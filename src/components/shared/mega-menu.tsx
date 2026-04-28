@@ -22,9 +22,7 @@ export function MegaMenu() {
     <NavigationMenu className="hidden lg:flex">
       <NavigationMenuList>
         <NavigationMenuItem>
-          <Link href="/services" passHref legacyBehavior>
-            <NavigationMenuTrigger className="bg-transparent hover:text-prixgen-blue">Services</NavigationMenuTrigger>
-          </Link>
+          <NavigationMenuTrigger className="bg-transparent hover:text-prixgen-blue">Services</NavigationMenuTrigger>
           <NavigationMenuContent>
             <div className="w-[400px] md:w-[500px] lg:w-[600px] p-6 bg-white rounded-xl shadow-2xl">
               <ul className="grid gap-3 md:grid-cols-2 mb-4">
@@ -35,18 +33,18 @@ export function MegaMenu() {
                 ))}
               </ul>
               <div className="border-t border-prixgen-gray pt-4">
-                <Link href="/services" className="text-sm font-bold text-prixgen-lightblue hover:underline flex items-center px-3">
-                  Explore All Services <span className="ml-1">→</span>
-                </Link>
+                <NavigationMenuLink asChild>
+                  <Link href="/services" className="text-sm font-bold text-prixgen-lightblue hover:underline flex items-center px-3">
+                    Explore All Services <span className="ml-1">→</span>
+                  </Link>
+                </NavigationMenuLink>
               </div>
             </div>
           </NavigationMenuContent>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <Link href="/solutions" passHref legacyBehavior>
-            <NavigationMenuTrigger className="bg-transparent hover:text-prixgen-blue">Solutions</NavigationMenuTrigger>
-          </Link>
+          <NavigationMenuTrigger className="bg-transparent hover:text-prixgen-blue">Solutions</NavigationMenuTrigger>
           <NavigationMenuContent>
             <div className="w-[400px] md:w-[500px] lg:w-[600px] p-6 bg-white rounded-xl shadow-2xl">
               <ul className="grid gap-3 md:grid-cols-2 mb-4">
@@ -57,18 +55,18 @@ export function MegaMenu() {
                 ))}
               </ul>
               <div className="border-t border-prixgen-gray pt-4">
-                <Link href="/solutions" className="text-sm font-bold text-prixgen-lightblue hover:underline flex items-center px-3">
-                  Explore All Solutions <span className="ml-1">→</span>
-                </Link>
+                <NavigationMenuLink asChild>
+                  <Link href="/solutions" className="text-sm font-bold text-prixgen-lightblue hover:underline flex items-center px-3">
+                    Explore All Solutions <span className="ml-1">→</span>
+                  </Link>
+                </NavigationMenuLink>
               </div>
             </div>
           </NavigationMenuContent>
         </NavigationMenuItem>
         
         <NavigationMenuItem>
-          <Link href="/industries" passHref legacyBehavior>
-            <NavigationMenuTrigger className="bg-transparent hover:text-prixgen-blue">Industries</NavigationMenuTrigger>
-          </Link>
+          <NavigationMenuTrigger className="bg-transparent hover:text-prixgen-blue">Industries</NavigationMenuTrigger>
           <NavigationMenuContent>
             <div className="w-[400px] md:w-[500px] lg:w-[600px] p-6 bg-white rounded-xl shadow-2xl">
               <ul className="grid gap-3 md:grid-cols-2 mb-4">
@@ -79,9 +77,11 @@ export function MegaMenu() {
                 ))}
               </ul>
               <div className="border-t border-prixgen-gray pt-4">
-                <Link href="/industries" className="text-sm font-bold text-prixgen-lightblue hover:underline flex items-center px-3">
-                  Explore All Industries <span className="ml-1">→</span>
-                </Link>
+                <NavigationMenuLink asChild>
+                  <Link href="/industries" className="text-sm font-bold text-prixgen-lightblue hover:underline flex items-center px-3">
+                    Explore All Industries <span className="ml-1">→</span>
+                  </Link>
+                </NavigationMenuLink>
               </div>
             </div>
           </NavigationMenuContent>
