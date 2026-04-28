@@ -37,6 +37,7 @@ export default function HomePage() {
               <StaggerText 
                 text={homeData.title} 
                 variant="gradient"
+                mode="dark"
                 className="text-5xl lg:text-7xl font-extrabold leading-tight"
               />
               <FadeUp delay={0.4}>

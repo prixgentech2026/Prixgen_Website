@@ -60,7 +60,9 @@ export default function SolutionPage({ params }: PageProps) {
           </FadeUp>
           <StaggerText 
             text={solution.title} 
-            className="text-5xl md:text-7xl font-extrabold leading-tight mb-6 text-white"
+            variant="gradient"
+            mode="light"
+            className="text-5xl md:text-7xl font-extrabold leading-tight mb-6"
           />
           <FadeUp delay={0.2}>
             <p className="text-2xl text-white/80 max-w-3xl leading-relaxed">

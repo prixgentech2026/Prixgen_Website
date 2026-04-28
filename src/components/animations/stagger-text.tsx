@@ -6,13 +6,20 @@ interface StaggerTextProps {
   text: string;
   className?: string;
   variant?: 'default' | 'gradient';
+  mode?: 'dark' | 'light'; // dark for white bg, light for dark/blue bg
 }
 
 /**
- * Premium StaggerText with support for brand gradients and blur entry.
- * Optimized for visibility with fallback colors.
+ * Premium StaggerText with high-visibility modes and gradient support.
+ * Mode 'dark' (default): Best for white/light backgrounds.
+ * Mode 'light': Best for blue/dark backgrounds (White/Silver Gradient).
  */
-export function StaggerText({ text, className, variant = 'default' }: StaggerTextProps) {
+export function StaggerText({ 
+  text, 
+  className, 
+  variant = 'default', 
+  mode = 'dark' 
+}: StaggerTextProps) {
   const words = text.split(" ");
   
   const container = {
@@ -33,10 +40,14 @@ export function StaggerText({ text, className, variant = 'default' }: StaggerTex
     }
   };
 
-  // Base class ensures visibility. Gradient class adds the effect.
-  const baseClass = "text-prixgen-blue";
+  // Determine colors based on mode
+  const baseColor = mode === 'dark' ? "text-prixgen-blue" : "text-white";
+  const gradientColors = mode === 'dark' 
+    ? "from-prixgen-blue to-prixgen-lightblue" 
+    : "from-white to-white/60";
+
   const gradientClass = variant === 'gradient' 
-    ? "bg-clip-text text-transparent bg-gradient-to-r from-prixgen-blue to-prixgen-lightblue" 
+    ? `bg-clip-text text-transparent bg-gradient-to-r ${gradientColors}` 
     : "";
 
   return (
@@ -44,7 +55,7 @@ export function StaggerText({ text, className, variant = 'default' }: StaggerTex
       variants={container} 
       initial="hidden" 
       animate="visible" 
-      className={cn(className, baseClass, gradientClass)}
+      className={cn(className, baseColor, gradientClass)}
     >
       {words.map((word, index) => (
         <motion.span key={index} variants={child} className="inline-block mr-[0.25em]">

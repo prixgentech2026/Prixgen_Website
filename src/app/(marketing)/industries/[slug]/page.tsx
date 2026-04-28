@@ -59,7 +59,9 @@ export default function IndustryPage({ params }: PageProps) {
             </div>
             <StaggerText 
               text={industry.title} 
-              className="text-5xl lg:text-7xl font-extrabold leading-tight text-white" 
+              variant="gradient"
+              mode="light"
+              className="text-5xl lg:text-7xl font-extrabold leading-tight" 
             />
             <FadeUp delay={0.2}>
               <p className="text-2xl text-white/80 font-medium max-w-4xl leading-relaxed">
