@@ -24,7 +24,7 @@ export function MegaMenu() {
         <NavigationMenuItem>
           <NavigationMenuTrigger className="bg-transparent hover:text-prixgen-blue">Services</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[400px] md:w-[500px] lg:w-[600px] p-4">
+            <div className="w-[400px] md:w-[500px] lg:w-[600px] p-6 bg-white rounded-xl shadow-2xl">
               <ul className="grid gap-3 md:grid-cols-2 mb-4">
                 {MENU_DATA.services.map((item) => (
                   <ListItem key={item.title} title={item.title} href={item.href}>
@@ -44,7 +44,7 @@ export function MegaMenu() {
         <NavigationMenuItem>
           <NavigationMenuTrigger className="bg-transparent hover:text-prixgen-blue">Solutions</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[400px] md:w-[500px] lg:w-[600px] p-4">
+            <div className="w-[400px] md:w-[500px] lg:w-[600px] p-6 bg-white rounded-xl shadow-2xl">
               <ul className="grid gap-3 md:grid-cols-2 mb-4">
                 {MENU_DATA.solutions.map((item) => (
                   <ListItem key={item.title} title={item.title} href={item.href}>
@@ -64,7 +64,7 @@ export function MegaMenu() {
         <NavigationMenuItem>
           <NavigationMenuTrigger className="bg-transparent hover:text-prixgen-blue">Industries</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[400px] md:w-[500px] lg:w-[600px] p-4">
+            <div className="w-[400px] md:w-[500px] lg:w-[600px] p-6 bg-white rounded-xl shadow-2xl">
               <ul className="grid gap-3 md:grid-cols-2 mb-4">
                 {MENU_DATA.industries.map((item) => (
                   <ListItem key={item.title} title={item.title} href={item.href}>

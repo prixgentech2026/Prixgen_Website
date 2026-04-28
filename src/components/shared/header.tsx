@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import { OptimizedImage } from '@/components/ui/optimized-image';
-import { MegaMenu } from './mega-menu';
+import { MegaMenu } from '@/components/shared/mega-menu';
+import { MobileMenu } from '@/components/shared/mobile-menu';
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
 
@@ -34,7 +35,8 @@ export function Header() {
 
         <div className="flex items-center gap-4">
           <Button variant="outline" className="hidden md:flex">Log In</Button>
-          <Button className="shadow-lg hover:scale-105 transition-transform">Get Started</Button>
+          <Button className="hidden sm:flex shadow-lg hover:scale-105 transition-transform">Get Started</Button>
+          <MobileMenu />
         </div>
       </div>
     </header>
