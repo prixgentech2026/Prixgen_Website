@@ -1,3 +1,5 @@
+'use client';
+
 import { OptimizedImage } from '@/components/ui/optimized-image';
 import { Button } from '@/components/ui/button';
 import { VideoFacade } from '@/components/features/video-facade';
