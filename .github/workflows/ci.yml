@@ -1,0 +1,24 @@
+name: CI
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        with: { version: 8 }
+      - uses: actions/setup-node@v4
+        with: { node-version: '20', cache: 'pnpm' }
+      - run: pnpm install
+      - run: pnpm lint
+      - run: pnpm build
+        env:
+          WP_GRAPHQL_URL: ${{ secrets.WP_GRAPHQL_URL }}
+          HUBSPOT_ACCESS_TOKEN: ${{ secrets.HUBSPOT_ACCESS_TOKEN }}
+          REVALIDATION_SECRET: ${{ secrets.REVALIDATION_SECRET }}
+          STAGING_PASSWORD: ${{ secrets.STAGING_PASSWORD }}
+          NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
