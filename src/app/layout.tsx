@@ -27,6 +27,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { SmoothScroll } from '@/components/providers/smooth-scroll';
+
 /**
  * Root Layout component.
  */
@@ -38,9 +40,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="font-sans antialiased bg-white text-prixgen-dark min-h-screen flex flex-col">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <SmoothScroll>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </SmoothScroll>
         {/* HubSpot Tracking Script */}
         <Script
           src="https://js.hs-scripts.com/YOUR_HUBSPOT_ID.js"

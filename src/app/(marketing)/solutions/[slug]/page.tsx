@@ -25,6 +25,9 @@ export async function generateMetadata({ params }: PageProps) {
   };
 }
 
+import { StaggerText } from '@/components/animations/stagger-text';
+import { FadeUp } from '@/components/animations/fade-up';
+
 export default function SolutionPage({ params }: PageProps) {
   const solution = solutionsData.find((s) => s.slug === params.slug);
   
@@ -46,55 +49,60 @@ export default function SolutionPage({ params }: PageProps) {
       {/* Breadcrumbs & Header */}
       <div className="bg-prixgen-gray/50 py-12">
         <div className="container mx-auto px-4">
-          <nav className="text-sm text-prixgen-dark/50 mb-4">
-            <Link href="/" className="hover:text-prixgen-blue">Home</Link> / 
-            <Link href="/solutions" className="mx-2 hover:text-prixgen-blue">Solutions</Link> / 
-            <span className="ml-2 text-prixgen-blue font-medium">{solution.title}</span>
-          </nav>
-          <h1 className="text-4xl md:text-6xl font-bold text-prixgen-blue max-w-4xl leading-tight">
-            {solution.headline}
-          </h1>
+          <FadeUp delay={0.1}>
+            <nav className="text-sm text-prixgen-dark/50 mb-4">
+              <Link href="/" className="hover:text-prixgen-blue">Home</Link> / 
+              <Link href="/solutions" className="mx-2 hover:text-prixgen-blue">Solutions</Link> / 
+              <span className="ml-2 text-prixgen-blue font-medium">{solution.title}</span>
+            </nav>
+          </FadeUp>
+          <StaggerText 
+            text={solution.headline} 
+            className="text-4xl md:text-6xl font-bold text-prixgen-blue max-w-4xl leading-tight"
+          />
         </div>
       </div>
 
       <div className="container mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-3 gap-12">
         <article className="lg:col-span-2">
           {solution.featuredImage?.sourceUrl && (
-            <div className="relative aspect-video w-full rounded-2xl overflow-hidden mb-12 shadow-xl">
+            <FadeUp delay={0.2} className="relative aspect-video w-full rounded-2xl overflow-hidden mb-12 shadow-xl">
               <OptimizedImage
                 src={solution.featuredImage.sourceUrl}
                 alt={solution.featuredImage.altText || solution.title}
                 fill
                 priority
               />
-            </div>
+            </FadeUp>
           )}
           
-          <div 
-            dangerouslySetInnerHTML={{ __html: solution.content }} 
-            className="prose prose-xl max-w-none prose-headings:text-prixgen-blue prose-a:text-prixgen-lightblue"
-          />
+          <FadeUp delay={0.3}>
+            <div 
+              dangerouslySetInnerHTML={{ __html: solution.content }} 
+              className="prose prose-xl max-w-none prose-headings:text-prixgen-blue prose-a:text-prixgen-lightblue"
+            />
+          </FadeUp>
         </article>
 
         <aside className="lg:col-span-1">
           <div className="sticky top-24 space-y-8">
-            <div className="bg-white p-8 rounded-2xl border border-prixgen-gray shadow-xl">
+            <FadeUp delay={0.4} className="bg-white p-8 rounded-2xl border border-prixgen-gray shadow-xl">
               <h3 className="text-2xl font-bold mb-6 text-prixgen-blue">Request an Architectural Audit</h3>
               <p className="text-prixgen-dark/60 text-sm mb-6">
                 Get a personalized roadmap for implementing {solution.title} in your enterprise.
               </p>
               <LeadCaptureForm source={`Solution: ${solution.title}`} />
-            </div>
+            </FadeUp>
 
-            <div className="bg-prixgen-blue p-8 rounded-2xl text-white shadow-xl">
+            <FadeUp delay={0.5} className="bg-prixgen-blue p-8 rounded-2xl text-white shadow-xl">
               <h4 className="text-xl font-bold mb-4">Scale Your Intelligence</h4>
               <p className="text-white/70 text-sm mb-6">
                 Speak with our {solution.title.includes('AI') ? 'AI Specialists' : 'ERP Architects'} about your global deployment.
               </p>
-              <Button variant="secondary" className="w-full bg-white text-prixgen-blue hover:bg-gray-100">
-                Contact Strategy Team
+              <Button variant="secondary" className="w-full bg-white text-prixgen-blue hover:bg-gray-100" asChild>
+                <Link href="/contact">Contact Strategy Team</Link>
               </Button>
-            </div>
+            </FadeUp>
           </div>
         </aside>
       </div>

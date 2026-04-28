@@ -34,8 +34,12 @@ export function Header() {
         <MegaMenu />
 
         <div className="flex items-center gap-4">
-          <Button variant="outline" className="hidden md:flex">Log In</Button>
-          <Button className="hidden sm:flex shadow-lg hover:scale-105 transition-transform">Get Started</Button>
+          <Button variant="outline" className="hidden md:flex" asChild>
+            <Link href="/contact">Log In</Link>
+          </Button>
+          <Button className="hidden sm:flex shadow-lg hover:scale-105 transition-transform" asChild>
+            <Link href="/contact">Get Started</Link>
+          </Button>
           <MobileMenu />
         </div>
       </div>

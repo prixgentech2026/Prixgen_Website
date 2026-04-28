@@ -2,9 +2,7 @@
 const nextConfig = {
   images: {
     remotePatterns: [
-      { protocol: 'https', hostname: 'cms.prixgen.com' },
-      { protocol: 'https', hostname: 'img.youtube.com' },
-      { protocol: 'https', hostname: 'images.unsplash.com' }
+      { protocol: 'https', hostname: '**' },
     ],
     formats: ['image/avif', 'image/webp'],
   },
