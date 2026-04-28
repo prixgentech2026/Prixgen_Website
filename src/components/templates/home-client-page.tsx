@@ -25,7 +25,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
       
       <main>
         {/* Hero Section */}
-        <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
+        <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-white">
           <AmbientGlow />
           <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="z-10 space-y-8">
@@ -36,11 +36,11 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                 className="text-5xl lg:text-7xl font-extrabold leading-tight"
               />
               <motion.div
-                initial={{ opacity: 0, y: 40, filter: 'blur(10px)' }}
-                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
               >
-                <p className="text-xl text-prixgen-dark/80 max-w-xl leading-relaxed">
+                <p className="text-xl text-prixgen-dark max-w-xl leading-relaxed font-medium">
                   {homeData.subheadline}
                 </p>
               </motion.div>

@@ -10,9 +10,8 @@ interface StaggerTextProps {
 }
 
 /**
- * Premium StaggerText with high-visibility modes and gradient support.
- * Mode 'dark' (default): Best for white/light backgrounds.
- * Mode 'light': Best for blue/dark backgrounds (White/Silver Gradient).
+ * Premium StaggerText with absolute visibility.
+ * Uses solid high-contrast colors to ensure legibility across all displays.
  */
 export function StaggerText({ 
   text, 
@@ -26,39 +25,32 @@ export function StaggerText({
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.08, delayChildren: 0.1 }
+      transition: { staggerChildren: 0.05, delayChildren: 0.1 }
     }
   };
 
   const child = {
-    hidden: { opacity: 0, y: 40, filter: "blur(10px)" },
+    hidden: { opacity: 0, y: 15 },
     visible: { 
       opacity: 1, 
       y: 0, 
-      filter: "blur(0px)", 
-      transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } 
+      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } 
     }
   };
 
-  // Determine colors based on mode
-  const baseColor = mode === 'dark' ? "text-prixgen-blue" : "text-white";
-  const gradientColors = mode === 'dark' 
-    ? "from-prixgen-blue to-prixgen-lightblue" 
-    : "from-white to-white/60";
-
-  const gradientClass = variant === 'gradient' 
-    ? `bg-clip-text text-transparent bg-gradient-to-r ${gradientColors}` 
-    : "";
+  // mode="dark" -> for WHITE background -> needs DARK text (Prixgen Blue)
+  // mode="light" -> for BLUE background -> needs WHITE text
+  const colorClass = mode === 'dark' ? "text-prixgen-blue" : "text-white";
 
   return (
     <motion.h1 
       variants={container} 
       initial="hidden" 
       animate="visible" 
-      className={cn(className, baseColor, gradientClass)}
+      className={cn(className, colorClass, "font-extrabold")}
     >
       {words.map((word, index) => (
-        <motion.span key={index} variants={child} className="inline-block mr-[0.25em]">
+        <motion.span key={index} variants={child} className="inline-block mr-[0.25em] whitespace-nowrap">
           {word}
         </motion.span>
       ))}

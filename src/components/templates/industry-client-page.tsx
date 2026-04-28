@@ -41,11 +41,11 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
               className="text-5xl lg:text-7xl font-extrabold leading-tight" 
             />
             <motion.div
-              initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
-              <p className="text-2xl text-white/80 font-medium max-w-4xl leading-relaxed">
+              <p className="text-2xl text-white font-medium max-w-4xl leading-relaxed">
                 {industry.headline}
               </p>
             </motion.div>
