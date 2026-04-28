@@ -1,52 +1,65 @@
 import { MetadataRoute } from 'next';
-import { wpFetch } from '@/lib/graphql/client';
+import { industriesData, solutionsData, servicesData } from '@/lib/data';
 
 /**
  * Dynamic sitemap generator.
+ * Refactored to use Local Mock Data for CMS-independent builds.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.prixgen.com';
 
-  // Fetch all solutions and industries slugs
-  const data = await wpFetch<any>(`
-    query GetAllSlugs {
-      solutions(first: 100) {
-        nodes {
-          uri
-          modified
-        }
-      }
-      industries(first: 100) {
-        nodes {
-          uri
-          modified
-        }
-      }
-    }
-  `);
-
-  const solutions = data.solutions?.nodes.map((node: any) => ({
-    url: `${baseUrl}${node.uri}`,
-    lastModified: new Date(node.modified),
-    changeFrequency: 'weekly',
+  const solutions = solutionsData.map((node) => ({
+    url: `${baseUrl}/solutions/${node.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
     priority: 0.8,
-  })) || [];
+  }));
 
-  const industries = data.industries?.nodes.map((node: any) => ({
-    url: `${baseUrl}${node.uri}`,
-    lastModified: new Date(node.modified),
-    changeFrequency: 'weekly',
+  const industries = industriesData.map((node) => ({
+    url: `${baseUrl}/industries/${node.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
     priority: 0.8,
-  })) || [];
+  }));
 
-  return [
+  const services = servicesData.map((node) => ({
+    url: `${baseUrl}/services/${node.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }));
+
+  const staticPages = [
     {
       url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: 'daily',
+      changeFrequency: 'daily' as const,
       priority: 1,
     },
+    {
+      url: `${baseUrl}/about-us`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/careers`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/contact`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+  ];
+
+  return [
+    ...staticPages,
     ...solutions,
     ...industries,
+    ...services,
   ];
 }
