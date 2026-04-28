@@ -3,7 +3,7 @@ import { OptimizedImage } from '@/components/ui/optimized-image';
 import { LeadCaptureForm } from '@/components/features/lead-capture-form';
 import { JsonLd } from '@/components/seo/json-ld';
 import Link from 'next/link';
-import { industriesData } from '@/lib/data';
+import { industriesData, PageData } from '@/lib/data';
 
 interface PageProps {
   params: { slug: string };

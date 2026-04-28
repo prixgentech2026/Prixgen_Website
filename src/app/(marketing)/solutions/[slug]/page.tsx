@@ -4,7 +4,7 @@ import { OptimizedImage } from '@/components/ui/optimized-image';
 import { LeadCaptureForm } from '@/components/features/lead-capture-form';
 import { JsonLd } from '@/components/seo/json-ld';
 import { Button } from '@/components/ui/button';
-import { solutionsData } from '@/lib/data';
+import { solutionsData, PageData } from '@/lib/data';
 
 interface PageProps {
   params: { slug: string };
