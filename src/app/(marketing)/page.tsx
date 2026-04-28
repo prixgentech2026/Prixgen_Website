@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { VideoFacade } from '@/components/features/video-facade';
 import { JsonLd } from '@/components/seo/json-ld';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { homeData } from '@/lib/data';
 import { StaggerText } from '@/components/animations/stagger-text';
 import { FadeUp } from '@/components/animations/fade-up';
@@ -40,26 +41,40 @@ export default function HomePage() {
                 mode="dark"
                 className="text-5xl lg:text-7xl font-extrabold leading-tight"
               />
-              <FadeUp delay={0.4}>
+              <motion.div
+                initial={{ opacity: 0, y: 40, filter: 'blur(10px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              >
                 <p className="text-xl text-prixgen-dark/80 max-w-xl leading-relaxed">
                   {homeData.subheadline}
                 </p>
-              </FadeUp>
-              <FadeUp delay={0.5} className="flex flex-wrap gap-4">
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 40, filter: 'blur(10px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-wrap gap-4"
+              >
                 <Button size="lg" className="text-lg px-8 hover:scale-105 hover:shadow-xl hover:shadow-prixgen-blue/20 transition-all duration-300" asChild>
                   <Link href="/contact">{homeData.heroPrimaryCTA}</Link>
                 </Button>
                 <Button size="lg" variant="outline" className="text-lg px-8 hover:bg-prixgen-lightblue/5 hover:border-prixgen-lightblue/50 transition-all" asChild>
                   <Link href="/industries/manufacturing">{homeData.heroSecondaryCTA}</Link>
                 </Button>
-              </FadeUp>
+              </motion.div>
               
-              <FadeUp delay={0.6} className="pt-8 border-t border-prixgen-gray">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 0.8 }}
+                className="pt-8 border-t border-prixgen-gray"
+              >
                 <p className="text-sm font-medium text-prixgen-dark/40 uppercase tracking-widest mb-4">Market Validation</p>
                 <p className="text-prixgen-dark/70 font-medium italic">
                   "{homeData.socialProof}"
                 </p>
-              </FadeUp>
+              </motion.div>
             </div>
             <FadeUp delay={0.3} className="relative">
               <div className="absolute -top-20 -right-20 w-80 h-80 bg-prixgen-blue/5 rounded-full blur-3xl" />
@@ -118,16 +133,18 @@ export default function HomePage() {
           <div className="bg-prixgen-blue rounded-3xl p-12 text-white relative overflow-hidden shadow-2xl">
             <AmbientGlow />
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
-              <div>
-                <h2 className="text-4xl font-bold mb-6">Ready to architect your operational intelligence?</h2>
-                <p className="text-white/80 text-lg mb-8 leading-relaxed">
+              <div className="space-y-6">
+                <h2 className="text-4xl md:text-5xl font-bold leading-tight text-white">Ready to architect your operational intelligence?</h2>
+                <p className="text-white/80 text-xl leading-relaxed">
                   Join 500+ industrial leaders that have eliminated supply chain friction with Prixgen.
                 </p>
-                <Button size="lg" variant="secondary" className="bg-white text-prixgen-blue hover:bg-gray-100 hover:scale-105 transition-all shadow-xl" asChild>
-                  <Link href="/contact">Book an Architecture Audit</Link>
-                </Button>
+                <div className="pt-4">
+                  <Button size="lg" variant="secondary" className="bg-white text-prixgen-blue hover:bg-gray-100 hover:scale-105 transition-all shadow-xl" asChild>
+                    <Link href="/contact">Book an Architecture Audit</Link>
+                  </Button>
+                </div>
               </div>
-              <div className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20">
+              <div className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 relative z-20">
                 <div className="bg-white rounded-xl p-8 text-prixgen-dark shadow-2xl">
                   <h3 className="text-2xl font-bold mb-6 text-center text-prixgen-blue">Get a Strategic Consultation</h3>
                   <LeadCaptureForm source="Homepage CTA" />

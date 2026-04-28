@@ -8,6 +8,7 @@ import { solutionsData, PageData } from '@/lib/data';
 import { StaggerText } from '@/components/animations/stagger-text';
 import { FadeUp } from '@/components/animations/fade-up';
 import { AmbientGlow } from '@/components/animations/ambient-glow';
+import { motion } from 'framer-motion';
 
 interface PageProps {
   params: { slug: string };
@@ -64,11 +65,15 @@ export default function SolutionPage({ params }: PageProps) {
             mode="light"
             className="text-5xl md:text-7xl font-extrabold leading-tight mb-6"
           />
-          <FadeUp delay={0.2}>
+          <motion.div
+            initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          >
             <p className="text-2xl text-white/80 max-w-3xl leading-relaxed">
               {solution.headline}
             </p>
-          </FadeUp>
+          </motion.div>
         </div>
         <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white/10 to-transparent pointer-events-none" />
       </section>

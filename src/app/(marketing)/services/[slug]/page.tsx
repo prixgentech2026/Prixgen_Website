@@ -4,6 +4,10 @@ import { OptimizedImage } from '@/components/ui/optimized-image';
 import { LeadCaptureForm } from '@/components/features/lead-capture-form';
 import { JsonLd } from '@/components/seo/json-ld';
 import { servicesData, PageData } from '@/lib/data';
+import { motion } from 'framer-motion';
+import { StaggerText } from '@/components/animations/stagger-text';
+import { FadeUp } from '@/components/animations/fade-up';
+import { AmbientGlow } from '@/components/animations/ambient-glow';
 
 interface PageProps {
   params: { slug: string };
@@ -24,8 +28,6 @@ export async function generateMetadata({ params }: PageProps) {
   };
 }
 
-import { StaggerText } from '@/components/animations/stagger-text';
-import { FadeUp } from '@/components/animations/fade-up';
 
 export default function ServicePage({ params }: PageProps) {
   const service = servicesData.find((s) => s.slug === params.slug);
@@ -35,7 +37,8 @@ export default function ServicePage({ params }: PageProps) {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative overflow-hidden">
+      <AmbientGlow />
       <JsonLd 
         type="Service" 
         data={{ 
@@ -46,26 +49,38 @@ export default function ServicePage({ params }: PageProps) {
       />
 
       {/* Hero Header */}
-      <div className="bg-prixgen-blue text-white py-24">
-        <div className="container mx-auto px-4">
-          <FadeUp delay={0.1}>
-            <nav className="text-sm text-white/50 mb-6">
-              <Link href="/" className="hover:text-white transition-colors">Home</Link> / 
-              <Link href="/services" className="mx-2 hover:text-white transition-colors">Services</Link> / 
+      <section className="bg-prixgen-blue text-white py-24 relative overflow-hidden">
+        <AmbientGlow />
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <nav className="text-sm text-white/50 mb-8">
+              <Link href="/" className="hover:text-prixgen-lightblue transition-colors">Home</Link> / 
+              <Link href="/services" className="mx-2 hover:text-prixgen-lightblue transition-colors">Services</Link> / 
               <span className="ml-2 text-prixgen-lightblue font-medium">{service.title}</span>
             </nav>
-          </FadeUp>
+          </motion.div>
           <StaggerText 
-            text={service.headline} 
-            className="text-5xl md:text-7xl font-bold mb-8 tracking-tight max-w-4xl leading-tight"
+            text={service.title} 
+            variant="gradient"
+            mode="light"
+            className="text-5xl md:text-7xl font-extrabold leading-tight mb-6"
           />
-          <FadeUp delay={0.4}>
-            <p className="text-xl text-white/70 max-w-2xl leading-relaxed">
-              Strategic architectural consulting and managed services for the high-velocity enterprise.
+          <motion.div
+            initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <p className="text-2xl text-white/80 max-w-3xl leading-relaxed">
+              {service.headline}
             </p>
-          </FadeUp>
+          </motion.div>
         </div>
-      </div>
+        <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white/10 to-transparent pointer-events-none" />
+      </section>
 
       <div className="container mx-auto px-4 py-20 grid grid-cols-1 lg:grid-cols-3 gap-16">
         {/* Main Content */}

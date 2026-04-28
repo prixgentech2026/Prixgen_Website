@@ -3,6 +3,7 @@ import { OptimizedImage } from '@/components/ui/optimized-image';
 import { LeadCaptureForm } from '@/components/features/lead-capture-form';
 import { JsonLd } from '@/components/seo/json-ld';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { industriesData, PageData } from '@/lib/data';
 import { StaggerText } from '@/components/animations/stagger-text';
 import { FadeUp } from '@/components/animations/fade-up';
@@ -63,11 +64,15 @@ export default function IndustryPage({ params }: PageProps) {
               mode="light"
               className="text-5xl lg:text-7xl font-extrabold leading-tight" 
             />
-            <FadeUp delay={0.2}>
+            <motion.div
+              initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            >
               <p className="text-2xl text-white/80 font-medium max-w-4xl leading-relaxed">
                 {industry.headline}
               </p>
-            </FadeUp>
+            </motion.div>
           </header>
         </div>
         <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white/10 to-transparent pointer-events-none" />
