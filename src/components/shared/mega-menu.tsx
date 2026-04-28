@@ -22,7 +22,9 @@ export function MegaMenu() {
     <NavigationMenu className="hidden lg:flex">
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent hover:text-prixgen-blue">Services</NavigationMenuTrigger>
+          <Link href="/services" passHref legacyBehavior>
+            <NavigationMenuTrigger className="bg-transparent hover:text-prixgen-blue">Services</NavigationMenuTrigger>
+          </Link>
           <NavigationMenuContent>
             <div className="w-[400px] md:w-[500px] lg:w-[600px] p-6 bg-white rounded-xl shadow-2xl">
               <ul className="grid gap-3 md:grid-cols-2 mb-4">
@@ -42,7 +44,9 @@ export function MegaMenu() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent hover:text-prixgen-blue">Solutions</NavigationMenuTrigger>
+          <Link href="/solutions" passHref legacyBehavior>
+            <NavigationMenuTrigger className="bg-transparent hover:text-prixgen-blue">Solutions</NavigationMenuTrigger>
+          </Link>
           <NavigationMenuContent>
             <div className="w-[400px] md:w-[500px] lg:w-[600px] p-6 bg-white rounded-xl shadow-2xl">
               <ul className="grid gap-3 md:grid-cols-2 mb-4">
@@ -62,7 +66,9 @@ export function MegaMenu() {
         </NavigationMenuItem>
         
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent hover:text-prixgen-blue">Industries</NavigationMenuTrigger>
+          <Link href="/industries" passHref legacyBehavior>
+            <NavigationMenuTrigger className="bg-transparent hover:text-prixgen-blue">Industries</NavigationMenuTrigger>
+          </Link>
           <NavigationMenuContent>
             <div className="w-[400px] md:w-[500px] lg:w-[600px] p-6 bg-white rounded-xl shadow-2xl">
               <ul className="grid gap-3 md:grid-cols-2 mb-4">

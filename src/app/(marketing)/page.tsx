@@ -99,7 +99,7 @@ export default function HomePage() {
             {[
               { title: 'Odoo Enterprise', slug: 'odoo-enterprise', desc: 'Engineering Odoo into a scalable enterprise engine.', color: 'border-blue-500' },
               { title: 'SAP Ecosystems', slug: 'sap-ecosystems', desc: 'Unified cloud business management for process leaders.', color: 'border-indigo-500' },
-              { title: 'Supply Chain & WMS', slug: 'supply-chain-wms', desc: 'Frictionless logistics ecosystems for global scale.', color: 'border-blue-400' },
+              { title: 'Lecca AI Vision', slug: 'lecca-ai', desc: 'Proprietary computer vision for industrial inventory and QC.', color: 'border-blue-400' },
             ].map((item, i) => (
               <FadeUp key={item.title} delay={i * 0.1} className={`p-8 bg-white rounded-xl border border-slate-100 border-l-4 ${item.color} shadow-sm transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-prixgen-lightblue/30 group`}>
                 <h3 className="text-2xl font-bold mb-4 text-prixgen-blue group-hover:text-prixgen-lightblue transition-colors">{item.title}</h3>

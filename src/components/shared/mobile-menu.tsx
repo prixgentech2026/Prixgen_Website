@@ -40,7 +40,9 @@ export function MobileMenu() {
             </Link>
 
             <div>
-              <h3 className="text-xs font-bold text-prixgen-dark/40 uppercase tracking-widest mb-4">Services</h3>
+              <Link href="/services" onClick={() => setOpen(false)}>
+                <h3 className="text-xs font-bold text-prixgen-dark/40 hover:text-prixgen-blue transition-colors uppercase tracking-widest mb-4">Services</h3>
+              </Link>
               <ul className="space-y-4">
                 {MENU_DATA.services.map((item) => (
                   <li key={item.title}>
@@ -58,7 +60,9 @@ export function MobileMenu() {
             </div>
 
             <div>
-              <h3 className="text-xs font-bold text-prixgen-dark/40 uppercase tracking-widest mb-4">Solutions</h3>
+              <Link href="/solutions" onClick={() => setOpen(false)}>
+                <h3 className="text-xs font-bold text-prixgen-dark/40 hover:text-prixgen-blue transition-colors uppercase tracking-widest mb-4">Solutions</h3>
+              </Link>
               <ul className="space-y-4">
                 {MENU_DATA.solutions.map((item) => (
                   <li key={item.title}>
@@ -76,7 +80,9 @@ export function MobileMenu() {
             </div>
 
             <div>
-              <h3 className="text-xs font-bold text-prixgen-dark/40 uppercase tracking-widest mb-4">Industries</h3>
+              <Link href="/industries" onClick={() => setOpen(false)}>
+                <h3 className="text-xs font-bold text-prixgen-dark/40 hover:text-prixgen-blue transition-colors uppercase tracking-widest mb-4">Industries</h3>
+              </Link>
               <ul className="space-y-4">
                 {MENU_DATA.industries.map((item) => (
                   <li key={item.title}>

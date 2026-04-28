@@ -35,35 +35,45 @@ export default function IndustryPage({ params }: PageProps) {
 
   return (
     <div className="relative overflow-hidden min-h-screen">
-      <AmbientGlow />
       <JsonLd 
         type="Article" 
         data={{ 
-          headline: industry.title, 
-          description: industry.seo?.metaDesc,
-          publisher: { "@type": "Organization", "name": "Prixgen Enterprise" }
+          title: industry.title, 
+          description: industry.seo.metaDesc 
         }} 
       />
 
-      <div className="container mx-auto px-4 py-20 lg:py-32">
+      <section className="bg-prixgen-blue text-white py-20 lg:py-32 relative overflow-hidden">
+        <AmbientGlow />
+        <div className="container mx-auto px-4 relative z-10">
+          <FadeUp delay={0.1}>
+            <nav className="text-sm text-white/50 mb-8">
+              <Link href="/" className="hover:text-prixgen-lightblue transition-colors">Home</Link> / 
+              <Link href="/industries" className="mx-2 hover:text-prixgen-lightblue transition-colors">Industries</Link> / 
+              <span className="ml-2 text-prixgen-lightblue font-medium">{industry.title}</span>
+            </nav>
+          </FadeUp>
+          <header className="space-y-6">
+            <div className="inline-block px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-prixgen-lightblue text-sm font-bold tracking-widest uppercase">
+              Industry Sector
+            </div>
+            <StaggerText 
+              text={industry.title} 
+              className="text-5xl lg:text-7xl font-extrabold leading-tight text-white" 
+            />
+            <FadeUp delay={0.2}>
+              <p className="text-2xl text-white/80 font-medium max-w-4xl leading-relaxed">
+                {industry.headline}
+              </p>
+            </FadeUp>
+          </header>
+        </div>
+        <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white/10 to-transparent pointer-events-none" />
+      </section>
+
+      <div className="container mx-auto px-4 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 items-start">
           <article className="lg:col-span-2 space-y-12">
-            <header className="space-y-6">
-              <div className="inline-block px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue text-sm font-bold tracking-widest uppercase">
-                Industry Sector
-              </div>
-              <StaggerText 
-                text={industry.title} 
-                variant="gradient"
-                className="text-5xl lg:text-7xl font-extrabold leading-tight" 
-              />
-              <FadeUp delay={0.2}>
-                <p className="text-2xl text-prixgen-dark/60 font-medium">
-                  {industry.headline}
-                </p>
-              </FadeUp>
-            </header>
-
             {industry.featuredImage?.sourceUrl && (
               <FadeUp delay={0.2} className="relative aspect-video w-full rounded-2xl overflow-hidden shadow-xl">
                 <OptimizedImage

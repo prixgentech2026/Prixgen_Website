@@ -10,6 +10,7 @@ interface StaggerTextProps {
 
 /**
  * Premium StaggerText with support for brand gradients and blur entry.
+ * Optimized for visibility with fallback colors.
  */
 export function StaggerText({ text, className, variant = 'default' }: StaggerTextProps) {
   const words = text.split(" ");
@@ -32,6 +33,8 @@ export function StaggerText({ text, className, variant = 'default' }: StaggerTex
     }
   };
 
+  // Base class ensures visibility. Gradient class adds the effect.
+  const baseClass = "text-prixgen-blue";
   const gradientClass = variant === 'gradient' 
     ? "bg-clip-text text-transparent bg-gradient-to-r from-prixgen-blue to-prixgen-lightblue" 
     : "";
@@ -41,7 +44,7 @@ export function StaggerText({ text, className, variant = 'default' }: StaggerTex
       variants={container} 
       initial="hidden" 
       animate="visible" 
-      className={cn(className, gradientClass)}
+      className={cn(className, baseClass, gradientClass)}
     >
       {words.map((word, index) => (
         <motion.span key={index} variants={child} className="inline-block mr-[0.25em]">

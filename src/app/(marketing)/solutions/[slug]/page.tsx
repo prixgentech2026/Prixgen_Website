@@ -48,27 +48,28 @@ export default function SolutionPage({ params }: PageProps) {
       />
 
       {/* Breadcrumbs & Header */}
-      <div className="py-20 lg:py-32">
-        <div className="container mx-auto px-4">
+      <section className="bg-prixgen-blue text-white py-20 lg:py-32 relative overflow-hidden">
+        <AmbientGlow />
+        <div className="container mx-auto px-4 relative z-10">
           <FadeUp delay={0.1}>
-            <nav className="text-sm text-prixgen-dark/50 mb-8">
-              <Link href="/" className="hover:text-prixgen-blue">Home</Link> / 
-              <Link href="/solutions" className="mx-2 hover:text-prixgen-blue">Solutions</Link> / 
-              <span className="ml-2 text-prixgen-blue font-medium">{solution.title}</span>
+            <nav className="text-sm text-white/50 mb-8">
+              <Link href="/" className="hover:text-prixgen-lightblue transition-colors">Home</Link> / 
+              <Link href="/solutions" className="mx-2 hover:text-prixgen-lightblue transition-colors">Solutions</Link> / 
+              <span className="ml-2 text-prixgen-lightblue font-medium">{solution.title}</span>
             </nav>
           </FadeUp>
           <StaggerText 
             text={solution.title} 
-            variant="gradient"
-            className="text-5xl md:text-7xl font-extrabold leading-tight mb-6"
+            className="text-5xl md:text-7xl font-extrabold leading-tight mb-6 text-white"
           />
           <FadeUp delay={0.2}>
-            <p className="text-2xl text-prixgen-dark/60 max-w-3xl">
+            <p className="text-2xl text-white/80 max-w-3xl leading-relaxed">
               {solution.headline}
             </p>
           </FadeUp>
         </div>
-      </div>
+        <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white/10 to-transparent pointer-events-none" />
+      </section>
 
       <div className="container mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-3 gap-12">
         <article className="lg:col-span-2">
