@@ -59,7 +59,7 @@ export default function HomePage() {
           <FadeUp delay={0.3} className="relative">
             <div className="absolute -top-20 -right-20 w-80 h-80 bg-prixgen-blue/5 rounded-full blur-3xl" />
             <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-prixgen-lightblue/5 rounded-full blur-3xl" />
-            <VideoFacade videoId="dQw4w9WgXcQ" title="Introduction to Prixgen Enterprise" />
+            <VideoFacade videoId="hXnS5K1SndI" title="Prixgen Enterprise: Digital Transformation" />
           </FadeUp>
         </div>
       </section>

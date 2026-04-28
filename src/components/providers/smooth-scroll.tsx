@@ -1,10 +1,24 @@
 'use client';
-import { ReactLenis } from '@studio-freight/react-lenis';
+import { useEffect } from 'react';
+import Lenis from 'lenis';
 
+/**
+ * Global Smooth Scroll Provider using Lenis.
+ * Architected for high-fidelity, inertial scrolling.
+ */
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
-  return (
-    <ReactLenis root options={{ lerp: 0.05, duration: 1.5, smoothWheel: true }}>
-      {children}
-    </ReactLenis>
-  );
+  useEffect(() => {
+    // Initialize Lenis with optimal enterprise easing
+    const lenis = new Lenis({
+      autoRaf: true,
+      lerp: 0.05,
+      duration: 1.2,
+    });
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
+  return <>{children}</>;
 }
