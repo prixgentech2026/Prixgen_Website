@@ -31,7 +31,10 @@ export function Header() {
           <span className="text-2xl font-bold text-prixgen-blue hidden sm:block tracking-tight">Prixgen</span>
         </Link>
 
-        <MegaMenu />
+        <nav className="hidden lg:flex items-center gap-8 mr-auto ml-12">
+          <Link href="/" className="text-sm font-medium hover:text-prixgen-lightblue transition-colors">Home</Link>
+          <MegaMenu />
+        </nav>
 
         <div className="flex items-center gap-4">
           <Button variant="outline" className="hidden md:flex" asChild>

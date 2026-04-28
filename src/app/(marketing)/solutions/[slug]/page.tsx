@@ -5,6 +5,9 @@ import { LeadCaptureForm } from '@/components/features/lead-capture-form';
 import { JsonLd } from '@/components/seo/json-ld';
 import { Button } from '@/components/ui/button';
 import { solutionsData, PageData } from '@/lib/data';
+import { StaggerText } from '@/components/animations/stagger-text';
+import { FadeUp } from '@/components/animations/fade-up';
+import { AmbientGlow } from '@/components/animations/ambient-glow';
 
 interface PageProps {
   params: { slug: string };
@@ -25,9 +28,6 @@ export async function generateMetadata({ params }: PageProps) {
   };
 }
 
-import { StaggerText } from '@/components/animations/stagger-text';
-import { FadeUp } from '@/components/animations/fade-up';
-
 export default function SolutionPage({ params }: PageProps) {
   const solution = solutionsData.find((s) => s.slug === params.slug);
   
@@ -36,7 +36,8 @@ export default function SolutionPage({ params }: PageProps) {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative overflow-hidden">
+      <AmbientGlow />
       <JsonLd 
         type="Service" 
         data={{ 
@@ -47,19 +48,25 @@ export default function SolutionPage({ params }: PageProps) {
       />
 
       {/* Breadcrumbs & Header */}
-      <div className="bg-prixgen-gray/50 py-12">
+      <div className="py-20 lg:py-32">
         <div className="container mx-auto px-4">
           <FadeUp delay={0.1}>
-            <nav className="text-sm text-prixgen-dark/50 mb-4">
+            <nav className="text-sm text-prixgen-dark/50 mb-8">
               <Link href="/" className="hover:text-prixgen-blue">Home</Link> / 
               <Link href="/solutions" className="mx-2 hover:text-prixgen-blue">Solutions</Link> / 
               <span className="ml-2 text-prixgen-blue font-medium">{solution.title}</span>
             </nav>
           </FadeUp>
           <StaggerText 
-            text={solution.headline} 
-            className="text-4xl md:text-6xl font-bold text-prixgen-blue max-w-4xl leading-tight"
+            text={solution.title} 
+            variant="gradient"
+            className="text-5xl md:text-7xl font-extrabold leading-tight mb-6"
           />
+          <FadeUp delay={0.2}>
+            <p className="text-2xl text-prixgen-dark/60 max-w-3xl">
+              {solution.headline}
+            </p>
+          </FadeUp>
         </div>
       </div>
 

@@ -4,6 +4,9 @@ import { LeadCaptureForm } from '@/components/features/lead-capture-form';
 import { JsonLd } from '@/components/seo/json-ld';
 import Link from 'next/link';
 import { industriesData, PageData } from '@/lib/data';
+import { StaggerText } from '@/components/animations/stagger-text';
+import { FadeUp } from '@/components/animations/fade-up';
+import { AmbientGlow } from '@/components/animations/ambient-glow';
 
 interface PageProps {
   params: { slug: string };
@@ -17,15 +20,11 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps) {
   const industry = industriesData.find((i) => i.slug === params.slug);
-  if (!industry) return {};
   return {
-    title: `${industry.title} | Prixgen Enterprise`,
-    description: industry.seo.metaDesc,
+    title: industry?.seo.title,
+    description: industry?.seo.metaDesc,
   };
 }
-
-import { StaggerText } from '@/components/animations/stagger-text';
-import { FadeUp } from '@/components/animations/fade-up';
 
 export default function IndustryPage({ params }: PageProps) {
   const industry = industriesData.find((i) => i.slug === params.slug);
@@ -35,7 +34,8 @@ export default function IndustryPage({ params }: PageProps) {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="relative overflow-hidden min-h-screen">
+      <AmbientGlow />
       <JsonLd 
         type="Article" 
         data={{ 
@@ -45,22 +45,55 @@ export default function IndustryPage({ params }: PageProps) {
         }} 
       />
 
-      <div className="bg-prixgen-dark text-white py-20">
-        <div className="container mx-auto px-4">
-          <FadeUp delay={0.1}>
-            <nav className="text-sm text-white/50 mb-6">
-              <Link href="/" className="hover:text-prixgen-lightblue transition-colors">Home</Link> / 
-              <Link href="/industries" className="mx-2 hover:text-prixgen-lightblue transition-colors">Industries</Link> / 
-              <span className="ml-2 text-prixgen-lightblue font-medium">{industry.title}</span>
-            </nav>
-          </FadeUp>
-          <StaggerText 
-            text={industry.headline} 
-            className="text-5xl md:text-7xl font-bold mb-6 tracking-tight max-w-5xl leading-tight"
-          />
+      <div className="container mx-auto px-4 py-20 lg:py-32">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 items-start">
+          <article className="lg:col-span-2 space-y-12">
+            <header className="space-y-6">
+              <div className="inline-block px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue text-sm font-bold tracking-widest uppercase">
+                Industry Sector
+              </div>
+              <StaggerText 
+                text={industry.title} 
+                variant="gradient"
+                className="text-5xl lg:text-7xl font-extrabold leading-tight" 
+              />
+              <FadeUp delay={0.2}>
+                <p className="text-2xl text-prixgen-dark/60 font-medium">
+                  {industry.headline}
+                </p>
+              </FadeUp>
+            </header>
+
+            {industry.featuredImage?.sourceUrl && (
+              <FadeUp delay={0.2} className="relative aspect-video w-full rounded-2xl overflow-hidden shadow-xl">
+                <OptimizedImage
+                  src={industry.featuredImage.sourceUrl}
+                  alt={industry.featuredImage.altText || industry.title}
+                  fill
+                  priority
+                />
+              </FadeUp>
+            )}
+            
+            <FadeUp delay={0.3}>
+              <div 
+                dangerouslySetInnerHTML={{ __html: industry.content }} 
+                className="prose prose-xl max-w-none prose-headings:text-prixgen-blue"
+              />
+            </FadeUp>
+          </article>
+
+          <aside className="lg:col-span-1">
+            <FadeUp delay={0.4} className="bg-prixgen-gray p-10 rounded-3xl sticky top-24 border border-prixgen-blue/5 shadow-xl">
+              <h3 className="text-3xl font-bold mb-6 text-prixgen-blue">Request an Architectural Audit</h3>
+              <p className="text-prixgen-dark/60 mb-8 leading-relaxed">
+                Discover how Prixgen can modernize your {industry.title.toLowerCase()} operations and eliminate technical debt.
+              </p>
+              <LeadCaptureForm source={`Industry: ${industry.title}`} />
+            </FadeUp>
+          </aside>
         </div>
       </div>
-
       <div className="container mx-auto px-4 py-20 grid grid-cols-1 lg:grid-cols-3 gap-16">
         <article className="lg:col-span-2">
           {industry.featuredImage?.sourceUrl && (

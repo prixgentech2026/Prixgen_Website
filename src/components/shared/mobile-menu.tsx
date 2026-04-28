@@ -31,6 +31,14 @@ export function MobileMenu() {
           </div>
           
           <div className="flex-1 overflow-y-auto p-6 space-y-8">
+            <Link 
+              href="/" 
+              onClick={() => setOpen(false)}
+              className="block text-2xl font-bold text-prixgen-blue pb-4 border-b border-prixgen-gray/20"
+            >
+              Home
+            </Link>
+
             <div>
               <h3 className="text-xs font-bold text-prixgen-dark/40 uppercase tracking-widest mb-4">Services</h3>
               <ul className="space-y-4">
