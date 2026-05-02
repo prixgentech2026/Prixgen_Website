@@ -11,10 +11,11 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     // Initialize Lenis with optimal enterprise easing
     const lenis = new Lenis({
       autoRaf: true,
-      lerp: 0.12,
-      duration: 0.8,
+      lerp: 0.08,
+      duration: 1.2,
       smoothWheel: true,
       wheelMultiplier: 1,
+      syncTouch: true,
     });
 
     return () => {

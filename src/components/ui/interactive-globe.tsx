@@ -72,14 +72,14 @@ MapBackground.displayName = 'MapBackground';
 export default function InteractiveGlobe() {
   return (
     <div className="w-full aspect-video md:aspect-square flex flex-col items-center justify-center p-4">
-      <div className="w-full max-w-4xl transition-all duration-700 ease-in-out group relative">
+      <div className="w-full max-w-4xl transition-all duration-700 ease-in-out group relative drop-shadow-[0_20px_50px_rgba(0,75,135,0.08)]">
         <ComposableMap
           projection="geoMercator"
           projectionConfig={{
             scale: 160, // Increased scale for better visibility
             center: [75, 18] // Adjusted center slightly
           }}
-          className="w-full h-auto filter drop-shadow-[0_20px_50px_rgba(0,75,135,0.1)] group-hover:drop-shadow-[0_25px_60px_rgba(0,75,135,0.2)] transition-all duration-500"
+          className="w-full h-auto transition-all duration-500"
         >
           <MapBackground />
 
