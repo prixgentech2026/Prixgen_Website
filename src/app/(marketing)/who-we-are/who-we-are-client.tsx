@@ -107,8 +107,14 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
     return null;
   };
 
+  const [mousePos, setMousePos] = React.useState({ x: 0, y: 0 });
+
   React.useEffect(() => {
-    window.scrollTo(0, 0);
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   return (
@@ -172,40 +178,92 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
       </AnimatePresence>
       {/* 1. HERO SECTION */}
       <section className="relative min-h-screen flex items-center pt-32 pb-16 px-4 overflow-hidden">
+        {/* Animated Architectural Grid */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#0ea5e908_1px,transparent_1px),linear-gradient(to_bottom,#0ea5e908_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_40%,#000_20%,transparent_100%)]" />
+          <motion.div 
+            animate={{ 
+              background: [
+                "radial-gradient(600px circle at 0% 0%, rgba(14, 165, 233, 0.05), transparent 100%)",
+                "radial-gradient(600px circle at 100% 100%, rgba(14, 165, 233, 0.05), transparent 100%)",
+                "radial-gradient(600px circle at 0% 0%, rgba(14, 165, 233, 0.05), transparent 100%)",
+              ]
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-0"
+          />
+        </div>
+
+        {/* Interactive Mouse Glow */}
+        <motion.div 
+          animate={{ 
+            x: mousePos.x - 400, 
+            y: mousePos.y - 400 
+          }}
+          transition={{ type: "spring", damping: 30, stiffness: 50 }}
+          className="fixed top-0 left-0 w-[800px] h-[800px] bg-prixgen-blue/[0.03] rounded-full blur-[120px] pointer-events-none z-10"
+        />
+
         <AmbientGlow />
-        <div className="container mx-auto relative z-10">
-          <div className="max-w-5xl">
+        
+        <div className="container mx-auto relative z-20">
+          <div className="max-w-6xl">
             <FadeUp>
-              <span className="inline-block px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue font-bold tracking-widest uppercase text-[10px] mb-8">
-                {data.subtitle || "About Our Company"}
-              </span>
-              <StaggerText 
-                text={data.title || "Who We Are"} 
-                variant="gradient"
-                className="text-5xl lg:text-8xl font-bold leading-tight mb-8 -ml-1 tracking-tighter"
-              />
+              <div className="flex items-center gap-3 mb-8">
+                <div className="h-[1px] w-8 bg-prixgen-blue/30" />
+                <span className="px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue font-bold tracking-widest uppercase text-[10px]">
+                  {data.subtitle || "Architects of Intelligence"}
+                </span>
+              </div>
+              <div className="relative">
+                <StaggerText 
+                  text={data.title || "Who We Are"} 
+                  variant="gradient"
+                  className="text-6xl md:text-8xl lg:text-[10rem] font-black leading-[0.85] mb-12 -ml-1 tracking-tighter"
+                />
+                <motion.div 
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 1.5, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  className="absolute -bottom-4 left-0 h-2 w-40 bg-prixgen-blue origin-left"
+                />
+              </div>
             </FadeUp>
             
-            <div className="flex flex-col lg:flex-row gap-12 items-end">
-              <FadeUp delay={0.4} className="max-w-2xl">
-                <p className="text-lg lg:text-xl text-slate-500 font-medium leading-relaxed">
-                  Pioneering enterprise intelligence through a specialized fusion of <span className="text-prixgen-blue">IoT, BI, and Analytics.</span>
+            <div className="flex flex-col lg:flex-row gap-16 items-start mt-20">
+              <FadeUp delay={0.4} className="max-w-xl">
+                <p className="text-xl lg:text-2xl text-slate-500 font-medium leading-relaxed">
+                  Pioneering enterprise intelligence through a specialized fusion of <span className="text-prixgen-blue font-bold">IoT, Business Intelligence, and Predictive Analytics.</span>
                 </p>
+                <div className="flex gap-4 mt-10">
+                  <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center text-prixgen-blue shadow-sm">
+                    <ShieldCheck size={24} />
+                  </div>
+                  <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center text-prixgen-blue shadow-sm">
+                    <Cpu size={24} />
+                  </div>
+                  <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center text-prixgen-blue shadow-sm">
+                    <Globe2 size={24} />
+                  </div>
+                </div>
               </FadeUp>
-              <FadeUp delay={0.6} className="flex-shrink-0">
-                <div className="w-24 h-24 rounded-full border border-slate-200 flex items-center justify-center animate-spin-slow">
-                  <ArrowRight className="text-prixgen-blue rotate-90" size={32} />
+              
+              <FadeUp delay={0.6} className="relative group">
+                <div className="relative flex items-center justify-center">
+                  <motion.div 
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    className="w-40 h-40 rounded-full border border-dashed border-slate-200 flex items-center justify-center"
+                  />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                    <ArrowRight className="text-prixgen-blue rotate-90 mb-2" size={32} />
+                    <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400">Scroll</span>
+                  </div>
                 </div>
               </FadeUp>
             </div>
           </div>
         </div>
-        
-        {/* Abstract Background Elements */}
-        <motion.div 
-          style={{ y: yParallax }}
-          className="absolute right-[-10%] top-[20%] w-[40%] aspect-square rounded-full bg-gradient-to-br from-prixgen-blue/10 to-transparent blur-3xl opacity-50"
-        />
       </section>
 
       {/* 2. INTRODUCTION SECTION */}
