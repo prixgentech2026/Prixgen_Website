@@ -3,7 +3,7 @@ import { getServiceBySlug, getServices, PageData } from '@/lib/data';
 import ServiceClientPage from '@/components/templates/service-client-page';
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -14,7 +14,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const service = await getServiceBySlug(params.slug);
+  const { slug } = await params;
+  const service = await getServiceBySlug(slug);
   if (!service) return {};
   return {
     title: `${service.title} | Prixgen Enterprise`,
@@ -23,7 +24,8 @@ export async function generateMetadata({ params }: PageProps) {
 }
 
 export default async function ServicePage({ params }: PageProps) {
-  const service = await getServiceBySlug(params.slug);
+  const { slug } = await params;
+  const service = await getServiceBySlug(slug);
   
   if (!service) {
     notFound();

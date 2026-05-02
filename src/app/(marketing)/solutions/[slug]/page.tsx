@@ -3,7 +3,7 @@ import { getSolutionBySlug, getSolutions, PageData } from '@/lib/data';
 import SolutionClientPage from '@/components/templates/solution-client-page';
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -14,7 +14,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const solution = await getSolutionBySlug(params.slug);
+  const { slug } = await params;
+  const solution = await getSolutionBySlug(slug);
   if (!solution) return {};
   return {
     title: `${solution.title} | Prixgen Enterprise`,
@@ -23,7 +24,8 @@ export async function generateMetadata({ params }: PageProps) {
 }
 
 export default async function SolutionPage({ params }: PageProps) {
-  const solution = await getSolutionBySlug(params.slug);
+  const { slug } = await params;
+  const solution = await getSolutionBySlug(slug);
   
   if (!solution) {
     notFound();

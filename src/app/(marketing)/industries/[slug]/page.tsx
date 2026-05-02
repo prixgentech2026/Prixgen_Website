@@ -3,7 +3,7 @@ import { getIndustryBySlug, getIndustries, PageData } from '@/lib/data';
 import IndustryClientPage from '@/components/templates/industry-client-page';
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -14,7 +14,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const industry = await getIndustryBySlug(params.slug);
+  const { slug } = await params;
+  const industry = await getIndustryBySlug(slug);
   return {
     title: industry?.seo.title,
     description: industry?.seo.metaDesc,
@@ -22,7 +23,8 @@ export async function generateMetadata({ params }: PageProps) {
 }
 
 export default async function IndustryPage({ params }: PageProps) {
-  const industry = await getIndustryBySlug(params.slug);
+  const { slug } = await params;
+  const industry = await getIndustryBySlug(slug);
   
   if (!industry) {
     notFound();
