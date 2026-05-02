@@ -48,14 +48,14 @@ const ImageReveal = ({ src, alt, className }: { src: string, alt: string, classN
     initial={{ clipPath: 'inset(100% 0% 0% 0%)' }}
     whileInView={{ clipPath: 'inset(0% 0% 0% 0%)' }}
     transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-    viewport={{ once: true }}
+    viewport={{ margin: "-50px" }}
     className={`relative overflow-hidden ${className}`}
   >
     <motion.div
       initial={{ scale: 1.4 }}
       whileInView={{ scale: 1 }}
       transition={{ duration: 1.5, ease: 'easeOut' }}
-      viewport={{ once: true }}
+      viewport={{ margin: "-50px" }}
       className="w-full h-full"
     >
       <Image src={src} alt={alt} fill className="object-cover" />
@@ -516,7 +516,7 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
         <motion.div 
           initial={{ opacity: 0, y: 40, scale: 0.95 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: true }}
+          viewport={{ margin: "-100px" }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="relative bg-[#020617] p-12 lg:p-24 rounded-[4rem] text-white text-center overflow-hidden shadow-2xl group"
         >

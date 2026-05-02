@@ -4,6 +4,8 @@ import { Header } from '@/components/shared/header';
 import { Footer } from '@/components/shared/footer';
 import { SmoothScroll } from '@/components/providers/smooth-scroll';
 
+import { PageTransition } from '@/components/providers/page-transition';
+
 export default function MarketingLayout({
   children,
 }: {
@@ -13,7 +15,9 @@ export default function MarketingLayout({
     <div className="font-sans antialiased bg-white text-prixgen-dark min-h-screen flex flex-col">
       <SmoothScroll>
         <Header />
-        <main className="flex-1">{children}</main>
+        <PageTransition>
+          <main className="flex-1">{children}</main>
+        </PageTransition>
         <Footer />
       </SmoothScroll>
       {/* HubSpot Tracking Script */}
