@@ -18,8 +18,14 @@ export const homeQuery = groq`*[_type == "home"][0]{
 // Query for the About Us Page
 export const aboutQuery = groq`*[_type == "about"][0]{
   title,
+  subtitle,
   content,
+  vision,
+  mission,
   stats,
+  whyChooseUs,
+  whyChooseUsIntro,
+  experienceSection,
   seo,
   "featuredImage": featuredImage.asset->{
     "sourceUrl": url,

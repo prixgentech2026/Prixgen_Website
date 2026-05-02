@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Menu, X, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { MENU_DATA } from '@/lib/constants';
@@ -15,6 +16,15 @@ import {
 
 export function MobileMenu() {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
+
+  const handleNavigate = (href: string) => {
+    setOpen(false);
+    // Use a small timeout to ensure the modal closing doesn't interrupt Next.js navigation
+    setTimeout(() => {
+      router.push(href);
+    }, 100);
+  };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -23,7 +33,7 @@ export function MobileMenu() {
           <Menu className="h-8 w-8 text-prixgen-blue" />
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-full h-full sm:max-w-none p-0 bg-white">
+      <DialogContent className="fixed inset-0 w-full h-[100dvh] sm:max-w-none p-0 bg-white translate-x-0 translate-y-0 left-0 top-0 border-none rounded-none overflow-hidden flex flex-col">
         <div className="flex flex-col h-full">
           <div className="p-4 border-b flex items-center justify-between bg-prixgen-gray/20">
             <DialogTitle className="font-bold text-prixgen-blue text-xl">Prixgen Menu</DialogTitle>
@@ -35,10 +45,13 @@ export function MobileMenu() {
             </Button>
           </div>
           
-          <div className="flex-1 overflow-y-auto p-6 space-y-8">
+          <div 
+            className="flex-1 overflow-y-auto p-6 space-y-8 pb-20"
+            data-lenis-prevent
+          >
             <Link 
               href="/" 
-              onClick={() => setOpen(false)}
+              onClick={(e) => { e.preventDefault(); handleNavigate('/'); }}
               className="block text-2xl font-bold text-prixgen-blue pb-4 border-b border-prixgen-gray/20"
             >
               Home
@@ -47,7 +60,11 @@ export function MobileMenu() {
             <div>
               <div className="flex items-center justify-between mb-4 pb-2 border-b border-prixgen-gray/20">
                 <h3 className="text-xs font-bold text-prixgen-dark/40 uppercase tracking-widest">Services</h3>
-                <Link href="/services" onClick={() => setOpen(false)} className="text-xs font-bold text-prixgen-lightblue hover:underline">
+                <Link 
+                  href="/services" 
+                  onClick={(e) => { e.preventDefault(); handleNavigate('/services'); }} 
+                  className="text-xs font-bold text-prixgen-lightblue hover:underline"
+                >
                   Explore All →
                 </Link>
               </div>
@@ -56,7 +73,7 @@ export function MobileMenu() {
                   <li key={item.title}>
                     <Link 
                       href={item.href} 
-                      onClick={() => setOpen(false)}
+                      onClick={(e) => { e.preventDefault(); handleNavigate(item.href); }}
                       className="flex items-center justify-between text-lg font-bold text-prixgen-blue group"
                     >
                       {item.title}
@@ -70,7 +87,11 @@ export function MobileMenu() {
             <div>
               <div className="flex items-center justify-between mb-4 pb-2 border-b border-prixgen-gray/20">
                 <h3 className="text-xs font-bold text-prixgen-dark/40 uppercase tracking-widest">Solutions</h3>
-                <Link href="/solutions" onClick={() => setOpen(false)} className="text-xs font-bold text-prixgen-lightblue hover:underline">
+                <Link 
+                  href="/solutions" 
+                  onClick={(e) => { e.preventDefault(); handleNavigate('/solutions'); }} 
+                  className="text-xs font-bold text-prixgen-lightblue hover:underline"
+                >
                   Explore All →
                 </Link>
               </div>
@@ -79,7 +100,7 @@ export function MobileMenu() {
                   <li key={item.title}>
                     <Link 
                       href={item.href} 
-                      onClick={() => setOpen(false)}
+                      onClick={(e) => { e.preventDefault(); handleNavigate(item.href); }}
                       className="flex items-center justify-between text-lg font-bold text-prixgen-blue"
                     >
                       {item.title}
@@ -93,7 +114,11 @@ export function MobileMenu() {
             <div>
               <div className="flex items-center justify-between mb-4 pb-2 border-b border-prixgen-gray/20">
                 <h3 className="text-xs font-bold text-prixgen-dark/40 uppercase tracking-widest">Industries</h3>
-                <Link href="/industries" onClick={() => setOpen(false)} className="text-xs font-bold text-prixgen-lightblue hover:underline">
+                <Link 
+                  href="/industries" 
+                  onClick={(e) => { e.preventDefault(); handleNavigate('/industries'); }} 
+                  className="text-xs font-bold text-prixgen-lightblue hover:underline"
+                >
                   Explore All →
                 </Link>
               </div>
@@ -102,7 +127,7 @@ export function MobileMenu() {
                   <li key={item.title}>
                     <Link 
                       href={item.href} 
-                      onClick={() => setOpen(false)}
+                      onClick={(e) => { e.preventDefault(); handleNavigate(item.href); }}
                       className="flex items-center justify-between text-lg font-bold text-prixgen-blue"
                     >
                       {item.title}
@@ -115,22 +140,22 @@ export function MobileMenu() {
 
             <div className="pt-8 border-t border-prixgen-gray">
               <Link 
-                href="/about-us" 
-                onClick={() => setOpen(false)}
+                href="/who-we-are" 
+                onClick={(e) => { e.preventDefault(); handleNavigate('/who-we-are'); }}
                 className="block text-lg font-bold text-prixgen-blue mb-4"
               >
                 Who We Are
               </Link>
               <Link 
                 href="/careers" 
-                onClick={() => setOpen(false)}
+                onClick={(e) => { e.preventDefault(); handleNavigate('/careers'); }}
                 className="block text-lg font-bold text-prixgen-blue mb-4"
               >
                 Careers
               </Link>
               <Link 
                 href="/contact" 
-                onClick={() => setOpen(false)}
+                onClick={(e) => { e.preventDefault(); handleNavigate('/contact'); }}
                 className="block text-lg font-bold text-prixgen-blue mb-4"
               >
                 Contact

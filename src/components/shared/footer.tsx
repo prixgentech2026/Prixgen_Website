@@ -56,8 +56,8 @@ export function Footer() {
         <div>
           <h4 className="font-bold mb-6 text-lg">Governance</h4>
           <ul className="space-y-4 text-gray-400 text-sm">
+            <li><Link href="/who-we-are" className="hover:text-prixgen-lightblue transition-colors">Who We Are</Link></li>
             <li><Link href="/services/it-consulting" className="hover:text-prixgen-lightblue transition-colors">Strategic Audits</Link></li>
-            <li><Link href="/services/supply-chain-wms" className="hover:text-prixgen-lightblue transition-colors">Supply Chain Optimization</Link></li>
             <li><Link href="/contact" className="hover:text-prixgen-lightblue transition-colors">Global Contact</Link></li>
           </ul>
         </div>

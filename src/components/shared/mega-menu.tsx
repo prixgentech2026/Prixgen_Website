@@ -89,6 +89,14 @@ export function MegaMenu() {
 
         <NavigationMenuItem>
           <NavigationMenuLink asChild>
+            <Link href="/who-we-are" className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-prixgen-gray hover:text-prixgen-blue focus:bg-prixgen-gray focus:text-prixgen-blue focus:outline-none disabled:pointer-events-none disabled:opacity-50">
+              Who We Are
+            </Link>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <NavigationMenuLink asChild>
             <Link href="/case-studies" className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-prixgen-gray hover:text-prixgen-blue focus:bg-prixgen-gray focus:text-prixgen-blue focus:outline-none disabled:pointer-events-none disabled:opacity-50">
               Case Studies
             </Link>
