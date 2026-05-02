@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { solutionsData } from '@/lib/data';
+import { getSolutions, PageData } from '@/lib/data';
 import { OptimizedImage } from '@/components/ui/optimized-image';
 
 export const metadata: Metadata = {
@@ -8,7 +8,8 @@ export const metadata: Metadata = {
   description: "Discover our specialized solutions including Odoo Enterprise, SAP Ecosystems, Microsoft Dynamics 365, and Lecca AI.",
 };
 
-export default function SolutionsIndexPage() {
+export default async function SolutionsIndexPage() {
+  const solutionsData = await getSolutions();
   return (
     <div className="min-h-screen">
       <section className="bg-prixgen-blue text-white py-24">
@@ -23,7 +24,7 @@ export default function SolutionsIndexPage() {
       </section>
 
       <section className="container mx-auto px-4 py-24 grid grid-cols-1 md:grid-cols-2 gap-12">
-        {solutionsData.map((solution) => (
+        {solutionsData.map((solution: PageData) => (
           <Link 
             key={solution.slug} 
             href={`/solutions/${solution.slug}`}

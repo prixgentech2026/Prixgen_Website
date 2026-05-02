@@ -1,23 +1,38 @@
 import { Metadata } from 'next';
 import { LeadCaptureForm } from '@/components/features/lead-capture-form';
+import { getContactData } from '@/lib/data';
+import { JsonLd } from '@/components/seo/json-ld';
 
-export const metadata: Metadata = {
-  title: "Contact Us | Let's Transform Your Operations",
-  description: "Connect with Prixgen Enterprise Headquarters in Mysuru to discuss your operational intelligence roadmap and ERP strategy.",
-};
+export async function generateMetadata() {
+  const contactData = await getContactData();
+  return {
+    title: contactData.seo.title,
+    description: contactData.seo.metaDesc,
+  };
+}
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const contactData = await getContactData();
+
   return (
     <div className="min-h-screen">
+      <JsonLd 
+        type="ContactPage" 
+        data={{ 
+          name: "Prixgen Contact", 
+          description: contactData.seo.metaDesc 
+        }} 
+      />
+
       {/* Hero */}
       <section className="bg-prixgen-dark text-white py-24 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-prixgen-blue/10 rounded-full blur-[120px] -mr-64 -mt-64" />
         <div className="container mx-auto px-4 relative z-10">
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-tight">
-            Let's Transform Your <span className="text-prixgen-lightblue">Operations.</span>
+            {contactData.title}
           </h1>
           <p className="text-xl text-white/70 max-w-3xl leading-relaxed">
-            Whether you are rescuing a failed implementation, architecting a new global ecosystem, or exploring proprietary AI solutions, our senior consultants are ready to assist.
+            {contactData.description}
           </p>
         </div>
       </section>
@@ -27,10 +42,8 @@ export default function ContactPage() {
         <div className="space-y-16">
           <div className="space-y-8">
             <h2 className="text-sm font-bold text-prixgen-lightblue uppercase tracking-widest">Global Headquarters</h2>
-            <address className="not-italic text-3xl font-bold text-prixgen-blue leading-tight max-w-md">
-              #244 Kalabhairaveshwara Complex,<br />
-              1st Stage, Niveditha Nagara,<br />
-              Mysuru, Karnataka 570022
+            <address className="not-italic text-3xl font-bold text-prixgen-blue leading-tight max-w-md whitespace-pre-line">
+              {contactData.address}
             </address>
             <p className="text-prixgen-dark/40 font-medium">India Office</p>
           </div>
@@ -39,12 +52,12 @@ export default function ContactPage() {
             <div className="space-y-4">
               <h3 className="text-xs font-bold text-prixgen-dark/30 uppercase tracking-widest">Strategic Inquiries</h3>
               <p className="text-2xl font-bold text-prixgen-blue hover:text-prixgen-lightblue transition-colors">
-                <a href="mailto:solutions@prixgen.com">solutions@prixgen.com</a>
+                <a href={`mailto:${contactData.email}`}>{contactData.email}</a>
               </p>
             </div>
             <div className="space-y-4">
               <h3 className="text-xs font-bold text-prixgen-dark/30 uppercase tracking-widest">Global Desk</h3>
-              <p className="text-2xl font-bold text-prixgen-blue">+91 (821) 400-XXXX</p>
+              <p className="text-2xl font-bold text-prixgen-blue">{contactData.phone}</p>
             </div>
           </div>
 

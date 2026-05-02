@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import { StaggerText } from '@/components/animations/stagger-text';
 import { FadeUp } from '@/components/animations/fade-up';
 import { AmbientGlow } from '@/components/animations/ambient-glow';
+import { PortableText } from '@/components/ui/portable-text';
 import { servicesData } from '@/lib/data';
 
 export default function ServiceClientPage({ service }: { service: any }) {
@@ -71,8 +72,8 @@ export default function ServiceClientPage({ service }: { service: any }) {
             </FadeUp>
           )}
           <FadeUp delay={0.3}>
-            <div 
-              dangerouslySetInnerHTML={{ __html: service.content }} 
+            <PortableText 
+              value={service.content} 
               className="prose prose-xl max-w-none prose-headings:text-prixgen-blue prose-p:text-prixgen-dark/80"
             />
           </FadeUp>

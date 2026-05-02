@@ -9,6 +9,7 @@ import { StaggerText } from '@/components/animations/stagger-text';
 import { FadeUp } from '@/components/animations/fade-up';
 import { AmbientGlow } from '@/components/animations/ambient-glow';
 import { motion } from 'framer-motion';
+import { PortableText } from '@/components/ui/portable-text';
 
 export default function SolutionClientPage({ solution }: { solution: any }) {
   return (
@@ -67,8 +68,8 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
           )}
           
           <FadeUp delay={0.3}>
-            <div 
-              dangerouslySetInnerHTML={{ __html: solution.content }} 
+            <PortableText 
+              value={solution.content} 
               className="prose prose-xl max-w-none prose-headings:text-prixgen-blue prose-a:text-prixgen-lightblue"
             />
           </FadeUp>

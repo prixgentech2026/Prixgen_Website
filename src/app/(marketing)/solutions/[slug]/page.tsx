@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { solutionsData } from '@/lib/data';
+import { getSolutionBySlug, getSolutions, PageData } from '@/lib/data';
 import SolutionClientPage from '@/components/templates/solution-client-page';
 
 interface PageProps {
@@ -7,13 +7,14 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  return solutionsData.map((solution) => ({
+  const solutions = await getSolutions();
+  return solutions.map((solution: PageData) => ({
     slug: solution.slug,
   }));
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const solution = solutionsData.find((s) => s.slug === params.slug);
+  const solution = await getSolutionBySlug(params.slug);
   if (!solution) return {};
   return {
     title: `${solution.title} | Prixgen Enterprise`,
@@ -21,8 +22,8 @@ export async function generateMetadata({ params }: PageProps) {
   };
 }
 
-export default function SolutionPage({ params }: PageProps) {
-  const solution = solutionsData.find((s) => s.slug === params.slug);
+export default async function SolutionPage({ params }: PageProps) {
+  const solution = await getSolutionBySlug(params.slug);
   
   if (!solution) {
     notFound();

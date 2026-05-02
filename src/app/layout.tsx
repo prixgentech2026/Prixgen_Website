@@ -1,10 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import Script from 'next/script';
 import './globals.css';
-import { Header } from '@/components/shared/header';
-import { Footer } from '@/components/shared/footer';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -27,10 +24,9 @@ export const metadata: Metadata = {
   },
 };
 
-import { SmoothScroll } from '@/components/providers/smooth-scroll';
-
 /**
  * Root Layout component.
+ * This is now a barebones wrapper. The main site layout is in (marketing)/layout.tsx
  */
 export default function RootLayout({
   children,
@@ -38,19 +34,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="font-sans antialiased bg-white text-prixgen-dark min-h-screen flex flex-col">
-        <SmoothScroll>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </SmoothScroll>
-        {/* HubSpot Tracking Script */}
-        <Script
-          src="https://js.hs-scripts.com/YOUR_HUBSPOT_ID.js"
-          strategy="lazyOnload"
-        />
-      </body>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }

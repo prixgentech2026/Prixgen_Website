@@ -1,20 +1,36 @@
 import { Metadata } from 'next';
 import { OptimizedImage } from '@/components/ui/optimized-image';
 import { LeadCaptureForm } from '@/components/features/lead-capture-form';
+import { getAboutData } from '@/lib/data';
+import { PortableText } from '@/components/ui/portable-text';
+import { JsonLd } from '@/components/seo/json-ld';
 
-export const metadata: Metadata = {
-  title: "Who We Are | Global Architects of Enterprise Intelligence",
-  description: "Prixgen is an elite team of IT professionals with over 30+ years of combined experience in ERP, IIoT, and AI implementations.",
-};
+export async function generateMetadata() {
+  const aboutData = await getAboutData();
+  return {
+    title: aboutData.seo.title,
+    description: aboutData.seo.metaDesc,
+  };
+}
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const aboutData = await getAboutData();
+
   return (
     <div className="flex flex-col">
+      <JsonLd 
+        type="Article" 
+        data={{ 
+          title: aboutData.title, 
+          description: aboutData.seo.metaDesc 
+        }} 
+      />
+
       {/* Hero */}
       <section className="bg-prixgen-dark text-white py-24">
         <div className="container mx-auto px-4">
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight max-w-5xl">
-            We are Global Architects of <span className="text-prixgen-lightblue">Enterprise Intelligence.</span>
+            {aboutData.title}
           </h1>
         </div>
       </section>
@@ -22,33 +38,23 @@ export default function AboutPage() {
       <section className="container mx-auto px-4 py-24 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
         <div className="space-y-8">
           <div className="prose prose-xl text-prixgen-dark/80 max-w-none">
-            <p className="text-2xl font-medium text-prixgen-blue">
-              Prixgen ensures the best ROI for companies by streamlining business processes.
-            </p>
-            <p>
-              Driven by the idea of providing innovative solutions through ERP, IIoT, and AI, we are an elite team of IT professionals with over 30+ years of combined experience in enterprise implementations.
-            </p>
-            <p>
-              We don't just deploy software; we future-proof your digital journey. Our methodology is rooted in architectural integrity and zero-tolerance for operational friction.
-            </p>
+            <PortableText value={aboutData.content} />
           </div>
           
           <div className="grid grid-cols-2 gap-8 pt-8">
-            <div>
-              <div className="text-4xl font-bold text-prixgen-blue mb-2">30+</div>
-              <div className="text-sm uppercase tracking-widest text-prixgen-dark/40 font-bold">Years Experience</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-prixgen-blue mb-2">Elite</div>
-              <div className="text-sm uppercase tracking-widest text-prixgen-dark/40 font-bold">Consulting Team</div>
-            </div>
+            {aboutData.stats.slice(0, 2).map((stat: any, i: number) => (
+              <div key={i}>
+                <div className="text-4xl font-bold text-prixgen-blue mb-2">{stat.value}</div>
+                <div className="text-sm uppercase tracking-widest text-prixgen-dark/40 font-bold">{stat.label}</div>
+              </div>
+            ))}
           </div>
         </div>
 
         <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl">
           <OptimizedImage
-            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=2070"
-            alt="The Prixgen Elite Team"
+            src={aboutData.featuredImage.sourceUrl}
+            alt={aboutData.featuredImage.altText || "The Prixgen Elite Team"}
             fill
           />
         </div>

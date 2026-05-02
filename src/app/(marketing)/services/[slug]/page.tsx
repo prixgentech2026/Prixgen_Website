@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { servicesData } from '@/lib/data';
+import { getServiceBySlug, getServices, PageData } from '@/lib/data';
 import ServiceClientPage from '@/components/templates/service-client-page';
 
 interface PageProps {
@@ -7,13 +7,14 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  return servicesData.map((service) => ({
+  const services = await getServices();
+  return services.map((service: PageData) => ({
     slug: service.slug,
   }));
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const service = servicesData.find((s) => s.slug === params.slug);
+  const service = await getServiceBySlug(params.slug);
   if (!service) return {};
   return {
     title: `${service.title} | Prixgen Enterprise`,
@@ -21,8 +22,8 @@ export async function generateMetadata({ params }: PageProps) {
   };
 }
 
-export default function ServicePage({ params }: PageProps) {
-  const service = servicesData.find((s) => s.slug === params.slug);
+export default async function ServicePage({ params }: PageProps) {
+  const service = await getServiceBySlug(params.slug);
   
   if (!service) {
     notFound();

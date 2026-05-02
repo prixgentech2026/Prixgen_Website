@@ -6,14 +6,14 @@ This document provides a detailed guide on how to acquire and configure the envi
 
 Create a `.env` file in the project root and populate the following keys:
 
-### 1. `WP_GRAPHQL_URL`
-*   **Purpose**: Connects the Next.js frontend to the WordPress backend.
-*   **How to acquire**: 
-    1.  Install the **WPGraphQL** plugin on your WordPress instance.
-    2.  The endpoint is typically `https://your-domain.com/graphql`.
-    3.  Ensure the "Public introspection" is enabled in WPGraphQL settings if you need to explore the schema.
+### 1. `NEXT_PUBLIC_SANITY_PROJECT_ID`
+*   **Purpose**: Connects the frontend to your specific Sanity project.
+*   **Value**: `n8icbhxu`
 
-### 2. `HUBSPOT_ACCESS_TOKEN`
+### 2. `SANITY_DATASET`
+*   **Purpose**: Specifies which dataset (e.g., `production`) to fetch content from.
+
+### 3. `HUBSPOT_ACCESS_TOKEN`
 *   **Purpose**: Securely pushes lead generation data from the website forms to your HubSpot CRM.
 *   **How to acquire**:
     1.  In HubSpot, go to **Settings** > **Integrations** > **Private Apps**.
@@ -24,20 +24,16 @@ Create a `.env` file in the project root and populate the following keys:
         *   `crm.objects.contacts.read`
     5.  Click **Create app** and copy the **Access Token**.
 
-### 3. `REVALIDATION_SECRET`
-*   **Purpose**: Authenticates on-demand cache clearing requests. When you update a post in WordPress, it tells Next.js to refresh that specific page instantly.
-*   **How to acquire**:
-    1.  Generate a long, random string (e.g., using a password generator).
-    2.  Paste it here in `.env`.
-    3.  Paste the same string into the revalidation settings of your WordPress plugin (e.g., "Next.js Revalidation").
+### 4. `SANITY_REVALIDATE_SECRET`
+*   **Purpose**: Authenticates on-demand cache clearing requests from Sanity webhooks.
 
-### 4. `STAGING_PASSWORD`
+### 5. `STAGING_PASSWORD`
 *   **Purpose**: Protects non-production environments from public access and search engine indexing.
 *   **How to acquire**:
     1.  Choose any password.
     2.  When visiting a staging/preview URL, the browser will prompt for a username (`admin`) and this password.
 
-### 5. `NEXT_PUBLIC_SITE_URL`
+### 6. `NEXT_PUBLIC_SITE_URL`
 *   **Purpose**: Sets the base URL for SEO metadata, OpenGraph images, and sitemaps.
 *   **How to acquire**:
     1.  Use `https://www.prixgen.com` for production.

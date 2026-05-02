@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { industriesData } from '@/lib/data';
+import { getIndustries, PageData } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import { OptimizedImage } from '@/components/ui/optimized-image';
 
@@ -9,7 +9,8 @@ export const metadata: Metadata = {
   description: "Explore how Prixgen Enterprise architects unified ecosystems for Manufacturing, Chemicals, FMCG, Retail, and Dairy.",
 };
 
-export default function IndustriesIndexPage() {
+export default async function IndustriesIndexPage() {
+  const industriesData = await getIndustries();
   return (
     <div className="min-h-screen bg-prixgen-gray/20">
       <section className="bg-prixgen-dark text-white py-24">
@@ -25,7 +26,7 @@ export default function IndustriesIndexPage() {
 
       <section className="container mx-auto px-4 py-24">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {industriesData.map((industry) => (
+          {industriesData.map((industry: PageData) => (
             <Link 
               key={industry.slug} 
               href={`/industries/${industry.slug}`}

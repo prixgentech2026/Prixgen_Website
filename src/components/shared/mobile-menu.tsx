@@ -8,6 +8,8 @@ import { MENU_DATA } from '@/lib/constants';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
+  DialogTitle,
   DialogTrigger,
 } from '../ui/dialog';
 
@@ -24,7 +26,10 @@ export function MobileMenu() {
       <DialogContent className="w-full h-full sm:max-w-none p-0 bg-white">
         <div className="flex flex-col h-full">
           <div className="p-4 border-b flex items-center justify-between bg-prixgen-gray/20">
-            <span className="font-bold text-prixgen-blue text-xl">Prixgen Menu</span>
+            <DialogTitle className="font-bold text-prixgen-blue text-xl">Prixgen Menu</DialogTitle>
+            <DialogDescription className="sr-only">
+              Navigate through Prixgen's services, solutions, and company information.
+            </DialogDescription>
             <Button variant="ghost" onClick={() => setOpen(false)}>
               <X className="h-6 w-6" />
             </Button>

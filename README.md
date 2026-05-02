@@ -3,7 +3,7 @@
 ## 🚀 Project Identity
 - **Project Name**: Prixgen Enterprise Rebuild
 - **Project Type**: Headless B2B Corporate Website & Lead Generation Engine
-- **Purpose**: Transition from a legacy monolithic WordPress architecture to a highly secure, edge-rendered, Next.js frontend with integrated CRM capabilities.
+- **Purpose**: Transition from a legacy architecture to a highly secure, edge-rendered, Next.js frontend with Sanity.io as the headless CMS.
 - **Problem Solved**: Eliminates staging indexation leaks, fixes delayed LCP from unoptimized assets, and replaces a bottom-of-funnel-only conversion approach with mid-funnel lead magnets.
 - **North Star**: *"Build an enterprise IT consulting platform that dominates search intent via edge-rendered SEO and securely captures mid-funnel B2B leads for manufacturing ERP buyers."*
 
@@ -13,7 +13,7 @@
 - **Framework**: Next.js 14 (App Router)
 - **Language**: TypeScript (Strict Mode)
 - **Styling**: Tailwind CSS
-- **CMS**: Headless WordPress (via WPGraphQL)
+- **CMS**: Sanity.io (Headless)
 - **Lead Gen**: HubSpot (Server-side Integration)
 - **UI Primitives**: Radix UI + shadcn/ui
 - **Validation**: Zod + React Hook Form
@@ -74,7 +74,7 @@ npm run dev
 ## 📂 Project Structure
 - `src/app`: App Router pages and dynamic routes.
 - `src/components`: UI components (primitives, shared, and features).
-- `src/lib`: Utility functions and GraphQL clients.
+- `src/lib`: Utility functions and local data schemas.
 - `src/actions`: Secure server-side logic (Lead generation).
 - `src/middleware.ts`: Staging protection and security logic.
 
@@ -83,4 +83,4 @@ npm run dev
 ## 📝 Governance
 - **Maintainer**: Prixgen IT Team
 - **Deployment**: Vercel (Production)
-- **Revalidation**: Secure webhooks from WordPress.
+- **Revalidation**: Secure webhooks from Sanity.io.
