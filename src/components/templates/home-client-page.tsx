@@ -304,6 +304,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
 
             <motion.div 
               className="flex whitespace-nowrap gap-0 py-4"
+              style={{ willChange: 'transform' }}
               animate={{ x: ["0%", "-50%"] }}
               transition={{ 
                 x: {

@@ -70,66 +70,97 @@ const MapBackground = React.memo(() => (
 MapBackground.displayName = 'MapBackground';
 
 export default function InteractiveGlobe() {
-  return (
-    <div className="w-full aspect-video md:aspect-square flex flex-col items-center justify-center p-4">
-      <div className="w-full max-w-4xl transition-all duration-700 ease-in-out group relative drop-shadow-[0_20px_50px_rgba(0,75,135,0.08)]">
-        <ComposableMap
-          projection="geoMercator"
-          projectionConfig={{
-            scale: 160, // Increased scale for better visibility
-            center: [75, 18] // Adjusted center slightly
-          }}
-          className="w-full h-auto transition-all duration-500"
-        >
-          <MapBackground />
+  const [isVisible, setIsVisible] = React.useState(false);
+  const containerRef = React.useRef<HTMLDivElement>(null);
 
-          {/* Strategic Locations */}
-          {locations.map(({ name, coordinates, offset }) => (
-            <Marker key={name} coordinates={coordinates as [number, number]}>
-              {/* Animated Halo */}
-              <motion.circle
-                r={12}
-                fill="#00A3E0"
-                initial={{ opacity: 0.1, scale: 0.8 }}
-                animate={{ 
-                  opacity: [0.1, 0.4, 0.1],
-                  scale: [1, 1.8, 1]
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
-              {/* Strategic Node */}
-              <circle 
-                r={5} 
-                fill="#004B87" // prixgen-blue
-                stroke="#fff" 
-                strokeWidth={2} 
-                className="drop-shadow-lg"
-              />
-              {/* City Label */}
-              <text
-                textAnchor="middle"
-                y={offset}
-                style={{ 
-                  fontFamily: "Inter, sans-serif", 
-                  fontSize: "12px", 
-                  fontWeight: 800,
-                  fill: "#1A1A1A",
-                  letterSpacing: "0.05em",
-                  textTransform: "uppercase",
-                  pointerEvents: "none"
-                }}
-                className="opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-              >
-                {name}
-              </text>
-            </Marker>
-          ))}
-        </ComposableMap>
-      </div>
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' } // Load slightly before it comes into view
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div 
+      ref={containerRef}
+      className="w-full aspect-video md:aspect-square flex flex-col items-center justify-center p-4"
+      style={{ transform: 'translateZ(0)' }}
+    >
+      {!isVisible ? (
+        <div className="w-full aspect-square flex items-center justify-center">
+          <div className="w-12 h-12 border-4 border-prixgen-blue/20 border-t-prixgen-blue rounded-full animate-spin" />
+        </div>
+      ) : (
+        <div className="w-full max-w-4xl transition-all duration-700 ease-in-out group relative drop-shadow-[0_20px_50px_rgba(0,75,135,0.08)]">
+          <ComposableMap
+            projection="geoMercator"
+            projectionConfig={{
+              scale: 160, // Increased scale for better visibility
+              center: [75, 18] // Adjusted center slightly
+            }}
+            className="w-full h-auto transition-all duration-500"
+          >
+            <MapBackground />
+
+            {/* Strategic Locations */}
+            {locations.map(({ name, coordinates, offset }) => (
+              <Marker key={name} coordinates={coordinates as [number, number]}>
+                {/* Animated Halo */}
+                <motion.circle
+                  r={12}
+                  fill="#00A3E0"
+                  initial={{ opacity: 0.1, scale: 0.8 }}
+                  animate={{ 
+                    opacity: [0.1, 0.4, 0.1],
+                    scale: [1, 1.8, 1]
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+                {/* Strategic Node */}
+                <circle 
+                  r={5} 
+                  fill="#004B87" // prixgen-blue
+                  stroke="#fff" 
+                  strokeWidth={2} 
+                  className="drop-shadow-lg"
+                />
+                {/* City Label */}
+                <text
+                  textAnchor="middle"
+                  y={offset}
+                  style={{ 
+                    fontFamily: "Inter, sans-serif", 
+                    fontSize: "12px", 
+                    fontWeight: 800,
+                    fill: "#1A1A1A",
+                    letterSpacing: "0.05em",
+                    textTransform: "uppercase",
+                    pointerEvents: "none"
+                  }}
+                  className="opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                >
+                  {name}
+                </text>
+              </Marker>
+            ))}
+          </ComposableMap>
+        </div>
+      )}
     </div>
   );
 }
