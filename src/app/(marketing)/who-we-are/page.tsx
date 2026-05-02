@@ -1,6 +1,6 @@
 import { client } from '@/sanity/lib/client';
 import { aboutQuery } from '@/sanity/lib/queries';
-import { WhoWeAreClient } from './who-we-are-client-v2';
+import { WhoWeAreClient } from './who-we-are-client';
 import { Metadata } from 'next';
 
 export async function generateMetadata(): Promise<Metadata> {

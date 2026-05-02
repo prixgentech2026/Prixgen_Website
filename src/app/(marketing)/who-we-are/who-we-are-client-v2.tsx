@@ -9,7 +9,7 @@ import { FadeUp } from '@/components/animations/fade-up';
 import { Button } from '@/components/ui/button';
 import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
-import { CheckCircle2, ArrowRight, Globe2, Target, Eye, ShieldCheck, Cpu, Code2, X } from 'lucide-react';
+import { CheckCircle2, ArrowRight, Globe2, Target, Eye, ShieldCheck, Cpu, Code2, X, Zap, Shield } from 'lucide-react';
 
 interface Stat {
   label: string;
