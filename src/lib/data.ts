@@ -214,6 +214,7 @@ export const homeData = {
 
 export const aboutData = {
   title: "Global Architects of Enterprise Intelligence.",
+  subtitle: "Pioneering enterprise intelligence through a specialized fusion of IoT, BI, and Analytics.",
   content: [
     {
       _type: 'block',
@@ -224,12 +225,38 @@ export const aboutData = {
       children: [{ _type: 'span', text: "We don't just deploy software; we future-proof your digital journey. Our methodology is rooted in architectural integrity and zero-tolerance for operational friction." }]
     }
   ],
+  vision: "To be the global benchmark for operational intelligence and industrial digital transformation.",
+  mission: "Empowering enterprises through unified ecosystems that turn data into decisive competitive advantage.",
   stats: [
     { label: "Years Experience", value: "30+" },
     { label: "Implementations", value: "500+" },
     { label: "Architect Team", value: "Elite" },
     { label: "Odoo Partner", value: "Gold" },
   ],
+  whyChooseUsIntro: "We provide an uncompromising technical edge for industrial leaders who demand reliability and scale.",
+  whyChooseUs: [
+    {
+      title: "Assured Services",
+      description: "Zero-latency support and multi-layered quality assurance for your entire enterprise stack."
+    },
+    {
+      title: "Future-Proofed Innovation",
+      description: "Architectures designed to evolve with AI, machine learning, and global supply chain shifts."
+    },
+    {
+      title: "Expert Engineering",
+      description: "Clean code and modular scalability from a team with decades of industrial expertise."
+    }
+  ],
+  experienceSection: {
+    title: "15 Years of Industrial Excellence",
+    description: "Our journey has been defined by rescuing failed implementations and architecting unified global ecosystems.",
+    points: [
+      "Certified Gold Partners for Odoo and SAP Business One.",
+      "Proprietary AI and IIoT telemetry extraction models.",
+      "Global delivery centers across APAC and EMEA."
+    ]
+  },
   featuredImage: {
     sourceUrl: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=2070",
     altText: "The Prixgen Elite Team"
