@@ -5,6 +5,7 @@ import { JsonLd } from '@/components/seo/json-ld';
 import { motion } from 'framer-motion';
 import { FadeUp } from '@/components/animations/fade-up';
 import { StaggerText } from '@/components/animations/stagger-text';
+import { AmbientGlow } from '@/components/animations/ambient-glow';
 
 export default function ContactClient({ contactData }: { contactData: any }) {
   return (
@@ -18,23 +19,35 @@ export default function ContactClient({ contactData }: { contactData: any }) {
       />
 
       {/* Hero */}
-      <section className="bg-prixgen-dark text-white py-24 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-prixgen-blue/10 rounded-full blur-[120px] -mr-64 -mt-64" />
-        <div className="container mx-auto px-4 relative z-10">
-          <StaggerText 
-            text={contactData.title}
-            variant="gradient"
-            mode="light"
-            className="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-tight"
-          />
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl text-white/70 max-w-3xl leading-relaxed"
-          >
-            {contactData.description}
-          </motion.p>
+      <section className="relative min-h-[70vh] flex items-center pt-20 overflow-hidden bg-white">
+        <AmbientGlow />
+        
+        {/* Animated Background Grid */}
+        <div className="absolute inset-0 z-0 opacity-[0.03]" 
+             style={{ backgroundImage: 'radial-gradient(#0066cc 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+
+        <div className="container mx-auto px-4 relative z-10 text-center">
+          <FadeUp className="space-y-10">
+            <div className="flex items-center justify-center gap-3 mb-8">
+              <div className="h-[1px] w-8 bg-prixgen-blue/30" />
+              <span className="px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue font-bold tracking-widest uppercase text-[10px]">
+                Global Connectivity
+              </span>
+              <div className="h-[1px] w-8 bg-prixgen-blue/30" />
+            </div>
+            
+            <StaggerText 
+              text={contactData.title}
+              variant="gradient"
+              className="text-6xl md:text-8xl lg:text-[10rem] font-black leading-[0.85] tracking-tighter"
+            />
+            
+            <div className="max-w-4xl mx-auto">
+              <p className="text-xl lg:text-2xl text-slate-500 font-medium leading-relaxed">
+                {contactData.description}
+              </p>
+            </div>
+          </FadeUp>
         </div>
       </section>
 

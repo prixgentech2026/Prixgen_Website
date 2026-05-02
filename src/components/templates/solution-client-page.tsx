@@ -25,33 +25,51 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
       />
 
       {/* Breadcrumbs & Header */}
-      <section className="bg-prixgen-blue text-white py-20 lg:py-32 relative overflow-hidden">
+      <section className="relative min-h-[70vh] flex items-center pt-20 overflow-hidden bg-white">
         <AmbientGlow />
-        <div className="container mx-auto px-4 relative z-10">
-          <FadeUp delay={0.1}>
-            <nav className="text-sm text-white/50 mb-8">
-              <Link href="/" className="hover:text-prixgen-lightblue transition-colors">Home</Link> / 
-              <Link href="/solutions" className="mx-2 hover:text-prixgen-lightblue transition-colors">Solutions</Link> / 
-              <span className="ml-2 text-prixgen-lightblue font-medium">{solution.title}</span>
-            </nav>
+        
+        {/* Animated Background Grid */}
+        <div className="absolute inset-0 z-0 opacity-[0.03]" 
+             style={{ backgroundImage: 'radial-gradient(#0066cc 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+
+        <div className="container mx-auto px-4 relative z-10 text-center">
+          <FadeUp className="space-y-8">
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="flex items-center justify-center gap-2 text-[10px] font-black text-prixgen-blue/40 uppercase tracking-[0.2em]"
+            >
+              <Link href="/" className="hover:text-prixgen-blue transition-colors">Home</Link>
+              <span className="opacity-20">/</span>
+              <Link href="/solutions" className="hover:text-prixgen-blue transition-colors">Solutions</Link>
+              <span className="opacity-20">/</span>
+              <span className="text-prixgen-blue">{solution.title}</span>
+            </motion.div>
+            
+            <StaggerText 
+              text={solution.title} 
+              variant="gradient"
+              className="text-5xl md:text-7xl lg:text-9xl font-black leading-[0.85] tracking-tighter"
+            />
+            
+            <div className="max-w-4xl mx-auto">
+              <p className="text-xl lg:text-2xl text-slate-500 font-medium leading-relaxed">
+                {solution.headline}
+              </p>
+            </div>
           </FadeUp>
-          <StaggerText 
-            text={solution.title} 
-            variant="gradient"
-            mode="light"
-            className="text-5xl md:text-7xl font-extrabold leading-tight mb-6"
-          />
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] as const }}
-          >
-            <p className="text-2xl text-white max-w-4xl leading-relaxed font-medium">
-              {solution.headline}
-            </p>
-          </motion.div>
         </div>
-        <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white/10 to-transparent pointer-events-none" />
+        
+        {/* Scroll Indicator */}
+        <motion.div 
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30"
+        >
+          <span className="text-xs font-bold uppercase tracking-widest text-prixgen-blue">Scroll</span>
+          <div className="w-px h-12 bg-gradient-to-b from-prixgen-blue to-transparent" />
+        </motion.div>
       </section>
 
       <div className="container mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-3 gap-12">

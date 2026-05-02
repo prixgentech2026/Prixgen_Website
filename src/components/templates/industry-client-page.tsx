@@ -21,38 +21,57 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
         }} 
       />
 
-      <section className="bg-prixgen-blue text-white py-20 lg:py-32 relative overflow-hidden">
+      <section className="relative min-h-[70vh] flex items-center pt-20 overflow-hidden bg-white">
         <AmbientGlow />
-        <div className="container mx-auto px-4 relative z-10">
-          <FadeUp delay={0.1}>
-            <nav className="text-sm text-white/50 mb-8">
-              <Link href="/" className="hover:text-prixgen-lightblue transition-colors">Home</Link> / 
-              <Link href="/industries" className="mx-2 hover:text-prixgen-lightblue transition-colors">Industries</Link> / 
-              <span className="ml-2 text-prixgen-lightblue font-medium">{industry.title}</span>
-            </nav>
-          </FadeUp>
-          <header className="space-y-6">
-            <div className="inline-block px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-prixgen-lightblue text-sm font-bold tracking-widest uppercase">
-              Industry Sector
-            </div>
-            <StaggerText 
-              text={industry.title} 
-              variant="gradient"
-              mode="light"
-              className="text-5xl lg:text-7xl font-extrabold leading-tight" 
-            />
+        
+        {/* Animated Background Grid */}
+        <div className="absolute inset-0 z-0 opacity-[0.03]" 
+             style={{ backgroundImage: 'radial-gradient(#0066cc 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+
+        <div className="container mx-auto px-4 relative z-10 text-center">
+          <FadeUp className="space-y-8">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] as const }}
+              transition={{ duration: 0.8 }}
+              className="flex items-center justify-center gap-2 text-[10px] font-black text-prixgen-blue/40 uppercase tracking-[0.2em]"
             >
-              <p className="text-2xl text-white font-medium max-w-4xl leading-relaxed">
-                {industry.headline}
-              </p>
+              <Link href="/" className="hover:text-prixgen-blue transition-colors">Home</Link>
+              <span className="opacity-20">/</span>
+              <Link href="/industries" className="hover:text-prixgen-blue transition-colors">Industries</Link>
+              <span className="opacity-20">/</span>
+              <span className="text-prixgen-blue">{industry.title}</span>
             </motion.div>
-          </header>
+            
+            <header className="space-y-6">
+              <div className="inline-block px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue text-[10px] font-bold tracking-widest uppercase mx-auto">
+                Industry Sector
+              </div>
+              
+              <StaggerText 
+                text={industry.title} 
+                variant="gradient"
+                className="text-5xl md:text-7xl lg:text-9xl font-black leading-[0.85] tracking-tighter"
+              />
+              
+              <div className="max-w-4xl mx-auto">
+                <p className="text-xl lg:text-2xl text-slate-500 font-medium leading-relaxed">
+                  {industry.headline}
+                </p>
+              </div>
+            </header>
+          </FadeUp>
         </div>
-        <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white/10 to-transparent pointer-events-none" />
+        
+        {/* Scroll Indicator */}
+        <motion.div 
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30"
+        >
+          <span className="text-xs font-bold uppercase tracking-widest text-prixgen-blue">Scroll</span>
+          <div className="w-px h-12 bg-gradient-to-b from-prixgen-blue to-transparent" />
+        </motion.div>
       </section>
 
       <div className="container mx-auto px-4 py-20">

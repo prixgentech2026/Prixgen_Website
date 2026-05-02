@@ -7,6 +7,7 @@ import {
   industriesQuery,
   solutionsQuery,
   servicesQuery,
+  servicesPageQuery,
   aboutQuery,
   contactQuery
 } from '@/sanity/lib/queries';
@@ -131,6 +132,17 @@ export async function getServiceBySlug(slug: string) {
   }
 }
 
+export async function getServicesPageData() {
+  if (!client) return servicesPageMockData;
+  try {
+    const data = await client.fetch(servicesPageQuery);
+    return data || servicesPageMockData;
+  } catch (error) {
+    console.error('Sanity Fetch Error (Services Page):', error);
+    return servicesPageMockData;
+  }
+}
+
 /**
  * MOCK DATA (Fallback)
  */
@@ -165,6 +177,29 @@ export interface PageData {
   };
 }
 
+export interface ServicesPageData {
+  title: string;
+  subtitle: string;
+  heroSubheadline: string;
+  methodology: {
+    step: string;
+    title: string;
+    description: string;
+    icon: string;
+  }[];
+  outcomes: {
+    title: string;
+    description: string;
+    icon: string;
+  }[];
+  coreServices: {
+    title: string;
+    headline: string;
+    slug: string;
+  }[];
+  seo: SEOData;
+}
+
 export const clientsData = [
   { name: "Licious" }, { name: "Curefit" }, { name: "Zetwerk" }, 
   { name: "Designcafe" }, { name: "Ravago" }, { name: "BI Worldwide" },
@@ -191,6 +226,10 @@ export const testimonialsData = [
 
 export const homeData = {
   title: "Intelligent Operations. Unified Enterprise.",
+  heroImage: {
+    _type: 'image',
+    asset: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2070"
+  },
   subheadline: [
     {
       _type: 'block',
@@ -495,3 +534,31 @@ export const servicesData: PageData[] = [
     }
   }
 ];
+
+export const servicesPageMockData: ServicesPageData = {
+  title: "Enterprise Application Services",
+  subtitle: "Architectural Services",
+  heroSubheadline: "Prixgen Preferred Care: We traverse a stringent, economical, and customer-driven methodology to enable technical confidence and exact solutions.",
+  methodology: [
+    { step: "01", title: "Discover : We Listen", description: "We define and discuss your goals and challenges, helping you envision new, innovative ways to improve operational experiences.", icon: "Search" },
+    { step: "02", title: "Design : We Strategize", description: "We design successful, outcomes-based learning and operational strategies tailored specifically to the needs of our enterprise partners.", icon: "PenTool" },
+    { step: "03", title: "Develop : We Create", description: "We offer thoughtful, relevant, and engaging development services, crafting a technical solution that works best for your exact needs.", icon: "Code" }
+  ],
+  outcomes: [
+    { title: "Increase Efficiency", description: "Automate day-to-day tasks, eliminate repetitive processes, and streamline cross-departmental workflows within a single platform.", icon: "Activity" },
+    { title: "Promote Collaboration", description: "Break down data silos. Link remote teams, headquarters, and offshore units through secure internet, intranet, and IoT highways.", icon: "Users" },
+    { title: "Accurate Forecasting", description: "Leverage centralized databases and advanced analytics to ensure data integrity and generate realistic, machine-learning-backed forecasts.", icon: "LineChart" },
+    { title: "Lower Operational Costs", description: "Anticipate disruptions and manage impact effectively. Real-time data across production and supply chain keeps operating costs strictly within budget.", icon: "TrendingUp" },
+    { title: "Data Security & Compliance", description: "Guard against breaches with single-warehouse access controls, while meeting myriad business requirements through built-in regulatory reporting.", icon: "ShieldCheck" },
+    { title: "SaaS Advantages", description: "Scale effortlessly, access data anywhere, integrate existing apps, and eliminate maintenance downtime with a low capital outlay.", icon: "Server" }
+  ],
+  coreServices: [
+    { title: "IT Consulting", headline: "Aligning Technology with Business Strategy.", slug: "it-consulting" },
+    { title: "Warehouse Management", headline: "Next-Generation Warehouse Automation.", slug: "supply-chain-wms" },
+    { title: "Industrial IoT (IIoT)", headline: "The Industrial Internet of Things.", slug: "iiot-engineering" }
+  ],
+  seo: {
+    title: "Services | Enterprise Application Services | Prixgen",
+    metaDesc: "Prixgen Preferred Care methodology: Discover, Design, and Develop outcomes-based learning and operational strategies for modern industrial enterprises.",
+  }
+};

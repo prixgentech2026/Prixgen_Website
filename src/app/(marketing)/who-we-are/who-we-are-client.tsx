@@ -177,7 +177,7 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
         )}
       </AnimatePresence>
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-screen flex items-center pt-32 pb-16 px-4 overflow-hidden">
+      <section className="relative min-h-[80vh] flex items-center pt-24 pb-12 px-4 overflow-hidden">
         {/* Animated Architectural Grid */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#0ea5e908_1px,transparent_1px),linear-gradient(to_bottom,#0ea5e908_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_40%,#000_20%,transparent_100%)]" />
@@ -316,7 +316,7 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
     </section>
 
     {/* 3. OUR FOUNDATION (Vision & Mission) */}
-    <section className="py-16 lg:py-24 bg-[#020617] text-white relative overflow-hidden">
+    <section className="py-12 lg:py-20 bg-[#020617] text-white relative overflow-hidden">
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 opacity-20 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
         <motion.div 
@@ -452,7 +452,7 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
     </section>
 
     {/* 5. EXPERIENCE SECTION */}
-    <section className="py-16 lg:py-20 bg-gradient-to-b from-white to-slate-50 relative overflow-hidden">
+    <section className="py-12 lg:py-16 bg-gradient-to-b from-white to-slate-50 relative overflow-hidden">
       <div className="absolute -left-10 top-40 text-[15rem] font-bold text-slate-100/40 select-none leading-none pointer-events-none italic">15</div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -486,7 +486,7 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
     </section>
 
     {/* 6. STATS SECTION */}
-    <section className="py-16 lg:py-24 bg-[#020617] relative overflow-hidden border-t border-white/5">
+    <section className="py-12 lg:py-20 bg-[#020617] relative overflow-hidden border-t border-white/5">
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-24">
           {data.stats?.map((stat, i) => (
@@ -511,7 +511,7 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
     </section>
 
     {/* 7. FINAL CTA */}
-    <section className="py-24 lg:py-32 bg-white relative overflow-hidden">
+    <section className="py-16 lg:py-24 bg-white relative overflow-hidden">
       <div className="container mx-auto px-4">
         <motion.div 
           initial={{ opacity: 0, y: 40, scale: 0.95 }}

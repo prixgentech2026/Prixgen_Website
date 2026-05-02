@@ -13,6 +13,7 @@ import { FadeUp } from '@/components/animations/fade-up';
 import { LeadCaptureForm } from '@/components/features/lead-capture-form';
 import { AmbientGlow } from '@/components/animations/ambient-glow';
 import { PortableText } from '@/components/ui/portable-text';
+import { urlFor } from '@/sanity/lib/image';
 
 import InteractiveGlobe from '@/components/ui/interactive-globe';
 
@@ -88,100 +89,115 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
       />
       
       <main>
-        {/* 1. Hero Section (Exploring / Innovation) */}
         <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-white">
           <AmbientGlow />
-          <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="z-10 space-y-8">
-              <div className="space-y-2">
-                <p className="text-prixgen-lightblue font-bold tracking-[0.2em] uppercase text-sm">Exploring</p>
+          
+          {/* Animated Background Grid */}
+          <div className="absolute inset-0 z-0 opacity-[0.03]" 
+               style={{ backgroundImage: 'radial-gradient(#0066cc 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <FadeUp className="space-y-10 text-left">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="h-[1px] w-8 bg-prixgen-blue/30" />
+                  <span className="px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue font-bold tracking-widest uppercase text-[10px]">
+                    Intelligent Architecture
+                  </span>
+                </div>
+                
                 <StaggerText 
                   text="Innovation" 
                   variant="gradient"
-                  className="text-6xl lg:text-8xl font-extrabold leading-tight"
+                  className="text-6xl md:text-8xl lg:text-9xl font-black leading-[0.85] mb-12 tracking-tighter"
                 />
-              </div>
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
-              >
-                <h1 className="text-4xl lg:text-5xl font-bold text-prixgen-blue mb-6">
-                  {homeData.title || "Intelligent Operations. Unified Enterprise."}
-                </h1>
-                {homeData.subheadline ? (
-                  <PortableText 
-                    value={homeData.subheadline} 
-                    className="text-xl text-prixgen-dark max-w-xl leading-relaxed font-medium"
-                  />
-                ) : (
-                  <p className="text-xl text-prixgen-dark max-w-xl leading-relaxed font-medium">
-                    We architect, deploy, and manage scalable ERP and supply chain ecosystems for modern industrial enterprises.
-                  </p>
-                )}
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.5 }}
-                className="flex flex-wrap gap-4"
-              >
-                <Button size="lg" className="text-lg px-8" asChild>
-                  <Link href="/contact">{homeData.heroPrimaryCTA || "Get Started"}</Link>
-                </Button>
-                <Button size="lg" variant="outline" className="text-lg px-8" asChild>
-                  <Link href="/solutions/odoo-enterprise">{homeData.heroSecondaryCTA || "Explore Architecture"}</Link>
-                </Button>
-              </motion.div>
+                
+                <div className="max-w-2xl space-y-8">
+                  <h1 className="text-3xl lg:text-5xl font-bold text-prixgen-blue tracking-tight">
+                    {homeData.title || "Intelligent Operations. Unified Enterprise."}
+                  </h1>
+                  
+                  {homeData.subheadline ? (
+                    <div className="text-xl text-slate-500 font-medium leading-relaxed">
+                      <PortableText value={homeData.subheadline} />
+                    </div>
+                  ) : (
+                    <p className="text-xl text-slate-500 font-medium leading-relaxed">
+                      We architect, deploy, and manage scalable ERP and supply chain ecosystems for modern industrial enterprises.
+                    </p>
+                  )}
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-center gap-6 pt-10">
+                  <Button size="lg" className="h-16 px-10 text-lg rounded-2xl shadow-xl shadow-prixgen-blue/20 w-full sm:w-auto" asChild>
+                    <Link href="/contact">{homeData.heroPrimaryCTA || "Get Started"}</Link>
+                  </Button>
+                  <Link href="/solutions/odoo-enterprise" className="group flex items-center gap-3 text-prixgen-blue font-bold text-lg">
+                    {homeData.heroSecondaryCTA || "Explore Architecture"}
+                    <motion.span
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      →
+                    </motion.span>
+                  </Link>
+                </div>
+              </FadeUp>
+
+              <FadeUp delay={0.3} className="relative">
+                <div className="absolute -inset-4 bg-prixgen-blue/5 rounded-[3rem] blur-3xl -z-10 animate-pulse" />
+                <div className="relative aspect-[4/3] rounded-[3rem] overflow-hidden border border-slate-100 shadow-2xl group">
+                  {homeData.heroImage ? (
+                    <div className="w-full h-full relative">
+                      <img
+                        key={homeData.heroImage.url || homeData.heroImage.asset || "hero-image"}
+                        src={
+                          homeData.heroImage.url || 
+                          homeData.heroImage.asset ||
+                          "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2070"
+                        }
+                        alt="Industrial Architecture"
+                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-full h-full bg-slate-100 flex items-center justify-center">
+                      <span className="text-slate-300 font-bold uppercase tracking-widest">Architectural Visual</span>
+                    </div>
+                  )}
+                  
+                  {/* Floating Tech Badge */}
+                  <div className="absolute bottom-8 left-8 bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-white/20 max-w-[200px]">
+                    <div className="text-prixgen-blue font-black text-2xl mb-1">2026</div>
+                    <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-tight">Operational Standard v3.0</div>
+                  </div>
+                </div>
+              </FadeUp>
             </div>
-            <FadeUp delay={0.3} className="relative z-10 flex justify-center">
-              <div className="relative w-full max-w-2xl">
-                <div className="absolute -top-20 -right-20 w-80 h-80 bg-prixgen-blue/10 rounded-full blur-3xl animate-pulse" />
-                <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-prixgen-lightblue/10 rounded-full blur-3xl animate-pulse delay-700" />
-                
-                <motion.div
-                  animate={{ 
-                    y: [0, -20, 0],
-                    rotate: [0, 1, 0]
-                  }}
-                  transition={{ 
-                    duration: 6, 
-                    repeat: Infinity, 
-                    ease: "easeInOut" 
-                  }}
-                  className="relative z-20 rounded-[3rem] overflow-hidden shadow-2xl border border-white/20"
-                >
-                  <img 
-                    src="/images/hero.png" 
-                    alt="Industrial Intelligence"
-                    className="w-full h-auto object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-prixgen-blue/20 to-transparent pointer-events-none" />
-                </motion.div>
-                
-                {/* Floating Data Badge */}
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 1, duration: 0.8 }}
-                  className="absolute -right-8 top-1/4 z-30 bg-white/90 backdrop-blur-xl p-6 rounded-2xl shadow-2xl border border-slate-100 hidden md:block"
-                >
-                  <div className="text-prixgen-blue font-bold text-2xl">500+</div>
-                  <div className="text-xs text-prixgen-dark/40 font-bold uppercase tracking-widest">Enterprises Unified</div>
-                </motion.div>
-              </div>
-            </FadeUp>
           </div>
+          
+          {/* Scroll Indicator */}
+          <motion.div 
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="absolute bottom-10 left-10 flex flex-col items-center gap-2 opacity-30"
+          >
+            <span className="text-xs font-bold uppercase tracking-widest text-prixgen-blue">Scroll</span>
+            <div className="w-px h-12 bg-gradient-to-b from-prixgen-blue to-transparent" />
+          </motion.div>
         </section>
 
         {/* 2. Services Section (Our Best Services / Prixgen Services) */}
-        <section className="py-24 bg-prixgen-gray/10 relative">
+        <section className="py-20 lg:py-28 bg-prixgen-gray/10 relative">
           <div className="container mx-auto px-4">
             <FadeUp className="mb-16 text-center lg:text-left">
-              <p className="text-prixgen-lightblue font-bold tracking-widest uppercase text-xs mb-4">Our Best Services</p>
-              <h2 className="text-4xl md:text-5xl font-bold text-prixgen-blue mb-6">Prixgen Services</h2>
-              <p className="text-prixgen-dark/70 max-w-3xl leading-relaxed">
-                Prixgen’s voyage is extremely unique. We traverse through a stringent yet economical and customer driven solution method. Fundamental of any success derives from constant research and enabling a suitable solution.
+              <div className="flex items-center gap-4 mb-4">
+                <div className="h-[1px] w-12 bg-prixgen-blue" />
+                <span className="text-prixgen-blue font-bold tracking-[0.2em] uppercase text-[10px]">Industrial Services</span>
+              </div>
+              <h2 className="text-4xl lg:text-6xl font-bold text-prixgen-blue mb-6 tracking-tighter">Prixgen Services</h2>
+              <p className="text-lg lg:text-xl text-slate-600 font-medium max-w-3xl leading-relaxed">
+                Prixgen’s voyage is unique. We traverse through a stringent yet customer-driven solution method, where success derives from constant research and architectural precision.
               </p>
             </FadeUp>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -238,17 +254,21 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
         </section>
 
         {/* 3. Our Solutions Section */}
-        <section className="py-24 bg-white">
+        <section className="py-20 lg:py-28 bg-white">
           <div className="container mx-auto px-4">
-            <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-8">
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-20 gap-8">
               <FadeUp className="max-w-2xl">
-                <h2 className="text-4xl md:text-5xl font-bold text-prixgen-blue mb-4">Our Solutions</h2>
-                <p className="text-xl text-prixgen-dark/60">
-                  What’s your challenge? Let’s work together to solve it.
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="h-[1px] w-12 bg-prixgen-blue" />
+                  <span className="text-prixgen-blue font-bold tracking-[0.2em] uppercase text-[10px]">Architecture Suite</span>
+                </div>
+                <h2 className="text-4xl lg:text-6xl font-bold text-prixgen-blue mb-4 tracking-tighter">Our Solutions</h2>
+                <p className="text-lg lg:text-xl text-slate-600 font-medium">
+                  What’s your challenge? Let’s architect the path forward together.
                 </p>
               </FadeUp>
               <FadeUp delay={0.2}>
-                <Button variant="outline" size="lg" asChild>
+                <Button variant="outline" size="lg" className="h-14 px-8 rounded-xl font-bold" asChild>
                   <Link href="/solutions">View All Architecture</Link>
                 </Button>
               </FadeUp>
@@ -289,7 +309,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
         </section>
 
         {/* 4. Our Patronage Section - Infinite Marquee */}
-        <section className="py-24 bg-prixgen-gray/20 overflow-hidden relative border-y border-slate-200/50">
+        <section className="py-16 lg:py-20 bg-prixgen-gray/20 overflow-hidden relative border-y border-slate-200/50">
           <div className="container mx-auto px-4 relative z-10">
             <FadeUp className="text-center mb-16">
               <h2 className="text-4xl font-bold text-prixgen-blue mb-4">Our Patronage</h2>
@@ -323,7 +343,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
         </section>
 
         {/* 5. Testimonials Section */}
-        <section className="py-24 bg-white relative overflow-hidden">
+        <section className="py-16 lg:py-20 bg-white relative overflow-hidden">
           <div className="container mx-auto px-4 relative z-10">
             <FadeUp className="text-center mb-16">
               <h2 className="text-4xl font-bold text-prixgen-blue mb-4">Success Voices</h2>
@@ -377,7 +397,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
         </section>
 
         {/* 6. Stories Section */}
-        <section className="py-24 bg-slate-50">
+        <section className="py-16 lg:py-20 bg-slate-50">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
               <FadeUp>
@@ -420,7 +440,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
         </section>
 
         {/* 7. Worldwide Presence Section */}
-        <section className="py-32 bg-white border-t border-slate-100 relative overflow-hidden">
+        <section className="py-20 lg:py-28 bg-white border-t border-slate-100 relative overflow-hidden">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8 items-center">
               {/* Left Column: Headquarters */}

@@ -12,14 +12,14 @@ export function OptimizedImage({ wrapperClassName, className, alt, ...props }: O
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
-    <div className={cn("relative overflow-hidden bg-prixgen-gray/20", wrapperClassName)}>
+    <div className={cn("relative overflow-hidden bg-prixgen-gray/5", wrapperClassName)}>
       <motion.div
-        initial={{ opacity: 0, scale: 1.05 }}
+        initial={{ opacity: props.priority ? 1 : 0.1, scale: 1.02 }}
         animate={{ 
-          opacity: isLoaded ? 1 : 0, 
-          scale: isLoaded ? 1 : 1.05 
+          opacity: 1, 
+          scale: 1 
         }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
         className="w-full h-full"
       >
         <Image

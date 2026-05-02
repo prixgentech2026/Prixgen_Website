@@ -3,6 +3,10 @@ import { groq } from 'next-sanity';
 // Query for the Homepage
 export const homeQuery = groq`*[_type == "home"][0]{
   title,
+  "heroImage": {
+    "url": heroImage.url,
+    "asset": heroImage.asset->url
+  },
   subheadline,
   heroPrimaryCTA,
   heroSecondaryCTA,
@@ -105,4 +109,19 @@ export const serviceBySlugQuery = groq`*[_type == "service" && slug.current == $
     "sourceUrl": url,
     "altText": altText
   }
+}`;
+
+// Query for the Services Landing Page
+export const servicesPageQuery = groq`*[_type == "servicesPage"][0]{
+  title,
+  subtitle,
+  heroSubheadline,
+  methodology,
+  outcomes,
+  "coreServices": coreServices[]->{
+    title,
+    headline,
+    "slug": slug.current
+  },
+  seo
 }`;

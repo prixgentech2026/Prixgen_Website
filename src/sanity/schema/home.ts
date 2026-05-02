@@ -11,6 +11,14 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'heroImage',
+      title: 'Hero Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
       name: 'subheadline',
       title: 'Subheadline',
       type: 'array',
