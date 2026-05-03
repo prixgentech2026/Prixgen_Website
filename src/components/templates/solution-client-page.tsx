@@ -50,7 +50,7 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
             <StaggerText 
               text={solution.title} 
               variant="gradient"
-              className="text-5xl md:text-7xl lg:text-[10rem] font-black leading-[0.85] tracking-tighter"
+              className="text-5xl md:text-6xl lg:text-7xl font-black leading-[0.9] tracking-tighter"
             />
             
             <div className="max-w-4xl mx-auto">

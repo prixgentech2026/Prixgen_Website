@@ -207,7 +207,7 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
                   <StaggerText 
                     text={data.title || "Who We Are"} 
                     variant="gradient"
-                    className="text-6xl md:text-8xl lg:text-[9rem] font-black leading-[0.85] mb-12 -ml-1 tracking-tighter"
+                    className="text-5xl md:text-6xl lg:text-7xl font-black leading-[0.9] mb-12 -ml-1 tracking-tighter"
                   />
                   <motion.div 
                     initial={{ scaleX: 0 }}

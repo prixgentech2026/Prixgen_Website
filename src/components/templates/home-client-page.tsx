@@ -97,7 +97,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                style={{ backgroundImage: 'radial-gradient(#0066cc 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
           <div className="container mx-auto px-4 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-16 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <FadeUp className="space-y-10 text-left relative z-20">
                 <div className="flex items-center gap-3 mb-8">
                   <div className="h-[1px] w-8 bg-prixgen-blue/30" />
@@ -109,13 +109,13 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                 <StaggerText 
                   text="Innovation" 
                   variant="gradient"
-                  className="text-6xl md:text-8xl lg:text-[10rem] font-black leading-[0.85] mb-12 tracking-tighter"
+                  className="text-5xl md:text-6xl lg:text-7xl font-black leading-[0.9] mb-10 tracking-tighter"
                 />
                 
                 <div className="max-w-2xl space-y-8">
-                  <h1 className="text-3xl lg:text-5xl font-bold text-prixgen-blue tracking-tight">
-                    {homeData.title || "Intelligent Operations. Unified Enterprise."}
-                  </h1>
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-prixgen-blue tracking-tight leading-[1.1]">
+                  {homeData.title || "Intelligent Operations. Unified Enterprise."}
+                </h1>
                   
                   {homeData.subheadline ? (
                     <div className="text-xl text-slate-500 font-medium leading-relaxed">
@@ -187,7 +187,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
         </section>
 
         {/* 2. Services Section (Our Best Services / Prixgen Services) */}
-        <section className="py-20 lg:py-28 bg-prixgen-gray/10 relative">
+        <section className="py-16 lg:py-24 bg-prixgen-gray/10 relative">
           <div className="container mx-auto px-4">
             <FadeUp className="mb-16 text-center lg:text-left">
               <div className="flex items-center gap-4 mb-4">
@@ -308,7 +308,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
         </section>
 
         {/* 4. Our Patronage Section - Infinite Marquee */}
-        <section className="py-16 lg:py-20 bg-prixgen-gray/20 overflow-hidden relative border-y border-slate-200/50">
+        <section className="py-16 lg:py-24 bg-prixgen-gray/20 overflow-hidden relative border-y border-slate-200/50">
           <div className="container mx-auto px-4 relative z-10">
             <FadeUp className="text-center mb-16">
               <h2 className="text-4xl font-bold text-prixgen-blue mb-4">Our Patronage</h2>
@@ -342,7 +342,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
         </section>
 
         {/* 5. Testimonials Section */}
-        <section className="py-12 lg:py-16 bg-white relative overflow-hidden">
+        <section className="py-16 lg:py-24 bg-white relative overflow-hidden">
           <div className="container mx-auto px-4 relative z-10">
             <FadeUp className="text-center mb-16">
               <h2 className="text-4xl font-bold text-prixgen-blue mb-4">Success Voices</h2>
@@ -396,7 +396,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
         </section>
 
         {/* 6. Stories Section */}
-        <section className="py-12 lg:py-16 bg-slate-50">
+        <section className="py-16 lg:py-24 bg-slate-50">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
               <FadeUp>
