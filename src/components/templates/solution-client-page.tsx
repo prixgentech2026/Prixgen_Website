@@ -25,7 +25,7 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
       />
 
       {/* Breadcrumbs & Header */}
-      <section className="relative min-h-[70vh] flex items-center pt-20 overflow-hidden bg-white">
+      <section className="relative min-h-[75vh] flex items-center pt-24 pb-12 overflow-hidden bg-white">
         <AmbientGlow />
         
         {/* Animated Background Grid */}
@@ -53,7 +53,7 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
               className="text-5xl md:text-6xl font-black leading-[0.9] tracking-tighter"
             />
             
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-4xl mx-auto pt-6">
               <p className="text-lg lg:text-xl text-slate-500 font-medium leading-relaxed">
                 {solution.headline}
               </p>

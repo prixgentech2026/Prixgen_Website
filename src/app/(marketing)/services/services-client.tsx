@@ -32,7 +32,7 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
   return (
     <div className="bg-white overflow-hidden selection:bg-prixgen-blue selection:text-white">
       {/* Section 1: The Hero */}
-      <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-white">
+      <section className="relative min-h-[75vh] flex items-center pt-16 overflow-hidden bg-white">
         <AmbientGlow />
         
         {/* Animated Background Grid */}
@@ -43,8 +43,8 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
           style={{ opacity, scale }}
           className="container mx-auto px-4 relative z-10 text-center"
         >
-          <FadeUp className="space-y-10">
-            <div className="flex items-center justify-center gap-3 mb-8">
+          <FadeUp className="space-y-6">
+            <div className="flex items-center justify-center gap-3 mb-4">
               <div className="h-[1px] w-8 bg-prixgen-blue/30" />
               <span className="px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue font-bold tracking-widest uppercase text-[10px]">
                 {data.subtitle || "Architectural Services"}
@@ -55,14 +55,14 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
             <StaggerText 
               text={data.title} 
               variant="gradient"
-              className="text-5xl md:text-6xl font-black leading-[0.9] mb-12 tracking-tighter"
+              className="text-5xl md:text-6xl font-black leading-[0.9] mb-8 tracking-tighter"
             />
             
             <p className="text-lg lg:text-xl text-slate-500 font-medium leading-relaxed max-w-4xl mx-auto">
               {data.heroSubheadline}
             </p>
 
-            <div className="flex flex-col md:flex-row items-center justify-center gap-6 pt-10">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-6 pt-6">
                <motion.button 
                  whileHover={{ scale: 1.05 }}
                  whileTap={{ scale: 0.95 }}

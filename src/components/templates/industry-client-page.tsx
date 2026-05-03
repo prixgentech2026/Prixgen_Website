@@ -21,7 +21,7 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
         }} 
       />
 
-      <section className="relative min-h-[70vh] flex items-center pt-20 overflow-hidden bg-white">
+      <section className="relative min-h-[75vh] flex items-center pt-24 pb-12 overflow-hidden bg-white">
         <AmbientGlow />
         
         {/* Animated Background Grid */}

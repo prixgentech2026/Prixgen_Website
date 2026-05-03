@@ -175,7 +175,7 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
       </AnimatePresence>
       
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[90vh] flex items-center pt-24 pb-12 px-4 overflow-hidden bg-white">
+      <section className="relative min-h-[75vh] flex items-center pt-24 pb-12 px-4 overflow-hidden bg-white">
         {/* Animated Architectural Grid */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#0ea5e908_1px,transparent_1px),linear-gradient(to_bottom,#0ea5e908_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_40%,#000_20%,transparent_100%)]" />
@@ -195,9 +195,9 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
         
         <div className="container mx-auto relative z-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-            <div className="space-y-12">
+            <div className="space-y-8">
               <FadeUp>
-                <div className="flex items-center gap-3 mb-8">
+                <div className="flex items-center gap-3 mb-4">
                   <div className="h-[1px] w-8 bg-prixgen-blue/30" />
                   <span className="px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue font-bold tracking-widest uppercase text-[10px]">
                     {data.subtitle || "Architects of Intelligence"}
@@ -207,7 +207,7 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
                   <StaggerText 
                     text={data.title || "Who We Are"} 
                     variant="gradient"
-                    className="text-5xl md:text-6xl font-black leading-[0.9] mb-12 -ml-1 tracking-tighter"
+                    className="text-5xl md:text-6xl font-black leading-[0.9] mb-8 -ml-1 tracking-tighter"
                   />
                   <motion.div 
                     initial={{ scaleX: 0 }}
@@ -229,7 +229,7 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
                     }}
                   />
                 </div>
-                <div className="flex gap-6 mt-10">
+                <div className="flex gap-6 mt-6">
                   <div className="flex flex-col">
                     <span className="text-3xl font-bold text-prixgen-blue">30+</span>
                     <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Years Exp</span>
