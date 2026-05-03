@@ -109,7 +109,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                 <StaggerText 
                   text="Innovation" 
                   variant="gradient"
-                  className="text-6xl md:text-8xl lg:text-9xl font-black leading-[0.85] mb-12 tracking-tighter"
+                  className="text-6xl md:text-8xl lg:text-[10rem] font-black leading-[0.85] mb-12 tracking-tighter"
                 />
                 
                 <div className="max-w-2xl space-y-8">
@@ -148,18 +148,17 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                 <div className="absolute -inset-4 bg-prixgen-blue/5 rounded-[3rem] blur-3xl -z-10 animate-pulse" />
                 <div className="relative aspect-[4/3] rounded-[3rem] overflow-hidden border border-slate-100 shadow-2xl group">
                   {homeData.heroImage ? (
-                    <div className="w-full h-full relative">
-                      <img
-                        key={homeData.heroImage.url || homeData.heroImage.asset || "hero-image"}
-                        src={
-                          homeData.heroImage.url || 
-                          homeData.heroImage.asset ||
-                          "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2070"
-                        }
-                        alt="Industrial Architecture"
-                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                      />
-                    </div>
+                    <OptimizedImage
+                      src={
+                        homeData.heroImage.url || 
+                        homeData.heroImage.asset ||
+                        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2070"
+                      }
+                      alt="Industrial Architecture"
+                      fill
+                      priority
+                      className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                    />
                   ) : (
                     <div className="w-full h-full bg-slate-100 flex items-center justify-center">
                       <span className="text-slate-300 font-bold uppercase tracking-widest">Architectural Visual</span>
@@ -254,7 +253,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
         </section>
 
         {/* 3. Our Solutions Section */}
-        <section className="py-20 lg:py-28 bg-white">
+        <section className="py-16 lg:py-24 bg-white">
           <div className="container mx-auto px-4">
             <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-20 gap-8">
               <FadeUp className="max-w-2xl">
@@ -343,7 +342,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
         </section>
 
         {/* 5. Testimonials Section */}
-        <section className="py-16 lg:py-20 bg-white relative overflow-hidden">
+        <section className="py-12 lg:py-16 bg-white relative overflow-hidden">
           <div className="container mx-auto px-4 relative z-10">
             <FadeUp className="text-center mb-16">
               <h2 className="text-4xl font-bold text-prixgen-blue mb-4">Success Voices</h2>
@@ -397,7 +396,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
         </section>
 
         {/* 6. Stories Section */}
-        <section className="py-16 lg:py-20 bg-slate-50">
+        <section className="py-12 lg:py-16 bg-slate-50">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
               <FadeUp>
@@ -440,7 +439,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
         </section>
 
         {/* 7. Worldwide Presence Section */}
-        <section className="py-20 lg:py-28 bg-white border-t border-slate-100 relative overflow-hidden">
+        <section className="py-16 lg:py-24 bg-white border-t border-slate-100 relative overflow-hidden">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8 items-center">
               {/* Left Column: Headquarters */}

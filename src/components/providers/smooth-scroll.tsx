@@ -9,15 +9,15 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    // Initialize Lenis with optimal enterprise easing
+    // Initialize Lenis with high-performance responsive settings
     const lenis = new Lenis({
       autoRaf: true,
-      lerp: 0.15, // Increased from 0.1 for even more responsive feel
-      duration: 0.8, // Reduced from 1 for snappier transitions
+      lerp: 0.2, 
+      duration: 0.6, 
       smoothWheel: true,
-      wheelMultiplier: 1,
+      wheelMultiplier: 1.1,
       touchMultiplier: 2,
-      syncTouch: false, // Disabled to allow native touch smoothness
+      syncTouch: false,
     });
 
     lenisRef.current = lenis;
@@ -30,7 +30,7 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       if (anchor && anchor.hash && anchor.origin === window.location.origin && anchor.pathname === window.location.pathname) {
         e.preventDefault();
         lenis.scrollTo(anchor.hash, {
-          duration: 1.5,
+          duration: 1.2,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         });
       }

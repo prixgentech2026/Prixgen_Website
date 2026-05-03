@@ -1,14 +1,42 @@
-import { createClient } from '@sanity/client';
+import * as fs from 'fs';
+import * as path from 'path';
+
+// 0. Load environment variables from .env.local manually if not present
+function loadEnv() {
+  const envPath = path.resolve(process.cwd(), '.env.local');
+  if (fs.existsSync(envPath)) {
+    const envFile = fs.readFileSync(envPath, 'utf-8');
+    envFile.split('\n').forEach(line => {
+      const match = line.match(/^([^#\s=]+)\s*=\s*(.*)$/);
+      if (match) {
+        const key = match[1];
+        let value = match[2].trim();
+        // Remove quotes if present
+        if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+          value = value.substring(1, value.length - 1);
+        }
+        if (!process.env[key]) {
+          process.env[key] = value;
+        }
+      }
+    });
+  }
+}
+
+loadEnv();
+
 import { 
   homeData, 
   industriesData, 
   solutionsData, 
   servicesData,
   aboutData,
-  contactData
+  contactData,
+  servicesPageMockData
 } from '../src/lib/data';
 
 // 1. Initialize the Sanity Client
+import { createClient } from '@sanity/client';
 // We use process.env to grab the required variables.
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
@@ -57,8 +85,7 @@ async function migrateData() {
       _id: 'aboutPage',
       _type: 'about',
       ...aboutData,
-      // We remove the featuredImage placeholder as it caused a reference error
-      featuredImage: undefined 
+      featuredImage: aboutData.featuredImage
     });
     console.log('✅ About Us Page migrated successfully.');
   } catch (error) {
@@ -134,6 +161,33 @@ async function migrateData() {
     } catch (error) {
       console.error(`❌ Failed to migrate service ${item.title}:`, error);
     }
+  }
+
+  // ---------------------------------------------------------
+  // MIGRATING SERVICES LANDING PAGE
+  // ---------------------------------------------------------
+  console.log('\nMigrating Services Landing Page...');
+  try {
+    // We need to map the slugs in servicesPageMockData to actual references
+    // Based on the mock data, we link: it-consulting, supply-chain-wms, iiot-engineering
+    const coreSlugs = ['it-consulting', 'supply-chain-wms', 'iiot-engineering'];
+    
+    // Fetch the IDs of these services that were just created
+    const coreServiceRefs = coreSlugs.map(slug => ({
+      _type: 'reference',
+      _ref: `service-${slug}`,
+      _key: `ref-${slug}`
+    }));
+
+    await client.createOrReplace({
+      _id: 'servicesPage',
+      _type: 'servicesPage',
+      ...servicesPageMockData,
+      coreServices: coreServiceRefs
+    });
+    console.log('✅ Services Landing Page migrated successfully.');
+  } catch (error) {
+    console.error('❌ Failed to migrate Services Page:', error);
   }
 
   console.log('\n🎉 Migration complete! Go check your Sanity Studio.');

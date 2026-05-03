@@ -50,7 +50,7 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
             <StaggerText 
               text={solution.title} 
               variant="gradient"
-              className="text-5xl md:text-7xl lg:text-9xl font-black leading-[0.85] tracking-tighter"
+              className="text-5xl md:text-7xl lg:text-[10rem] font-black leading-[0.85] tracking-tighter"
             />
             
             <div className="max-w-4xl mx-auto">
@@ -72,7 +72,7 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
         </motion.div>
       </section>
 
-      <div className="container mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div className="container mx-auto px-4 py-20 lg:py-28 grid grid-cols-1 lg:grid-cols-3 gap-12">
         <article className="lg:col-span-2">
           {solution.featuredImage?.sourceUrl && (
             <FadeUp delay={0.2} className="relative aspect-video w-full rounded-2xl overflow-hidden mb-12 shadow-xl">
