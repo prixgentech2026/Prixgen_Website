@@ -51,11 +51,11 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
               <StaggerText 
                 text={industry.title} 
                 variant="gradient"
-                className="text-5xl md:text-6xl lg:text-7xl font-black leading-[0.9] tracking-tighter"
+                className="text-5xl md:text-6xl font-black leading-[0.9] tracking-tighter"
               />
               
               <div className="max-w-4xl mx-auto">
-                <p className="text-xl lg:text-2xl text-slate-500 font-medium leading-relaxed">
+                <p className="text-lg lg:text-xl text-slate-500 font-medium leading-relaxed">
                   {industry.headline}
                 </p>
               </div>
@@ -74,7 +74,7 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
         </motion.div>
       </section>
 
-      <div className="container mx-auto px-4 py-20 lg:py-28">
+      <div className="container mx-auto px-4 py-16 lg:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 items-start">
           <article className="lg:col-span-2 space-y-12">
             {industry.featuredImage?.sourceUrl && (
@@ -91,14 +91,14 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
             <FadeUp delay={0.3}>
               <PortableText 
                 value={industry.content} 
-                className="prose prose-xl max-w-none prose-headings:text-prixgen-blue"
+                className="prose prose-lg max-w-none prose-headings:text-prixgen-blue"
               />
             </FadeUp>
           </article>
 
           <aside className="lg:col-span-1">
             <FadeUp delay={0.4} className="bg-prixgen-gray p-10 rounded-3xl sticky top-24 border border-prixgen-blue/5 shadow-xl">
-              <h3 className="text-3xl font-bold mb-6 text-prixgen-blue">Request an Architectural Audit</h3>
+              <h3 className="text-2xl font-bold mb-6 text-prixgen-blue">Request an Architectural Audit</h3>
               <p className="text-prixgen-dark/60 mb-8 leading-relaxed">
                 Discover how Prixgen can modernize your {industry.title.toLowerCase()} operations and eliminate technical debt.
               </p>

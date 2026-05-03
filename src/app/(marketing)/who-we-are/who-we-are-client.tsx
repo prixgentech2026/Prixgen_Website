@@ -207,7 +207,7 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
                   <StaggerText 
                     text={data.title || "Who We Are"} 
                     variant="gradient"
-                    className="text-5xl md:text-6xl lg:text-7xl font-black leading-[0.9] mb-12 -ml-1 tracking-tighter"
+                    className="text-5xl md:text-6xl font-black leading-[0.9] mb-12 -ml-1 tracking-tighter"
                   />
                   <motion.div 
                     initial={{ scaleX: 0 }}
@@ -224,7 +224,7 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
                     value={data.content} 
                     components={{
                       block: {
-                        normal: ({ children }) => <p className="text-xl text-slate-500 font-medium leading-relaxed mb-6">{children}</p>,
+                        normal: ({ children }) => <p className="text-lg lg:text-xl text-slate-500 font-medium leading-relaxed mb-6">{children}</p>,
                       }
                     }}
                   />
@@ -283,12 +283,12 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
       </section>
 
       {/* 2. CORE PHILOSOPHY SECTION */}
-      <section className="py-20 lg:py-32 px-4 bg-slate-50/50 relative overflow-hidden">
+      <section className="py-16 lg:py-24 px-4 bg-slate-50/50 relative overflow-hidden">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto text-center mb-20">
             <FadeUp>
-              <h2 className="text-4xl lg:text-5xl font-bold text-prixgen-blue mb-6 tracking-tight">Our Architectural Philosophy</h2>
-              <p className="text-xl text-slate-500 font-medium leading-relaxed">
+              <h2 className="text-3xl lg:text-4xl font-bold text-prixgen-blue mb-6 tracking-tight">Our Architectural Philosophy</h2>
+              <p className="text-lg lg:text-xl text-slate-500 font-medium leading-relaxed">
                 We don't just deploy software; we future-proof your digital journey. Our methodology is rooted in architectural integrity and zero-tolerance for operational friction.
               </p>
             </FadeUp>
@@ -297,7 +297,7 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
       </section>
 
     {/* 3. OUR FOUNDATION (Vision & Mission) */}
-    <section className="py-20 lg:py-28 bg-[#020617] text-white relative overflow-hidden">
+    <section className="py-16 lg:py-24 bg-[#020617] text-white relative overflow-hidden">
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 opacity-20 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
         <motion.div 
@@ -314,7 +314,7 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mb-24">
           <FadeUp>
-            <h2 className="text-4xl lg:text-6xl font-bold mb-6 tracking-tight uppercase leading-tight opacity-90">
+            <h2 className="text-3xl lg:text-5xl font-bold mb-6 tracking-tight uppercase leading-tight opacity-90">
               The <span className="text-prixgen-lightblue">Foundation</span>
             </h2>
             <div className="w-24 h-1.5 bg-gradient-to-r from-prixgen-blue to-transparent rounded-full mb-8" />
@@ -330,7 +330,7 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
               <div className="mb-10 w-20 h-20 bg-white/5 rounded-[2rem] flex items-center justify-center text-4xl group-hover:bg-prixgen-blue group-hover:text-white transition-all duration-500 ring-1 ring-white/10 shadow-inner">
                 <Eye size={44} strokeWidth={1} />
               </div>
-              <h3 className="text-2xl lg:text-3xl font-bold mb-4 tracking-tighter uppercase text-white/90">Our Vision</h3>
+              <h3 className="text-xl lg:text-2xl font-bold mb-4 tracking-tighter uppercase text-white/90">Our Vision</h3>
               <p className="text-base lg:text-lg text-slate-300 leading-relaxed font-medium group-hover:text-white transition-colors duration-700">
                 "{data.vision}"
               </p>
@@ -346,7 +346,7 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
               <div className="mb-10 w-20 h-20 bg-white/5 rounded-[2rem] flex items-center justify-center text-4xl group-hover:bg-prixgen-blue group-hover:text-white transition-all duration-500 ring-1 ring-white/10 shadow-inner">
                 <Target size={44} strokeWidth={1} />
               </div>
-              <h3 className="text-2xl lg:text-3xl font-bold mb-4 tracking-tighter uppercase relative z-10 text-white/90">Our Mission</h3>
+              <h3 className="text-xl lg:text-2xl font-bold mb-4 tracking-tighter uppercase relative z-10 text-white/90">Our Mission</h3>
               <p className="text-base lg:text-lg text-slate-300 leading-relaxed font-medium relative z-10 group-hover:text-white transition-colors duration-700">
                 "{data.mission}"
               </p>
@@ -361,7 +361,7 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
               <div className="mb-10 w-20 h-20 bg-white/5 rounded-[2rem] flex items-center justify-center text-4xl group-hover:bg-prixgen-blue group-hover:text-white transition-all duration-500 ring-1 ring-white/10 shadow-inner">
                 <Globe2 size={44} strokeWidth={1} />
               </div>
-              <h3 className="text-2xl lg:text-3xl font-bold mb-4 tracking-tighter uppercase relative z-10 text-white/90">Our Strategy</h3>
+              <h3 className="text-xl lg:text-2xl font-bold mb-4 tracking-tighter uppercase relative z-10 text-white/90">Our Strategy</h3>
               <p className="text-base lg:text-lg text-slate-300 leading-relaxed font-medium relative z-10 group-hover:text-white transition-colors duration-700">
                 "We combine technical edge with strong business insight to architect future-proof enterprise operations."
               </p>
@@ -384,8 +384,8 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
               <div className="h-[1px] w-12 bg-prixgen-blue" />
               <span className="text-prixgen-blue font-bold tracking-[0.2em] uppercase text-sm">Our Competitive Edge</span>
             </div>
-            <h2 className="text-4xl lg:text-6xl font-bold text-prixgen-blue mb-8 tracking-tighter">Why Choose Us</h2>
-            <p className="text-lg lg:text-2xl text-slate-500 leading-relaxed font-medium max-w-4xl">
+            <h2 className="text-3xl lg:text-5xl font-bold text-prixgen-blue mb-8 tracking-tighter">Why Choose Us</h2>
+            <p className="text-lg lg:text-xl text-slate-500 leading-relaxed font-medium max-w-4xl">
               {data.whyChooseUsIntro}
             </p>
           </FadeUp>
@@ -403,7 +403,7 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
                 
                 <div className="h-full p-12 bg-white/70 backdrop-blur-2xl rounded-[3.5rem] border border-slate-200/60 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.05)] group-hover:border-prixgen-blue/30 transition-all duration-500 flex flex-col relative overflow-hidden">
                   {/* Watermark Number */}
-                  <div className="absolute -right-6 -bottom-6 text-[12rem] font-black text-slate-100/40 group-hover:text-prixgen-blue/[0.03] transition-colors duration-700 select-none leading-none">
+                  <div className="absolute -right-6 -bottom-6 text-7xl lg:text-8xl font-black text-slate-100/40 group-hover:text-prixgen-blue/[0.03] transition-colors duration-700 select-none leading-none">
                     {i + 1}
                   </div>
 
@@ -434,12 +434,12 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
 
     {/* 5. EXPERIENCE SECTION */}
     <section className="py-16 lg:py-24 bg-gradient-to-b from-white to-slate-50 relative overflow-hidden">
-      <div className="absolute -left-10 top-40 text-[15rem] font-bold text-slate-100/40 select-none leading-none pointer-events-none italic">15</div>
+      <div className="absolute -left-10 top-40 text-8xl lg:text-9xl font-bold text-slate-100/40 select-none leading-none pointer-events-none italic">15</div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <FadeUp>
             <div className="relative">
-              <h2 className="text-4xl lg:text-6xl font-bold mb-8 tracking-tight text-slate-900 leading-tight">
+              <h2 className="text-3xl lg:text-5xl font-bold mb-8 tracking-tight text-slate-900 leading-tight">
                 {data.experienceSection?.title}
               </h2>
               <div className="space-y-8">
@@ -478,7 +478,7 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
                 <motion.div 
                   initial={{ scale: 0.5, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
-                  className="text-5xl lg:text-7xl font-bold mb-4 text-white tracking-tighter leading-none"
+                  className="text-4xl lg:text-6xl font-bold mb-4 text-white tracking-tighter leading-none"
                 >
                   {stat.value}
                 </motion.div>
@@ -521,7 +521,7 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
               <span className="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-prixgen-lightblue font-bold tracking-widest uppercase text-[10px] mb-8">
                 Ready to transform?
               </span>
-              <h2 className="text-5xl md:text-7xl font-black mb-10 leading-[1.1] tracking-tighter">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-10 leading-[1.1] tracking-tighter">
                 Scale your vision <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-prixgen-blue to-prixgen-lightblue">with Prixgen.</span>
               </h2>

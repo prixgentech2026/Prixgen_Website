@@ -55,10 +55,10 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
             <StaggerText 
               text={data.title} 
               variant="gradient"
-              className="text-5xl md:text-6xl lg:text-7xl font-black leading-[0.9] mb-12 tracking-tighter"
+              className="text-5xl md:text-6xl font-black leading-[0.9] mb-12 tracking-tighter"
             />
             
-            <p className="text-xl lg:text-2xl text-slate-500 font-medium leading-relaxed max-w-4xl mx-auto">
+            <p className="text-lg lg:text-xl text-slate-500 font-medium leading-relaxed max-w-4xl mx-auto">
               {data.heroSubheadline}
             </p>
 
@@ -95,7 +95,7 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
       </section>
 
       {/* Section 2: Our Methodology (The Voyage) */}
-      <section id="methodology" className="py-20 lg:py-28 bg-slate-50 relative overflow-hidden">
+      <section id="methodology" className="py-16 lg:py-24 bg-slate-50 relative overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row justify-between items-end gap-10 mb-20">
             <FadeUp className="max-w-2xl">
@@ -129,7 +129,7 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
                   >
                     <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-prixgen-blue to-prixgen-lightblue opacity-0 group-hover:opacity-10 transition-opacity duration-700 blur-3xl`} />
                     
-                    <div className="text-[12rem] font-black text-slate-50/50 absolute -bottom-10 -right-10 z-0 select-none group-hover:text-prixgen-blue/5 transition-all duration-700 italic group-hover:scale-110">
+                    <div className="text-7xl lg:text-8xl font-black text-slate-50/50 absolute -bottom-6 -right-6 z-0 select-none group-hover:text-prixgen-blue/5 transition-all duration-700 italic group-hover:scale-110">
                       {item.step}
                     </div>
                     
@@ -138,8 +138,8 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
                         <Icon size={36} />
                       </div>
                       <div className="space-y-4">
-                        <h3 className="text-3xl font-bold text-prixgen-blue group-hover:text-prixgen-lightblue transition-colors">{item.title}</h3>
-                        <p className="text-xl text-prixgen-dark/60 leading-relaxed text-left font-medium">
+                        <h3 className="text-2xl lg:text-3xl font-bold text-prixgen-blue group-hover:text-prixgen-lightblue transition-colors">{item.title}</h3>
+                        <p className="text-lg text-prixgen-dark/60 leading-relaxed text-left font-medium">
                           {item.description}
                         </p>
                       </div>
@@ -162,12 +162,12 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
       </section>
 
       {/* Section 3: Core Capabilities */}
-      <section className="py-20 lg:py-28 bg-white relative">
+      <section className="py-16 lg:py-24 bg-white relative">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
             <div className="lg:col-span-4 space-y-8">
               <FadeUp>
-                <h2 className="text-4xl lg:text-6xl font-bold text-prixgen-blue tracking-tighter leading-tight">
+                <h2 className="text-4xl lg:text-5xl font-bold text-prixgen-blue tracking-tighter leading-tight">
                   What is your <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-prixgen-blue to-prixgen-lightblue">challenge?</span>
                 </h2>
@@ -215,7 +215,7 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
       </section>
 
       {/* Section 4: Enterprise Outcomes */}
-      <section className="py-20 lg:py-28 bg-[#020617] text-white relative overflow-hidden">
+      <section className="py-16 lg:py-24 bg-[#020617] text-white relative overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute top-0 left-0 w-full h-full">
           <div className="absolute top-[10%] left-[5%] w-[400px] h-[400px] bg-prixgen-blue/10 rounded-full blur-[120px] animate-pulse" />
@@ -237,7 +237,7 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
               </h2>
             </FadeUp>
             <FadeUp delay={0.2}>
-              <p className="text-xl lg:text-2xl text-white/50 leading-relaxed font-medium">
+              <p className="text-lg lg:text-xl text-white/50 leading-relaxed font-medium">
                 We translate technical complexity into measurable business value, ensuring your enterprise stays agile, efficient, and future-proof.
               </p>
             </FadeUp>
@@ -273,12 +273,12 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
       </section>
 
       {/* Section 5: Final CTA */}
-      <section className="py-20 lg:py-28 bg-white overflow-hidden">
+      <section className="py-16 lg:py-24 bg-white overflow-hidden">
         <div className="container mx-auto px-4">
           <FadeUp>
             <motion.div 
               whileHover={{ scale: 0.99 }}
-              className="max-w-6xl mx-auto bg-prixgen-blue rounded-[5rem] p-12 lg:p-32 text-center text-white relative overflow-hidden shadow-2xl"
+              className="max-w-6xl mx-auto bg-prixgen-blue rounded-[5rem] p-12 lg:p-24 text-center text-white relative overflow-hidden shadow-2xl"
             >
               <motion.div 
                 animate={{
@@ -295,7 +295,7 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
               
               <div className="relative z-10 space-y-16">
                 <div className="space-y-6">
-                  <h2 className="text-5xl md:text-7xl font-bold leading-[1] tracking-tighter">
+                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1] tracking-tighter">
                     Ready to <span className="italic opacity-60">streamline</span> <br /> your business?
                   </h2>
                   <p className="text-xl text-white/60 max-w-xl mx-auto font-medium">

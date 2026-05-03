@@ -113,16 +113,16 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                 />
                 
                 <div className="max-w-2xl space-y-8">
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-prixgen-blue tracking-tight leading-[1.1]">
+                  <h1 className="text-3xl md:text-4xl font-bold text-prixgen-blue tracking-tight leading-[1.1]">
                   {homeData.title || "Intelligent Operations. Unified Enterprise."}
                 </h1>
                   
                   {homeData.subheadline ? (
-                    <div className="text-xl text-slate-500 font-medium leading-relaxed">
+                    <div className="text-lg text-slate-500 font-medium leading-relaxed">
                       <PortableText value={homeData.subheadline} />
                     </div>
                   ) : (
-                    <p className="text-xl text-slate-500 font-medium leading-relaxed">
+                    <p className="text-lg text-slate-500 font-medium leading-relaxed">
                       We architect, deploy, and manage scalable ERP and supply chain ecosystems for modern industrial enterprises.
                     </p>
                   )}
@@ -194,8 +194,8 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                 <div className="h-[1px] w-12 bg-prixgen-blue" />
                 <span className="text-prixgen-blue font-bold tracking-[0.2em] uppercase text-[10px]">Industrial Services</span>
               </div>
-              <h2 className="text-4xl lg:text-6xl font-bold text-prixgen-blue mb-6 tracking-tighter">Prixgen Services</h2>
-              <p className="text-lg lg:text-xl text-slate-600 font-medium max-w-3xl leading-relaxed">
+              <h2 className="text-4xl lg:text-5xl font-bold text-prixgen-blue mb-6 tracking-tighter">Prixgen Services</h2>
+              <p className="text-lg text-slate-600 font-medium max-w-3xl leading-relaxed">
                 Prixgen’s voyage is unique. We traverse through a stringent yet customer-driven solution method, where success derives from constant research and architectural precision.
               </p>
             </FadeUp>
@@ -261,8 +261,8 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                   <div className="h-[1px] w-12 bg-prixgen-blue" />
                   <span className="text-prixgen-blue font-bold tracking-[0.2em] uppercase text-[10px]">Architecture Suite</span>
                 </div>
-                <h2 className="text-4xl lg:text-6xl font-bold text-prixgen-blue mb-4 tracking-tighter">Our Solutions</h2>
-                <p className="text-lg lg:text-xl text-slate-600 font-medium">
+                <h2 className="text-4xl lg:text-5xl font-bold text-prixgen-blue mb-4 tracking-tighter">Our Solutions</h2>
+                <p className="text-lg text-slate-600 font-medium">
                   What’s your challenge? Let’s architect the path forward together.
                 </p>
               </FadeUp>
@@ -378,7 +378,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                   <div className="mb-6 text-prixgen-lightblue group-hover:text-white transition-colors">
                     <svg className="w-10 h-10 fill-current opacity-20" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11C14.017 11.5523 13.5693 12 13.017 12H12.017V4H22.017V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM2.01697 21L2.01697 18C2.01697 16.8954 2.91241 16 4.01697 16H7.01697C7.56925 16 8.01697 15.5523 8.01697 15V9C8.01697 8.44772 7.56925 8 7.01697 8H3.01697C2.46468 8 2.01697 8.44772 2.01697 9V11C2.01697 11.5523 1.56925 12 1.01697 12H0.0169678V4H10.017V15C10.017 18.3137 7.33068 21 4.01697 21H2.01697Z"></path></svg>
                   </div>
-                  <p className="text-slate-600 group-hover:text-white/90 transition-colors mb-8 text-lg italic flex-1">"{testimonial.text}"</p>
+                  <p className="text-slate-600 group-hover:text-white/90 transition-colors mb-8 text-base italic flex-1">"{testimonial.text}"</p>
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-full bg-prixgen-gray flex items-center justify-center font-bold text-prixgen-blue group-hover:bg-white group-hover:text-prixgen-blue transition-colors">
                       {testimonial.name[0]}
@@ -446,14 +446,14 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
               <FadeUp className="space-y-12">
                 <div>
                   <p className="text-prixgen-lightblue font-bold tracking-widest uppercase text-xs mb-4">Headquarters</p>
-                  <h2 className="text-4xl font-bold text-prixgen-blue mb-8 leading-tight">
+                  <h2 className="text-3xl font-bold text-prixgen-blue mb-8 leading-tight">
                     Prixgen India
                   </h2>
                   <div className="space-y-6">
-                    <p className="text-xl text-prixgen-dark font-bold leading-relaxed">
+                    <p className="text-lg text-prixgen-dark font-bold leading-relaxed">
                       Prixgen Tech Solutions Pvt. Ltd.
                     </p>
-                    <p className="text-lg text-prixgen-dark/70 leading-relaxed font-medium">
+                    <p className="text-base text-prixgen-dark/70 leading-relaxed font-medium">
                       #244, Kalabairaweshwara Complex, 1st Stage Nivedithanagar, Mysuru – 570022, Karnataka, INDIA
                     </p>
                   </div>
