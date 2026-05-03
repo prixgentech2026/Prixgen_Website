@@ -97,8 +97,8 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                style={{ backgroundImage: 'radial-gradient(#0066cc 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
           <div className="container mx-auto px-4 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <FadeUp className="space-y-10 text-left">
+            <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-16 items-center">
+              <FadeUp className="space-y-10 text-left relative z-20">
                 <div className="flex items-center gap-3 mb-8">
                   <div className="h-[1px] w-8 bg-prixgen-blue/30" />
                   <span className="px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue font-bold tracking-widest uppercase text-[10px]">
@@ -144,7 +144,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                 </div>
               </FadeUp>
 
-              <FadeUp delay={0.3} className="relative">
+              <FadeUp delay={0.3} className="relative z-10">
                 <div className="absolute -inset-4 bg-prixgen-blue/5 rounded-[3rem] blur-3xl -z-10 animate-pulse" />
                 <div className="relative aspect-[4/3] rounded-[3rem] overflow-hidden border border-slate-100 shadow-2xl group">
                   {homeData.heroImage ? (
