@@ -95,8 +95,12 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
       </section>
 
       {/* Section 2: Our Methodology (The Voyage) */}
-      <section id="methodology" className="py-16 lg:py-24 bg-slate-50 relative overflow-hidden">
-        <div className="container mx-auto px-4">
+      <section id="methodology" className="py-24 lg:py-32 bg-slate-100/50 border-t border-slate-200/60 relative overflow-hidden">
+        {/* Architectural Background Pattern for Section Demarcation */}
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+             style={{ backgroundImage: 'linear-gradient(#0047ab 1px, transparent 1px), linear-gradient(90deg, #0047ab 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+        
+        <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col lg:flex-row justify-between items-end gap-10 mb-20">
             <FadeUp className="max-w-2xl">
               <div className="flex items-center gap-4 mb-4">
@@ -123,34 +127,60 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
               return (
                 <FadeUp key={i} delay={i * 0.2} className="relative z-10">
                   <motion.div 
-                    whileHover={{ y: -15 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                    className="group relative p-12 bg-white rounded-[4rem] border border-slate-100 shadow-2xl shadow-slate-200/50 h-full overflow-hidden flex flex-col"
+                    whileHover={{ y: -20, scale: 1.02 }}
+                    animate={{ 
+                      backgroundColor: ["#f5f3ff", "#f0f0ff", "#f3f0ff", "#f5f3ff"],
+                      borderColor: ["rgba(139, 92, 246, 0.1)", "rgba(139, 92, 246, 0.2)", "rgba(139, 92, 246, 0.1)"]
+                    }}
+                    transition={{ 
+                      backgroundColor: { duration: 10, repeat: Infinity, ease: "linear", delay: i * 2 },
+                      borderColor: { duration: 5, repeat: Infinity, ease: "linear" },
+                      y: { type: "spring", stiffness: 300 },
+                      scale: { type: "spring", stiffness: 300 }
+                    }}
+                    className="group relative p-12 rounded-[4rem] border shadow-2xl shadow-indigo-100/50 h-full overflow-hidden flex flex-col"
                   >
-                    <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-prixgen-blue to-prixgen-lightblue opacity-0 group-hover:opacity-10 transition-opacity duration-700 blur-3xl`} />
+                    {/* Animated Radial Glow - Purple variant */}
+                    <motion.div 
+                      className="absolute inset-0 z-0 opacity-20 group-hover:opacity-40 transition-opacity duration-1000 pointer-events-none"
+                      animate={{
+                        background: [
+                          "radial-gradient(600px circle at 0% 0%, rgba(139, 92, 246, 0.15), transparent 40%)",
+                          "radial-gradient(600px circle at 100% 100%, rgba(139, 92, 246, 0.15), transparent 40%)",
+                          "radial-gradient(600px circle at 0% 100%, rgba(139, 92, 246, 0.15), transparent 40%)",
+                          "radial-gradient(600px circle at 0% 0%, rgba(139, 92, 246, 0.15), transparent 40%)",
+                        ]
+                      }}
+                      transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                    />
+
+                    <div className={`absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-[80px] z-0`} />
                     
-                    <div className="text-7xl lg:text-8xl font-black text-slate-50/50 absolute -bottom-6 -right-6 z-0 select-none group-hover:text-prixgen-blue/5 transition-all duration-700 italic group-hover:scale-110">
+                    <div className="absolute top-8 right-12 text-8xl lg:text-9xl font-black text-transparent [WebkitTextStroke:1px_rgba(99,102,241,0.15)] group-hover:[WebkitTextStroke:1px_rgba(139,92,246,0.3)] transition-all duration-700 select-none z-0 pointer-events-none">
                       {item.step}
                     </div>
                     
                     <div className="relative z-10 space-y-8 flex-grow">
-                      <div className={`w-20 h-20 bg-gradient-to-br from-prixgen-blue to-prixgen-lightblue rounded-3xl flex items-center justify-center text-white shadow-lg shadow-blue-500/20 group-hover:scale-110 transition-transform duration-500`}>
+                      <motion.div 
+                        whileHover={{ rotate: [0, -5, 5, 0] }}
+                        className={`w-20 h-20 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-3xl flex items-center justify-center text-white shadow-lg shadow-indigo-500/20 group-hover:scale-110 transition-transform duration-500`}
+                      >
                         <Icon size={36} />
-                      </div>
+                      </motion.div>
                       <div className="space-y-4">
-                        <h3 className="text-2xl lg:text-3xl font-bold text-prixgen-blue group-hover:text-prixgen-lightblue transition-colors">{item.title}</h3>
-                        <p className="text-lg text-prixgen-dark/60 leading-relaxed text-left font-medium">
+                        <h3 className="text-2xl lg:text-3xl font-bold text-indigo-900 group-hover:text-purple-600 transition-colors">{item.title}</h3>
+                        <p className="text-lg text-indigo-950/60 leading-relaxed text-left font-medium">
                           {item.description}
                         </p>
                       </div>
                     </div>
                     
-                    <div className="mt-12 h-1 w-full bg-slate-50 rounded-full overflow-hidden">
+                    <div className="mt-12 h-1.5 w-full bg-indigo-100/50 rounded-full overflow-hidden relative z-10">
                       <motion.div 
                         initial={{ width: 0 }}
                         whileInView={{ width: "100%" }}
-                        transition={{ duration: 1, delay: i * 0.3 }}
-                        className={`h-full bg-gradient-to-r from-prixgen-blue to-prixgen-lightblue`}
+                        transition={{ duration: 1.5, delay: i * 0.3 }}
+                        className={`h-full bg-gradient-to-r from-indigo-600 via-purple-500 to-indigo-600 bg-[length:200%_100%] animate-gradient`}
                       />
                     </div>
                   </motion.div>
@@ -184,31 +214,64 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
             </div>
             
             <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-              {data.coreServices.map((service, i) => (
-                <FadeUp key={i} delay={i * 0.1} className={i === 1 ? 'md:mt-12' : ''}>
-                  <Link href={`/services/${service.slug}`} className="block group h-full">
-                    <motion.div 
-                      whileHover={{ scale: 1.02 }}
-                      className="p-12 bg-prixgen-gray/30 rounded-[3rem] h-full flex flex-col justify-between transition-all duration-500 hover:bg-white hover:shadow-[0_40px_80px_-20px_rgba(0,102,204,0.1)] border border-transparent hover:border-prixgen-blue/10"
-                    >
-                      <div className="space-y-8">
-                         <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-prixgen-blue shadow-sm group-hover:shadow-lg transition-all">
-                           <Globe size={28} />
-                         </div>
-                         <div className="space-y-4">
-                            <h3 className="text-3xl font-bold text-prixgen-blue leading-tight">{service.title}</h3>
-                            <p className="text-lg text-prixgen-dark/60 leading-relaxed text-left font-medium">
-                              {service.headline}
-                            </p>
-                         </div>
-                      </div>
-                      <div className="mt-12 flex items-center text-prixgen-lightblue font-bold text-sm uppercase tracking-widest group-hover:translate-x-2 transition-transform duration-300">
-                        View Service <ArrowRight className="ml-2" size={16} />
-                      </div>
-                    </motion.div>
-                  </Link>
-                </FadeUp>
-              ))}
+              {data.coreServices.map((service, i) => {
+                const serviceImages: Record<string, string> = {
+                  "it-consulting": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000",
+                  "supply-chain-wms": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1000",
+                  "iiot-engineering": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000",
+                };
+                const bgImage = serviceImages[service.slug] || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000";
+
+                return (
+                  <FadeUp key={i} delay={i * 0.1} className={i === 1 ? 'md:mt-12' : ''}>
+                    <Link href={`/services/${service.slug}`} className="block group h-full">
+                      <motion.div 
+                        whileHover={{ y: -10 }}
+                        className="relative p-12 bg-prixgen-gray/30 rounded-[3rem] h-full flex flex-col justify-between transition-all duration-700 hover:shadow-[0_40px_80px_-20px_rgba(0,102,204,0.2)] border border-transparent hover:border-prixgen-blue/10 overflow-hidden"
+                      >
+                        {/* Background Image Layer */}
+                        <div className="absolute inset-0 z-0 transition-opacity duration-1000">
+                          <motion.img 
+                            src={bgImage}
+                            alt={service.title}
+                            className="w-full h-full object-cover"
+                            initial={{ filter: "grayscale(100%)", opacity: 0.3 }}
+                            whileHover={{ 
+                              filter: "grayscale(0%)", 
+                              opacity: 1,
+                              scale: 1.1, 
+                              rotate: 0 
+                            }}
+                            transition={{ 
+                              duration: 0.8,
+                              scale: { duration: 10 }
+                            }}
+                          />
+                        </div>
+                        
+                        <div className="space-y-8 relative z-10">
+                           <motion.div 
+                             whileHover={{ scale: 1.1, backgroundColor: "#0047ab", color: "#fff" }}
+                             className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-prixgen-blue shadow-lg group-hover:shadow-blue-500/20 transition-all duration-500"
+                           >
+                             <Globe size={28} />
+                           </motion.div>
+                           <div className="space-y-4">
+                              <h3 className="text-3xl font-bold text-prixgen-blue leading-tight group-hover:text-white transition-colors drop-shadow-[0_2px_4px_rgba(255,255,255,0.8)] group-hover:drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)]">{service.title}</h3>
+                              <p className="text-lg text-prixgen-dark/80 leading-relaxed text-left font-bold group-hover:text-white transition-colors drop-shadow-[0_2px_4px_rgba(255,255,255,0.8)] group-hover:drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)]">
+                                {service.headline}
+                              </p>
+                           </div>
+                        </div>
+                        
+                        <div className="mt-12 relative z-10 flex items-center text-prixgen-blue font-bold text-sm uppercase tracking-widest group-hover:text-white group-hover:translate-x-2 transition-all duration-300 drop-shadow-[0_2px_2px_rgba(255,255,255,0.8)] group-hover:drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+                          View Service <ArrowRight className="ml-2" size={16} />
+                        </div>
+                      </motion.div>
+                    </Link>
+                  </FadeUp>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -272,43 +335,44 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
         </div>
       </section>
 
-      {/* Section 5: Final CTA */}
-      <section className="py-16 lg:py-24 bg-white overflow-hidden">
+      {/* Section 5: Final CTA (The Destination) */}
+      <section className="py-24 lg:py-40 bg-white relative overflow-hidden">
         <div className="container mx-auto px-4">
-          <FadeUp>
-            <motion.div 
-              whileHover={{ scale: 0.99 }}
-              className="max-w-6xl mx-auto bg-prixgen-blue rounded-[5rem] p-12 lg:p-24 text-center text-white relative overflow-hidden shadow-2xl"
-            >
-              <motion.div 
-                animate={{
-                  rotate: [0, 360],
-                  scale: [1, 1.2, 1],
-                }}
-                transition={{
-                  duration: 20,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-                className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-to-br from-white/10 to-transparent blur-[120px] pointer-events-none" 
-              />
-              
-              <div className="relative z-10 space-y-16">
-                <div className="space-y-6">
-                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1] tracking-tighter">
-                    Ready to <span className="italic opacity-60">streamline</span> <br /> your business?
-                  </h2>
-                  <p className="text-xl text-white/60 max-w-xl mx-auto font-medium">
-                    Submit your requirements for a prioritized response from our strategy team.
-                  </p>
+          <motion.div 
+            whileHover={{ y: -5 }}
+            className="relative bg-gradient-to-br from-prixgen-blue to-indigo-900 rounded-[3.5rem] lg:rounded-[5rem] p-12 lg:p-32 overflow-hidden shadow-[0_40px_100px_-30px_rgba(0,71,171,0.4)] group"
+          >
+            {/* Animated Background Elements */}
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4 group-hover:scale-110 transition-transform duration-1000" />
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-500/10 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/4" />
+            
+            <div className="relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+              <FadeUp className="text-left space-y-8">
+                <div className="inline-flex items-center gap-2 px-6 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white font-bold text-sm uppercase tracking-widest">
+                  <span className="w-2 h-2 bg-prixgen-lightblue rounded-full animate-pulse" />
+                  Get Started
                 </div>
-                
-                <div className="max-w-2xl mx-auto bg-white p-10 lg:p-16 rounded-[4rem] text-left text-prixgen-dark shadow-2xl">
-                   <LeadCaptureForm source="Services Page" />
+                <h2 className="text-5xl lg:text-7xl font-bold text-white leading-[1.1] tracking-tight">
+                  Ready to <span className="text-indigo-300 italic font-medium">streamline</span> <br /> your business?
+                </h2>
+                <p className="text-xl text-indigo-100/80 max-w-xl font-medium leading-relaxed">
+                  Submit your requirements for a prioritized response from our expert strategy team.
+                </p>
+              </FadeUp>
+
+              <FadeUp delay={0.2}>
+                <div className="max-w-md ml-auto bg-white/95 backdrop-blur-xl p-8 lg:p-10 rounded-[3rem] text-left text-prixgen-dark shadow-2xl border border-white/20">
+                   <div className="mb-6 border-b border-slate-100 pb-4">
+                      <h4 className="text-xl font-bold text-prixgen-blue">Quick Inquiry</h4>
+                      <p className="text-sm text-slate-500 font-medium">We'll get back to you shortly.</p>
+                   </div>
+                   <div className="scale-95 origin-top">
+                     <LeadCaptureForm source="Services Page" />
+                   </div>
                 </div>
-              </div>
-            </motion.div>
-          </FadeUp>
+              </FadeUp>
+            </div>
+          </motion.div>
         </div>
       </section>
     </div>

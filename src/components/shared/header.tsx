@@ -32,7 +32,7 @@ export function Header() {
         </Link>
 
         <nav className="hidden lg:flex items-center gap-8 mr-auto ml-12">
-          <Link href="/" className="text-sm font-medium hover:text-prixgen-lightblue transition-colors">Home</Link>
+          <Link href="/" className="text-sm font-bold uppercase tracking-wider hover:text-prixgen-lightblue transition-colors">Home</Link>
           <MegaMenu />
         </nav>
 
