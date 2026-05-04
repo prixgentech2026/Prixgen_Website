@@ -12,11 +12,11 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     // Initialize Lenis with high-performance responsive settings
     const lenis = new Lenis({
       autoRaf: true,
-      lerp: 0.2, 
-      duration: 0.6, 
+      lerp: 0.12, 
+      duration: 1.2, 
       smoothWheel: true,
-      wheelMultiplier: 1.1,
-      touchMultiplier: 2,
+      wheelMultiplier: 1,
+      touchMultiplier: 1.5,
       syncTouch: false,
     });
 

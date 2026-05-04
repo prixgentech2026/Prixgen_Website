@@ -128,10 +128,11 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
                 <FadeUp key={i} delay={i * 0.2} className="relative z-10">
                   <motion.div 
                     whileHover={{ y: -20, scale: 1.02 }}
-                    animate={{ 
+                    whileInView={{ 
                       backgroundColor: ["#f5f3ff", "#f0f0ff", "#f3f0ff", "#f5f3ff"],
                       borderColor: ["rgba(139, 92, 246, 0.1)", "rgba(139, 92, 246, 0.2)", "rgba(139, 92, 246, 0.1)"]
                     }}
+                    viewport={{ once: false, margin: "-100px" }}
                     transition={{ 
                       backgroundColor: { duration: 10, repeat: Infinity, ease: "linear", delay: i * 2 },
                       borderColor: { duration: 5, repeat: Infinity, ease: "linear" },
@@ -143,7 +144,7 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
                     {/* Animated Radial Glow - Purple variant */}
                     <motion.div 
                       className="absolute inset-0 z-0 opacity-20 group-hover:opacity-40 transition-opacity duration-1000 pointer-events-none"
-                      animate={{
+                      whileInView={{
                         background: [
                           "radial-gradient(600px circle at 0% 0%, rgba(139, 92, 246, 0.15), transparent 40%)",
                           "radial-gradient(600px circle at 100% 100%, rgba(139, 92, 246, 0.15), transparent 40%)",
@@ -151,6 +152,7 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
                           "radial-gradient(600px circle at 0% 0%, rgba(139, 92, 246, 0.15), transparent 40%)",
                         ]
                       }}
+                      viewport={{ once: false }}
                       transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
                     />
 
