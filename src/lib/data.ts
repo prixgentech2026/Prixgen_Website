@@ -341,33 +341,67 @@ export const contactData = {
   }
 };
 
-export const industriesData: PageData[] = [
+export const industriesData: any[] = [
   {
     slug: "manufacturing",
-    title: "Advanced Manufacturing",
-    headline: "Engineered for the Factory of the Future.",
+    title: "Discrete & Process Manufacturing",
+    headline: "Engineering the Smart Factory of the Future.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000", altText: "Manufacturing" },
     content: [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "We architect unified ERP and IIoT ecosystems that connect shop-floor machinery directly to top-floor financial dashboards. Eliminate data silos, optimize production scheduling, and achieve real-time visibility across global manufacturing hubs." }]
+        children: [{ _type: 'span', text: "Manufacturing is no longer just about physical production; it's about digital intelligence. We help discrete and process manufacturers transition to Industry 4.0 by integrating their shop-floor machinery with enterprise-grade ERP systems. Our solutions provide real-time visibility into production cycles, allowing for precise tracking of work-in-progress (WIP) and automated quality control." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "We specialize in optimizing complex Bills of Materials (BOM) and routing logic, ensuring that your production planning is as efficient as possible. By implementing IIoT sensors and edge computing, we enable predictive maintenance that identifies equipment failure before it causes costly downtime. Our manufacturing architectures are designed for high-stakes environments where precision and uptime are the primary drivers of profitability." }]
       }
     ],
+    features: [
+      { title: "BOM Optimization", description: "Complex multi-level Bill of Materials management and costing." },
+      { title: "Shop Floor Control", description: "Real-time production tracking and operator management." },
+      { title: "Predictive Maintenance", description: "AI-backed monitoring to eliminate unplanned downtime." },
+      { title: "Quality Assurance", description: "Automated inspection points throughout the production cycle." }
+    ],
+    process: [
+      { title: "Floor Audit", description: "Physical assessment of production lines and data touchpoints." },
+      { title: "Digital Integration", description: "Syncing shop-floor hardware with core ERP logic." },
+      { title: "Performance Scaling", description: "Optimizing throughput through continuous data analysis." }
+    ],
     seo: {
-      title: "Advanced Manufacturing ERP & IIoT | Prixgen",
-      metaDesc: "Architecting unified ERP and IIoT ecosystems for the factory of the future.",
+      title: "Industry 4.0 Manufacturing ERP Solutions | Prixgen",
+      metaDesc: "Achieve Zero Operational Friction in manufacturing with integrated IIoT and ERP architectures.",
     }
   },
   {
     slug: "chemicals",
     title: "Chemicals & Process Manufacturing",
     headline: "Precision, Compliance, and Batch Intelligence.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1581093450021-4a7360e9a6ad?auto=format&fit=crop&q=80&w=1000", altText: "Chemical Industry" },
     content: [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "Process manufacturing demands zero-tolerance for error. We deploy architectures that natively handle complex batch management, strict regulatory compliance, and dynamic shelf-life tracking, eliminating fragmented legacy spreadsheets." }]
+        children: [{ _type: 'span', text: "Process manufacturing in the chemical industry demands zero-tolerance for error. We deploy architectures that natively handle complex batch management, strict regulatory compliance, and dynamic shelf-life tracking, eliminating fragmented legacy spreadsheets." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Our chemical ERP solutions include integrated Quality Management Systems (QMS) that automatically enforce compliance checks at every stage of the production process. We provide real-time batch costing and yield analysis, helping you optimize resource utilization and reduce waste. With Prixgen, your chemical operations achieve a new level of technical precision and regulatory confidence." }]
       }
+    ],
+    features: [
+      { title: "Batch Management", description: "Granular tracking of raw materials and finished goods by batch." },
+      { title: "Regulatory Compliance", description: "Automated enforcement of industry standards and safety protocols." },
+      { title: "Yield Analysis", description: "Real-time monitoring of production efficiency and waste reduction." },
+      { title: "Shelf-Life Tracking", description: "Dynamic management of perishable and volatile chemical components." }
+    ],
+    process: [
+      { title: "Compliance Audit", description: "Reviewing regulatory requirements and safety touchpoints." },
+      { title: "Batch Logic Design", description: "Architecting the tracking and costing modules for your specific products." },
+      { title: "System Validation", description: "Rigorous testing to ensure data integrity and compliance enforcement." }
     ],
     seo: {
       title: "Chemical ERP & Regulatory Compliance | Prixgen",
@@ -376,14 +410,31 @@ export const industriesData: PageData[] = [
   },
   {
     slug: "fmcg-distribution",
-    title: "Consumer Goods & Distribution (FMCG)",
+    title: "FMCG & Distribution",
     headline: "Velocity and Visibility in Consumer Goods.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1566633806327-68e152aaf26d?auto=format&fit=crop&q=80&w=1000", altText: "FMCG" },
     content: [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "In FMCG, latency is a liability. We deploy hyper-scalable supply chain architectures that optimize inventory routing, accelerate fulfillment, and protect profit margins from procurement to delivery." }]
+        children: [{ _type: 'span', text: "In the fast-moving consumer goods industry, latency is a liability. We deploy hyper-scalable supply chain architectures that optimize inventory routing, accelerate fulfillment, and protect profit margins from procurement to delivery. Our FMCG solutions are built to handle the complexity of high-volume, multi-channel distribution with zero-fault accuracy." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "By integrating real-time demand forecasting with your procurement cycle, we ensure you maintain optimal stock levels across all distribution hubs. Our warehouse management modules are optimized for the high-velocity picking and packing required in the FMCG sector, while our logistics tracking provides end-to-end visibility into every shipment. With Prixgen, your supply chain becomes a high-speed engine of growth." }]
       }
+    ],
+    features: [
+      { title: "Demand Forecasting", description: "Machine-learning backed inventory planning for high-volume SKUs." },
+      { title: "Omnichannel Sync", description: "Unified inventory across retail, e-commerce, and wholesale." },
+      { title: "Automated Fulfillment", description: "High-speed picking and packing workflows for distribution centers." },
+      { title: "Margin Protection", description: "Real-time tracking of procurement costs and logistics overhead." }
+    ],
+    process: [
+      { title: "Supply Chain Mapping", description: "Identifying latency points in your current distribution network." },
+      { title: "System Engineering", description: "Deploying high-velocity inventory and fulfillment architectures." },
+      { title: "Visibility Rollout", description: "Implementing real-time tracking for stakeholders across the chain." }
     ],
     seo: {
       title: "FMCG Supply Chain & WMS Solutions | Prixgen",
@@ -394,12 +445,29 @@ export const industriesData: PageData[] = [
     slug: "retail",
     title: "Retail Operations",
     headline: "Omnichannel Retail Architecture.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1000", altText: "Retail" },
     content: [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "Transform legacy retail operations into unified omnichannel experiences. We integrate complex point-of-sale systems with back-end ERPs to provide real-time inventory visibility and synchronized financial reporting." }]
+        children: [{ _type: 'span', text: "Modern retail is no longer just about the storefront; it's about a unified omnichannel experience. We help retailers transform legacy operations into synchronized digital ecosystems where inventory, customer data, and financial reporting are all linked in real-time. Our solutions ensure that whether a customer buys in-store, online, or via mobile, the experience and data remain consistent." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "We specialize in integrating complex point-of-sale (POS) systems with back-end ERPs, providing a 'single pane of glass' view into your entire retail operation. This integration enables advanced features like click-and-collect, cross-store returns, and real-time loyalty program management. Our retail architectures are designed to help you scale your store count and digital presence with zero operational friction." }]
       }
+    ],
+    features: [
+      { title: "Unified Inventory", description: "Real-time stock visibility across all physical and digital channels." },
+      { title: "POS Integration", description: "Deep syncing of storefront sales with back-end financial systems." },
+      { title: "Loyalty Management", description: "Personalized customer experiences and reward tracking." },
+      { title: "Click-and-Collect", description: "Automated workflows for modern consumer fulfillment models." }
+    ],
+    process: [
+      { title: "Channel Audit", description: "Assessing current performance across physical and digital storefronts." },
+      { title: "Unified Design", description: "Architecting the central data hub for all retail operations." },
+      { title: "Experience Deployment", description: "Rolling out synchronized features to staff and customers." }
     ],
     seo: {
       title: "Omnichannel Retail ERP Integration | Prixgen",
@@ -410,12 +478,29 @@ export const industriesData: PageData[] = [
     slug: "dairy",
     title: "Dairy & Perishables",
     headline: "Time-Critical Supply Chain Management.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1550583760-d80392be8c42?auto=format&fit=crop&q=80&w=1000", altText: "Dairy Industry" },
     content: [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "We implement specialized routing and cold-chain ERP tracking modules designed specifically for the extreme time-sensitivity of dairy and perishable distribution." }]
+        children: [{ _type: 'span', text: "The dairy and perishable industry operates on an extreme clock where minutes can impact product safety and profit margins. We implement specialized cold-chain ERP tracking and routing modules designed for this level of time-sensitivity. Our solutions ensure that every batch is tracked from farm to shelf, with integrated temperature monitoring and shelf-life alerts." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Our perishable-specific routing logic optimizes delivery paths to ensure maximum freshness and minimum waste. We integrate batch-level financial tracking, allowing you to monitor margins on a granular level and identify any leakage in your cold chain. With Prixgen, you gain the technical precision needed to lead in the complex perishables market." }]
       }
+    ],
+    features: [
+      { title: "Cold-Chain Tracking", description: "Integrated temperature and location monitoring for perishables." },
+      { title: "Batch-Level Margin", description: "Tracking profitability for every specific production lot." },
+      { title: "Freshness Alerts", description: "Automated notifications for items nearing shelf-life limits." },
+      { title: "Specialized Routing", description: "Time-optimized logistics for perishable distribution." }
+    ],
+    process: [
+      { title: "Chain Assessment", description: "Physical audit of temperature control and tracking points." },
+      { title: "Module Customization", description: "Configuring ERP logic for perishable-specific workflows." },
+      { title: "Integrity Rollout", description: "Implementing end-to-end monitoring for quality assurance." }
     ],
     seo: {
       title: "Dairy & Perishable Supply Chain ERP | Prixgen",
@@ -424,17 +509,34 @@ export const industriesData: PageData[] = [
   }
 ];
 
-export const solutionsData: PageData[] = [
+export const solutionsData: any[] = [
   {
     slug: "odoo-enterprise",
     title: "Odoo Enterprise Integration",
     headline: "Odoo Architecture, Engineered for Scale.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000", altText: "Odoo ERP" },
     content: [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "As a certified Gold Partner, we don't just install Odoo—we engineer it to fit complex, multi-national workflows. From multi-warehouse inventory routing to automated procurement, we turn Odoo into an uncompromising enterprise engine." }]
+        children: [{ _type: 'span', text: "As a certified Odoo Gold Partner, we don't just install software; we engineer complex operational engines. We specialize in high-stakes Odoo Enterprise migrations and greenfield implementations for multi-national organizations. Our approach focuses on minimal customization of the core, ensuring long-term maintainability while delivering maximum functional depth." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "From multi-warehouse inventory routing to automated global procurement and localized financial reporting, we turn Odoo into an uncompromising enterprise engine. Our elite team of developers and consultants ensures that every module is optimized for performance, providing your team with the real-time data needed to make decisive business moves." }]
       }
+    ],
+    features: [
+      { title: "Multi-Entity Consolidation", description: "Seamless financial and operational syncing across global subsidiaries." },
+      { title: "Advanced WMS", description: "AI-optimized warehouse routing and real-time inventory tracking." },
+      { title: "Automated Procurement", description: "Smart reordering rules and vendor management integration." },
+      { title: "Custom BI Dashboards", description: "Tailored reporting engines for executive-level decision making." }
+    ],
+    process: [
+      { title: "GAP Analysis", description: "Detailed mapping of business requirements against Odoo standards." },
+      { title: "Architectural Design", description: "Designing the data flows and integration touchpoints." },
+      { title: "Agile Deployment", description: "Phased rollout with continuous feedback and optimization." }
     ],
     seo: {
       title: "Odoo Enterprise Gold Partner | Prixgen",
@@ -445,12 +547,29 @@ export const solutionsData: PageData[] = [
     slug: "sap-ecosystems",
     title: "SAP Ecosystems",
     headline: "Unlocking the Full Value of SAP.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1551288049-bbbda5366391?auto=format&fit=crop&q=80&w=1000", altText: "SAP Solutions" },
     content: [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "We guide mid-market and enterprise clients through complex SAP deployments and migrations. We focus on phase-zero architectural audits to ensure your SAP environment aligns perfectly with your long-term operational strategy." }]
+        children: [{ _type: 'span', text: "We guide mid-market and enterprise clients through the complexities of SAP Business One and S/4HANA deployments. Our methodology begins with a Phase-Zero architectural audit, identifying hidden inefficiencies in your current stack before a single line of code is moved. We focus on creating a 'clean core' that allows for rapid scaling and easy integration with external systems." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Whether you are migrating from legacy systems or optimizing an existing SAP environment, our consultants bring decades of industrial expertise to the table. We ensure that your SAP ecosystem aligns perfectly with your long-term operational strategy, providing the stability and visibility required for global industrial leadership." }]
       }
+    ],
+    features: [
+      { title: "SAP S/4HANA Migration", description: "Secure and optimized transition to the latest SAP core." },
+      { title: "Architectural Audits", description: "Phase-zero assessments to identify scaling bottlenecks." },
+      { title: "Inter-company Sync", description: "Unified data flow across complex corporate structures." },
+      { title: "Compliance Mapping", description: "Ensuring global regulatory standards are natively enforced." }
+    ],
+    process: [
+      { title: "Strategic Audit", description: "Deep-dive into current operational gaps and data silos." },
+      { title: "Blueprint Engineering", description: "Developing the technical roadmap for your SAP ecosystem." },
+      { title: "Managed Rollout", description: "Carefully orchestrated implementation with zero business disruption." }
     ],
     seo: {
       title: "SAP Business One Deployment & Migration | Prixgen",
@@ -461,12 +580,29 @@ export const solutionsData: PageData[] = [
     slug: "microsoft-dynamics",
     title: "Microsoft Dynamics 365",
     headline: "Unified CRM and ERP Capabilities.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1512758017271-d7b84c2113f1?auto=format&fit=crop&q=80&w=1000", altText: "Dynamics 365" },
     content: [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "Break down data silos and modernize your business with Dynamics 365. We deploy intelligent cloud applications (including Power BI and Dynamics NAV) that unify financial management, supply chain operations, and customer insights into a single pane of glass." }]
+        children: [{ _type: 'span', text: "Break down data silos and modernize your business with Microsoft Dynamics 365. We deploy intelligent cloud applications that unify financial management, supply chain operations, and customer insights into a single pane of glass. Our solutions leverage the full power of the Microsoft Power Platform, including Power BI and Power Automate, to create a truly connected enterprise." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "We specialize in tailoring Dynamics 365 Business Central and F&O for industrial environments, ensuring that your field service, sales, and manufacturing teams are all working from a single source of truth. With Prixgen, your Microsoft ecosystem becomes a driver of innovation, providing the agility needed to respond to changing market demands." }]
       }
+    ],
+    features: [
+      { title: "Power Platform Sync", description: "Deep integration with Power BI, Apps, and Automate." },
+      { title: "Unified CRM & ERP", description: "Seamless data flow between customer facing and back-end teams." },
+      { title: "Cloud Architecture", description: "Scalable, secure, and always-on enterprise environment." },
+      { title: "Predictive Analytics", description: "Leveraging Azure AI for demand and financial forecasting." }
+    ],
+    process: [
+      { title: "Ecosystem Mapping", description: "Evaluating current Microsoft 365 usage and integration points." },
+      { title: "Tailored Architecture", description: "Building the custom modules and data flows for your industry." },
+      { title: "Success Rollout", description: "Comprehensive training and phased deployment for maximum adoption." }
     ],
     seo: {
       title: "Microsoft Dynamics 365 & Power BI Integration | Prixgen",
@@ -477,16 +613,33 @@ export const solutionsData: PageData[] = [
     slug: "lecca-ai",
     title: "Lecca: Computer Vision & AI",
     headline: "AI-Powered Industrial Image Processing.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=1000", altText: "Lecca AI" },
     content: [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "Eliminate manual errors and accelerate quality control with Lecca, our proprietary neural network. Designed for complex object detection and segmentation in extreme manufacturing environments (such as automated pipe-counting), Lecca digitizes physical inventory with unparalleled accuracy." }]
+        children: [{ _type: 'span', text: "Lecca is our proprietary AI platform designed specifically for industrial environments. We use advanced computer vision to automate quality control, safety monitoring, and asset tracking. By processing visual data at the edge, Lecca provides real-time alerts that prevent accidents and ensure that every product leaving your facility meets the highest standards." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Our AI models are trained on hundreds of thousands of industrial data points, making them highly resilient to the challenging lighting and environmental conditions of a factory floor. Lecca integrates directly with your core ERP, turning visual observations into actionable data points for your management team. Experience the next generation of industrial intelligence with Lecca." }]
       }
     ],
+    features: [
+      { title: "Automated QC", description: "Visual inspection at production speed with zero-error tolerance." },
+      { title: "Safety Monitoring", description: "Real-time detection of PPE compliance and hazardous conditions." },
+      { title: "Asset Tracking", description: "AI-powered identification and location tracking of industrial assets." },
+      { title: "Edge Processing", description: "Low-latency analysis performed directly on-site for immediate action." }
+    ],
+    process: [
+      { title: "Vision Audit", description: "Identifying high-value automation points on your production line." },
+      { title: "Model Training", description: "Developing custom AI models for your specific product or environment." },
+      { title: "Hardware Sync", description: "Deploying cameras and edge computing units for live monitoring." }
+    ],
     seo: {
-      title: "Lecca AI | Proprietary Industrial Computer Vision | Prixgen",
-      metaDesc: "Proprietary AI for industrial image processing, automated inventory counting, and quality control.",
+      title: "Lecca Industrial AI & Computer Vision | Prixgen",
+      metaDesc: "Automate quality control and safety with Lecca's proprietary industrial AI platform.",
     }
   }
 ];
@@ -501,7 +654,17 @@ export const servicesData: any[] = [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "We partner with enterprise leaders to redefine their operational models, identifying high-impact opportunities for digital transformation and sustainable growth. Our strategic framework focuses on building resilient business architectures that can adapt to rapid market shifts while maintaining high margins." }]
+        children: [{ _type: 'span', text: "In an era of unprecedented digital disruption, a static business strategy is no longer viable. We partner with enterprise leaders to redefine their operational models, identifying high-impact opportunities for digital transformation and sustainable growth. Our approach goes beyond simple efficiency gains; we focus on building resilient business architectures that can adapt to rapid market shifts while maintaining high margins and customer loyalty." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Our strategic framework is built on three pillars: Operational Agility, Technical Excellence, and Market Innovation. By conducting deep-dive audits of your existing value chain, we pinpoint bottlenecks that hinder growth and replace them with streamlined, automated workflows. This transformation ensures that your organization remains competitive in a global economy that rewards speed and precision." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "We don't just provide a roadmap; we govern the entire implementation process. From aligning executive vision to ensuring front-line adoption, our consultants work side-by-side with your teams to deliver measurable ROI. Whether you are looking to enter new markets or optimize your core operations, Prixgen provides the strategic clarity needed to achieve market leadership." }]
       }
     ],
     features: [
@@ -529,7 +692,17 @@ export const servicesData: any[] = [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "A company's technology should accelerate its strategy, not constrain it. We conduct deep architectural audits to identify workflow bottlenecks, eliminate technical debt, and build a modern roadmap for digital transformation." }]
+        children: [{ _type: 'span', text: "A company's technology should accelerate its strategy, not constrain it. Our IT and Management Consulting services are designed to bridge the gap between technical infrastructure and business objectives. We conduct deep architectural audits to identify workflow bottlenecks, eliminate technical debt, and build a modern roadmap for digital transformation that scales with your growth." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "In today's complex technical landscape, choosing the right stack is critical. We assist organizations in navigating the myriad of software and hardware options, ensuring that every investment delivers long-term value. Our expertise spans legacy system modernization, hybrid cloud migrations, and the implementation of high-velocity DevOps cultures that reduce time-to-market for your internal applications." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Security and compliance are integrated into everything we do. Beyond optimization, we ensure your IT infrastructure is hardened against modern threats and compliant with global data regulations. With Prixgen as your consulting partner, your technology becomes a powerful engine for innovation rather than a maintenance burden." }]
       }
     ],
     features: [
@@ -557,7 +730,17 @@ export const servicesData: any[] = [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "Modern enterprises require real-time financial visibility. We deploy integrated accounting architectures that ensure multi-currency compliance, automated reconciliation, and machine-learning backed financial forecasting." }]
+        children: [{ _type: 'span', text: "Modern enterprises require real-time financial visibility to make informed decisions at the speed of the market. We deploy integrated accounting architectures that ensure multi-currency compliance, automated reconciliation, and machine-learning backed financial forecasting. Our advisory services go beyond record-keeping; we turn your financial data into a strategic asset." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Managing complex global corporate groups requires a unified financial view. We specialize in multi-entity consolidation and tax compliance across different jurisdictions, reducing the risk of regulatory friction. By automating high-frequency financial tasks, we free your finance team to focus on high-value analysis and strategic capital allocation." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Our systems are designed for maximum audit-readiness and transparency. With Prixgen, you gain a robust financial foundation that supports rapid scaling and provides stakeholders with the technical confidence they demand. We ensure your financial stack is as sophisticated as your business goals." }]
       }
     ],
     features: [
@@ -585,7 +768,17 @@ export const servicesData: any[] = [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "We optimize your human and technical capital by re-engineering core business processes for maximum efficiency and zero operational friction." }]
+        children: [{ _type: 'span', text: "We optimize your human and technical capital by re-engineering core business processes for maximum efficiency and zero operational friction. Our management consulting practice is built on the principle that operational excellence is the foundation of market leadership. We work with you to eliminate organizational silos and create a culture of continuous improvement." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Our process engineering approach identifies 'hidden' costs in your current workflows—manual tasks, redundant approvals, and communication gaps—and replaces them with lean, automated alternatives. We don't just recommend changes; we help you navigate the complex change management required to ensure these new processes stick and deliver long-term value." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "By defining and tracking the right KPIs, we provide your leadership team with a clear view of operational performance. Whether you are scaling a startup or modernizing a legacy enterprise, Prixgen ensures your management structure is lean, agile, and perfectly aligned with your strategic vision." }]
       }
     ],
     features: [
@@ -613,7 +806,17 @@ export const servicesData: any[] = [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "In a global economy, your supply chain is your competitive edge. We architect resilient, high-velocity logistics networks that reduce latency and protect margins." }]
+        children: [{ _type: 'span', text: "In a global economy where disruptions are the new normal, your supply chain is your competitive edge. We architect resilient, high-velocity logistics networks that reduce latency and protect margins. Our consultants bring deep expertise in network design, supplier governance, and real-time logistics analytics to ensure your physical products move as fast as your digital data." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "We help organizations optimize their inventory levels, reducing carrying costs without sacrificing service levels. By implementing advanced demand forecasting and supply chain visibility tools, we enable you to anticipate disruptions and react with agility. Our network design services ensure your warehouse and distribution hubs are located for maximum efficiency and minimum transportation costs." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Integrating your supply chain into your core ERP and WMS is essential for end-to-end transparency. Prixgen provides the technical bridge needed to sync your physical operations with your digital strategy, resulting in a supply chain that is not just a cost center, but a driver of profitability." }]
       }
     ],
     features: [
@@ -641,7 +844,17 @@ export const servicesData: any[] = [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "Eliminate manual errors and optimize warehouse space with our intelligent WMS architectures. We provide real-time inventory tracking, automated picking routes, and seamless ERP integration." }]
+        children: [{ _type: 'span', text: "Eliminate manual errors and optimize warehouse space with our intelligent WMS architectures. Prixgen's WMS solutions provide zero-latency visibility into every SKU in your facility, enabling real-time inventory tracking and automated fulfillment routes. We design systems that handle the complexity of high-volume, multi-channel distribution with ease." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Our intelligent picking algorithms minimize travel time for warehouse staff, while automated slotting optimization ensures that your high-velocity items are always in the most accessible locations. We integrate seamlessly with your existing ERP, ensuring that your physical inventory and digital records are always perfectly in sync, eliminating the 'ghost stock' issues that plague traditional warehouses." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Beyond software, we provide the technical expertise to deploy modern hardware—from RFID systems to mobile data terminals—that empowers your workforce. With a Prixgen-designed WMS, your warehouse becomes a high-performance hub that accelerates your entire supply chain." }]
       }
     ],
     features: [
@@ -669,7 +882,17 @@ export const servicesData: any[] = [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "Access our pre-vetted pool of senior Odoo developers and architects. We provide dedicated technical talent that integrates seamlessly with your internal teams to accelerate your digital roadmap." }]
+        children: [{ _type: 'span', text: "Finding elite Odoo talent is one of the biggest challenges in digital transformation. We provide access to our pre-vetted pool of senior Odoo developers and architects who have built complex enterprise systems across multiple industries. Our talent services are designed to scale your technical capacity instantly, providing the expertise needed to accelerate your digital roadmap." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Our developers are more than just coders; they are business-aware architects who understand how Odoo's core modules interact with your operational goals. Whether you need custom module development, complex API integrations, or database performance tuning, our dedicated talent integrates seamlessly with your internal teams, following your DevOps and communication protocols." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "We handle the entire vetting and onboarding process, ensuring that the developers we provide have the exact technical and cultural profile your project demands. With Prixgen's dedicated Odoo talent, you eliminate the overhead of traditional hiring and gain immediate access to technical excellence." }]
       }
     ],
     features: [
@@ -697,7 +920,17 @@ export const servicesData: any[] = [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "We bridge the gap between physical machinery and digital dashboards. Our IIoT architectures extract high-frequency telemetry data to enable predictive maintenance and real-time production visibility." }]
+        children: [{ _type: 'span', text: "The future of manufacturing lies in the bridge between physical machinery and digital intelligence. Our IIoT and Telemetry Engineering services extract high-frequency data from your shop floor, transforming raw machine signals into actionable insights. We design secure, scalable architectures that enable predictive maintenance and provide real-time production visibility." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "We specialize in connecting legacy machinery via modern industrial protocols like MQTT and OPC UA, ensuring that your entire plant is integrated into your digital dashboard. By utilizing edge computing, we process critical machine data locally, enabling zero-latency control systems and reducing the bandwidth required for cloud-based analytics. Our custom dashboards provide plant managers with a 360-degree view of production health." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Predictive maintenance is no longer a luxury; it is a necessity for protecting your equipment ROI. Our systems identify potential failures before they result in costly downtime, allowing you to schedule repairs during planned maintenance windows. With Prixgen's IIoT engineering, your factory floor becomes a data-driven engine of efficiency." }]
       }
     ],
     features: [
@@ -725,7 +958,17 @@ export const servicesData: any[] = [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "We design and deploy automated control systems that reduce human error and maximize production throughput in high-stakes manufacturing environments." }]
+        children: [{ _type: 'span', text: "We design and deploy automated control systems that reduce human error and maximize production throughput in high-stakes manufacturing environments. From robotic arm integration to complete assembly line automation, our engineering team builds the intelligent systems that drive the modern factory. We focus on zero-fault logic and high-speed execution." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Our expertise includes the deployment of Collaborative Robots (cobots) and Autonomous Mobile Robots (AMRs) that work safely alongside your human workforce. We provide custom PLC programming and HMI design, ensuring that your operators have intuitive, powerful control over complex machine operations. Our AI-backed vision systems enable high-precision quality control and automated inspection, reducing scrap and increasing yields." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "We utilize advanced 3D simulation to validate automation logic before a single machine is moved on the factory floor. This 'Digital Twin' approach reduces commissioning time and ensures that your automation project delivers the projected ROI from day one. Prixgen is your partner in engineering the future of autonomous manufacturing." }]
       }
     ],
     features: [
@@ -753,7 +996,17 @@ export const servicesData: any[] = [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "We architect and manage secure, industrial-grade cloud environments optimized for ERP performance and data integrity. Zero operational friction, guaranteed uptime." }]
+        children: [{ _type: 'span', text: "Prixgen architects and manages secure, industrial-grade cloud environments optimized for ERP performance and data integrity. We understand that for an industrial enterprise, downtime is not just an inconvenience—it's a massive financial loss. That's why our infrastructure is built for high-availability, with zero-data-loss failover and automated disaster recovery protocols." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Our hybrid cloud architectures allow you to maintain the security of on-premise data while leveraging the scalability and performance of the public cloud. We perform continuous performance tuning, optimizing your database and application servers to ensure that your mission-critical apps run with zero latency. Our 24/7 managed security service provides proactive threat detection and mitigation, keeping your industrial data safe from modern cyber threats." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "With Prixgen managing your cloud infrastructure, your technical team is free to focus on innovation instead of server maintenance. We provide a stable, high-performance ecosystem that supports your entire digital transformation roadmap, ensuring that your technical foundation is as strong as your business strategy." }]
       }
     ],
     features: [

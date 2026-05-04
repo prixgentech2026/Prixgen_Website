@@ -48,6 +48,34 @@ export default defineType({
       of: [{ type: 'block' }],
     }),
     defineField({
+      name: 'features',
+      title: 'Key Features',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            { name: 'title', title: 'Feature Title', type: 'string' },
+            { name: 'description', title: 'Feature Description', type: 'text' },
+          ]
+        }
+      ]
+    }),
+    defineField({
+      name: 'process',
+      title: 'Process Steps',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            { name: 'title', title: 'Step Title', type: 'string' },
+            { name: 'description', title: 'Step Description', type: 'text' },
+          ]
+        }
+      ]
+    }),
+    defineField({
       name: 'seo',
       title: 'SEO Metadata',
       type: 'object',
