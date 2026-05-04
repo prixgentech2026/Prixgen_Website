@@ -72,37 +72,98 @@ export default function ServiceClientPage({ service }: { service: any }) {
         </motion.div>
       </section>
 
-      <div className="container mx-auto px-4 py-16 lg:py-24 grid grid-cols-1 lg:grid-cols-3 gap-16">
-        {/* Main Content */}
-        <article className="lg:col-span-2">
-          {service.featuredImage && (
-            <FadeUp delay={0.2} className="relative aspect-video w-full rounded-3xl overflow-hidden mb-12 shadow-2xl">
-              <OptimizedImage
-                src={service.featuredImage.sourceUrl}
-                alt={service.featuredImage.altText || service.title}
-                fill
-                priority
-              />
-            </FadeUp>
-          )}
-          <FadeUp delay={0.3}>
-            <PortableText 
-              value={service.content} 
-              className="prose prose-lg max-w-none prose-headings:text-prixgen-blue prose-p:text-prixgen-dark/80"
-            />
-          </FadeUp>
-        </article>
+      <div className="container mx-auto px-4 py-16 lg:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+          {/* Main Content */}
+          <article className="lg:col-span-2 space-y-16">
+            {service.featuredImage && (
+              <FadeUp delay={0.2} className="relative aspect-video w-full rounded-[3rem] overflow-hidden shadow-2xl">
+                <OptimizedImage
+                  src={service.featuredImage.sourceUrl}
+                  alt={service.featuredImage.altText || service.title}
+                  fill
+                  priority
+                  className="object-cover transition-transform duration-700 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+              </FadeUp>
+            )}
 
-        {/* Sticky Sidebar */}
-        <aside className="lg:col-span-1">
-          <FadeUp delay={0.4} className="bg-prixgen-gray p-10 rounded-3xl sticky top-24 border border-prixgen-blue/5 shadow-xl">
-            <h3 className="text-2xl font-bold mb-6 text-prixgen-blue">Request an Architectural Audit</h3>
-            <p className="text-prixgen-dark/60 mb-8 leading-relaxed">
-              Our senior consultants will analyze your {service.title.toLowerCase()} stack and provide a comprehensive modernization roadmap.
-            </p>
-            <LeadCaptureForm source={`Service: ${service.title}`} />
-          </FadeUp>
-        </aside>
+            <FadeUp delay={0.3} className="space-y-12">
+              <div className="prose prose-xl max-w-none prose-headings:text-prixgen-blue prose-p:text-slate-600 prose-p:leading-relaxed prose-strong:text-prixgen-blue">
+                <PortableText value={service.content} />
+              </div>
+
+              {/* Unique Features / Benefits */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8">
+                {service.features?.map((feature: any, i: number) => (
+                  <div key={i} className="p-8 bg-prixgen-blue/[0.03] border border-prixgen-blue/5 rounded-[2rem] hover:bg-prixgen-blue/[0.06] transition-colors">
+                    <h4 className="text-xl font-bold text-prixgen-blue mb-3">{feature.title}</h4>
+                    <p className="text-slate-500 font-medium leading-relaxed">{feature.description}</p>
+                  </div>
+                ))}
+              </div>
+            </FadeUp>
+
+            {/* Process Section */}
+            <section className="pt-16 border-t border-prixgen-blue/5">
+              <h2 className="text-3xl md:text-5xl font-bold text-prixgen-dark tracking-tighter mb-12">
+                Our <span className="italic text-prixgen-blue">Methodology</span>
+              </h2>
+              <div className="space-y-12">
+                {service.process?.map((step: any, i: number) => (
+                  <div key={i} className="flex gap-8 group">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-prixgen-blue text-white flex items-center justify-center font-black text-xl shadow-lg shadow-prixgen-blue/20">
+                      {i + 1}
+                    </div>
+                    <div className="space-y-3">
+                      <h3 className="text-2xl font-bold text-prixgen-dark group-hover:text-prixgen-blue transition-colors">{step.title}</h3>
+                      <p className="text-lg text-slate-500 font-medium leading-relaxed">{step.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </article>
+
+          {/* Sticky Sidebar */}
+          <aside className="lg:col-span-1">
+            <div className="sticky top-24 space-y-8">
+              <FadeUp delay={0.4} className="bg-white p-10 rounded-[3rem] border border-prixgen-blue/10 shadow-2xl shadow-prixgen-blue/5 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-prixgen-blue/5 rounded-full blur-3xl -mr-16 -mt-16" />
+                <h3 className="text-2xl font-bold mb-6 text-prixgen-blue relative z-10">Strategic Consultation</h3>
+                <p className="text-slate-500 mb-8 leading-relaxed font-medium relative z-10">
+                  Ready to transform your business with our expertise in {service.title}? Schedule a technical briefing with our leads.
+                </p>
+                <div className="relative z-10">
+                  <LeadCaptureForm source={`Service: ${service.title}`} />
+                </div>
+              </FadeUp>
+
+              {/* Related Services */}
+              <div className="p-10 bg-prixgen-blue/[0.02] rounded-[3rem] border border-prixgen-blue/5">
+                <h4 className="text-lg font-bold text-prixgen-dark mb-6 uppercase tracking-widest opacity-50">Related Solutions</h4>
+                <div className="space-y-4">
+                  {servicesData
+                    .filter(s => s.slug !== service.slug)
+                    .slice(0, 4)
+                    .map((related, i) => (
+                      <Link 
+                        key={i} 
+                        href={`/services/${related.slug}`}
+                        className="flex items-center justify-between p-4 rounded-2xl hover:bg-white hover:shadow-lg transition-all group"
+                      >
+                        <span className="font-bold text-slate-600 group-hover:text-prixgen-blue">{related.title}</span>
+                        <div className="w-8 h-8 rounded-full bg-prixgen-blue/5 flex items-center justify-center text-prixgen-blue group-hover:bg-prixgen-blue group-hover:text-white transition-colors">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                        </div>
+                      </Link>
+                    ))}
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
       </div>
     </div>
   );

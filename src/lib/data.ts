@@ -106,20 +106,25 @@ export async function getSolutionBySlug(slug: string) {
 }
 
 export async function getServices() {
-  if (!client) return servicesData;
+  const engineeringSlugs = ["iiot-telemetry", "automation", "cloud-infrastructure"];
+  if (!client) return servicesData.filter(s => !engineeringSlugs.includes(s.slug));
   try {
     const data = await client.fetch(servicesQuery);
-    return data && data.length > 0 ? data.map((item: any) => ({
+    const allServices = data && data.length > 0 ? data.map((item: any) => ({
       ...item,
       slug: item.slug?.current || item.slug
     })) : servicesData;
+    return allServices.filter((s: any) => !engineeringSlugs.includes(s.slug));
   } catch (error) {
     console.error('Sanity Fetch Error (Services):', error);
-    return servicesData;
+    return servicesData.filter(s => !engineeringSlugs.includes(s.slug));
   }
 }
 
 export async function getServiceBySlug(slug: string) {
+  const engineeringSlugs = ["iiot-telemetry", "automation", "cloud-infrastructure"];
+  if (engineeringSlugs.includes(slug)) return null;
+
   if (!client) {
     return servicesData.find(s => s.slug === slug);
   }
@@ -152,13 +157,13 @@ export async function getServicesPageData() {
 }
 
 export async function getEngineeringServices() {
-  return [] as any[];
+  const engineeringSlugs = ["iiot-telemetry", "automation", "cloud-infrastructure"];
+  return servicesData.filter(s => engineeringSlugs.includes(s.slug));
 }
 
 export async function getEngineeringServiceBySlug(slug: string) {
-  // Return a dummy object with required properties to satisfy TS during build
-  // even though this route is effectively disabled.
-  return null as any;
+  const services = await getEngineeringServices();
+  return services.find(s => s.slug === slug) || null;
 }
 
 /**
@@ -486,17 +491,29 @@ export const solutionsData: PageData[] = [
   }
 ];
 
-export const servicesData: PageData[] = [
+export const servicesData: any[] = [
   {
     slug: "business-strategy",
     title: "Business Strategy & Transformation",
     headline: "Architecting Long-term Value and Market Leadership.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000", altText: "Business Strategy" },
     content: [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "We partner with enterprise leaders to redefine their operational models, identifying high-impact opportunities for digital transformation and sustainable growth." }]
+        children: [{ _type: 'span', text: "We partner with enterprise leaders to redefine their operational models, identifying high-impact opportunities for digital transformation and sustainable growth. Our strategic framework focuses on building resilient business architectures that can adapt to rapid market shifts while maintaining high margins." }]
       }
+    ],
+    features: [
+      { title: "Market Analysis", description: "Deep-dive competitive intelligence and market trend forecasting." },
+      { title: "Operational Audit", description: "Identifying inefficiencies in current business processes." },
+      { title: "Transformation Roadmap", description: "Phased implementation plans for digital modernization." },
+      { title: "ROI Projection", description: "Data-backed forecasting of transformation benefits." }
+    ],
+    process: [
+      { title: "Discovery & Alignment", description: "We align with your executive vision and identify core business objectives." },
+      { title: "Strategic Architecture", description: "Designing the new operational model and technical requirements." },
+      { title: "Implementation Governance", description: "Managing the transition with minimal operational disruption." }
     ],
     seo: {
       title: "Business Strategy & Digital Transformation | Prixgen",
@@ -507,12 +524,24 @@ export const servicesData: PageData[] = [
     slug: "it-consulting",
     title: "IT & Management Consulting",
     headline: "Aligning Technology with Business Strategy.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000", altText: "IT Consulting" },
     content: [
       {
         _type: 'block',
         style: 'normal',
         children: [{ _type: 'span', text: "A company's technology should accelerate its strategy, not constrain it. We conduct deep architectural audits to identify workflow bottlenecks, eliminate technical debt, and build a modern roadmap for digital transformation." }]
       }
+    ],
+    features: [
+      { title: "System Integration", description: "Seamlessly connecting disparate enterprise applications." },
+      { title: "Legacy Modernization", description: "Migrating from outdated systems to high-velocity cloud stacks." },
+      { title: "Cybersecurity Audit", description: "Comprehensive vulnerability assessment and hardening." },
+      { title: "Tech-Stack Optimization", description: "Right-sizing your software licenses and infrastructure." }
+    ],
+    process: [
+      { title: "Technical Audit", description: "Evaluating existing hardware, software, and networking assets." },
+      { title: "Gap Analysis", description: "Identifying the distance between current state and business goals." },
+      { title: "Deployment & Training", description: "Rolling out solutions and ensuring team adoption." }
     ],
     seo: {
       title: "Strategic IT & Management Consulting | Prixgen",
@@ -523,12 +552,24 @@ export const servicesData: PageData[] = [
     slug: "accounting-advisory",
     title: "Accounting & Financial Advisory",
     headline: "Precision, Compliance, and Financial Intelligence.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=1000", altText: "Accounting Advisory" },
     content: [
       {
         _type: 'block',
         style: 'normal',
         children: [{ _type: 'span', text: "Modern enterprises require real-time financial visibility. We deploy integrated accounting architectures that ensure multi-currency compliance, automated reconciliation, and machine-learning backed financial forecasting." }]
       }
+    ],
+    features: [
+      { title: "Multi-Entity Consolidation", description: "Unified financial reporting for global corporate groups." },
+      { title: "Tax Compliance", description: "Automated regulatory reporting and multi-jurisdictional compliance." },
+      { title: "Cash Flow Analytics", description: "Real-time tracking of liquidity and operational spend." },
+      { title: "Audit Readiness", description: "Ensuring all financial data is accurate and verifiable." }
+    ],
+    process: [
+      { title: "Financial Diagnostics", description: "Reviewing current accounting workflows and compliance status." },
+      { title: "System Engineering", description: "Implementing automated financial control systems." },
+      { title: "Continuous Advisory", description: "Ongoing strategic financial guidance and performance review." }
     ],
     seo: {
       title: "Enterprise Accounting Advisory & Systems | Prixgen",
@@ -539,12 +580,24 @@ export const servicesData: PageData[] = [
     slug: "management-consulting",
     title: "Management Consulting",
     headline: "Operational Excellence through Process Engineering.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1000", altText: "Management Consulting" },
     content: [
       {
         _type: 'block',
         style: 'normal',
         children: [{ _type: 'span', text: "We optimize your human and technical capital by re-engineering core business processes for maximum efficiency and zero operational friction." }]
       }
+    ],
+    features: [
+      { title: "Change Management", description: "Guiding organizations through complex cultural and structural shifts." },
+      { title: "KPI Engineering", description: "Defining and tracking the metrics that actually drive growth." },
+      { title: "Talent Optimization", description: "Aligning human resources with strategic business goals." },
+      { title: "Process Automation", description: "Eliminating manual touchpoints in high-frequency workflows." }
+    ],
+    process: [
+      { title: "Process Mapping", description: "Visualizing current workflows and identifying friction points." },
+      { title: "Solution Design", description: "Creating the 'To-Be' model for maximum efficiency." },
+      { title: "Scale & Sustain", description: "Standardizing improvements across the entire enterprise." }
     ],
     seo: {
       title: "Management Consulting & Process Engineering | Prixgen",
@@ -555,12 +608,24 @@ export const servicesData: PageData[] = [
     slug: "supply-chain-consulting",
     title: "Supply Chain Consulting",
     headline: "End-to-End Logistics and Supply Chain Optimization.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?auto=format&fit=crop&q=80&w=1000", altText: "Supply Chain Consulting" },
     content: [
       {
         _type: 'block',
         style: 'normal',
         children: [{ _type: 'span', text: "In a global economy, your supply chain is your competitive edge. We architect resilient, high-velocity logistics networks that reduce latency and protect margins." }]
       }
+    ],
+    features: [
+      { title: "Inventory Optimization", description: "Reducing carrying costs while ensuring 100% service levels." },
+      { title: "Network Design", description: "Architecting optimal warehouse and distribution hub locations." },
+      { title: "Supplier Governance", description: "Implementing rigorous quality and performance standards." },
+      { title: "Logistics Analytics", description: "Real-time visibility into global shipment status and costs." }
+    ],
+    process: [
+      { title: "Network Audit", description: "Analyzing current transportation and storage performance." },
+      { title: "Resilience Strategy", description: "Identifying and mitigating potential supply chain disruptions." },
+      { title: "Digital Integration", description: "Connecting supply chain data to your core ERP/WMS." }
     ],
     seo: {
       title: "Supply Chain Strategy & Optimization | Prixgen",
@@ -571,12 +636,24 @@ export const servicesData: PageData[] = [
     slug: "wms",
     title: "Warehouse Management Systems (WMS)",
     headline: "Intelligent Inventory and Fulfillment Automation.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1000", altText: "Warehouse Management Systems" },
     content: [
       {
         _type: 'block',
         style: 'normal',
         children: [{ _type: 'span', text: "Eliminate manual errors and optimize warehouse space with our intelligent WMS architectures. We provide real-time inventory tracking, automated picking routes, and seamless ERP integration." }]
       }
+    ],
+    features: [
+      { title: "Automated Picking", description: "Intelligent route planning to minimize picker travel time." },
+      { title: "Real-time Tracking", description: "Zero-latency visibility into every SKU in your facility." },
+      { title: "Slotting Optimization", description: "Dynamic reorganization of stock based on velocity." },
+      { title: "ERP Syncing", description: "Perfect alignment between physical stock and digital records." }
+    ],
+    process: [
+      { title: "Facility Blueprinting", description: "Digital mapping of your warehouse for WMS configuration." },
+      { title: "Hardware Deployment", description: "Setting up RFID, scanning, and mobile data terminals." },
+      { title: "Go-Live Support", description: "On-site assistance during the critical transition period." }
     ],
     seo: {
       title: "Enterprise WMS & Warehouse Automation | Prixgen",
@@ -587,12 +664,24 @@ export const servicesData: PageData[] = [
     slug: "hiring-odoo-developers",
     title: "Dedicated Odoo Talent Services",
     headline: "Scaling Your Technical Capacity with Elite Odoo Experts.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1000", altText: "Odoo Developers" },
     content: [
       {
         _type: 'block',
         style: 'normal',
         children: [{ _type: 'span', text: "Access our pre-vetted pool of senior Odoo developers and architects. We provide dedicated technical talent that integrates seamlessly with your internal teams to accelerate your digital roadmap." }]
       }
+    ],
+    features: [
+      { title: "Pre-vetted Experts", description: "Only the top 3% of Odoo developers make it into our pool." },
+      { title: "Full-Stack Capability", description: "Frontend, backend, and PostgreSQL database experts." },
+      { title: "Agile Integration", description: "Talent that adapts to your existing DevOps and PM workflows." },
+      { title: "Technical Oversight", description: "All projects monitored by our senior technical architects." }
+    ],
+    process: [
+      { title: "Requirements Definition", description: "Understanding the specific skills and seniority you need." },
+      { title: "Talent Matching", description: "Shortlisting candidates who fit your technical and cultural profile." },
+      { title: "Seamless Onboarding", description: "Integrating talent into your communication and dev cycles." }
     ],
     seo: {
       title: "Hire Senior Odoo Developers & Architects | Prixgen",
@@ -603,12 +692,24 @@ export const servicesData: PageData[] = [
     slug: "iiot-telemetry",
     title: "IIoT & Telemetry Engineering",
     headline: "Unlocking Real-Time Intelligence from the Shop Floor.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000", altText: "IIoT Engineering" },
     content: [
       {
         _type: 'block',
         style: 'normal',
         children: [{ _type: 'span', text: "We bridge the gap between physical machinery and digital dashboards. Our IIoT architectures extract high-frequency telemetry data to enable predictive maintenance and real-time production visibility." }]
       }
+    ],
+    features: [
+      { title: "Sensor Integration", description: "Connecting legacy machinery via industrial protocols (MQTT, OPC UA)." },
+      { title: "Edge Computing", description: "Processing data locally for zero-latency machine control." },
+      { title: "Predictive Analytics", description: "Identifying equipment failure before it causes downtime." },
+      { title: "Custom Dashboards", description: "High-visibility production monitoring for plant managers." }
+    ],
+    process: [
+      { title: "Field Survey", description: "Physical assessment of machinery and connectivity options." },
+      { title: "Infrastructure Setup", description: "Deploying gateways, sensors, and secure edge devices." },
+      { title: "Data Visualization", description: "Building the digital twin and real-time alerts." }
     ],
     seo: {
       title: "IIoT Engineering & Telemetry Solutions | Prixgen",
@@ -619,12 +720,24 @@ export const servicesData: PageData[] = [
     slug: "automation",
     title: "Factory & Industrial Automation",
     headline: "Robotics and Intelligent Control Systems.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&q=80&w=1000", altText: "Industrial Automation" },
     content: [
       {
         _type: 'block',
         style: 'normal',
         children: [{ _type: 'span', text: "We design and deploy automated control systems that reduce human error and maximize production throughput in high-stakes manufacturing environments." }]
       }
+    ],
+    features: [
+      { title: "Robotic Integration", description: "Deploying cobots and autonomous mobile robots (AMRs)." },
+      { title: "PLC Programming", description: "Custom logic for complex industrial control systems." },
+      { title: "Vision Systems", description: "AI-backed quality control and automated inspection." },
+      { title: "HMI Design", description: "Intuitive interfaces for complex machine operations." }
+    ],
+    process: [
+      { title: "Workflow Simulation", description: "Testing automation logic in a 3D digital environment." },
+      { title: "Hardware Integration", description: "On-site installation and mechanical synchronization." },
+      { title: "Stress Testing", description: "Validating systems under peak production loads." }
     ],
     seo: {
       title: "Industrial Automation & Robotics Systems | Prixgen",
@@ -635,12 +748,24 @@ export const servicesData: PageData[] = [
     slug: "cloud-infrastructure",
     title: "Managed Industrial Cloud Infrastructure",
     headline: "High-Availability Ecosystems for Mission-Critical Apps.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000", altText: "Cloud Infrastructure" },
     content: [
       {
         _type: 'block',
         style: 'normal',
         children: [{ _type: 'span', text: "We architect and manage secure, industrial-grade cloud environments optimized for ERP performance and data integrity. Zero operational friction, guaranteed uptime." }]
       }
+    ],
+    features: [
+      { title: "Hybrid Cloud Architecture", description: "Combining on-premise security with cloud scalability." },
+      { title: "Disaster Recovery", description: "Automated backups and zero-data-loss failover protocols." },
+      { title: "Performance Tuning", description: "Optimizing database and application server latency." },
+      { title: "Managed Security", description: "24/7 monitoring and threat detection for your infrastructure." }
+    ],
+    process: [
+      { title: "Cloud Strategy", description: "Defining the right infrastructure for your workload needs." },
+      { title: "Migration Execution", description: "Moving data and apps with zero downtime." },
+      { title: "Performance Lifecycle", description: "Continuous monitoring and resource optimization." }
     ],
     seo: {
       title: "Industrial Cloud Hosting & Infrastructure | Prixgen",
