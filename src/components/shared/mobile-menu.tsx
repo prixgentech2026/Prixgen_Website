@@ -113,6 +113,33 @@ export function MobileMenu() {
 
             <div>
               <div className="flex items-center justify-between mb-4 pb-2 border-b border-prixgen-gray/20">
+                <h3 className="text-xs font-bold text-prixgen-dark/40 uppercase tracking-widest">Engineering Services</h3>
+                <Link 
+                  href="/engineering-services" 
+                  onClick={(e) => { e.preventDefault(); handleNavigate('/engineering-services'); }} 
+                  className="text-xs font-bold text-prixgen-lightblue hover:underline"
+                >
+                  Architecture →
+                </Link>
+              </div>
+              <ul className="space-y-4">
+                {MENU_DATA.engineering_services.map((item) => (
+                  <li key={item.title}>
+                    <Link 
+                      href={item.href} 
+                      onClick={(e) => { e.preventDefault(); handleNavigate(item.href); }}
+                      className="flex items-center justify-between text-lg font-bold text-prixgen-blue"
+                    >
+                      {item.title}
+                      <ChevronRight className="h-5 w-5 text-prixgen-lightblue" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between mb-4 pb-2 border-b border-prixgen-gray/20">
                 <h3 className="text-xs font-bold text-prixgen-dark/40 uppercase tracking-widest">Industries</h3>
                 <Link 
                   href="/industries" 

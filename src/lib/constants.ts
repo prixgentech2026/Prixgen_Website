@@ -6,10 +6,18 @@
 
 export const MENU_DATA = {
   services: [
-    { title: "IT & Management Consulting", href: "/services/it-consulting", description: "Aligning technology with strategy." },
-    { title: "Supply Chain & WMS", href: "/services/supply-chain-wms", description: "Frictionless logistics ecosystems." },
-    { title: "IIoT & Engineering Services", href: "/services/iiot-engineering", description: "Real-time industrial intelligence." },
-    { title: "Managed Infrastructure", href: "/services/it-infrastructure", description: "High-availability cloud environments." },
+    { title: "Business Strategy", href: "/services/business-strategy", description: "Long-term value creation and optimization." },
+    { title: "IT Consulting", href: "/services/it-consulting", description: "Aligning technology with enterprise goals." },
+    { title: "Accounting Advisory", href: "/services/accounting-advisory", description: "Financial precision and compliance." },
+    { title: "Management Consulting", href: "/services/management-consulting", description: "Operational excellence and efficiency." },
+    { title: "Supply Chain Consulting", href: "/services/supply-chain-consulting", description: "End-to-end logistics optimization." },
+    { title: "WMS", href: "/services/wms", description: "Intelligent warehouse management systems." },
+    { title: "Hiring Odoo Developers", href: "/services/hiring-odoo-developers", description: "Dedicated talent for Odoo ecosystems." },
+  ],
+  engineering_services: [
+    { title: "IIoT & Telemetry", href: "/engineering-services/iiot-telemetry", description: "Real-time shop-floor intelligence." },
+    { title: "Factory Automation", href: "/engineering-services/automation", description: "Robotics and automated control systems." },
+    { title: "Cloud Infrastructure", href: "/engineering-services/cloud-infrastructure", description: "High-availability industrial cloud." },
   ],
   solutions: [
     { title: "Odoo Enterprise", href: "/solutions/odoo-enterprise", description: "Gold Partner precision for scale." },

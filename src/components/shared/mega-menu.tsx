@@ -22,51 +22,15 @@ export function MegaMenu() {
     <NavigationMenu className="hidden lg:flex">
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent hover:text-prixgen-blue">Services</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <div className="w-[400px] md:w-[500px] lg:w-[600px] p-6 bg-white rounded-xl shadow-2xl">
-              <ul className="grid gap-3 md:grid-cols-2 mb-4">
-                {MENU_DATA.services.map((item) => (
-                  <ListItem key={item.title} title={item.title} href={item.href}>
-                    {item.description}
-                  </ListItem>
-                ))}
-              </ul>
-              <div className="border-t border-prixgen-gray pt-4">
-                <NavigationMenuLink asChild>
-                  <Link href="/services" className="text-sm font-bold text-prixgen-lightblue hover:underline flex items-center px-3">
-                    Explore All Services <span className="ml-1">→</span>
-                  </Link>
-                </NavigationMenuLink>
-              </div>
-            </div>
-          </NavigationMenuContent>
+          <NavigationMenuLink asChild>
+            <Link href="/who-we-are" className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-bold uppercase tracking-wider transition-colors hover:bg-prixgen-gray hover:text-prixgen-blue focus:bg-prixgen-gray focus:text-prixgen-blue focus:outline-none disabled:pointer-events-none disabled:opacity-50">
+              Who We Are
+            </Link>
+          </NavigationMenuLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent hover:text-prixgen-blue">Solutions</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <div className="w-[400px] md:w-[500px] lg:w-[600px] p-6 bg-white rounded-xl shadow-2xl">
-              <ul className="grid gap-3 md:grid-cols-2 mb-4">
-                {MENU_DATA.solutions.map((item) => (
-                  <ListItem key={item.title} title={item.title} href={item.href}>
-                    {item.description}
-                  </ListItem>
-                ))}
-              </ul>
-              <div className="border-t border-prixgen-gray pt-4">
-                <NavigationMenuLink asChild>
-                  <Link href="/solutions" className="text-sm font-bold text-prixgen-lightblue hover:underline flex items-center px-3">
-                    Explore All Solutions <span className="ml-1">→</span>
-                  </Link>
-                </NavigationMenuLink>
-              </div>
-            </div>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        
-        <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent hover:text-prixgen-blue">Industries</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="bg-transparent hover:text-prixgen-blue font-bold uppercase tracking-wider">Industries</NavigationMenuTrigger>
           <NavigationMenuContent>
             <div className="w-[400px] md:w-[500px] lg:w-[600px] p-6 bg-white rounded-xl shadow-2xl">
               <ul className="grid gap-3 md:grid-cols-2 mb-4">
@@ -88,19 +52,69 @@ export function MegaMenu() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuLink asChild>
-            <Link href="/who-we-are" className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-prixgen-gray hover:text-prixgen-blue focus:bg-prixgen-gray focus:text-prixgen-blue focus:outline-none disabled:pointer-events-none disabled:opacity-50">
-              Who We Are
-            </Link>
-          </NavigationMenuLink>
+          <NavigationMenuTrigger className="bg-transparent hover:text-prixgen-blue font-bold uppercase tracking-wider">Solutions</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <div className="w-[400px] md:w-[500px] lg:w-[600px] p-6 bg-white rounded-xl shadow-2xl">
+              <ul className="grid gap-3 md:grid-cols-2 mb-4">
+                {MENU_DATA.solutions.map((item) => (
+                  <ListItem key={item.title} title={item.title} href={item.href}>
+                    {item.description}
+                  </ListItem>
+                ))}
+              </ul>
+              <div className="border-t border-prixgen-gray pt-4">
+                <NavigationMenuLink asChild>
+                  <Link href="/solutions" className="text-sm font-bold text-prixgen-lightblue hover:underline flex items-center px-3">
+                    Explore All Solutions <span className="ml-1">→</span>
+                  </Link>
+                </NavigationMenuLink>
+              </div>
+            </div>
+          </NavigationMenuContent>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuLink asChild>
-            <Link href="/case-studies" className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-prixgen-gray hover:text-prixgen-blue focus:bg-prixgen-gray focus:text-prixgen-blue focus:outline-none disabled:pointer-events-none disabled:opacity-50">
-              Case Studies
-            </Link>
-          </NavigationMenuLink>
+          <NavigationMenuTrigger className="bg-transparent hover:text-prixgen-blue font-bold uppercase tracking-wider">Services</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <div className="w-[400px] md:w-[500px] lg:w-[600px] p-6 bg-white rounded-xl shadow-2xl">
+              <ul className="grid gap-3 md:grid-cols-2 mb-4">
+                {MENU_DATA.services.map((item) => (
+                  <ListItem key={item.title} title={item.title} href={item.href}>
+                    {item.description}
+                  </ListItem>
+                ))}
+              </ul>
+              <div className="border-t border-prixgen-gray pt-4">
+                <NavigationMenuLink asChild>
+                  <Link href="/services" className="text-sm font-bold text-prixgen-lightblue hover:underline flex items-center px-3">
+                    Explore All Services <span className="ml-1">→</span>
+                  </Link>
+                </NavigationMenuLink>
+              </div>
+            </div>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <NavigationMenuTrigger className="bg-transparent hover:text-prixgen-blue font-bold uppercase tracking-wider">Engineering Services</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <div className="w-[400px] md:w-[500px] lg:w-[600px] p-6 bg-white rounded-xl shadow-2xl">
+              <ul className="grid gap-3 md:grid-cols-2 mb-4">
+                {MENU_DATA.engineering_services.map((item) => (
+                  <ListItem key={item.title} title={item.title} href={item.href}>
+                    {item.description}
+                  </ListItem>
+                ))}
+              </ul>
+              <div className="border-t border-prixgen-gray pt-4">
+                <NavigationMenuLink asChild>
+                  <Link href="/engineering-services" className="text-sm font-bold text-prixgen-lightblue hover:underline flex items-center px-3">
+                    Industrial Architecture <span className="ml-1">→</span>
+                  </Link>
+                </NavigationMenuLink>
+              </div>
+            </div>
+          </NavigationMenuContent>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
