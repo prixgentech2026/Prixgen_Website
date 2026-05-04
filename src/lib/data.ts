@@ -136,7 +136,15 @@ export async function getServicesPageData() {
   if (!client) return servicesPageMockData;
   try {
     const data = await client.fetch(servicesPageQuery);
-    return data || servicesPageMockData;
+    if (!data) return servicesPageMockData;
+    
+    // Ensure we show all services even if Sanity only has a few
+    return {
+      ...data,
+      coreServices: data.coreServices && data.coreServices.length >= servicesPageMockData.coreServices.length
+        ? data.coreServices 
+        : servicesPageMockData.coreServices
+    };
   } catch (error) {
     console.error('Sanity Fetch Error (Services Page):', error);
     return servicesPageMockData;
@@ -480,6 +488,22 @@ export const solutionsData: PageData[] = [
 
 export const servicesData: PageData[] = [
   {
+    slug: "business-strategy",
+    title: "Business Strategy & Transformation",
+    headline: "Architecting Long-term Value and Market Leadership.",
+    content: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "We partner with enterprise leaders to redefine their operational models, identifying high-impact opportunities for digital transformation and sustainable growth." }]
+      }
+    ],
+    seo: {
+      title: "Business Strategy & Digital Transformation | Prixgen",
+      metaDesc: "Strategic consultancy for long-term value creation and operational optimization.",
+    }
+  },
+  {
     slug: "it-consulting",
     title: "IT & Management Consulting",
     headline: "Aligning Technology with Business Strategy.",
@@ -496,50 +520,130 @@ export const servicesData: PageData[] = [
     }
   },
   {
-    slug: "supply-chain-wms",
-    title: "Supply Chain & WMS Consulting",
-    headline: "Next-Generation Warehouse Automation.",
+    slug: "accounting-advisory",
+    title: "Accounting & Financial Advisory",
+    headline: "Precision, Compliance, and Financial Intelligence.",
     content: [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "Shaping the future of automation. We provide end-to-end warehousing operations consulting, helping you reduce inventory holding costs while dramatically improving order accuracy and fulfillment speed." }]
+        children: [{ _type: 'span', text: "Modern enterprises require real-time financial visibility. We deploy integrated accounting architectures that ensure multi-currency compliance, automated reconciliation, and machine-learning backed financial forecasting." }]
       }
     ],
     seo: {
-      title: "Supply Chain & WMS Consulting | Prixgen",
-      metaDesc: "End-to-end warehousing operations consulting and automation strategies.",
+      title: "Enterprise Accounting Advisory & Systems | Prixgen",
+      metaDesc: "Achieve financial precision and compliance with Prixgen's integrated accounting architectures.",
     }
   },
   {
-    slug: "iiot-engineering",
-    title: "IIoT & Engineering Services",
-    headline: "The Industrial Internet of Things.",
+    slug: "management-consulting",
+    title: "Management Consulting",
+    headline: "Operational Excellence through Process Engineering.",
     content: [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "Manage millions of IIoT device connections. We build custom engineering solutions that extract telemetry data from legacy hardware, open new revenue streams, and enable predictive maintenance models." }]
+        children: [{ _type: 'span', text: "We optimize your human and technical capital by re-engineering core business processes for maximum efficiency and zero operational friction." }]
       }
     ],
     seo: {
-      title: "IIoT Engineering & Predictive Maintenance | Prixgen",
-      metaDesc: "Extracting telemetry from legacy hardware to enable predictive maintenance.",
+      title: "Management Consulting & Process Engineering | Prixgen",
+      metaDesc: "Driving operational excellence and efficiency through expert management consulting.",
     }
   },
   {
-    slug: "it-infrastructure",
-    title: "IT Infrastructure & Managed Hosting",
-    headline: "High-Availability Cloud Environments.",
+    slug: "supply-chain-consulting",
+    title: "Supply Chain Consulting",
+    headline: "End-to-End Logistics and Supply Chain Optimization.",
     content: [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "Heterogeneous IT environments create operational drag. We architect, host, and manage scalable cloud architectures, resolving latency and standardizing processes so your enterprise can exceed its SLAs with zero operational friction." }]
+        children: [{ _type: 'span', text: "In a global economy, your supply chain is your competitive edge. We architect resilient, high-velocity logistics networks that reduce latency and protect margins." }]
       }
     ],
     seo: {
-      title: "Managed Cloud Hosting & Infrastructure | Prixgen",
+      title: "Supply Chain Strategy & Optimization | Prixgen",
+      metaDesc: "Architecting resilient, high-velocity logistics networks for global industrial leaders.",
+    }
+  },
+  {
+    slug: "wms",
+    title: "Warehouse Management Systems (WMS)",
+    headline: "Intelligent Inventory and Fulfillment Automation.",
+    content: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Eliminate manual errors and optimize warehouse space with our intelligent WMS architectures. We provide real-time inventory tracking, automated picking routes, and seamless ERP integration." }]
+      }
+    ],
+    seo: {
+      title: "Enterprise WMS & Warehouse Automation | Prixgen",
+      metaDesc: "Next-generation warehouse management systems for intelligent inventory and fulfillment.",
+    }
+  },
+  {
+    slug: "hiring-odoo-developers",
+    title: "Dedicated Odoo Talent Services",
+    headline: "Scaling Your Technical Capacity with Elite Odoo Experts.",
+    content: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Access our pre-vetted pool of senior Odoo developers and architects. We provide dedicated technical talent that integrates seamlessly with your internal teams to accelerate your digital roadmap." }]
+      }
+    ],
+    seo: {
+      title: "Hire Senior Odoo Developers & Architects | Prixgen",
+      metaDesc: "Scale your Odoo projects with dedicated, elite technical talent from Prixgen.",
+    }
+  },
+  {
+    slug: "iiot-telemetry",
+    title: "IIoT & Telemetry Engineering",
+    headline: "Unlocking Real-Time Intelligence from the Shop Floor.",
+    content: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "We bridge the gap between physical machinery and digital dashboards. Our IIoT architectures extract high-frequency telemetry data to enable predictive maintenance and real-time production visibility." }]
+      }
+    ],
+    seo: {
+      title: "IIoT Engineering & Telemetry Solutions | Prixgen",
+      metaDesc: "Extracting shop-floor intelligence through custom IIoT and telemetry architectures.",
+    }
+  },
+  {
+    slug: "automation",
+    title: "Factory & Industrial Automation",
+    headline: "Robotics and Intelligent Control Systems.",
+    content: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "We design and deploy automated control systems that reduce human error and maximize production throughput in high-stakes manufacturing environments." }]
+      }
+    ],
+    seo: {
+      title: "Industrial Automation & Robotics Systems | Prixgen",
+      metaDesc: "Engineering intelligent factory automation and robotic control systems.",
+    }
+  },
+  {
+    slug: "cloud-infrastructure",
+    title: "Managed Industrial Cloud Infrastructure",
+    headline: "High-Availability Ecosystems for Mission-Critical Apps.",
+    content: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "We architect and manage secure, industrial-grade cloud environments optimized for ERP performance and data integrity. Zero operational friction, guaranteed uptime." }]
+      }
+    ],
+    seo: {
+      title: "Industrial Cloud Hosting & Infrastructure | Prixgen",
       metaDesc: "Architecting high-availability cloud environments for Zero Operational Friction.",
     }
   }
@@ -563,9 +667,16 @@ export const servicesPageMockData: ServicesPageData = {
     { title: "SaaS Advantages", description: "Scale effortlessly, access data anywhere, integrate existing apps, and eliminate maintenance downtime with a low capital outlay.", icon: "Server" }
   ],
   coreServices: [
-    { title: "IT Consulting", headline: "Aligning Technology with Business Strategy.", slug: "it-consulting" },
-    { title: "Warehouse Management", headline: "Next-Generation Warehouse Automation.", slug: "supply-chain-wms" },
-    { title: "Industrial IoT (IIoT)", headline: "The Industrial Internet of Things.", slug: "iiot-engineering" }
+    { title: "Business Strategy", headline: "Long-term value creation and optimization.", slug: "business-strategy" },
+    { title: "IT Consulting", headline: "Aligning technology with enterprise goals.", slug: "it-consulting" },
+    { title: "Accounting Advisory", headline: "Financial precision and compliance.", slug: "accounting-advisory" },
+    { title: "Management Consulting", headline: "Operational excellence and efficiency.", slug: "management-consulting" },
+    { title: "Supply Chain Consulting", headline: "End-to-end logistics optimization.", slug: "supply-chain-consulting" },
+    { title: "WMS", headline: "Intelligent warehouse management systems.", slug: "wms" },
+    { title: "Hiring Odoo Developers", headline: "Dedicated talent for Odoo ecosystems.", slug: "hiring-odoo-developers" },
+    { title: "IIoT & Telemetry", headline: "Real-time shop-floor intelligence.", slug: "iiot-telemetry" },
+    { title: "Factory Automation", headline: "Robotics and automated control systems.", slug: "automation" },
+    { title: "Cloud Infrastructure", headline: "High-availability industrial cloud.", slug: "cloud-infrastructure" }
   ],
   seo: {
     title: "Services | Enterprise Application Services | Prixgen",

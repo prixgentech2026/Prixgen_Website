@@ -194,87 +194,98 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
       </section>
 
       {/* Section 3: Core Capabilities */}
-      <section className="py-16 lg:py-24 bg-white relative">
+      <section className="py-24 lg:py-32 bg-white relative">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
-            <div className="lg:col-span-4 space-y-8">
-              <FadeUp>
-                <h2 className="text-4xl lg:text-5xl font-bold text-prixgen-blue tracking-tighter leading-tight">
-                  What is your <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-prixgen-blue to-prixgen-lightblue">challenge?</span>
-                </h2>
-                <p className="text-lg lg:text-xl text-slate-600 leading-relaxed font-medium mt-6">
-                  We specialize in high-stakes architectural pivots and enterprise-grade system modernization.
-                </p>
-              </FadeUp>
-              
-              <FadeUp delay={0.2} className="pt-6">
-                 <Link href="/contact" className="px-8 py-4 border-2 border-prixgen-blue text-prixgen-blue rounded-xl font-bold hover:bg-prixgen-blue hover:text-white transition-all inline-block">
-                   Schedule an Audit
-                 </Link>
-              </FadeUp>
-            </div>
-            
-            <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-              {data.coreServices.map((service, i) => {
-                const serviceImages: Record<string, string> = {
-                  "it-consulting": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000",
-                  "supply-chain-wms": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1000",
-                  "iiot-engineering": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000",
-                };
-                const bgImage = serviceImages[service.slug] || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000";
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-20 gap-8">
+            <FadeUp className="max-w-2xl">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="h-[1px] w-12 bg-prixgen-blue" />
+                <span className="text-prixgen-blue font-bold tracking-[0.2em] uppercase text-[10px]">Core Capabilities</span>
+              </div>
+              <h2 className="text-4xl lg:text-6xl font-bold text-prixgen-blue tracking-tighter leading-tight">
+                What is your <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-prixgen-blue to-prixgen-lightblue">challenge?</span>
+              </h2>
+              <p className="text-lg lg:text-xl text-slate-600 leading-relaxed font-medium mt-6">
+                We specialize in high-stakes architectural pivots and enterprise-grade system modernization.
+              </p>
+            </FadeUp>
+            <FadeUp delay={0.2}>
+               <Link href="/contact" className="px-8 py-4 border-2 border-prixgen-blue text-prixgen-blue rounded-xl font-bold hover:bg-prixgen-blue hover:text-white transition-all inline-block">
+                 Schedule an Audit
+               </Link>
+            </FadeUp>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {data.coreServices.map((service, i) => {
+              const serviceImages: Record<string, string> = {
+                "business-strategy": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000",
+                "it-consulting": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000",
+                "accounting-advisory": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=1000",
+                "management-consulting": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1000",
+                "supply-chain-consulting": "https://images.unsplash.com/photo-1566633806327-68e152aaf26d?auto=format&fit=crop&q=80&w=1000",
+                "wms": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1000",
+                "hiring-odoo-developers": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1000",
+                "iiot-telemetry": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2070",
+                "automation": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1000",
+                "cloud-infrastructure": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000",
+              };
+              const bgImage = serviceImages[service.slug] || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000";
 
-                return (
-                  <FadeUp key={i} delay={i * 0.1} className={i === 1 ? 'md:mt-12' : ''}>
-                    <Link href={`/services/${service.slug}`} className="block group h-full">
-                      <motion.div 
-                        whileHover={{ y: -10 }}
-                        className="relative p-12 bg-prixgen-gray/30 rounded-[3rem] h-full flex flex-col justify-between transition-all duration-700 hover:shadow-[0_40px_80px_-20px_rgba(0,102,204,0.2)] border border-transparent hover:border-prixgen-blue/10 overflow-hidden"
-                      >
-                        {/* Background Image Layer */}
-                        <div className="absolute inset-0 z-0 transition-opacity duration-1000">
-                          <motion.img 
-                            src={bgImage}
-                            alt={service.title}
-                            className="w-full h-full object-cover"
-                            initial={{ filter: "grayscale(100%)", opacity: 0.3 }}
-                            whileHover={{ 
-                              filter: "grayscale(0%)", 
-                              opacity: 1,
-                              scale: 1.1, 
-                              rotate: 0 
-                            }}
-                            transition={{ 
-                              duration: 0.8,
-                              scale: { duration: 10 }
-                            }}
-                          />
-                        </div>
-                        
-                        <div className="space-y-8 relative z-10">
-                           <motion.div 
-                             whileHover={{ scale: 1.1, backgroundColor: "#0047ab", color: "#fff" }}
-                             className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-prixgen-blue shadow-lg group-hover:shadow-blue-500/20 transition-all duration-500"
-                           >
-                             <Globe size={28} />
-                           </motion.div>
-                           <div className="space-y-4">
-                              <h3 className="text-3xl font-bold text-prixgen-blue leading-tight group-hover:text-white transition-colors drop-shadow-[0_2px_4px_rgba(255,255,255,0.8)] group-hover:drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)]">{service.title}</h3>
-                              <p className="text-lg text-prixgen-dark/80 leading-relaxed text-left font-bold group-hover:text-white transition-colors drop-shadow-[0_2px_4px_rgba(255,255,255,0.8)] group-hover:drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)]">
-                                {service.headline}
-                              </p>
-                           </div>
-                        </div>
-                        
-                        <div className="mt-12 relative z-10 flex items-center text-prixgen-blue font-bold text-sm uppercase tracking-widest group-hover:text-white group-hover:translate-x-2 transition-all duration-300 drop-shadow-[0_2px_2px_rgba(255,255,255,0.8)] group-hover:drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
-                          View Service <ArrowRight className="ml-2" size={16} />
-                        </div>
-                      </motion.div>
-                    </Link>
-                  </FadeUp>
-                );
-              })}
-            </div>
+              const engineeringSlugs = ["iiot-telemetry", "automation", "cloud-infrastructure"];
+              const basePath = engineeringSlugs.includes(service.slug) ? "/engineering-services" : "/services";
+
+              return (
+                <FadeUp key={i} delay={i * 0.1}>
+                  <Link href={`${basePath}/${service.slug}`} className="block group h-full">
+                    <motion.div 
+                      whileHover={{ y: -10 }}
+                      className="relative p-12 bg-prixgen-gray/30 rounded-[3rem] h-full flex flex-col justify-between transition-all duration-700 hover:shadow-[0_40px_80px_-20px_rgba(0,102,204,0.2)] border border-transparent hover:border-prixgen-blue/10 overflow-hidden"
+                    >
+                      {/* Background Image Layer */}
+                      <div className="absolute inset-0 z-0 transition-opacity duration-1000">
+                        <motion.img 
+                          src={bgImage}
+                          alt={service.title}
+                          className="w-full h-full object-cover"
+                          initial={{ filter: "grayscale(100%)", opacity: 0.3 }}
+                          whileHover={{ 
+                            filter: "grayscale(0%)", 
+                            opacity: 1,
+                            scale: 1.1, 
+                            rotate: 0 
+                          }}
+                          transition={{ 
+                            duration: 0.8,
+                            scale: { duration: 10 }
+                          }}
+                        />
+                      </div>
+                      
+                      <div className="space-y-8 relative z-10">
+                         <motion.div 
+                           whileHover={{ scale: 1.1, backgroundColor: "#0047ab", color: "#fff" }}
+                           className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-prixgen-blue shadow-lg group-hover:shadow-blue-500/20 transition-all duration-500"
+                         >
+                           <Globe size={28} />
+                         </motion.div>
+                         <div className="space-y-4">
+                            <h3 className="text-3xl font-bold text-prixgen-blue leading-tight group-hover:text-white transition-colors drop-shadow-[0_2px_4px_rgba(255,255,255,0.8)] group-hover:drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)]">{service.title}</h3>
+                            <p className="text-lg text-prixgen-dark/80 leading-relaxed text-left font-bold group-hover:text-white transition-colors drop-shadow-[0_2px_4px_rgba(255,255,255,0.8)] group-hover:drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)]">
+                              {service.headline}
+                            </p>
+                         </div>
+                      </div>
+                      
+                      <div className="mt-12 relative z-10 flex items-center text-prixgen-blue font-bold text-sm uppercase tracking-widest group-hover:text-white group-hover:translate-x-2 transition-all duration-300 drop-shadow-[0_2px_2px_rgba(255,255,255,0.8)] group-hover:drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+                        View Service <ArrowRight className="ml-2" size={16} />
+                      </div>
+                    </motion.div>
+                  </Link>
+                </FadeUp>
+              );
+            })}
           </div>
         </div>
       </section>

@@ -170,13 +170,11 @@ async function migrateData() {
   try {
     // We need to map the slugs in servicesPageMockData to actual references
     // Based on the mock data, we link: it-consulting, supply-chain-wms, iiot-engineering
-    const coreSlugs = ['it-consulting', 'supply-chain-wms', 'iiot-engineering'];
-    
-    // Fetch the IDs of these services that were just created
-    const coreServiceRefs = coreSlugs.map(slug => ({
+    // Dynamically link all services defined in the coreServices mock data
+    const coreServiceRefs = servicesPageMockData.coreServices.map(service => ({
       _type: 'reference',
-      _ref: `service-${slug}`,
-      _key: `ref-${slug}`
+      _ref: `service-${service.slug}`,
+      _key: `ref-${service.slug}`
     }));
 
     await client.createOrReplace({

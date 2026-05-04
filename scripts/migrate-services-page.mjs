@@ -58,7 +58,18 @@ async function migrate() {
   try {
     // 1. Fetch current service IDs to link as references
     const services = await client.fetch('*[_type == "service"]{_id, slug}');
-    const coreSlugs = ['it-consulting', 'supply-chain-wms', 'iiot-engineering'];
+    const coreSlugs = [
+      'business-strategy',
+      'it-consulting',
+      'accounting-advisory',
+      'management-consulting',
+      'supply-chain-consulting',
+      'wms',
+      'hiring-odoo-developers',
+      'iiot-telemetry',
+      'automation',
+      'cloud-infrastructure'
+    ];
     
     const coreServiceRefs = services
       .filter((s) => coreSlugs.includes(s.slug.current))
