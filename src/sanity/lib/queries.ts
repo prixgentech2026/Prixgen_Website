@@ -84,10 +84,16 @@ export const solutionBySlugQuery = groq`*[_type == "solution" && slug.current ==
   title,
   headline,
   content,
+  features,
+  process,
   seo,
-  "featuredImage": featuredImage.asset->{
-    "sourceUrl": url,
-    "altText": altText
+  "featuredImage": {
+    "sourceUrl": featuredImage.asset->url,
+    "altText": featuredImage.altText
+  },
+  "summaryImage": {
+    "sourceUrl": summaryImage.asset->url,
+    "altText": summaryImage.altText
   }
 }`;
 
@@ -104,10 +110,16 @@ export const serviceBySlugQuery = groq`*[_type == "service" && slug.current == $
   title,
   headline,
   content,
+  features,
+  process,
   seo,
-  "featuredImage": featuredImage.asset->{
-    "sourceUrl": url,
-    "altText": altText
+  "featuredImage": {
+    "sourceUrl": featuredImage.asset->url,
+    "altText": featuredImage.altText
+  },
+  "summaryImage": {
+    "sourceUrl": summaryImage.asset->url,
+    "altText": summaryImage.altText
   }
 }`;
 

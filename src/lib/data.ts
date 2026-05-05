@@ -92,18 +92,6 @@ export async function getSolutions() {
   }
 }
 
-export async function getSolutionBySlug(slug: string) {
-  if (!client) {
-    return solutionsData.find(s => s.slug === slug);
-  }
-  try {
-    const data = await client.fetch(solutionBySlugQuery, { slug });
-    return data || solutionsData.find(s => s.slug === slug);
-  } catch (error) {
-    console.error(`Sanity Fetch Error (Solution: ${slug}):`, error);
-    return solutionsData.find(s => s.slug === slug);
-  }
-}
 
 export async function getServices() {
   const engineeringSlugs = ["iiot-telemetry", "automation", "cloud-infrastructure"];
@@ -134,6 +122,19 @@ export async function getServiceBySlug(slug: string) {
   } catch (error) {
     console.error(`Sanity Fetch Error (Service: ${slug}):`, error);
     return servicesData.find(s => s.slug === slug);
+  }
+}
+
+export async function getSolutionBySlug(slug: string) {
+  if (!client) {
+    return solutionsData.find(s => s.slug === slug);
+  }
+  try {
+    const data = await client.fetch(solutionBySlugQuery, { slug });
+    return data || solutionsData.find(s => s.slug === slug);
+  } catch (error) {
+    console.error(`Sanity Fetch Error (Solution: ${slug}):`, error);
+    return solutionsData.find(s => s.slug === slug);
   }
 }
 
@@ -641,6 +642,45 @@ export const solutionsData: any[] = [
       title: "Lecca Industrial AI & Computer Vision | Prixgen",
       metaDesc: "Automate quality control and safety with Lecca's proprietary industrial AI platform.",
     }
+  },
+  {
+    slug: "warehouse-management",
+    title: "Warehouse Management",
+    headline: "Intelligent Inventory and Fulfillment Automation.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1000", altText: "Warehouse Management Systems" },
+    summaryImage: { sourceUrl: "https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=2000&auto=format&fit=crop", altText: "Warehouse Efficiency" },
+    content: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Eliminate manual errors and optimize warehouse space with our intelligent WMS architectures. Prixgen's WMS solutions provide zero-latency visibility into every SKU in your facility, enabling real-time inventory tracking and automated fulfillment routes. We design systems that handle the complexity of high-volume, multi-channel distribution with ease." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Our intelligent picking algorithms minimize travel time for warehouse staff, while automated slotting optimization ensures that your high-velocity items are always in the most accessible locations. We integrate seamlessly with your existing ERP, ensuring that your physical inventory and digital records are always perfectly in sync, eliminating the 'ghost stock' issues that plague traditional warehouses." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Beyond software, we provide the technical expertise to deploy modern hardware—from RFID systems to mobile data terminals—that empowers your workforce. With a Prixgen-designed WMS, your warehouse becomes a high-performance hub that accelerates your entire supply chain." }]
+      }
+    ],
+    features: [
+      { title: "Automated Picking", description: "Intelligent route planning to minimize picker travel time." },
+      { title: "Real-time Tracking", description: "Zero-latency visibility into every SKU in your facility." },
+      { title: "Slotting Optimization", description: "Dynamic reorganization of stock based on velocity." },
+      { title: "ERP Syncing", description: "Perfect alignment between physical stock and digital records." }
+    ],
+    process: [
+      { title: "Facility Blueprinting", description: "Digital mapping of your warehouse for WMS configuration." },
+      { title: "Hardware Deployment", description: "Setting up RFID, scanning, and mobile data terminals." },
+      { title: "Go-Live Support", description: "On-site assistance during the critical transition period." }
+    ],
+    seo: {
+      title: "Enterprise Warehouse Management Systems (WMS) | Prixgen",
+      metaDesc: "Next-generation warehouse management systems for intelligent inventory and fulfillment.",
+    }
   }
 ];
 
@@ -688,6 +728,7 @@ export const servicesData: any[] = [
     title: "IT & Management Consulting",
     headline: "Aligning Technology with Business Strategy.",
     featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000", altText: "IT Consulting" },
+    summaryImage: { sourceUrl: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2000&auto=format&fit=crop", altText: "IT Strategy Session" },
     content: [
       {
         _type: 'block',
@@ -706,15 +747,16 @@ export const servicesData: any[] = [
       }
     ],
     features: [
-      { title: "System Integration", description: "Seamlessly connecting disparate enterprise applications." },
-      { title: "Legacy Modernization", description: "Migrating from outdated systems to high-velocity cloud stacks." },
-      { title: "Cybersecurity Audit", description: "Comprehensive vulnerability assessment and hardening." },
-      { title: "Tech-Stack Optimization", description: "Right-sizing your software licenses and infrastructure." }
+      { title: "Enterprise Architecture Audit", description: "Deep-dive assessment of your current technical debt, system bottlenecks, and scalability potential." },
+      { title: "Legacy System Modernization", description: "Seamless migration of mission-critical workflows from aging infrastructure to high-velocity cloud stacks." },
+      { title: "Strategic Tech-Stack Governance", description: "Expert guidance on software selection and license optimization to ensure maximum ROI on IT spend." },
+      { title: "Cybersecurity Hardening", description: "Comprehensive vulnerability mapping and implementation of zero-trust security frameworks." },
+      { title: "Cloud Infrastructure Strategy", description: "Designing resilient, auto-scaling hybrid cloud environments for industrial-scale operations." }
     ],
     process: [
-      { title: "Technical Audit", description: "Evaluating existing hardware, software, and networking assets." },
-      { title: "Gap Analysis", description: "Identifying the distance between current state and business goals." },
-      { title: "Deployment & Training", description: "Rolling out solutions and ensuring team adoption." }
+      { title: "Discovery & Technical Audit", description: "We conduct an exhaustive review of your existing hardware, software assets, and team workflows." },
+      { title: "Strategic Design & Gap Analysis", description: "Developing a phased modernization roadmap that aligns technical capabilities with business growth goals." },
+      { title: "Governance & Continuous Optimization", description: "Providing ongoing oversight and technical advisory to ensure your architecture evolves with market demands." }
     ],
     seo: {
       title: "Strategic IT & Management Consulting | Prixgen",
@@ -836,7 +878,7 @@ export const servicesData: any[] = [
     }
   },
   {
-    slug: "wms",
+    slug: "warehouse-management",
     title: "Warehouse Management Systems (WMS)",
     headline: "Intelligent Inventory and Fulfillment Automation.",
     featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1000", altText: "Warehouse Management Systems" },
@@ -1118,7 +1160,7 @@ export const servicesPageMockData: ServicesPageData = {
     { title: "Accounting Advisory", headline: "Financial precision and compliance.", slug: "accounting-advisory" },
     { title: "Management Consulting", headline: "Operational excellence and efficiency.", slug: "management-consulting" },
     { title: "Supply Chain Consulting", headline: "End-to-end logistics optimization.", slug: "supply-chain-consulting" },
-    { title: "WMS", headline: "Intelligent warehouse management systems.", slug: "wms" },
+    { title: "WMS", headline: "Intelligent warehouse management systems.", slug: "warehouse-management" },
     { title: "Hiring Odoo Developers", headline: "Dedicated talent for Odoo ecosystems.", slug: "hiring-odoo-developers" },
     { title: "IIoT & Telemetry", headline: "Real-time shop-floor intelligence.", slug: "iiot-telemetry" },
     { title: "Factory Automation", headline: "Robotics and automated control systems.", slug: "automation" },

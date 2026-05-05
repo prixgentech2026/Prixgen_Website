@@ -39,6 +39,13 @@ export default defineType({
       of: [{ type: 'block' }],
     }),
     defineField({
+      name: 'summaryImage',
+      title: 'Summary Image (Executive Section)',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [defineField({ name: 'altText', title: 'Alt Text', type: 'string' })]
+    }),
+    defineField({
       name: 'features',
       title: 'Key Features',
       type: 'array',

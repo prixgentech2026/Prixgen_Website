@@ -4,12 +4,12 @@ import Link from 'next/link';
 import { OptimizedImage } from '@/components/ui/optimized-image';
 import { LeadCaptureForm } from '@/components/features/lead-capture-form';
 import { JsonLd } from '@/components/seo/json-ld';
-import { Button } from '@/components/ui/button';
+import { motion } from 'framer-motion';
 import { StaggerText } from '@/components/animations/stagger-text';
 import { FadeUp } from '@/components/animations/fade-up';
 import { AmbientGlow } from '@/components/animations/ambient-glow';
-import { motion } from 'framer-motion';
 import { PortableText } from '@/components/ui/portable-text';
+import { solutionsData } from '@/lib/data';
 
 export default function SolutionClientPage({ solution }: { solution: any }) {
   return (
@@ -34,21 +34,22 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
         }} 
       />
 
-      {/* Breadcrumbs & Header */}
-      <section className="relative min-h-[75vh] flex items-center pt-24 pb-12 overflow-hidden bg-white">
-        <AmbientGlow />
+      {/* Hero Header */}
+      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-white pt-24 pb-12">
+        {/* Background Elements */}
+        <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-40" />
         
-        {/* Animated Background Grid */}
-        <div className="absolute inset-0 z-0 opacity-[0.03]" 
-             style={{ backgroundImage: 'radial-gradient(#0066cc 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
-
-        <div className="container mx-auto px-4 relative z-10 text-center">
-          <FadeUp className="space-y-8">
+        {/* Animated Floating Elements */}
+        <div className="absolute top-1/4 -left-20 w-64 h-64 bg-prixgen-blue/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-prixgen-lightblue/5 rounded-full blur-3xl animate-pulse delay-700" />
+        
+        <div className="container relative z-10 mx-auto px-4 text-center">
+          <FadeUp delay={0.1} className="space-y-6 flex flex-col items-center">
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="flex items-center justify-center gap-2 text-[10px] font-black text-prixgen-blue/40 uppercase tracking-[0.2em]"
+              className="px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 flex items-center justify-center gap-2 text-[10px] font-black text-prixgen-blue/60 uppercase tracking-[0.2em]"
             >
               <Link href="/" className="hover:text-prixgen-blue transition-colors">Home</Link>
               <span className="opacity-20">/</span>
@@ -60,11 +61,11 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
             <StaggerText 
               text={solution.title} 
               variant="gradient"
-              className="text-5xl md:text-6xl font-black leading-[0.9] tracking-tighter"
+              className="text-5xl md:text-7xl font-black leading-[0.9] tracking-tighter"
             />
             
-            <div className="max-w-4xl mx-auto pt-6">
-              <p className="text-lg lg:text-xl text-slate-500 font-medium leading-relaxed">
+            <div className="max-w-3xl mx-auto pt-6">
+              <p className="text-xl lg:text-2xl text-slate-500 font-medium leading-relaxed">
                 {solution.headline}
               </p>
             </div>
@@ -75,109 +76,168 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
         <motion.div 
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-10 left-10 flex flex-col items-center gap-2 opacity-30"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30"
         >
-          <span className="text-xs font-bold uppercase tracking-widest text-prixgen-blue">Scroll</span>
           <div className="w-px h-12 bg-gradient-to-b from-prixgen-blue to-transparent" />
         </motion.div>
       </section>
 
-      <div className="container mx-auto px-4 py-16 lg:py-24 grid grid-cols-1 lg:grid-cols-3 gap-16 items-start">
-        <article className="lg:col-span-2 space-y-20">
-          {/* Visual Header */}
-          {solution.featuredImage?.sourceUrl && (
-            <FadeUp delay={0.2} className="relative aspect-[21/9] w-full rounded-2xl overflow-hidden shadow-2xl border border-black/5">
-              <OptimizedImage
-                src={solution.featuredImage.sourceUrl}
-                alt={solution.featuredImage.altText || solution.title}
-                fill
-                priority
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-            </FadeUp>
-          )}
-          
-          {/* Main Narrative */}
-          <FadeUp delay={0.3} className="space-y-8">
-            <h2 className="text-3xl font-black tracking-tighter text-prixgen-blue">Solution Architecture</h2>
-            <PortableText 
-              value={solution.content} 
-              className="prose prose-lg max-w-none prose-headings:text-prixgen-blue prose-p:text-slate-600 prose-p:leading-relaxed"
-            />
-          </FadeUp>
+      <div className="container mx-auto px-4 py-8 lg:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+          {/* Main Content */}
+          <article className="lg:col-span-2 space-y-16">
+            {solution.summaryImage && (
+              <FadeUp delay={0.2} className="relative aspect-video w-full rounded-[3rem] overflow-hidden shadow-2xl">
+                <OptimizedImage
+                  src={solution.summaryImage.sourceUrl}
+                  alt={solution.summaryImage.altText || solution.title}
+                  fill
+                  priority
+                  className="object-cover transition-transform duration-700 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+              </FadeUp>
+            )}
 
-          {/* Key Features/Capabilities */}
-          {solution.features && (
-            <FadeUp delay={0.4} className="space-y-12">
-              <div className="space-y-4">
-                <h2 className="text-3xl font-black tracking-tighter text-prixgen-blue">Technical Capabilities</h2>
-                <div className="w-20 h-1.5 bg-prixgen-blue rounded-full" />
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {solution.features.map((feature: any, idx: number) => (
-                  <div key={idx} className="p-8 rounded-2xl bg-prixgen-gray border border-prixgen-blue/5 hover:border-prixgen-blue/20 transition-all group">
-                    <div className="text-prixgen-blue font-black text-4xl mb-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                      {String(idx + 1).padStart(2, '0')}
-                    </div>
-                    <h3 className="text-xl font-bold text-prixgen-blue mb-2">{feature.title}</h3>
-                    <p className="text-sm text-slate-500 leading-relaxed">{feature.description}</p>
-                  </div>
-                ))}
-              </div>
-            </FadeUp>
-          )}
-
-          {/* Implementation Roadmap */}
-          {solution.process && (
-            <FadeUp delay={0.5} className="space-y-12">
-              <div className="space-y-4">
-                <h2 className="text-3xl font-black tracking-tighter text-prixgen-blue">The Implementation Journey</h2>
-                <div className="w-20 h-1.5 bg-prixgen-blue rounded-full" />
-              </div>
-              <div className="space-y-6">
-                {solution.process.map((step: any, idx: number) => (
-                  <div key={idx} className="flex gap-6 items-start p-6 rounded-2xl hover:bg-prixgen-blue/[0.02] transition-colors border border-transparent hover:border-prixgen-blue/5">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-prixgen-blue text-white flex items-center justify-center font-black shadow-lg shadow-prixgen-blue/20">
-                      {idx + 1}
-                    </div>
-                    <div className="space-y-1">
-                      <h3 className="text-lg font-bold text-prixgen-blue">{step.title}</h3>
-                      <p className="text-slate-500 leading-relaxed">{step.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </FadeUp>
-          )}
-        </article>
-
-        <aside className="lg:col-span-1">
-          <div className="sticky top-24 space-y-8">
-            <FadeUp delay={0.4} className="bg-prixgen-gray p-10 rounded-[2.5rem] border border-prixgen-blue/10 shadow-2xl overflow-hidden group">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-prixgen-blue/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" />
+            {/* Executive Summary (Content) */}
+            <FadeUp delay={0.3} className="relative bg-white rounded-[3rem] p-10 lg:p-14 shadow-[0_30px_60px_-15px_rgba(0,102,204,0.05)] border border-slate-100 overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-prixgen-blue/[0.02] rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none" />
               
-              <h3 className="text-2xl font-black mb-6 text-prixgen-blue relative z-10">Request an Audit</h3>
-              <p className="text-slate-500 mb-8 leading-relaxed relative z-10 text-sm">
-                Discuss how our specialized {solution.title} architectures can eliminate operational friction and technical debt.
-              </p>
-              <div className="relative z-10">
-                <LeadCaptureForm source={`Solution: ${solution.title}`} />
+              <div className="flex items-center gap-4 mb-10">
+                <div className="w-12 h-12 rounded-2xl bg-prixgen-blue/5 flex items-center justify-center">
+                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-prixgen-blue" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                </div>
+                <h3 className="text-2xl font-bold text-prixgen-dark tracking-tight">Executive Summary</h3>
+              </div>
+
+              <div className="prose prose-lg lg:prose-xl max-w-none prose-headings:text-prixgen-blue prose-p:text-slate-600 prose-p:leading-[1.8] prose-strong:text-prixgen-blue prose-strong:font-bold">
+                <PortableText value={solution.content} />
               </div>
             </FadeUp>
 
-            <FadeUp delay={0.5} className="bg-prixgen-blue p-10 rounded-[2.5rem] text-white shadow-2xl relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" />
-              <h4 className="text-xl font-black mb-4 relative z-10">Scale Your Intelligence</h4>
-              <p className="text-white/70 text-sm mb-8 relative z-10 leading-relaxed">
-                Speak with our {solution.title.includes('AI') ? 'AI Specialists' : 'ERP Architects'} about your global deployment.
-              </p>
-              <Button variant="secondary" className="w-full bg-white text-prixgen-blue hover:bg-gray-100 relative z-10 h-14 font-black rounded-xl" asChild>
-                <Link href="/contact">Contact Strategy Team</Link>
-              </Button>
+            {/* Key Capabilities / Features */}
+            <div className="pt-8">
+              <FadeUp>
+                <h2 className="text-3xl md:text-4xl font-bold text-prixgen-dark tracking-tighter mb-10">
+                  Solution <span className="italic text-prixgen-blue text-opacity-80">Capabilities</span>
+                </h2>
+              </FadeUp>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {solution.features?.map((feature: any, i: number) => (
+                  <FadeUp 
+                    key={i} 
+                    delay={0.1 * i}
+                    className={i === 0 ? "md:col-span-2" : ""}
+                  >
+                    <div className="group h-full p-10 bg-white border border-slate-100 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_30px_60px_-20px_rgba(0,102,204,0.15)] rounded-[2.5rem] hover:border-prixgen-blue/20 transition-all duration-700 relative overflow-hidden">
+                      {/* Hover Gradient Background */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-prixgen-blue/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                      
+                      <div className="flex flex-col md:flex-row md:items-center gap-8">
+                        <div className="w-16 h-16 shrink-0 rounded-[1.25rem] bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:scale-110 group-hover:bg-prixgen-blue/5 group-hover:border-prixgen-blue/20 transition-all duration-700">
+                          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-prixgen-blue" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="m21 16-4 4-4-4"/><path d="M17 20V4"/><path d="m3 8 4-4 4 4"/><path d="M7 4v16"/></svg>
+                        </div>
+                        <div className="space-y-3">
+                          <h4 className="text-2xl font-bold text-prixgen-dark group-hover:text-prixgen-blue transition-colors tracking-tight">{feature.title}</h4>
+                          <p className="text-slate-500 font-medium leading-relaxed text-lg">{feature.description}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </FadeUp>
+                ))}
+              </div>
+            </div>
+
+            {/* Strategic Outcomes Banner */}
+            <FadeUp delay={0.2} className="relative rounded-[3rem] bg-prixgen-dark overflow-hidden p-12 lg:p-16 my-8 shadow-2xl">
+               <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+               <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-l from-prixgen-blue/40 to-transparent opacity-30 pointer-events-none" />
+               
+               <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-10 text-white">
+                  <div className="space-y-3">
+                     <div className="text-4xl font-black text-prixgen-lightblue tracking-tighter">Zero</div>
+                     <h4 className="font-bold text-lg">System Latency</h4>
+                     <p className="text-white/60 text-sm leading-relaxed">Optimize performance and eliminate bottlenecks across your entire digital ecosystem.</p>
+                  </div>
+                  <div className="space-y-3">
+                     <div className="text-4xl font-black text-prixgen-lightblue tracking-tighter">Scalable</div>
+                     <h4 className="font-bold text-lg">Architecture</h4>
+                     <p className="text-white/60 text-sm leading-relaxed">Achieve robust growth with technical designs built to expand with your enterprise.</p>
+                  </div>
+                  <div className="space-y-3">
+                     <div className="text-4xl font-black text-prixgen-lightblue tracking-tighter">Verified</div>
+                     <h4 className="font-bold text-lg">Technical ROI</h4>
+                     <p className="text-white/60 text-sm leading-relaxed">Deploy high-performance industrial solutions that deliver measurable business value.</p>
+                  </div>
+               </div>
             </FadeUp>
-          </div>
-        </aside>
+
+            {/* Process Section - Vertical Timeline */}
+            {solution.process && solution.process.length > 0 && (
+              <section className="pt-8">
+                <FadeUp>
+                  <h2 className="text-3xl md:text-4xl font-bold text-prixgen-dark tracking-tighter mb-12">
+                    Implementation <span className="italic text-prixgen-blue text-opacity-80">Roadmap</span>
+                  </h2>
+                </FadeUp>
+                <div className="space-y-0 relative pl-4 md:pl-8">
+                  {/* Vertical Line */}
+                  <div className="absolute top-0 bottom-0 left-[27px] md:left-[43px] w-0.5 bg-gradient-to-b from-prixgen-blue/30 via-slate-200 to-transparent" />
+                  
+                  {solution.process.map((step: any, i: number) => (
+                    <FadeUp key={i} delay={0.1 * i} className="relative flex gap-8 md:gap-12 group pb-16 last:pb-0">
+                      <div className="relative z-10 flex-shrink-0 w-10 h-10 md:w-14 md:h-14 rounded-full bg-white border-4 border-prixgen-blue/10 flex items-center justify-center font-black text-prixgen-blue text-lg shadow-sm group-hover:border-prixgen-blue group-hover:bg-prixgen-blue group-hover:text-white transition-all duration-500">
+                        {i + 1}
+                      </div>
+                      <div className="space-y-3 pt-1 md:pt-2">
+                        <h3 className="text-2xl font-bold text-prixgen-dark group-hover:text-prixgen-blue transition-colors tracking-tight">{step.title}</h3>
+                        <p className="text-lg text-slate-500 font-medium leading-relaxed max-w-2xl">{step.description}</p>
+                      </div>
+                    </FadeUp>
+                  ))}
+                </div>
+              </section>
+            )}
+          </article>
+
+          {/* Sticky Sidebar */}
+          <aside className="lg:col-span-1">
+            <div className="sticky top-24 space-y-8">
+              <FadeUp delay={0.4} className="bg-white p-10 rounded-[3rem] border border-prixgen-blue/10 shadow-2xl shadow-prixgen-blue/5 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-prixgen-blue/5 rounded-full blur-3xl -mr-16 -mt-16" />
+                <h3 className="text-2xl font-bold mb-6 text-prixgen-blue relative z-10">Solution Audit</h3>
+                <p className="text-slate-500 mb-8 leading-relaxed font-medium relative z-10">
+                  Discuss how our specialized {solution.title} architectures can eliminate operational friction and technical debt.
+                </p>
+                <div className="relative z-10">
+                  <LeadCaptureForm source={`Solution: ${solution.title}`} />
+                </div>
+              </FadeUp>
+
+              {/* Related Solutions */}
+              <div className="p-10 bg-prixgen-blue/[0.02] rounded-[3rem] border border-prixgen-blue/5">
+                <h4 className="text-lg font-bold text-prixgen-dark mb-6 uppercase tracking-widest opacity-50">Related Solutions</h4>
+                <div className="space-y-4">
+                  {solutionsData
+                    .filter(s => s.slug !== solution.slug)
+                    .slice(0, 4)
+                    .map((related, i) => (
+                      <Link 
+                        key={i} 
+                        href={`/solutions/${related.slug}`}
+                        className="flex items-center justify-between p-4 rounded-2xl hover:bg-white hover:shadow-lg transition-all group"
+                      >
+                        <span className="font-bold text-slate-600 group-hover:text-prixgen-blue">{related.title}</span>
+                        <div className="w-8 h-8 rounded-full bg-prixgen-blue/5 flex items-center justify-center text-prixgen-blue group-hover:bg-prixgen-blue group-hover:text-white transition-colors">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                        </div>
+                      </Link>
+                    ))}
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
       </div>
     </div>
   );

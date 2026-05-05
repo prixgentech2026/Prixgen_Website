@@ -37,14 +37,12 @@ import {
 
 // 1. Initialize the Sanity Client
 import { createClient } from '@sanity/client';
-// We use process.env to grab the required variables.
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
 const token = process.env.SANITY_API_TOKEN;
 
 if (!projectId || !token) {
   console.error('❌ ERROR: Missing NEXT_PUBLIC_SANITY_PROJECT_ID or SANITY_API_TOKEN in environment variables.');
-  console.error('Make sure you have added them to your .env.local file and exported them if running locally.');
   process.exit(1);
 }
 
@@ -52,24 +50,88 @@ const client = createClient({
   projectId,
   dataset,
   apiVersion: '2024-04-30',
-  useCdn: false, // We must bypass the CDN to write data
-  token,         // Write-access token
+  useCdn: false,
+  token,
 });
 
+/**
+ * Helper to upload an image from a URL to Sanity
+ */
+async function uploadImage(imageUrl: string) {
+  if (!imageUrl || !imageUrl.startsWith('http')) return null;
+  
+  try {
+    console.log(`   Uploading image: ${imageUrl.substring(0, 50)}...`);
+    const response = await fetch(imageUrl);
+    if (!response.ok) throw new Error(`Failed to fetch image: ${response.statusText}`);
+    
+    const buffer = await response.arrayBuffer();
+    const asset = await client.assets.upload('image', Buffer.from(buffer), {
+      filename: path.basename(imageUrl.split('?')[0])
+    });
+    
+    return {
+      _type: 'image',
+      asset: {
+        _type: 'reference',
+        _ref: asset._id
+      }
+    };
+  } catch (error) {
+    console.error(`   ⚠️ Failed to upload image ${imageUrl}:`, error);
+    return null;
+  }
+}
+
+/**
+ * Process a document and upload its images
+ */
+async function processImages(item: any) {
+  const processed = { ...item };
+  
+  if (item.featuredImage?.sourceUrl) {
+    const asset = await uploadImage(item.featuredImage.sourceUrl);
+    if (asset) {
+      processed.featuredImage = {
+        ...asset,
+        altText: item.featuredImage.altText
+      };
+    }
+  }
+
+  if (item.summaryImage?.sourceUrl) {
+    const asset = await uploadImage(item.summaryImage.sourceUrl);
+    if (asset) {
+      processed.summaryImage = {
+        ...asset,
+        altText: item.summaryImage.altText
+      };
+    }
+  }
+
+  if (item.heroImage?.sourceUrl) {
+    const asset = await uploadImage(item.heroImage.sourceUrl);
+    if (asset) {
+      processed.heroImage = asset;
+    }
+  }
+
+  return processed;
+}
+
 async function migrateData() {
-  console.log('🚀 Starting Data Migration to Sanity...\n');
+  console.log('🚀 Starting Advanced Data Migration (with Image Processing)...\n');
 
   // ---------------------------------------------------------
   // MIGRATING HOME PAGE
   // ---------------------------------------------------------
   console.log('Migrating Home Page...');
   try {
+    const processedHome = await processImages(homeData);
     await client.createOrReplace({
-      _id: 'homePage', // Custom stable ID for singleton
+      _id: 'homePage',
       _type: 'home',
-      ...homeData,
-      clients: homeData.clients,
-      testimonials: homeData.testimonials
+      ...processedHome,
     });
     console.log('✅ Home Page migrated successfully.');
   } catch (error) {
@@ -81,11 +143,11 @@ async function migrateData() {
   // ---------------------------------------------------------
   console.log('\nMigrating About Us Page...');
   try {
+    const processedAbout = await processImages(aboutData);
     await client.createOrReplace({
       _id: 'aboutPage',
       _type: 'about',
-      ...aboutData,
-      featuredImage: aboutData.featuredImage
+      ...processedAbout,
     });
     console.log('✅ About Us Page migrated successfully.');
   } catch (error) {
@@ -97,10 +159,11 @@ async function migrateData() {
   // ---------------------------------------------------------
   console.log('\nMigrating Contact Page...');
   try {
+    const processedContact = await processImages(contactData);
     await client.createOrReplace({
       _id: 'contactPage',
       _type: 'contact',
-      ...contactData
+      ...processedContact,
     });
     console.log('✅ Contact Page migrated successfully.');
   } catch (error) {
@@ -113,12 +176,11 @@ async function migrateData() {
   console.log('\nMigrating Industries...');
   for (const item of industriesData) {
     try {
+      const processed = await processImages(item);
       await client.createOrReplace({
-        // We use the slug as part of the ID so we don't create duplicates if run twice
         _id: `industry-${item.slug}`,
         _type: 'industry',
-        ...item,
-        // Sanity expects slugs to be objects with a 'current' property
+        ...processed,
         slug: { _type: 'slug', current: item.slug }
       });
       console.log(`✅ Industry migrated: ${item.title}`);
@@ -133,10 +195,11 @@ async function migrateData() {
   console.log('\nMigrating Solutions...');
   for (const item of solutionsData) {
     try {
+      const processed = await processImages(item);
       await client.createOrReplace({
         _id: `solution-${item.slug}`,
         _type: 'solution',
-        ...item,
+        ...processed,
         slug: { _type: 'slug', current: item.slug }
       });
       console.log(`✅ Solution migrated: ${item.title}`);
@@ -151,10 +214,11 @@ async function migrateData() {
   console.log('\nMigrating Services...');
   for (const item of servicesData) {
     try {
+      const processed = await processImages(item);
       await client.createOrReplace({
         _id: `service-${item.slug}`,
         _type: 'service',
-        ...item,
+        ...processed,
         slug: { _type: 'slug', current: item.slug }
       });
       console.log(`✅ Service migrated: ${item.title}`);
@@ -168,9 +232,6 @@ async function migrateData() {
   // ---------------------------------------------------------
   console.log('\nMigrating Services Landing Page...');
   try {
-    // We need to map the slugs in servicesPageMockData to actual references
-    // Based on the mock data, we link: it-consulting, supply-chain-wms, iiot-engineering
-    // Dynamically link all services defined in the coreServices mock data
     const coreServiceRefs = servicesPageMockData.coreServices.map(service => ({
       _type: 'reference',
       _ref: `service-${service.slug}`,
@@ -191,5 +252,4 @@ async function migrateData() {
   console.log('\n🎉 Migration complete! Go check your Sanity Studio.');
 }
 
-// Execute the function
 migrateData();

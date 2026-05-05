@@ -35,10 +35,13 @@ export default function ServiceClientPage({ service }: { service: any }) {
       />
 
       {/* Hero Header */}
-      <section className="relative min-h-[50vh] lg:min-h-[70vh] flex items-center justify-center overflow-hidden bg-slate-50 border-b border-prixgen-blue/10 pt-20">
+      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-white pt-24 pb-12">
         {/* Background Elements */}
-        <div className="absolute inset-0 bg-grid-slate-200/50 [mask-image:linear-gradient(to_bottom,white,transparent)]" />
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-prixgen-blue/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3" />
+        <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-40" />
+        
+        {/* Animated Floating Elements */}
+        <div className="absolute top-1/4 -left-20 w-64 h-64 bg-prixgen-blue/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-prixgen-lightblue/5 rounded-full blur-3xl animate-pulse delay-700" />
         
         <div className="container relative z-10 mx-auto px-4 text-center">
           <FadeUp delay={0.1} className="space-y-6 flex flex-col items-center">
@@ -46,7 +49,7 @@ export default function ServiceClientPage({ service }: { service: any }) {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="flex items-center justify-center gap-2 text-[10px] font-black text-prixgen-blue/40 uppercase tracking-[0.2em]"
+              className="px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 flex items-center justify-center gap-2 text-[10px] font-black text-prixgen-blue/60 uppercase tracking-[0.2em]"
             >
               <Link href="/" className="hover:text-prixgen-blue transition-colors">Home</Link>
               <span className="opacity-20">/</span>
@@ -58,11 +61,11 @@ export default function ServiceClientPage({ service }: { service: any }) {
             <StaggerText 
               text={service.title} 
               variant="gradient"
-              className="text-5xl md:text-6xl font-black leading-[0.9] tracking-tighter"
+              className="text-5xl md:text-7xl font-black leading-[0.9] tracking-tighter"
             />
             
-            <div className="max-w-4xl mx-auto pt-6">
-              <p className="text-lg lg:text-xl text-slate-500 font-medium leading-relaxed">
+            <div className="max-w-3xl mx-auto pt-6">
+              <p className="text-xl lg:text-2xl text-slate-500 font-medium leading-relaxed">
                 {service.headline}
               </p>
             </div>
@@ -73,9 +76,8 @@ export default function ServiceClientPage({ service }: { service: any }) {
         <motion.div 
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-10 left-10 flex flex-col items-center gap-2 opacity-30"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30"
         >
-          <span className="text-xs font-bold uppercase tracking-widest text-prixgen-blue">Scroll</span>
           <div className="w-px h-12 bg-gradient-to-b from-prixgen-blue to-transparent" />
         </motion.div>
       </section>
@@ -84,11 +86,11 @@ export default function ServiceClientPage({ service }: { service: any }) {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
           {/* Main Content */}
           <article className="lg:col-span-2 space-y-16">
-            {service.featuredImage && (
+            {service.summaryImage && (
               <FadeUp delay={0.2} className="relative aspect-video w-full rounded-[3rem] overflow-hidden shadow-2xl">
                 <OptimizedImage
-                  src={service.featuredImage.sourceUrl}
-                  alt={service.featuredImage.altText || service.title}
+                  src={service.summaryImage.sourceUrl}
+                  alt={service.summaryImage.altText || service.title}
                   fill
                   priority
                   className="object-cover transition-transform duration-700 hover:scale-105"
@@ -116,22 +118,33 @@ export default function ServiceClientPage({ service }: { service: any }) {
             {/* Key Capabilities / Features */}
             <div className="pt-8">
               <FadeUp>
-                <h2 className="text-3xl md:text-4xl font-bold text-prixgen-dark tracking-tighter mb-10">
-                  Core <span className="italic text-prixgen-blue text-opacity-80">Capabilities</span>
-                </h2>
+                <div className="flex items-center gap-4 mb-10">
+                  <div className="w-2 h-10 bg-prixgen-blue rounded-full" />
+                  <h2 className="text-3xl md:text-4xl font-bold text-prixgen-dark tracking-tighter">
+                    Solution <span className="italic text-prixgen-blue text-opacity-80">Capabilities</span>
+                  </h2>
+                </div>
               </FadeUp>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {service.features?.map((feature: any, i: number) => (
-                  <FadeUp key={i} delay={0.1 * i}>
-                    <div className="group h-full p-8 bg-white border border-slate-100 shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(0,102,204,0.15)] rounded-[2rem] hover:border-prixgen-blue/20 transition-all duration-500 relative overflow-hidden">
+                  <FadeUp 
+                    key={i} 
+                    delay={0.1 * i}
+                    className={i === 0 ? "md:col-span-2" : ""}
+                  >
+                    <div className="group h-full p-10 bg-white border border-slate-100 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_30px_60px_-20px_rgba(0,102,204,0.15)] rounded-[2.5rem] hover:border-prixgen-blue/20 transition-all duration-700 relative overflow-hidden">
                       {/* Hover Gradient Background */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-prixgen-blue/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-prixgen-blue/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                       
-                      <div className="w-14 h-14 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-prixgen-blue/5 group-hover:border-prixgen-blue/20 transition-all duration-500">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-prixgen-blue" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                      <div className="flex flex-col md:flex-row md:items-center gap-8">
+                        <div className="w-16 h-16 shrink-0 rounded-[1.25rem] bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:scale-110 group-hover:bg-prixgen-blue/5 group-hover:border-prixgen-blue/20 transition-all duration-700">
+                          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-prixgen-blue" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <div className="space-y-3">
+                          <h4 className="text-2xl font-bold text-prixgen-dark group-hover:text-prixgen-blue transition-colors tracking-tight">{feature.title}</h4>
+                          <p className="text-slate-500 font-medium leading-relaxed text-lg">{feature.description}</p>
+                        </div>
                       </div>
-                      <h4 className="text-xl font-bold text-prixgen-dark mb-3 group-hover:text-prixgen-blue transition-colors tracking-tight">{feature.title}</h4>
-                      <p className="text-slate-500 font-medium leading-relaxed">{feature.description}</p>
                     </div>
                   </FadeUp>
                 ))}
@@ -167,7 +180,7 @@ export default function ServiceClientPage({ service }: { service: any }) {
               <section className="pt-8">
                 <FadeUp>
                   <h2 className="text-3xl md:text-4xl font-bold text-prixgen-dark tracking-tighter mb-12">
-                    Our <span className="italic text-prixgen-blue text-opacity-80">Methodology</span>
+                    Implementation <span className="italic text-prixgen-blue text-opacity-80">Roadmap</span>
                   </h2>
                 </FadeUp>
                 <div className="space-y-0 relative pl-4 md:pl-8">
