@@ -204,6 +204,9 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                 { title: 'Consulting', desc: 'Prixgen Gold Partner with Oddo and is the best software consulting company in India providing IT consulting services.', link: '/services/it-consulting', icon: 'Strategy', img: '/images/consulting.png' },
                 { title: 'Warehouse', desc: 'Better Warehouse management can be yours. Reduce inventory and warehouse costs while improving customer service.', link: '/solutions/warehouse-management', icon: 'Box', img: '/images/warehouse.png' },
                 { title: 'IIoT', desc: 'Manage Millions of IIOT Device Connections And Support Applications That Open New Revenues For Industries.', link: '/solutions/industrial-internet-of-things', icon: 'Cpu', img: '/images/iiot.png' },
+                { title: 'AI & ML Advisory', desc: 'Consulting services to define your data-driven roadmap, assess AI readiness, and architect a secure adoption strategy.', link: '/services/ai-machine-learning', icon: 'Brain', img: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop' },
+                { title: 'Transformation Strategy', desc: 'Expert guidance to rethink legacy workflows, optimize business processes, and design your digital transition plan.', link: '/services/business-transformation', icon: 'TrendingUp', img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop' },
+                { title: 'Managed Cloud', desc: 'Secure, high-availability industrial cloud infrastructure with 24/7 monitoring and zero-data-loss disaster recovery.', link: '/services/managed-industrial-cloud-infrastructure', icon: 'Cloud', img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop' }
               ].map((service, i) => (
                 <FadeUp key={i} delay={i * 0.1}>
                   <Link href={service.link} className="block h-full group">
@@ -221,6 +224,9 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                               {service.icon === 'Strategy' && '📊'}
                               {service.icon === 'Box' && '📦'}
                               {service.icon === 'Cpu' && '⚙️'}
+                              {service.icon === 'Brain' && '🧠'}
+                              {service.icon === 'TrendingUp' && '📈'}
+                              {service.icon === 'Cloud' && '☁️'}
                             </span>
                           </div>
                         </div>
@@ -273,34 +279,38 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
               </FadeUp>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
-                { title: 'Odoo Enterprise', desc: 'Engineering Odoo into a scalable enterprise engine for global workflows.', img: '/images/odoo.png', color: 'from-purple-500/10' },
-                { title: 'SAP Business One', desc: 'Advanced ERP orchestration for high-growth industrial sectors.', img: '/images/sap.png', color: 'from-blue-600/10' },
-                { title: 'Microsoft Dynamics', desc: 'Intelligent cloud ERP solutions for unified business processes.', img: '/images/microsoft.png', color: 'from-blue-400/10' },
-                { title: 'Power BI Analytics', desc: 'Real-time industrial intelligence and predictive visualization.', img: '/images/powerbi.png', color: 'from-yellow-500/10' }
+                { title: 'Odoo Enterprise', desc: 'Engineering Odoo into a scalable enterprise engine for global workflows.', img: '/images/odoo.png', color: 'from-purple-500/10', link: '/solutions/odoo-enterprise' },
+                { title: 'SAP Business One', desc: 'Advanced ERP orchestration for high-growth industrial sectors.', img: '/images/sap.png', color: 'from-blue-600/10', link: '/solutions/sap-ecosystems' },
+                { title: 'Microsoft Dynamics', desc: 'Intelligent cloud ERP solutions for unified business processes.', img: '/images/microsoft.png', color: 'from-blue-400/10', link: '/solutions/microsoft-dynamics' },
+                { title: 'Power BI Analytics', desc: 'Real-time industrial intelligence and predictive visualization.', img: '/images/powerbi.png', color: 'from-yellow-500/10', link: '/solutions/power-bi' },
+                { title: 'Enterprise AI & ML', desc: 'Empower operations with predictive analytics, generative AI, and intelligent automation.', img: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop', color: 'from-emerald-500/10', link: '/services/ai-machine-learning' },
+                { title: 'Digital Transformation', desc: 'Comprehensive strategies to modernize legacy systems and build scalable future-proof operations.', img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop', color: 'from-rose-500/10', link: '/services/business-transformation' }
               ].map((sol, i) => (
-                <FadeUp key={i} delay={i * 0.1} className="group cursor-pointer">
-                  <div className={`h-full p-8 bg-prixgen-blue rounded-[2.5rem] text-white relative overflow-hidden transition-all duration-500 hover:scale-[1.05] hover:shadow-[0_40px_80px_-20px_rgba(0,102,204,0.4)] flex flex-col`}>
-                    {/* Radial Glow Overlay */}
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,rgba(255,255,255,0.15),transparent)] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                    
-                    <div className="relative z-10 flex-1">
-                      <div className="aspect-square w-24 mb-6 rounded-2xl bg-white/10 p-4 flex items-center justify-center overflow-hidden">
-                        <img src={sol.img} alt={sol.title} className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
+                <FadeUp key={i} delay={i * 0.1} className="group cursor-pointer h-full">
+                  <Link href={sol.link} className="block h-full">
+                    <div className={`h-full p-8 bg-prixgen-blue rounded-[2.5rem] text-white relative overflow-hidden transition-all duration-500 hover:scale-[1.05] hover:shadow-[0_40px_80px_-20px_rgba(0,102,204,0.4)] flex flex-col`}>
+                      {/* Radial Glow Overlay */}
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,rgba(255,255,255,0.15),transparent)] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                      
+                      <div className="relative z-10 flex-1">
+                        <div className="aspect-square w-24 mb-6 rounded-2xl bg-white/10 p-4 flex items-center justify-center overflow-hidden">
+                          <img src={sol.img} alt={sol.title} className="w-full h-full object-cover rounded-lg group-hover:scale-110 transition-transform duration-500" />
+                        </div>
+                        <h3 className="text-xl font-bold mb-4">{sol.title}</h3>
+                        <p className="text-white/60 text-sm leading-relaxed">{sol.desc}</p>
                       </div>
-                      <h3 className="text-xl font-bold mb-4">{sol.title}</h3>
-                      <p className="text-white/60 text-sm leading-relaxed">{sol.desc}</p>
-                    </div>
-                    
-                    <div className="relative z-10 mt-8 flex items-center text-xs font-bold uppercase tracking-widest opacity-40 group-hover:opacity-100 transition-opacity">
-                      Learn Architecture <span className="ml-2">→</span>
-                    </div>
+                      
+                      <div className="relative z-10 mt-8 flex items-center text-xs font-bold uppercase tracking-widest opacity-40 group-hover:opacity-100 transition-opacity">
+                        Learn Architecture <span className="ml-2">→</span>
+                      </div>
 
-                    <div className="absolute bottom-0 right-0 p-4 opacity-5 group-hover:opacity-20 transition-all duration-700 group-hover:scale-110 -mb-4 -mr-4">
-                      <div className="w-24 h-24 border-[4px] border-white rounded-full" />
+                      <div className="absolute bottom-0 right-0 p-4 opacity-5 group-hover:opacity-20 transition-all duration-700 group-hover:scale-110 -mb-4 -mr-4">
+                        <div className="w-24 h-24 border-[4px] border-white rounded-full" />
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 </FadeUp>
               ))}
             </div>

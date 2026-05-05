@@ -1024,6 +1024,74 @@ export const servicesData: any[] = [
       title: "Industrial Cloud Hosting & Infrastructure | Prixgen",
       metaDesc: "Architecting high-availability cloud environments for Zero Operational Friction.",
     }
+  },
+  {
+    slug: "ai-machine-learning",
+    title: "AI & Machine Learning",
+    headline: "Empower your enterprise with predictive analytics and generative AI.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop", altText: "AI & Machine Learning" },
+    content: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Artificial Intelligence and Machine Learning are no longer buzzwords; they are essential tools for gaining a competitive edge. We help organizations harness the power of AI to drive data-backed decision making, automate repetitive tasks, and unlock new revenue streams. From predictive analytics to natural language processing and generative AI, we build models that solve real-world industrial problems." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Our approach integrates AI directly into your existing enterprise architecture. Whether you need an intelligent supply chain forecasting model, an automated customer support agent, or deep visual inspection algorithms on the factory floor, our data scientists and engineers deploy solutions that deliver measurable ROI." }]
+      }
+    ],
+    features: [
+      { title: "Predictive Analytics", description: "Anticipating market trends, demand shifts, and equipment failures." },
+      { title: "Generative AI", description: "Automating content, code, and reporting workflows." },
+      { title: "Computer Vision", description: "High-precision automated inspection and safety monitoring." },
+      { title: "Data Integration", description: "Feeding AI models with clean, structured data from your ERP." }
+    ],
+    process: [
+      { title: "Data Audit", description: "Assessing the quality and structure of your enterprise data." },
+      { title: "Model Training", description: "Developing and refining AI algorithms tailored to your use case." },
+      { title: "Enterprise Deployment", description: "Integrating AI seamlessly into your operational workflows." }
+    ],
+    seo: {
+      title: "AI & Machine Learning Solutions | Prixgen",
+      metaDesc: "Drive innovation and efficiency with enterprise-grade predictive analytics and Generative AI.",
+      keywords: ["AI", "Machine Learning", "Generative AI", "Predictive Analytics", "Computer Vision"]
+    }
+  },
+  {
+    slug: "business-transformation",
+    title: "Business Transformation",
+    headline: "Comprehensive digital transformation strategies to modernize legacy systems.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop", altText: "Business Transformation" },
+    content: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "True digital transformation requires more than just upgrading software; it demands a fundamental shift in how your organization operates. We partner with executive teams to design and execute comprehensive transformation strategies that modernize legacy systems, optimize cross-functional workflows, and build scalable, future-proof operations." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Our holistic approach covers every aspect of transformation: technology architecture, process re-engineering, and cultural change management. We identify high-impact areas where digital tools can eliminate friction, reduce costs, and enhance the customer experience, ensuring that your enterprise remains agile and competitive in a rapidly evolving market." }]
+      }
+    ],
+    features: [
+      { title: "Legacy Modernization", description: "Seamless transition from outdated systems to modern cloud architectures." },
+      { title: "Process Re-engineering", description: "Redesigning workflows for maximum efficiency and automation." },
+      { title: "Change Management", description: "Guiding your teams through cultural and operational shifts." },
+      { title: "Strategic Roadmap", description: "Phased implementation plans aligned with your business objectives." }
+    ],
+    process: [
+      { title: "Strategic Discovery", description: "Aligning transformation goals with your core business vision." },
+      { title: "Architecture Design", description: "Mapping out the new technological and operational ecosystem." },
+      { title: "Agile Execution", description: "Iterative rollout with continuous measurement and refinement." }
+    ],
+    seo: {
+      title: "Digital Business Transformation | Prixgen",
+      metaDesc: "Modernize legacy systems and optimize operations with holistic transformation strategies.",
+      keywords: ["Business Transformation", "Digital Strategy", "Legacy Modernization", "Process Re-engineering"]
+    }
   }
 ];
 
@@ -1054,7 +1122,9 @@ export const servicesPageMockData: ServicesPageData = {
     { title: "Hiring Odoo Developers", headline: "Dedicated talent for Odoo ecosystems.", slug: "hiring-odoo-developers" },
     { title: "IIoT & Telemetry", headline: "Real-time shop-floor intelligence.", slug: "iiot-telemetry" },
     { title: "Factory Automation", headline: "Robotics and automated control systems.", slug: "automation" },
-    { title: "Cloud Infrastructure", headline: "High-availability industrial cloud.", slug: "cloud-infrastructure" }
+    { title: "Cloud Infrastructure", headline: "High-availability industrial cloud.", slug: "cloud-infrastructure" },
+    { title: "AI & Machine Learning", headline: "Empower your enterprise with predictive analytics and generative AI.", slug: "ai-machine-learning" },
+    { title: "Business Transformation", headline: "Comprehensive digital transformation strategies to modernize legacy systems.", slug: "business-transformation" }
   ],
   seo: {
     title: "Services | Enterprise Application Services | Prixgen",
