@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { getContactData } from '@/lib/data';
-import ContactClient from './contact-client';
+import ContactClientPage from '@/components/templates/contact-client-page';
 
 export async function generateMetadata(): Promise<Metadata> {
   const contactData = await getContactData();
@@ -13,5 +13,5 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ContactPage() {
   const contactData = await getContactData();
 
-  return <ContactClient contactData={contactData} />;
+  return <ContactClientPage contactData={contactData} />;
 }
