@@ -6,6 +6,7 @@ export async function generateMetadata() {
   return {
     title: homeData.seo.title,
     description: homeData.seo.metaDesc,
+    keywords: homeData.seo.keywords,
   };
 }
 

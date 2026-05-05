@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: PageProps) {
   return {
     title: industry?.seo.title,
     description: industry?.seo.metaDesc,
+    keywords: industry?.seo.keywords,
   };
 }
 

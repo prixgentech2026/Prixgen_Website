@@ -20,6 +20,16 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
           description: industry.seo.metaDesc 
         }} 
       />
+      <JsonLd 
+        type="BreadcrumbList" 
+        data={{ 
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://www.prixgen.com" },
+            { "@type": "ListItem", position: 2, name: "Industries", item: "https://www.prixgen.com/industries" },
+            { "@type": "ListItem", position: 3, name: industry.title, item: `https://www.prixgen.com/industries/${industry.slug}` }
+          ]
+        }} 
+      />
 
       <section className="relative min-h-[75vh] flex items-center pt-24 pb-12 overflow-hidden bg-white">
         <AmbientGlow />

@@ -20,6 +20,7 @@ export async function generateMetadata({ params }: PageProps) {
   return {
     title: `${solution.title} | Prixgen Enterprise`,
     description: solution.seo.metaDesc,
+    keywords: solution.seo.keywords,
   };
 }
 

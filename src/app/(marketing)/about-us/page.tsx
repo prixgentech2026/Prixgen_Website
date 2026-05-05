@@ -7,6 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: data?.seo?.title || 'About Us | Prixgen',
     description: data?.seo?.metaDesc || 'Learn about Prixgen Tech Solutions and our expertise in ERP and IoT.',
+    keywords: data?.seo?.keywords,
   };
 }
 

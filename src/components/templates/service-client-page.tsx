@@ -23,6 +23,16 @@ export default function ServiceClientPage({ service }: { service: any }) {
           provider: { "@type": "Organization", "name": "Prixgen Enterprise" }
         }} 
       />
+      <JsonLd 
+        type="BreadcrumbList" 
+        data={{ 
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://www.prixgen.com" },
+            { "@type": "ListItem", position: 2, name: "Services", item: "https://www.prixgen.com/services" },
+            { "@type": "ListItem", position: 3, name: service.title, item: `https://www.prixgen.com/services/${service.slug}` }
+          ]
+        }} 
+      />
 
       {/* Hero Header */}
       <section className="relative min-h-[75vh] flex items-center pt-24 pb-12 overflow-hidden bg-white">

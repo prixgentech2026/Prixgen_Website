@@ -73,6 +73,7 @@ export default defineType({
       fields: [
         defineField({ name: 'title', title: 'Meta Title', type: 'string' }),
         defineField({ name: 'metaDesc', title: 'Meta Description', type: 'text' }),
+        defineField({ name: 'keywords', title: 'Meta Keywords', type: 'string', description: 'Comma-separated keywords (e.g. ERP, manufacturing, consulting)' }),
       ]
     }),
   ],

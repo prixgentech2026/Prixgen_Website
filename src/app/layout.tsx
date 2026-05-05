@@ -22,6 +22,9 @@ export const metadata: Metadata = {
     url: 'https://www.prixgen.com',
     siteName: 'Prixgen Enterprise',
   },
+  alternates: {
+    canonical: '/',
+  },
 };
 
 /**

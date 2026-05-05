@@ -23,6 +23,16 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
           provider: { "@type": "Organization", "name": "Prixgen Enterprise" }
         }} 
       />
+      <JsonLd 
+        type="BreadcrumbList" 
+        data={{ 
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://www.prixgen.com" },
+            { "@type": "ListItem", position: 2, name: "Solutions", item: "https://www.prixgen.com/solutions" },
+            { "@type": "ListItem", position: 3, name: solution.title, item: `https://www.prixgen.com/solutions/${solution.slug}` }
+          ]
+        }} 
+      />
 
       {/* Breadcrumbs & Header */}
       <section className="relative min-h-[75vh] flex items-center pt-24 pb-12 overflow-hidden bg-white">
