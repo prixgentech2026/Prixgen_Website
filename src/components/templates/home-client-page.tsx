@@ -131,7 +131,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                     </div>
                   ) : (
                     <p className="text-lg text-slate-500 font-medium leading-relaxed">
-                      We architect, deploy, and manage scalable ERP and supply chain ecosystems for modern industrial enterprises.
+                      We architect, deploy, and manage scalable ERP and supply chain ecosystems for global manufacturing and FMCG leaders. Powered by AI, GenAI, and IoT, our solutions fuse Odoo and SAP with proven industrial intelligence.
                     </p>
                   )}
                 </div>

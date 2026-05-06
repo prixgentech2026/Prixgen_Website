@@ -260,7 +260,7 @@ export const homeData = {
     {
       _type: 'block',
       style: 'normal',
-      children: [{ _type: 'span', text: "We architect, deploy, and manage scalable ERP and supply chain ecosystems for global manufacturing and FMCG leaders. Built on Odoo, SAP, and proven industrial intelligence." }]
+      children: [{ _type: 'span', text: "We architect, deploy, and manage scalable ERP and supply chain ecosystems for global manufacturing and FMCG leaders. Powered by AI, GenAI, and IoT, our solutions fuse Odoo and SAP with proven industrial intelligence." }]
     }
   ],
   heroPrimaryCTA: "Schedule an Architecture Audit",

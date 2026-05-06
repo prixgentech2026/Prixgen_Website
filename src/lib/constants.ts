@@ -43,7 +43,7 @@ export const FOOTER_DATA = {
 export const HOME_COPY = {
   hero: {
     title: "Intelligent Operations. Unified Enterprise.",
-    subheadline: "We architect, deploy, and manage scalable ERP and supply chain ecosystems for global manufacturing and FMCG leaders. Built on Odoo, SAP, and proven industrial intelligence.",
+    subheadline: "We architect, deploy, and manage scalable ERP and supply chain ecosystems for global manufacturing and FMCG leaders. Powered by AI, GenAI, and IoT, our solutions fuse Odoo and SAP with proven industrial intelligence.",
     primaryCTA: "Schedule an Architecture Audit",
     secondaryCTA: "Read the 2026 Manufacturing Benchmark",
   },
