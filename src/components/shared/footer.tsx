@@ -84,12 +84,6 @@ export function Footer() {
             </li>
             <li className="flex items-center gap-3">
               <span className="text-prixgen-lightblue opacity-60">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
-              </span>
-              <a href={`tel:${FOOTER_DATA.mobile}`} className="hover:text-prixgen-lightblue transition-colors font-medium">{FOOTER_DATA.mobile}</a>
-            </li>
-            <li className="flex items-center gap-3">
-              <span className="text-prixgen-lightblue opacity-60">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               </span>
               <a href={`mailto:${FOOTER_DATA.email}`} className="hover:text-prixgen-lightblue transition-colors font-medium">{FOOTER_DATA.email}</a>
@@ -98,7 +92,7 @@ export function Footer() {
               <span className="text-prixgen-lightblue opacity-60">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20z"/></svg>
               </span>
-              <a href={`https://${FOOTER_DATA.website}`} target="_blank" rel="noopener noreferrer" className="hover:text-prixgen-lightblue transition-colors font-medium">{FOOTER_DATA.website}</a>
+              <a href={FOOTER_DATA.website} target="_blank" rel="noopener noreferrer" className="hover:text-prixgen-lightblue transition-colors font-medium">{FOOTER_DATA.website.replace('https://', '')}</a>
             </li>
           </ul>
 

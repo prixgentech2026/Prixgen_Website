@@ -338,8 +338,7 @@ export const contactData = {
   address: "#244 Kalabhairaveshwara Complex,\n1st Stage, Niveditha Nagara,\nMysuru, Karnataka 570022",
   email: "info@prixgen.com",
   phone: "0821-2548666",
-  mobile: "+91 99300 57159",
-  website: "www.prixgen.com",
+  website: "https://www.prixgen.com",
   seo: {
     title: "Contact Us | Let's Transform Your Operations",
     metaDesc: "Connect with Prixgen Enterprise Headquarters in Mysuru to discuss your operational intelligence roadmap and ERP strategy.",
