@@ -33,9 +33,18 @@ export function MegaMenu() {
           <NavigationMenuTrigger className="bg-transparent hover:text-prixgen-blue font-bold uppercase tracking-wider">Industries</NavigationMenuTrigger>
           <NavigationMenuContent>
             <div className="w-[400px] md:w-[500px] lg:w-[600px] p-6 bg-white rounded-xl shadow-2xl">
-              <ul className="grid gap-3 md:grid-cols-2 mb-4">
-                {MENU_DATA.industries.map((item) => (
-                  <ListItem key={item.title} title={item.title} href={item.href}>
+              <ul className="flex flex-col mb-4">
+                {MENU_DATA.industries.map((item, index) => (
+                  <ListItem 
+                    key={item.title} 
+                    title={item.title} 
+                    href={item.href}
+                    className={cn(
+                      "border-b border-slate-100 last:border-0 rounded-none py-4",
+                      index === 0 && "pt-2",
+                      index === MENU_DATA.industries.length - 1 && "pb-2"
+                    )}
+                  >
                     {item.description}
                   </ListItem>
                 ))}

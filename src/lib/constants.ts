@@ -26,11 +26,13 @@ export const MENU_DATA = {
     { title: "Lecca: Computer Vision & AI", href: "/solutions/lecca-ai", description: "Proprietary industrial intelligence." },
   ],
   industries: [
-    { title: "Advanced Manufacturing", href: "/industries/manufacturing", description: "Shop-floor to top-floor sync." },
-    { title: "Chemicals & Process", href: "/industries/chemicals", description: "Precision and compliance." },
-    { title: "Consumer Goods (FMCG)", href: "/industries/fmcg-distribution", description: "High-velocity supply chains." },
-    { title: "Retail Operations", href: "/industries/retail", description: "Omnichannel architecture." },
-    { title: "Dairy & Perishables", href: "/industries/dairy", description: "Time-critical supply chain." },
+    { title: "Manufacturing", href: "/industries/manufacturing", description: "Shop-floor to top-floor synchronization." },
+    { title: "Retail", href: "/industries/retail", description: "Omnichannel commerce and architecture." },
+    { title: "Chemicals", href: "/industries/chemicals", description: "Precision process and safety compliance." },
+    { title: "Information Services", href: "/industries/information-services", description: "Digital infrastructure and enterprise software." },
+    { title: "Consumer Goods & Distribution", href: "/industries/fmcg-distribution", description: "High-velocity supply chain management." },
+    { title: "Dairy", href: "/industries/dairy", description: "Time-critical perishables logistics." },
+    { title: "Electronics", href: "/industries/electronics", description: "High-precision engineering and assembly." },
   ],
 };
 
