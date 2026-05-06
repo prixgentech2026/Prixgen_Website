@@ -218,7 +218,7 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {data.coreServices.map((service, i) => {
+            {data.coreServices.filter(s => s !== null).map((service, i) => {
               const serviceImages: Record<string, string> = {
                 "business-strategy": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000",
                 "it-consulting": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000",

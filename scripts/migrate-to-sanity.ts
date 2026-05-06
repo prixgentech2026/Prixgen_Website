@@ -232,7 +232,11 @@ async function migrateServicesPage() {
     heroSubheadline: servicesPageMockData.heroSubheadline,
     methodology: servicesPageMockData.methodology.map(m => ({ _key: Math.random().toString(36).substr(2, 9), ...m })),
     outcomes: servicesPageMockData.outcomes.map(o => ({ _key: Math.random().toString(36).substr(2, 9), ...o })),
-    coreServices: servicesPageMockData.coreServices.map(s => ({ _key: Math.random().toString(36).substr(2, 9), ...s })),
+    coreServices: servicesPageMockData.coreServices.map(s => ({ 
+      _key: Math.random().toString(36).substr(2, 9), 
+      _type: 'reference',
+      _ref: `service-${s.slug}` 
+    })),
     seo: servicesPageMockData.seo,
   };
   await client.createOrReplace(doc);

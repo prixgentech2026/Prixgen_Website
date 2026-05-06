@@ -145,10 +145,12 @@ export async function getServicesPageData() {
     if (!data) return servicesPageMockData;
 
     // Ensure we show all services even if Sanity only has a few
+    const cleanCoreServices = (data.coreServices || []).filter((s: any) => s !== null);
+    
     return {
       ...data,
-      coreServices: data.coreServices && data.coreServices.length >= servicesPageMockData.coreServices.length
-        ? data.coreServices
+      coreServices: cleanCoreServices.length >= servicesPageMockData.coreServices.length
+        ? cleanCoreServices
         : servicesPageMockData.coreServices
     };
   } catch (error) {
