@@ -42,6 +42,19 @@ export default defineType({
       ]
     }),
     defineField({
+      name: 'externalImageUrl',
+      title: 'External Image URL (Fallback)',
+      type: 'url',
+      description: 'Use this to quickly link an Unsplash image without uploading.'
+    }),
+    defineField({
+      name: 'summaryImage',
+      title: 'Summary Image (Executive Section)',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [defineField({ name: 'altText', title: 'Alt Text', type: 'string' })]
+    }),
+    defineField({
       name: 'content',
       title: 'Content',
       type: 'array',

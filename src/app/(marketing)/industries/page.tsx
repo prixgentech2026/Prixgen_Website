@@ -1,13 +1,16 @@
 import { Metadata } from 'next';
-import { getIndustries } from '@/lib/data';
+import { getIndustriesPageData } from '@/lib/data';
 import IndustriesClient from './industries-client';
 
-export const metadata: Metadata = {
-  title: "Industries | Enterprise ERP Solutions for Global Sectors",
-  description: "Explore how Prixgen Enterprise architects unified ecosystems for Manufacturing, Chemicals, FMCG, Retail, and Dairy.",
-};
+export async function generateMetadata() {
+  const data = await getIndustriesPageData();
+  return {
+    title: data?.seo?.title || "Industries | Prixgen",
+    description: data?.seo?.metaDesc || "Explore how Prixgen Enterprise architects unified ecosystems for various industries.",
+  };
+}
 
 export default async function IndustriesIndexPage() {
-  const industriesData = await getIndustries();
-  return <IndustriesClient industries={industriesData} />;
+  const pageData = await getIndustriesPageData();
+  return <IndustriesClient data={pageData} />;
 }

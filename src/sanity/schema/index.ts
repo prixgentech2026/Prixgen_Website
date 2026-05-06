@@ -5,7 +5,8 @@ import home from './home';
 import about from './about';
 import contact from './contact';
 import servicesPage from './servicesPage';
+import industriesPage from './industriesPage';
 
 export const schema = {
-  types: [industry, solution, service, home, about, contact, servicesPage],
+  types: [industry, solution, service, home, about, contact, servicesPage, industriesPage],
 };

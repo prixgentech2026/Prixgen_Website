@@ -61,6 +61,10 @@ export const industriesQuery = groq`*[_type == "industry"]{
   "featuredImage": featuredImage.asset->{
     "sourceUrl": url,
     "altText": altText
+  },
+  "summaryImage": {
+    "sourceUrl": summaryImage.asset->url,
+    "altText": summaryImage.altText
   }
 }`;
 
@@ -69,10 +73,16 @@ export const industryBySlugQuery = groq`*[_type == "industry" && slug.current ==
   title,
   headline,
   content,
+  features,
+  process,
   seo,
   "featuredImage": featuredImage.asset->{
     "sourceUrl": url,
     "altText": altText
+  },
+  "summaryImage": {
+    "sourceUrl": summaryImage.asset->url,
+    "altText": summaryImage.altText
   }
 }`;
 
@@ -139,6 +149,22 @@ export const servicesPageQuery = groq`*[_type == "servicesPage"][0]{
     title,
     headline,
     "slug": slug.current
+  },
+  seo
+}`;
+
+// Query for the Industries Landing Page
+export const industriesPageQuery = groq`*[_type == "industriesPage"][0]{
+  title,
+  heroSubheadline,
+  methodology,
+  outcomes,
+  "coreIndustries": coreIndustries[]->{
+    title,
+    headline,
+    "slug": slug.current,
+    "featuredImage": featuredImage.asset->url,
+    externalImageUrl
   },
   seo
 }`;

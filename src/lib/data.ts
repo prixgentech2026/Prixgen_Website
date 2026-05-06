@@ -8,6 +8,7 @@ import {
   solutionsQuery,
   servicesQuery,
   servicesPageQuery,
+  industriesPageQuery,
   aboutQuery,
   contactQuery
 } from '@/sanity/lib/queries';
@@ -149,6 +150,7 @@ export async function getServicesPageData() {
     
     return {
       ...data,
+      seo: data.seo || servicesPageMockData.seo,
       coreServices: cleanCoreServices.length >= servicesPageMockData.coreServices.length
         ? cleanCoreServices
         : servicesPageMockData.coreServices
@@ -156,6 +158,28 @@ export async function getServicesPageData() {
   } catch (error) {
     console.error('Sanity Fetch Error (Services Page):', error);
     return servicesPageMockData;
+  }
+}
+
+export async function getIndustriesPageData() {
+  if (!client) return industriesPageMockData;
+  try {
+    const data = await client.fetch(industriesPageQuery);
+    if (!data) return industriesPageMockData;
+
+    // Ensure we show all industries even if Sanity only has a few
+    const cleanCoreIndustries = (data.coreIndustries || []).filter((i: any) => i !== null);
+    
+    return {
+      ...data,
+      seo: data.seo || industriesPageMockData.seo,
+      coreIndustries: cleanCoreIndustries.length >= industriesPageMockData.coreIndustries.length
+        ? cleanCoreIndustries
+        : industriesPageMockData.coreIndustries
+    };
+  } catch (error) {
+    console.error('Sanity Fetch Error (Industries Page):', error);
+    return industriesPageMockData;
   }
 }
 
@@ -222,6 +246,29 @@ export interface ServicesPageData {
     title: string;
     headline: string;
     slug: string;
+  }[];
+  seo: SEOData;
+}
+
+export interface IndustriesPageData {
+  title: string;
+  heroSubheadline: string;
+  methodology: {
+    step: string;
+    title: string;
+    description: string;
+    icon: string;
+  }[];
+  outcomes: {
+    title: string;
+    description: string;
+    icon: string;
+  }[];
+  coreIndustries: {
+    title: string;
+    headline: string;
+    slug: string;
+    image?: string;
   }[];
   seo: SEOData;
 }
@@ -355,6 +402,7 @@ export const industriesData: any[] = [
     title: "Discrete & Process Manufacturing",
     headline: "Engineering the Smart Factory of the Future.",
     featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000", altText: "Manufacturing" },
+    summaryImage: { sourceUrl: "https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=2000&auto=format&fit=crop", altText: "Modern Industrial Facility" },
     content: [
       {
         _type: 'block',
@@ -388,6 +436,7 @@ export const industriesData: any[] = [
     title: "Chemicals & Process Manufacturing",
     headline: "Precision, Compliance, and Batch Intelligence.",
     featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1532187875605-1ef6c237f146?auto=format&fit=crop&q=80&w=1000", altText: "Chemical Industry" },
+    summaryImage: { sourceUrl: "https://images.unsplash.com/photo-1581093450021-4a7360e9a6ad?q=80&w=2000&auto=format&fit=crop", altText: "Chemical Process Control" },
     content: [
       {
         _type: 'block',
@@ -421,6 +470,7 @@ export const industriesData: any[] = [
     title: "FMCG & Distribution",
     headline: "Velocity and Visibility in Consumer Goods.",
     featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1566633806327-68e152aaf26d?auto=format&fit=crop&q=80&w=1000", altText: "FMCG" },
+    summaryImage: { sourceUrl: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2000&auto=format&fit=crop", altText: "FMCG Distribution Hub" },
     content: [
       {
         _type: 'block',
@@ -1250,5 +1300,34 @@ export const servicesPageMockData: ServicesPageData = {
   seo: {
     title: "Services | Enterprise Application Services | Prixgen",
     metaDesc: "Prixgen Preferred Care methodology: Discover, Design, and Develop outcomes-based learning and operational strategies for modern industrial enterprises.",
+  }
+};
+
+export const industriesPageMockData: IndustriesPageData = {
+  title: "Transforming Global Industries",
+  heroSubheadline: "We architect resilient, data-driven ecosystems across the world's most demanding industrial sectors.",
+  methodology: [
+    { step: "01", title: "Analyze : Industrial Audit", description: "We conduct deep-dive technical audits of your existing shop-floor and supply chain workflows.", icon: "Search" },
+    { step: "02", title: "Architect : Digital Core", description: "We design high-availability digital cores that unify legacy hardware with modern cloud intelligence.", icon: "PenTool" },
+    { step: "03", title: "Automate : Scale Operations", description: "We deploy autonomous systems and AI models that drive measurable throughput and efficiency.", icon: "Settings" }
+  ],
+  outcomes: [
+    { title: "Zero Operational Friction", description: "Eliminate data silos and manual bottlenecks across your global production network.", icon: "Zap" },
+    { title: "Predictive Intelligence", description: "Shift from reactive repairs to predictive maintenance using shop-floor telemetry.", icon: "LineChart" },
+    { title: "High-Precision Costing", description: "Gain absolute visibility into batch-level profitability and resource utilization.", icon: "BarChart3" },
+    { title: "Regulatory Confidence", description: "Automated compliance reporting and end-to-end traceability for every unit.", icon: "ShieldCheck" },
+    { title: "Supply Chain Resilience", description: "Anticipate disruptions with real-time demand sensing and inventory optimization.", icon: "Network" },
+    { title: "Rapid Modernization", description: "Transform legacy factories into smart facilities with minimal operational downtime.", icon: "Factory" }
+  ],
+  coreIndustries: [
+    { title: "Manufacturing", headline: "Industry 4.0 Smart Factories.", slug: "manufacturing", image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000" },
+    { title: "Chemicals", headline: "Precision Batch Intelligence.", slug: "chemicals", image: "https://images.unsplash.com/photo-1532187875605-1ef6c237f146?auto=format&fit=crop&q=80&w=1000" },
+    { title: "FMCG", headline: "High-Velocity Distribution.", slug: "fmcg-distribution", image: "https://images.unsplash.com/photo-1566633806327-68e152aaf26d?auto=format&fit=crop&q=80&w=1000" },
+    { title: "Information Services", headline: "Digital Infrastructure & Data.", slug: "information-services", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000" },
+    { title: "Electronics", headline: "High-Precision Engineering.", slug: "electronics", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1000" }
+  ],
+  seo: {
+    title: "Industries | Enterprise Digital Transformation | Prixgen",
+    metaDesc: "Discover how Prixgen architects operational intelligence for Manufacturing, Chemicals, FMCG, and high-precision Electronics.",
   }
 };
