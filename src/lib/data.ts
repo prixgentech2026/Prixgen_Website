@@ -413,7 +413,7 @@ export const industriesData: any[] = [
     ],
     seo: {
       title: "Chemical ERP & Regulatory Compliance | Prixgen",
-      metaDesc: "Precision ERP architectures for complex batch management and chemical compliance.",
+      metaDesc: "Precision ERP architectures for complex batch management and compliance.",
     }
   },
   {
@@ -513,6 +513,72 @@ export const industriesData: any[] = [
     seo: {
       title: "Dairy & Perishable Supply Chain ERP | Prixgen",
       metaDesc: "Specialized cold-chain tracking and time-critical supply chain modules for the dairy industry.",
+    },
+  },
+  {
+    slug: "information-services",
+    title: "Information Services",
+    headline: "Digital Infrastructure and Enterprise Software.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000", altText: "Information Services" },
+    content: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "In the information age, data is the most valuable asset. We architect high-availability digital infrastructures that allow information-heavy enterprises to process, secure, and monetize their data assets. Our solutions focus on eliminating data silos and creating a unified digital core that supports rapid innovation and global scale." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "From managing complex software-as-a-service (SaaS) environments to deploying enterprise-wide knowledge management systems, we provide the technical depth required to lead in the information sector. Our architectures are designed for high throughput and zero-latency access, ensuring that your teams have the intelligence they need, exactly when they need it." }]
+      }
+    ],
+    features: [
+      { title: "Data Core Sync", description: "Unifying fragmented data sources into a single source of truth." },
+      { title: "SaaS Governance", description: "Optimizing software ecosystems for maximum ROI and performance." },
+      { title: "Knowledge Management", description: "Intelligent systems for capturing and sharing enterprise intelligence." },
+      { title: "Scalable Infrastructure", description: "Cloud-native architectures built for high-growth digital environments." }
+    ],
+    process: [
+      { title: "Data Audit", description: "Identifying silos and security vulnerabilities in your digital stack." },
+      { title: "Architecture Blueprint", description: "Designing the unified digital core for your enterprise." },
+      { title: "Scale Deployment", description: "Rolling out the new infrastructure with zero downtime." }
+    ],
+    seo: {
+      title: "Enterprise Information Services & Data Architecture | Prixgen",
+      metaDesc: "Architecting high-availability digital cores for information-heavy enterprise leaders.",
+    }
+  },
+  {
+    slug: "electronics",
+    title: "Electronics",
+    headline: "High-Precision Engineering and Assembly.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1000", altText: "Electronics" },
+    content: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "The electronics industry demands a level of precision and supply chain agility that traditional systems often fail to deliver. We implement specialized ERP architectures that handle micro-BOM management, complex component sourcing, and high-velocity assembly lines. Our solutions provide end-to-end traceability for every component, ensuring quality and compliance in a fast-moving market." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "By integrating real-time shop-floor data with procurement and inventory modules, we help electronics manufacturers minimize waste and optimize their production cycles. Our architectures support advanced manufacturing techniques like surface-mount technology (SMT) and automated optical inspection (AOI), providing the visibility needed to maintain high yields and competitive margins. With Prixgen, your electronics operations achieve the technical precision required for global leadership." }]
+      }
+    ],
+    features: [
+      { title: "Micro-BOM Management", description: "Handling thousands of components with absolute precision and costing." },
+      { title: "Component Traceability", description: "End-to-end tracking from raw material to finished electronic unit." },
+      { title: "SMT Integration", description: "Direct syncing of assembly line machinery with enterprise dashboards." },
+      { title: "Global Sourcing Sync", description: "Managing complex vendor networks and lead times in real-time." }
+    ],
+    process: [
+      { title: "Engineering Audit", description: "Reviewing assembly line data points and BOM complexity." },
+      { title: "Logic Customization", description: "Tailoring ERP modules for electronics-specific workflows." },
+      { title: "Precision Deployment", description: "Rolling out the synchronized system across the production floor." }
+    ],
+    seo: {
+      title: "Electronics Manufacturing ERP & Supply Chain | Prixgen",
+      metaDesc: "High-precision ERP architectures for electronics assembly and component traceability.",
     }
   }
 ];

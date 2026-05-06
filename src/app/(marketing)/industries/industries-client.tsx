@@ -12,9 +12,11 @@ import { PageData } from '@/lib/data';
 const IconMap: Record<string, any> = {
   'manufacturing': Settings,
   'chemicals': Zap,
-  'fmcg': BarChart,
+  'fmcg-distribution': BarChart,
   'retail': Globe,
   'dairy': Database,
+  'information-services': Database,
+  'electronics': Settings,
 };
 
 const getIcon = (slug: string) => IconMap[slug] || Globe;
