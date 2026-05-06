@@ -405,7 +405,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
           </div>
         </section>
 
-        {/* 6. Stories Section */}
+        {/* 6. Stories Section (Suppressed)
         <section className="py-16 lg:py-24 bg-slate-50">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
@@ -447,6 +447,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
             </div>
           </div>
         </section>
+        */}
 
         {/* 7. Worldwide Presence Section */}
         <section className="py-16 lg:py-24 bg-white border-t border-slate-100 relative overflow-hidden">

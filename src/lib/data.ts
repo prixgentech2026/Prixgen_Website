@@ -689,7 +689,8 @@ export const servicesData: any[] = [
     slug: "business-strategy",
     title: "Business Strategy & Transformation",
     headline: "Architecting Long-term Value and Market Leadership.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000", altText: "Business Strategy" },
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000", altText: "Business Transformation" },
+    summaryImage: { sourceUrl: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2000&auto=format&fit=crop", altText: "Modernizing Enterprise Systems" },
     content: [
       {
         _type: 'block',
@@ -958,6 +959,7 @@ export const servicesData: any[] = [
     title: "IIoT & Telemetry Engineering",
     headline: "Unlocking Real-Time Intelligence from the Shop Floor.",
     featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000", altText: "IIoT Engineering" },
+    summaryImage: { sourceUrl: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?q=80&w=2000&auto=format&fit=crop", altText: "Industrial Data Intelligence" },
     content: [
       {
         _type: 'block',
@@ -996,6 +998,7 @@ export const servicesData: any[] = [
     title: "Factory & Industrial Automation",
     headline: "Robotics and Intelligent Control Systems.",
     featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&q=80&w=1000", altText: "Industrial Automation" },
+    summaryImage: { sourceUrl: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=2000&auto=format&fit=crop", altText: "Advanced Robotics" },
     content: [
       {
         _type: 'block',
@@ -1034,6 +1037,7 @@ export const servicesData: any[] = [
     title: "Managed Industrial Cloud Infrastructure",
     headline: "High-Availability Ecosystems for Mission-Critical Apps.",
     featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000", altText: "Cloud Infrastructure" },
+    summaryImage: { sourceUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2000&auto=format&fit=crop", altText: "Secure Cloud Ecosystem" },
     content: [
       {
         _type: 'block',
@@ -1072,6 +1076,7 @@ export const servicesData: any[] = [
     title: "AI & Machine Learning",
     headline: "Empower your enterprise with predictive analytics and generative AI.",
     featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop", altText: "AI & Machine Learning" },
+    summaryImage: { sourceUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2000&auto=format&fit=crop", altText: "Enterprise Intelligence" },
     content: [
       {
         _type: 'block',
@@ -1105,7 +1110,8 @@ export const servicesData: any[] = [
     slug: "business-transformation",
     title: "Business Transformation",
     headline: "Comprehensive digital transformation strategies to modernize legacy systems.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop", altText: "Business Transformation" },
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000", altText: "Business Transformation" },
+    summaryImage: { sourceUrl: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2000&auto=format&fit=crop", altText: "Modernizing Enterprise Systems" },
     content: [
       {
         _type: 'block',
