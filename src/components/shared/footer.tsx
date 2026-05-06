@@ -9,7 +9,7 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-prixgen-dark text-white py-20 mt-20">
+    <footer className="bg-prixgen-dark text-white py-20 mt-8">
       <div className="container mx-auto px-4 grid grid-cols-2 lg:grid-cols-6 gap-12 lg:gap-8">
         <div className="col-span-2 lg:col-span-1">
           <Link href="/" className="inline-block mb-6">

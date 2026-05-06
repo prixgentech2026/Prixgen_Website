@@ -20,7 +20,7 @@ export default function ContactClientPage({ contactData }: { contactData: any })
       />
 
       {/* Hero Section - Optimized Padding */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section className="relative pt-24 pb-12 overflow-hidden">
         <AmbientGlow />
         <div className="container mx-auto px-4 relative z-10">
           <FadeUp className="max-w-4xl">
@@ -44,40 +44,68 @@ export default function ContactClientPage({ contactData }: { contactData: any })
       </section>
 
       {/* Main Contact Grid */}
-      <section className="container mx-auto px-4 pb-24">
+      <section className="container mx-auto px-4 pb-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
           
           {/* Left Column: Information */}
           <div className="lg:col-span-5 space-y-12">
-            <FadeUp className="space-y-8">
-              <div>
-                <h3 className="text-xs font-black text-prixgen-blue/40 uppercase tracking-[0.2em] mb-6">Global Headquarters</h3>
-                <div className="flex gap-4">
-                  <div className="mt-1.5 p-2 rounded-lg bg-prixgen-blue/5 text-prixgen-blue">
-                    <MapPin size={20} />
+            <FadeUp className="space-y-12">
+              {/* Regional Offices Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {/* India HQ */}
+                <div className="space-y-6">
+                  <div className="space-y-2">
+                    <h4 className="text-[10px] font-black text-prixgen-blue uppercase tracking-widest flex items-center gap-2">
+                      <MapPin size={12} />
+                      India Headquarters
+                    </h4>
+                    <address className="text-sm text-slate-600 not-italic leading-relaxed">
+                      {contactData.address}
+                    </address>
                   </div>
-                  <address className="not-italic text-2xl md:text-3xl font-bold text-prixgen-blue leading-snug tracking-tight whitespace-pre-line">
-                    {contactData.address}
-                  </address>
-                </div>
-              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-slate-100">
-                <div className="space-y-4">
-                  <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                    <Mail size={12} className="text-prixgen-blue" />
-                    Strategic Email
-                  </h4>
-                  <a href={`mailto:${contactData.email}`} className="text-xl font-bold text-prixgen-blue hover:text-prixgen-lightblue transition-colors block">
-                    {contactData.email}
-                  </a>
+                  <div className="space-y-4">
+                    <div className="space-y-1">
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Office Desk</p>
+                      <p className="text-lg font-bold text-prixgen-blue">{contactData.phone}</p>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Strategic Sales</p>
+                      <p className="text-lg font-bold text-prixgen-blue">{contactData.salesPhone}</p>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Primary Email</p>
+                      <a href={`mailto:${contactData.email}`} className="text-lg font-bold text-prixgen-blue hover:text-prixgen-lightblue transition-colors">
+                        {contactData.email}
+                      </a>
+                    </div>
+                  </div>
                 </div>
-                <div className="space-y-4">
-                  <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                    <Phone size={12} className="text-prixgen-blue" />
-                    Direct Desk
-                  </h4>
-                  <p className="text-xl font-bold text-prixgen-blue">{contactData.phone}</p>
+
+                {/* Australia Regional Office */}
+                <div className="space-y-6">
+                  <div className="space-y-2">
+                    <h4 className="text-[10px] font-black text-prixgen-blue uppercase tracking-widest flex items-center gap-2">
+                      <MapPin size={12} />
+                      Australia Regional Office
+                    </h4>
+                    <address className="text-sm text-slate-600 not-italic leading-relaxed">
+                      {contactData.australiaAddress}
+                    </address>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="space-y-1">
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Direct Desk</p>
+                      <p className="text-lg font-bold text-prixgen-blue">{contactData.australiaPhone}</p>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Regional Email</p>
+                      <a href={`mailto:${contactData.australiaEmail}`} className="text-lg font-bold text-prixgen-blue hover:text-prixgen-lightblue transition-colors">
+                        {contactData.australiaEmail}
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -94,15 +122,15 @@ export default function ContactClientPage({ contactData }: { contactData: any })
               </div>
             </FadeUp>
 
-            {/* Department Routing */}
+            {/* Support Channels */}
             <FadeUp delay={0.2} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                <div className="p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-prixgen-blue/20 transition-all group">
                   <h4 className="font-bold text-prixgen-blue mb-1 text-sm">Technical Support</h4>
                   <a href="mailto:support@prixgen.com" className="text-xs text-prixgen-lightblue font-bold uppercase tracking-wider group-hover:underline">support@prixgen.com</a>
                </div>
                <div className="p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-prixgen-blue/20 transition-all group">
-                  <h4 className="font-bold text-prixgen-blue mb-1 text-sm">Careers</h4>
-                  <a href="mailto:careers@prixgen.com" className="text-xs text-prixgen-lightblue font-bold uppercase tracking-wider group-hover:underline">careers@prixgen.com</a>
+                  <h4 className="font-bold text-prixgen-blue mb-1 text-sm">Corporate Sales</h4>
+                  <a href="mailto:sales@prixgen.com" className="text-xs text-prixgen-lightblue font-bold uppercase tracking-wider group-hover:underline">sales@prixgen.com</a>
                </div>
             </FadeUp>
           </div>
@@ -125,9 +153,9 @@ export default function ContactClientPage({ contactData }: { contactData: any })
       </section>
 
       {/* Interactive Map Section */}
-      <section className="bg-slate-50 py-24 relative overflow-hidden border-t border-slate-200">
+      <section className="bg-slate-50 pt-6 pb-0 relative overflow-hidden border-t border-slate-200">
         <div className="container mx-auto px-4 relative z-10">
-          <FadeUp className="text-center mb-16">
+          <FadeUp className="text-center mb-2">
             <h2 className="text-4xl font-bold text-prixgen-blue mb-4 tracking-tight">Global Operations</h2>
             <div className="w-12 h-1 bg-prixgen-lightblue mx-auto rounded-full mb-6" />
             <p className="text-lg text-slate-500 font-medium max-w-2xl mx-auto">

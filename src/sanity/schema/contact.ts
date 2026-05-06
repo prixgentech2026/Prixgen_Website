@@ -27,7 +27,32 @@ export default defineType({
     }),
     defineField({
       name: 'phone',
-      title: 'Global Desk Phone',
+      title: 'India Desk Phone',
+      type: 'string',
+    }),
+    defineField({
+      name: 'salesPhone',
+      title: 'India Sales Phone',
+      type: 'string',
+    }),
+    defineField({
+      name: 'website',
+      title: 'Digital Presence URL',
+      type: 'string',
+    }),
+    defineField({
+      name: 'australiaAddress',
+      title: 'Australia Address',
+      type: 'text',
+    }),
+    defineField({
+      name: 'australiaPhone',
+      title: 'Australia Desk Phone',
+      type: 'string',
+    }),
+    defineField({
+      name: 'australiaEmail',
+      title: 'Australia Email',
       type: 'string',
     }),
     defineField({

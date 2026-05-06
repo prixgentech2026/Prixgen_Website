@@ -44,6 +44,11 @@ export const contactQuery = groq`*[_type == "contact"][0]{
   address,
   email,
   phone,
+  salesPhone,
+  website,
+  australiaAddress,
+  australiaPhone,
+  australiaEmail,
   seo
 }`;
 

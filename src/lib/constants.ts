@@ -35,9 +35,9 @@ export const MENU_DATA = {
 };
 
 export const FOOTER_DATA = {
-  office_india: "#244 Kalabhairaveshwara Complex, 1st Stage, Niveditha Nagara, Mysuru, Karnataka 570022",
-  office_australia: "Sydney, Australia (Regional Desk)",
-  phone: "0821-2548666",
+  office_india: "#244, Kalabairaweshwara Complex, 1st Stage, Nivedithanagar, Mysuru - 570022, Karnataka, India.",
+  office_australia: "Unit 3 / 5 Murphy Street, Oconnor, Perth, WA 6163, Australia",
+  phone: "+91 (0821) 2548666",
   email: "info@prixgen.com",
   website: "https://www.prixgen.com",
   tagline: "Architecting unified enterprise ecosystems for global industrial leaders.",

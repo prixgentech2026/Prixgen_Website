@@ -335,10 +335,14 @@ export const aboutData = {
 export const contactData = {
   title: "Let's Transform Your Operations.",
   description: "Whether you are rescuing a failed implementation, architecting a new global ecosystem, or exploring proprietary AI solutions, our senior consultants are ready to assist.",
-  address: "#244 Kalabhairaveshwara Complex,\n1st Stage, Niveditha Nagara,\nMysuru, Karnataka 570022",
+  address: "#244, Kalabairaweshwara Complex, 1st Stage, Nivedithanagar, Mysuru - 570022, Karnataka, India.",
   email: "info@prixgen.com",
-  phone: "0821-2548666",
+  phone: "+91 (0821) 2548666",
+  salesPhone: "+91 99300 57159",
   website: "https://www.prixgen.com",
+  australiaAddress: "Unit 3 / 5 Murphy Street, Oconnor, Perth, WA 6163, Australia",
+  australiaPhone: "08 9337 7907",
+  australiaEmail: "info@prixgen.com.au",
   seo: {
     title: "Contact Us | Let's Transform Your Operations",
     metaDesc: "Connect with Prixgen Enterprise Headquarters in Mysuru to discuss your operational intelligence roadmap and ERP strategy.",

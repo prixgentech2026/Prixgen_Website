@@ -94,17 +94,14 @@ export default function InteractiveGlobe() {
   return (
     <div 
       ref={containerRef}
-      className="w-full aspect-video md:aspect-square flex flex-col items-center justify-center p-4 overflow-hidden"
+      className="w-full aspect-[3/1] flex flex-col items-center justify-center p-0 overflow-hidden group"
       style={{ 
         transform: 'translateZ(0)',
         willChange: 'transform',
         // @ts-ignore
         contentVisibility: 'auto',
         containIntrinsicSize: '500px 500px',
-        pointerEvents: 'none'
       }}
-      onMouseEnter={(e) => e.currentTarget.style.pointerEvents = 'auto'}
-      onMouseLeave={(e) => e.currentTarget.style.pointerEvents = 'none'}
     >
       <style jsx global>{`
         @keyframes globe-pulse {
@@ -124,7 +121,7 @@ export default function InteractiveGlobe() {
           <div className="w-12 h-12 border-4 border-prixgen-blue/20 border-t-prixgen-blue rounded-full animate-spin" />
         </div>
       ) : (
-        <div className="w-full max-w-4xl transition-all duration-700 ease-in-out group relative drop-shadow-[0_20px_50px_rgba(0,75,135,0.08)]">
+        <div className="w-full max-w-4xl transition-all duration-700 ease-in-out relative drop-shadow-[0_20px_50px_rgba(0,75,135,0.08)]">
           <ComposableMap
             projection="geoMercator"
             projectionConfig={{
