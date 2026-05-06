@@ -154,7 +154,8 @@ export const servicesPageQuery = groq`*[_type == "servicesPage"][0]{
   "coreServices": coreServices[]->{
     title,
     headline,
-    "slug": slug.current
+    "slug": slug.current,
+    externalImageUrl
   },
   seo
 }`;

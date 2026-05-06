@@ -279,6 +279,7 @@ const servicesData = [
     slug: "business-strategy",
     title: "Business Strategy & Transformation",
     headline: "Architecting Long-term Value and Market Leadership.",
+    externalImageUrl: "https://images.unsplash.com/photo-1553484771-371a605b060b?auto=format&fit=crop&q=80&w=1200",
     content: [
       {
         _type: 'block',
@@ -316,6 +317,7 @@ const servicesData = [
     slug: "it-consulting",
     title: "IT & Management Consulting",
     headline: "Aligning Technology with Business Strategy.",
+    externalImageUrl: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=1200",
     content: [
       {
         _type: 'block',
@@ -354,6 +356,7 @@ const servicesData = [
     slug: "accounting-advisory",
     title: "Accounting & Financial Advisory",
     headline: "Precision, Compliance, and Financial Intelligence.",
+    externalImageUrl: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=1200",
     content: [
       {
         _type: 'block',
@@ -391,6 +394,7 @@ const servicesData = [
     slug: "management-consulting",
     title: "Management Consulting",
     headline: "Operational Excellence through Process Engineering.",
+    externalImageUrl: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=1200",
     content: [
       {
         _type: 'block',
@@ -428,6 +432,7 @@ const servicesData = [
     slug: "supply-chain-consulting",
     title: "Supply Chain Consulting",
     headline: "End-to-End Logistics and Supply Chain Optimization.",
+    externalImageUrl: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1200",
     content: [
       {
         _type: 'block',
@@ -465,6 +470,7 @@ const servicesData = [
     slug: "warehouse-management",
     title: "Warehouse Management Systems (WMS)",
     headline: "Intelligent Inventory and Fulfillment Automation.",
+    externalImageUrl: "https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&q=80&w=1200",
     content: [
       {
         _type: 'block',
@@ -502,6 +508,7 @@ const servicesData = [
     slug: "hiring-odoo-developers",
     title: "Dedicated Odoo Talent Services",
     headline: "Scaling Your Technical Capacity with Elite Odoo Experts.",
+    externalImageUrl: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1200",
     content: [
       {
         _type: 'block',
@@ -539,6 +546,7 @@ const servicesData = [
     slug: "iiot-telemetry",
     title: "IIoT & Telemetry Engineering",
     headline: "Unlocking Real-Time Intelligence from the Shop Floor.",
+    externalImageUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200",
     content: [
       {
         _type: 'block',
@@ -576,6 +584,7 @@ const servicesData = [
     slug: "automation",
     title: "Factory & Industrial Automation",
     headline: "Robotics and Intelligent Control Systems.",
+    externalImageUrl: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=1200",
     content: [
       {
         _type: 'block',
@@ -613,6 +622,7 @@ const servicesData = [
     slug: "cloud-infrastructure",
     title: "Managed Industrial Cloud Infrastructure",
     headline: "High-Availability Ecosystems for Mission-Critical Apps.",
+    externalImageUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200",
     content: [
       {
         _type: 'block',
@@ -650,6 +660,7 @@ const servicesData = [
     slug: "ai-machine-learning",
     title: "AI & Machine Learning",
     headline: "Empower your enterprise with predictive analytics and generative AI.",
+    externalImageUrl: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&q=80&w=1200",
     content: [
       {
         _type: 'block',
@@ -682,6 +693,7 @@ const servicesData = [
     slug: "business-transformation",
     title: "Business Transformation",
     headline: "Comprehensive digital transformation strategies to modernize legacy systems.",
+    externalImageUrl: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=1200",
     content: [
       {
         _type: 'block',
@@ -873,6 +885,7 @@ async function recover() {
         title: item.title,
         slug: { _type: 'slug', current: item.slug },
         headline: item.headline,
+        externalImageUrl: item.externalImageUrl,
         content: item.content,
         features: item.features,
         process: item.process,

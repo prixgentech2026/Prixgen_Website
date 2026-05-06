@@ -227,12 +227,48 @@ export async function getIndustriesPageData() {
 
 export async function getEngineeringServices() {
   const engineeringSlugs = ["iiot-telemetry", "automation", "cloud-infrastructure"];
-  return servicesData.filter(s => engineeringSlugs.includes(s.slug));
+  const engineeringMock = servicesData.filter(s => engineeringSlugs.includes(s.slug));
+
+  if (!client) return engineeringMock;
+
+  try {
+    const results = await Promise.all(
+      engineeringSlugs.map(slug => client!.fetch(serviceBySlugQuery, { slug }))
+    );
+    const fetched = results
+      .map((data, i) => {
+        if (!data) return engineeringMock.find(s => s.slug === engineeringSlugs[i]) || null;
+        return {
+          ...data,
+          seo: data.seo || engineeringMock.find(s => s.slug === engineeringSlugs[i])?.seo
+        };
+      })
+      .filter(Boolean);
+    return fetched.length > 0 ? fetched : engineeringMock;
+  } catch (error) {
+    console.error('Sanity Fetch Error (Engineering Services):', error);
+    return engineeringMock;
+  }
 }
 
 export async function getEngineeringServiceBySlug(slug: string) {
-  const services = await getEngineeringServices();
-  return services.find(s => s.slug === slug) || null;
+  const engineeringSlugs = ["iiot-telemetry", "automation", "cloud-infrastructure"];
+  const mockFallback = servicesData.find(s => s.slug === slug) || null;
+
+  if (!engineeringSlugs.includes(slug)) return null;
+  if (!client) return mockFallback;
+
+  try {
+    const data = await client.fetch(serviceBySlugQuery, { slug });
+    if (!data) return mockFallback;
+    return {
+      ...data,
+      seo: data.seo || mockFallback?.seo
+    };
+  } catch (error) {
+    console.error(`Sanity Fetch Error (Engineering Service: ${slug}):`, error);
+    return mockFallback;
+  }
 }
 
 /**
