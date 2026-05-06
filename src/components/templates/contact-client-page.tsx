@@ -72,7 +72,15 @@ export default function ContactClientPage({ contactData }: { contactData: any })
             </FadeUp>
             <FadeUp delay={0.2} className="space-y-4">
               <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest">Global Desk</h3>
-              <p className="text-2xl font-bold text-prixgen-blue">{contactData.phone}</p>
+              <div className="space-y-2">
+                <p className="text-2xl font-bold text-prixgen-blue">{contactData.phone}</p>
+                {contactData.mobile && (
+                  <p className="text-xl font-bold text-prixgen-blue/70">
+                    <span className="text-[10px] uppercase tracking-widest text-slate-400 mr-2">Mobile:</span>
+                    {contactData.mobile}
+                  </p>
+                )}
+              </div>
             </FadeUp>
           </div>
 
