@@ -12,7 +12,7 @@ export default function CareersClient() {
   return (
     <div className="bg-white selection:bg-prixgen-blue selection:text-white">
       {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex items-center pt-20 overflow-hidden bg-white">
+      <section className="relative min-h-[80vh] flex items-center pt-32 overflow-hidden bg-white">
         <AmbientGlow />
         
         {/* Animated Background Grid */}

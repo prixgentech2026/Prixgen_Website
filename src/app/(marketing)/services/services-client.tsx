@@ -32,7 +32,7 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
   return (
     <div className="bg-white overflow-hidden selection:bg-prixgen-blue selection:text-white">
       {/* Section 1: The Hero */}
-      <section className="relative min-h-[75vh] flex items-center pt-16 overflow-hidden bg-white">
+      <section className="relative min-h-[80vh] flex items-center pt-32 overflow-hidden bg-white">
         <AmbientGlow />
         
         {/* Animated Background Grid */}

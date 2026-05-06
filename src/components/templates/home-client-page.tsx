@@ -97,7 +97,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
       />
       
       <main>
-        <section className="relative min-h-screen flex items-center pt-0 overflow-hidden bg-white">
+        <section className="relative min-h-screen flex items-center pt-28 overflow-hidden bg-white">
           <AmbientGlow />
           
           {/* Animated Background Grid */}
