@@ -1,8 +1,8 @@
 import { client } from '@/sanity/lib/client';
-import { 
-  homeQuery, 
-  industryBySlugQuery, 
-  solutionBySlugQuery, 
+import {
+  homeQuery,
+  industryBySlugQuery,
+  solutionBySlugQuery,
   serviceBySlugQuery,
   industriesQuery,
   solutionsQuery,
@@ -143,12 +143,12 @@ export async function getServicesPageData() {
   try {
     const data = await client.fetch(servicesPageQuery);
     if (!data) return servicesPageMockData;
-    
+
     // Ensure we show all services even if Sanity only has a few
     return {
       ...data,
       coreServices: data.coreServices && data.coreServices.length >= servicesPageMockData.coreServices.length
-        ? data.coreServices 
+        ? data.coreServices
         : servicesPageMockData.coreServices
     };
   } catch (error) {
@@ -225,7 +225,7 @@ export interface ServicesPageData {
 }
 
 export const clientsData = [
-  { name: "Licious" }, { name: "Curefit" }, { name: "Zetwerk" }, 
+  { name: "Licious" }, { name: "Curefit" }, { name: "Zetwerk" },
   { name: "Designcafe" }, { name: "Ravago" }, { name: "BI Worldwide" },
   { name: "Murudeshwar Ceramics" }, { name: "Vahini Irrigations" }
 ];
@@ -380,7 +380,7 @@ export const industriesData: any[] = [
     slug: "chemicals",
     title: "Chemicals & Process Manufacturing",
     headline: "Precision, Compliance, and Batch Intelligence.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1581093450021-4a7360e9a6ad?auto=format&fit=crop&q=80&w=1000", altText: "Chemical Industry" },
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1532187875605-1ef6c237f146?auto=format&fit=crop&q=80&w=1000", altText: "Chemical Industry" },
     content: [
       {
         _type: 'block',
@@ -548,7 +548,7 @@ export const solutionsData: any[] = [
     slug: "sap-ecosystems",
     title: "SAP Ecosystems",
     headline: "Unlocking the Full Value of SAP.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1551288049-bbbda5366391?auto=format&fit=crop&q=80&w=1000", altText: "SAP Solutions" },
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=1000", altText: "SAP Solutions" },
     content: [
       {
         _type: 'block',

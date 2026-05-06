@@ -9,10 +9,14 @@ import {
   servicesPageMockData 
 } from '../src/lib/data';
 
-// Configuration from .env.local
-const projectId = 'n8icbhxu';
-const dataset = 'production';
-const token = 'skX7V2yaZU3wi5Hq9FmPeXK4KpdBlSdUsGa81fj8FmhZMG6vpCNErX5ZBPCZOHrwPTzx2bvzYfqFDCTDQT848oDfkfkKqlBIh34U6ui4WylhPRlYR7gGWveQtb0Agtw5DCCLpSW6ulDFZ0CyKSjjOMPOABW5szjaQ2gHUTG5rKbZl3S8FwMX';
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
+const token = process.env.SANITY_API_TOKEN;
+
+if (!projectId || !dataset || !token) {
+  console.error('Missing Sanity configuration. Please run with: npx tsx --env-file .env.local scripts/migrate-to-sanity.ts');
+  process.exit(1);
+}
 
 const client = createClient({
   projectId,
@@ -23,18 +27,28 @@ const client = createClient({
 });
 
 async function uploadImage(url: string) {
+  const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1000';
+  
   console.log(`Uploading image: ${url}`);
   try {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error(`Failed to fetch image: ${response.statusText}`);
+    let response = await fetch(url);
+    
+    if (!response.ok) {
+      console.warn(`[WARN] Failed to fetch ${url}. Using fallback image.`);
+      response = await fetch(FALLBACK_IMAGE);
+    }
+    
+    if (!response.ok) throw new Error(`Failed to fetch even the fallback image: ${response.statusText}`);
+    
     const arrayBuffer = await response.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
     const asset = await client.assets.upload('image', buffer, {
-      filename: url.split('/').pop() || 'image.jpg',
+      filename: url.split('/').pop()?.split('?')[0] || 'image.jpg',
     });
+    console.log(`[SUCCESS] Image uploaded: ${asset._id}`);
     return asset._id;
   } catch (error) {
-    console.error(`Error uploading image ${url}:`, error);
+    console.error(`[ERROR] Failed to upload ${url}:`, error);
     return null;
   }
 }
