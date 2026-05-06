@@ -11,6 +11,8 @@ interface OptimizedImageProps extends Omit<ImageProps, 'onLoad'> {
 export function OptimizedImage({ wrapperClassName, className, alt, ...props }: OptimizedImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
 
+  if (!props.src || props.src === '') return null;
+
   return (
     <div className={cn("relative w-full h-full overflow-hidden bg-prixgen-gray/5", wrapperClassName)}>
       <motion.div

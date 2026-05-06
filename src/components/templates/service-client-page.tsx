@@ -86,7 +86,7 @@ export default function ServiceClientPage({ service }: { service: any }) {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
           {/* Main Content */}
           <article className="lg:col-span-2 space-y-16">
-            {service.summaryImage && (
+            {service.summaryImage?.sourceUrl && (
               <FadeUp delay={0.2} className="relative aspect-video w-full rounded-[3rem] overflow-hidden shadow-2xl">
                 <OptimizedImage
                   src={service.summaryImage.sourceUrl}
