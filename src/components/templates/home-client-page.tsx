@@ -15,7 +15,15 @@ import { AmbientGlow } from '@/components/animations/ambient-glow';
 import { PortableText } from '@/components/ui/portable-text';
 import { urlFor } from '@/sanity/lib/image';
 
-import InteractiveGlobe from '@/components/ui/interactive-globe';
+// Dynamic import for performance-heavy globe component
+const InteractiveGlobe = dynamic(() => import('@/components/ui/interactive-globe'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full aspect-square flex items-center justify-center">
+      <div className="w-12 h-12 border-4 border-prixgen-blue/20 border-t-prixgen-blue rounded-full animate-spin" />
+    </div>
+  )
+});
 
 /**
  * Custom component to handle patron logos with robust fallback
@@ -165,11 +173,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                     </div>
                   )}
                   
-                  {/* Floating Tech Badge */}
-                  <div className="absolute bottom-8 left-8 bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-white/20 max-w-[200px]">
-                    <div className="text-prixgen-blue font-black text-2xl mb-1">2026</div>
-                    <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-tight">Operational Standard v3.0</div>
-                  </div>
+
                 </div>
               </FadeUp>
             </div>

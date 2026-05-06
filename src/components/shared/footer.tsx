@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { FOOTER_DATA, MENU_DATA } from '@/lib/constants';
+import { Logo } from '@/components/shared/logo';
 
 /**
  * Global Footer component.
@@ -11,11 +12,8 @@ export function Footer() {
     <footer className="bg-prixgen-dark text-white py-20 mt-20">
       <div className="container mx-auto px-4 grid grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
         <div className="col-span-2 lg:col-span-1">
-          <Link href="/" className="flex items-center gap-2 mb-6">
-            <div className="w-10 h-10 bg-prixgen-blue rounded-md flex items-center justify-center">
-              <span className="text-white font-bold text-lg">P</span>
-            </div>
-            <span className="text-2xl font-bold tracking-tight">Prixgen</span>
+          <Link href="/" className="inline-block mb-6">
+            <Logo variant="light" className="w-32" />
           </Link>
           <p className="text-gray-400 text-sm leading-relaxed mb-6">
             {FOOTER_DATA.tagline}

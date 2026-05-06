@@ -12,8 +12,8 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     // Initialize Lenis with high-performance responsive settings
     const lenis = new Lenis({
       autoRaf: true,
-      lerp: 0.12, 
-      duration: 1.2, 
+      lerp: 0.15, 
+      duration: 0.8, 
       smoothWheel: true,
       wheelMultiplier: 1,
       touchMultiplier: 1.5,
@@ -30,7 +30,7 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       if (anchor && anchor.hash && anchor.origin === window.location.origin && anchor.pathname === window.location.pathname) {
         e.preventDefault();
         lenis.scrollTo(anchor.hash, {
-          duration: 1.2,
+          duration: 0.8,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         });
       }

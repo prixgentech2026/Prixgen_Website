@@ -36,9 +36,9 @@ const MapBackground = React.memo(() => (
               stroke="#CBD5E1" // slate-300 for visible borders
               strokeWidth={0.5}
               style={{
-                default: { outline: "none" },
-                hover: { fill: "#CBD5E1", outline: "none" }, // slate-300
-                pressed: { outline: "none" },
+                default: { outline: "none", pointerEvents: "none" },
+                hover: { outline: "none", pointerEvents: "none" },
+                pressed: { outline: "none", pointerEvents: "none" },
               }}
             />
           ))
@@ -56,9 +56,9 @@ const MapBackground = React.memo(() => (
             stroke="#64748B" // slate-500
             strokeWidth={0.8}
             style={{
-              default: { outline: "none" },
-              hover: { fill: "#64748B", outline: "none" },
-              pressed: { outline: "none" },
+              default: { outline: "none", pointerEvents: "none" },
+              hover: { outline: "none", pointerEvents: "none" },
+              pressed: { outline: "none", pointerEvents: "none" },
             }}
           />
         ))
@@ -81,7 +81,7 @@ export default function InteractiveGlobe() {
           observer.disconnect();
         }
       },
-      { rootMargin: '200px' } // Load slightly before it comes into view
+      { rootMargin: '0px' } // Load ONLY when actually in view
     );
 
     if (containerRef.current) {
@@ -94,9 +94,31 @@ export default function InteractiveGlobe() {
   return (
     <div 
       ref={containerRef}
-      className="w-full aspect-video md:aspect-square flex flex-col items-center justify-center p-4"
-      style={{ transform: 'translateZ(0)' }}
+      className="w-full aspect-video md:aspect-square flex flex-col items-center justify-center p-4 overflow-hidden"
+      style={{ 
+        transform: 'translateZ(0)',
+        willChange: 'transform',
+        // @ts-ignore
+        contentVisibility: 'auto',
+        containIntrinsicSize: '500px 500px',
+        pointerEvents: 'none'
+      }}
+      onMouseEnter={(e) => e.currentTarget.style.pointerEvents = 'auto'}
+      onMouseLeave={(e) => e.currentTarget.style.pointerEvents = 'none'}
     >
+      <style jsx global>{`
+        @keyframes globe-pulse {
+          0% { transform: scale(1); opacity: 0.1; }
+          50% { transform: scale(1.8); opacity: 0.4; }
+          100% { transform: scale(1); opacity: 0.1; }
+        }
+        .globe-marker-pulse {
+          transform-origin: center;
+          transform-box: fill-box;
+          animation: globe-pulse 3s ease-in-out infinite;
+        }
+      `}</style>
+
       {!isVisible ? (
         <div className="w-full aspect-square flex items-center justify-center">
           <div className="w-12 h-12 border-4 border-prixgen-blue/20 border-t-prixgen-blue rounded-full animate-spin" />
@@ -106,8 +128,8 @@ export default function InteractiveGlobe() {
           <ComposableMap
             projection="geoMercator"
             projectionConfig={{
-              scale: 160, // Increased scale for better visibility
-              center: [75, 18] // Adjusted center slightly
+              scale: 160, 
+              center: [75, 18] 
             }}
             className="w-full h-auto transition-all duration-500"
           >
@@ -116,21 +138,13 @@ export default function InteractiveGlobe() {
             {/* Strategic Locations */}
             {locations.map(({ name, coordinates, offset }) => (
               <Marker key={name} coordinates={coordinates as [number, number]}>
-                {/* Animated Halo */}
-                <motion.circle
+                {/* CSS-Animated Halo (More performant than Framer Motion for loops) */}
+                <circle
                   r={12}
                   fill="#00A3E0"
-                  initial={{ opacity: 0.1, scale: 0.8 }}
-                  animate={{ 
-                    opacity: [0.1, 0.4, 0.1],
-                    scale: [1, 1.8, 1]
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
+                  className="globe-marker-pulse"
                 />
+                
                 {/* Strategic Node */}
                 <circle 
                   r={5} 
@@ -139,6 +153,7 @@ export default function InteractiveGlobe() {
                   strokeWidth={2} 
                   className="drop-shadow-lg"
                 />
+                
                 {/* City Label */}
                 <text
                   textAnchor="middle"

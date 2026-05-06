@@ -1,255 +1,243 @@
-import * as fs from 'fs';
-import * as path from 'path';
-
-// 0. Load environment variables from .env.local manually if not present
-function loadEnv() {
-  const envPath = path.resolve(process.cwd(), '.env.local');
-  if (fs.existsSync(envPath)) {
-    const envFile = fs.readFileSync(envPath, 'utf-8');
-    envFile.split('\n').forEach(line => {
-      const match = line.match(/^([^#\s=]+)\s*=\s*(.*)$/);
-      if (match) {
-        const key = match[1];
-        let value = match[2].trim();
-        // Remove quotes if present
-        if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
-          value = value.substring(1, value.length - 1);
-        }
-        if (!process.env[key]) {
-          process.env[key] = value;
-        }
-      }
-    });
-  }
-}
-
-loadEnv();
-
+import { createClient } from '@sanity/client';
 import { 
   homeData, 
+  aboutData, 
+  contactData, 
   industriesData, 
   solutionsData, 
   servicesData,
-  aboutData,
-  contactData,
-  servicesPageMockData
+  servicesPageMockData 
 } from '../src/lib/data';
 
-// 1. Initialize the Sanity Client
-import { createClient } from '@sanity/client';
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
-const token = process.env.SANITY_API_TOKEN;
-
-if (!projectId || !token) {
-  console.error('❌ ERROR: Missing NEXT_PUBLIC_SANITY_PROJECT_ID or SANITY_API_TOKEN in environment variables.');
-  process.exit(1);
-}
+// Configuration from .env.local
+const projectId = 'n8icbhxu';
+const dataset = 'production';
+const token = 'skX7V2yaZU3wi5Hq9FmPeXK4KpdBlSdUsGa81fj8FmhZMG6vpCNErX5ZBPCZOHrwPTzx2bvzYfqFDCTDQT848oDfkfkKqlBIh34U6ui4WylhPRlYR7gGWveQtb0Agtw5DCCLpSW6ulDFZ0CyKSjjOMPOABW5szjaQ2gHUTG5rKbZl3S8FwMX';
 
 const client = createClient({
   projectId,
   dataset,
-  apiVersion: '2024-04-30',
-  useCdn: false,
   token,
+  useCdn: false,
+  apiVersion: '2024-05-01',
 });
 
-/**
- * Helper to upload an image from a URL to Sanity
- */
-async function uploadImage(imageUrl: string) {
-  if (!imageUrl || !imageUrl.startsWith('http')) return null;
-  
+async function uploadImage(url: string) {
+  console.log(`Uploading image: ${url}`);
   try {
-    console.log(`   Uploading image: ${imageUrl.substring(0, 50)}...`);
-    const response = await fetch(imageUrl);
+    const response = await fetch(url);
     if (!response.ok) throw new Error(`Failed to fetch image: ${response.statusText}`);
-    
-    const buffer = await response.arrayBuffer();
-    const asset = await client.assets.upload('image', Buffer.from(buffer), {
-      filename: path.basename(imageUrl.split('?')[0])
+    const arrayBuffer = await response.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    const asset = await client.assets.upload('image', buffer, {
+      filename: url.split('/').pop() || 'image.jpg',
     });
-    
-    return {
-      _type: 'image',
-      asset: {
-        _type: 'reference',
-        _ref: asset._id
-      }
-    };
+    return asset._id;
   } catch (error) {
-    console.error(`   ⚠️ Failed to upload image ${imageUrl}:`, error);
+    console.error(`Error uploading image ${url}:`, error);
     return null;
   }
 }
 
-/**
- * Process a document and upload its images
- */
-async function processImages(item: any) {
-  const processed = { ...item };
+async function migrateHome() {
+  console.log('Migrating Home Data...');
+  const imageId = await uploadImage(homeData.heroImage.asset as string);
   
-  if (item.featuredImage?.sourceUrl) {
-    const asset = await uploadImage(item.featuredImage.sourceUrl);
-    if (asset) {
-      processed.featuredImage = {
-        ...asset,
-        altText: item.featuredImage.altText
-      };
-    }
-  }
+  const doc = {
+    _type: 'home',
+    _id: 'home',
+    title: homeData.title,
+    heroImage: imageId ? {
+      _type: 'image',
+      asset: {
+        _type: 'reference',
+        _ref: imageId,
+      },
+    } : undefined,
+    subheadline: homeData.subheadline,
+    heroPrimaryCTA: homeData.heroPrimaryCTA,
+    heroSecondaryCTA: homeData.heroSecondaryCTA,
+    socialProof: homeData.socialProof,
+    clients: homeData.clients.map(c => ({ _key: Math.random().toString(36).substr(2, 9), ...c })),
+    testimonials: homeData.testimonials.map(t => ({ _key: Math.random().toString(36).substr(2, 9), ...t })),
+    ctaTitle: homeData.ctaTitle,
+    ctaDescription: homeData.ctaDescription,
+    ctaButtonText: homeData.ctaButtonText,
+    seo: homeData.seo,
+  };
 
-  if (item.summaryImage?.sourceUrl) {
-    const asset = await uploadImage(item.summaryImage.sourceUrl);
-    if (asset) {
-      processed.summaryImage = {
-        ...asset,
-        altText: item.summaryImage.altText
-      };
-    }
-  }
-
-  if (item.heroImage?.sourceUrl) {
-    const asset = await uploadImage(item.heroImage.sourceUrl);
-    if (asset) {
-      processed.heroImage = asset;
-    }
-  }
-
-  return processed;
+  await client.createOrReplace(doc);
+  console.log('Home Data Migrated.');
 }
 
-async function migrateData() {
-  console.log('🚀 Starting Advanced Data Migration (with Image Processing)...\n');
+async function migrateAbout() {
+  console.log('Migrating About Data...');
+  const imageId = await uploadImage(aboutData.featuredImage.sourceUrl);
 
-  // ---------------------------------------------------------
-  // MIGRATING HOME PAGE
-  // ---------------------------------------------------------
-  console.log('Migrating Home Page...');
-  try {
-    const processedHome = await processImages(homeData);
-    await client.createOrReplace({
-      _id: 'homePage',
-      _type: 'home',
-      ...processedHome,
-    });
-    console.log('✅ Home Page migrated successfully.');
-  } catch (error) {
-    console.error('❌ Failed to migrate Home Page:', error);
-  }
+  const doc = {
+    _type: 'about',
+    _id: 'about',
+    title: aboutData.title,
+    subtitle: aboutData.subtitle,
+    content: aboutData.content,
+    vision: aboutData.vision,
+    mission: aboutData.mission,
+    stats: aboutData.stats.map(s => ({ _key: Math.random().toString(36).substr(2, 9), ...s })),
+    whyChooseUsIntro: aboutData.whyChooseUsIntro,
+    whyChooseUs: aboutData.whyChooseUs.map(w => ({ _key: Math.random().toString(36).substr(2, 9), ...w })),
+    experienceSection: {
+      ...aboutData.experienceSection,
+      points: aboutData.experienceSection.points,
+    },
+    featuredImage: imageId ? {
+      _type: 'image',
+      asset: {
+        _type: 'reference',
+        _ref: imageId,
+      },
+      altText: aboutData.featuredImage.altText,
+    } : undefined,
+    seo: aboutData.seo,
+  };
 
-  // ---------------------------------------------------------
-  // MIGRATING ABOUT PAGE
-  // ---------------------------------------------------------
-  console.log('\nMigrating About Us Page...');
-  try {
-    const processedAbout = await processImages(aboutData);
-    await client.createOrReplace({
-      _id: 'aboutPage',
-      _type: 'about',
-      ...processedAbout,
-    });
-    console.log('✅ About Us Page migrated successfully.');
-  } catch (error) {
-    console.error('❌ Failed to migrate About Page:', error);
-  }
-
-  // ---------------------------------------------------------
-  // MIGRATING CONTACT PAGE
-  // ---------------------------------------------------------
-  console.log('\nMigrating Contact Page...');
-  try {
-    const processedContact = await processImages(contactData);
-    await client.createOrReplace({
-      _id: 'contactPage',
-      _type: 'contact',
-      ...processedContact,
-    });
-    console.log('✅ Contact Page migrated successfully.');
-  } catch (error) {
-    console.error('❌ Failed to migrate Contact Page:', error);
-  }
-
-  // ---------------------------------------------------------
-  // MIGRATING INDUSTRIES
-  // ---------------------------------------------------------
-  console.log('\nMigrating Industries...');
-  for (const item of industriesData) {
-    try {
-      const processed = await processImages(item);
-      await client.createOrReplace({
-        _id: `industry-${item.slug}`,
-        _type: 'industry',
-        ...processed,
-        slug: { _type: 'slug', current: item.slug }
-      });
-      console.log(`✅ Industry migrated: ${item.title}`);
-    } catch (error) {
-      console.error(`❌ Failed to migrate industry ${item.title}:`, error);
-    }
-  }
-
-  // ---------------------------------------------------------
-  // MIGRATING SOLUTIONS
-  // ---------------------------------------------------------
-  console.log('\nMigrating Solutions...');
-  for (const item of solutionsData) {
-    try {
-      const processed = await processImages(item);
-      await client.createOrReplace({
-        _id: `solution-${item.slug}`,
-        _type: 'solution',
-        ...processed,
-        slug: { _type: 'slug', current: item.slug }
-      });
-      console.log(`✅ Solution migrated: ${item.title}`);
-    } catch (error) {
-      console.error(`❌ Failed to migrate solution ${item.title}:`, error);
-    }
-  }
-
-  // ---------------------------------------------------------
-  // MIGRATING SERVICES
-  // ---------------------------------------------------------
-  console.log('\nMigrating Services...');
-  for (const item of servicesData) {
-    try {
-      const processed = await processImages(item);
-      await client.createOrReplace({
-        _id: `service-${item.slug}`,
-        _type: 'service',
-        ...processed,
-        slug: { _type: 'slug', current: item.slug }
-      });
-      console.log(`✅ Service migrated: ${item.title}`);
-    } catch (error) {
-      console.error(`❌ Failed to migrate service ${item.title}:`, error);
-    }
-  }
-
-  // ---------------------------------------------------------
-  // MIGRATING SERVICES LANDING PAGE
-  // ---------------------------------------------------------
-  console.log('\nMigrating Services Landing Page...');
-  try {
-    const coreServiceRefs = servicesPageMockData.coreServices.map(service => ({
-      _type: 'reference',
-      _ref: `service-${service.slug}`,
-      _key: `ref-${service.slug}`
-    }));
-
-    await client.createOrReplace({
-      _id: 'servicesPage',
-      _type: 'servicesPage',
-      ...servicesPageMockData,
-      coreServices: coreServiceRefs
-    });
-    console.log('✅ Services Landing Page migrated successfully.');
-  } catch (error) {
-    console.error('❌ Failed to migrate Services Page:', error);
-  }
-
-  console.log('\n🎉 Migration complete! Go check your Sanity Studio.');
+  await client.createOrReplace(doc);
+  console.log('About Data Migrated.');
 }
 
-migrateData();
+async function migrateContact() {
+  console.log('Migrating Contact Data...');
+  const doc = {
+    _type: 'contact',
+    _id: 'contact',
+    ...contactData,
+  };
+  await client.createOrReplace(doc);
+  console.log('Contact Data Migrated.');
+}
+
+async function migrateIndustries() {
+  console.log('Migrating Industries...');
+  for (const industry of industriesData) {
+    console.log(`Migrating Industry: ${industry.title}`);
+    const imageId = await uploadImage(industry.featuredImage.sourceUrl);
+    
+    const doc = {
+      _type: 'industry',
+      _id: `industry-${industry.slug}`,
+      title: industry.title,
+      slug: { _type: 'slug', current: industry.slug },
+      headline: industry.headline,
+      featuredImage: imageId ? {
+        _type: 'image',
+        asset: {
+          _type: 'reference',
+          _ref: imageId,
+        },
+        altText: industry.featuredImage.altText,
+      } : undefined,
+      content: industry.content,
+      features: industry.features.map((f: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...f })),
+      process: industry.process.map((p: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...p })),
+      seo: industry.seo,
+    };
+    
+    await client.createOrReplace(doc);
+  }
+  console.log('Industries Migrated.');
+}
+
+async function migrateSolutions() {
+  console.log('Migrating Solutions...');
+  for (const solution of solutionsData) {
+    console.log(`Migrating Solution: ${solution.title}`);
+    const imageId = await uploadImage(solution.featuredImage.sourceUrl);
+    
+    const doc = {
+      _type: 'solution',
+      _id: `solution-${solution.slug}`,
+      title: solution.title,
+      slug: { _type: 'slug', current: solution.slug },
+      headline: solution.headline,
+      featuredImage: imageId ? {
+        _type: 'image',
+        asset: {
+          _type: 'reference',
+          _ref: imageId,
+        },
+        altText: solution.featuredImage.altText,
+      } : undefined,
+      content: solution.content,
+      features: solution.features.map((f: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...f })),
+      process: solution.process.map((p: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...p })),
+      seo: solution.seo,
+    };
+    
+    await client.createOrReplace(doc);
+  }
+  console.log('Solutions Migrated.');
+}
+
+async function migrateServices() {
+  console.log('Migrating Services...');
+  for (const service of servicesData) {
+    console.log(`Migrating Service: ${service.title}`);
+    const imageId = await uploadImage(service.featuredImage.sourceUrl);
+    
+    const doc = {
+      _type: 'service',
+      _id: `service-${service.slug}`,
+      title: service.title,
+      slug: { _type: 'slug', current: service.slug },
+      headline: service.headline,
+      featuredImage: imageId ? {
+        _type: 'image',
+        asset: {
+          _type: 'reference',
+          _ref: imageId,
+        },
+        altText: service.featuredImage.altText,
+      } : undefined,
+      content: service.content,
+      features: service.features.map((f: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...f })),
+      process: service.process.map((p: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...p })),
+      seo: service.seo,
+    };
+    
+    await client.createOrReplace(doc);
+  }
+  console.log('Services Migrated.');
+}
+
+async function migrateServicesPage() {
+  console.log('Migrating Services Page Data...');
+  const doc = {
+    _type: 'servicesPage',
+    _id: 'servicesPage',
+    title: servicesPageMockData.title,
+    subtitle: servicesPageMockData.subtitle,
+    heroSubheadline: servicesPageMockData.heroSubheadline,
+    methodology: servicesPageMockData.methodology.map(m => ({ _key: Math.random().toString(36).substr(2, 9), ...m })),
+    outcomes: servicesPageMockData.outcomes.map(o => ({ _key: Math.random().toString(36).substr(2, 9), ...o })),
+    coreServices: servicesPageMockData.coreServices.map(s => ({ _key: Math.random().toString(36).substr(2, 9), ...s })),
+    seo: servicesPageMockData.seo,
+  };
+  await client.createOrReplace(doc);
+  console.log('Services Page Data Migrated.');
+}
+
+async function runMigration() {
+  try {
+    await migrateHome();
+    await migrateAbout();
+    await migrateContact();
+    await migrateIndustries();
+    await migrateSolutions();
+    await migrateServices();
+    await migrateServicesPage();
+    console.log('ALL MIGRATIONS COMPLETED SUCCESSFULLY!');
+  } catch (error) {
+    console.error('Migration failed:', error);
+  }
+}
+
+runMigration();

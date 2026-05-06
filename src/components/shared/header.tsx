@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { OptimizedImage } from '@/components/ui/optimized-image';
 import { MegaMenu } from '@/components/shared/mega-menu';
 import { MobileMenu } from '@/components/shared/mobile-menu';
+import { Logo } from '@/components/shared/logo';
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
 
@@ -24,11 +25,8 @@ export function Header() {
   return (
     <header className={`sticky top-0 z-50 w-full transition-all duration-300 ${isScrolled ? 'bg-white/80 backdrop-blur-md shadow-sm py-2' : 'bg-transparent py-4'}`}>
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-prixgen-blue rounded-md flex items-center justify-center">
-            <span className="text-white font-bold text-xl">P</span>
-          </div>
-          <span className="text-2xl font-bold text-prixgen-blue hidden sm:block tracking-tight">Prixgen</span>
+        <Link href="/" className="flex items-center">
+          <Logo className="w-32 md:w-40" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-8 mr-auto ml-12">
