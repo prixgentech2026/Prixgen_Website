@@ -16,11 +16,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
   const service = await getServiceBySlug(slug);
-  if (!service) return {};
   return {
-    title: `${service.title} | Prixgen Enterprise`,
-    description: service.seo.metaDesc,
-    keywords: service.seo.keywords,
+    title: service?.seo?.title || `${service?.title || 'Service'} | Prixgen`,
+    description: service?.seo?.metaDesc || "Expert enterprise application services and managed digital solutions.",
+    keywords: service?.seo?.keywords,
   };
 }
 

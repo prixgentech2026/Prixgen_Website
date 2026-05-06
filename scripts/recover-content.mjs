@@ -1,454 +1,51 @@
-import { client } from '@/sanity/lib/client';
-import {
-  homeQuery,
-  industryBySlugQuery,
-  solutionBySlugQuery,
-  serviceBySlugQuery,
-  industriesQuery,
-  solutionsQuery,
-  servicesQuery,
-  servicesPageQuery,
-  industriesPageQuery,
-  aboutQuery,
-  contactQuery
-} from '@/sanity/lib/queries';
+import { createClient } from '@sanity/client';
+import { createRequire } from 'module';
+import { resolve } from 'path';
+import { fileURLToPath } from 'url';
+import { readFileSync } from 'fs';
 
-/**
- * SANITY FETCHING LAYER
- * These functions fetch data from Sanity if a Project ID is provided.
- * Otherwise, they fallback to the local mock data defined below.
- */
-
-export async function getHomeData() {
-  if (!client) return homeData;
-  try {
-    const data = await client.fetch(homeQuery);
-    return data || homeData;
-  } catch (error) {
-    console.error('Sanity Fetch Error (Home):', error);
-    return homeData;
+// Load .env.local from the project root (one level up from /scripts)
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
+const envPath = resolve(__dirname, '../.env.local');
+try {
+  const envFile = readFileSync(envPath, 'utf8');
+  for (const line of envFile.split('\n')) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) continue;
+    const eqIdx = trimmed.indexOf('=');
+    if (eqIdx === -1) continue;
+    const key = trimmed.slice(0, eqIdx).trim();
+    const val = trimmed.slice(eqIdx + 1).trim().replace(/^["']|["']$/g, '');
+    if (!process.env[key]) process.env[key] = val;
   }
+} catch {
+  // .env.local not found — rely on environment variables already set in shell
 }
 
-export async function getAboutData() {
-  if (!client) return aboutData;
-  try {
-    const data = await client.fetch(aboutQuery);
-    return data || aboutData;
-  } catch (error) {
-    console.error('Sanity Fetch Error (About):', error);
-    return aboutData;
-  }
+const SANITY_PROJECT_ID = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+const SANITY_API_TOKEN = process.env.SANITY_API_TOKEN;
+
+if (!SANITY_PROJECT_ID || !SANITY_API_TOKEN) {
+  console.error('❌ Missing required environment variables: NEXT_PUBLIC_SANITY_PROJECT_ID and/or SANITY_API_TOKEN');
+  console.error('   Make sure .env.local exists in the project root or these variables are set in your shell.');
+  process.exit(1);
 }
 
-export async function getContactData() {
-  if (!client) return contactData;
-  try {
-    const data = await client.fetch(contactQuery);
-    return data || contactData;
-  } catch (error) {
-    console.error('Sanity Fetch Error (Contact):', error);
-    return contactData;
-  }
-}
-
-export async function getIndustries() {
-  if (!client) return industriesData;
-  try {
-    const data = await client.fetch(industriesQuery);
-    return data && data.length > 0 ? data.map((item: any) => ({
-      ...item,
-      slug: item.slug?.current || item.slug
-    })) : industriesData;
-  } catch (error) {
-    console.error('Sanity Fetch Error (Industries):', error);
-    return industriesData;
-  }
-}
-
-export async function getIndustryBySlug(slug: string) {
-  if (!client) {
-    return industriesData.find(i => i.slug === slug);
-  }
-  try {
-    const data = await client.fetch(industryBySlugQuery, { slug });
-    if (!data) return industriesData.find(i => i.slug === slug);
-    
-    return {
-      ...data,
-      seo: data.seo || industriesData.find(i => i.slug === slug)?.seo
-    };
-  } catch (error) {
-    console.error(`Sanity Fetch Error (Industry: ${slug}):`, error);
-    return industriesData.find(i => i.slug === slug);
-  }
-}
-
-export async function getSolutions() {
-  if (!client) return solutionsData;
-  try {
-    const data = await client.fetch(solutionsQuery);
-    return data && data.length > 0 ? data.map((item: any) => ({
-      ...item,
-      slug: item.slug?.current || item.slug
-    })) : solutionsData;
-  } catch (error) {
-    console.error('Sanity Fetch Error (Solutions):', error);
-    return solutionsData;
-  }
-}
+const client = createClient({
+  projectId: SANITY_PROJECT_ID,
+  dataset: 'production',
+  token: SANITY_API_TOKEN,
+  apiVersion: '2024-04-30',
+  useCdn: false,
+});
 
 
-export async function getServices() {
-  const engineeringSlugs = ["iiot-telemetry", "automation", "cloud-infrastructure"];
-  if (!client) return servicesData.filter(s => !engineeringSlugs.includes(s.slug));
-  try {
-    const data = await client.fetch(servicesQuery);
-    const allServices = data && data.length > 0 ? data.map((item: any) => ({
-      ...item,
-      slug: item.slug?.current || item.slug
-    })) : servicesData;
-    return allServices.filter((s: any) => !engineeringSlugs.includes(s.slug));
-  } catch (error) {
-    console.error('Sanity Fetch Error (Services):', error);
-    return servicesData.filter(s => !engineeringSlugs.includes(s.slug));
-  }
-}
-
-export async function getServiceBySlug(slug: string) {
-  const engineeringSlugs = ["iiot-telemetry", "automation", "cloud-infrastructure"];
-  if (engineeringSlugs.includes(slug)) return null;
-
-  if (!client) {
-    return servicesData.find(s => s.slug === slug);
-  }
-  try {
-    const data = await client.fetch(serviceBySlugQuery, { slug });
-    if (!data) return servicesData.find(s => s.slug === slug);
-    
-    return {
-      ...data,
-      seo: data.seo || servicesData.find(s => s.slug === slug)?.seo
-    };
-  } catch (error) {
-    console.error(`Sanity Fetch Error (Service: ${slug}):`, error);
-    return servicesData.find(s => s.slug === slug);
-  }
-}
-
-export async function getSolutionBySlug(slug: string) {
-  if (!client) {
-    return solutionsData.find(s => s.slug === slug);
-  }
-  try {
-    const data = await client.fetch(solutionBySlugQuery, { slug });
-    if (!data) return solutionsData.find(s => s.slug === slug);
-    
-    return {
-      ...data,
-      seo: data.seo || solutionsData.find(s => s.slug === slug)?.seo
-    };
-  } catch (error) {
-    console.error(`Sanity Fetch Error (Solution: ${slug}):`, error);
-    return solutionsData.find(s => s.slug === slug);
-  }
-}
-
-export async function getServicesPageData() {
-  if (!client) return servicesPageMockData;
-  try {
-    const data = await client.fetch(servicesPageQuery);
-    if (!data) return servicesPageMockData;
-
-    // Ensure we show all services even if Sanity only has a few
-    let cleanCoreServices = (data.coreServices || []).filter((s: any) => s !== null);
-    
-    // If we have fewer than expected, let's just fetch all of them
-    if (cleanCoreServices.length === 0 || cleanCoreServices.length < servicesPageMockData.coreServices.length) {
-      const allServices = await getServices();
-      if (allServices && allServices.length > 0) {
-        cleanCoreServices = allServices.map((s: any) => ({
-          title: s.title,
-          headline: s.headline,
-          slug: s.slug,
-          externalImageUrl: s.externalImageUrl || s.image
-        }));
-      }
-    }
-
-    return {
-      ...data,
-      seo: data.seo || servicesPageMockData.seo,
-      coreServices: cleanCoreServices.length >= servicesPageMockData.coreServices.length
-        ? cleanCoreServices
-        : servicesPageMockData.coreServices
-    };
-  } catch (error) {
-    console.error('Sanity Fetch Error (Services Page):', error);
-    return servicesPageMockData;
-  }
-}
-
-export async function getIndustriesPageData() {
-  if (!client) return industriesPageMockData;
-  try {
-    const data = await client.fetch(industriesPageQuery);
-    if (!data) return industriesPageMockData;
-
-    // Ensure we show all industries even if Sanity only has a few
-    let cleanCoreIndustries = (data.coreIndustries || []).filter((i: any) => i !== null);
-    
-    // If we have fewer than expected, let's just fetch all of them
-    if (cleanCoreIndustries.length === 0 || cleanCoreIndustries.length < industriesPageMockData.coreIndustries.length) {
-      const allIndustries = await getIndustries();
-      if (allIndustries && allIndustries.length > 0) {
-        cleanCoreIndustries = allIndustries.map((i: any) => ({
-          title: i.title,
-          headline: i.headline,
-          slug: i.slug,
-          externalImageUrl: i.externalImageUrl || i.image,
-          featuredImage: i.featuredImage?.sourceUrl
-        }));
-      }
-    }
-
-    return {
-      ...data,
-      seo: data.seo || industriesPageMockData.seo,
-      coreIndustries: cleanCoreIndustries.length >= industriesPageMockData.coreIndustries.length
-        ? cleanCoreIndustries
-        : industriesPageMockData.coreIndustries
-    };
-  } catch (error) {
-    console.error('Sanity Fetch Error (Industries Page):', error);
-    return industriesPageMockData;
-  }
-}
-
-export async function getEngineeringServices() {
-  const engineeringSlugs = ["iiot-telemetry", "automation", "cloud-infrastructure"];
-  return servicesData.filter(s => engineeringSlugs.includes(s.slug));
-}
-
-export async function getEngineeringServiceBySlug(slug: string) {
-  const services = await getEngineeringServices();
-  return services.find(s => s.slug === slug) || null;
-}
-
-/**
- * MOCK DATA (Fallback)
- */
-
-export interface PortableTextSpan {
-  _type: 'span';
-  text: string;
-  marks?: string[];
-}
-
-export interface PortableTextBlock {
-  _type: 'block';
-  _key?: string;
-  style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'blockquote';
-  children: PortableTextSpan[];
-}
-
-export interface SEOData {
-  title: string;
-  metaDesc: string;
-}
-
-export interface PageData {
-  slug: string;
-  title: string;
-  headline: string;
-  content: PortableTextBlock[];
-  seo: SEOData;
-  featuredImage?: {
-    sourceUrl: string;
-    altText: string;
-  };
-}
-
-export interface ServicesPageData {
-  title: string;
-  subtitle: string;
-  heroSubheadline: string;
-  methodology: {
-    step: string;
-    title: string;
-    description: string;
-    icon: string;
-  }[];
-  outcomes: {
-    title: string;
-    description: string;
-    icon: string;
-  }[];
-  coreServices: {
-    title: string;
-    headline: string;
-    slug: string;
-    externalImageUrl?: string;
-    featuredImage?: any;
-  }[];
-  seo: SEOData;
-}
-
-export interface IndustriesPageData {
-  title: string;
-  heroSubheadline: string;
-  methodology: {
-    step: string;
-    title: string;
-    description: string;
-    icon: string;
-  }[];
-  outcomes: {
-    title: string;
-    description: string;
-    icon: string;
-  }[];
-  coreIndustries: {
-    title: string;
-    headline: string;
-    slug: string;
-    image?: string;
-    externalImageUrl?: string;
-    featuredImage?: any;
-  }[];
-  seo: SEOData;
-}
-
-export const clientsData = [
-  { name: "Licious" }, { name: "Curefit" }, { name: "Zetwerk" },
-  { name: "Designcafe" }, { name: "Ravago" }, { name: "BI Worldwide" },
-  { name: "Murudeshwar Ceramics" }, { name: "Vahini Irrigations" }
-];
-
-export const testimonialsData = [
-  {
-    quote: "We replaced all legacy SAP, Tally, and Daily Tracker applications with Odoo Enterprise Edition. Now, all our teams are interconnected, and everything is happening paperless. Thanks to Prixgen's professional efforts and expert knowledge.",
-    author: "Karan Shetty",
-    title: "Executive Director, Murudeshwar Ceramics Limited"
-  },
-  {
-    quote: "The COVID-19 shift forced us to adapt quickly. Odoo ERP drastically reduced reporting and reconciliation time for my team. Prixgen configured the platform without disrupting our current practices. A strong implementation partner with exceptional product knowledge.",
-    author: "Kshiraj Prakash",
-    title: "Finance Controller, BI Worldwide"
-  },
-  {
-    quote: "Our experience with Prixgen has been exceptional. The breadth and depth of the offering has met all our requirements, and the team has been incredibly responsive to all our needs.",
-    author: "Hemraj Sencha",
-    title: "Managing Director, Vahini Irrigations"
-  }
-];
-
-export const homeData = {
-  title: "Intelligent Operations. Unified Enterprise.",
-  heroImage: {
-    _type: 'image',
-    asset: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2070"
-  },
-  subheadline: [
-    {
-      _type: 'block',
-      style: 'normal',
-      children: [{ _type: 'span', text: "We architect, deploy, and manage scalable ERP and supply chain ecosystems for global manufacturing and FMCG leaders. Powered by AI, GenAI, and IoT, our solutions fuse Odoo and SAP with proven industrial intelligence." }]
-    }
-  ],
-  heroPrimaryCTA: "Schedule an Architecture Audit",
-  heroSecondaryCTA: "Read the 2026 Manufacturing Benchmark",
-  socialProof: "Trusted by leading industrial operators across APAC and Australia to process billions in supply chain volume.",
-  clients: clientsData,
-  testimonials: testimonialsData,
-  ctaTitle: "Ready to architect your operational intelligence?",
-  ctaDescription: "Join 500+ industrial leaders who have unified their global operations. Start your transformation with a zero-cost architecture audit.",
-  ctaButtonText: "Book an Architecture Audit",
-  seo: {
-    title: "Prixgen | Enterprise ERP Architecture & Strategy",
-    metaDesc: "Architecting unified enterprise ecosystems for global industrial leaders through Odoo, SAP, and IIoT integration.",
-  }
-};
-
-export const aboutData = {
-  title: "Global Architects of Enterprise Intelligence.",
-  subtitle: "Pioneering enterprise intelligence through a specialized fusion of IoT, BI, and Analytics.",
-  content: [
-    {
-      _type: 'block',
-      children: [{ _type: 'span', text: "Prixgen ensures the best ROI for companies by streamlining business processes. Driven by the idea of providing innovative solutions through ERP, IIoT, and AI, we are an elite team of IT professionals with over 30+ years of combined experience in enterprise implementations." }]
-    },
-    {
-      _type: 'block',
-      children: [{ _type: 'span', text: "We don't just deploy software; we future-proof your digital journey. Our methodology is rooted in architectural integrity and zero-tolerance for operational friction." }]
-    }
-  ],
-  vision: "To be the global benchmark for operational intelligence and industrial digital transformation.",
-  mission: "Empowering enterprises through unified ecosystems that turn data into decisive competitive advantage.",
-  stats: [
-    { label: "Years Experience", value: "30+" },
-    { label: "Implementations", value: "500+" },
-    { label: "Architect Team", value: "Elite" },
-    { label: "Odoo Partner", value: "Gold" },
-  ],
-  whyChooseUsIntro: "We provide an uncompromising technical edge for industrial leaders who demand reliability and scale.",
-  whyChooseUs: [
-    {
-      title: "Assured Services",
-      description: "Zero-latency support and multi-layered quality assurance for your entire enterprise stack."
-    },
-    {
-      title: "Future-Proofed Innovation",
-      description: "Architectures designed to evolve with AI, machine learning, and global supply chain shifts."
-    },
-    {
-      title: "Expert Engineering",
-      description: "Clean code and modular scalability from a team with decades of industrial expertise."
-    }
-  ],
-  experienceSection: {
-    title: "15 Years of Industrial Excellence",
-    description: "Our journey has been defined by rescuing failed implementations and architecting unified global ecosystems.",
-    points: [
-      "Certified Gold Partners for Odoo and SAP Business One.",
-      "Proprietary AI and IIoT telemetry extraction models.",
-      "Global delivery centers across APAC and EMEA."
-    ]
-  },
-  featuredImage: {
-    sourceUrl: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=2070",
-    altText: "The Prixgen Elite Team"
-  },
-  seo: {
-    title: "About Us | Global Architects of Enterprise Intelligence",
-    metaDesc: "Prixgen is an elite team of IT professionals with over 30+ years of combined experience in ERP, IIoT, and AI implementations.",
-  }
-};
-
-export const contactData = {
-  title: "Let's Transform Your Operations.",
-  description: "Whether you are rescuing a failed implementation, architecting a new global ecosystem, or exploring proprietary AI solutions, our senior consultants are ready to assist.",
-  address: "#244, Kalabairaweshwara Complex, 1st Stage, Nivedithanagar, Mysuru - 570022, Karnataka, India.",
-  email: "info@prixgen.com",
-  phone: "+91 (0821) 2548666",
-  salesPhone: "+91 99300 57159",
-  website: "https://www.prixgen.com",
-  australiaAddress: "Unit 3 / 5 Murphy Street, Oconnor, Perth, WA 6163, Australia",
-  australiaPhone: "08 9337 7907",
-  australiaEmail: "info@prixgen.com.au",
-  seo: {
-    title: "Contact Us | Let's Transform Your Operations",
-    metaDesc: "Connect with Prixgen Enterprise Headquarters in Mysuru to discuss your operational intelligence roadmap and ERP strategy.",
-  }
-};
-
-export const industriesData: any[] = [
+const industriesData = [
   {
     slug: "manufacturing",
     title: "Discrete & Process Manufacturing",
     headline: "Engineering the Smart Factory of the Future.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000", altText: "Manufacturing" },
-    summaryImage: { sourceUrl: "https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=2000&auto=format&fit=crop", altText: "Modern Industrial Facility" },
+    externalImageUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000",
     content: [
       {
         _type: 'block',
@@ -481,8 +78,7 @@ export const industriesData: any[] = [
     slug: "chemicals",
     title: "Chemicals & Process Manufacturing",
     headline: "Precision, Compliance, and Batch Intelligence.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1532187875605-1ef6c237f146?auto=format&fit=crop&q=80&w=1000", altText: "Chemical Industry" },
-    summaryImage: { sourceUrl: "https://images.unsplash.com/photo-1581093450021-4a7360e9a6ad?q=80&w=2000&auto=format&fit=crop", altText: "Chemical Process Control" },
+    externalImageUrl: "https://images.unsplash.com/photo-1532187875605-1ef6c237f146?auto=format&fit=crop&q=80&w=1000",
     content: [
       {
         _type: 'block',
@@ -515,8 +111,7 @@ export const industriesData: any[] = [
     slug: "fmcg-distribution",
     title: "FMCG & Distribution",
     headline: "Velocity and Visibility in Consumer Goods.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1566633806327-68e152aaf26d?auto=format&fit=crop&q=80&w=1000", altText: "FMCG" },
-    summaryImage: { sourceUrl: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2000&auto=format&fit=crop", altText: "FMCG Distribution Hub" },
+    externalImageUrl: "https://images.unsplash.com/photo-1566633806327-68e152aaf26d?auto=format&fit=crop&q=80&w=1000",
     content: [
       {
         _type: 'block',
@@ -549,7 +144,7 @@ export const industriesData: any[] = [
     slug: "retail",
     title: "Retail Operations",
     headline: "Omnichannel Retail Architecture.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1000", altText: "Retail" },
+    externalImageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1000",
     content: [
       {
         _type: 'block',
@@ -582,7 +177,7 @@ export const industriesData: any[] = [
     slug: "dairy",
     title: "Dairy & Perishables",
     headline: "Time-Critical Supply Chain Management.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1550583760-d80392be8c42?auto=format&fit=crop&q=80&w=1000", altText: "Dairy Industry" },
+    externalImageUrl: "https://images.unsplash.com/photo-1559560923-3b80329ea420?auto=format&fit=crop&q=80&w=1000",
     content: [
       {
         _type: 'block',
@@ -609,13 +204,13 @@ export const industriesData: any[] = [
     seo: {
       title: "Dairy & Perishable Supply Chain ERP | Prixgen",
       metaDesc: "Specialized cold-chain tracking and time-critical supply chain modules for the dairy industry.",
-    },
+    }
   },
   {
     slug: "information-services",
     title: "Information Services",
     headline: "Digital Infrastructure and Enterprise Software.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000", altText: "Information Services" },
+    externalImageUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000",
     content: [
       {
         _type: 'block',
@@ -648,7 +243,7 @@ export const industriesData: any[] = [
     slug: "electronics",
     title: "Electronics",
     headline: "High-Precision Engineering and Assembly.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1000", altText: "Electronics" },
+    externalImageUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1000",
     content: [
       {
         _type: 'block',
@@ -679,187 +274,11 @@ export const industriesData: any[] = [
   }
 ];
 
-export const solutionsData: any[] = [
-  {
-    slug: "odoo-enterprise",
-    title: "Odoo Enterprise Integration",
-    headline: "Odoo Architecture, Engineered for Scale.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000", altText: "Odoo ERP" },
-    content: [
-      {
-        _type: 'block',
-        style: 'normal',
-        children: [{ _type: 'span', text: "As a certified Odoo Gold Partner, we don't just install software; we engineer complex operational engines. We specialize in high-stakes Odoo Enterprise migrations and greenfield implementations for multi-national organizations. Our approach focuses on minimal customization of the core, ensuring long-term maintainability while delivering maximum functional depth." }]
-      },
-      {
-        _type: 'block',
-        style: 'normal',
-        children: [{ _type: 'span', text: "From multi-warehouse inventory routing to automated global procurement and localized financial reporting, we turn Odoo into an uncompromising enterprise engine. Our elite team of developers and consultants ensures that every module is optimized for performance, providing your team with the real-time data needed to make decisive business moves." }]
-      }
-    ],
-    features: [
-      { title: "Multi-Entity Consolidation", description: "Seamless financial and operational syncing across global subsidiaries." },
-      { title: "Advanced WMS", description: "AI-optimized warehouse routing and real-time inventory tracking." },
-      { title: "Automated Procurement", description: "Smart reordering rules and vendor management integration." },
-      { title: "Custom BI Dashboards", description: "Tailored reporting engines for executive-level decision making." }
-    ],
-    process: [
-      { title: "GAP Analysis", description: "Detailed mapping of business requirements against Odoo standards." },
-      { title: "Architectural Design", description: "Designing the data flows and integration touchpoints." },
-      { title: "Agile Deployment", description: "Phased rollout with continuous feedback and optimization." }
-    ],
-    seo: {
-      title: "Odoo Enterprise Gold Partner | Prixgen",
-      metaDesc: "Engineering complex Odoo workflows for multi-national enterprise scale.",
-    }
-  },
-  {
-    slug: "sap-ecosystems",
-    title: "SAP Ecosystems",
-    headline: "Unlocking the Full Value of SAP.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=1000", altText: "SAP Solutions" },
-    content: [
-      {
-        _type: 'block',
-        style: 'normal',
-        children: [{ _type: 'span', text: "We guide mid-market and enterprise clients through the complexities of SAP Business One and S/4HANA deployments. Our methodology begins with a Phase-Zero architectural audit, identifying hidden inefficiencies in your current stack before a single line of code is moved. We focus on creating a 'clean core' that allows for rapid scaling and easy integration with external systems." }]
-      },
-      {
-        _type: 'block',
-        style: 'normal',
-        children: [{ _type: 'span', text: "Whether you are migrating from legacy systems or optimizing an existing SAP environment, our consultants bring decades of industrial expertise to the table. We ensure that your SAP ecosystem aligns perfectly with your long-term operational strategy, providing the stability and visibility required for global industrial leadership." }]
-      }
-    ],
-    features: [
-      { title: "SAP S/4HANA Migration", description: "Secure and optimized transition to the latest SAP core." },
-      { title: "Architectural Audits", description: "Phase-zero assessments to identify scaling bottlenecks." },
-      { title: "Inter-company Sync", description: "Unified data flow across complex corporate structures." },
-      { title: "Compliance Mapping", description: "Ensuring global regulatory standards are natively enforced." }
-    ],
-    process: [
-      { title: "Strategic Audit", description: "Deep-dive into current operational gaps and data silos." },
-      { title: "Blueprint Engineering", description: "Developing the technical roadmap for your SAP ecosystem." },
-      { title: "Managed Rollout", description: "Carefully orchestrated implementation with zero business disruption." }
-    ],
-    seo: {
-      title: "SAP Business One Deployment & Migration | Prixgen",
-      metaDesc: "Unlocking SAP value through architectural audits and strategic mid-market deployments.",
-    }
-  },
-  {
-    slug: "microsoft-dynamics",
-    title: "Microsoft Dynamics 365",
-    headline: "Unified CRM and ERP Capabilities.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1512758017271-d7b84c2113f1?auto=format&fit=crop&q=80&w=1000", altText: "Dynamics 365" },
-    content: [
-      {
-        _type: 'block',
-        style: 'normal',
-        children: [{ _type: 'span', text: "Break down data silos and modernize your business with Microsoft Dynamics 365. We deploy intelligent cloud applications that unify financial management, supply chain operations, and customer insights into a single pane of glass. Our solutions leverage the full power of the Microsoft Power Platform, including Power BI and Power Automate, to create a truly connected enterprise." }]
-      },
-      {
-        _type: 'block',
-        style: 'normal',
-        children: [{ _type: 'span', text: "We specialize in tailoring Dynamics 365 Business Central and F&O for industrial environments, ensuring that your field service, sales, and manufacturing teams are all working from a single source of truth. With Prixgen, your Microsoft ecosystem becomes a driver of innovation, providing the agility needed to respond to changing market demands." }]
-      }
-    ],
-    features: [
-      { title: "Power Platform Sync", description: "Deep integration with Power BI, Apps, and Automate." },
-      { title: "Unified CRM & ERP", description: "Seamless data flow between customer facing and back-end teams." },
-      { title: "Cloud Architecture", description: "Scalable, secure, and always-on enterprise environment." },
-      { title: "Predictive Analytics", description: "Leveraging Azure AI for demand and financial forecasting." }
-    ],
-    process: [
-      { title: "Ecosystem Mapping", description: "Evaluating current Microsoft 365 usage and integration points." },
-      { title: "Tailored Architecture", description: "Building the custom modules and data flows for your industry." },
-      { title: "Success Rollout", description: "Comprehensive training and phased deployment for maximum adoption." }
-    ],
-    seo: {
-      title: "Microsoft Dynamics 365 & Power BI Integration | Prixgen",
-      metaDesc: "Unifying finance, supply chain, and customer insights through Dynamics 365.",
-    }
-  },
-  {
-    slug: "lecca-ai",
-    title: "Lecca: Computer Vision & AI",
-    headline: "AI-Powered Industrial Image Processing.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=1000", altText: "Lecca AI" },
-    content: [
-      {
-        _type: 'block',
-        style: 'normal',
-        children: [{ _type: 'span', text: "Lecca is our proprietary AI platform designed specifically for industrial environments. We use advanced computer vision to automate quality control, safety monitoring, and asset tracking. By processing visual data at the edge, Lecca provides real-time alerts that prevent accidents and ensure that every product leaving your facility meets the highest standards." }]
-      },
-      {
-        _type: 'block',
-        style: 'normal',
-        children: [{ _type: 'span', text: "Our AI models are trained on hundreds of thousands of industrial data points, making them highly resilient to the challenging lighting and environmental conditions of a factory floor. Lecca integrates directly with your core ERP, turning visual observations into actionable data points for your management team. Experience the next generation of industrial intelligence with Lecca." }]
-      }
-    ],
-    features: [
-      { title: "Automated QC", description: "Visual inspection at production speed with zero-error tolerance." },
-      { title: "Safety Monitoring", description: "Real-time detection of PPE compliance and hazardous conditions." },
-      { title: "Asset Tracking", description: "AI-powered identification and location tracking of industrial assets." },
-      { title: "Edge Processing", description: "Low-latency analysis performed directly on-site for immediate action." }
-    ],
-    process: [
-      { title: "Vision Audit", description: "Identifying high-value automation points on your production line." },
-      { title: "Model Training", description: "Developing custom AI models for your specific product or environment." },
-      { title: "Hardware Sync", description: "Deploying cameras and edge computing units for live monitoring." }
-    ],
-    seo: {
-      title: "Lecca Industrial AI & Computer Vision | Prixgen",
-      metaDesc: "Automate quality control and safety with Lecca's proprietary industrial AI platform.",
-    }
-  },
-  {
-    slug: "warehouse-management",
-    title: "Warehouse Management",
-    headline: "Intelligent Inventory and Fulfillment Automation.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1000", altText: "Warehouse Management Systems" },
-    summaryImage: { sourceUrl: "https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=2000&auto=format&fit=crop", altText: "Warehouse Efficiency" },
-    content: [
-      {
-        _type: 'block',
-        style: 'normal',
-        children: [{ _type: 'span', text: "Eliminate manual errors and optimize warehouse space with our intelligent WMS architectures. Prixgen's WMS solutions provide zero-latency visibility into every SKU in your facility, enabling real-time inventory tracking and automated fulfillment routes. We design systems that handle the complexity of high-volume, multi-channel distribution with ease." }]
-      },
-      {
-        _type: 'block',
-        style: 'normal',
-        children: [{ _type: 'span', text: "Our intelligent picking algorithms minimize travel time for warehouse staff, while automated slotting optimization ensures that your high-velocity items are always in the most accessible locations. We integrate seamlessly with your existing ERP, ensuring that your physical inventory and digital records are always perfectly in sync, eliminating the 'ghost stock' issues that plague traditional warehouses." }]
-      },
-      {
-        _type: 'block',
-        style: 'normal',
-        children: [{ _type: 'span', text: "Beyond software, we provide the technical expertise to deploy modern hardware—from RFID systems to mobile data terminals—that empowers your workforce. With a Prixgen-designed WMS, your warehouse becomes a high-performance hub that accelerates your entire supply chain." }]
-      }
-    ],
-    features: [
-      { title: "Automated Picking", description: "Intelligent route planning to minimize picker travel time." },
-      { title: "Real-time Tracking", description: "Zero-latency visibility into every SKU in your facility." },
-      { title: "Slotting Optimization", description: "Dynamic reorganization of stock based on velocity." },
-      { title: "ERP Syncing", description: "Perfect alignment between physical stock and digital records." }
-    ],
-    process: [
-      { title: "Facility Blueprinting", description: "Digital mapping of your warehouse for WMS configuration." },
-      { title: "Hardware Deployment", description: "Setting up RFID, scanning, and mobile data terminals." },
-      { title: "Go-Live Support", description: "On-site assistance during the critical transition period." }
-    ],
-    seo: {
-      title: "Enterprise Warehouse Management Systems (WMS) | Prixgen",
-      metaDesc: "Next-generation warehouse management systems for intelligent inventory and fulfillment.",
-    }
-  }
-];
-
-export const servicesData: any[] = [
+const servicesData = [
   {
     slug: "business-strategy",
     title: "Business Strategy & Transformation",
     headline: "Architecting Long-term Value and Market Leadership.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000", altText: "Business Transformation" },
-    summaryImage: { sourceUrl: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2000&auto=format&fit=crop", altText: "Modernizing Enterprise Systems" },
     content: [
       {
         _type: 'block',
@@ -897,8 +316,6 @@ export const servicesData: any[] = [
     slug: "it-consulting",
     title: "IT & Management Consulting",
     headline: "Aligning Technology with Business Strategy.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000", altText: "IT Consulting" },
-    summaryImage: { sourceUrl: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2000&auto=format&fit=crop", altText: "IT Strategy Session" },
     content: [
       {
         _type: 'block',
@@ -937,7 +354,6 @@ export const servicesData: any[] = [
     slug: "accounting-advisory",
     title: "Accounting & Financial Advisory",
     headline: "Precision, Compliance, and Financial Intelligence.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=1000", altText: "Accounting Advisory" },
     content: [
       {
         _type: 'block',
@@ -975,7 +391,6 @@ export const servicesData: any[] = [
     slug: "management-consulting",
     title: "Management Consulting",
     headline: "Operational Excellence through Process Engineering.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1000", altText: "Management Consulting" },
     content: [
       {
         _type: 'block',
@@ -1013,7 +428,6 @@ export const servicesData: any[] = [
     slug: "supply-chain-consulting",
     title: "Supply Chain Consulting",
     headline: "End-to-End Logistics and Supply Chain Optimization.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?auto=format&fit=crop&q=80&w=1000", altText: "Supply Chain Consulting" },
     content: [
       {
         _type: 'block',
@@ -1051,7 +465,6 @@ export const servicesData: any[] = [
     slug: "warehouse-management",
     title: "Warehouse Management Systems (WMS)",
     headline: "Intelligent Inventory and Fulfillment Automation.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1000", altText: "Warehouse Management Systems" },
     content: [
       {
         _type: 'block',
@@ -1089,7 +502,6 @@ export const servicesData: any[] = [
     slug: "hiring-odoo-developers",
     title: "Dedicated Odoo Talent Services",
     headline: "Scaling Your Technical Capacity with Elite Odoo Experts.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1000", altText: "Odoo Developers" },
     content: [
       {
         _type: 'block',
@@ -1127,8 +539,6 @@ export const servicesData: any[] = [
     slug: "iiot-telemetry",
     title: "IIoT & Telemetry Engineering",
     headline: "Unlocking Real-Time Intelligence from the Shop Floor.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000", altText: "IIoT Engineering" },
-    summaryImage: { sourceUrl: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?q=80&w=2000&auto=format&fit=crop", altText: "Industrial Data Intelligence" },
     content: [
       {
         _type: 'block',
@@ -1166,8 +576,6 @@ export const servicesData: any[] = [
     slug: "automation",
     title: "Factory & Industrial Automation",
     headline: "Robotics and Intelligent Control Systems.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&q=80&w=1000", altText: "Industrial Automation" },
-    summaryImage: { sourceUrl: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=2000&auto=format&fit=crop", altText: "Advanced Robotics" },
     content: [
       {
         _type: 'block',
@@ -1205,8 +613,6 @@ export const servicesData: any[] = [
     slug: "cloud-infrastructure",
     title: "Managed Industrial Cloud Infrastructure",
     headline: "High-Availability Ecosystems for Mission-Critical Apps.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000", altText: "Cloud Infrastructure" },
-    summaryImage: { sourceUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2000&auto=format&fit=crop", altText: "Secure Cloud Ecosystem" },
     content: [
       {
         _type: 'block',
@@ -1244,8 +650,6 @@ export const servicesData: any[] = [
     slug: "ai-machine-learning",
     title: "AI & Machine Learning",
     headline: "Empower your enterprise with predictive analytics and generative AI.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop", altText: "AI & Machine Learning" },
-    summaryImage: { sourceUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2000&auto=format&fit=crop", altText: "Enterprise Intelligence" },
     content: [
       {
         _type: 'block',
@@ -1272,15 +676,12 @@ export const servicesData: any[] = [
     seo: {
       title: "AI & Machine Learning Solutions | Prixgen",
       metaDesc: "Drive innovation and efficiency with enterprise-grade predictive analytics and Generative AI.",
-      keywords: ["AI", "Machine Learning", "Generative AI", "Predictive Analytics", "Computer Vision"]
     }
   },
   {
     slug: "business-transformation",
     title: "Business Transformation",
     headline: "Comprehensive digital transformation strategies to modernize legacy systems.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000", altText: "Business Transformation" },
-    summaryImage: { sourceUrl: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2000&auto=format&fit=crop", altText: "Modernizing Enterprise Systems" },
     content: [
       {
         _type: 'block',
@@ -1307,73 +708,200 @@ export const servicesData: any[] = [
     seo: {
       title: "Digital Business Transformation | Prixgen",
       metaDesc: "Modernize legacy systems and optimize operations with holistic transformation strategies.",
-      keywords: ["Business Transformation", "Digital Strategy", "Legacy Modernization", "Process Re-engineering"]
     }
   }
 ];
 
-export const servicesPageMockData: ServicesPageData = {
-  title: "Enterprise Application Services",
-  subtitle: "Architectural Services",
-  heroSubheadline: "Prixgen Preferred Care: We traverse a stringent, economical, and customer-driven methodology to enable technical confidence and exact solutions.",
-  methodology: [
-    { step: "01", title: "Discover : We Listen", description: "We define and discuss your goals and challenges, helping you envision new, innovative ways to improve operational experiences.", icon: "Search" },
-    { step: "02", title: "Design : We Strategize", description: "We design successful, outcomes-based learning and operational strategies tailored specifically to the needs of our enterprise partners.", icon: "PenTool" },
-    { step: "03", title: "Develop : We Create", description: "We offer thoughtful, relevant, and engaging development services, crafting a technical solution that works best for your exact needs.", icon: "Code" }
-  ],
-  outcomes: [
-    { title: "Increase Efficiency", description: "Automate day-to-day tasks, eliminate repetitive processes, and streamline cross-departmental workflows within a single platform.", icon: "Activity" },
-    { title: "Promote Collaboration", description: "Break down data silos. Link remote teams, headquarters, and offshore units through secure internet, intranet, and IoT highways.", icon: "Users" },
-    { title: "Accurate Forecasting", description: "Leverage centralized databases and advanced analytics to ensure data integrity and generate realistic, machine-learning-backed forecasts.", icon: "LineChart" },
-    { title: "Lower Operational Costs", description: "Anticipate disruptions and manage impact effectively. Real-time data across production and supply chain keeps operating costs strictly within budget.", icon: "TrendingUp" },
-    { title: "Data Security & Compliance", description: "Guard against breaches with single-warehouse access controls, while meeting myriad business requirements through built-in regulatory reporting.", icon: "ShieldCheck" },
-    { title: "SaaS Advantages", description: "Scale effortlessly, access data anywhere, integrate existing apps, and eliminate maintenance downtime with a low capital outlay.", icon: "Server" }
-  ],
-  coreServices: [
-    { title: "Business Strategy", headline: "Long-term value creation and optimization.", slug: "business-strategy" },
-    { title: "IT Consulting", headline: "Aligning technology with enterprise goals.", slug: "it-consulting" },
-    { title: "Accounting Advisory", headline: "Financial precision and compliance.", slug: "accounting-advisory" },
-    { title: "Management Consulting", headline: "Operational excellence and efficiency.", slug: "management-consulting" },
-    { title: "Supply Chain Consulting", headline: "End-to-end logistics optimization.", slug: "supply-chain-consulting" },
-    { title: "WMS", headline: "Intelligent warehouse management systems.", slug: "warehouse-management" },
-    { title: "Hiring Odoo Developers", headline: "Dedicated talent for Odoo ecosystems.", slug: "hiring-odoo-developers" },
-    { title: "IIoT & Telemetry", headline: "Real-time shop-floor intelligence.", slug: "iiot-telemetry" },
-    { title: "Factory Automation", headline: "Robotics and automated control systems.", slug: "automation" },
-    { title: "Cloud Infrastructure", headline: "High-availability industrial cloud.", slug: "cloud-infrastructure" },
-    { title: "AI & Machine Learning", headline: "Empower your enterprise with predictive analytics and generative AI.", slug: "ai-machine-learning" },
-    { title: "Business Transformation", headline: "Comprehensive digital transformation strategies to modernize legacy systems.", slug: "business-transformation" }
-  ],
-  seo: {
-    title: "Services | Enterprise Application Services | Prixgen",
-    metaDesc: "Prixgen Preferred Care methodology: Discover, Design, and Develop outcomes-based learning and operational strategies for modern industrial enterprises.",
+const solutionsData = [
+  {
+    slug: "odoo-enterprise",
+    title: "Odoo Enterprise Integration",
+    headline: "Odoo Architecture, Engineered for Scale.",
+    content: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "As a certified Odoo Gold Partner, we don't just install software; we engineer complex operational engines. We specialize in high-stakes Odoo Enterprise migrations and greenfield implementations for multi-national organizations. Our approach focuses on minimal customization of the core, ensuring long-term maintainability while delivering maximum functional depth." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "From multi-warehouse inventory routing to automated global procurement and localized financial reporting, we turn Odoo into an uncompromising enterprise engine. Our elite team of developers and consultants ensures that every module is optimized for performance, providing your team with the real-time data needed to make decisive business moves." }]
+      }
+    ],
+    features: [
+      { title: "Multi-Entity Consolidation", description: "Seamless financial and operational syncing across global subsidiaries." },
+      { title: "Advanced WMS", description: "AI-optimized warehouse routing and real-time inventory tracking." },
+      { title: "Automated Procurement", description: "Smart reordering rules and vendor management integration." },
+      { title: "Custom BI Dashboards", description: "Tailored reporting engines for executive-level decision making." }
+    ],
+    process: [
+      { title: "GAP Analysis", description: "Detailed mapping of business requirements against Odoo standards." },
+      { title: "Architectural Design", description: "Designing the data flows and integration touchpoints." },
+      { title: "Agile Deployment", description: "Phased rollout with continuous feedback and optimization." }
+    ],
+    seo: {
+      title: "Odoo Enterprise Gold Partner | Prixgen",
+      metaDesc: "Engineering complex Odoo workflows for multi-national enterprise scale.",
+    }
+  },
+  {
+    slug: "sap-ecosystems",
+    title: "SAP Ecosystems",
+    headline: "Unlocking the Full Value of SAP.",
+    content: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "We guide mid-market and enterprise clients through the complexities of SAP Business One and S/4HANA deployments. Our methodology begins with a Phase-Zero architectural audit, identifying hidden inefficiencies in your current stack before a single line of code is moved. We focus on creating a 'clean core' that allows for rapid scaling and easy integration with external systems." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Whether you are migrating from legacy systems or optimizing an existing SAP environment, our consultants bring decades of industrial expertise to the table. We ensure that your SAP ecosystem aligns perfectly with your long-term operational strategy, providing the stability and visibility required for global industrial leadership." }]
+      }
+    ],
+    features: [
+      { title: "SAP S/4HANA Migration", description: "Secure and optimized transition to the latest SAP core." },
+      { title: "Architectural Audits", description: "Phase-zero assessments to identify scaling bottlenecks." },
+      { title: "Inter-company Sync", description: "Unified data flow across complex corporate structures." },
+      { title: "Compliance Mapping", description: "Ensuring global regulatory standards are natively enforced." }
+    ],
+    process: [
+      { title: "Strategic Audit", description: "Deep-dive into current operational gaps and data silos." },
+      { title: "Blueprint Engineering", description: "Developing the technical roadmap for your SAP ecosystem." },
+      { title: "Managed Rollout", description: "Carefully orchestrated implementation with zero business disruption." }
+    ],
+    seo: {
+      title: "SAP Business One Deployment & Migration | Prixgen",
+      metaDesc: "Unlocking SAP value through architectural audits and strategic mid-market deployments.",
+    }
+  },
+  {
+    slug: "microsoft-dynamics",
+    title: "Microsoft Dynamics 365",
+    headline: "Unified CRM and ERP Capabilities.",
+    content: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Break down data silos and modernize your business with Microsoft Dynamics 365. We deploy intelligent cloud applications that unify financial management, supply chain operations, and customer insights into a single pane of glass. Our solutions leverage the full power of the Microsoft Power Platform, including Power BI and Power Automate, to create a truly connected enterprise." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "We specialize in tailoring Dynamics 365 Business Central and F&O for industrial environments, ensuring that your field service, sales, and manufacturing teams are all working from a single source of truth. With Prixgen, your Microsoft ecosystem becomes a driver of innovation, providing the agility needed to respond to changing market demands." }]
+      }
+    ],
+    features: [
+      { title: "Power Platform Sync", description: "Deep integration with Power BI, Apps, and Automate." },
+      { title: "Unified CRM & ERP", description: "Seamless data flow between customer facing and back-end teams." },
+      { title: "Cloud Architecture", description: "Scalable, secure, and always-on enterprise environment." },
+      { title: "Predictive Analytics", description: "Leveraging Azure AI for demand and financial forecasting." }
+    ],
+    process: [
+      { title: "Ecosystem Mapping", description: "Evaluating current Microsoft 365 usage and integration points." },
+      { title: "Tailored Architecture", description: "Building the custom modules and data flows for your industry." },
+      { title: "Success Rollout", description: "Comprehensive training and phased deployment for maximum adoption." }
+    ],
+    seo: {
+      title: "Microsoft Dynamics 365 & Power BI Integration | Prixgen",
+      metaDesc: "Unifying finance, supply chain, and customer insights through Dynamics 365.",
+    }
+  },
+  {
+    slug: "lecca-ai",
+    title: "Lecca: Computer Vision & AI",
+    headline: "AI-Powered Industrial Image Processing.",
+    content: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Lecca is our proprietary AI platform designed specifically for industrial environments. We use advanced computer vision to automate quality control, safety monitoring, and asset tracking. By processing visual data at the edge, Lecca provides real-time alerts that prevent accidents and ensure that every product leaving your facility meets the highest standards." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Our AI models are trained on hundreds of thousands of industrial data points, making them highly resilient to the challenging lighting and environmental conditions of a factory floor. Lecca integrates directly with your core ERP, turning visual observations into actionable data points for your management team. Experience the next generation of industrial intelligence with Lecca." }]
+      }
+    ],
+    features: [
+      { title: "Automated QC", description: "Visual inspection at production speed with zero-error tolerance." },
+      { title: "Safety Monitoring", description: "Real-time detection of PPE compliance and hazardous conditions." },
+      { title: "Asset Tracking", description: "AI-powered identification and location tracking of industrial assets." },
+      { title: "Edge Processing", description: "Low-latency analysis performed directly on-site for immediate action." }
+    ],
+    process: [
+      { title: "Vision Audit", description: "Identifying high-value automation points on your production line." },
+      { title: "Model Training", description: "Developing custom AI models for your specific product or environment." },
+      { title: "Hardware Sync", description: "Deploying cameras and edge computing units for live monitoring." }
+    ],
+    seo: {
+      title: "Lecca Industrial AI & Computer Vision | Prixgen",
+      metaDesc: "Automate quality control and safety with Lecca's proprietary industrial AI platform.",
+    }
   }
-};
+];
 
-export const industriesPageMockData: IndustriesPageData = {
-  title: "Transforming Global Industries",
-  heroSubheadline: "We architect resilient, data-driven ecosystems across the world's most demanding industrial sectors.",
-  methodology: [
-    { step: "01", title: "Analyze : Industrial Audit", description: "We conduct deep-dive technical audits of your existing shop-floor and supply chain workflows.", icon: "Search" },
-    { step: "02", title: "Architect : Digital Core", description: "We design high-availability digital cores that unify legacy hardware with modern cloud intelligence.", icon: "PenTool" },
-    { step: "03", title: "Automate : Scale Operations", description: "We deploy autonomous systems and AI models that drive measurable throughput and efficiency.", icon: "Settings" }
-  ],
-  outcomes: [
-    { title: "Zero Operational Friction", description: "Eliminate data silos and manual bottlenecks across your global production network.", icon: "Zap" },
-    { title: "Predictive Intelligence", description: "Shift from reactive repairs to predictive maintenance using shop-floor telemetry.", icon: "LineChart" },
-    { title: "High-Precision Costing", description: "Gain absolute visibility into batch-level profitability and resource utilization.", icon: "BarChart3" },
-    { title: "Regulatory Confidence", description: "Automated compliance reporting and end-to-end traceability for every unit.", icon: "ShieldCheck" },
-    { title: "Supply Chain Resilience", description: "Anticipate disruptions with real-time demand sensing and inventory optimization.", icon: "Network" },
-    { title: "Rapid Modernization", description: "Transform legacy factories into smart facilities with minimal operational downtime.", icon: "Factory" }
-  ],
-  coreIndustries: [
-    { title: "Manufacturing", headline: "Industry 4.0 Smart Factories.", slug: "manufacturing", image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000" },
-    { title: "Chemicals", headline: "Precision Batch Intelligence.", slug: "chemicals", image: "https://images.unsplash.com/photo-1532187875605-1ef6c237f146?auto=format&fit=crop&q=80&w=1000" },
-    { title: "FMCG", headline: "High-Velocity Distribution.", slug: "fmcg-distribution", image: "https://images.unsplash.com/photo-1566633806327-68e152aaf26d?auto=format&fit=crop&q=80&w=1000" },
-    { title: "Information Services", headline: "Digital Infrastructure & Data.", slug: "information-services", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000" },
-    { title: "Electronics", headline: "High-Precision Engineering.", slug: "electronics", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1000" }
-  ],
-  seo: {
-    title: "Industries | Enterprise Digital Transformation | Prixgen",
-    metaDesc: "Discover how Prixgen architects operational intelligence for Manufacturing, Chemicals, FMCG, and high-precision Electronics.",
+async function recover() {
+  console.log('Starting high-fidelity content recovery...');
+
+  try {
+    const transaction = client.transaction();
+
+    // 1. Industries
+    industriesData.forEach(item => {
+      transaction.createOrReplace({
+        _id: `industry-${item.slug}`,
+        _type: 'industry',
+        title: item.title,
+        slug: { _type: 'slug', current: item.slug },
+        headline: item.headline,
+        externalImageUrl: item.externalImageUrl,
+        content: item.content,
+        features: item.features,
+        process: item.process,
+        seo: item.seo
+      });
+    });
+
+    // 2. Services
+    servicesData.forEach(item => {
+      transaction.createOrReplace({
+        _id: `service-${item.slug}`,
+        _type: 'service',
+        title: item.title,
+        slug: { _type: 'slug', current: item.slug },
+        headline: item.headline,
+        content: item.content,
+        features: item.features,
+        process: item.process,
+        seo: item.seo
+      });
+    });
+
+    // 3. Solutions
+    solutionsData.forEach(item => {
+      transaction.createOrReplace({
+        _id: `solution-${item.slug}`,
+        _type: 'solution',
+        title: item.title,
+        slug: { _type: 'slug', current: item.slug },
+        headline: item.headline,
+        content: item.content,
+        features: item.features,
+        process: item.process,
+        seo: item.seo
+      });
+    });
+
+    console.log('Committing recovered content to Sanity...');
+    await transaction.commit();
+    console.log('CONTENT RECOVERY SUCCESSFUL!');
+  } catch (err) {
+    console.error('RECOVERY FAILED:', err.message);
+    process.exit(1);
   }
-};
+}
+
+recover();

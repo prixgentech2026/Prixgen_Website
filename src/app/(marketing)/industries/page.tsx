@@ -7,6 +7,7 @@ export async function generateMetadata() {
   return {
     title: data?.seo?.title || "Industries | Prixgen",
     description: data?.seo?.metaDesc || "Explore how Prixgen Enterprise architects unified ecosystems for various industries.",
+    keywords: data?.seo?.keywords || "manufacturing, retail, distribution, industrial automation",
   };
 }
 

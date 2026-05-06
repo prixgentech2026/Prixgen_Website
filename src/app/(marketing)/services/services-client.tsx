@@ -222,7 +222,7 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
                 "automation": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1000",
                 "cloud-infrastructure": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000",
               };
-              const bgImage = serviceImages[service.slug] || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000";
+              const bgImage = service.externalImageUrl || service.featuredImage || serviceImages[service.slug] || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000";
 
               const engineeringSlugs = ["iiot-telemetry", "automation", "cloud-infrastructure"];
               const basePath = engineeringSlugs.includes(service.slug) ? "/engineering-services" : "/services";

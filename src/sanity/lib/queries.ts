@@ -58,9 +58,10 @@ export const industriesQuery = groq`*[_type == "industry"]{
   title,
   headline,
   seo,
-  "featuredImage": featuredImage.asset->{
-    "sourceUrl": url,
-    "altText": altText
+  externalImageUrl,
+  "featuredImage": {
+    "sourceUrl": featuredImage.asset->url,
+    "altText": featuredImage.altText
   },
   "summaryImage": {
     "sourceUrl": summaryImage.asset->url,
@@ -76,9 +77,10 @@ export const industryBySlugQuery = groq`*[_type == "industry" && slug.current ==
   features,
   process,
   seo,
-  "featuredImage": featuredImage.asset->{
-    "sourceUrl": url,
-    "altText": altText
+  externalImageUrl,
+  "featuredImage": {
+    "sourceUrl": featuredImage.asset->url,
+    "altText": featuredImage.altText
   },
   "summaryImage": {
     "sourceUrl": summaryImage.asset->url,
@@ -91,7 +93,8 @@ export const solutionsQuery = groq`*[_type == "solution"]{
   slug,
   title,
   headline,
-  seo
+  seo,
+  externalImageUrl
 }`;
 
 // Query for a single Solution by slug
@@ -102,6 +105,7 @@ export const solutionBySlugQuery = groq`*[_type == "solution" && slug.current ==
   features,
   process,
   seo,
+  externalImageUrl,
   "featuredImage": {
     "sourceUrl": featuredImage.asset->url,
     "altText": featuredImage.altText
@@ -117,7 +121,8 @@ export const servicesQuery = groq`*[_type == "service"]{
   slug,
   title,
   headline,
-  seo
+  seo,
+  externalImageUrl
 }`;
 
 // Query for a single Service by slug
@@ -128,6 +133,7 @@ export const serviceBySlugQuery = groq`*[_type == "service" && slug.current == $
   features,
   process,
   seo,
+  externalImageUrl,
   "featuredImage": {
     "sourceUrl": featuredImage.asset->url,
     "altText": featuredImage.altText

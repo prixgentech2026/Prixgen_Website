@@ -13,8 +13,9 @@ import { PortableText } from '@/components/ui/portable-text';
 import { FileText, ChevronRight, Globe, Zap, BarChart3, ShieldCheck } from 'lucide-react';
 
 export default function IndustryClientPage({ industry }: { industry: any }) {
-  // Use summaryImage for the main banner, fallback to featuredImage
-  const bannerImage = industry.summaryImage || industry.featuredImage;
+  // Use summaryImage for the main banner, fallback to featuredImage or externalImageUrl
+  const bannerImageUrl = industry.summaryImage?.sourceUrl || industry.featuredImage?.sourceUrl || industry.externalImageUrl;
+  const bannerImageAlt = industry.summaryImage?.altText || industry.featuredImage?.altText || industry.title;
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-white selection:bg-prixgen-blue selection:text-white">
@@ -92,11 +93,11 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
           <article className="lg:col-span-2 space-y-20 lg:space-y-32">
             
             {/* Visual Narrative Anchor */}
-            {bannerImage?.sourceUrl && (
+            {bannerImageUrl && (
               <FadeUp delay={0.2} className="relative aspect-[21/10] w-full rounded-[4rem] overflow-hidden shadow-2xl border border-slate-100 group">
                 <OptimizedImage
-                  src={bannerImage.sourceUrl}
-                  alt={bannerImage.altText || industry.title}
+                  src={bannerImageUrl}
+                  alt={bannerImageAlt}
                   fill
                   priority
                   className="object-cover transition-transform duration-1000 group-hover:scale-105"

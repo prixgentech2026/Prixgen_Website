@@ -5,8 +5,8 @@ import ServicesClient from './services-client';
 export async function generateMetadata(): Promise<Metadata> {
   const data = await getServicesPageData();
   return {
-    title: data.seo.title,
-    description: data.seo.metaDesc,
+    title: data?.seo?.title || "Services | Prixgen",
+    description: data?.seo?.metaDesc || "Comprehensive enterprise application services and digital engineering.",
   };
 }
 

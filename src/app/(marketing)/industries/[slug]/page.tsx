@@ -17,9 +17,9 @@ export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
   const industry = await getIndustryBySlug(slug);
   return {
-    title: industry?.seo.title,
-    description: industry?.seo.metaDesc,
-    keywords: industry?.seo.keywords,
+    title: industry?.seo?.title || `${industry?.title || 'Industrial Sector'} | Prixgen`,
+    description: industry?.seo?.metaDesc || "Enterprise solutions and digital transformation for industrial sectors.",
+    keywords: industry?.seo?.keywords || [],
   };
 }
 

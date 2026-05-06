@@ -12,6 +12,9 @@ import { PortableText } from '@/components/ui/portable-text';
 import { servicesData } from '@/lib/data';
 
 export default function ServiceClientPage({ service }: { service: any }) {
+  const bannerImageUrl = service.summaryImage?.sourceUrl || service.featuredImage?.sourceUrl || service.externalImageUrl;
+  const bannerImageAlt = service.summaryImage?.altText || service.featuredImage?.altText || service.title;
+
   return (
     <div className="min-h-screen relative overflow-hidden">
       <AmbientGlow />
@@ -86,11 +89,11 @@ export default function ServiceClientPage({ service }: { service: any }) {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
           {/* Main Content */}
           <article className="lg:col-span-2 space-y-16">
-            {service.summaryImage?.sourceUrl && (
+            {bannerImageUrl && (
               <FadeUp delay={0.2} className="relative aspect-video w-full rounded-[3rem] overflow-hidden shadow-2xl">
                 <OptimizedImage
-                  src={service.summaryImage.sourceUrl}
-                  alt={service.summaryImage.altText || service.title}
+                  src={bannerImageUrl}
+                  alt={bannerImageAlt}
                   fill
                   priority
                   className="object-cover transition-transform duration-700 hover:scale-105"
