@@ -240,6 +240,7 @@ export async function getEngineeringServices() {
         if (!data) return engineeringMock.find(s => s.slug === engineeringSlugs[i]) || null;
         return {
           ...data,
+          slug: engineeringSlugs[i], // serviceBySlugQuery doesn't project slug, add it back
           seo: data.seo || engineeringMock.find(s => s.slug === engineeringSlugs[i])?.seo
         };
       })

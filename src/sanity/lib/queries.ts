@@ -129,6 +129,7 @@ export const servicesQuery = groq`*[_type == "service"]{
 export const serviceBySlugQuery = groq`*[_type == "service" && slug.current == $slug][0]{
   title,
   headline,
+  "slug": slug.current,
   content,
   features,
   process,
