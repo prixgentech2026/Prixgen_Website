@@ -57,9 +57,9 @@ export function Logo({ className, showTagline = true, variant = 'default' }: Log
           </text>
         </g>
 
-        {/* Tagline - Increased vertical padding (from 60 to 68) */}
+        {/* Tagline - Increased vertical padding (from 68 to 72) */}
         {showTagline && (
-          <g id="LogoTagline" transform="translate(90, 68)">
+          <g id="LogoTagline" transform="translate(90, 72)">
             <text
               x="0"
               y="0"
@@ -74,7 +74,7 @@ export function Logo({ className, showTagline = true, variant = 'default' }: Log
               fill={blueColor}
               style={{ fontSize: '10px', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}
             >
-              Innovations
+              Innovation
             </text>
           </g>
         )}

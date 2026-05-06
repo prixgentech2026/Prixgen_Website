@@ -73,15 +73,7 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
           </FadeUp>
         </div>
         
-        {/* Scroll Indicator */}
-        <motion.div 
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-10 left-10 flex flex-col items-center gap-2 opacity-30"
-        >
-          <span className="text-xs font-bold uppercase tracking-widest text-prixgen-blue">Scroll</span>
-          <div className="w-px h-12 bg-gradient-to-b from-prixgen-blue to-transparent" />
-        </motion.div>
+
       </section>
 
       <div className="container mx-auto px-4 py-16 lg:py-24">
