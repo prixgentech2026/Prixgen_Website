@@ -729,6 +729,7 @@ const solutionsData = [
     slug: "odoo-enterprise",
     title: "Odoo Enterprise Integration",
     headline: "Odoo Architecture, Engineered for Scale.",
+    externalImageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200",
     content: [
       {
         _type: 'block',
@@ -761,6 +762,7 @@ const solutionsData = [
     slug: "sap-ecosystems",
     title: "SAP Ecosystems",
     headline: "Unlocking the Full Value of SAP.",
+    externalImageUrl: "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=1200",
     content: [
       {
         _type: 'block',
@@ -793,6 +795,7 @@ const solutionsData = [
     slug: "microsoft-dynamics",
     title: "Microsoft Dynamics 365",
     headline: "Unified CRM and ERP Capabilities.",
+    externalImageUrl: "https://images.unsplash.com/photo-1512758017271-d7b84c2113f1?auto=format&fit=crop&q=80&w=1200",
     content: [
       {
         _type: 'block',
@@ -825,6 +828,7 @@ const solutionsData = [
     slug: "lecca-ai",
     title: "Lecca: Computer Vision & AI",
     headline: "AI-Powered Industrial Image Processing.",
+    externalImageUrl: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=1200",
     content: [
       {
         _type: 'block',
@@ -851,6 +855,44 @@ const solutionsData = [
     seo: {
       title: "Lecca Industrial AI & Computer Vision | Prixgen",
       metaDesc: "Automate quality control and safety with Lecca's proprietary industrial AI platform.",
+    }
+  },
+  {
+    slug: "warehouse-management",
+    title: "Warehouse Management",
+    headline: "Intelligent Inventory and Fulfillment Automation.",
+    externalImageUrl: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1200",
+    content: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Eliminate manual errors and optimize warehouse space with our intelligent WMS architectures. Prixgen's WMS solutions provide zero-latency visibility into every SKU in your facility, enabling real-time inventory tracking and automated fulfillment routes. We design systems that handle the complexity of high-volume, multi-channel distribution with ease." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Our intelligent picking algorithms minimize travel time for warehouse staff, while automated slotting optimization ensures that your high-velocity items are always in the most accessible locations. We integrate seamlessly with your existing ERP, ensuring that your physical inventory and digital records are always perfectly in sync, eliminating the 'ghost stock' issues that plague traditional warehouses." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Beyond software, we provide the technical expertise to deploy modern hardware—from RFID systems to mobile data terminals—that empowers your workforce. With a Prixgen-designed WMS, your warehouse becomes a high-performance hub that accelerates your entire supply chain." }]
+      }
+    ],
+    features: [
+      { title: "Automated Picking", description: "Intelligent route planning to minimize picker travel time." },
+      { title: "Real-time Tracking", description: "Zero-latency visibility into every SKU in your facility." },
+      { title: "Slotting Optimization", description: "Dynamic reorganization of stock based on velocity." },
+      { title: "ERP Syncing", description: "Perfect alignment between physical stock and digital records." }
+    ],
+    process: [
+      { title: "Facility Blueprinting", description: "Digital mapping of your warehouse for WMS configuration." },
+      { title: "Hardware Deployment", description: "Setting up RFID, scanning, and mobile data terminals." },
+      { title: "Go-Live Support", description: "On-site assistance during the critical transition period." }
+    ],
+    seo: {
+      title: "Enterprise Warehouse Management Systems (WMS) | Prixgen",
+      metaDesc: "Next-generation warehouse management systems for intelligent inventory and fulfillment.",
     }
   }
 ];
@@ -901,6 +943,7 @@ async function recover() {
         title: item.title,
         slug: { _type: 'slug', current: item.slug },
         headline: item.headline,
+        externalImageUrl: item.externalImageUrl,
         content: item.content,
         features: item.features,
         process: item.process,
