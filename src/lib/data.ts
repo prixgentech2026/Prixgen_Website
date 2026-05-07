@@ -12,8 +12,54 @@ import {
   engineeringServicesPageQuery,
   solutionsPageQuery,
   aboutQuery,
-  contactQuery
+  contactQuery,
+  privacyQuery,
+  termsQuery
 } from '@/sanity/lib/queries';
+
+export interface PrivacyPageData {
+  title: string;
+  subtitle: string;
+  heroDescription: string;
+  principles: {
+    title: string;
+    icon: string;
+    content: string;
+  }[];
+  detailedSections: {
+    title: string;
+    content: string;
+    keyPoints?: string[];
+  }[];
+  lastUpdated: string;
+  referenceId: string;
+  seo?: {
+    title: string;
+    metaDesc: string;
+  };
+}
+
+export interface TermsPageData {
+  title: string;
+  subtitle: string;
+  heroDescription: string;
+  coreTerms: {
+    title: string;
+    icon: string;
+    content: string;
+  }[];
+  detailedSections: {
+    title: string;
+    content: string;
+    keyPoints?: string[];
+  }[];
+  lastUpdated: string;
+  referenceId: string;
+  seo?: {
+    title: string;
+    metaDesc: string;
+  };
+}
 
 /**
  * SANITY FETCHING LAYER
@@ -51,6 +97,28 @@ export async function getContactData() {
   } catch (error) {
     console.error('Sanity Fetch Error (Contact):', error);
     return contactData;
+  }
+}
+
+export async function getPrivacyData() {
+  if (!client) return privacyData;
+  try {
+    const data = await client.fetch(privacyQuery);
+    return data || privacyData;
+  } catch (error) {
+    console.error('Sanity Fetch Error (Privacy):', error);
+    return privacyData;
+  }
+}
+
+export async function getTermsData() {
+  if (!client) return termsData;
+  try {
+    const data = await client.fetch(termsQuery);
+    return data || termsData;
+  } catch (error) {
+    console.error('Sanity Fetch Error (Terms):', error);
+    return termsData;
   }
 }
 
@@ -1695,5 +1763,64 @@ export const solutionsPageMockData: SolutionsPageData = {
   seo: {
     title: "Solutions | Enterprise Resource Planning & AI | Prixgen",
     metaDesc: "Explore Prixgen's comprehensive suite of enterprise solutions including Odoo, SAP, and Tally, integrated with modern AI intelligence.",
+  }
+};
+
+export const privacyData: PrivacyPageData = {
+  title: "Privacy Policy",
+  subtitle: "Compliance & Trust",
+  heroDescription: "At Prixgen Enterprise, we treat your data with the same precision and integrity we apply to our engineering. Our policy outlines how we safeguard your information in an era of digital intelligence.",
+  principles: [
+    { title: "Data Collection", icon: "Eye", content: "We collect information necessary to provide our enterprise services, including contact details, professional credentials, and technical logs required for system optimization." },
+    { title: "Information Usage", icon: "Server", content: "Your data is used strictly for service delivery, infrastructure maintenance, and communicating critical system updates or strategic business insights." },
+    { title: "Security Protocols", icon: "Lock", content: "We implement multi-layered encryption, zero-trust architecture, and rigorous access controls to ensure your industrial data remains sovereign and secure." },
+    { title: "Third-Party Disclosure", icon: "Globe", content: "Prixgen does not sell or trade enterprise data. We only share information with vetted partners essential for service orchestration under strict NDAs." }
+  ],
+  detailedSections: [
+    {
+      title: "Our Commitment to Security",
+      content: "We leverage advanced cybersecurity frameworks to protect your sensitive operational data. Our systems are regularly audited to meet global enterprise standards.",
+      keyPoints: ["AES-256 Encryption", "ISO 27001 Alignment"]
+    },
+    {
+      title: "User Rights and Control",
+      content: "You maintain absolute control over your information. Under regional data protection laws, you have the right to access, rectify, or erase your data from our systems.",
+      keyPoints: ["Request a copy of your stored data", "Update outdated information", "Revoke consent", "Request total data deletion"]
+    }
+  ],
+  lastUpdated: "May 2026",
+  referenceId: "PXG-PRV-2026-V1",
+  seo: {
+    title: "Privacy Policy | Prixgen Enterprise",
+    metaDesc: "Read our commitment to data protection and enterprise-grade privacy standards."
+  }
+};
+
+export const termsData: TermsPageData = {
+  title: "Terms of Service",
+  subtitle: "Legal Framework",
+  heroDescription: "Our terms are designed to foster transparent, high-performance partnerships. By engaging with Prixgen, you agree to a framework of mutual accountability and engineering excellence.",
+  coreTerms: [
+    { title: "Service Delivery", icon: "Zap", content: "We commit to delivering high-availability enterprise solutions. Service levels (SLAs) are defined per project engagement to ensure peak operational performance." },
+    { title: "Intellectual Property", icon: "FileCheck", content: "All proprietary methodologies and digital assets developed by Prixgen remain our property, while clients retain full ownership of their operational data." },
+    { title: "Payment & Terms", icon: "Clock", content: "Standard billing cycles are monthly or milestone-based. Late payments may result in service suspension to maintain infrastructure integrity." },
+    { title: "Termination", icon: "Gavel", content: "Either party may terminate the agreement with written notice, subject to project-specific offboarding protocols and data transition safeguards." }
+  ],
+  detailedSections: [
+    {
+      title: "Acceptance of Terms",
+      content: "By accessing the Prixgen platform or commissioning our engineering services, you acknowledge that you have read, understood, and agreed to be bound by these Terms."
+    },
+    {
+      title: "Professional Conduct & Use",
+      content: "Clients are expected to maintain professional integrity and provide accurate operational data required for service execution.",
+      keyPoints: ["Mutual Accountability", "Global Compliance"]
+    }
+  ],
+  lastUpdated: "May 2026",
+  referenceId: "PXG-TOS-2026-V1",
+  seo: {
+    title: "Terms of Service | Prixgen Enterprise",
+    metaDesc: "The legal framework for our enterprise partnerships and engineering excellence."
   }
 };

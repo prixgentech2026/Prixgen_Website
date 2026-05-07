@@ -11,7 +11,9 @@ import {
   servicesPageMockData,
   industriesPageMockData,
   engineeringServicesPageMockData,
-  solutionsPageMockData
+  solutionsPageMockData,
+  privacyData,
+  termsData
 } from '../src/lib/data';
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
@@ -369,6 +371,42 @@ async function migrateSolutionsPage() {
   console.log('Solutions Page Data Migrated.');
 }
 
+async function migratePrivacyPage() {
+  console.log('Migrating Privacy Page Data...');
+  const doc = {
+    _type: 'privacyPage',
+    _id: 'privacyPage',
+    ...privacyData,
+    principles: privacyData.principles.map((p: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...p })),
+    detailedSections: privacyData.detailedSections.map((s: any) => ({ 
+      _key: Math.random().toString(36).substr(2, 9), 
+      ...s,
+      keyPoints: s.keyPoints || []
+    })),
+  };
+  await client.createIfNotExists({ _type: 'privacyPage', _id: 'privacyPage' });
+  await client.patch('privacyPage').set(doc).commit();
+  console.log('Privacy Page Data Migrated.');
+}
+
+async function migrateTermsPage() {
+  console.log('Migrating Terms Page Data...');
+  const doc = {
+    _type: 'termsPage',
+    _id: 'termsPage',
+    ...termsData,
+    coreTerms: termsData.coreTerms.map((t: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...t })),
+    detailedSections: termsData.detailedSections.map((s: any) => ({ 
+      _key: Math.random().toString(36).substr(2, 9), 
+      ...s,
+      keyPoints: s.keyPoints || []
+    })),
+  };
+  await client.createIfNotExists({ _type: 'termsPage', _id: 'termsPage' });
+  await client.patch('termsPage').set(doc).commit();
+  console.log('Terms Page Data Migrated.');
+}
+
 async function runMigration() {
   try {
     await migrateHome();
@@ -381,6 +419,8 @@ async function runMigration() {
     await migrateIndustriesPage();
     await migrateEngineeringServicesPage();
     await migrateSolutionsPage();
+    await migratePrivacyPage();
+    await migrateTermsPage();
     console.log('ALL MIGRATIONS COMPLETED SUCCESSFULLY!');
   } catch (error) {
     console.error('Migration failed:', error);

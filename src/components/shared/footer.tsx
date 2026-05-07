@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { FOOTER_DATA, MENU_DATA } from '@/lib/constants';
 import { Logo } from '@/components/shared/logo';
+import { Linkedin, Facebook, Twitter, Instagram, Youtube } from "lucide-react";
 
 /**
  * Global Footer component.
@@ -27,6 +28,27 @@ export function Footer() {
               <p className="text-[10px] text-gray-500 font-black uppercase tracking-[0.2em]">Australia Regional Office</p>
               <p className="text-gray-400 text-xs leading-relaxed">{FOOTER_DATA.office_australia}</p>
             </div>
+          </div>
+
+          <div className="mt-8 pt-8 border-t border-white/5 flex gap-4">
+            {[
+              { icon: Linkedin, href: "https://www.linkedin.com/company/prixgen-tech-solutions-private-limited/", name: "LinkedIn" },
+              { icon: Twitter, href: "https://twitter.com/prixgentech", name: "Twitter" },
+              { icon: Facebook, href: "https://www.facebook.com/PrixgentechSolutions/", name: "Facebook" },
+              { icon: Instagram, href: "https://www.instagram.com/prixgentechno/", name: "Instagram" },
+              { icon: Youtube, href: "https://www.youtube.com/channel/UCdnOG_2Ar83HMPf3PpjDLZQ", name: "YouTube" }
+            ].map((social) => (
+              <a 
+                key={social.name}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-prixgen-blue hover:text-white hover:border-prixgen-blue transition-all duration-300 group"
+                aria-label={social.name}
+              >
+                <social.icon size={18} strokeWidth={1.5} className="group-hover:scale-110 transition-transform" />
+              </a>
+            ))}
           </div>
         </div>
 

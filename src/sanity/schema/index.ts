@@ -8,7 +8,9 @@ import servicesPage from './servicesPage';
 import industriesPage from './industriesPage';
 import engineeringServicesPage from './engineeringServicesPage';
 import solutionsPage from './solutionsPage';
+import privacyPage from './privacyPage';
+import termsPage from './termsPage';
 
 export const schema = {
-  types: [industry, solution, service, home, about, contact, servicesPage, industriesPage, engineeringServicesPage, solutionsPage],
+  types: [industry, solution, service, home, about, contact, servicesPage, industriesPage, engineeringServicesPage, solutionsPage, privacyPage, termsPage],
 };

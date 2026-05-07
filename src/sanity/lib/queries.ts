@@ -219,3 +219,27 @@ export const engineeringServicesPageQuery = groq`*[_type == "engineeringServices
   seo
 }`;
 
+// Query for Privacy Policy Page
+export const privacyQuery = groq`*[_type == "privacyPage"][0]{
+  title,
+  subtitle,
+  heroDescription,
+  principles,
+  detailedSections,
+  lastUpdated,
+  documentId,
+  seo
+}`;
+
+// Query for Terms of Service Page
+export const termsQuery = groq`*[_type == "termsPage"][0]{
+  title,
+  subtitle,
+  heroDescription,
+  coreTerms,
+  detailedSections,
+  lastUpdated,
+  referenceId,
+  seo
+}`;
+
