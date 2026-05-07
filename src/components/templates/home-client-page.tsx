@@ -446,7 +446,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
         */}
 
         {/* 7. Worldwide Presence Section */}
-        <section className="py-16 lg:py-24 bg-white border-t border-slate-100 relative overflow-hidden">
+        <section className="py-24 lg:py-32 bg-white border-t border-slate-100 relative overflow-hidden">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8 items-center">
               {/* Left Column: Headquarters */}
@@ -485,14 +485,14 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                 </div>
               </FadeUp>
               
-              {/* Center Column: Interactive 3D Canvas Globe */}
+              {/* Center Column: Map with enhanced scale and blending */}
               <div className="relative flex justify-center items-center py-12 lg:py-0">
-                <div className="relative w-full max-w-[500px] aspect-square">
-                  <InteractiveGlobe />
+                <div className="relative w-full max-w-[800px] aspect-square lg:scale-125">
+                   {/* Blending Mask for the map container */}
+                   <div className="absolute inset-0 z-10 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_40%,white_100%)]" />
+                   <InteractiveGlobe />
                 </div>
-
               </div>
-
 
               {/* Right Column: Lead Form */}
               <FadeUp delay={0.2} className="relative">

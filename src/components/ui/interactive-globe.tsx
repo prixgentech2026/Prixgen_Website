@@ -94,13 +94,12 @@ export default function InteractiveGlobe() {
   return (
     <div 
       ref={containerRef}
-      className="w-full aspect-[3/1] flex flex-col items-center justify-center p-0 overflow-hidden group"
+      className="w-full h-full flex flex-col items-center justify-center p-0 overflow-hidden group"
       style={{ 
         transform: 'translateZ(0)',
         willChange: 'transform',
         // @ts-ignore
         contentVisibility: 'auto',
-        containIntrinsicSize: '500px 500px',
       }}
     >
       <style jsx global>{`
@@ -117,18 +116,18 @@ export default function InteractiveGlobe() {
       `}</style>
 
       {!isVisible ? (
-        <div className="w-full aspect-square flex items-center justify-center">
+        <div className="w-full h-full flex items-center justify-center">
           <div className="w-12 h-12 border-4 border-prixgen-blue/20 border-t-prixgen-blue rounded-full animate-spin" />
         </div>
       ) : (
-        <div className="w-full max-w-4xl transition-all duration-700 ease-in-out relative drop-shadow-[0_20px_50px_rgba(0,75,135,0.08)]">
+        <div className="w-full h-full transition-all duration-700 ease-in-out relative">
           <ComposableMap
             projection="geoMercator"
             projectionConfig={{
-              scale: 160, 
-              center: [75, 18] 
+              scale: 180, 
+              center: [75, 10] 
             }}
-            className="w-full h-auto transition-all duration-500"
+            className="w-full h-full transition-all duration-500"
           >
             <MapBackground />
 
