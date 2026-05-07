@@ -10,7 +10,24 @@ import engineeringServicesPage from './engineeringServicesPage';
 import solutionsPage from './solutionsPage';
 import privacyPage from './privacyPage';
 import termsPage from './termsPage';
+import leadSubmission from './leadSubmission';
+import careersPage from './careersPage';
 
 export const schema = {
-  types: [industry, solution, service, home, about, contact, servicesPage, industriesPage, engineeringServicesPage, solutionsPage, privacyPage, termsPage],
+  types: [
+    industry, 
+    solution, 
+    service, 
+    home, 
+    about, 
+    contact, 
+    servicesPage, 
+    industriesPage, 
+    engineeringServicesPage, 
+    solutionsPage, 
+    privacyPage, 
+    termsPage,
+    leadSubmission,
+    careersPage
+  ],
 };

@@ -6,6 +6,7 @@ import { z } from 'zod';
 import { useState, useTransition } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { submitLead } from '@/actions/hubspot';
 import { Loader2, CheckCircle2 } from 'lucide-react';
 
@@ -13,6 +14,7 @@ const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
   firstname: z.string().min(2, { message: "First name must be at least 2 characters" }),
   company: z.string().min(2, { message: "Company name is required" }),
+  message: z.string().optional(),
 });
 
 type FormData = z.infer<typeof FormSchema>;
@@ -93,6 +95,16 @@ export function LeadCaptureForm({ source }: { source: string }) {
           className={errors.company ? 'border-red-500' : ''}
         />
         {errors.company && <p className="text-xs text-red-500 mt-1">{errors.company.message}</p>}
+      </div>
+
+      <div>
+        <label htmlFor="message" className="block text-sm font-medium mb-1 text-prixgen-dark/70">Message (Optional)</label>
+        <Textarea
+          id="message"
+          rows={3}
+          placeholder="How can we help you?"
+          {...register('message')}
+        />
       </div>
 
       {error && <p className="text-sm text-red-500 bg-red-50 p-3 rounded border border-red-100">{error}</p>}

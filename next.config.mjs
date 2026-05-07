@@ -23,5 +23,14 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/who-we-are',
+        destination: '/about-us',
+        permanent: true,
+      },
+    ];
+  },
 };
 export default nextConfig;

@@ -243,3 +243,11 @@ export const termsQuery = groq`*[_type == "termsPage"][0]{
   seo
 }`;
 
+export const careersQuery = `*[_type == "careersPage"][0]{
+  title,
+  subtitle,
+  badge,
+  openings,
+  seo
+}`;
+

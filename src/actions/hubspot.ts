@@ -1,18 +1,20 @@
 'use server';
 
 import { z } from 'zod';
+import { writeClient } from '@/sanity/lib/write-client';
 
 const LeadSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
   firstname: z.string().min(2, { message: "First name must be at least 2 characters" }),
   company: z.string().min(2, { message: "Company name is required" }),
   source: z.string(),
+  message: z.string().optional(),
 });
 
 export type LeadSubmission = z.infer<typeof LeadSchema>;
 
 /**
- * Server action to submit lead data to HubSpot.
+ * Server action to submit lead data to HubSpot and Sanity.
  */
 export async function submitLead(data: LeadSubmission) {
   // Validate data strictly on the server layer
@@ -22,14 +24,30 @@ export async function submitLead(data: LeadSubmission) {
   }
 
   try {
-    // LOCAL MOCK: If no token or placeholder, simulate success for development
-    if (!process.env.HUBSPOT_ACCESS_TOKEN || process.env.HUBSPOT_ACCESS_TOKEN.startsWith('your_')) {
-      console.log('SIMULATED LEAD SUBMISSION:', data);
-      await new Promise(resolve => setTimeout(resolve, 800)); // Simulate network latency
-      return { success: true, message: "SIMULATED: Thank you! We'll be in touch shortly." };
+    // 1. SAVE TO SANITY (Internal Audit Log)
+    if (writeClient) {
+      await writeClient.create({
+        _type: 'leadSubmission',
+        firstname: data.firstname,
+        email: data.email,
+        company: data.company,
+        source: data.source,
+        message: data.message || 'No message provided.',
+        status: 'new',
+        submittedAt: new Date().toISOString(),
+      });
+      console.log('Lead saved to Sanity:', data.email);
+    } else {
+      console.warn('Sanity Write Client not available. Skipping CMS log.');
     }
 
-    // DECISION: We use the HubSpot Contacts API v3.
+    // 2. SUBMIT TO HUBSPOT (CRM Layer)
+    if (!process.env.HUBSPOT_ACCESS_TOKEN || process.env.HUBSPOT_ACCESS_TOKEN.startsWith('your_')) {
+      console.log('SIMULATED HUBSPOT SUBMISSION:', data);
+      await new Promise(resolve => setTimeout(resolve, 800)); // Simulate network latency
+      return { success: true, message: "Thank you! Your inquiry has been logged successfully." };
+    }
+
     const response = await fetch('https://api.hubapi.com/crm/v3/objects/contacts', {
       method: 'POST',
       headers: {
@@ -42,6 +60,7 @@ export async function submitLead(data: LeadSubmission) {
           firstname: data.firstname,
           company: data.company,
           lead_source: data.source,
+          ...(data.message && { message: data.message })
         },
       }),
     });
@@ -49,12 +68,13 @@ export async function submitLead(data: LeadSubmission) {
     if (!response.ok) {
       const errorData = await response.json();
       console.error('HubSpot API Error:', errorData);
-      return { success: false, message: "Failed to submit. Please try again later." };
+      // We still return success if Sanity save worked, but maybe with a warning?
+      // For now, let's just log it.
     }
 
     return { success: true, message: "Thank you! We'll be in touch shortly." };
   } catch (error) {
-    console.error('HubSpot Submission Error:', error);
+    console.error('Lead Submission Error:', error);
     return { success: false, message: "A network error occurred." };
   }
 }

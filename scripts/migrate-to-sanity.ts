@@ -13,7 +13,8 @@ import {
   engineeringServicesPageMockData,
   solutionsPageMockData,
   privacyData,
-  termsData
+  termsData,
+  careersData
 } from '../src/lib/data';
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
@@ -407,6 +408,19 @@ async function migrateTermsPage() {
   console.log('Terms Page Data Migrated.');
 }
 
+async function migrateCareersPage() {
+  console.log('Migrating Careers Page Data...');
+  const doc = {
+    _type: 'careersPage',
+    _id: 'careersPage',
+    ...careersData,
+    openings: careersData.openings.map((o: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...o })),
+  };
+  await client.createIfNotExists({ _type: 'careersPage', _id: 'careersPage' });
+  await client.patch('careersPage').set(doc).commit();
+  console.log('Careers Page Data Migrated.');
+}
+
 async function runMigration() {
   try {
     await migrateHome();
@@ -421,6 +435,7 @@ async function runMigration() {
     await migrateSolutionsPage();
     await migratePrivacyPage();
     await migrateTermsPage();
+    await migrateCareersPage();
     console.log('ALL MIGRATIONS COMPLETED SUCCESSFULLY!');
   } catch (error) {
     console.error('Migration failed:', error);

@@ -7,8 +7,11 @@ import { FadeUp } from '@/components/animations/fade-up';
 import { StaggerText } from '@/components/animations/stagger-text';
 import { AmbientGlow } from '@/components/animations/ambient-glow';
 import Link from 'next/link';
+import { CareersPageData } from '@/lib/data';
 
-export default function CareersClient() {
+export default function CareersClient({ data }: { data: CareersPageData }) {
+  const { title, subtitle, badge, openings } = data;
+
   return (
     <div className="bg-white selection:bg-prixgen-blue selection:text-white">
       {/* Hero Section */}
@@ -24,20 +27,20 @@ export default function CareersClient() {
             <div className="flex items-center justify-center gap-3 mb-8">
               <div className="h-[1px] w-8 bg-prixgen-blue/30" />
               <span className="px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue font-bold tracking-widest uppercase text-[10px]">
-                Global Engineering
+                {badge}
               </span>
               <div className="h-[1px] w-8 bg-prixgen-blue/30" />
             </div>
             
             <StaggerText 
-              text="Careers" 
+              text={title} 
               variant="gradient"
               className="text-6xl md:text-8xl lg:text-[10rem] font-black leading-[0.85] mb-12 tracking-tighter"
             />
             
             <div className="max-w-4xl mx-auto">
               <p className="text-xl lg:text-2xl text-slate-500 font-medium leading-relaxed">
-                Join an elite team of engineers, architects, and consultants. We are building the future of industrial intelligence.
+                {subtitle}
               </p>
             </div>
           </FadeUp>
@@ -57,11 +60,7 @@ export default function CareersClient() {
             </FadeUp>
             
             <div className="space-y-8">
-              {[
-                { title: 'Senior Python/Odoo Developer', type: 'Full-time', location: 'Mysuru', team: 'Engineering' },
-                { title: 'Functional Consultant (ERP)', type: 'Full-time', location: 'Mysuru', team: 'Consulting' },
-                { title: 'Technical Project Manager', type: 'Full-time', location: 'Mysuru', team: 'Project Management' },
-              ].map((job, i) => (
+              {openings.map((job, i) => (
                 <FadeUp key={job.title} delay={i * 0.1}>
                   <div className="bg-white p-12 rounded-[3rem] shadow-2xl shadow-slate-200/50 hover:shadow-blue-500/10 transition-all duration-500 border border-slate-50 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 group">
                     <div className="space-y-4">

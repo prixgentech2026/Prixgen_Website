@@ -14,7 +14,8 @@ import {
   aboutQuery,
   contactQuery,
   privacyQuery,
-  termsQuery
+  termsQuery,
+  careersQuery
 } from '@/sanity/lib/queries';
 
 export interface PrivacyPageData {
@@ -61,6 +62,22 @@ export interface TermsPageData {
   };
 }
 
+export interface CareersPageData {
+  title: string;
+  subtitle: string;
+  badge: string;
+  openings: {
+    title: string;
+    team: string;
+    location: string;
+    type: string;
+  }[];
+  seo?: {
+    title: string;
+    metaDesc: string;
+  };
+}
+
 /**
  * SANITY FETCHING LAYER
  * These functions fetch data from Sanity if a Project ID is provided.
@@ -97,6 +114,17 @@ export async function getContactData() {
   } catch (error) {
     console.error('Sanity Fetch Error (Contact):', error);
     return contactData;
+  }
+}
+
+export async function getCareersData() {
+  if (!client) return careersData;
+  try {
+    const data = await client.fetch(careersQuery);
+    return data || careersData;
+  } catch (error) {
+    console.error('Sanity Fetch Error (Careers):', error);
+    return careersData;
   }
 }
 
@@ -1822,5 +1850,20 @@ export const termsData: TermsPageData = {
   seo: {
     title: "Terms of Service | Prixgen Enterprise",
     metaDesc: "The legal framework for our enterprise partnerships and engineering excellence."
+  }
+};
+
+export const careersData: CareersPageData = {
+  title: "Careers",
+  subtitle: "Join an elite team of engineers, architects, and consultants. We are building the future of industrial intelligence.",
+  badge: "Global Engineering",
+  openings: [
+    { title: 'Senior Python/Odoo Developer', type: 'Full-time', location: 'Mysuru', team: 'Engineering' },
+    { title: 'Functional Consultant (ERP)', type: 'Full-time', location: 'Mysuru', team: 'Consulting' },
+    { title: 'Technical Project Manager', type: 'Full-time', location: 'Mysuru', team: 'Project Management' },
+  ],
+  seo: {
+    title: "Careers | Build the Future of Industrial Automation",
+    metaDesc: "Join an elite team of engineers, architects, and consultants at Prixgen. Current openings for Senior Python/Odoo Developers and Functional Consultants in Mysuru."
   }
 };
