@@ -29,7 +29,7 @@ const InteractiveGlobe = dynamic(() => import('@/components/ui/interactive-globe
  * Custom component to handle patron logos with robust fallback
  */
 
-const PatronLogo = ({ patron }: { patron: { id: string; name: string } }) => {
+const PatronLogo = ({ patron }: { patron: { filename: string; name: string } }) => {
   const [error, setError] = useState(false);
 
   return (
@@ -37,7 +37,7 @@ const PatronLogo = ({ patron }: { patron: { id: string; name: string } }) => {
       <div className="w-28 h-28 mb-4 rounded-full bg-white shadow-xl flex items-center justify-center overflow-hidden p-6 border border-slate-100 group-hover:border-prixgen-blue/30 transition-all duration-300">
         {!error ? (
           <img 
-            src={`/images/patron_${patron.id}.png`} 
+            src={`/images/patron/${patron.filename}`} 
             alt={patron.name} 
             className="w-full h-full object-contain"
             onError={() => setError(true)}
@@ -54,31 +54,31 @@ const PatronLogo = ({ patron }: { patron: { id: string; name: string } }) => {
 };
 
 const PATRONS = [
-  { id: 'elsteel', name: 'EL Steel' },
-  { id: 'licious', name: 'Licious' },
-  { id: 'curefit', name: 'Curefit' },
-  { id: 'ravago', name: 'Ravago' },
-  { id: 'zetwerk', name: 'Zetwerk' },
-  { id: 'designcafe', name: 'Designcafe' },
-  { id: 'starpipe', name: 'Starpipe' },
-  { id: 'wittmann', name: 'Wittmann Battenfeld' },
-  { id: 'worldoutdoor', name: 'World of Outdoor' },
-  { id: 'murudeshwar', name: 'Murudeshwar' },
-  { id: 'ceezet', name: 'Ceezet' },
-  { id: 'sfdyes', name: 'SF Dyes' },
-  { id: 'starflex', name: 'Star Flex' },
-  { id: 'lseng', name: 'L S Engineering' },
-  { id: 'synthesis', name: 'Synthesis Solutions' },
-  { id: 'vahini', name: 'Vahini Irrigation' },
-  { id: 'biworldwide', name: 'BI Worldwide' },
-  { id: 'masfurniture', name: 'Mas Furniture' },
-  { id: 'onetown', name: 'One Town Engineering' },
-  { id: 'diamondmetal', name: 'Diamond Metal Screen' },
-  { id: 'alansari', name: 'Al Ansari' },
-  { id: 'morris', name: 'Morris And Sons' },
-  { id: 'plymoduld', name: 'Plymoduld' },
-  { id: 'instellars', name: 'Instellars' },
-  { id: 'starwater', name: 'Star Water Tanker' },
+  { filename: 'EL-Steel.png', name: 'EL Steel' },
+  { filename: 'Licious-Logo.png', name: 'Licious' },
+  { filename: 'curefit-1.png', name: 'Curefit' },
+  { filename: 'Ravago.png', name: 'Ravago' },
+  { filename: 'zetwerk.png', name: 'Zetwerk' },
+  { filename: 'G-S-E-commerce-Designcafe.png', name: 'Designcafe' },
+  { filename: 'Starpipe.png', name: 'Starpipe' },
+  { filename: 'WITTMANN-BATTENFELD.png', name: 'Wittmann Battenfeld' },
+  { filename: 'world-of-outdoor.png', name: 'World of Outdoor' },
+  { filename: 'Murudeshwar.png', name: 'Murudeshwar' },
+  { filename: 'ceezet.png', name: 'Ceezet' },
+  { filename: 'SF-Dyes.png', name: 'SF Dyes' },
+  { filename: 'Star-Flex.png', name: 'Star Flex' },
+  { filename: 'L-S-Engineering.png', name: 'L S Engineering' },
+  { filename: 'Synthesis-Solutions.png', name: 'Synthesis Solutions' },
+  { filename: 'Vahini-Irrigation.png', name: 'Vahini Irrigation' },
+  { filename: 'bi-worldwide.png', name: 'BI Worldwide' },
+  { filename: 'Mas-Furniture.png', name: 'Mas Furniture' },
+  { filename: 'one-town-enginnering..png', name: 'One Town Engineering' },
+  { filename: 'diamond-metal-screen.png', name: 'Diamond Metal Screen' },
+  { filename: 'AI-Ansari.png', name: 'Al Ansari' },
+  { filename: 'MorrisAndSons.png', name: 'Morris And Sons' },
+  { filename: 'PLYMODULD.png', name: 'Plymoduld' },
+  { filename: 'instellars.png', name: 'Instellars' },
+  { filename: 'star-water-tanker.png', name: 'Star Water Tanker' },
 ];
 
 
@@ -341,7 +341,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
               }}
             >
               {[...PATRONS, ...PATRONS].map((patron, i) => (
-                <PatronLogo key={`${patron.id}-${i}`} patron={patron} />
+                <PatronLogo key={`${patron.filename}-${i}`} patron={patron} />
               ))}
             </motion.div>
           </div>

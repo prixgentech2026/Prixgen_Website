@@ -1,5 +1,5 @@
 import { getAboutData } from '@/lib/data';
-import { WhoWeAreClient } from '../who-we-are/who-we-are-client';
+import { AboutClient } from './about-client';
 import { Metadata } from 'next';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -22,5 +22,5 @@ export default async function AboutPage() {
     );
   }
 
-  return <WhoWeAreClient data={data} />;
+  return <AboutClient data={data} />;
 }
