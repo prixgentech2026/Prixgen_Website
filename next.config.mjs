@@ -32,5 +32,6 @@ const nextConfig = {
       },
     ];
   },
+  transpilePackages: ['next-sanity', 'sanity'],
 };
 export default nextConfig;
