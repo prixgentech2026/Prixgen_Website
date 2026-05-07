@@ -19,6 +19,26 @@ export const homeQuery = groq`*[_type == "home"][0]{
   seo
 }`;
 
+// Query for the Solutions Landing Page
+export const solutionsPageQuery = groq`*[_type == "solutionsPage"][0]{
+  title,
+  subtitle,
+  heroSubheadline,
+  methodology,
+  outcomes,
+  "coreSolutions": coreSolutions[]->{
+    title,
+    headline,
+    "slug": slug.current,
+    externalImageUrl,
+    "featuredImage": {
+      "sourceUrl": featuredImage.asset->url,
+      "altText": featuredImage.altText
+    }
+  },
+  seo
+}`;
+
 // Query for the About Us Page
 export const aboutQuery = groq`*[_type == "about"][0]{
   title,
@@ -90,11 +110,15 @@ export const industryBySlugQuery = groq`*[_type == "industry" && slug.current ==
 
 // Query for all Solutions
 export const solutionsQuery = groq`*[_type == "solution"]{
-  slug,
+  "slug": slug.current,
   title,
   headline,
   seo,
-  externalImageUrl
+  externalImageUrl,
+  "featuredImage": {
+    "sourceUrl": featuredImage.asset->url,
+    "altText": featuredImage.altText
+  }
 }`;
 
 // Query for a single Solution by slug
@@ -161,6 +185,7 @@ export const servicesPageQuery = groq`*[_type == "servicesPage"][0]{
   seo
 }`;
 
+
 // Query for the Industries Landing Page
 export const industriesPageQuery = groq`*[_type == "industriesPage"][0]{
   title,
@@ -193,3 +218,4 @@ export const engineeringServicesPageQuery = groq`*[_type == "engineeringServices
   },
   seo
 }`;
+

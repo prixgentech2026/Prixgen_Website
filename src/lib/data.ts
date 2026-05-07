@@ -10,6 +10,7 @@ import {
   servicesPageQuery,
   industriesPageQuery,
   engineeringServicesPageQuery,
+  solutionsPageQuery,
   aboutQuery,
   contactQuery
 } from '@/sanity/lib/queries';
@@ -271,6 +272,45 @@ export async function getEngineeringServicesPageData() {
   }
 }
 
+export async function getSolutionsPageData() {
+  if (!client) return solutionsPageMockData;
+  try {
+    const data = await client.fetch(solutionsPageQuery);
+    if (!data) return solutionsPageMockData;
+
+    // Ensure we show all solutions even if Sanity only has a few
+    let cleanCoreSolutions = (data.coreSolutions || []).filter((s: any) => s !== null);
+    
+    // If we have fewer than expected, let's just fetch all solutions
+    if (cleanCoreSolutions.length === 0 || cleanCoreSolutions.length < solutionsPageMockData.coreSolutions.length) {
+      const allSolutions = await getSolutions();
+      if (allSolutions && allSolutions.length > 0) {
+        cleanCoreSolutions = allSolutions.map((s: any) => ({
+          title: s.title,
+          headline: s.headline,
+          slug: s.slug,
+          externalImageUrl: s.externalImageUrl,
+          featuredImage: s.featuredImage
+        }));
+      }
+    }
+
+    return {
+      ...data,
+      seo: data.seo || solutionsPageMockData.seo,
+      coreSolutions: cleanCoreSolutions.length >= solutionsPageMockData.coreSolutions.length
+        ? cleanCoreSolutions
+        : solutionsPageMockData.coreSolutions,
+      outcomes: (data.outcomes && data.outcomes.length >= solutionsPageMockData.outcomes.length)
+        ? data.outcomes
+        : solutionsPageMockData.outcomes
+    };
+  } catch (error) {
+    console.error('Sanity Fetch Error (Solutions Page):', error);
+    return solutionsPageMockData;
+  }
+}
+
 export async function getEngineeringServices() {
   const engineeringSlugs = ["iiot-telemetry", "automation", "cloud-infrastructure"];
   const engineeringMock = servicesData.filter(s => engineeringSlugs.includes(s.slug));
@@ -419,6 +459,31 @@ export interface EngineeringServicesPageData {
     icon: string;
   }[];
   coreServices: {
+    title: string;
+    headline: string;
+    slug: string;
+    externalImageUrl?: string;
+    featuredImage?: any;
+  }[];
+  seo: SEOData;
+}
+
+export interface SolutionsPageData {
+  title: string;
+  subtitle: string;
+  heroSubheadline: string;
+  methodology: {
+    step: string;
+    title: string;
+    description: string;
+    icon: string;
+  }[];
+  outcomes: {
+    title: string;
+    description: string;
+    icon: string;
+  }[];
+  coreSolutions: {
     title: string;
     headline: string;
     slug: string;
@@ -919,6 +984,87 @@ export const solutionsData: any[] = [
     seo: {
       title: "Lecca Industrial AI & Computer Vision | Prixgen",
       metaDesc: "Automate quality control and safety with Lecca's proprietary industrial AI platform.",
+    }
+  },
+  {
+    slug: "power-bi",
+    title: "Power BI",
+    headline: "Real-time industrial intelligence and predictive visualization.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1543286386-713bdd548da4?auto=format&fit=crop&q=80&w=1000", altText: "Power BI" },
+    content: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Transform raw industrial data into actionable executive insights with Power BI. We design high-performance data models that connect directly to your Odoo or SAP core, providing real-time visibility into production KPIs, financial health, and supply chain performance. Our custom dashboards are engineered for high-stakes decision making, featuring predictive trend analysis and automated alerting." }]
+      }
+    ],
+    features: [
+      { title: "Real-time Dashboards", description: "Live monitoring of industrial KPIs and operational health." },
+      { title: "Predictive Modeling", description: "Anticipating market shifts and demand fluctuations." },
+      { title: "ERP Data Bridge", description: "Direct, secure connection to Odoo, SAP, and Dynamics data." }
+    ],
+    process: [
+      { title: "Data Audit", description: "Identifying key metrics and data sources for visualization." },
+      { title: "Architecture Design", description: "Building the secure data pipeline and modeling logic." },
+      { title: "Executive Rollout", description: "Deploying high-visibility dashboards to leadership teams." }
+    ],
+    seo: {
+      title: "Power BI Industrial Intelligence | Prixgen",
+      metaDesc: "Transforming enterprise data into actionable insights with custom Power BI architectures.",
+    }
+  },
+  {
+    slug: "dynamics-nav",
+    title: "Dynamics NAV Modernization",
+    headline: "Modernize your legacy ERP with cloud-ready extensions.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1580674285054-bed31e145f59?auto=format&fit=crop&q=80&w=1000", altText: "Dynamics NAV" },
+    content: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Don't let legacy software hold back your enterprise growth. We specialize in modernizing Dynamics NAV environments, extending their lifespan with modern cloud integrations and AI layers. Whether you are looking to migrate to Business Central or optimize your current NAV deployment, our architects provide the technical bridge needed for high-availability performance." }]
+      }
+    ],
+    features: [
+      { title: "Cloud Extensions", description: "Adding modern web and mobile capabilities to legacy NAV." },
+      { title: "Database Optimization", description: "Enhancing performance for high-volume industrial workloads." },
+      { title: "Integration Bridge", description: "Connecting NAV to modern IIoT and AI ecosystems." }
+    ],
+    process: [
+      { title: "Legacy Audit", description: "Assessing the current health and customization depth of your NAV stack." },
+      { title: "Modernization Roadmap", description: "Defining the phased approach to cloud and AI integration." },
+      { title: "Secure Deployment", description: "Rolling out updates with zero data loss or operational downtime." }
+    ],
+    seo: {
+      title: "Dynamics NAV Modernization & Support | Prixgen",
+      metaDesc: "Extending the power of legacy Dynamics NAV with modern cloud and AI architectures.",
+    }
+  },
+  {
+    slug: "image-processing",
+    title: "Advanced Image Processing",
+    headline: "Advanced computer vision for quality control and inspection.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=1000", altText: "Image Processing" },
+    content: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Our image processing solutions bring high-precision computer vision to the shop floor. We design systems that automatically detect defects, verify assembly steps, and monitor safety compliance in real-time. By utilizing custom AI models trained on your specific products, we eliminate the variability of human inspection and ensure 100% quality assurance." }]
+      }
+    ],
+    features: [
+      { title: "Automated Inspection", description: "High-speed defect detection and assembly verification." },
+      { title: "Precision Measurement", description: "Sub-millimeter visual auditing for critical industrial components." },
+      { title: "Safety Surveillance", description: "AI-backed monitoring of PPE compliance and danger zones." }
+    ],
+    process: [
+      { title: "Optics Survey", description: "Defining camera and lighting requirements for your environment." },
+      { title: "Algorithm Training", description: "Developing custom vision models for your unique products." },
+      { title: "Real-time Integration", description: "Connecting vision signals to your production line and ERP." }
+    ],
+    seo: {
+      title: "Industrial Image Processing & Computer Vision | Prixgen",
+      metaDesc: "High-precision computer vision solutions for automated quality control.",
     }
   },
   {
@@ -1515,5 +1661,39 @@ export const engineeringServicesPageMockData: EngineeringServicesPageData = {
   seo: {
     title: "Engineering Services | Industrial Intelligence & Automation | Prixgen",
     metaDesc: "Prixgen's engineering services deliver high-frequency IIoT telemetry, factory automation, and bespoke industrial technical solutions.",
+  }
+};
+
+export const solutionsPageMockData: SolutionsPageData = {
+  title: "Strategic ERP & AI Architectures",
+  subtitle: "Architecture Suite",
+  heroSubheadline: "We engineer integrated enterprise ecosystems that bridge the gap between legacy operations and future-ready digital intelligence.",
+  methodology: [
+    { step: "01", title: "Analyze : Process Mapping", description: "We conduct deep-dive technical audits of your existing business processes and data flow.", icon: "Search" },
+    { step: "02", title: "Architect : Solution Design", description: "We design a scalable architecture that integrates core ERP with modern AI and data layers.", icon: "PenTool" },
+    { step: "03", title: "Automate : System Rollout", description: "We deploy the integrated solution with a focus on seamless transition and immediate ROI.", icon: "Settings" }
+  ],
+  outcomes: [
+    { title: "Unified Data Core", description: "Single source of truth across finance, supply chain, and manufacturing operations.", icon: "Database" },
+    { title: "Operational Velocity", description: "Drastically reduce cycle times through automated workflows and real-time decisioning.", icon: "Zap" },
+    { title: "Financial Integrity", description: "Real-time visibility into batch-level profitability and automated financial reporting.", icon: "BarChart3" },
+    { title: "Supply Chain Agility", description: "Anticipate market shifts with AI-driven demand sensing and inventory optimization.", icon: "Network" },
+    { title: "Regulatory Mastery", description: "Built-in compliance and traceability for global standards and local regulations.", icon: "ShieldCheck" },
+    { title: "Scalable Growth", description: "Future-proof architecture that scales seamlessly with your business expansion.", icon: "TrendingUp" }
+  ],
+  coreSolutions: [
+    { title: "Odoo", headline: "Gold Partner precision for scale.", slug: "odoo-enterprise", externalImageUrl: "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?auto=format&fit=crop&q=80&w=1000" },
+    { title: "SAP", headline: "Intelligent core management.", slug: "sap-ecosystems", externalImageUrl: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1000" },
+    { title: "Microsoft Dynamics", headline: "Unified business applications.", slug: "microsoft-dynamics", externalImageUrl: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1000" },
+    { title: "Power BI", headline: "Real-time industrial intelligence and predictive visualization.", slug: "power-bi", externalImageUrl: "https://images.unsplash.com/photo-1543286386-713bdd548da4?auto=format&fit=crop&q=80&w=1000" },
+    { title: "Dynamics NAV", headline: "Modernize your legacy ERP with cloud-ready extensions.", slug: "dynamics-nav", externalImageUrl: "https://images.unsplash.com/photo-1580674285054-bed31e145f59?auto=format&fit=crop&q=80&w=1000" },
+    { title: "IIoT", headline: "Real-time industrial intelligence.", slug: "iiot-telemetry", externalImageUrl: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=1000" },
+    { title: "AI & ML", headline: "Proprietary industrial intelligence.", slug: "ai-machine-learning", externalImageUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=1000" },
+    { title: "Image Processing", headline: "Advanced computer vision for quality control and inspection.", slug: "image-processing", externalImageUrl: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=1000" },
+    { title: "Lecca", headline: "Industrial computer vision and AI intelligence.", slug: "lecca-ai", externalImageUrl: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=1000" }
+  ],
+  seo: {
+    title: "Solutions | Enterprise Resource Planning & AI | Prixgen",
+    metaDesc: "Explore Prixgen's comprehensive suite of enterprise solutions including Odoo, SAP, and Tally, integrated with modern AI intelligence.",
   }
 };

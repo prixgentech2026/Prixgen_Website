@@ -20,10 +20,27 @@ export const MENU_DATA = {
     { title: "Cloud Infrastructure", href: "/engineering-services/cloud-infrastructure", description: "High-availability industrial cloud." },
   ],
   solutions: [
-    { title: "Odoo Enterprise", href: "/solutions/odoo-enterprise", description: "Gold Partner precision for scale." },
-    { title: "SAP Ecosystems", href: "/solutions/sap-ecosystems", description: "Intelligent core management." },
-    { title: "Microsoft Dynamics 365", href: "/solutions/microsoft-dynamics", description: "Unified business applications." },
-    { title: "Lecca: Computer Vision & AI", href: "/solutions/lecca-ai", description: "Proprietary industrial intelligence." },
+    { title: "Odoo", href: "/solutions/odoo-enterprise", description: "Gold Partner precision for scale." },
+    { title: "SAP", href: "/solutions/sap-ecosystems", description: "Intelligent core management." },
+    { 
+      title: "Microsoft Dynamics", 
+      href: "/solutions/microsoft-dynamics",
+      description: "Unified business applications.",
+      subItems: [
+        { title: "Power BI", href: "/solutions/power-bi" },
+        { title: "Dynamics NAV", href: "/solutions/dynamics-nav" }
+      ]
+    },
+    { title: "IIoT", href: "/engineering-services/iiot-telemetry", description: "Real-time industrial intelligence." },
+    { 
+      title: "AI & ML", 
+      href: "/services/ai-machine-learning",
+      description: "Proprietary industrial intelligence.",
+      subItems: [
+        { title: "Image Processing", href: "/solutions/image-processing" },
+        { title: "Lecca", href: "/solutions/lecca-ai" }
+      ]
+    },
   ],
   industries: [
     { title: "Manufacturing", href: "/industries/manufacturing", description: "Shop-floor to top-floor synchronization." },

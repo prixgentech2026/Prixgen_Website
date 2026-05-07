@@ -18,10 +18,15 @@ export function Footer() {
           <p className="text-gray-400 text-sm leading-relaxed mb-6">
             {FOOTER_DATA.tagline}
           </p>
-          <div className="space-y-2">
-            <p className="text-[10px] text-gray-500 font-black uppercase tracking-[0.2em]">Regional Headquarters</p>
-            <p className="text-gray-400 text-xs leading-relaxed">{FOOTER_DATA.office_india}</p>
-            <p className="text-gray-400 text-xs">{FOOTER_DATA.office_australia}</p>
+          <div className="space-y-4">
+            <div className="space-y-1.5">
+              <p className="text-[10px] text-gray-500 font-black uppercase tracking-[0.2em]">Corporate Headquarters</p>
+              <p className="text-gray-400 text-xs leading-relaxed">{FOOTER_DATA.office_india}</p>
+            </div>
+            <div className="space-y-1.5">
+              <p className="text-[10px] text-gray-500 font-black uppercase tracking-[0.2em]">Australia Regional Office</p>
+              <p className="text-gray-400 text-xs leading-relaxed">{FOOTER_DATA.office_australia}</p>
+            </div>
           </div>
         </div>
 
@@ -30,9 +35,20 @@ export function Footer() {
           <ul className="space-y-3 text-gray-400 text-sm">
             {MENU_DATA.solutions.map((item) => (
               <li key={item.title}>
-                <Link href={item.href} className="hover:text-prixgen-lightblue transition-colors">
+                <Link href={item.href} className="hover:text-prixgen-lightblue transition-colors font-medium">
                   {item.title}
                 </Link>
+                {item.subItems && (
+                  <ul className="mt-2 ml-2 space-y-2 border-l border-white/10 pl-3 text-[11px] opacity-70">
+                    {item.subItems.map((sub) => (
+                      <li key={sub.title}>
+                        <Link href={sub.href} className="hover:text-prixgen-lightblue transition-colors">
+                          {sub.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </ul>

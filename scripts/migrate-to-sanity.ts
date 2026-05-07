@@ -9,7 +9,9 @@ import {
   solutionsData, 
   servicesData,
   servicesPageMockData,
-  industriesPageMockData
+  industriesPageMockData,
+  engineeringServicesPageMockData,
+  solutionsPageMockData
 } from '../src/lib/data';
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
@@ -29,42 +31,54 @@ const client = createClient({
   apiVersion: '2024-05-01',
 });
 
-async function uploadImage(url: string) {
+async function uploadImage(url: string, retries = 3) {
   const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1000';
   
-  console.log(`Uploading image: ${url}`);
-  try {
-    let buffer: Buffer;
-    let filename: string;
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      console.log(`Uploading image (Attempt ${attempt}/${retries}): ${url}`);
+      let buffer: Buffer;
+      let filename: string;
 
-    if (url.startsWith('file://') || url.startsWith('C:') || url.startsWith('/') || fs.existsSync(url)) {
-      const filePath = url.startsWith('file://') ? url.replace('file:///', '').replace('file://', '') : url;
-      buffer = fs.readFileSync(filePath);
-      filename = path.basename(filePath);
-    } else {
-      let response = await fetch(url);
+      if (url.startsWith('file://') || url.startsWith('C:') || url.startsWith('/') || fs.existsSync(url)) {
+        const filePath = url.startsWith('file://') ? url.replace('file:///', '').replace('file://', '') : url;
+        buffer = fs.readFileSync(filePath);
+        filename = path.basename(filePath);
+      } else {
+        let response = await fetch(url);
+        
+        if (!response.ok) {
+          console.warn(`[WARN] Failed to fetch ${url}. Using fallback image.`);
+          response = await fetch(FALLBACK_IMAGE);
+        }
+        
+        if (!response.ok) throw new Error(`Failed to fetch even the fallback image: ${response.statusText}`);
+        
+        const arrayBuffer = await response.arrayBuffer();
+        buffer = Buffer.from(arrayBuffer);
+        filename = url.split('/').pop()?.split('?')[0] || 'image.jpg';
+      }
+
+      const asset = await client.assets.upload('image', buffer, {
+        filename,
+      });
+      console.log(`[SUCCESS] Image uploaded: ${asset._id}`);
+      return asset._id;
+    } catch (error: any) {
+      const isTransient = error.statusCode === 502 || error.statusCode === 503 || error.statusCode === 504 || error.statusCode === 429;
       
-      if (!response.ok) {
-        console.warn(`[WARN] Failed to fetch ${url}. Using fallback image.`);
-        response = await fetch(FALLBACK_IMAGE);
+      if (isTransient && attempt < retries) {
+        const delay = attempt * 2000;
+        console.warn(`[RETRY] Sanity API error (${error.statusCode}). Retrying in ${delay}ms...`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        continue;
       }
       
-      if (!response.ok) throw new Error(`Failed to fetch even the fallback image: ${response.statusText}`);
-      
-      const arrayBuffer = await response.arrayBuffer();
-      buffer = Buffer.from(arrayBuffer);
-      filename = url.split('/').pop()?.split('?')[0] || 'image.jpg';
+      console.error(`[ERROR] Failed to upload ${url} after ${attempt} attempts:`, error.message || error);
+      return null;
     }
-    
-    const asset = await client.assets.upload('image', buffer, {
-      filename,
-    });
-    console.log(`[SUCCESS] Image uploaded: ${asset._id}`);
-    return asset._id;
-  } catch (error) {
-    console.error(`[ERROR] Failed to upload ${url}:`, error);
-    return null;
   }
+  return null;
 }
 
 const PREMIUM_IMAGES: Record<string, string> = {
@@ -193,7 +207,8 @@ async function migrateSolutions() {
   console.log('Migrating Solutions...');
   for (const solution of solutionsData) {
     console.log(`Migrating Solution: ${solution.title}`);
-    const imageId = await uploadImage(solution.featuredImage.sourceUrl);
+    const imageUrl = solution.externalImageUrl || (solution.featuredImage ? solution.featuredImage.sourceUrl : null);
+    const imageId = imageUrl ? await uploadImage(imageUrl) : null;
     
     const doc = {
       _type: 'solution',
@@ -201,17 +216,18 @@ async function migrateSolutions() {
       title: solution.title,
       slug: { _type: 'slug', current: solution.slug },
       headline: solution.headline,
+      externalImageUrl: solution.externalImageUrl,
       featuredImage: imageId ? {
         _type: 'image',
         asset: {
           _type: 'reference',
           _ref: imageId,
         },
-        altText: solution.featuredImage.altText,
+        altText: solution.featuredImage?.altText || solution.title,
       } : undefined,
       content: solution.content,
-      features: solution.features.map((f: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...f })),
-      process: solution.process.map((p: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...p })),
+      features: solution.features ? solution.features.map((f: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...f })) : [],
+      process: solution.process ? solution.process.map((p: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...p })) : [],
       seo: solution.seo,
     };
     
@@ -225,7 +241,8 @@ async function migrateServices() {
   console.log('Migrating Services...');
   for (const service of servicesData) {
     console.log(`Migrating Service: ${service.title}`);
-    const imageId = await uploadImage(service.featuredImage.sourceUrl);
+    const imageUrl = service.externalImageUrl || (service.featuredImage ? service.featuredImage.sourceUrl : null);
+    const imageId = imageUrl ? await uploadImage(imageUrl) : null;
     
     const doc = {
       _type: 'service',
@@ -233,17 +250,18 @@ async function migrateServices() {
       title: service.title,
       slug: { _type: 'slug', current: service.slug },
       headline: service.headline,
+      externalImageUrl: service.externalImageUrl,
       featuredImage: imageId ? {
         _type: 'image',
         asset: {
           _type: 'reference',
           _ref: imageId,
         },
-        altText: service.featuredImage.altText,
+        altText: service.featuredImage?.altText || service.title,
       } : undefined,
       content: service.content,
-      features: service.features.map((f: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...f })),
-      process: service.process.map((p: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...p })),
+      features: service.features ? service.features.map((f: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...f })) : [],
+      process: service.process ? service.process.map((p: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...p })) : [],
       seo: service.seo,
     };
     
@@ -297,6 +315,60 @@ async function migrateIndustriesPage() {
   console.log('Industries Page Data Migrated.');
 }
 
+async function migrateEngineeringServicesPage() {
+  console.log('Migrating Engineering Services Page Data...');
+  const doc = {
+    _type: 'engineeringServicesPage',
+    _id: 'engineeringServicesPage',
+    title: engineeringServicesPageMockData.title,
+    subtitle: engineeringServicesPageMockData.subtitle,
+    heroSubheadline: engineeringServicesPageMockData.heroSubheadline,
+    methodology: engineeringServicesPageMockData.methodology.map(m => ({ _key: Math.random().toString(36).substr(2, 9), ...m })),
+    outcomes: engineeringServicesPageMockData.outcomes.map(o => ({ _key: Math.random().toString(36).substr(2, 9), ...o })),
+    coreServices: engineeringServicesPageMockData.coreServices.map(s => ({ 
+      _key: Math.random().toString(36).substr(2, 9), 
+      _type: 'reference',
+      _ref: `service-${s.slug}` 
+    })),
+    seo: engineeringServicesPageMockData.seo,
+  };
+  await client.createIfNotExists({ _type: 'engineeringServicesPage', _id: 'engineeringServicesPage' });
+  await client.patch('engineeringServicesPage').set(doc).commit();
+  console.log('Engineering Services Page Data Migrated.');
+}
+
+async function migrateSolutionsPage() {
+  console.log('Migrating Solutions Page Data...');
+  const doc = {
+    _type: 'solutionsPage',
+    _id: 'solutionsPage',
+    title: solutionsPageMockData.title,
+    subtitle: solutionsPageMockData.subtitle,
+    heroSubheadline: solutionsPageMockData.heroSubheadline,
+    methodology: solutionsPageMockData.methodology.map(m => ({ _key: Math.random().toString(36).substr(2, 9), ...m })),
+    outcomes: solutionsPageMockData.outcomes.map(o => ({ _key: Math.random().toString(36).substr(2, 9), ...o })),
+    coreSolutions: solutionsPageMockData.coreSolutions.map(s => {
+      // Determine if this slug belongs to a solution or a service
+      const engineeringSlugs = ["iiot-telemetry"];
+      const serviceSlugs = ["ai-machine-learning"];
+      let prefix = "solution";
+      if (engineeringSlugs.includes(s.slug) || serviceSlugs.includes(s.slug)) {
+        prefix = "service";
+      }
+
+      return { 
+        _key: Math.random().toString(36).substr(2, 9), 
+        _type: 'reference',
+        _ref: `${prefix}-${s.slug}` 
+      };
+    }),
+    seo: solutionsPageMockData.seo,
+  };
+  await client.createIfNotExists({ _type: 'solutionsPage', _id: 'solutionsPage' });
+  await client.patch('solutionsPage').set(doc).commit();
+  console.log('Solutions Page Data Migrated.');
+}
+
 async function runMigration() {
   try {
     await migrateHome();
@@ -307,6 +379,8 @@ async function runMigration() {
     await migrateServices();
     await migrateServicesPage();
     await migrateIndustriesPage();
+    await migrateEngineeringServicesPage();
+    await migrateSolutionsPage();
     console.log('ALL MIGRATIONS COMPLETED SUCCESSFULLY!');
   } catch (error) {
     console.error('Migration failed:', error);

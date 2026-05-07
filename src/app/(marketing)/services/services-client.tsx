@@ -86,7 +86,7 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
       </section>
 
       {/* Section 2: Our Methodology (The Voyage) */}
-      <section id="methodology" className="py-24 lg:py-32 bg-slate-100/50 border-t border-slate-200/60 relative overflow-hidden">
+      <section id="methodology" className="py-12 lg:py-20 bg-slate-100/50 border-t border-slate-200/60 relative overflow-hidden">
         {/* Architectural Background Pattern for Section Demarcation */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
              style={{ backgroundImage: 'linear-gradient(#0047ab 1px, transparent 1px), linear-gradient(90deg, #0047ab 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
@@ -185,7 +185,7 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
       </section>
 
       {/* Section 3: Core Capabilities */}
-      <section className="py-24 lg:py-32 bg-white relative">
+      <section className="py-12 lg:py-20 bg-white relative">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-20 gap-8">
             <FadeUp className="max-w-2xl">
@@ -289,7 +289,7 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
       </section>
 
       {/* Section 4: Enterprise Outcomes */}
-      <section className="py-16 lg:py-24 bg-[#020617] text-white relative overflow-hidden">
+      <section className="py-12 lg:py-20 bg-[#020617] text-white relative overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute top-0 left-0 w-full h-full">
           <div className="absolute top-[10%] left-[5%] w-[400px] h-[400px] bg-prixgen-blue/10 rounded-full blur-[120px] animate-pulse" />
@@ -347,7 +347,7 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
       </section>
 
       {/* Section 5: Final CTA (The Destination) */}
-      <section className="py-24 lg:py-40 bg-white relative overflow-hidden">
+      <section className="py-12 lg:py-20 bg-white relative overflow-hidden">
         <div className="container mx-auto px-4">
           <motion.div 
             whileHover={{ y: -5 }}
