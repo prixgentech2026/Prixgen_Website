@@ -897,6 +897,25 @@ const solutionsData = [
   }
 ];
 
+const engineeringServicesPageData = {
+  title: "Engineering Services",
+  heroSubheadline: "Fusing mechanical precision with digital intelligence. We architect the telemetry and control systems that drive the factory of the future.",
+  methodology: [
+    { step: "01", title: "Analyze : Industrial Audit", description: "We conduct deep-dive technical audits of your existing shop-floor and supply chain workflows.", icon: "Search" },
+    { step: "02", title: "Architect : Digital Core", description: "We design high-availability digital cores that unify legacy hardware with modern cloud intelligence.", icon: "PenTool" },
+    { step: "03", title: "Automate : Scale Operations", description: "We deploy autonomous systems and AI models that drive measurable throughput and efficiency.", icon: "Settings" }
+  ],
+  coreServices: [
+    { _type: 'reference', _ref: 'service-iiot-telemetry' },
+    { _type: 'reference', _ref: 'service-automation' },
+    { _type: 'reference', _ref: 'service-cloud-infrastructure' }
+  ],
+  seo: {
+    title: "Engineering Services | Industrial Intelligence & Automation | Prixgen",
+    metaDesc: "Prixgen's engineering services deliver high-frequency IIoT telemetry, factory automation, and bespoke industrial technical solutions.",
+  }
+};
+
 async function recover() {
   console.log('Starting high-fidelity content recovery...');
 
@@ -949,6 +968,17 @@ async function recover() {
         process: item.process,
         seo: item.seo
       });
+    });
+
+    // 4. Engineering Services Page
+    transaction.createOrReplace({
+      _id: 'engineering-services-page',
+      _type: 'engineeringServicesPage',
+      title: engineeringServicesPageData.title,
+      heroSubheadline: engineeringServicesPageData.heroSubheadline,
+      methodology: engineeringServicesPageData.methodology,
+      coreServices: engineeringServicesPageData.coreServices,
+      seo: engineeringServicesPageData.seo
     });
 
     console.log('Committing recovered content to Sanity...');

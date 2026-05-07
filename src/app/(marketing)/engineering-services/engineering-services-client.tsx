@@ -72,7 +72,7 @@ export default function EngineeringServicesClient({ data }: { data: ServicesPage
               </div>
               
               <h1 className="text-5xl md:text-8xl lg:text-9xl font-bold text-prixgen-dark leading-[0.85] tracking-tighter">
-                <StaggerText text={data.title} />
+                <StaggerText text={data.title} as="span" />
               </h1>
               
               <div className="max-w-4xl mx-auto pt-4">

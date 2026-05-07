@@ -14,7 +14,13 @@ import { FileText, ChevronRight, Globe, Zap, BarChart3, ShieldCheck } from 'luci
 
 export default function IndustryClientPage({ industry }: { industry: any }) {
   // Use summaryImage for the main banner, fallback to featuredImage or externalImageUrl
-  const bannerImageUrl = industry.summaryImage?.sourceUrl || industry.featuredImage?.sourceUrl || industry.externalImageUrl;
+  const getImageUrl = (img: any) => {
+    if (!img) return null;
+    if (typeof img === 'string') return img;
+    return img.sourceUrl || img.asset?.url || null;
+  };
+
+  const bannerImageUrl = getImageUrl(industry.summaryImage) || getImageUrl(industry.featuredImage) || industry.externalImageUrl;
   const bannerImageAlt = industry.summaryImage?.altText || industry.featuredImage?.altText || industry.title;
 
   return (

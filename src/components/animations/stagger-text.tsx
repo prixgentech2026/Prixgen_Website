@@ -7,6 +7,7 @@ interface StaggerTextProps {
   className?: string;
   variant?: 'default' | 'gradient';
   mode?: 'dark' | 'light'; // dark for white bg, light for dark/blue bg
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div';
 }
 
 /**
@@ -17,10 +18,12 @@ export function StaggerText({
   text, 
   className, 
   variant = 'default', 
-  mode = 'dark' 
+  mode = 'dark',
+  as: Component = 'h1'
 }: StaggerTextProps) {
   const words = text.split(" ");
   
+  const MotionComponent = motion[Component as keyof typeof motion] as any;
   const container: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -43,7 +46,7 @@ export function StaggerText({
   const colorClass = mode === 'dark' ? "text-prixgen-blue" : "text-white";
 
   return (
-    <motion.h1 
+    <MotionComponent 
       variants={container} 
       initial="hidden" 
       animate="visible" 
@@ -54,6 +57,6 @@ export function StaggerText({
           {word}
         </motion.span>
       ))}
-    </motion.h1>
+    </MotionComponent>
   );
 }

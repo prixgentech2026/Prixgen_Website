@@ -176,7 +176,13 @@ export default function IndustriesClient({ data }: { data: IndustriesPageData })
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {data.coreIndustries.map((industry: any, i: number) => {
-              const bgImage = industry.featuredImage || industry.externalImageUrl || "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000";
+              const getImageUrl = (img: any) => {
+                if (!img) return null;
+                if (typeof img === 'string') return img;
+                return img.sourceUrl || img.asset?.url || null;
+              };
+              
+              const bgImage = getImageUrl(industry.featuredImage) || industry.externalImageUrl || industry.image || "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000";
 
               return (
                 <FadeUp key={i} delay={i * 0.1}>

@@ -210,6 +210,12 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {data.coreServices.filter(s => s !== null).map((service, i) => {
+              const getImageUrl = (img: any) => {
+                if (!img) return null;
+                if (typeof img === 'string') return img;
+                return img.sourceUrl || img.asset?.url || null;
+              };
+
               const serviceImages: Record<string, string> = {
                 "business-strategy": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000",
                 "it-consulting": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000",
@@ -222,7 +228,8 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
                 "automation": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1000",
                 "cloud-infrastructure": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000",
               };
-              const bgImage = service.externalImageUrl || service.featuredImage || serviceImages[service.slug] || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000";
+
+              const bgImage = service.externalImageUrl || getImageUrl(service.featuredImage) || serviceImages[service.slug] || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000";
 
               const engineeringSlugs = ["iiot-telemetry", "automation", "cloud-infrastructure"];
               const basePath = engineeringSlugs.includes(service.slug) ? "/engineering-services" : "/services";

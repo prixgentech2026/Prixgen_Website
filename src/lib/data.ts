@@ -9,6 +9,7 @@ import {
   servicesQuery,
   servicesPageQuery,
   industriesPageQuery,
+  engineeringServicesPageQuery,
   aboutQuery,
   contactQuery
 } from '@/sanity/lib/queries';
@@ -225,6 +226,42 @@ export async function getIndustriesPageData() {
   }
 }
 
+export async function getEngineeringServicesPageData() {
+  if (!client) return engineeringServicesPageMockData;
+  try {
+    const data = await client.fetch(engineeringServicesPageQuery);
+    if (!data) return engineeringServicesPageMockData;
+
+    // Ensure we show all services even if Sanity only has a few
+    let cleanCoreServices = (data.coreServices || []).filter((s: any) => s !== null);
+    
+    // If we have fewer than expected, let's just fetch all engineering services
+    if (cleanCoreServices.length === 0 || cleanCoreServices.length < engineeringServicesPageMockData.coreServices.length) {
+      const allServices = await getEngineeringServices();
+      if (allServices && allServices.length > 0) {
+        cleanCoreServices = allServices.map((s: any) => ({
+          title: s.title,
+          headline: s.headline,
+          slug: s.slug,
+          externalImageUrl: s.externalImageUrl || s.image,
+          featuredImage: s.featuredImage?.sourceUrl
+        }));
+      }
+    }
+
+    return {
+      ...data,
+      seo: data.seo || engineeringServicesPageMockData.seo,
+      coreServices: cleanCoreServices.length >= engineeringServicesPageMockData.coreServices.length
+        ? cleanCoreServices
+        : engineeringServicesPageMockData.coreServices
+    };
+  } catch (error) {
+    console.error('Sanity Fetch Error (Engineering Services Page):', error);
+    return engineeringServicesPageMockData;
+  }
+}
+
 export async function getEngineeringServices() {
   const engineeringSlugs = ["iiot-telemetry", "automation", "cloud-infrastructure"];
   const engineeringMock = servicesData.filter(s => engineeringSlugs.includes(s.slug));
@@ -350,6 +387,25 @@ export interface IndustriesPageData {
     headline: string;
     slug: string;
     image?: string;
+    externalImageUrl?: string;
+    featuredImage?: any;
+  }[];
+  seo: SEOData;
+}
+
+export interface EngineeringServicesPageData {
+  title: string;
+  heroSubheadline: string;
+  methodology: {
+    step: string;
+    title: string;
+    description: string;
+    icon: string;
+  }[];
+  coreServices: {
+    title: string;
+    headline: string;
+    slug: string;
     externalImageUrl?: string;
     featuredImage?: any;
   }[];
@@ -1412,5 +1468,24 @@ export const industriesPageMockData: IndustriesPageData = {
   seo: {
     title: "Industries | Enterprise Digital Transformation | Prixgen",
     metaDesc: "Discover how Prixgen architects operational intelligence for Manufacturing, Chemicals, FMCG, and high-precision Electronics.",
+  }
+};
+
+export const engineeringServicesPageMockData: EngineeringServicesPageData = {
+  title: "Engineering Services",
+  heroSubheadline: "Fusing mechanical precision with digital intelligence. We architect the telemetry and control systems that drive the factory of the future.",
+  methodology: [
+    { step: "01", title: "Analyze : Industrial Audit", description: "We conduct deep-dive technical audits of your existing shop-floor and supply chain workflows.", icon: "Search" },
+    { step: "02", title: "Architect : Digital Core", description: "We design high-availability digital cores that unify legacy hardware with modern cloud intelligence.", icon: "PenTool" },
+    { step: "03", title: "Automate : Scale Operations", description: "We deploy autonomous systems and AI models that drive measurable throughput and efficiency.", icon: "Settings" }
+  ],
+  coreServices: [
+    { title: "IIoT & Telemetry", headline: "Real-time shop-floor intelligence.", slug: "iiot-telemetry" },
+    { title: "Factory Automation", headline: "Robotics and automated control systems.", slug: "automation" },
+    { title: "Cloud Infrastructure", headline: "High-availability industrial cloud.", slug: "cloud-infrastructure" }
+  ],
+  seo: {
+    title: "Engineering Services | Industrial Intelligence & Automation | Prixgen",
+    metaDesc: "Prixgen's engineering services deliver high-frequency IIoT telemetry, factory automation, and bespoke industrial technical solutions.",
   }
 };

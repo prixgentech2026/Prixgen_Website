@@ -12,7 +12,13 @@ import { PortableText } from '@/components/ui/portable-text';
 import { servicesData } from '@/lib/data';
 
 export default function ServiceClientPage({ service }: { service: any }) {
-  const bannerImageUrl = service.summaryImage?.sourceUrl || service.featuredImage?.sourceUrl || service.externalImageUrl;
+  const getImageUrl = (img: any) => {
+    if (!img) return null;
+    if (typeof img === 'string') return img;
+    return img.sourceUrl || img.asset?.url || null;
+  };
+
+  const bannerImageUrl = getImageUrl(service.summaryImage) || getImageUrl(service.featuredImage) || service.externalImageUrl;
   const bannerImageAlt = service.summaryImage?.altText || service.featuredImage?.altText || service.title;
 
   return (

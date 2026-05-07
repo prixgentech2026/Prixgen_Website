@@ -176,3 +176,17 @@ export const industriesPageQuery = groq`*[_type == "industriesPage"][0]{
   },
   seo
 }`;
+
+// Query for the Engineering Services Landing Page
+export const engineeringServicesPageQuery = groq`*[_type == "engineeringServicesPage"][0]{
+  title,
+  heroSubheadline,
+  methodology,
+  "coreServices": coreServices[]->{
+    title,
+    headline,
+    "slug": slug.current,
+    externalImageUrl
+  },
+  seo
+}`;

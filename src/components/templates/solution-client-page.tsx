@@ -12,7 +12,13 @@ import { PortableText } from '@/components/ui/portable-text';
 import { solutionsData } from '@/lib/data';
 
 export default function SolutionClientPage({ solution }: { solution: any }) {
-  const bannerImageUrl = solution.summaryImage?.sourceUrl || solution.featuredImage?.sourceUrl || solution.externalImageUrl;
+  const getImageUrl = (img: any) => {
+    if (!img) return null;
+    if (typeof img === 'string') return img;
+    return img.sourceUrl || img.asset?.url || null;
+  };
+
+  const bannerImageUrl = getImageUrl(solution.summaryImage) || getImageUrl(solution.featuredImage) || solution.externalImageUrl;
   const bannerImageAlt = solution.summaryImage?.altText || solution.featuredImage?.altText || solution.title;
 
   return (
