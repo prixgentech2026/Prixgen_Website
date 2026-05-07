@@ -47,7 +47,7 @@ export default function IndustriesClient({ data }: { data: IndustriesPageData })
             <div className="flex items-center justify-center gap-3 mb-4">
               <div className="h-[1px] w-8 bg-prixgen-blue/30" />
               <span className="px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue font-bold tracking-widest uppercase text-[10px]">
-                Market Verticals
+                {data.subtitle || "Market Verticals"}
               </span>
               <div className="h-[1px] w-8 bg-prixgen-blue/30" />
             </div>

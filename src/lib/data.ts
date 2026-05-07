@@ -182,7 +182,10 @@ export async function getServicesPageData() {
       seo: data.seo || servicesPageMockData.seo,
       coreServices: cleanCoreServices.length >= servicesPageMockData.coreServices.length
         ? cleanCoreServices
-        : servicesPageMockData.coreServices
+        : servicesPageMockData.coreServices,
+      outcomes: (data.outcomes && data.outcomes.length >= servicesPageMockData.outcomes.length)
+        ? data.outcomes
+        : servicesPageMockData.outcomes
     };
   } catch (error) {
     console.error('Sanity Fetch Error (Services Page):', error);
@@ -218,7 +221,10 @@ export async function getIndustriesPageData() {
       seo: data.seo || industriesPageMockData.seo,
       coreIndustries: cleanCoreIndustries.length >= industriesPageMockData.coreIndustries.length
         ? cleanCoreIndustries
-        : industriesPageMockData.coreIndustries
+        : industriesPageMockData.coreIndustries,
+      outcomes: (data.outcomes && data.outcomes.length >= industriesPageMockData.outcomes.length)
+        ? data.outcomes
+        : industriesPageMockData.outcomes
     };
   } catch (error) {
     console.error('Sanity Fetch Error (Industries Page):', error);
@@ -254,7 +260,10 @@ export async function getEngineeringServicesPageData() {
       seo: data.seo || engineeringServicesPageMockData.seo,
       coreServices: cleanCoreServices.length >= engineeringServicesPageMockData.coreServices.length
         ? cleanCoreServices
-        : engineeringServicesPageMockData.coreServices
+        : engineeringServicesPageMockData.coreServices,
+      outcomes: (data.outcomes && data.outcomes.length >= engineeringServicesPageMockData.outcomes.length)
+        ? data.outcomes
+        : engineeringServicesPageMockData.outcomes
     };
   } catch (error) {
     console.error('Sanity Fetch Error (Engineering Services Page):', error);
@@ -370,6 +379,7 @@ export interface ServicesPageData {
 
 export interface IndustriesPageData {
   title: string;
+  subtitle: string;
   heroSubheadline: string;
   methodology: {
     step: string;
@@ -395,9 +405,15 @@ export interface IndustriesPageData {
 
 export interface EngineeringServicesPageData {
   title: string;
+  subtitle: string;
   heroSubheadline: string;
   methodology: {
     step: string;
+    title: string;
+    description: string;
+    icon: string;
+  }[];
+  outcomes: {
     title: string;
     description: string;
     icon: string;
@@ -1444,6 +1460,7 @@ export const servicesPageMockData: ServicesPageData = {
 
 export const industriesPageMockData: IndustriesPageData = {
   title: "Transforming Global Industries",
+  subtitle: "Market Verticals",
   heroSubheadline: "We architect resilient, data-driven ecosystems across the world's most demanding industrial sectors.",
   methodology: [
     { step: "01", title: "Analyze : Industrial Audit", description: "We conduct deep-dive technical audits of your existing shop-floor and supply chain workflows.", icon: "Search" },
@@ -1460,24 +1477,35 @@ export const industriesPageMockData: IndustriesPageData = {
   ],
   coreIndustries: [
     { title: "Manufacturing", headline: "Industry 4.0 Smart Factories.", slug: "manufacturing", image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000" },
+    { title: "Retail", headline: "Omnichannel Commerce Architecture.", slug: "retail", image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1000" },
     { title: "Chemicals", headline: "Precision Batch Intelligence.", slug: "chemicals", image: "https://images.unsplash.com/photo-1532187875605-1ef6c237f146?auto=format&fit=crop&q=80&w=1000" },
-    { title: "FMCG", headline: "High-Velocity Distribution.", slug: "fmcg-distribution", image: "https://images.unsplash.com/photo-1566633806327-68e152aaf26d?auto=format&fit=crop&q=80&w=1000" },
+    { title: "FMCG & Distribution", headline: "High-Velocity Distribution.", slug: "fmcg-distribution", image: "https://images.unsplash.com/photo-1566633806327-68e152aaf26d?auto=format&fit=crop&q=80&w=1000" },
     { title: "Information Services", headline: "Digital Infrastructure & Data.", slug: "information-services", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000" },
+    { title: "Dairy", headline: "Time-Critical Logistics.", slug: "dairy", image: "https://images.unsplash.com/photo-1550583760-d80392be8c42?auto=format&fit=crop&q=80&w=1000" },
     { title: "Electronics", headline: "High-Precision Engineering.", slug: "electronics", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1000" }
   ],
   seo: {
     title: "Industries | Enterprise Digital Transformation | Prixgen",
-    metaDesc: "Discover how Prixgen architects operational intelligence for Manufacturing, Chemicals, FMCG, and high-precision Electronics.",
+    metaDesc: "Discover how Prixgen architects operational intelligence for Manufacturing, Retail, Chemicals, FMCG, Dairy, and Electronics.",
   }
 };
 
 export const engineeringServicesPageMockData: EngineeringServicesPageData = {
   title: "Engineering Services",
+  subtitle: "Precision Engineering",
   heroSubheadline: "Fusing mechanical precision with digital intelligence. We architect the telemetry and control systems that drive the factory of the future.",
   methodology: [
     { step: "01", title: "Analyze : Industrial Audit", description: "We conduct deep-dive technical audits of your existing shop-floor and supply chain workflows.", icon: "Search" },
     { step: "02", title: "Architect : Digital Core", description: "We design high-availability digital cores that unify legacy hardware with modern cloud intelligence.", icon: "PenTool" },
     { step: "03", title: "Automate : Scale Operations", description: "We deploy autonomous systems and AI models that drive measurable throughput and efficiency.", icon: "Settings" }
+  ],
+  outcomes: [
+    { title: "Real-time Telemetry", description: "High-frequency data ingestion from every shop-floor sensor for absolute visibility.", icon: "Activity" },
+    { title: "Predictive Control", description: "Edge-computing models that anticipate machinery failure before it impacts throughput.", icon: "Zap" },
+    { title: "Autonomous Routing", description: "Self-optimizing material handling systems that adapt to real-time production shifts.", icon: "Network" },
+    { title: "Closed-Loop Quality", description: "Vision-AI systems that detect and divert defects in sub-millisecond cycles.", icon: "ShieldCheck" },
+    { title: "Energy Optimization", description: "Smart grid integration that reduces industrial carbon footprint and utility overheads.", icon: "TrendingUp" },
+    { title: "Rapid Reconfigurability", description: "Modular digital architecture that allows for instant line-side adjustments.", icon: "Settings" }
   ],
   coreServices: [
     { title: "IIoT & Telemetry", headline: "Real-time shop-floor intelligence.", slug: "iiot-telemetry" },

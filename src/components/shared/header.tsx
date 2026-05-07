@@ -29,8 +29,8 @@ export function Header() {
           <Logo className="w-32 md:w-40" />
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-8 mr-auto ml-12">
-          <Link href="/" className="text-sm font-bold uppercase tracking-wider hover:text-prixgen-lightblue transition-colors">Home</Link>
+        <nav className="hidden lg:flex items-center gap-6 mr-auto ml-8">
+          <Link href="/" className="text-sm font-bold uppercase tracking-wider hover:text-prixgen-lightblue transition-colors whitespace-nowrap">Home</Link>
           <MegaMenu />
         </nav>
 

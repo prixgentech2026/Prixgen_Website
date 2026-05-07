@@ -13,6 +13,12 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'subtitle',
+      title: 'Section Subtitle',
+      type: 'string',
+      description: 'The smaller label above the main headline (e.g., Precision Engineering)',
+    }),
+    defineField({
       name: 'heroSubheadline',
       title: 'Hero Subheadline',
       type: 'text',
@@ -35,6 +41,26 @@ export default defineType({
             title: 'Icon Name', 
             type: 'string', 
             description: 'Lucide icon name (e.g., Search, PenTool, Code)' 
+          }
+        ]
+      }]
+    }),
+
+    // Outcomes Section
+    defineField({
+      name: 'outcomes',
+      title: 'Industrial Outcomes',
+      type: 'array',
+      of: [{
+        type: 'object',
+        fields: [
+          { name: 'title', title: 'Title', type: 'string' },
+          { name: 'description', title: 'Description', type: 'text' },
+          { 
+            name: 'icon', 
+            title: 'Icon Name', 
+            type: 'string', 
+            description: 'Lucide icon name (e.g., Activity, Users, LineChart)' 
           }
         ]
       }]

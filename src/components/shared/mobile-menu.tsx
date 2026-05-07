@@ -57,6 +57,14 @@ export function MobileMenu() {
               Home
             </Link>
 
+            <Link 
+              href="/who-we-are" 
+              onClick={(e) => { e.preventDefault(); handleNavigate('/who-we-are'); }}
+              className="block text-2xl font-bold text-prixgen-blue pb-4 border-b border-prixgen-gray/20"
+            >
+              Who We Are
+            </Link>
+
             <div>
               <div className="flex items-center justify-between mb-4 pb-2 border-b border-prixgen-gray/20">
                 <h3 className="text-xs font-bold text-prixgen-dark/40 uppercase tracking-widest">Services</h3>
@@ -75,6 +83,33 @@ export function MobileMenu() {
                       href={item.href} 
                       onClick={(e) => { e.preventDefault(); handleNavigate(item.href); }}
                       className="flex items-center justify-between text-lg font-bold text-prixgen-blue group"
+                    >
+                      {item.title}
+                      <ChevronRight className="h-5 w-5 text-prixgen-lightblue" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between mb-4 pb-2 border-b border-prixgen-gray/20">
+                <h3 className="text-xs font-bold text-prixgen-dark/40 uppercase tracking-widest">Industries</h3>
+                <Link 
+                  href="/industries" 
+                  onClick={(e) => { e.preventDefault(); handleNavigate('/industries'); }} 
+                  className="text-xs font-bold text-prixgen-lightblue hover:underline"
+                >
+                  Explore All →
+                </Link>
+              </div>
+              <ul className="space-y-4">
+                {MENU_DATA.industries.map((item) => (
+                  <li key={item.title}>
+                    <Link 
+                      href={item.href} 
+                      onClick={(e) => { e.preventDefault(); handleNavigate(item.href); }}
+                      className="flex items-center justify-between text-lg font-bold text-prixgen-blue"
                     >
                       {item.title}
                       <ChevronRight className="h-5 w-5 text-prixgen-lightblue" />
@@ -138,54 +173,21 @@ export function MobileMenu() {
               </ul>
             </div>
 
-            <div>
-              <div className="flex items-center justify-between mb-4 pb-2 border-b border-prixgen-gray/20">
-                <h3 className="text-xs font-bold text-prixgen-dark/40 uppercase tracking-widest">Industries</h3>
-                <Link 
-                  href="/industries" 
-                  onClick={(e) => { e.preventDefault(); handleNavigate('/industries'); }} 
-                  className="text-xs font-bold text-prixgen-lightblue hover:underline"
-                >
-                  Explore All →
-                </Link>
-              </div>
-              <ul className="space-y-4">
-                {MENU_DATA.industries.map((item) => (
-                  <li key={item.title}>
-                    <Link 
-                      href={item.href} 
-                      onClick={(e) => { e.preventDefault(); handleNavigate(item.href); }}
-                      className="flex items-center justify-between text-lg font-bold text-prixgen-blue"
-                    >
-                      {item.title}
-                      <ChevronRight className="h-5 w-5 text-prixgen-lightblue" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
             <div className="pt-8 border-t border-prixgen-gray">
-              <Link 
-                href="/who-we-are" 
-                onClick={(e) => { e.preventDefault(); handleNavigate('/who-we-are'); }}
-                className="block text-lg font-bold text-prixgen-blue mb-4"
-              >
-                Who We Are
-              </Link>
+              <h3 className="text-xs font-bold text-prixgen-dark/40 uppercase tracking-widest mb-4">More</h3>
               <Link 
                 href="/careers" 
                 onClick={(e) => { e.preventDefault(); handleNavigate('/careers'); }}
-                className="block text-lg font-bold text-prixgen-blue mb-4"
+                className="block text-2xl font-bold text-prixgen-blue pb-4 border-b border-prixgen-gray/20"
               >
                 Careers
               </Link>
               <Link 
                 href="/contact" 
                 onClick={(e) => { e.preventDefault(); handleNavigate('/contact'); }}
-                className="block text-lg font-bold text-prixgen-blue mb-4"
+                className="block text-2xl font-bold text-prixgen-blue pb-4 border-b border-prixgen-gray/20"
               >
-                Contact
+                Contact Us
               </Link>
             </div>
           </div>

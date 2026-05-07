@@ -164,6 +164,7 @@ export const servicesPageQuery = groq`*[_type == "servicesPage"][0]{
 // Query for the Industries Landing Page
 export const industriesPageQuery = groq`*[_type == "industriesPage"][0]{
   title,
+  subtitle,
   heroSubheadline,
   methodology,
   outcomes,
@@ -180,8 +181,10 @@ export const industriesPageQuery = groq`*[_type == "industriesPage"][0]{
 // Query for the Engineering Services Landing Page
 export const engineeringServicesPageQuery = groq`*[_type == "engineeringServicesPage"][0]{
   title,
+  subtitle,
   heroSubheadline,
   methodology,
+  outcomes,
   "coreServices": coreServices[]->{
     title,
     headline,

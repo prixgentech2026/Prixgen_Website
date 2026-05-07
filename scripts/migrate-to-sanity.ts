@@ -1,4 +1,6 @@
 import { createClient } from '@sanity/client';
+import fs from 'fs';
+import path from 'path';
 import { 
   homeData, 
   aboutData, 
@@ -6,7 +8,8 @@ import {
   industriesData, 
   solutionsData, 
   servicesData,
-  servicesPageMockData 
+  servicesPageMockData,
+  industriesPageMockData
 } from '../src/lib/data';
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
@@ -31,19 +34,30 @@ async function uploadImage(url: string) {
   
   console.log(`Uploading image: ${url}`);
   try {
-    let response = await fetch(url);
-    
-    if (!response.ok) {
-      console.warn(`[WARN] Failed to fetch ${url}. Using fallback image.`);
-      response = await fetch(FALLBACK_IMAGE);
+    let buffer: Buffer;
+    let filename: string;
+
+    if (url.startsWith('file://') || url.startsWith('C:') || url.startsWith('/') || fs.existsSync(url)) {
+      const filePath = url.startsWith('file://') ? url.replace('file:///', '').replace('file://', '') : url;
+      buffer = fs.readFileSync(filePath);
+      filename = path.basename(filePath);
+    } else {
+      let response = await fetch(url);
+      
+      if (!response.ok) {
+        console.warn(`[WARN] Failed to fetch ${url}. Using fallback image.`);
+        response = await fetch(FALLBACK_IMAGE);
+      }
+      
+      if (!response.ok) throw new Error(`Failed to fetch even the fallback image: ${response.statusText}`);
+      
+      const arrayBuffer = await response.arrayBuffer();
+      buffer = Buffer.from(arrayBuffer);
+      filename = url.split('/').pop()?.split('?')[0] || 'image.jpg';
     }
     
-    if (!response.ok) throw new Error(`Failed to fetch even the fallback image: ${response.statusText}`);
-    
-    const arrayBuffer = await response.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
     const asset = await client.assets.upload('image', buffer, {
-      filename: url.split('/').pop()?.split('?')[0] || 'image.jpg',
+      filename,
     });
     console.log(`[SUCCESS] Image uploaded: ${asset._id}`);
     return asset._id;
@@ -52,6 +66,16 @@ async function uploadImage(url: string) {
     return null;
   }
 }
+
+const PREMIUM_IMAGES: Record<string, string> = {
+  'manufacturing': 'C:/Users/Dell/.gemini/antigravity/brain/f842cbc1-f7da-441f-bf56-d2950f6d5108/manufacturing_industry_premium_1778137573049.png',
+  'retail': 'C:/Users/Dell/.gemini/antigravity/brain/f842cbc1-f7da-441f-bf56-d2950f6d5108/retail_omnichannel_premium_1778137593723.png',
+  'chemicals': 'C:/Users/Dell/.gemini/antigravity/brain/f842cbc1-f7da-441f-bf56-d2950f6d5108/chemicals_processing_premium_1778137616364.png',
+  'fmcg-distribution': 'C:/Users/Dell/.gemini/antigravity/brain/f842cbc1-f7da-441f-bf56-d2950f6d5108/fmcg_distribution_premium_1778137636665.png',
+  'information-services': 'C:/Users/Dell/.gemini/antigravity/brain/f842cbc1-f7da-441f-bf56-d2950f6d5108/information_services_premium_1778137656742.png',
+  'dairy': 'C:/Users/Dell/.gemini/antigravity/brain/f842cbc1-f7da-441f-bf56-d2950f6d5108/dairy_processing_premium_1778137680236.png',
+  'electronics': 'C:/Users/Dell/.gemini/antigravity/brain/f842cbc1-f7da-441f-bf56-d2950f6d5108/electronics_manufacturing_premium_1778137704583.png',
+};
 
 async function migrateHome() {
   console.log('Migrating Home Data...');
@@ -80,7 +104,8 @@ async function migrateHome() {
     seo: homeData.seo,
   };
 
-  await client.createOrReplace(doc);
+  await client.createIfNotExists({ _type: 'home', _id: 'home' });
+  await client.patch('home').set(doc).commit();
   console.log('Home Data Migrated.');
 }
 
@@ -114,7 +139,8 @@ async function migrateAbout() {
     seo: aboutData.seo,
   };
 
-  await client.createOrReplace(doc);
+  await client.createIfNotExists({ _type: 'about', _id: 'about' });
+  await client.patch('about').set(doc).commit();
   console.log('About Data Migrated.');
 }
 
@@ -125,7 +151,8 @@ async function migrateContact() {
     _id: 'contact',
     ...contactData,
   };
-  await client.createOrReplace(doc);
+  await client.createIfNotExists({ _type: 'contact', _id: 'contact' });
+  await client.patch('contact').set(doc).commit();
   console.log('Contact Data Migrated.');
 }
 
@@ -133,7 +160,8 @@ async function migrateIndustries() {
   console.log('Migrating Industries...');
   for (const industry of industriesData) {
     console.log(`Migrating Industry: ${industry.title}`);
-    const imageId = await uploadImage(industry.featuredImage.sourceUrl);
+    const imageUrl = PREMIUM_IMAGES[industry.slug] || industry.featuredImage.sourceUrl;
+    const imageId = await uploadImage(imageUrl);
     
     const doc = {
       _type: 'industry',
@@ -155,7 +183,8 @@ async function migrateIndustries() {
       seo: industry.seo,
     };
     
-    await client.createOrReplace(doc);
+    await client.createIfNotExists({ _type: 'industry', _id: doc._id });
+    await client.patch(doc._id).set(doc).commit();
   }
   console.log('Industries Migrated.');
 }
@@ -186,7 +215,8 @@ async function migrateSolutions() {
       seo: solution.seo,
     };
     
-    await client.createOrReplace(doc);
+    await client.createIfNotExists({ _type: 'solution', _id: doc._id });
+    await client.patch(doc._id).set(doc).commit();
   }
   console.log('Solutions Migrated.');
 }
@@ -217,7 +247,8 @@ async function migrateServices() {
       seo: service.seo,
     };
     
-    await client.createOrReplace(doc);
+    await client.createIfNotExists({ _type: 'service', _id: doc._id });
+    await client.patch(doc._id).set(doc).commit();
   }
   console.log('Services Migrated.');
 }
@@ -239,8 +270,31 @@ async function migrateServicesPage() {
     })),
     seo: servicesPageMockData.seo,
   };
-  await client.createOrReplace(doc);
+  await client.createIfNotExists({ _type: 'servicesPage', _id: 'servicesPage' });
+  await client.patch('servicesPage').set(doc).commit();
   console.log('Services Page Data Migrated.');
+}
+
+async function migrateIndustriesPage() {
+  console.log('Migrating Industries Page Data...');
+  const doc = {
+    _type: 'industriesPage',
+    _id: 'industriesPage',
+    title: industriesPageMockData.title,
+    subtitle: industriesPageMockData.subtitle,
+    heroSubheadline: industriesPageMockData.heroSubheadline,
+    methodology: industriesPageMockData.methodology.map(m => ({ _key: Math.random().toString(36).substr(2, 9), ...m })),
+    outcomes: industriesPageMockData.outcomes.map(o => ({ _key: Math.random().toString(36).substr(2, 9), ...o })),
+    coreIndustries: industriesPageMockData.coreIndustries.map(i => ({ 
+      _key: Math.random().toString(36).substr(2, 9), 
+      _type: 'reference',
+      _ref: `industry-${i.slug}` 
+    })),
+    seo: industriesPageMockData.seo,
+  };
+  await client.createIfNotExists({ _type: 'industriesPage', _id: 'industriesPage' });
+  await client.patch('industriesPage').set(doc).commit();
+  console.log('Industries Page Data Migrated.');
 }
 
 async function runMigration() {
@@ -252,6 +306,7 @@ async function runMigration() {
     await migrateSolutions();
     await migrateServices();
     await migrateServicesPage();
+    await migrateIndustriesPage();
     console.log('ALL MIGRATIONS COMPLETED SUCCESSFULLY!');
   } catch (error) {
     console.error('Migration failed:', error);

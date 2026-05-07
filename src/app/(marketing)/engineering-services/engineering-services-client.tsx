@@ -68,7 +68,7 @@ export default function EngineeringServicesClient({ data }: { data: ServicesPage
             
             <header className="space-y-6">
               <div className="inline-block px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue text-[10px] font-bold tracking-widest uppercase mx-auto">
-                Precision Engineering
+                {data.subtitle || "Precision Engineering"}
               </div>
               
               <h1 className="text-5xl md:text-8xl lg:text-9xl font-bold text-prixgen-dark leading-[0.85] tracking-tighter">
@@ -95,34 +95,155 @@ export default function EngineeringServicesClient({ data }: { data: ServicesPage
       </section>
 
       {/* Methodology Section */}
-      <section id="methodology" className="py-24 relative bg-white overflow-hidden border-t border-prixgen-blue/5">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row justify-between items-center gap-10 mb-20 text-center lg:text-left">
+      <section id="methodology" className="py-24 lg:py-32 bg-slate-100/50 border-t border-slate-200/60 relative overflow-hidden">
+        {/* Architectural Background Pattern */}
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+             style={{ backgroundImage: 'linear-gradient(#0047ab 1px, transparent 1px), linear-gradient(90deg, #0047ab 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="flex flex-col lg:flex-row justify-between items-end gap-10 mb-20">
             <FadeUp className="max-w-2xl">
-              <div className="flex items-center justify-center lg:justify-start gap-4 mb-6">
+              <div className="flex items-center gap-4 mb-4">
                 <div className="h-[1px] w-12 bg-prixgen-blue" />
-                <span className="text-prixgen-blue font-bold tracking-[0.4em] uppercase text-[10px]">Methodology</span>
+                <span className="text-prixgen-blue font-bold tracking-[0.2em] uppercase text-[10px]">Engineering Methodology</span>
               </div>
-              <h2 className="text-4xl lg:text-7xl font-bold text-prixgen-dark tracking-tighter leading-[1.1]">
-                Our Engineering <span className="italic text-prixgen-blue">Process</span>
+              <h2 className="text-4xl lg:text-6xl font-bold text-prixgen-blue tracking-tighter">
+                Our Engineering <span className="text-prixgen-lightblue">Process</span>
               </h2>
+            </FadeUp>
+            <FadeUp delay={0.2} className="max-w-md text-right hidden lg:block">
+              <p className="text-lg lg:text-xl text-slate-500 font-medium leading-relaxed">
+                Precision-engineered from concept to commissioning, ensuring zero operational friction.
+              </p>
             </FadeUp>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+            {/* Connecting Line (Desktop) */}
+            <div className="absolute top-1/2 left-0 w-full h-px bg-slate-200 z-0 hidden md:block" />
+            
             {data.methodology.map((item, i) => {
               const Icon = getIcon(item.icon);
               return (
-                <FadeUp key={i} delay={i * 0.1}>
-                  <div className="group relative p-10 bg-prixgen-blue/[0.03] border border-prixgen-blue/5 rounded-[3rem] hover:bg-prixgen-blue/[0.06] hover:border-prixgen-blue/20 transition-all duration-500 h-full flex flex-col">
-                    <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-prixgen-blue border border-prixgen-blue/10 shadow-sm mb-8 transition-transform duration-500 group-hover:scale-110">
-                      <Icon size={28} />
+                <FadeUp key={i} delay={i * 0.2} className="relative z-10">
+                  <motion.div 
+                    whileHover={{ y: -20, scale: 1.02 }}
+                    whileInView={{ 
+                      backgroundColor: ["#f5f3ff", "#f0f0ff", "#f3f0ff", "#f5f3ff"],
+                      borderColor: ["rgba(0, 102, 204, 0.1)", "rgba(0, 102, 204, 0.2)", "rgba(0, 102, 204, 0.1)"]
+                    }}
+                    viewport={{ once: false, margin: "-100px" }}
+                    transition={{ 
+                      backgroundColor: { duration: 10, repeat: Infinity, ease: "linear", delay: i * 2 },
+                      borderColor: { duration: 5, repeat: Infinity, ease: "linear" },
+                      y: { type: "spring", stiffness: 300 },
+                      scale: { type: "spring", stiffness: 300 }
+                    }}
+                    className="group relative p-12 rounded-[4rem] border shadow-2xl shadow-blue-100/50 h-full overflow-hidden flex flex-col"
+                  >
+                    {/* Animated Radial Glow */}
+                    <motion.div 
+                      className="absolute inset-0 z-0 opacity-20 group-hover:opacity-40 transition-opacity duration-1000 pointer-events-none"
+                      whileInView={{
+                        background: [
+                          "radial-gradient(600px circle at 0% 0%, rgba(0, 102, 204, 0.15), transparent 40%)",
+                          "radial-gradient(600px circle at 100% 100%, rgba(0, 102, 204, 0.15), transparent 40%)",
+                          "radial-gradient(600px circle at 0% 100%, rgba(0, 102, 204, 0.15), transparent 40%)",
+                          "radial-gradient(600px circle at 0% 0%, rgba(0, 102, 204, 0.15), transparent 40%)",
+                        ]
+                      }}
+                      viewport={{ once: false }}
+                      transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                    />
+
+                    <div className={`absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-blue-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-[80px] z-0`} />
+                    
+                    <div className="absolute top-8 right-12 text-8xl lg:text-9xl font-black text-transparent [WebkitTextStroke:1px_rgba(0,102,204,0.15)] group-hover:[WebkitTextStroke:1px_rgba(0,102,204,0.3)] transition-all duration-700 select-none z-0 pointer-events-none">
+                      {item.step}
                     </div>
-                    <h3 className="text-2xl font-bold text-prixgen-dark mb-4 group-hover:text-prixgen-blue transition-colors">{item.title}</h3>
-                    <p className="text-slate-500 font-medium leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
+                    
+                    <div className="relative z-10 space-y-8 flex-grow">
+                      <motion.div 
+                        whileHover={{ rotate: [0, -5, 5, 0] }}
+                        className={`w-20 h-20 bg-gradient-to-br from-prixgen-blue to-prixgen-lightblue rounded-3xl flex items-center justify-center text-white shadow-lg shadow-blue-500/20 group-hover:scale-110 transition-transform duration-500`}
+                      >
+                        <Icon size={36} />
+                      </motion.div>
+                      <div className="space-y-4">
+                        <h3 className="text-2xl lg:text-3xl font-bold text-prixgen-dark group-hover:text-prixgen-blue transition-colors">{item.title}</h3>
+                        <p className="text-lg text-slate-500 leading-relaxed text-left font-medium">
+                          {item.description}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div className="mt-12 h-1.5 w-full bg-blue-100/50 rounded-full overflow-hidden relative z-10">
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        whileInView={{ width: "100%" }}
+                        transition={{ duration: 1.5, delay: i * 0.3 }}
+                        className={`h-full bg-gradient-to-r from-prixgen-blue via-prixgen-lightblue to-prixgen-blue bg-[length:200%_100%] animate-gradient`}
+                      />
+                    </div>
+                  </motion.div>
+                </FadeUp>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Industrial Outcomes Section */}
+      <section className="py-24 lg:py-32 bg-[#020617] text-white relative overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute top-0 left-0 w-full h-full">
+          <div className="absolute top-[10%] left-[5%] w-[400px] h-[400px] bg-prixgen-blue/10 rounded-full blur-[120px] animate-pulse" />
+          <div className="absolute bottom-[10%] right-[5%] w-[500px] h-[500px] bg-indigo-500/5 rounded-full blur-[150px]" />
+          <div className="absolute inset-0 z-0 opacity-20" 
+               style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '100px 100px' }} />
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-32 items-center text-left">
+            <FadeUp>
+              <div className="flex items-center gap-4 mb-4">
+                <div className="h-[1px] w-12 bg-prixgen-lightblue" />
+                <span className="text-prixgen-lightblue font-bold tracking-[0.4em] uppercase text-[10px]">Architectural ROI</span>
+              </div>
+              <h2 className="text-4xl lg:text-6xl font-bold mb-8 tracking-tighter">
+                Industrial <br />
+                <span className="text-prixgen-lightblue">Outcomes</span>
+              </h2>
+            </FadeUp>
+            <FadeUp delay={0.2}>
+              <p className="text-lg lg:text-xl text-white/50 leading-relaxed font-medium">
+                We translate engineering complexity into resilient performance, ensuring zero operational friction across the value chain.
+              </p>
+            </FadeUp>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            {data.outcomes.map((outcome, i) => {
+              const Icon = getIcon(outcome.icon);
+              return (
+                <FadeUp key={i} delay={i * 0.1} className="group">
+                  <motion.div 
+                    whileHover={{ backgroundColor: "rgba(255,255,255,0.03)" }}
+                    className="p-10 rounded-[3rem] border border-white/5 bg-white/[0.01] backdrop-blur-sm transition-all h-full"
+                  >
+                    <div className="mb-8 flex items-center justify-between">
+                      <div className="w-14 h-14 bg-prixgen-blue/10 rounded-2xl flex items-center justify-center text-prixgen-blue group-hover:scale-110 group-hover:bg-prixgen-blue group-hover:text-white transition-all duration-500">
+                        <Icon size={28} />
+                      </div>
+                      <div className="text-white/5 text-6xl font-black italic select-none">0{i+1}</div>
+                    </div>
+                    <div className="space-y-4 text-left">
+                      <h3 className="text-2xl font-bold text-white group-hover:text-prixgen-lightblue transition-colors">{outcome.title}</h3>
+                      <p className="text-slate-400 leading-relaxed text-lg font-light">
+                        {outcome.description}
+                      </p>
+                    </div>
+                  </motion.div>
                 </FadeUp>
               );
             })}
@@ -145,61 +266,100 @@ export default function EngineeringServicesClient({ data }: { data: ServicesPage
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {data.coreServices.map((service, i) => (
-              <FadeUp key={i} delay={i * 0.05}>
-                <Link href={`/engineering-services/${service.slug}`} className="block group h-full">
-                  <div className="p-10 bg-prixgen-blue/[0.03] border border-prixgen-blue/5 rounded-[3.5rem] h-full flex flex-col justify-between transition-all duration-500 hover:bg-prixgen-blue/[0.06] hover:border-prixgen-blue/20 hover:-translate-y-2 hover:shadow-2xl hover:shadow-prixgen-blue/10">
-                    <div className="space-y-8">
-                      <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-prixgen-blue border border-prixgen-blue/10 shadow-sm transition-transform duration-500 group-hover:rotate-6">
-                        <Cpu size={28} />
+            {data.coreServices.map((service, i) => {
+              const getImageUrl = (img: any) => {
+                if (!img) return null;
+                if (typeof img === 'string') return img;
+                return img.sourceUrl || img.asset?.url || null;
+              };
+
+              const serviceImages: Record<string, string> = {
+                "iiot-telemetry": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2070",
+                "automation": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1000",
+                "cloud-infrastructure": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000",
+              };
+
+              const bgImage = service.externalImageUrl || getImageUrl(service.featuredImage) || serviceImages[service.slug] || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000";
+
+              return (
+                <FadeUp key={i} delay={i * 0.05}>
+                  <Link href={`/engineering-services/${service.slug}`} className="block group h-full">
+                    <motion.div 
+                      whileHover={{ y: -10 }}
+                      className="relative p-12 bg-slate-50 rounded-[3rem] h-full flex flex-col justify-between transition-all duration-700 hover:shadow-[0_40px_80px_-20px_rgba(0,102,204,0.2)] border border-transparent hover:border-prixgen-blue/10 overflow-hidden"
+                    >
+                      <div className="absolute inset-0 z-0 opacity-10 group-hover:opacity-100 transition-opacity duration-700">
+                        <motion.img 
+                          src={bgImage}
+                          alt={service.title}
+                          className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-prixgen-blue to-transparent opacity-0 group-hover:opacity-90 transition-opacity" />
                       </div>
-                      <div className="space-y-4">
-                        <h3 className="text-3xl font-bold text-prixgen-dark leading-tight group-hover:text-prixgen-blue transition-colors">
-                          {service.title}
-                        </h3>
-                        <p className="text-lg text-slate-500 leading-relaxed font-medium">
-                          {service.headline}
-                        </p>
+                      
+                      <div className="relative z-10 space-y-8 text-left">
+                        <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-prixgen-blue border border-prixgen-blue/10 shadow-sm transition-transform duration-500 group-hover:rotate-6">
+                          <Cpu size={28} />
+                        </div>
+                        <div className="space-y-4">
+                          <h3 className="text-3xl font-bold text-prixgen-blue group-hover:text-white transition-colors">
+                            {service.title}
+                          </h3>
+                          <p className="text-lg text-slate-600 leading-relaxed font-bold group-hover:text-white/80 transition-colors">
+                            {service.headline}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <div className="mt-12 flex items-center gap-3 text-prixgen-blue font-bold text-xs uppercase tracking-widest">
-                      Capabilities <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
-                    </div>
-                  </div>
-                </Link>
-              </FadeUp>
-            ))}
+                      <div className="mt-12 relative z-10 flex items-center text-prixgen-blue font-bold text-sm uppercase tracking-widest group-hover:text-white group-hover:translate-x-2 transition-all duration-300">
+                        Capabilities <ArrowRight size={16} className="ml-2" />
+                      </div>
+                    </motion.div>
+                  </Link>
+                </FadeUp>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 bg-white relative overflow-hidden">
+      {/* Section 5: Final CTA */}
+      <section className="py-24 lg:py-40 bg-white relative overflow-hidden">
         <div className="container mx-auto px-4">
-          <FadeUp>
-            <div className="max-w-6xl mx-auto bg-white rounded-[5rem] p-12 lg:p-24 text-center text-prixgen-dark relative overflow-hidden border border-prixgen-blue/5 shadow-2xl">
-              <div className="relative z-10 space-y-16">
-                <div className="space-y-6">
-                  <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold leading-[0.9] tracking-tighter">
-                    Ready to <span className="italic text-prixgen-blue">optimize</span> <br /> your production?
-                  </h2>
-                  <p className="text-xl text-slate-500 max-w-xl mx-auto font-medium">
-                    Our engineering leads are ready to review your technical requirements.
-                  </p>
+          <motion.div 
+            whileHover={{ y: -5 }}
+            className="relative bg-gradient-to-br from-prixgen-blue to-indigo-900 rounded-[3.5rem] lg:rounded-[5rem] p-12 lg:p-32 overflow-hidden shadow-[0_40px_100px_-30px_rgba(0,71,171,0.4)] group"
+          >
+            {/* Animated Background Elements */}
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4 group-hover:scale-110 transition-transform duration-1000" />
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-500/10 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/4" />
+            
+            <div className="relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+              <FadeUp className="text-left space-y-8">
+                <div className="inline-flex items-center gap-2 px-6 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white font-bold text-sm uppercase tracking-widest">
+                  <span className="w-2 h-2 bg-prixgen-lightblue rounded-full animate-pulse" />
+                  Engineering Audit
                 </div>
-                
-                <div className="flex justify-center">
-                  <div className="w-full max-w-3xl bg-prixgen-blue/[0.03] p-10 lg:p-16 rounded-[4rem] text-left border border-prixgen-blue/5">
-                    <div className="mb-10 space-y-4">
-                      <h3 className="text-3xl font-bold text-prixgen-dark">Technical Brief</h3>
-                      <p className="text-slate-500 font-medium">Schedule a deep-dive session with our industrial engineering team.</p>
-                    </div>
-                    <LeadCaptureForm source="Engineering Services Page" />
-                  </div>
+                <h2 className="text-5xl lg:text-7xl font-bold text-white leading-[1.1] tracking-tight">
+                  Ready to <span className="text-indigo-300 italic font-medium">optimize</span> <br /> your production?
+                </h2>
+                <p className="text-xl text-indigo-100/80 max-w-xl font-medium leading-relaxed">
+                  Submit your technical requirements for a priority review from our industrial engineering leads.
+                </p>
+              </FadeUp>
+ 
+              <FadeUp delay={0.2}>
+                <div className="max-w-md ml-auto bg-white/95 backdrop-blur-xl p-8 lg:p-10 rounded-[3rem] text-left text-prixgen-dark shadow-2xl border border-white/20">
+                   <div className="mb-6 border-b border-slate-100 pb-4">
+                      <h4 className="text-xl font-bold text-prixgen-blue">Technical Inquiry</h4>
+                      <p className="text-sm text-slate-500 font-medium">Engineer-led response within 24 hours.</p>
+                   </div>
+                   <div className="scale-95 origin-top">
+                     <LeadCaptureForm source="Engineering Services Page" />
+                   </div>
                 </div>
-              </div>
+              </FadeUp>
             </div>
-          </FadeUp>
+          </motion.div>
         </div>
       </section>
     </div>

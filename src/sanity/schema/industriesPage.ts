@@ -13,6 +13,12 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'subtitle',
+      title: 'Section Subtitle',
+      type: 'string',
+      description: 'The smaller label above the main headline (e.g., Market Verticals)',
+    }),
+    defineField({
       name: 'heroSubheadline',
       title: 'Hero Subheadline',
       type: 'text',
