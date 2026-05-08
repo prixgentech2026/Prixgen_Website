@@ -38,7 +38,7 @@ export function MobileMenu() {
           <div className="p-4 border-b flex items-center justify-between bg-prixgen-gray/20">
             <DialogTitle className="font-bold text-prixgen-blue text-xl">Prixgen Menu</DialogTitle>
             <DialogDescription className="sr-only">
-              Navigate through Prixgen's services, solutions, and company information.
+              Navigate through Prixgen&apos;s services, solutions, and company information.
             </DialogDescription>
             <Button variant="ghost" onClick={() => setOpen(false)}>
               <X className="h-6 w-6" />

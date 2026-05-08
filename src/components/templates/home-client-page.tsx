@@ -384,7 +384,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                   <div className="mb-6 text-prixgen-lightblue group-hover:text-white transition-colors">
                     <svg className="w-10 h-10 fill-current opacity-20" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11C14.017 11.5523 13.5693 12 13.017 12H12.017V4H22.017V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM2.01697 21L2.01697 18C2.01697 16.8954 2.91241 16 4.01697 16H7.01697C7.56925 16 8.01697 15.5523 8.01697 15V9C8.01697 8.44772 7.56925 8 7.01697 8H3.01697C2.46468 8 2.01697 8.44772 2.01697 9V11C2.01697 11.5523 1.56925 12 1.01697 12H0.0169678V4H10.017V15C10.017 18.3137 7.33068 21 4.01697 21H2.01697Z"></path></svg>
                   </div>
-                  <p className="text-slate-600 group-hover:text-white/90 transition-colors mb-8 text-base italic flex-1">"{testimonial.text}"</p>
+                  <p className="text-slate-600 group-hover:text-white/90 transition-colors mb-8 text-base italic flex-1">&quot;{testimonial.text}&quot;</p>
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-full bg-prixgen-gray flex items-center justify-center font-bold text-prixgen-blue group-hover:bg-white group-hover:text-prixgen-blue transition-colors">
                       {testimonial.name[0]}

@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
 import { OptimizedImage } from '@/components/ui/optimized-image';
-import { CheckCircle2, ArrowRight, Globe2, Target, Eye, ShieldCheck, Cpu, Code2, X, Zap, Shield } from 'lucide-react';
+import { CheckCircle2, ArrowRight, Globe2, Target, Eye, ShieldCheck, Cpu, Code2, X } from 'lucide-react';
 
 interface Stat {
   label: string;
@@ -289,7 +289,7 @@ export function AboutClient({ data }: AboutProps) {
             <FadeUp>
               <h2 className="text-3xl lg:text-4xl font-bold text-prixgen-blue mb-6 tracking-tight">Our Architectural Philosophy</h2>
               <p className="text-lg lg:text-xl text-slate-500 font-medium leading-relaxed">
-                We don't just deploy software; we future-proof your digital journey. Our methodology is rooted in architectural integrity and zero-tolerance for operational friction.
+                We don&apos;t just deploy software; we future-proof your digital journey. Our methodology is rooted in architectural integrity and zero-tolerance for operational friction.
               </p>
             </FadeUp>
           </div>
@@ -332,7 +332,7 @@ export function AboutClient({ data }: AboutProps) {
               </div>
               <h3 className="text-xl lg:text-2xl font-bold mb-4 tracking-tighter uppercase text-white/90">Our Vision</h3>
               <p className="text-base lg:text-lg text-slate-300 leading-relaxed font-medium group-hover:text-white transition-colors duration-700">
-                "{data.vision}"
+                &quot;{data.vision}&quot;
               </p>
             </motion.div>
           </FadeUp>
@@ -348,7 +348,7 @@ export function AboutClient({ data }: AboutProps) {
               </div>
               <h3 className="text-xl lg:text-2xl font-bold mb-4 tracking-tighter uppercase relative z-10 text-white/90">Our Mission</h3>
               <p className="text-base lg:text-lg text-slate-300 leading-relaxed font-medium relative z-10 group-hover:text-white transition-colors duration-700">
-                "{data.mission}"
+                &quot;{data.mission}&quot;
               </p>
             </motion.div>
           </FadeUp>
@@ -363,7 +363,7 @@ export function AboutClient({ data }: AboutProps) {
               </div>
               <h3 className="text-xl lg:text-2xl font-bold mb-4 tracking-tighter uppercase relative z-10 text-white/90">Our Strategy</h3>
               <p className="text-base lg:text-lg text-slate-300 leading-relaxed font-medium relative z-10 group-hover:text-white transition-colors duration-700">
-                "We combine technical edge with strong business insight to architect future-proof enterprise operations."
+                &quot;We combine technical edge with strong business insight to architect future-proof enterprise operations.&quot;
               </p>
             </motion.div>
           </FadeUp>

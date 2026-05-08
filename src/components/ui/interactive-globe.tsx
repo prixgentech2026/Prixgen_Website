@@ -2,7 +2,6 @@
 
 import React from "react";
 import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
-import { motion } from "framer-motion";
 
 // Standard lightweight TopoJSON for world map
 const geoUrl = "/world-110m.json";
@@ -98,7 +97,6 @@ export default function InteractiveGlobe() {
       style={{ 
         transform: 'translateZ(0)',
         willChange: 'transform',
-        // @ts-ignore
         contentVisibility: 'auto',
       }}
     >

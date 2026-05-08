@@ -104,7 +104,7 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
             </FadeUp>
             <FadeUp delay={0.2} className="max-w-md text-right hidden lg:block">
               <p className="text-lg lg:text-xl text-slate-500 font-medium leading-relaxed">
-                We don't just implement software; we engineer operational success through a three-stage strategic voyage.
+                We don&apos;t just implement software; we engineer operational success through a three-stage strategic voyage.
               </p>
             </FadeUp>
           </div>
@@ -375,7 +375,7 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
                 <div className="max-w-md ml-auto bg-white/95 backdrop-blur-xl p-8 lg:p-10 rounded-[3rem] text-left text-prixgen-dark shadow-2xl border border-white/20">
                    <div className="mb-6 border-b border-slate-100 pb-4">
                       <h4 className="text-xl font-bold text-prixgen-blue">Quick Inquiry</h4>
-                      <p className="text-sm text-slate-500 font-medium">We'll get back to you shortly.</p>
+                      <p className="text-sm text-slate-500 font-medium">We&apos;ll get back to you shortly.</p>
                    </div>
                    <div className="scale-95 origin-top">
                      <LeadCaptureForm source="Services Page" />
