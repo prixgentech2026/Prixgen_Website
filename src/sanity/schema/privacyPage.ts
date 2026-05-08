@@ -70,7 +70,13 @@ export default {
       fields: [
         { name: 'title', title: 'Meta Title', type: 'string' },
         { name: 'metaDesc', title: 'Meta Description', type: 'text' },
-        { name: 'keywords', title: 'Keywords', type: 'array', of: [{ type: 'string' }] },
+        { 
+          name: 'keywords', 
+          title: 'Keywords', 
+          type: 'array', 
+          of: [{ type: 'string' }],
+          options: { layout: 'tags' }
+        },
       ],
     },
   ],

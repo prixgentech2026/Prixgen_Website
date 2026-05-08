@@ -7,6 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: data.seo?.title || "Solutions | Strategic ERP & AI Architectures",
     description: data.seo?.metaDesc || "Discover our specialized solutions including Odoo Enterprise, SAP Ecosystems, Microsoft Dynamics 365, and Lecca AI.",
+    keywords: data.seo?.keywords || [],
   };
 }
 

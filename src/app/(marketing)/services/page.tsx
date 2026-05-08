@@ -7,6 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: data?.seo?.title || "Services | Prixgen",
     description: data?.seo?.metaDesc || "Comprehensive enterprise application services and digital engineering.",
+    keywords: data?.seo?.keywords || [],
   };
 }
 

@@ -247,7 +247,7 @@ export const careersQuery = groq`*[_type == "careersPage"][0]{
   title,
   subtitle,
   badge,
-  "openings": reverse(openings),
+  openings,
   seo
 }`;
 

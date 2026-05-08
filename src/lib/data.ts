@@ -34,10 +34,7 @@ export interface PrivacyPageData {
   }[];
   lastUpdated: string;
   referenceId: string;
-  seo?: {
-    title: string;
-    metaDesc: string;
-  };
+  seo?: SEOData;
 }
 
 export interface TermsPageData {
@@ -56,10 +53,7 @@ export interface TermsPageData {
   }[];
   lastUpdated: string;
   referenceId: string;
-  seo?: {
-    title: string;
-    metaDesc: string;
-  };
+  seo?: SEOData;
 }
 
 export interface CareersPageData {
@@ -72,10 +66,7 @@ export interface CareersPageData {
     location: string;
     type: string;
   }[];
-  seo?: {
-    title: string;
-    metaDesc: string;
-  };
+  seo?: SEOData;
 }
 
 /**
@@ -474,6 +465,7 @@ export interface PortableTextBlock {
 export interface SEOData {
   title: string;
   metaDesc: string;
+  keywords?: string[];
 }
 
 export interface PageData {
@@ -635,8 +627,9 @@ export const homeData = {
   ctaDescription: "Join 500+ industrial leaders who have unified their global operations. Start your transformation with a zero-cost architecture audit.",
   ctaButtonText: "Book an Architecture Audit",
   seo: {
-    title: "Prixgen | Enterprise ERP Architecture & Strategy",
-    metaDesc: "Architecting unified enterprise ecosystems for global industrial leaders through Odoo, SAP, and IIoT integration.",
+    title: "Odoo Gold Partner & SAP Implementation Experts | Prixgen",
+    metaDesc: "Global enterprise ERP architects specializing in Odoo, SAP, and IIoT integration for manufacturing, FMCG, and industrial sectors.",
+    keywords: ["Odoo Gold Partner", "SAP Implementation", "Enterprise ERP", "Industrial IoT", "Supply Chain Digital Transformation"]
   }
 };
 
@@ -690,8 +683,9 @@ export const aboutData = {
     altText: "The Prixgen Elite Team"
   },
   seo: {
-    title: "About Us | Global Architects of Enterprise Intelligence",
-    metaDesc: "Prixgen is an elite team of IT professionals with over 30+ years of combined experience in ERP, IIoT, and AI implementations.",
+    title: "Global Architects of Enterprise Intelligence | Prixgen",
+    metaDesc: "Elite team of ERP consultants with 30+ years of expertise in IIoT, AI, and large-scale industrial digital transformation.",
+    keywords: ["ERP Consultants", "Digital Transformation Agency", "Industrial AI Experts", "Odoo Partners India"]
   }
 };
 
@@ -707,8 +701,9 @@ export const contactData = {
   australiaPhone: "08 9337 7907",
   australiaEmail: "info@prixgen.com.au",
   seo: {
-    title: "Contact Us | Let's Transform Your Operations",
-    metaDesc: "Connect with Prixgen Enterprise Headquarters in Mysuru to discuss your operational intelligence roadmap and ERP strategy.",
+    title: "ERP Architecture Audit & Strategy Consulting | Prixgen",
+    metaDesc: "Schedule a zero-cost architecture audit for your enterprise. Discuss Odoo, SAP, or IIoT roadmaps with our senior consultants.",
+    keywords: ["ERP Audit", "IT Strategy Consulting", "Contact Prixgen", "Australia ERP Services"]
   }
 };
 
@@ -743,8 +738,9 @@ export const industriesData: any[] = [
       { title: "Performance Scaling", description: "Optimizing throughput through continuous data analysis." }
     ],
     seo: {
-      title: "Industry 4.0 Manufacturing ERP Solutions | Prixgen",
-      metaDesc: "Achieve Zero Operational Friction in manufacturing with integrated IIoT and ERP architectures.",
+      title: "Industry 4.0 ERP for Manufacturing & Process Engineering",
+      metaDesc: "Achieve Zero Operational Friction with integrated shop-floor telemetry and high-precision manufacturing ERP architectures.",
+      keywords: ["Industry 4.0", "Manufacturing ERP", "Smart Factory", "Shop Floor Control", "BOM Optimization"]
     }
   },
   {
@@ -777,8 +773,9 @@ export const industriesData: any[] = [
       { title: "System Validation", description: "Rigorous testing to ensure data integrity and compliance enforcement." }
     ],
     seo: {
-      title: "Chemical ERP & Regulatory Compliance | Prixgen",
-      metaDesc: "Precision ERP architectures for complex batch management and compliance.",
+      title: "Chemical ERP Solutions & Batch Manufacturing Compliance",
+      metaDesc: "Precision ERP architectures for complex batch management, regulatory compliance (QMS), and dynamic shelf-life tracking.",
+      keywords: ["Chemical ERP", "Batch Management", "Regulatory Compliance", "Process Manufacturing"]
     }
   },
   {
@@ -811,8 +808,9 @@ export const industriesData: any[] = [
       { title: "Visibility Rollout", description: "Implementing real-time tracking for stakeholders across the chain." }
     ],
     seo: {
-      title: "FMCG Supply Chain & WMS Solutions | Prixgen",
-      metaDesc: "Optimize inventory routing and accelerate fulfillment with Prixgen's FMCG architectures.",
+      title: "High-Velocity FMCG Supply Chain & WMS Solutions",
+      metaDesc: "Hyper-scalable supply chain architectures designed for rapid fulfillment, inventory routing, and margin protection.",
+      keywords: ["FMCG Supply Chain", "WMS Solutions", "Inventory Routing", "Distribution Automation"]
     }
   },
   {
@@ -844,8 +842,9 @@ export const industriesData: any[] = [
       { title: "Experience Deployment", description: "Rolling out synchronized features to staff and customers." }
     ],
     seo: {
-      title: "Omnichannel Retail ERP Integration | Prixgen",
-      metaDesc: "Transforming legacy retail into unified omnichannel experiences with real-time inventory visibility.",
+      title: "Omnichannel Retail ERP & POS Integration | Prixgen",
+      metaDesc: "Transform legacy retail into unified omnichannel ecosystems with real-time inventory visibility and POS syncing.",
+      keywords: ["Omnichannel Retail", "Retail ERP", "POS Integration", "Unified Commerce"]
     }
   },
   {
@@ -877,9 +876,10 @@ export const industriesData: any[] = [
       { title: "Integrity Rollout", description: "Implementing end-to-end monitoring for quality assurance." }
     ],
     seo: {
-      title: "Dairy & Perishable Supply Chain ERP | Prixgen",
-      metaDesc: "Specialized cold-chain tracking and time-critical supply chain modules for the dairy industry.",
-    },
+      title: "Time-Critical Dairy & Perishable Supply Chain ERP | Prixgen",
+      metaDesc: "Specialized cold-chain ERP tracking and time-sensitive logistics for the dairy and perishables industry.",
+      keywords: ["Cold Chain Logistics", "Dairy ERP", "Perishables Tracking", "Supply Chain Visibility"]
+    }
   },
   {
     slug: "information-services",
@@ -910,8 +910,9 @@ export const industriesData: any[] = [
       { title: "Scale Deployment", description: "Rolling out the new infrastructure with zero downtime." }
     ],
     seo: {
-      title: "Enterprise Information Services & Data Architecture | Prixgen",
-      metaDesc: "Architecting high-availability digital cores for information-heavy enterprise leaders.",
+      title: "Enterprise Data Architecture & High-Availability IT | Prixgen",
+      metaDesc: "Architecting high-availability digital cores and SaaS governance for information-heavy industrial enterprises.",
+      keywords: ["Data Architecture", "SaaS Governance", "IT Infrastructure", "Digital Core"]
     }
   },
   {
@@ -943,8 +944,9 @@ export const industriesData: any[] = [
       { title: "Precision Deployment", description: "Rolling out the synchronized system across the production floor." }
     ],
     seo: {
-      title: "Electronics Manufacturing ERP & Supply Chain | Prixgen",
-      metaDesc: "High-precision ERP architectures for electronics assembly and component traceability.",
+      title: "Electronics Manufacturing ERP & Assembly Traceability",
+      metaDesc: "High-precision ERP for micro-BOM management, assembly line automation, and component-level traceability.",
+      keywords: ["Electronics ERP", "SMT Integration", "Micro-BOM", "Component Traceability"]
     }
   }
 ];
@@ -979,8 +981,9 @@ export const solutionsData: any[] = [
       { title: "Agile Deployment", description: "Phased rollout with continuous feedback and optimization." }
     ],
     seo: {
-      title: "Odoo Enterprise Gold Partner | Prixgen",
-      metaDesc: "Engineering complex Odoo workflows for multi-national enterprise scale.",
+      title: "Odoo Enterprise Implementation & Customization (Gold Partner)",
+      metaDesc: "Engineering complex Odoo engines for multi-national scale. Specialists in migrations, WMS, and custom BI dashboards.",
+      keywords: ["Odoo Gold Partner", "Odoo Migration", "Custom Odoo Development", "Enterprise Odoo"]
     }
   },
   {
@@ -1012,8 +1015,9 @@ export const solutionsData: any[] = [
       { title: "Managed Rollout", description: "Carefully orchestrated implementation with zero business disruption." }
     ],
     seo: {
-      title: "SAP Business One Deployment & Migration | Prixgen",
-      metaDesc: "Unlocking SAP value through architectural audits and strategic mid-market deployments.",
+      title: "SAP Business One Migration & Strategic ERP Consulting",
+      metaDesc: "Unlocking SAP value through Phase-Zero architectural audits and strategic S/4HANA migration services.",
+      keywords: ["SAP Business One", "S/4HANA Migration", "SAP Consulting", "Enterprise SAP"]
     }
   },
   {
@@ -1046,7 +1050,8 @@ export const solutionsData: any[] = [
     ],
     seo: {
       title: "Microsoft Dynamics 365 & Power BI Integration | Prixgen",
-      metaDesc: "Unifying finance, supply chain, and customer insights through Dynamics 365.",
+      metaDesc: "Unified financial management and supply chain operations using Dynamics 365 and the Microsoft Power Platform.",
+      keywords: ["Dynamics 365", "Power BI Integration", "Business Central", "Microsoft ERP"]
     }
   },
   {
@@ -1078,8 +1083,9 @@ export const solutionsData: any[] = [
       { title: "Hardware Sync", description: "Deploying cameras and edge computing units for live monitoring." }
     ],
     seo: {
-      title: "Lecca Industrial AI & Computer Vision | Prixgen",
-      metaDesc: "Automate quality control and safety with Lecca's proprietary industrial AI platform.",
+      title: "Industrial Computer Vision & AI Quality Control | Prixgen",
+      metaDesc: "Automate safety monitoring and quality control with Lecca, our proprietary industrial computer vision platform.",
+      keywords: ["Industrial AI", "Computer Vision", "Automated Quality Control", "Lecca AI"]
     }
   },
   {
@@ -1105,8 +1111,9 @@ export const solutionsData: any[] = [
       { title: "Executive Rollout", description: "Deploying high-visibility dashboards to leadership teams." }
     ],
     seo: {
-      title: "Power BI Industrial Intelligence | Prixgen",
-      metaDesc: "Transforming enterprise data into actionable insights with custom Power BI architectures.",
+      title: "Industrial Intelligence & Predictive BI Dashboards | Prixgen",
+      metaDesc: "Transform shop-floor data into executive insights with custom Power BI data models and real-time KPI dashboards.",
+      keywords: ["Power BI Dashboards", "Predictive Analytics", "Industrial BI", "ERP Reporting"]
     }
   },
   {
@@ -1134,6 +1141,7 @@ export const solutionsData: any[] = [
     seo: {
       title: "Dynamics NAV Modernization & Support | Prixgen",
       metaDesc: "Extending the power of legacy Dynamics NAV with modern cloud and AI architectures.",
+      keywords: ["Dynamics NAV", "ERP Modernization", "NAV Support", "Legacy System Bridge"]
     }
   },
   {
@@ -1161,6 +1169,7 @@ export const solutionsData: any[] = [
     seo: {
       title: "Industrial Image Processing & Computer Vision | Prixgen",
       metaDesc: "High-precision computer vision solutions for automated quality control.",
+      keywords: ["Image Processing", "Industrial Vision", "Quality Control AI", "Surface Inspection"]
     }
   },
   {
@@ -1198,8 +1207,9 @@ export const solutionsData: any[] = [
       { title: "Go-Live Support", description: "On-site assistance during the critical transition period." }
     ],
     seo: {
-      title: "Enterprise Warehouse Management Systems (WMS) | Prixgen",
-      metaDesc: "Next-generation warehouse management systems for intelligent inventory and fulfillment.",
+      title: "Intelligent Warehouse Management Systems (WMS) \| Prixgen",
+      metaDesc: "Next-generation WMS for automated picking, slotting optimization, and real-time inventory tracking.",
+      keywords: ["Intelligent WMS", "Warehouse Automation", "Inventory Tracking", "Fulfillment Software"]
     }
   }
 ];
@@ -1242,6 +1252,7 @@ export const servicesData: any[] = [
     seo: {
       title: "Business Strategy & Digital Transformation | Prixgen",
       metaDesc: "Strategic consultancy for long-term value creation and operational optimization.",
+      keywords: ["Business Transformation", "Digital Strategy", "Legacy Modernization", "Process Re-engineering"]
     }
   },
   {
@@ -1282,6 +1293,7 @@ export const servicesData: any[] = [
     seo: {
       title: "Strategic IT & Management Consulting | Prixgen",
       metaDesc: "Aligning technology with business strategy through deep architectural audits.",
+      keywords: ["IT Consulting", "Strategic IT", "Architecture Audit", "IT Governance"]
     }
   },
   {
@@ -1320,6 +1332,7 @@ export const servicesData: any[] = [
     seo: {
       title: "Enterprise Accounting Advisory & Systems | Prixgen",
       metaDesc: "Achieve financial precision and compliance with Prixgen's integrated accounting architectures.",
+      keywords: ["Accounting Advisory", "Financial Compliance", "Multi-entity Reporting", "ERP Finance"]
     }
   },
   {
@@ -1358,6 +1371,7 @@ export const servicesData: any[] = [
     seo: {
       title: "Management Consulting & Process Engineering | Prixgen",
       metaDesc: "Driving operational excellence and efficiency through expert management consulting.",
+      keywords: ["Management Consulting", "Process Engineering", "Operational Excellence", "KPI Design"]
     }
   },
   {
@@ -1396,6 +1410,7 @@ export const servicesData: any[] = [
     seo: {
       title: "Supply Chain Strategy & Optimization | Prixgen",
       metaDesc: "Architecting resilient, high-velocity logistics networks for global industrial leaders.",
+      keywords: ["Supply Chain Strategy", "Logistics Optimization", "Inventory Control", "Demand Sensing"]
     }
   },
   {
@@ -1470,8 +1485,9 @@ export const servicesData: any[] = [
       { title: "Seamless Onboarding", description: "Integrating talent into your communication and dev cycles." }
     ],
     seo: {
-      title: "Hire Senior Odoo Developers & Architects | Prixgen",
-      metaDesc: "Scale your Odoo projects with dedicated, elite technical talent from Prixgen.",
+      title: "Hire Senior Odoo Developers & Technical Architects | Prixgen",
+      metaDesc: "Scale your technical capacity with pre-vetted senior Odoo experts, developers, and architects for enterprise projects.",
+      keywords: ["Hire Odoo Developers", "Odoo Talent", "ERP Staffing", "Dedicated Odoo Team"]
     }
   },
   {
@@ -1509,8 +1525,9 @@ export const servicesData: any[] = [
       { title: "Data Visualization", description: "Building the digital twin and real-time alerts." }
     ],
     seo: {
-      title: "IIoT Engineering & Telemetry Solutions | Prixgen",
+      title: "IIoT Engineering & Real-Time Machine Telemetry | Prixgen",
       metaDesc: "Extracting shop-floor intelligence through custom IIoT and telemetry architectures.",
+      keywords: ["IIoT Engineering", "Machine Telemetry", "Predictive Maintenance", "MQTT", "OPC UA"]
     }
   },
   {
@@ -1550,6 +1567,7 @@ export const servicesData: any[] = [
     seo: {
       title: "Industrial Automation & Robotics Systems | Prixgen",
       metaDesc: "Engineering intelligent factory automation and robotic control systems.",
+      keywords: ["Industrial Automation", "Robotics", "PLC Programming", "Factory Automation"]
     }
   },
   {
@@ -1589,6 +1607,7 @@ export const servicesData: any[] = [
     seo: {
       title: "Industrial Cloud Hosting & Infrastructure | Prixgen",
       metaDesc: "Architecting high-availability cloud environments for Zero Operational Friction.",
+      keywords: ["Industrial Cloud", "ERP Hosting", "Disaster Recovery", "Managed IT Services"]
     }
   },
   {
@@ -1697,6 +1716,7 @@ export const servicesPageMockData: ServicesPageData = {
   seo: {
     title: "Services | Enterprise Application Services | Prixgen",
     metaDesc: "Prixgen Preferred Care methodology: Discover, Design, and Develop outcomes-based learning and operational strategies for modern industrial enterprises.",
+    keywords: ["IT Modernization", "Enterprise Services", "Business Strategy Consulting", "Industrial Cloud"]
   }
 };
 
@@ -1729,6 +1749,7 @@ export const industriesPageMockData: IndustriesPageData = {
   seo: {
     title: "Industries | Enterprise Digital Transformation | Prixgen",
     metaDesc: "Discover how Prixgen architects operational intelligence for Manufacturing, Retail, Chemicals, FMCG, Dairy, and Electronics.",
+    keywords: ["Industrial Transformation", "Market Verticals", "Smart Factory", "Digital Supply Chain"]
   }
 };
 
@@ -1757,6 +1778,7 @@ export const engineeringServicesPageMockData: EngineeringServicesPageData = {
   seo: {
     title: "Engineering Services | Industrial Intelligence & Automation | Prixgen",
     metaDesc: "Prixgen's engineering services deliver high-frequency IIoT telemetry, factory automation, and bespoke industrial technical solutions.",
+    keywords: ["Engineering Services", "Industrial Intelligence", "Factory Automation", "Industrial IoT"]
   }
 };
 
@@ -1818,10 +1840,11 @@ export const privacyData: PrivacyPageData = {
   ],
   lastUpdated: "May 2026",
   referenceId: "PXG-PRV-2026-V1",
-  seo: {
-    title: "Privacy Policy | Prixgen Enterprise",
-    metaDesc: "Read our commitment to data protection and enterprise-grade privacy standards."
-  }
+    seo: {
+      title: "Privacy Policy | Prixgen Enterprise",
+      metaDesc: "Read our commitment to data protection and enterprise-grade privacy standards.",
+      keywords: ["Privacy Policy", "Data Protection", "Enterprise Privacy", "GDPR Compliance"]
+    }
 };
 
 export const termsData: TermsPageData = {
@@ -1847,10 +1870,11 @@ export const termsData: TermsPageData = {
   ],
   lastUpdated: "May 2026",
   referenceId: "PXG-TOS-2026-V1",
-  seo: {
-    title: "Terms of Service | Prixgen Enterprise",
-    metaDesc: "The legal framework for our enterprise partnerships and engineering excellence."
-  }
+    seo: {
+      title: "Terms of Service | Prixgen Enterprise",
+      metaDesc: "The legal framework for our enterprise partnerships and engineering excellence.",
+      keywords: ["Terms of Service", "Legal Framework", "Service Level Agreement", "ERP Service Terms"]
+    }
 };
 
 export const careersData: CareersPageData = {
@@ -1864,6 +1888,7 @@ export const careersData: CareersPageData = {
   ],
   seo: {
     title: "Careers | Build the Future of Industrial Automation",
-    metaDesc: "Join an elite team of engineers, architects, and consultants at Prixgen. Current openings for Senior Python/Odoo Developers and Functional Consultants in Mysuru."
+    metaDesc: "Join an elite team of engineers, architects, and consultants at Prixgen. Current openings for Senior Python/Odoo Developers and Functional Consultants in Mysuru.",
+    keywords: ["ERP Careers", "Odoo Developer Jobs", "SAP Consultant Openings", "Tech Jobs Mysuru"]
   }
 };

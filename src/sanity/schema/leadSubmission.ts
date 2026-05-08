@@ -1,4 +1,4 @@
-export default {
+const leadSubmission = {
   name: 'leadSubmission',
   title: 'Lead Submissions',
   type: 'document',
@@ -62,3 +62,5 @@ export default {
     },
   },
 };
+
+export default leadSubmission;

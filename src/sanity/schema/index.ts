@@ -12,6 +12,7 @@ import privacyPage from './privacyPage';
 import termsPage from './termsPage';
 import leadSubmission from './leadSubmission';
 import careersPage from './careersPage';
+import jobApplication from './jobApplication';
 
 export const schema = {
   types: [
@@ -28,6 +29,7 @@ export const schema = {
     privacyPage, 
     termsPage,
     leadSubmission,
-    careersPage
+    careersPage,
+    jobApplication
   ],
 };

@@ -1,4 +1,4 @@
-export default {
+const careersPage = {
   name: 'careersPage',
   title: 'Careers Page',
   type: 'document',
@@ -41,7 +41,16 @@ export default {
       fields: [
         { name: 'title', title: 'Meta Title', type: 'string' },
         { name: 'metaDesc', title: 'Meta Description', type: 'text' },
+        { 
+          name: 'keywords', 
+          title: 'Meta Keywords', 
+          type: 'array', 
+          of: [{type: 'string'}],
+          options: { layout: 'tags' }
+        },
       ],
     },
   ],
 };
+
+export default careersPage;
