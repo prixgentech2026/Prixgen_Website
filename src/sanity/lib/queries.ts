@@ -243,11 +243,11 @@ export const termsQuery = groq`*[_type == "termsPage"][0]{
   seo
 }`;
 
-export const careersQuery = `*[_type == "careersPage"][0]{
+export const careersQuery = groq`*[_type == "careersPage"][0]{
   title,
   subtitle,
   badge,
-  openings,
+  "openings": reverse(openings),
   seo
 }`;
 
