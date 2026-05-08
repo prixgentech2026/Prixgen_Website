@@ -32,6 +32,20 @@ const nextConfig = {
       },
     ];
   },
-  transpilePackages: ['next-sanity', 'sanity'],
+  transpilePackages: [
+    'next-sanity', 
+    'sanity', 
+    '@sanity/ui', 
+    '@sanity/icons', 
+    '@sanity/insert-menu', 
+    '@sanity/vision',
+    '@codemirror/theme-one-dark'
+  ],
+  compiler: {
+    styledComponents: true,
+  },
+  experimental: {
+    cpus: 1,
+  },
 };
 export default nextConfig;
