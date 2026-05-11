@@ -692,9 +692,10 @@ export const aboutData = {
 export const contactData = {
   title: "Let's Transform Your Operations.",
   description: "Whether you are rescuing a failed implementation, architecting a new global ecosystem, or exploring proprietary AI solutions, our senior consultants are ready to assist.",
-  address: "#244, Kalabairaweshwara Complex, 1st Stage, Nivedithanagar, Mysuru - 570022, Karnataka, India.",
+  address: "No 2622, Krishna Kaveri Complex, Panchayat, opposite to Bogadi, Mysuru, Karnataka 570026",
   email: "info@prixgen.com",
   phone: "+91 (0821) 2548666",
+  mobile: "+91 95138 41111",
   salesPhone: "+91 99300 57159",
   website: "https://www.prixgen.com",
   australiaAddress: "Unit 3 / 5 Murphy Street, Oconnor, Perth, WA 6163, Australia",

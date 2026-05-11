@@ -64,6 +64,7 @@ export const contactQuery = groq`*[_type == "contact"][0]{
   address,
   email,
   phone,
+  mobile,
   salesPhone,
   website,
   australiaAddress,

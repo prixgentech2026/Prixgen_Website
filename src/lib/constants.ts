@@ -54,9 +54,11 @@ export const MENU_DATA = {
 };
 
 export const FOOTER_DATA = {
-  office_india: "#244, Kalabairaweshwara Complex, 1st Stage, Nivedithanagar, Mysuru - 570022, Karnataka, India.",
+  office_india: "No 2622, Krishna Kaveri Complex, Panchayat, opposite to Bogadi, Mysuru, Karnataka 570026",
   office_australia: "Unit 3 / 5 Murphy Street, Oconnor, Perth, WA 6163, Australia",
   phone: "+91 (0821) 2548666",
+  mobile: "+91 95138 41111",
+  salesPhone: "+91 99300 57159",
   email: "info@prixgen.com",
   website: "https://www.prixgen.com",
   tagline: "Architecting unified enterprise ecosystems for global industrial leaders.",

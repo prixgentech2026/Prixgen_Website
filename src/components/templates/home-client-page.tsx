@@ -461,7 +461,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                       Prixgen Tech Solutions Pvt. Ltd.
                     </p>
                     <p className="text-base text-prixgen-dark/70 leading-relaxed font-medium">
-                      #244, Kalabairaweshwara Complex, 1st Stage Nivedithanagar, Mysuru – 570022, Karnataka, INDIA
+                      No 2622, Krishna Kaveri Complex, Panchayat, opposite to Bogadi, Mysuru, Karnataka 570026
                     </p>
                   </div>
                 </div>

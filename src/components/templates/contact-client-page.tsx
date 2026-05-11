@@ -70,6 +70,10 @@ export default function ContactClientPage({ contactData }: { contactData: any })
                       <p className="text-lg font-bold text-prixgen-blue">{contactData.phone}</p>
                     </div>
                     <div className="space-y-1">
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Mobile Support</p>
+                      <p className="text-lg font-bold text-prixgen-blue">{contactData.mobile}</p>
+                    </div>
+                    <div className="space-y-1">
                       <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Strategic Sales</p>
                       <p className="text-lg font-bold text-prixgen-blue">{contactData.salesPhone}</p>
                     </div>

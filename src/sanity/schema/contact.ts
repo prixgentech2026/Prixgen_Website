@@ -31,6 +31,11 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'mobile',
+      title: 'India Mobile Support',
+      type: 'string',
+    }),
+    defineField({
       name: 'salesPhone',
       title: 'India Sales Phone',
       type: 'string',
