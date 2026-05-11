@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { FOOTER_DATA, MENU_DATA } from '@/lib/constants';
-import { Logo } from '@/components/shared/logo';
+import Image from 'next/image';
 import { Linkedin, Facebook, Twitter, Instagram, Youtube } from "lucide-react";
 
 /**
@@ -14,7 +14,13 @@ export function Footer() {
       <div className="container mx-auto px-4 grid grid-cols-2 lg:grid-cols-6 gap-12 lg:gap-8">
         <div className="col-span-2 lg:col-span-1">
           <Link href="/" className="inline-block mb-6">
-            <Logo variant="light" className="w-32" />
+            <Image 
+              src="/images/Logo.png" 
+              alt="Prixgen Logo" 
+              width={160} 
+              height={60} 
+              className="h-12 w-auto brightness-0 invert" 
+            />
           </Link>
           <p className="text-gray-400 text-sm leading-relaxed mb-6">
             {FOOTER_DATA.tagline}
