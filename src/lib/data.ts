@@ -89,7 +89,7 @@ export async function getHomeData() {
 export async function getAboutData() {
   if (!client) return aboutData;
   try {
-    const data = await client.fetch(aboutQuery);
+    const data = await client.fetch(aboutQuery, {}, { next: { tags: ['sanity'] } });
     return data || aboutData;
   } catch (error) {
     console.error('Sanity Fetch Error (About):', error);
@@ -100,7 +100,7 @@ export async function getAboutData() {
 export async function getContactData() {
   if (!client) return contactData;
   try {
-    const data = await client.fetch(contactQuery);
+    const data = await client.fetch(contactQuery, {}, { next: { tags: ['sanity'] } });
     return data || contactData;
   } catch (error) {
     console.error('Sanity Fetch Error (Contact):', error);
@@ -111,7 +111,7 @@ export async function getContactData() {
 export async function getCareersData() {
   if (!client) return careersData;
   try {
-    const data = await client.fetch(careersQuery);
+    const data = await client.fetch(careersQuery, {}, { next: { tags: ['sanity'] } });
     return data || careersData;
   } catch (error) {
     console.error('Sanity Fetch Error (Careers):', error);
@@ -144,7 +144,7 @@ export async function getTermsData() {
 export async function getIndustries() {
   if (!client) return industriesData;
   try {
-    const data = await client.fetch(industriesQuery);
+    const data = await client.fetch(industriesQuery, {}, { next: { tags: ['sanity'] } });
     return data && data.length > 0 ? data.map((item: any) => ({
       ...item,
       slug: item.slug?.current || item.slug
@@ -160,7 +160,7 @@ export async function getIndustryBySlug(slug: string) {
     return industriesData.find(i => i.slug === slug);
   }
   try {
-    const data = await client.fetch(industryBySlugQuery, { slug });
+    const data = await client.fetch(industryBySlugQuery, { slug }, { next: { tags: ['sanity'] } });
     if (!data) return industriesData.find(i => i.slug === slug);
     
     return {
@@ -176,7 +176,7 @@ export async function getIndustryBySlug(slug: string) {
 export async function getSolutions() {
   if (!client) return solutionsData;
   try {
-    const data = await client.fetch(solutionsQuery);
+    const data = await client.fetch(solutionsQuery, {}, { next: { tags: ['sanity'] } });
     return data && data.length > 0 ? data.map((item: any) => ({
       ...item,
       slug: item.slug?.current || item.slug
@@ -192,7 +192,7 @@ export async function getServices() {
   const engineeringSlugs = ["iiot-telemetry", "automation", "cloud-infrastructure"];
   if (!client) return servicesData.filter(s => !engineeringSlugs.includes(s.slug));
   try {
-    const data = await client.fetch(servicesQuery);
+    const data = await client.fetch(servicesQuery, {}, { next: { tags: ['sanity'] } });
     const allServices = data && data.length > 0 ? data.map((item: any) => ({
       ...item,
       slug: item.slug?.current || item.slug
