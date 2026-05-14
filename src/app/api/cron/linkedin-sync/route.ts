@@ -4,13 +4,23 @@ import { createClient } from '@sanity/client';
 // This would be triggered by a Vercel Cron job
 // https://vercel.com/docs/cron-jobs
 
-const sanityClient = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
-  token: process.env.SANITY_API_TOKEN,
-  useCdn: false,
-  apiVersion: '2024-05-01',
-});
+function getSanityClient() {
+  const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+  const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
+  const token = process.env.SANITY_API_TOKEN;
+
+  if (!projectId || !dataset || !token) {
+    throw new Error('Sanity configuration missing. Ensure NEXT_PUBLIC_SANITY_PROJECT_ID, NEXT_PUBLIC_SANITY_DATASET, and SANITY_API_TOKEN are set.');
+  }
+
+  return createClient({
+    projectId,
+    dataset,
+    token,
+    useCdn: false,
+    apiVersion: '2024-05-01',
+  });
+}
 
 const LINKEDIN_API_URL = 'https://api.linkedin.com/v2/shares?q=owners&owners=urn:li:organization:'; // Need Org ID
 
@@ -22,6 +32,7 @@ export async function GET(request: Request) {
   }
 
   try {
+    const sanityClient = getSanityClient();
     // 1. Fetch credentials from Sanity
     const settings = await sanityClient.fetch(`*[_type == "linkedinSettings"][0]`);
     
@@ -64,7 +75,7 @@ export async function GET(request: Request) {
       const text = liPost.text?.text || liPost.commentary || '';
       
       // Check if already exists
-      const existing = await sanityClient.fetch(
+      const existing = await getSanityClient().fetch(
         `*[_type == "post" && linkedinId == $liId][0]`,
         { liId }
       );
@@ -80,7 +91,7 @@ export async function GET(request: Request) {
       const slug = title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
       
       try {
-        await sanityClient.create({
+        await getSanityClient().create({
           _type: 'post',
           title: title,
           slug: { _type: 'slug', current: `${slug}-${liId.substring(0, 8)}` },

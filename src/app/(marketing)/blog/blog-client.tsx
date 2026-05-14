@@ -3,10 +3,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { Calendar, User, ArrowRight, Clock, ChevronRight, Share2 } from 'lucide-react';
+import { Calendar, User, ArrowRight, Clock } from 'lucide-react';
 import { BlogPost } from '@/lib/data';
 import { OptimizedImage } from '@/components/ui/optimized-image';
-import { Button } from '@/components/ui/button';
 import { FadeUp } from '@/components/animations/fade-up';
 import { StaggerText } from '@/components/animations/stagger-text';
 import { AmbientGlow } from '@/components/animations/ambient-glow';

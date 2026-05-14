@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
 import { 
-  Calendar, ArrowLeft, Share2, Clock, 
-  ChevronRight, Twitter, Linkedin, 
+  Calendar, ArrowLeft, Clock, 
+  Twitter, Linkedin, 
   Copy, CheckCircle2, Bookmark
 } from 'lucide-react';
 import { BlogPost } from '@/lib/data';
@@ -100,7 +100,6 @@ export default function PostClient({ post }: PostClientProps) {
   // Parallax for Hero
   const heroY = useTransform(scrollYProgress, [0, 0.3], [0, 100]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0.5]);
-  const imageScale = useTransform(scrollYProgress, [0, 0.3], [1, 1.1]);
   
   const [copied, setCopied] = useState(false);
 

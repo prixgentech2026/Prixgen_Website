@@ -43,9 +43,9 @@ export async function updateLinkedInSettings(formData: FormData) {
 
     revalidatePath('/admin/linkedin');
     return { success: true };
-  } catch (error: any) {
-    console.error('Failed to update LinkedIn settings:', error);
-    return { success: false, error: error.message };
+  } catch (err: any) {
+    console.error('Failed to update LinkedIn settings:', err);
+    return { success: false, error: err.message };
   }
 }
 
