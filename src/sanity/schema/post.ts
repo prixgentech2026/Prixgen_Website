@@ -81,7 +81,6 @@ export default defineType({
       type: 'url',
       description: 'Paste the LinkedIn post URL here to embed it instead of writing a body content.',
     }),
-    }),
   ],
 
   preview: {
