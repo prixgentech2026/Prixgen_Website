@@ -17,7 +17,8 @@ export function AmbientGlow() {
           opacity: [0.3, 0.5, 0.3],
         }}
         transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-        className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-prixgen-blue/15 rounded-full filter blur-[120px] will-change-transform"
+        className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-prixgen-blue/15 rounded-full filter blur-[120px]"
+        style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }}
       />
       <motion.div
         animate={{
@@ -27,7 +28,8 @@ export function AmbientGlow() {
           opacity: [0.2, 0.4, 0.2],
         }}
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-prixgen-lightblue/10 rounded-full filter blur-[150px] will-change-transform"
+        className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-prixgen-lightblue/10 rounded-full filter blur-[150px]"
+        style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }}
       />
     </div>
   );

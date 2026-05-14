@@ -32,11 +32,7 @@ export function FadeUp({ children, className, delay = 0 }: FadeUpProps) {
       }}
       viewport={{ margin: "-50px", once: false }}
       className={cn(className)}
-      style={{ 
-        willChange: 'opacity, transform', 
-        WebkitBackfaceVisibility: 'hidden',
-        backfaceVisibility: 'hidden' 
-      }}
+      style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }}
     >
       {children}
     </motion.div>
