@@ -5,15 +5,19 @@ import { NextResponse } from 'next/server';
  * On-demand revalidation endpoint for Sanity content.
  */
 export async function POST(request: Request) {
-  const secret = request.headers.get('x-reval-secret');
+  const secretHeader = request.headers.get('x-reval-secret') || request.headers.get('id-token');
   
-  if (secret !== process.env.REVALIDATION_SECRET) {
+  if (secretHeader !== process.env.REVALIDATION_SECRET) {
+    console.error('Revalidation failed: Invalid or missing secret token');
     return NextResponse.json({ message: 'Invalid token' }, { status: 401 });
   }
 
-  const { tag, path } = await request.json().catch(() => ({}));
-
   try {
+    const body = await request.json().catch(() => ({}));
+    const { tag, path } = body;
+
+    console.log('Revalidation request received:', { tag, path, body });
+
     if (tag) {
       revalidateTag(tag);
       console.log(`Revalidated tag: ${tag}`);
@@ -23,18 +27,16 @@ export async function POST(request: Request) {
     } else {
       // Default fallback: revalidate the global sanity tag
       revalidateTag('sanity');
-      console.log('Revalidated global sanity tag');
+      console.log('Revalidated global sanity tag (fallback)');
     }
 
     return NextResponse.json({ 
       revalidated: true, 
       now: Date.now(),
-      message: 'Revalidation triggered successfully'
+      target: tag || path || 'global-sanity-tag'
     });
-  } catch (err) {
-    return NextResponse.json({ 
-      revalidated: false, 
-      message: 'Error revalidating' 
-    }, { status: 500 });
+  } catch (err: any) {
+    console.error('Revalidation error:', err.message);
+    return NextResponse.json({ message: err.message }, { status: 500 });
   }
 }

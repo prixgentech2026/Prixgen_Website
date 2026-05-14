@@ -118,7 +118,7 @@ export interface BlogPost {
 export async function getHomeData() {
   if (!client) return homeData;
   try {
-    const data = await client.fetch(homeQuery);
+    const data = await client.fetch(homeQuery, {}, { next: { tags: ['sanity'] } });
     return data || homeData;
   } catch (error) {
     console.error('Sanity Fetch Error (Home):', error);
@@ -162,7 +162,7 @@ export async function getCareersData() {
 export async function getPrivacyData() {
   if (!client) return privacyData;
   try {
-    const data = await client.fetch(privacyQuery);
+    const data = await client.fetch(privacyQuery, {}, { next: { tags: ['sanity'] } });
     return data || privacyData;
   } catch (error) {
     console.error('Sanity Fetch Error (Privacy):', error);
@@ -173,7 +173,7 @@ export async function getPrivacyData() {
 export async function getTermsData() {
   if (!client) return termsData;
   try {
-    const data = await client.fetch(termsQuery);
+    const data = await client.fetch(termsQuery, {}, { next: { tags: ['sanity'] } });
     return data || termsData;
   } catch (error) {
     console.error('Sanity Fetch Error (Terms):', error);
@@ -274,7 +274,7 @@ export async function getServiceBySlug(slug: string) {
     return servicesData.find(s => s.slug === slug);
   }
   try {
-    const data = await client.fetch(serviceBySlugQuery, { slug });
+    const data = await client.fetch(serviceBySlugQuery, { slug }, { next: { tags: ['sanity'] } });
     if (!data) return servicesData.find(s => s.slug === slug);
     
     return {
@@ -292,7 +292,7 @@ export async function getSolutionBySlug(slug: string) {
     return solutionsData.find(s => s.slug === slug);
   }
   try {
-    const data = await client.fetch(solutionBySlugQuery, { slug });
+    const data = await client.fetch(solutionBySlugQuery, { slug }, { next: { tags: ['sanity'] } });
     if (!data) return solutionsData.find(s => s.slug === slug);
     
     return {
@@ -308,7 +308,7 @@ export async function getSolutionBySlug(slug: string) {
 export async function getServicesPageData() {
   if (!client) return servicesPageMockData;
   try {
-    const data = await client.fetch(servicesPageQuery);
+    const data = await client.fetch(servicesPageQuery, {}, { next: { tags: ['sanity'] } });
     if (!data) return servicesPageMockData;
 
     // Ensure we show all services even if Sanity only has a few
@@ -346,7 +346,7 @@ export async function getServicesPageData() {
 export async function getIndustriesPageData() {
   if (!client) return industriesPageMockData;
   try {
-    const data = await client.fetch(industriesPageQuery);
+    const data = await client.fetch(industriesPageQuery, {}, { next: { tags: ['sanity'] } });
     if (!data) return industriesPageMockData;
 
     // Ensure we show all industries even if Sanity only has a few
@@ -385,7 +385,7 @@ export async function getIndustriesPageData() {
 export async function getEngineeringServicesPageData() {
   if (!client) return engineeringServicesPageMockData;
   try {
-    const data = await client.fetch(engineeringServicesPageQuery);
+    const data = await client.fetch(engineeringServicesPageQuery, {}, { next: { tags: ['sanity'] } });
     if (!data) return engineeringServicesPageMockData;
 
     // Ensure we show all services even if Sanity only has a few
@@ -424,7 +424,7 @@ export async function getEngineeringServicesPageData() {
 export async function getSolutionsPageData() {
   if (!client) return solutionsPageMockData;
   try {
-    const data = await client.fetch(solutionsPageQuery);
+    const data = await client.fetch(solutionsPageQuery, {}, { next: { tags: ['sanity'] } });
     if (!data) return solutionsPageMockData;
 
     // Ensure we show all solutions even if Sanity only has a few
@@ -468,7 +468,7 @@ export async function getEngineeringServices() {
 
   try {
     const results = await Promise.all(
-      engineeringSlugs.map(slug => client!.fetch(serviceBySlugQuery, { slug }))
+      engineeringSlugs.map(slug => client!.fetch(serviceBySlugQuery, { slug }, { next: { tags: ['sanity'] } }))
     );
     const fetched = results
       .map((data, i) => {
@@ -495,7 +495,7 @@ export async function getEngineeringServiceBySlug(slug: string) {
   if (!client) return mockFallback;
 
   try {
-    const data = await client.fetch(serviceBySlugQuery, { slug });
+    const data = await client.fetch(serviceBySlugQuery, { slug }, { next: { tags: ['sanity'] } });
     if (!data) return mockFallback;
     return {
       ...data,
