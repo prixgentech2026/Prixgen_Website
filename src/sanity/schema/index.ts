@@ -14,6 +14,10 @@ import leadSubmission from './leadSubmission';
 import careersPage from './careersPage';
 import jobApplication from './jobApplication';
 
+import post from './post';
+import author from './author';
+import category from './category';
+
 export const schema = {
   types: [
     industry, 
@@ -30,6 +34,9 @@ export const schema = {
     termsPage,
     leadSubmission,
     careersPage,
-    jobApplication
+    jobApplication,
+    post,
+    author,
+    category
   ],
 };

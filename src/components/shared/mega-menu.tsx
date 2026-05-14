@@ -160,15 +160,20 @@ export function MegaMenu() {
         </div>
       </li>
 
-      {/* More - Dropdown */}
+      {/* Resources - Dropdown */}
       <li className="relative group/more flex items-center">
         <button className="group/more inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-3 py-2 text-sm font-bold uppercase tracking-wider transition-colors hover:bg-prixgen-gray hover:text-prixgen-blue focus:bg-prixgen-gray focus:text-prixgen-blue focus:outline-none">
-          More
+          Resources
           <ChevronIcon />
         </button>
         <div className="absolute top-full right-0 pt-2 opacity-0 invisible group-hover/more:opacity-100 group-hover/more:visible transition-all duration-200 z-50">
           <div className="w-[180px] p-2 bg-white rounded-xl shadow-2xl border border-slate-100">
             <ul className="flex flex-col gap-1">
+              <li>
+                <Link href="/blog" className="block select-none space-y-1 rounded-md p-2.5 leading-none no-underline outline-none transition-colors hover:bg-prixgen-gray hover:text-prixgen-blue">
+                  <div className="text-sm font-bold leading-none">Blog</div>
+                </Link>
+              </li>
               <li>
                 <Link href="/careers" className="block select-none space-y-1 rounded-md p-2.5 leading-none no-underline outline-none transition-colors hover:bg-prixgen-gray hover:text-prixgen-blue">
                   <div className="text-sm font-bold leading-none">Careers</div>

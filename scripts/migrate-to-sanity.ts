@@ -14,7 +14,10 @@ import {
   solutionsPageMockData,
   privacyData,
   termsData,
-  careersData
+  careersData,
+  blogAuthors,
+  blogCategories,
+  blogPosts
 } from '../src/lib/data';
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
@@ -421,6 +424,74 @@ async function migrateCareersPage() {
   console.log('Careers Page Data Migrated.');
 }
 
+async function migrateBlogCategories() {
+  console.log('Migrating Blog Categories...');
+  for (const category of blogCategories) {
+    const doc = {
+      _type: 'category',
+      _id: `category-${category.title.toLowerCase().replace(/\s+/g, '-')}`,
+      title: category.title,
+      description: category.description,
+    };
+    await client.createIfNotExists(doc);
+    await client.patch(doc._id).set(doc).commit();
+  }
+  console.log('Blog Categories Migrated.');
+}
+
+async function migrateBlogAuthors() {
+  console.log('Migrating Blog Authors...');
+  for (const author of blogAuthors) {
+    const imageId = author.image ? await uploadImage(author.image) : null;
+    const doc = {
+      _type: 'author',
+      _id: `author-${author.slug}`,
+      name: author.name,
+      slug: { _type: 'slug', current: author.slug },
+      image: imageId ? {
+        _type: 'image',
+        asset: { _type: 'reference', _ref: imageId }
+      } : undefined,
+      bio: author.bio,
+    };
+    await client.createIfNotExists({ _type: 'author', _id: doc._id });
+    await client.patch(doc._id).set(doc).commit();
+  }
+  console.log('Blog Authors Migrated.');
+}
+
+async function migrateBlogPosts() {
+  console.log('Migrating Blog Posts...');
+  for (const post of blogPosts) {
+    const imageId = post.mainImage ? await uploadImage(post.mainImage) : null;
+    const doc = {
+      _type: 'post',
+      _id: `post-${post.slug}`,
+      title: post.title,
+      slug: { _type: 'slug', current: post.slug },
+      excerpt: post.excerpt,
+      publishedAt: post.publishedAt,
+      author: post.author ? {
+        _type: 'reference',
+        _ref: `author-${post.author.slug}`
+      } : undefined,
+      categories: post.categories?.map(cat => ({
+        _key: Math.random().toString(36).substr(2, 9),
+        _type: 'reference',
+        _ref: `category-${cat.title.toLowerCase().replace(/\s+/g, '-')}`
+      })),
+      mainImage: imageId ? {
+        _type: 'image',
+        asset: { _type: 'reference', _ref: imageId }
+      } : undefined,
+      body: post.body,
+    };
+    await client.createIfNotExists({ _type: 'post', _id: doc._id });
+    await client.patch(doc._id).set(doc).commit();
+  }
+  console.log('Blog Posts Migrated.');
+}
+
 async function runMigration() {
   try {
     await migrateHome();
@@ -436,6 +507,9 @@ async function runMigration() {
     await migratePrivacyPage();
     await migrateTermsPage();
     await migrateCareersPage();
+    await migrateBlogCategories();
+    await migrateBlogAuthors();
+    await migrateBlogPosts();
     console.log('ALL MIGRATIONS COMPLETED SUCCESSFULLY!');
   } catch (error) {
     console.error('Migration failed:', error);

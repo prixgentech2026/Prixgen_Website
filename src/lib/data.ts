@@ -15,8 +15,29 @@ import {
   contactQuery,
   privacyQuery,
   termsQuery,
-  careersQuery
+  careersQuery,
+  postsQuery,
+  postBySlugQuery
 } from '@/sanity/lib/queries';
+
+export interface SEOData {
+  title: string;
+  metaDesc: string;
+  keywords?: string[];
+}
+
+export interface PortableTextSpan {
+  _type: 'span';
+  text: string;
+  marks?: string[];
+}
+
+export interface PortableTextBlock {
+  _type: 'block';
+  _key?: string;
+  style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'blockquote';
+  children: PortableTextSpan[];
+}
 
 export interface PrivacyPageData {
   title: string;
@@ -66,6 +87,25 @@ export interface CareersPageData {
     location: string;
     type: string;
   }[];
+  seo?: SEOData;
+}
+
+export interface BlogAuthor {
+  name: string;
+  slug?: string;
+  image?: string;
+  bio?: any;
+}
+
+export interface BlogPost {
+  title: string;
+  slug: string;
+  excerpt?: string;
+  publishedAt: string;
+  mainImage?: string;
+  author?: BlogAuthor;
+  categories?: { title: string }[];
+  body?: any;
   seo?: SEOData;
 }
 
@@ -138,6 +178,28 @@ export async function getTermsData() {
   } catch (error) {
     console.error('Sanity Fetch Error (Terms):', error);
     return termsData;
+  }
+}
+
+export async function getPosts(): Promise<BlogPost[]> {
+  if (!client) return [];
+  try {
+    const data = await client.fetch(postsQuery, {}, { next: { tags: ['sanity'] } });
+    return data || [];
+  } catch (error) {
+    console.error('Sanity Fetch Error (Posts):', error);
+    return [];
+  }
+}
+
+export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
+  if (!client) return null;
+  try {
+    const data = await client.fetch(postBySlugQuery, { slug }, { next: { tags: ['sanity'] } });
+    return data || null;
+  } catch (error) {
+    console.error(`Sanity Fetch Error (Post: ${slug}):`, error);
+    return null;
   }
 }
 
@@ -449,24 +511,7 @@ export async function getEngineeringServiceBySlug(slug: string) {
  * MOCK DATA (Fallback)
  */
 
-export interface PortableTextSpan {
-  _type: 'span';
-  text: string;
-  marks?: string[];
-}
 
-export interface PortableTextBlock {
-  _type: 'block';
-  _key?: string;
-  style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'blockquote';
-  children: PortableTextSpan[];
-}
-
-export interface SEOData {
-  title: string;
-  metaDesc: string;
-  keywords?: string[];
-}
 
 export interface PageData {
   slug: string;
@@ -1893,3 +1938,78 @@ export const careersData: CareersPageData = {
     keywords: ["ERP Careers", "Odoo Developer Jobs", "SAP Consultant Openings", "Tech Jobs Mysuru"]
   }
 };
+
+export const blogAuthors: BlogAuthor[] = [
+  {
+    name: 'Dr. Arvinth P.',
+    slug: 'arvinth-p',
+    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400',
+    bio: [
+      {
+        _type: 'block',
+        children: [{ _type: 'span', text: 'Dr. Arvinth is the Chief Technology Officer at Prixgen, specializing in AI-driven industrial automation and enterprise architecture.' }]
+      }
+    ]
+  }
+];
+
+export const blogCategories = [
+  { title: 'Industrial AI', description: 'Exploring the intersection of artificial intelligence and manufacturing operations.' },
+  { title: 'ERP Insights', description: 'Deep dives into Enterprise Resource Planning systems and best practices.' },
+  { title: 'Digital Transformation', description: 'Strategies for modernizing legacy industrial workflows.' }
+];
+
+export const blogPosts: BlogPost[] = [
+  {
+    title: 'The Future of Predictive Maintenance in Smart Factories',
+    slug: 'predictive-maintenance-smart-factories',
+    excerpt: 'How AI-driven predictive maintenance is reducing downtime and optimizing operational efficiency in modern manufacturing.',
+    publishedAt: new Date().toISOString(),
+    mainImage: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200',
+    author: blogAuthors[0],
+    categories: [{ title: 'Industrial AI' }, { title: 'Digital Transformation' }],
+    body: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: 'In the rapidly evolving landscape of Industry 4.0, predictive maintenance has emerged as a cornerstone of operational excellence. By leveraging real-time telemetry from IoT sensors and advanced machine learning algorithms, manufacturers can now anticipate equipment failures before they occur.' }]
+      },
+      {
+        _type: 'block',
+        style: 'h2',
+        children: [{ _type: 'span', text: 'Reducing Unplanned Downtime' }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: 'Unplanned downtime remains one of the most significant costs for industrial enterprises. Predictive models analyze vibration patterns, thermal signatures, and acoustic data to identify anomalies that precede mechanical fatigue. This proactive approach allows maintenance teams to schedule repairs during planned windows, minimizing disruption to the production line.' }]
+      }
+    ],
+    seo: {
+      title: 'Predictive Maintenance in Smart Factories | Prixgen Blog',
+      metaDesc: 'Learn how AI and IoT are revolutionizing maintenance strategies in modern smart factories.',
+      keywords: ['Predictive Maintenance', 'Smart Factory', 'Industry 4.0', 'Industrial AI']
+    }
+  },
+  {
+    title: 'Optimizing Supply Chain Resilience with Next-Gen ERP',
+    slug: 'optimizing-supply-chain-resilience-erp',
+    excerpt: 'Why traditional ERP systems are no longer enough to handle modern supply chain complexities and how next-gen solutions are filling the gap.',
+    publishedAt: new Date().toISOString(),
+    mainImage: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1200',
+    author: blogAuthors[0],
+    categories: [{ title: 'ERP Insights' }],
+    body: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: 'Global supply chains have faced unprecedented challenges in recent years. From geopolitical shifts to logistics bottlenecks, the need for real-time visibility and agile response has never been greater.' }]
+      }
+    ],
+    seo: {
+      title: 'Next-Gen ERP for Supply Chain Resilience | Prixgen Blog',
+      metaDesc: 'Explore how modern ERP systems provide the visibility and agility needed for resilient global supply chains.',
+      keywords: ['ERP Systems', 'Supply Chain Management', 'Logistics Optimization', 'Business Continuity']
+    }
+  }
+];

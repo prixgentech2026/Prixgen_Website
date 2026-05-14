@@ -174,7 +174,14 @@ export function MobileMenu() {
             </div>
 
             <div className="pt-8 border-t border-prixgen-gray">
-              <h3 className="text-xs font-bold text-prixgen-dark/40 uppercase tracking-widest mb-4">More</h3>
+              <h3 className="text-xs font-bold text-prixgen-dark/40 uppercase tracking-widest mb-4">Resources</h3>
+              <Link 
+                href="/blog" 
+                onClick={(e) => { e.preventDefault(); handleNavigate('/blog'); }}
+                className="block text-2xl font-bold text-prixgen-blue pb-4 border-b border-prixgen-gray/20"
+              >
+                Blog
+              </Link>
               <Link 
                 href="/careers" 
                 onClick={(e) => { e.preventDefault(); handleNavigate('/careers'); }}

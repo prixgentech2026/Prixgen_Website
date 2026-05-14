@@ -252,3 +252,38 @@ export const careersQuery = groq`*[_type == "careersPage"][0]{
   seo
 }`;
 
+// Query for all Blog Posts
+export const postsQuery = groq`*[_type == "post"] | order(publishedAt desc) {
+  title,
+  "slug": slug.current,
+  excerpt,
+  publishedAt,
+  "mainImage": mainImage.asset->url,
+  "author": author->{
+    name,
+    "image": image.asset->url
+  },
+  "categories": categories[]->{
+    title
+  }
+}`;
+
+// Query for a single Blog Post by slug
+export const postBySlugQuery = groq`*[_type == "post" && slug.current == $slug][0]{
+  title,
+  "slug": slug.current,
+  excerpt,
+  publishedAt,
+  body,
+  "mainImage": mainImage.asset->url,
+  "author": author->{
+    name,
+    "image": image.asset->url,
+    bio
+  },
+  "categories": categories[]->{
+    title
+  },
+  seo
+}`;
+
