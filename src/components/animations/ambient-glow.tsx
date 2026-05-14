@@ -13,17 +13,21 @@ export function AmbientGlow() {
         animate={{
           x: [0, 50, -50, 0],
           y: [0, 30, -30, 0],
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.5, 0.3],
         }}
         transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-        className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-prixgen-blue/5 rounded-full filter blur-[120px] will-change-transform"
+        className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-prixgen-blue/15 rounded-full filter blur-[120px] will-change-transform"
       />
       <motion.div
         animate={{
           x: [0, -50, 50, 0],
           y: [0, -30, 30, 0],
+          scale: [1.2, 1, 1.2],
+          opacity: [0.2, 0.4, 0.2],
         }}
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-prixgen-lightblue/5 rounded-full filter blur-[150px] will-change-transform"
+        className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-prixgen-lightblue/10 rounded-full filter blur-[150px] will-change-transform"
       />
     </div>
   );

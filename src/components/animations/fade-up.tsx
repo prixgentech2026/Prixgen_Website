@@ -15,10 +15,22 @@ interface FadeUpProps {
 export function FadeUp({ children, className, delay = 0 }: FadeUpProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ margin: "-50px", once: true }}
-      transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] as const }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ 
+        opacity: 1,
+        y: [0, -8, 0],
+      }}
+      transition={{ 
+        y: {
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: delay + 0.8,
+        },
+        opacity: { duration: 0.8, delay },
+        default: { ease: [0.16, 1, 0.3, 1] }
+      }}
+      viewport={{ margin: "-50px", once: false }}
       className={cn(className)}
       style={{ 
         willChange: 'opacity, transform', 

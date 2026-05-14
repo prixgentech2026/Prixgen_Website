@@ -26,10 +26,10 @@ export default function BlogClient({ posts }: BlogClientProps) {
     restDelta: 0.001
   });
 
-  const heroOpacity = useTransform(smoothProgress, [0, 0.15], [1, 0]);
-  const heroScale = useTransform(smoothProgress, [0, 0.15], [1, 0.9]);
-  const heroY = useTransform(smoothProgress, [0, 0.15], [0, -50]);
-  const bgY = useTransform(scrollYProgress, [0, 1], [0, 200]); // Parallax bg
+  const heroOpacity = useTransform(smoothProgress, [0, 0.3], [1, 0]);
+  const heroScale = useTransform(smoothProgress, [0, 0.3], [1, 0.95]);
+  const heroY = useTransform(smoothProgress, [0, 0.5], [0, -100]);
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, 300]); // Deeper parallax
 
   return (
     <div className="bg-white overflow-hidden selection:bg-prixgen-blue selection:text-white">
@@ -50,12 +50,23 @@ export default function BlogClient({ posts }: BlogClientProps) {
         <div className="absolute inset-0 z-0 pointer-events-none">
           <motion.div 
             animate={{ 
-              y: [0, -30, 0],
-              x: [0, 20, 0],
-              rotate: [0, 45, 0]
+              y: [0, -40, 0],
+              x: [0, 30, 0],
+              rotate: [0, 90, 0],
+              scale: [1, 1.1, 1]
             }}
-            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-[20%] left-[10%] w-64 h-64 bg-prixgen-blue/10 rounded-full blur-3xl opacity-20"
+            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-[10%] left-[5%] w-96 h-96 bg-prixgen-blue/10 rounded-full blur-[100px] opacity-20"
+          />
+          <motion.div 
+            animate={{ 
+              y: [0, 50, 0],
+              x: [0, -40, 0],
+              rotate: [0, -60, 0],
+              scale: [1, 1.2, 1]
+            }}
+            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            className="absolute bottom-[20%] right-[5%] w-[500px] h-[500px] bg-prixgen-lightblue/10 rounded-full blur-[120px] opacity-20"
           />
           <motion.div 
             animate={{ 
@@ -184,6 +195,14 @@ export default function BlogClient({ posts }: BlogClientProps) {
       <section className="py-24 bg-slate-50 border-y border-slate-200/60 relative">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row justify-between items-end gap-8 mb-20 text-left">
+            <motion.div 
+              animate={{ 
+                x: [0, -20, 0],
+                y: [0, 20, 0],
+              }}
+              transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+              className="absolute left-[-10%] top-1/2 w-96 h-96 bg-prixgen-blue/5 rounded-full blur-[120px] pointer-events-none"
+            />
             <FadeUp className="max-w-2xl">
               <div className="flex items-center gap-4 mb-4">
                 <div className="h-[1px] w-12 bg-prixgen-blue" />
@@ -207,8 +226,8 @@ export default function BlogClient({ posts }: BlogClientProps) {
                 <FadeUp key={post.slug} delay={idx * 0.1}>
                   <Link href={`/blog/${post.slug}`} className="group block h-full">
                     <motion.div 
-                      whileHover={{ y: -10 }}
-                      className="relative p-8 bg-white rounded-[2.5rem] h-full flex flex-col transition-all duration-700 hover:shadow-[0_40px_80px_-20px_rgba(0,102,204,0.15)] border border-transparent hover:border-prixgen-blue/10 overflow-hidden"
+                      whileHover={{ y: -10, scale: 1.02 }}
+                      className="relative p-8 bg-white rounded-[2.5rem] h-full flex flex-col transition-all duration-700 hover:shadow-[0_40px_80px_-20px_rgba(0,102,204,0.15)] border border-transparent hover:border-prixgen-blue/10 overflow-hidden group"
                     >
                       <div className="relative h-64 w-full rounded-[2rem] overflow-hidden mb-8">
                         <OptimizedImage

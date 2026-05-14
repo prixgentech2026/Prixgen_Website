@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import Link from 'next/link';
 import { FadeUp } from '@/components/animations/fade-up';
+import { AmbientGlow } from '@/components/animations/ambient-glow';
 import { StaggerText } from '@/components/animations/stagger-text';
 import { LeadCaptureForm } from '@/components/features/lead-capture-form';
 import { ServicesPageData } from '@/lib/data';
@@ -43,8 +44,7 @@ export default function EngineeringServicesClient({ data }: { data: ServicesPage
 
       {/* Hero Section */}
       <section className="relative min-h-[85vh] flex items-center pt-24 pb-12 overflow-hidden bg-white">
-        {/* Advanced Ambient Glows */}
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-prixgen-blue/5 rounded-full blur-[140px] animate-pulse" />
+        <AmbientGlow />
         
         {/* Architectural Grid Background */}
         <div className="absolute inset-0 z-0 opacity-[0.03]" 

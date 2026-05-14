@@ -98,8 +98,8 @@ export default function PostClient({ post }: PostClientProps) {
   });
 
   // Parallax for Hero
-  const heroY = useTransform(scrollYProgress, [0, 0.3], [0, 100]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0.5]);
+  const heroY = useTransform(scrollYProgress, [0, 0.5], [0, 150]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0.3]);
   
   const [copied, setCopied] = useState(false);
 
@@ -136,6 +136,19 @@ export default function PostClient({ post }: PostClientProps) {
             />
           )}
         </motion.div>
+        
+        {/* Living background elements */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <motion.div 
+            animate={{ 
+              x: [0, 100, 0],
+              y: [0, 50, 0],
+              scale: [1, 1.2, 1]
+            }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="absolute -top-1/4 -left-1/4 w-full h-full bg-prixgen-lightblue/10 rounded-full blur-[120px]"
+          />
+        </div>
 
         {/* Animated Grid */}
         <div className="absolute inset-0 z-0 opacity-[0.05]" 

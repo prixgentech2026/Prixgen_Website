@@ -11,9 +11,26 @@ const config: Config = {
           dark: "#1A1A1A"
         }
       },
-      fontFamily: {
-        sans: ["var(--font-inter)", "ui-sans-serif", "system-ui"],
+      keyframes: {
+        'spin-slow': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' }
+        },
+        'float': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-20px)' }
+        },
+        'drift': {
+          '0%': { transform: 'translate(0, 0)' },
+          '50%': { transform: 'translate(30px, 20px)' },
+          '100%': { transform: 'translate(0, 0)' }
+        }
       },
+      animation: {
+        'spin-slow': 'spin-slow 12s linear infinite',
+        'float': 'float 6s ease-in-out infinite',
+        'drift': 'drift 15s ease-in-out infinite'
+      }
     },
   },
   plugins: [],

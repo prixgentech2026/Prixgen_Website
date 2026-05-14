@@ -49,7 +49,19 @@ export function StaggerText({
     <MotionComponent 
       variants={container} 
       initial="hidden" 
-      animate="visible" 
+      whileInView="visible"
+      animate={{ 
+        y: [0, -10, 0],
+      }}
+      transition={{ 
+        y: {
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1.5
+        }
+      }}
+      viewport={{ once: false }}
       className={cn(className, colorClass, "font-extrabold")}
     >
       {words.map((word, index) => (
