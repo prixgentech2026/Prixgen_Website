@@ -17,7 +17,6 @@ import jobApplication from './jobApplication';
 import post from './post';
 import author from './author';
 import category from './category';
-import linkedinSettings from './linkedinSettings';
 
 export const schema = {
   types: [
@@ -38,7 +37,6 @@ export const schema = {
     jobApplication,
     post,
     author,
-    category,
-    linkedinSettings
+    category
   ],
 };

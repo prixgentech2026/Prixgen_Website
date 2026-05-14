@@ -14,6 +14,7 @@ import { OptimizedImage } from '@/components/ui/optimized-image';
 import { Button } from '@/components/ui/button';
 import { FadeUp } from '@/components/animations/fade-up';
 import { AmbientGlow } from '@/components/animations/ambient-glow';
+import { LinkedInEmbed } from '@/components/shared/linkedin-embed';
 
 interface PostClientProps {
   post: BlogPost;
@@ -264,12 +265,17 @@ export default function PostClient({ post }: PostClientProps) {
                  </motion.button>
               </motion.div>
            </aside>
-
            {/* Main Content */}
            <div className="flex-1 max-w-4xl">
               <FadeUp>
                 <div className="prose prose-2xl prose-slate max-w-none text-left">
-                  {post.body && <PortableText value={post.body} components={components} />}
+                  {post.linkedinUrl ? (
+                    <div className="my-12">
+                      <LinkedInEmbed url={post.linkedinUrl} />
+                    </div>
+                  ) : (
+                    post.body && <PortableText value={post.body} components={components} />
+                  )}
                 </div>
               </FadeUp>
 

@@ -485,6 +485,8 @@ async function migrateBlogPosts() {
         asset: { _type: 'reference', _ref: imageId }
       } : undefined,
       body: post.body,
+      linkedinUrl: post.linkedinUrl,
+      seo: post.seo,
     };
     await client.createIfNotExists({ _type: 'post', _id: doc._id });
     await client.patch(doc._id).set(doc).commit();

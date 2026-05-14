@@ -76,11 +76,11 @@ export default defineType({
       ],
     }),
     defineField({
-      name: 'linkedinId',
-      title: 'LinkedIn Post ID',
-      type: 'string',
-      description: 'Used for synchronization with LinkedIn official posts.',
-      hidden: true, // Internal use mainly
+      name: 'linkedinUrl',
+      title: 'LinkedIn Post URL',
+      type: 'url',
+      description: 'Paste the LinkedIn post URL here to embed it instead of writing a body content.',
+    }),
     }),
   ],
 

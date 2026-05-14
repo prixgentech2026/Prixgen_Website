@@ -265,7 +265,8 @@ export const postsQuery = groq`*[_type == "post"] | order(publishedAt desc) {
   },
   "categories": categories[]->{
     title
-  }
+  },
+  linkedinUrl
 }`;
 
 // Query for a single Blog Post by slug
@@ -284,6 +285,7 @@ export const postBySlugQuery = groq`*[_type == "post" && slug.current == $slug][
   "categories": categories[]->{
     title
   },
+  linkedinUrl,
   seo
 }`;
 

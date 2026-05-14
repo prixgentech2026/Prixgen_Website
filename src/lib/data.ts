@@ -106,6 +106,7 @@ export interface BlogPost {
   author?: BlogAuthor;
   categories?: { title: string }[];
   body?: any;
+  linkedinUrl?: string;
   seo?: SEOData;
 }
 
@@ -1968,6 +1969,7 @@ export const blogPosts: BlogPost[] = [
     mainImage: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200',
     author: blogAuthors[0],
     categories: [{ title: 'Industrial AI' }, { title: 'Digital Transformation' }],
+    linkedinUrl: 'https://www.linkedin.com/posts/prixgen_predictive-maintenance-industry40-activity-7195415705332514816-uvmE',
     body: [
       {
         _type: 'block',
