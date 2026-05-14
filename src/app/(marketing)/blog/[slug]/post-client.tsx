@@ -13,8 +13,10 @@ import { BlogPost } from '@/lib/data';
 import { OptimizedImage } from '@/components/ui/optimized-image';
 import { Button } from '@/components/ui/button';
 import { FadeUp } from '@/components/animations/fade-up';
+import { StaggerText } from '@/components/animations/stagger-text';
 import { AmbientGlow } from '@/components/animations/ambient-glow';
 import { LinkedInEmbed } from '@/components/shared/linkedin-embed';
+import { LeadCaptureForm } from '@/components/features/lead-capture-form';
 
 interface PostClientProps {
   post: BlogPost;
@@ -28,8 +30,8 @@ const components = {
       </h1>
     ),
     h2: ({ children }: any) => (
-      <h2 className="text-3xl md:text-4xl font-bold text-prixgen-blue mt-14 mb-6 tracking-tight flex items-center gap-4">
-        <span className="h-8 w-1 bg-prixgen-lightblue rounded-full" />
+      <h2 className="text-3xl md:text-5xl font-bold text-prixgen-blue mt-20 mb-8 tracking-tighter flex items-center gap-5">
+        <span className="h-10 w-1.5 bg-gradient-to-b from-prixgen-blue to-prixgen-lightblue rounded-full" />
         {children}
       </h2>
     ),
@@ -39,7 +41,7 @@ const components = {
       </h3>
     ),
     normal: ({ children }: any) => (
-      <p className="text-xl leading-[1.8] text-slate-600 mb-8 font-medium">
+      <p className="text-xl leading-[1.9] text-slate-500 mb-10 font-medium">
         {children}
       </p>
     ),
@@ -113,162 +115,123 @@ export default function PostClient({ post }: PostClientProps) {
   if (!post) return null;
 
   return (
-    <article className="bg-white selection:bg-prixgen-blue selection:text-white">
+    <article className="bg-white selection:bg-prixgen-blue selection:text-white overflow-hidden">
       {/* Reading Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1.5 bg-prixgen-lightblue z-[100] origin-left shadow-[0_0_15px_rgba(0,191,255,0.5)]"
         style={{ scaleX }}
       />
 
-      {/* Hero Header */}
-      <header className="relative min-h-[90vh] flex items-center pt-32 pb-20 overflow-hidden bg-prixgen-blue text-white">
+      {/* Premium White Hero */}
+      <header className="relative min-h-[60vh] flex items-center pt-32 md:pt-48 pb-20 overflow-hidden bg-white">
         <AmbientGlow />
         
-        <motion.div 
-          style={{ y: heroY, opacity: heroOpacity }}
-          className="absolute inset-0 opacity-10 grayscale mix-blend-overlay"
-        >
-          {post.mainImage && (
-            <OptimizedImage 
-              src={post.mainImage} 
-              alt="" 
-              fill 
-              className="object-cover scale-110 blur-xl"
-            />
-          )}
-        </motion.div>
-        
-        {/* Living background elements */}
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-          <motion.div 
-            animate={{ 
-              x: [0, 100, 0],
-              y: [0, 50, 0],
-              scale: [1, 1.2, 1]
-            }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="absolute -top-1/4 -left-1/4 w-full h-full bg-prixgen-lightblue/10 rounded-full blur-[120px]"
-          />
-        </div>
+        {/* Subtle Background Elements */}
+        <div className="absolute inset-0 z-0 opacity-[0.03]" 
+             style={{ backgroundImage: 'radial-gradient(#0066cc 1px, transparent 1px)', backgroundSize: '50px 50px' }} />
 
-        {/* Animated Grid */}
-        <div className="absolute inset-0 z-0 opacity-[0.05]" 
-             style={{ backgroundImage: 'linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)', backgroundSize: '100px 100px' }} />
+        <div className="container mx-auto px-6 relative z-10 text-center">
+          <FadeUp className="space-y-10 max-w-5xl mx-auto">
+            <Link 
+              href="/blog" 
+              className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue hover:bg-prixgen-blue hover:text-white transition-all font-black text-[10px] uppercase tracking-widest group mx-auto"
+            >
+              <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+              Intelligence Center
+            </Link>
 
-        <div className="container mx-auto px-4 relative z-10">
-          <Link 
-            href="/blog" 
-            className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white hover:text-prixgen-blue transition-all mb-12 font-black text-[10px] uppercase tracking-widest group"
-          >
-            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-            Architectural Feed
-          </Link>
-          
-          <div className="max-w-5xl">
-            <FadeUp className="space-y-10">
-              <div className="flex flex-wrap items-center gap-6">
-                {post.categories?.map((cat: { title: string }) => (
-                  <span key={cat.title} className="px-5 py-2 rounded-2xl bg-prixgen-lightblue/20 backdrop-blur-xl border border-prixgen-lightblue/30 text-prixgen-lightblue text-[10px] font-black uppercase tracking-[0.2em]">
-                    {cat.title}
-                  </span>
-                ))}
-                <div className="flex items-center gap-2 text-white/50 text-[10px] font-bold uppercase tracking-widest">
-                  <Calendar size={14} className="text-prixgen-lightblue" />
-                  {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : 'Analysis Pending'}
-                </div>
-                <div className="flex items-center gap-2 text-white/50 text-[10px] font-bold uppercase tracking-widest">
-                  <Clock size={14} className="text-prixgen-lightblue" />
-                  8 Min Read
-                </div>
+            <div className="flex flex-wrap items-center justify-center gap-6">
+              {post.categories?.map((cat: { title: string }) => (
+                <span key={cat.title} className="px-5 py-2 rounded-2xl bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue text-[10px] font-black uppercase tracking-[0.2em]">
+                  {cat.title}
+                </span>
+              ))}
+              <div className="h-4 w-px bg-slate-200 hidden md:block" />
+              <div className="flex items-center gap-2 text-slate-400 text-[10px] font-bold uppercase tracking-widest">
+                <Calendar size={14} className="text-prixgen-lightblue" />
+                {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : 'Analysis Pending'}
               </div>
-              
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-[0.9] tracking-tighter mb-12">
-                {post.title}
-              </h1>
-              
-              <div className="flex flex-wrap items-center justify-between gap-8 pt-12 border-t border-white/10">
-                <div className="flex items-center gap-6">
+            </div>
+
+            <StaggerText 
+              text={post.title} 
+              variant="gradient"
+              className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-[1] tracking-tighter"
+            />
+
+            <div className="flex items-center justify-center gap-6 pt-4">
+               <div className="flex items-center gap-4">
                   {post.author?.image && (
-                    <div className="relative w-20 h-20 rounded-[2rem] overflow-hidden border-2 border-prixgen-lightblue shadow-2xl rotate-6">
+                    <div className="relative w-14 h-14 rounded-2xl overflow-hidden border-2 border-white shadow-xl ring-1 ring-slate-100">
                       <OptimizedImage src={post.author.image} alt={post.author.name} fill className="object-cover" />
                     </div>
                   )}
-                  <div>
-                    <div className="text-2xl font-black tracking-tight">{post.author?.name}</div>
+                  <div className="text-left">
+                    <div className="text-lg font-black text-prixgen-blue tracking-tight leading-none mb-1">{post.author?.name}</div>
                     <div className="text-prixgen-lightblue text-[10px] font-black uppercase tracking-widest">Principal Architect</div>
                   </div>
-                </div>
-                
-                <div className="flex items-center gap-3">
-                   <motion.button 
-                     whileHover={{ scale: 1.1 }}
-                     whileTap={{ scale: 0.9 }}
-                     className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center text-white border border-white/10 hover:bg-white hover:text-prixgen-blue transition-colors"
-                   >
-                     <Linkedin size={20} />
-                   </motion.button>
-                   <motion.button 
-                     onClick={handleCopy}
-                     whileHover={{ scale: 1.1 }}
-                     whileTap={{ scale: 0.9 }}
-                     className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center text-white border border-white/10 hover:bg-white hover:text-prixgen-blue transition-colors"
-                   >
-                     {copied ? <CheckCircle2 size={20} /> : <Copy size={20} />}
-                   </motion.button>
-                </div>
-              </div>
-            </FadeUp>
-          </div>
+               </div>
+               <div className="h-8 w-px bg-slate-100" />
+               <div className="flex items-center gap-2">
+                 <motion.button 
+                   onClick={handleCopy}
+                   whileHover={{ scale: 1.1 }}
+                   className="w-10 h-10 bg-slate-50 rounded-xl flex items-center justify-center text-slate-400 hover:text-prixgen-blue hover:bg-white hover:shadow-xl transition-all"
+                   title="Copy link"
+                 >
+                   {copied ? <CheckCircle2 size={16} /> : <Copy size={16} />}
+                 </motion.button>
+               </div>
+            </div>
+          </FadeUp>
         </div>
       </header>
 
-      {/* Main Feature Image */}
-      <div className="container mx-auto px-4 -mt-32 relative z-20">
+      {/* Feature Image */}
+      <div className="container mx-auto px-6 relative z-20">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 50 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1, type: 'spring' }}
-          className="relative aspect-[21/9] max-w-7xl mx-auto rounded-[4rem] overflow-hidden shadow-[0_100px_150px_-50px_rgba(0,102,204,0.4)] border-[12px] border-white"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="relative aspect-[21/9] max-w-7xl mx-auto rounded-[3.5rem] lg:rounded-[5rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,102,204,0.15)] border-[12px] border-white ring-1 ring-slate-100"
         >
           <OptimizedImage 
             src={post.mainImage || "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2070"} 
             alt={post.title} 
             fill 
-            className="object-cover"
+            className="object-cover transition-transform duration-[2s] hover:scale-105"
           />
         </motion.div>
       </div>
 
       {/* Content Section */}
-      <div className="container mx-auto px-4 py-32 relative">
+      <div className="container mx-auto px-6 py-24 relative">
         <div className="flex flex-col lg:flex-row gap-20">
            {/* Sidebar - Left (Desktop Only) */}
-           <aside className="hidden lg:block w-24 shrink-0 relative">
+           <aside className="hidden lg:block w-16 shrink-0">
               <motion.div 
-                initial={{ x: -100, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                viewport={{ margin: "-100px" }}
-                className="sticky top-40 space-y-8 flex flex-col items-center"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                className="sticky top-40 space-y-6 flex flex-col items-center"
               >
-                 <div className="flex flex-col items-center gap-2">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-300 vertical-text rotate-180 mb-4">Share Analysis</span>
-                    <div className="w-px h-12 bg-slate-100" />
-                 </div>
-                 <motion.button whileHover={{ y: -5, scale: 1.1 }} className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 hover:text-prixgen-blue hover:bg-white hover:shadow-xl transition-all">
-                    <Linkedin size={18} />
+                 <span className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-300 vertical-text rotate-180 mb-4 whitespace-nowrap">Share Intelligence</span>
+                 <div className="w-px h-10 bg-slate-100" />
+                 <motion.button whileHover={{ scale: 1.1, color: '#0066cc' }} className="text-slate-300 transition-colors">
+                    <Linkedin size={20} />
                  </motion.button>
-                 <motion.button whileHover={{ y: -5, scale: 1.1 }} className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 hover:text-prixgen-blue hover:bg-white hover:shadow-xl transition-all">
-                    <Twitter size={18} />
+                 <motion.button whileHover={{ scale: 1.1, color: '#1da1f2' }} className="text-slate-300 transition-colors">
+                    <Twitter size={20} />
                  </motion.button>
-                 <motion.button whileHover={{ y: -5, scale: 1.1 }} className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 hover:text-prixgen-blue hover:bg-white hover:shadow-xl transition-all">
-                    <Bookmark size={18} />
+                 <motion.button whileHover={{ scale: 1.1, color: '#00bfff' }} className="text-slate-300 transition-colors">
+                    <Bookmark size={20} />
                  </motion.button>
               </motion.div>
            </aside>
+
            {/* Main Content */}
            <div className="flex-1 max-w-4xl">
               <FadeUp>
-                <div className="prose prose-2xl prose-slate max-w-none text-left">
+                <div className="max-w-none text-left">
                   {post.linkedinUrl ? (
                     <div className="my-12">
                       <LinkedInEmbed url={post.linkedinUrl} />
@@ -309,20 +272,20 @@ export default function PostClient({ post }: PostClientProps) {
            </div>
 
            {/* Sidebar - Right (Desktop Only) */}
-           <aside className="hidden xl:block w-80 shrink-0">
-              <motion.div 
-                initial={{ x: 100, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                viewport={{ margin: "-100px" }}
-                className="sticky top-40 space-y-12"
-              >
-                 <div className="p-10 bg-prixgen-blue rounded-[3rem] text-white shadow-2xl shadow-blue-900/20">
-                    <h4 className="text-2xl font-black tracking-tighter mb-6 leading-tight">Need a customized architecture?</h4>
-                    <p className="text-white/60 mb-10 font-medium">Schedule an executive review of your industrial workflows.</p>
-                    <Button className="w-full bg-white text-prixgen-blue hover:bg-prixgen-lightblue hover:text-white rounded-2xl py-6 font-black uppercase tracking-widest text-xs h-auto shadow-xl" asChild>
-                       <Link href="/contact">Inquire Now</Link>
-                    </Button>
-                 </div>
+            <aside className="hidden xl:block w-80 shrink-0">
+               <motion.div 
+                 initial={{ opacity: 0, x: 20 }}
+                 whileInView={{ opacity: 1, x: 0 }}
+                 className="sticky top-40 space-y-12"
+               >
+                  <div className="p-10 bg-gradient-to-br from-prixgen-blue to-indigo-900 rounded-[3rem] text-white shadow-2xl shadow-blue-900/20 relative overflow-hidden group">
+                     <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-700" />
+                     <h4 className="text-xl font-black tracking-tight mb-4 leading-tight relative z-10">Architectural Support</h4>
+                     <p className="text-white/60 mb-8 font-medium text-xs relative z-10">Schedule an executive review of your industrial workflows.</p>
+                     <Button className="w-full bg-white text-prixgen-blue hover:bg-prixgen-lightblue hover:text-white rounded-2xl py-6 font-black uppercase tracking-widest text-[10px] h-auto shadow-xl relative z-10" asChild>
+                        <Link href="/contact">Inquire Now</Link>
+                     </Button>
+                  </div>
 
                  <div className="space-y-6 px-4 text-left">
                     <h5 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-6">Trending Analysis</h5>
