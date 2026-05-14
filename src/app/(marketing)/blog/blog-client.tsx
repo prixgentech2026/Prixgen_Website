@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Calendar, User, ArrowRight, Clock, ChevronRight, Share2 } from 'lucide-react';
 import { BlogPost } from '@/lib/data';
 import { OptimizedImage } from '@/components/ui/optimized-image';
@@ -18,9 +18,19 @@ interface BlogClientProps {
 export default function BlogClient({ posts }: BlogClientProps) {
   const featuredPost = posts[0];
   const remainingPosts = posts.slice(1);
+  
+  // Hero Parallax with Spring for smoothness
   const { scrollYProgress } = useScroll();
-  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  const heroOpacity = useTransform(smoothProgress, [0, 0.15], [1, 0]);
+  const heroScale = useTransform(smoothProgress, [0, 0.15], [1, 0.9]);
+  const heroY = useTransform(smoothProgress, [0, 0.15], [0, -50]);
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, 200]); // Parallax bg
 
   return (
     <div className="bg-white overflow-hidden selection:bg-prixgen-blue selection:text-white">
@@ -28,12 +38,39 @@ export default function BlogClient({ posts }: BlogClientProps) {
       <section className="relative min-h-[70vh] flex items-center pt-32 overflow-hidden bg-white">
         <AmbientGlow />
         
-        {/* Animated Background Grid */}
-        <div className="absolute inset-0 z-0 opacity-[0.03]" 
-             style={{ backgroundImage: 'radial-gradient(#0066cc 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+        <motion.div 
+          style={{ 
+            backgroundImage: 'radial-gradient(#0066cc 1px, transparent 1px)', 
+            backgroundSize: '40px 40px',
+            y: bgY 
+          }} 
+          className="absolute inset-0 z-0 opacity-[0.03] will-change-transform" 
+        />
+
+        {/* Floating Decorative Nodes */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <motion.div 
+            animate={{ 
+              y: [0, -30, 0],
+              x: [0, 20, 0],
+              rotate: [0, 45, 0]
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-[20%] left-[10%] w-64 h-64 bg-prixgen-blue/10 rounded-full blur-3xl opacity-20"
+          />
+          <motion.div 
+            animate={{ 
+              y: [0, 40, 0],
+              x: [0, -30, 0],
+              rotate: [0, -30, 0]
+            }}
+            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            className="absolute bottom-[20%] right-[10%] w-96 h-96 bg-prixgen-lightblue/10 rounded-full blur-3xl opacity-20"
+          />
+        </div>
 
         <motion.div 
-          style={{ opacity, scale }}
+          style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
           className="container mx-auto px-4 relative z-10 text-center"
         >
           <FadeUp className="space-y-6">
@@ -124,10 +161,16 @@ export default function BlogClient({ posts }: BlogClientProps) {
                     
                     <Link href={`/blog/${featuredPost.slug}`}>
                       <motion.div 
-                        whileHover={{ scale: 1.1 }}
-                        className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-prixgen-blue shadow-xl"
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        whileTap={{ scale: 0.9 }}
+                        className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-prixgen-blue shadow-xl group/btn"
                       >
-                        <ArrowRight size={28} />
+                        <motion.div
+                          animate={{ x: [0, 3, 0] }}
+                          transition={{ repeat: Infinity, duration: 1.5 }}
+                        >
+                          <ArrowRight size={28} />
+                        </motion.div>
                       </motion.div>
                     </Link>
                   </div>
@@ -207,8 +250,13 @@ export default function BlogClient({ posts }: BlogClientProps) {
                           </div>
                           <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">{post.author?.name}</span>
                         </div>
-                        <div className="w-10 h-10 rounded-xl bg-prixgen-blue/5 flex items-center justify-center text-prixgen-blue group-hover:bg-prixgen-blue group-hover:text-white transition-all">
-                          <ArrowRight size={18} />
+                        <div className="w-10 h-10 rounded-xl bg-prixgen-blue/5 flex items-center justify-center text-prixgen-blue group-hover:bg-prixgen-blue group-hover:text-white transition-all overflow-hidden relative">
+                          <motion.div
+                            animate={{ x: [-20, 0, 20] }}
+                            transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+                            className="absolute inset-0 opacity-0 group-hover:opacity-10 pointer-events-none bg-gradient-to-r from-transparent via-white to-transparent"
+                          />
+                          <ArrowRight size={18} className="relative z-10" />
                         </div>
                       </div>
                     </motion.div>

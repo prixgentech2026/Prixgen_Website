@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { motion, useScroll, useSpring } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
 import { 
@@ -96,6 +96,11 @@ export default function PostClient({ post }: PostClientProps) {
     damping: 30,
     restDelta: 0.001
   });
+
+  // Parallax for Hero
+  const heroY = useTransform(scrollYProgress, [0, 0.3], [0, 100]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0.5]);
+  const imageScale = useTransform(scrollYProgress, [0, 0.3], [1, 1.1]);
   
   const [copied, setCopied] = useState(false);
 
@@ -111,7 +116,7 @@ export default function PostClient({ post }: PostClientProps) {
     <article className="bg-white selection:bg-prixgen-blue selection:text-white">
       {/* Reading Progress Bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1.5 bg-prixgen-lightblue z-[100] origin-left"
+        className="fixed top-0 left-0 right-0 h-1.5 bg-prixgen-lightblue z-[100] origin-left shadow-[0_0_15px_rgba(0,191,255,0.5)]"
         style={{ scaleX }}
       />
 
@@ -119,8 +124,10 @@ export default function PostClient({ post }: PostClientProps) {
       <header className="relative min-h-[90vh] flex items-center pt-32 pb-20 overflow-hidden bg-prixgen-blue text-white">
         <AmbientGlow />
         
-        {/* Background Image Overlay */}
-        <div className="absolute inset-0 opacity-10 grayscale mix-blend-overlay">
+        <motion.div 
+          style={{ y: heroY, opacity: heroOpacity }}
+          className="absolute inset-0 opacity-10 grayscale mix-blend-overlay"
+        >
           {post.mainImage && (
             <OptimizedImage 
               src={post.mainImage} 
@@ -129,7 +136,7 @@ export default function PostClient({ post }: PostClientProps) {
               className="object-cover scale-110 blur-xl"
             />
           )}
-        </div>
+        </motion.div>
 
         {/* Animated Grid */}
         <div className="absolute inset-0 z-0 opacity-[0.05]" 
@@ -224,21 +231,26 @@ export default function PostClient({ post }: PostClientProps) {
         <div className="flex flex-col lg:flex-row gap-20">
            {/* Sidebar - Left (Desktop Only) */}
            <aside className="hidden lg:block w-24 shrink-0 relative">
-              <div className="sticky top-40 space-y-8 flex flex-col items-center">
+              <motion.div 
+                initial={{ x: -100, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                viewport={{ margin: "-100px" }}
+                className="sticky top-40 space-y-8 flex flex-col items-center"
+              >
                  <div className="flex flex-col items-center gap-2">
                     <span className="text-[10px] font-black uppercase tracking-widest text-slate-300 vertical-text rotate-180 mb-4">Share Analysis</span>
                     <div className="w-px h-12 bg-slate-100" />
                  </div>
-                 <motion.button whileHover={{ y: -5 }} className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 hover:text-prixgen-blue hover:bg-white hover:shadow-xl transition-all">
+                 <motion.button whileHover={{ y: -5, scale: 1.1 }} className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 hover:text-prixgen-blue hover:bg-white hover:shadow-xl transition-all">
                     <Linkedin size={18} />
                  </motion.button>
-                 <motion.button whileHover={{ y: -5 }} className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 hover:text-prixgen-blue hover:bg-white hover:shadow-xl transition-all">
+                 <motion.button whileHover={{ y: -5, scale: 1.1 }} className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 hover:text-prixgen-blue hover:bg-white hover:shadow-xl transition-all">
                     <Twitter size={18} />
                  </motion.button>
-                 <motion.button whileHover={{ y: -5 }} className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 hover:text-prixgen-blue hover:bg-white hover:shadow-xl transition-all">
+                 <motion.button whileHover={{ y: -5, scale: 1.1 }} className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 hover:text-prixgen-blue hover:bg-white hover:shadow-xl transition-all">
                     <Bookmark size={18} />
                  </motion.button>
-              </div>
+              </motion.div>
            </aside>
 
            {/* Main Content */}
@@ -280,7 +292,12 @@ export default function PostClient({ post }: PostClientProps) {
 
            {/* Sidebar - Right (Desktop Only) */}
            <aside className="hidden xl:block w-80 shrink-0">
-              <div className="sticky top-40 space-y-12">
+              <motion.div 
+                initial={{ x: 100, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                viewport={{ margin: "-100px" }}
+                className="sticky top-40 space-y-12"
+              >
                  <div className="p-10 bg-prixgen-blue rounded-[3rem] text-white shadow-2xl shadow-blue-900/20">
                     <h4 className="text-2xl font-black tracking-tighter mb-6 leading-tight">Need a customized architecture?</h4>
                     <p className="text-white/60 mb-10 font-medium">Schedule an executive review of your industrial workflows.</p>
@@ -292,7 +309,11 @@ export default function PostClient({ post }: PostClientProps) {
                  <div className="space-y-6 px-4 text-left">
                     <h5 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-6">Trending Analysis</h5>
                     {[1, 2, 3].map((_, i) => (
-                      <div key={i} className="group cursor-pointer">
+                      <motion.div 
+                        key={i} 
+                        whileHover={{ x: 10 }}
+                        className="group cursor-pointer"
+                      >
                          <div className="text-slate-300 text-[10px] font-black uppercase tracking-widest mb-2 flex items-center gap-2">
                             <span className="w-1.5 h-1.5 bg-prixgen-lightblue rounded-full" />
                             Industrial AI
@@ -300,10 +321,10 @@ export default function PostClient({ post }: PostClientProps) {
                          <h6 className="text-lg font-bold text-prixgen-blue group-hover:text-prixgen-lightblue transition-colors leading-tight">
                             Synthesizing Operational Data in High-Latency Environments
                          </h6>
-                      </div>
+                      </motion.div>
                     ))}
                  </div>
-              </div>
+              </motion.div>
            </aside>
         </div>
       </div>
