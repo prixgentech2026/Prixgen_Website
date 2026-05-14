@@ -33,7 +33,9 @@ export function LinkedInEmbed({ url }: LinkedInEmbedProps) {
   if (!postId) {
     return (
       <div className="p-8 bg-slate-50 rounded-3xl border-2 border-dashed border-slate-200 text-center">
-        <p className="text-slate-500 font-medium italic">Invalid LinkedIn URL provided.</p>
+        <p className="text-slate-500 font-medium italic">
+          To embed this content, please use the <strong>LinkedIn Post URL</strong> from your feed (not the article URL).
+        </p>
       </div>
     );
   }
