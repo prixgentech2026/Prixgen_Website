@@ -1,3 +1,4 @@
+export const revalidate = 0;
 import { getAboutData } from '@/lib/data';
 import { AboutClient } from './about-client';
 import { Metadata } from 'next';

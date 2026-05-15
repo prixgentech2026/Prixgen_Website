@@ -1,3 +1,4 @@
+export const revalidate = 0;
 import { Metadata } from 'next';
 import { getSolutionsPageData } from '@/lib/data';
 import SolutionsClient from './solutions-client';

@@ -1,3 +1,4 @@
+export const revalidate = 0;
 import { Metadata } from 'next';
 import { getEngineeringServicesPageData } from '@/lib/data';
 import EngineeringServicesClient from './engineering-services-client';

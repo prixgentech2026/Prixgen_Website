@@ -1,3 +1,4 @@
+export const revalidate = 0;
 import { notFound } from 'next/navigation';
 import { getIndustryBySlug, getIndustries, PageData } from '@/lib/data';
 import IndustryClientPage from '@/components/templates/industry-client-page';

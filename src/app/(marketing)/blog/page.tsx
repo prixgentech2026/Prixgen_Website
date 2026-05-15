@@ -1,3 +1,4 @@
+export const revalidate = 0;
 import { Metadata } from 'next';
 import { getPosts } from '@/lib/data';
 import BlogClient from './blog-client';

@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import CareersClient from './careers-client';
 import { getCareersData } from '@/lib/data';
 
-export const revalidate = 60; // Revalidate every 60 seconds
+export const revalidate = 0;
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = await getCareersData();

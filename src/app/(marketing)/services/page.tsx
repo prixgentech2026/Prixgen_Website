@@ -1,3 +1,4 @@
+export const revalidate = 0;
 import { Metadata } from 'next';
 import { getServicesPageData } from '@/lib/data';
 import ServicesClient from './services-client';

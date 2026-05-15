@@ -1,3 +1,4 @@
+export const revalidate = 0;
 import { getHomeData } from '@/lib/data';
 import HomeClientPage from '@/components/templates/home-client-page';
 

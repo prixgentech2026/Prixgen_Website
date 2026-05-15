@@ -1,3 +1,4 @@
+export const revalidate = 0;
 import { notFound } from 'next/navigation';
 import { getServiceBySlug, getServices, PageData } from '@/lib/data';
 import ServiceClientPage from '@/components/templates/service-client-page';

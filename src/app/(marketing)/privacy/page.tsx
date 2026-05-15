@@ -1,3 +1,4 @@
+export const revalidate = 0;
 import React from 'react';
 import { Metadata } from 'next';
 import PrivacyClient from '@/app/(marketing)/privacy/privacy-client';

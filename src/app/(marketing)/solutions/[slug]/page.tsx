@@ -1,3 +1,4 @@
+export const revalidate = 0;
 import { notFound } from 'next/navigation';
 import { getSolutionBySlug, getSolutions, PageData } from '@/lib/data';
 import SolutionClientPage from '@/components/templates/solution-client-page';
