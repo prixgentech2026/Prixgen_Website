@@ -230,16 +230,15 @@ export function WhoWeAreClient({ data }: WhoWeAreProps) {
                   />
                 </div>
                 <div className="flex gap-6 mt-6">
-                  <div className="flex flex-col">
-                    <span className="text-3xl font-bold text-prixgen-blue">30+</span>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Years Exp</span>
-                  </div>
-                  <div className="w-px h-12 bg-slate-100" />
-                  <div className="flex flex-col">
-                    <span className="text-3xl font-bold text-prixgen-blue">500+</span>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Projects</span>
-                  </div>
-                  <div className="w-px h-12 bg-slate-100" />
+                  {data.stats?.slice(0, 2).map((stat, i) => (
+                    <React.Fragment key={i}>
+                      <div className="flex flex-col">
+                        <span className="text-3xl font-bold text-prixgen-blue">{stat.value}</span>
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">{stat.label === "Years of Experience" ? "Years Exp" : stat.label === "Successful Projects" ? "Projects" : stat.label}</span>
+                      </div>
+                      <div className="w-px h-12 bg-slate-100" />
+                    </React.Fragment>
+                  ))}
                   <div className="flex flex-col">
                     <span className="text-3xl font-bold text-prixgen-blue">Gold</span>
                     <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Partner</span>

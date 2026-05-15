@@ -226,7 +226,7 @@ export async function getIndustryBySlug(slug: string) {
   try {
     const data = await client.fetch(industryBySlugQuery, { slug }, { next: { tags: ['sanity'] } });
     if (!data) return industriesData.find(i => i.slug === slug);
-    
+
     return {
       ...data,
       seo: data.seo || industriesData.find(i => i.slug === slug)?.seo
@@ -278,7 +278,7 @@ export async function getServiceBySlug(slug: string) {
   try {
     const data = await client.fetch(serviceBySlugQuery, { slug }, { next: { tags: ['sanity'] } });
     if (!data) return servicesData.find(s => s.slug === slug);
-    
+
     return {
       ...data,
       seo: data.seo || servicesData.find(s => s.slug === slug)?.seo
@@ -296,7 +296,7 @@ export async function getSolutionBySlug(slug: string) {
   try {
     const data = await client.fetch(solutionBySlugQuery, { slug }, { next: { tags: ['sanity'] } });
     if (!data) return solutionsData.find(s => s.slug === slug);
-    
+
     return {
       ...data,
       seo: data.seo || solutionsData.find(s => s.slug === slug)?.seo
@@ -315,7 +315,7 @@ export async function getServicesPageData() {
 
     // Ensure we show all services even if Sanity only has a few
     let cleanCoreServices = (data.coreServices || []).filter((s: any) => s !== null);
-    
+
     // If we have fewer than expected, let's just fetch all of them
     if (cleanCoreServices.length === 0 || cleanCoreServices.length < servicesPageMockData.coreServices.length) {
       const allServices = await getServices();
@@ -353,7 +353,7 @@ export async function getIndustriesPageData() {
 
     // Ensure we show all industries even if Sanity only has a few
     let cleanCoreIndustries = (data.coreIndustries || []).filter((i: any) => i !== null);
-    
+
     // If we have fewer than expected, let's just fetch all of them
     if (cleanCoreIndustries.length === 0 || cleanCoreIndustries.length < industriesPageMockData.coreIndustries.length) {
       const allIndustries = await getIndustries();
@@ -392,7 +392,7 @@ export async function getEngineeringServicesPageData() {
 
     // Ensure we show all services even if Sanity only has a few
     let cleanCoreServices = (data.coreServices || []).filter((s: any) => s !== null);
-    
+
     // If we have fewer than expected, let's just fetch all engineering services
     if (cleanCoreServices.length === 0 || cleanCoreServices.length < engineeringServicesPageMockData.coreServices.length) {
       const allServices = await getEngineeringServices();
@@ -431,7 +431,7 @@ export async function getSolutionsPageData() {
 
     // Ensure we show all solutions even if Sanity only has a few
     let cleanCoreSolutions = (data.coreSolutions || []).filter((s: any) => s !== null);
-    
+
     // If we have fewer than expected, let's just fetch all solutions
     if (cleanCoreSolutions.length === 0 || cleanCoreSolutions.length < solutionsPageMockData.coreSolutions.length) {
       const allSolutions = await getSolutions();
@@ -671,7 +671,7 @@ export const homeData = {
   clients: clientsData,
   testimonials: testimonialsData,
   ctaTitle: "Ready to architect your operational intelligence?",
-  ctaDescription: "Join 500+ industrial leaders who have unified their global operations. Start your transformation with a zero-cost architecture audit.",
+  ctaDescription: "Join 100+ industrial leaders who have unified their global operations. Start your transformation with a zero-cost architecture audit.",
   ctaButtonText: "Book an Architecture Audit",
   seo: {
     title: "Odoo Gold Partner & SAP Implementation Experts | Prixgen",
@@ -686,7 +686,7 @@ export const aboutData = {
   content: [
     {
       _type: 'block',
-      children: [{ _type: 'span', text: "Prixgen ensures the best ROI for companies by streamlining business processes. Driven by the idea of providing innovative solutions through ERP, IIoT, and AI, we are an elite team of IT professionals with over 30+ years of combined experience in enterprise implementations." }]
+      children: [{ _type: 'span', text: "Prixgen ensures the best ROI for companies by streamlining business processes. Driven by the idea of providing innovative solutions through ERP, IIoT, and AI, we are an elite team of IT professionals with over 20+ years of combined experience in enterprise implementations." }]
     },
     {
       _type: 'block',
@@ -696,8 +696,8 @@ export const aboutData = {
   vision: "To be the global benchmark for operational intelligence and industrial digital transformation.",
   mission: "Empowering enterprises through unified ecosystems that turn data into decisive competitive advantage.",
   stats: [
-    { label: "Years Experience", value: "30+" },
-    { label: "Implementations", value: "500+" },
+    { label: "Years Experience", value: "20+" },
+    { label: "Implementations", value: "100+" },
     { label: "Architect Team", value: "Elite" },
     { label: "Odoo Partner", value: "Gold" },
   ],
@@ -717,7 +717,7 @@ export const aboutData = {
     }
   ],
   experienceSection: {
-    title: "15 Years of Industrial Excellence",
+    title: "20 Years of Industrial Excellence",
     description: "Our journey has been defined by rescuing failed implementations and architecting unified global ecosystems.",
     points: [
       "Certified Gold Partners for Odoo and SAP Business One.",
@@ -731,7 +731,7 @@ export const aboutData = {
   },
   seo: {
     title: "Global Architects of Enterprise Intelligence | Prixgen",
-    metaDesc: "Elite team of ERP consultants with 30+ years of expertise in IIoT, AI, and large-scale industrial digital transformation.",
+    metaDesc: "Elite team of ERP consultants with 20+ years of expertise in IIoT, AI, and large-scale industrial digital transformation.",
     keywords: ["ERP Consultants", "Digital Transformation Agency", "Industrial AI Experts", "Odoo Partners India"]
   }
 };
@@ -786,9 +786,9 @@ export const industriesData: any[] = [
       { title: "Performance Scaling", description: "Optimizing throughput through continuous data analysis." }
     ],
     seo: {
-      title: "Industry 4.0 ERP for Manufacturing & Process Engineering",
+      title: "Industry 5.0 ERP for Manufacturing & Process Engineering",
       metaDesc: "Achieve Zero Operational Friction with integrated shop-floor telemetry and high-precision manufacturing ERP architectures.",
-      keywords: ["Industry 4.0", "Manufacturing ERP", "Smart Factory", "Shop Floor Control", "BOM Optimization"]
+      keywords: ["Industry 5.0", "Manufacturing ERP", "Smart Factory", "Shop Floor Control", "BOM Optimization"]
     }
   },
   {
@@ -1888,11 +1888,11 @@ export const privacyData: PrivacyPageData = {
   ],
   lastUpdated: "May 2026",
   referenceId: "PXG-PRV-2026-V1",
-    seo: {
-      title: "Privacy Policy | Prixgen Enterprise",
-      metaDesc: "Read our commitment to data protection and enterprise-grade privacy standards.",
-      keywords: ["Privacy Policy", "Data Protection", "Enterprise Privacy", "GDPR Compliance"]
-    }
+  seo: {
+    title: "Privacy Policy | Prixgen Enterprise",
+    metaDesc: "Read our commitment to data protection and enterprise-grade privacy standards.",
+    keywords: ["Privacy Policy", "Data Protection", "Enterprise Privacy", "GDPR Compliance"]
+  }
 };
 
 export const termsData: TermsPageData = {
@@ -1918,11 +1918,11 @@ export const termsData: TermsPageData = {
   ],
   lastUpdated: "May 2026",
   referenceId: "PXG-TOS-2026-V1",
-    seo: {
-      title: "Terms of Service | Prixgen Enterprise",
-      metaDesc: "The legal framework for our enterprise partnerships and engineering excellence.",
-      keywords: ["Terms of Service", "Legal Framework", "Service Level Agreement", "ERP Service Terms"]
-    }
+  seo: {
+    title: "Terms of Service | Prixgen Enterprise",
+    metaDesc: "The legal framework for our enterprise partnerships and engineering excellence.",
+    keywords: ["Terms of Service", "Legal Framework", "Service Level Agreement", "ERP Service Terms"]
+  }
 };
 
 export const careersData: CareersPageData = {

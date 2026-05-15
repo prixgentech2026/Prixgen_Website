@@ -6,7 +6,8 @@
     "dev": "cross-env NODE_OPTIONS=\"--max-old-space-size=4096\" next dev",
     "build": "cross-env NODE_OPTIONS=\"--max-old-space-size=4096\" next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "migrate": "tsx --env-file .env.local scripts/migrate-to-sanity.ts"
   },
   "dependencies": {
     "@codemirror/theme-one-dark": "^6.1.2",
