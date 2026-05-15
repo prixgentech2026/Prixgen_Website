@@ -17,6 +17,8 @@ import { StaggerText } from '@/components/animations/stagger-text';
 import { AmbientGlow } from '@/components/animations/ambient-glow';
 import { LinkedInEmbed } from '@/components/shared/linkedin-embed';
 import { LeadCaptureForm } from '@/components/features/lead-capture-form';
+import { RevealImage } from '@/components/animations/reveal-image';
+import { Magnetic } from '@/components/animations/magnetic';
 
 interface PostClientProps {
   post: BlogPost;
@@ -100,9 +102,10 @@ export default function PostClient({ post }: PostClientProps) {
     restDelta: 0.001
   });
 
-  // Parallax for Hero
+  // Parallax for Hero and Author
   const heroY = useTransform(scrollYProgress, [0, 0.5], [0, 150]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0.3]);
+  const authorY = useTransform(scrollYProgress, [0.6, 1], [20, -20]);
   
   const [copied, setCopied] = useState(false);
 
@@ -115,7 +118,7 @@ export default function PostClient({ post }: PostClientProps) {
   if (!post) return null;
 
   return (
-    <article className="bg-white selection:bg-prixgen-blue selection:text-white overflow-hidden">
+    <article className="bg-white selection:bg-prixgen-blue selection:text-white overflow-hidden" style={{ willChange: 'transform' }}>
       {/* Reading Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1.5 bg-prixgen-lightblue z-[100] origin-left shadow-[0_0_15px_rgba(0,191,255,0.5)]"
@@ -189,20 +192,18 @@ export default function PostClient({ post }: PostClientProps) {
 
       {/* Feature Image */}
       <div className="container mx-auto px-6 relative z-20">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-          className="relative aspect-[21/9] max-w-7xl mx-auto rounded-[3.5rem] lg:rounded-[5rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,102,204,0.15)] border-[12px] border-white ring-1 ring-slate-100"
-        >
-          <OptimizedImage 
-            src={post.mainImage || "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2070"} 
-            alt={post.title} 
-            fill 
-            className="object-cover transition-transform duration-[2s] hover:scale-105"
-          />
-        </motion.div>
+        <RevealImage className="max-w-7xl mx-auto rounded-[3.5rem] lg:rounded-[5rem] shadow-[0_50px_100px_-20px_rgba(0,102,204,0.15)] border-[12px] border-white ring-1 ring-slate-100">
+          <div className="relative aspect-[21/9]">
+            <OptimizedImage 
+              src={post.mainImage || "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2070"} 
+              alt={post.title} 
+              fill 
+              className="object-cover transition-transform duration-[2s] hover:scale-105"
+            />
+          </div>
+        </RevealImage>
       </div>
+
 
       {/* Content Section */}
       <div className="container mx-auto px-6 py-24 relative">
@@ -216,19 +217,24 @@ export default function PostClient({ post }: PostClientProps) {
               >
                  <span className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-300 vertical-text rotate-180 mb-4 whitespace-nowrap">Share Intelligence</span>
                  <div className="w-px h-10 bg-slate-100" />
-                 <motion.button whileHover={{ scale: 1.1, color: '#0066cc' }} className="text-slate-300 transition-colors">
-                    <Linkedin size={20} />
-                 </motion.button>
-                 <motion.button whileHover={{ scale: 1.1, color: '#1da1f2' }} className="text-slate-300 transition-colors">
-                    <Twitter size={20} />
-                 </motion.button>
-                 <motion.button whileHover={{ scale: 1.1, color: '#00bfff' }} className="text-slate-300 transition-colors">
-                    <Bookmark size={20} />
-                 </motion.button>
+                 <Magnetic>
+                    <motion.button whileHover={{ scale: 1.1, color: '#0066cc' }} className="text-slate-300 transition-colors p-2">
+                       <Linkedin size={20} />
+                    </motion.button>
+                 </Magnetic>
+                 <Magnetic>
+                    <motion.button whileHover={{ scale: 1.1, color: '#1da1f2' }} className="text-slate-300 transition-colors p-2">
+                       <Twitter size={20} />
+                    </motion.button>
+                 </Magnetic>
+                 <Magnetic>
+                    <motion.button whileHover={{ scale: 1.1, color: '#00bfff' }} className="text-slate-300 transition-colors p-2">
+                       <Bookmark size={20} />
+                    </motion.button>
+                 </Magnetic>
               </motion.div>
            </aside>
 
-           {/* Main Content */}
            <div className="flex-1 max-w-4xl">
               <FadeUp>
                 <div className="max-w-none text-left">
@@ -242,16 +248,15 @@ export default function PostClient({ post }: PostClientProps) {
                 </div>
               </FadeUp>
 
-              {/* Author Bio Section */}
               <footer className="mt-32 pt-20 border-t-2 border-slate-50">
                 <div className="relative group p-12 bg-slate-50 rounded-[4rem] overflow-hidden">
                    <div className="absolute top-0 right-0 w-64 h-64 bg-prixgen-blue/5 rounded-full blur-[80px] group-hover:scale-150 transition-transform duration-1000" />
                    
                    <div className="relative z-10 flex flex-col md:flex-row gap-12 items-center text-center md:text-left">
                       {post.author?.image && (
-                        <div className="relative w-32 h-32 rounded-[2.5rem] overflow-hidden shrink-0 border-8 border-white shadow-2xl rotate-3 group-hover:rotate-0 transition-transform duration-700">
+                        <motion.div style={{ y: authorY }} className="relative w-32 h-32 rounded-[2.5rem] overflow-hidden shrink-0 border-8 border-white shadow-2xl rotate-3 group-hover:rotate-0 transition-transform duration-700">
                           <OptimizedImage src={post.author.image} alt={post.author.name} fill className="object-cover" />
-                        </div>
+                        </motion.div>
                       )}
                       <div className="space-y-6">
                         <div className="space-y-1">
@@ -271,7 +276,6 @@ export default function PostClient({ post }: PostClientProps) {
               </footer>
            </div>
 
-           {/* Sidebar - Right (Desktop Only) */}
             <aside className="hidden xl:block w-80 shrink-0">
                <motion.div 
                  initial={{ opacity: 0, x: 20 }}
@@ -282,9 +286,11 @@ export default function PostClient({ post }: PostClientProps) {
                      <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-700" />
                      <h4 className="text-xl font-black tracking-tight mb-4 leading-tight relative z-10">Architectural Support</h4>
                      <p className="text-white/60 mb-8 font-medium text-xs relative z-10">Schedule an executive review of your industrial workflows.</p>
-                     <Button className="w-full bg-white text-prixgen-blue hover:bg-prixgen-lightblue hover:text-white rounded-2xl py-6 font-black uppercase tracking-widest text-[10px] h-auto shadow-xl relative z-10" asChild>
-                        <Link href="/contact">Inquire Now</Link>
-                     </Button>
+                     <Magnetic>
+                        <Button className="w-full bg-white text-prixgen-blue hover:bg-prixgen-lightblue hover:text-white rounded-2xl py-6 font-black uppercase tracking-widest text-[10px] h-auto shadow-xl relative z-10" asChild>
+                           <Link href="/contact">Inquire Now</Link>
+                        </Button>
+                     </Magnetic>
                   </div>
 
                  <div className="space-y-6 px-4 text-left">
@@ -317,7 +323,7 @@ export default function PostClient({ post }: PostClientProps) {
             whileHover={{ y: -5 }}
             className="relative bg-white rounded-[4rem] lg:rounded-[6rem] p-12 lg:p-32 overflow-hidden shadow-2xl border border-slate-100 group text-left"
           >
-            <div className="absolute bottom-0 right-0 w-full h-full bg-prixgen-blue/5 -z-10 translate-y-1/2 rounded-full blur-[120px]" />
+            <div className="absolute bottom-0 right-0 w-full h-full bg-prixgen-blue/5 -z-10 translate-y-1/2 rounded-full blur-[100px]" style={{ willChange: 'transform, opacity' }} />
             
             <div className="relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
               <FadeUp className="space-y-8">

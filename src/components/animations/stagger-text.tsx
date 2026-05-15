@@ -50,20 +50,10 @@ export function StaggerText({
       variants={container} 
       initial="hidden" 
       whileInView="visible"
-      animate={{ 
-        y: [0, -10, 0],
-      }}
-      transition={{ 
-        y: {
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1.5
-        }
-      }}
-      viewport={{ once: false }}
+      viewport={{ once: true }}
       className={cn(className, colorClass, "font-extrabold")}
     >
+
       {words.map((word, index) => (
         <motion.span key={index} variants={child} className="inline-block mr-[0.25em] whitespace-nowrap">
           {word}

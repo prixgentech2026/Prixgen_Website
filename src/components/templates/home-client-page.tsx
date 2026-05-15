@@ -14,6 +14,9 @@ import { LeadCaptureForm } from '@/components/features/lead-capture-form';
 import { AmbientGlow } from '@/components/animations/ambient-glow';
 import { PortableText } from '@/components/ui/portable-text';
 import { urlFor } from '@/sanity/lib/image';
+import { Magnetic } from '@/components/animations/magnetic';
+import { RevealImage } from '@/components/animations/reveal-image';
+import { RevealText } from '@/components/animations/reveal-text';
 
 // Dynamic import for performance-heavy globe component
 const InteractiveGlobe = dynamic(() => import('@/components/ui/interactive-globe'), {
@@ -33,7 +36,13 @@ const PatronLogo = ({ patron }: { patron: { filename: string; name: string } }) 
   const [error, setError] = useState(false);
 
   return (
-    <div className="flex flex-col items-center justify-center min-w-[280px] grayscale hover:grayscale-0 transition-all duration-500 hover:scale-110 cursor-default opacity-60 hover:opacity-100 px-10 group">
+    <motion.div 
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="flex flex-col items-center justify-center min-w-[280px] grayscale hover:grayscale-0 transition-all duration-500 hover:scale-110 cursor-default opacity-60 hover:opacity-100 px-10 group"
+    >
       <div className="w-28 h-28 mb-4 rounded-full bg-white shadow-xl flex items-center justify-center overflow-hidden p-6 border border-slate-100 group-hover:border-prixgen-blue/30 transition-all duration-300">
         {!error ? (
           <img 
@@ -43,13 +52,13 @@ const PatronLogo = ({ patron }: { patron: { filename: string; name: string } }) 
             onError={() => setError(true)}
           />
         ) : (
-          <div className="flex items-center justify-center w-full h-full bg-gradient-to-br from-slate-50 to-slate-100 text-prixgen-blue font-black text-2xl animate-in fade-in zoom-in duration-500">
+          <div className="flex items-center justify-center w-full h-full bg-gradient-to-br from-slate-50 to-slate-100 text-prixgen-blue font-black text-2xl">
             {patron.name.split(' ').map(n => n[0]).join('').substring(0, 2)}
           </div>
         )}
       </div>
       <span className="text-[10px] font-black text-prixgen-blue/80 tracking-[0.2em] uppercase text-center max-w-[200px] line-clamp-1">{patron.name}</span>
-    </div>
+    </motion.div>
   );
 };
 
@@ -121,40 +130,50 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                 />
                 
                 <div className="max-w-2xl space-y-8">
-                  <h1 className="text-3xl md:text-4xl font-bold text-prixgen-blue tracking-tight leading-[1.1]">
-                  {homeData.title || "Intelligent Operations. Unified Enterprise."}
-                </h1>
+                  <RevealText delay={0.2}>
+                    <h1 className="text-3xl md:text-4xl font-bold text-prixgen-blue tracking-tight leading-[1.1]">
+                      {homeData.title || "Intelligent Operations. Unified Enterprise."}
+                    </h1>
+                  </RevealText>
                   
                   {homeData.subheadline ? (
-                    <div className="text-lg text-slate-500 font-medium leading-relaxed">
-                      <PortableText value={homeData.subheadline} />
-                    </div>
+                    <RevealText delay={0.3}>
+                      <div className="text-lg text-slate-500 font-medium leading-relaxed">
+                        <PortableText value={homeData.subheadline} />
+                      </div>
+                    </RevealText>
                   ) : (
-                    <p className="text-lg text-slate-500 font-medium leading-relaxed">
-                      We architect, deploy, and manage scalable ERP and supply chain ecosystems for global manufacturing and FMCG leaders. Powered by AI, GenAI, and IoT, our solutions fuse Odoo and SAP with proven industrial intelligence.
-                    </p>
+                    <RevealText delay={0.3}>
+                      <p className="text-lg text-slate-500 font-medium leading-relaxed">
+                        We architect, deploy, and manage scalable ERP and supply chain ecosystems for global manufacturing and FMCG leaders. Powered by AI, GenAI, and IoT, our solutions fuse Odoo and SAP with proven industrial intelligence.
+                      </p>
+                    </RevealText>
                   )}
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-center gap-6 pt-6">
-                  <Button size="lg" className="h-16 px-10 text-lg rounded-2xl shadow-xl shadow-prixgen-blue/20 w-full sm:w-auto" asChild>
-                    <Link href="/contact">{homeData.heroPrimaryCTA || "Get Started"}</Link>
-                  </Button>
-                  <Link href="/solutions/odoo-enterprise" className="group flex items-center gap-3 text-prixgen-blue font-bold text-lg">
-                    {homeData.heroSecondaryCTA || "Explore Architecture"}
-                    <motion.span
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                      →
-                    </motion.span>
-                  </Link>
+                  <Magnetic>
+                    <Button size="lg" className="h-16 px-10 text-lg rounded-2xl shadow-xl shadow-prixgen-blue/20 w-full sm:w-auto" asChild>
+                      <Link href="/contact">{homeData.heroPrimaryCTA || "Get Started"}</Link>
+                    </Button>
+                  </Magnetic>
+                  <Magnetic>
+                    <Link href="/solutions/odoo-enterprise" className="group flex items-center gap-3 text-prixgen-blue font-bold text-lg">
+                      {homeData.heroSecondaryCTA || "Explore Architecture"}
+                      <motion.span
+                        animate={{ x: [0, 5, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      >
+                        →
+                      </motion.span>
+                    </Link>
+                  </Magnetic>
                 </div>
               </FadeUp>
 
               <FadeUp delay={0.3} className="relative z-10">
                 <div className="absolute -inset-4 bg-prixgen-blue/5 rounded-[3rem] blur-3xl -z-10 animate-pulse" />
-                <div className="relative aspect-[4/3] rounded-[3rem] overflow-hidden border border-slate-100 shadow-2xl group">
+                <RevealImage className="relative aspect-[4/3] rounded-[3rem] overflow-hidden border border-slate-100 shadow-2xl group">
                   {homeData.heroImage ? (
                     <OptimizedImage
                       src={
@@ -172,9 +191,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                       <span className="text-slate-300 font-bold uppercase tracking-widest">Architectural Visual</span>
                     </div>
                   )}
-                  
-
-                </div>
+                </RevealImage>
               </FadeUp>
             </div>
           </div>
@@ -235,16 +252,18 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                         <p className="text-prixgen-dark/70 leading-relaxed mb-8 min-h-[80px]">
                           {service.desc}
                         </p>
-                        <div className="flex items-center text-prixgen-lightblue font-bold text-sm uppercase tracking-widest group-hover:gap-3 transition-all duration-300">
-                          Architecture Details 
-                          <motion.span 
-                            className="ml-2"
-                            animate={{ x: [0, 5, 0] }}
-                            transition={{ repeat: Infinity, duration: 1.5 }}
-                          >
-                            →
-                          </motion.span>
-                        </div>
+                        <Magnetic>
+                          <div className="flex items-center text-prixgen-lightblue font-bold text-sm uppercase tracking-widest group-hover:gap-3 transition-all duration-300">
+                            Architecture Details 
+                            <motion.span 
+                              className="ml-2"
+                              animate={{ x: [0, 5, 0] }}
+                              transition={{ repeat: Infinity, duration: 1.5 }}
+                            >
+                              →
+                            </motion.span>
+                          </div>
+                        </Magnetic>
                       </div>
                     </div>
                   </Link>
@@ -269,9 +288,11 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                 </p>
               </FadeUp>
               <FadeUp delay={0.2}>
-                <Button variant="outline" size="lg" className="h-14 px-8 rounded-xl font-bold" asChild>
-                  <Link href="/solutions">View All Architecture</Link>
-                </Button>
+                <Magnetic>
+                  <Button variant="outline" size="lg" className="h-14 px-8 rounded-xl font-bold" asChild>
+                    <Link href="/solutions">View All Architecture</Link>
+                  </Button>
+                </Magnetic>
               </FadeUp>
             </div>
             
@@ -298,8 +319,12 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                         <p className="text-white/60 text-sm leading-relaxed">{sol.desc}</p>
                       </div>
                       
-                      <div className="relative z-10 mt-8 flex items-center text-xs font-bold uppercase tracking-widest opacity-40 group-hover:opacity-100 transition-opacity">
-                        Learn Architecture <span className="ml-2">→</span>
+                      <div className="relative z-10 mt-8">
+                        <Magnetic>
+                          <div className="inline-flex items-center text-xs font-bold uppercase tracking-widest opacity-40 group-hover:opacity-100 transition-opacity">
+                            Learn Architecture <span className="ml-2">→</span>
+                          </div>
+                        </Magnetic>
                       </div>
 
                       <div className="absolute bottom-0 right-0 p-4 opacity-5 group-hover:opacity-20 transition-all duration-700 group-hover:scale-110 -mb-4 -mr-4">
@@ -479,9 +504,11 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                 </div>
 
                 <div className="pt-8 border-t border-slate-100">
-                  <Button size="lg" className="h-14 px-10 text-lg shadow-2xl shadow-prixgen-blue/20 w-full lg:w-auto" asChild>
-                    <Link href="/contact">Architecture Audit</Link>
-                  </Button>
+                  <Magnetic>
+                    <Button size="lg" className="h-14 px-10 text-lg shadow-2xl shadow-prixgen-blue/20 w-full lg:w-auto" asChild>
+                      <Link href="/contact">Architecture Audit</Link>
+                    </Button>
+                  </Magnetic>
                 </div>
               </FadeUp>
               

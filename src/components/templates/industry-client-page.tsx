@@ -11,6 +11,9 @@ import { FadeUp } from '@/components/animations/fade-up';
 import { AmbientGlow } from '@/components/animations/ambient-glow';
 import { PortableText } from '@/components/ui/portable-text';
 import { FileText, ChevronRight, Globe, Zap, BarChart3, ShieldCheck } from 'lucide-react';
+import { Magnetic } from '@/components/animations/magnetic';
+import { RevealImage } from '@/components/animations/reveal-image';
+import { RevealText } from '@/components/animations/reveal-text';
 
 export default function IndustryClientPage({ industry }: { industry: any }) {
   // Use summaryImage for the main banner, fallback to featuredImage or externalImageUrl
@@ -62,9 +65,13 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
               transition={{ duration: 0.8 }}
               className="px-5 py-2 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 flex items-center justify-center gap-2 text-[10px] font-black text-prixgen-blue uppercase tracking-[0.3em] backdrop-blur-sm"
             >
-              <Link href="/" className="hover:text-prixgen-blue transition-colors">Home</Link>
+              <Magnetic>
+                <Link href="/" className="hover:text-prixgen-blue transition-colors">Home</Link>
+              </Magnetic>
               <ChevronRight size={10} className="opacity-30" />
-              <Link href="/industries" className="hover:text-prixgen-blue transition-colors">Industries</Link>
+              <Magnetic>
+                <Link href="/industries" className="hover:text-prixgen-blue transition-colors">Industries</Link>
+              </Magnetic>
               <ChevronRight size={10} className="opacity-30" />
               <span className="text-prixgen-blue/60">{industry.title}</span>
             </motion.div>
@@ -76,9 +83,11 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
             />
             
             <div className="max-w-3xl mx-auto pt-4">
-              <p className="text-xl lg:text-2xl text-slate-500 font-medium leading-relaxed">
-                {industry.headline}
-              </p>
+              <RevealText delay={0.2}>
+                <p className="text-xl lg:text-2xl text-slate-500 font-medium leading-relaxed">
+                  {industry.headline}
+                </p>
+              </RevealText>
             </div>
           </FadeUp>
         </div>
@@ -101,13 +110,15 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
             {/* Visual Narrative Anchor */}
             {bannerImageUrl && (
               <FadeUp delay={0.2} className="relative aspect-[21/10] w-full rounded-[4rem] overflow-hidden shadow-2xl border border-slate-100 group">
-                <OptimizedImage
-                  src={bannerImageUrl}
-                  alt={bannerImageAlt}
-                  fill
-                  priority
-                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                />
+                <RevealImage>
+                  <OptimizedImage
+                    src={bannerImageUrl}
+                    alt={bannerImageAlt}
+                    fill
+                    priority
+                    className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                  />
+                </RevealImage>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 pointer-events-none" />
                 <div className="absolute bottom-12 left-12">
                    <div className="flex items-center gap-3 px-6 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl text-white font-bold text-xs uppercase tracking-widest">
@@ -161,9 +172,11 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
                         <div className="absolute inset-0 bg-gradient-to-br from-prixgen-blue/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                         
                         <div className="space-y-8 relative z-10">
-                           <div className="w-16 h-16 shrink-0 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:scale-110 group-hover:bg-prixgen-blue group-hover:text-white transition-all duration-700 text-prixgen-blue shadow-sm">
-                             <Zap size={28} />
-                           </div>
+                           <Magnetic>
+                             <div className="w-16 h-16 shrink-0 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:scale-110 group-hover:bg-prixgen-blue group-hover:text-white transition-all duration-700 text-prixgen-blue shadow-sm">
+                               <Zap size={28} />
+                             </div>
+                           </Magnetic>
                            <div className="space-y-4">
                               <h4 className="text-2xl lg:text-3xl font-black text-prixgen-dark group-hover:text-prixgen-blue transition-colors tracking-tighter leading-tight">{feature.title}</h4>
                               <p className="text-slate-500 font-medium leading-relaxed text-lg">{feature.description}</p>

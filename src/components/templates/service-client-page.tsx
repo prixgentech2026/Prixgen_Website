@@ -10,6 +10,9 @@ import { FadeUp } from '@/components/animations/fade-up';
 import { AmbientGlow } from '@/components/animations/ambient-glow';
 import { PortableText } from '@/components/ui/portable-text';
 import { servicesData } from '@/lib/data';
+import { Magnetic } from '@/components/animations/magnetic';
+import { RevealImage } from '@/components/animations/reveal-image';
+import { RevealText } from '@/components/animations/reveal-text';
 
 export default function ServiceClientPage({ service }: { service: any }) {
   const getImageUrl = (img: any) => {
@@ -60,9 +63,13 @@ export default function ServiceClientPage({ service }: { service: any }) {
               transition={{ duration: 0.8 }}
               className="px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 flex items-center justify-center gap-2 text-[10px] font-black text-prixgen-blue/60 uppercase tracking-[0.2em]"
             >
-              <Link href="/" className="hover:text-prixgen-blue transition-colors">Home</Link>
+              <Magnetic>
+                <Link href="/" className="hover:text-prixgen-blue transition-colors">Home</Link>
+              </Magnetic>
               <span className="opacity-20">/</span>
-              <Link href="/services" className="hover:text-prixgen-blue transition-colors">Services</Link>
+              <Magnetic>
+                <Link href="/services" className="hover:text-prixgen-blue transition-colors">Services</Link>
+              </Magnetic>
               <span className="opacity-20">/</span>
               <span className="text-prixgen-blue">{service.title}</span>
             </motion.div>
@@ -74,9 +81,11 @@ export default function ServiceClientPage({ service }: { service: any }) {
             />
             
             <div className="max-w-3xl mx-auto pt-6">
-              <p className="text-xl lg:text-2xl text-slate-500 font-medium leading-relaxed">
-                {service.headline}
-              </p>
+              <RevealText delay={0.2}>
+                <p className="text-xl lg:text-2xl text-slate-500 font-medium leading-relaxed">
+                  {service.headline}
+                </p>
+              </RevealText>
             </div>
           </FadeUp>
         </div>
@@ -97,13 +106,15 @@ export default function ServiceClientPage({ service }: { service: any }) {
           <article className="lg:col-span-2 space-y-16">
             {bannerImageUrl && (
               <FadeUp delay={0.2} className="relative aspect-video w-full rounded-[3rem] overflow-hidden shadow-2xl">
-                <OptimizedImage
-                  src={bannerImageUrl}
-                  alt={bannerImageAlt}
-                  fill
-                  priority
-                  className="object-cover transition-transform duration-700 hover:scale-105"
-                />
+                <RevealImage>
+                  <OptimizedImage
+                    src={bannerImageUrl}
+                    alt={bannerImageAlt}
+                    fill
+                    priority
+                    className="object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                </RevealImage>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
               </FadeUp>
             )}
@@ -146,9 +157,11 @@ export default function ServiceClientPage({ service }: { service: any }) {
                       <div className="absolute inset-0 bg-gradient-to-br from-prixgen-blue/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                       
                       <div className="flex flex-col md:flex-row md:items-center gap-8">
-                        <div className="w-16 h-16 shrink-0 rounded-[1.25rem] bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:scale-110 group-hover:bg-prixgen-blue/5 group-hover:border-prixgen-blue/20 transition-all duration-700">
-                          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-prixgen-blue" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                        </div>
+                        <Magnetic>
+                          <div className="w-16 h-16 shrink-0 rounded-[1.25rem] bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:scale-110 group-hover:bg-prixgen-blue/5 group-hover:border-prixgen-blue/20 transition-all duration-700">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-prixgen-blue" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                          </div>
+                        </Magnetic>
                         <div className="space-y-3">
                           <h4 className="text-2xl font-bold text-prixgen-dark group-hover:text-prixgen-blue transition-colors tracking-tight">{feature.title}</h4>
                           <p className="text-slate-500 font-medium leading-relaxed text-lg">{feature.description}</p>

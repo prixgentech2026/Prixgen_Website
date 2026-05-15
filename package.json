@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@codemirror/theme-one-dark": "^6.1.2",
     "@hookform/resolvers": "^3.3.4",
     "@netlify/plugin-nextjs": "^5.2.0",
     "@portabletext/react": "^3.1.0",
@@ -19,7 +20,7 @@
     "@sanity/client": "^7.22.0",
     "@sanity/schema": "^3.71.1",
     "@sanity/vision": "^3.71.1",
-    "@codemirror/theme-one-dark": "^6.1.2",
+    "@studio-freight/react-lenis": "^0.0.47",
     "@types/react-simple-maps": "^3.0.6",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",

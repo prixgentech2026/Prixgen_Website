@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { submitLead } from '@/actions/hubspot';
 import { Loader2, CheckCircle2 } from 'lucide-react';
+import { Magnetic } from '@/components/animations/magnetic';
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -109,20 +110,22 @@ export function LeadCaptureForm({ source }: { source: string }) {
 
       {error && <p className="text-sm text-red-500 bg-red-50 p-3 rounded border border-red-100">{error}</p>}
 
-      <Button
-        type="submit"
-        className="w-full h-12 text-base font-bold shadow-blue-500/20"
-        disabled={isPending}
-      >
-        {isPending ? (
-          <>
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Sending...
-          </>
-        ) : (
-          'Book a Consultation'
-        )}
-      </Button>
+      <Magnetic>
+        <Button
+          type="submit"
+          className="w-full h-12 text-base font-bold shadow-blue-500/20"
+          disabled={isPending}
+        >
+          {isPending ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Sending...
+            </>
+          ) : (
+            'Book a Consultation'
+          )}
+        </Button>
+      </Magnetic>
     </form>
   );
 }

@@ -6,35 +6,36 @@ interface FadeUpProps {
   children: React.ReactNode;
   className?: string;
   delay?: number;
+  duration?: number;
+  y?: number;
 }
 
 /**
- * Enhanced FadeUp with high-fidelity blur and scale physics.
- * Travel distance increased to 80px for a more dramatic entrance.
+ * Optimized FadeUp animation.
+ * Removed continuous floating effect to prioritize scroll performance.
  */
-export function FadeUp({ children, className, delay = 0 }: FadeUpProps) {
+export function FadeUp({ 
+  children, 
+  className, 
+  delay = 0,
+  duration = 0.8,
+  y = 30
+}: FadeUpProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ 
-        opacity: 1,
-        y: [0, -8, 0],
-      }}
+      initial={{ opacity: 0, y }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
       transition={{ 
-        y: {
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: delay + 0.8,
-        },
-        opacity: { duration: 0.8, delay },
-        default: { ease: [0.16, 1, 0.3, 1] }
+        duration, 
+        delay, 
+        ease: [0.16, 1, 0.3, 1] 
       }}
-      viewport={{ margin: "-50px", once: false }}
       className={cn(className)}
-      style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }}
+      style={{ willChange: 'transform, opacity' }}
     >
       {children}
     </motion.div>
   );
 }
+
