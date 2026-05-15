@@ -20,11 +20,13 @@ export default function MarketingLayout({
         </PageTransition>
         <Footer />
       </SmoothScroll>
-      {/* HubSpot Tracking Script */}
+      {/* HubSpot Tracking Script - Only active when actual ID is provided */}
+      {/* 
       <Script
         src="https://js.hs-scripts.com/YOUR_HUBSPOT_ID.js"
         strategy="lazyOnload"
       />
+      */}
     </div>
   );
 }

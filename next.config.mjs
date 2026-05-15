@@ -3,8 +3,10 @@ const nextConfig = {
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: '**' },
+      { protocol: 'http', hostname: '**' },
     ],
     formats: ['image/avif', 'image/webp'],
+    dangerouslyAllowSVG: true,
   },
   async headers() {
     return [
@@ -17,7 +19,7 @@ const nextConfig = {
           { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains; preload' },
           { 
             key: 'Content-Security-Policy', 
-            value: "default-src 'self'; img-src 'self' data: https://img.youtube.com https://images.unsplash.com https://*.hubspot.com https://cdn.sanity.io; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.hs-scripts.com https://*.hubspot.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://www.youtube.com; connect-src 'self' https://registry.npmjs.org https://*.hubspot.com https://*.sanity.io https://*.sanity.api;" 
+            value: "default-src 'self'; img-src 'self' data: blob: https://img.youtube.com https://images.unsplash.com https://*.unsplash.com https://*.hubspot.com https://cdn.sanity.io https://*.sanity.io; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.hs-scripts.com https://*.hubspot.com https://*.hs-analytics.net https://*.hs-banner.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-src 'self' https://www.youtube.com https://*.hubspot.com https://*.hsforms.com; connect-src 'self' https://*.hubspot.com https://*.sanity.io https://*.api.sanity.io https://*.sanity.work;" 
           }
         ],
       },

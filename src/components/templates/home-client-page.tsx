@@ -47,11 +47,11 @@ const PatronLogo = ({ patron }: { patron: { filename: string; name: string } }) 
     >
       <div className="w-28 h-28 mb-4 rounded-full bg-white shadow-xl flex items-center justify-center overflow-hidden p-6 border border-slate-100 group-hover:border-prixgen-blue/30 transition-all duration-300">
         {!error ? (
-          <img 
+          <OptimizedImage 
             src={`/images/patron/${patron.filename}`} 
             alt={patron.name} 
-            className="w-full h-full object-contain"
-            onError={() => setError(true)}
+            className="object-contain p-2"
+            wrapperClassName="bg-transparent"
           />
         ) : (
           <div className="flex items-center justify-center w-full h-full bg-gradient-to-br from-slate-50 to-slate-100 text-prixgen-blue font-black text-2xl">
@@ -103,7 +103,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
         data={{ 
           name: "Prixgen Enterprise", 
           url: "https://www.prixgen.com",
-          logo: "https://www.prixgen.com/logo.png" 
+          logo: "https://www.prixgen.com/images/Logo.png" 
         }} 
       />
       
@@ -204,9 +204,9 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
               </FadeUp>
             </div>
           </div>
-          
-
         </section>
+
+
 
         {/* 2. Services Section (Our Best Services / Prixgen Services) */}
         <section className="py-12 lg:py-20 bg-prixgen-gray/10 relative">
@@ -236,26 +236,26 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                       {/* Image Container with Zoom */}
                       <div className="h-64 overflow-hidden relative bg-slate-100">
                         <Parallax offset={20} className="h-full w-full">
-                          <motion.img 
+                          <OptimizedImage 
                             src={service.img} 
                             alt={service.title}
-                            className="w-full h-[120%] object-cover transition-transform duration-1000 group-hover:scale-110"
+                            className="transition-transform duration-1000 group-hover:scale-110"
                           />
                         </Parallax>
-                        <div className="absolute top-6 left-6 z-20">
-                          <Floating duration={3 + i} y={5}>
-                            <div className="w-12 h-12 bg-white/90 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg group-hover:bg-prixgen-blue group-hover:text-white transition-all duration-500">
-                              <span className="text-xl">
-                                {service.icon === 'Strategy' && '📊'}
-                                {service.icon === 'Box' && '📦'}
-                                {service.icon === 'Cpu' && '⚙️'}
-                                {service.icon === 'Brain' && '🧠'}
-                                {service.icon === 'TrendingUp' && '📈'}
-                                {service.icon === 'Cloud' && '☁️'}
-                              </span>
-                            </div>
-                          </Floating>
-                        </div>
+                      </div>
+                      <div className="absolute top-6 left-6 z-20">
+                        <Floating duration={3 + i} y={5}>
+                          <div className="w-12 h-12 bg-white/90 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg group-hover:bg-prixgen-blue group-hover:text-white transition-all duration-500">
+                            <span className="text-xl">
+                              {service.icon === 'Strategy' && '📊'}
+                              {service.icon === 'Box' && '📦'}
+                              {service.icon === 'Cpu' && '⚙️'}
+                              {service.icon === 'Brain' && '🧠'}
+                              {service.icon === 'TrendingUp' && '📈'}
+                              {service.icon === 'Cloud' && '☁️'}
+                            </span>
+                          </div>
+                        </Floating>
                       </div>
 
                       <div className="p-10 pt-4 relative z-10">
@@ -327,7 +327,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                       <div className="relative z-10 flex-1">
                         <Floating delay={i * 0.2}>
                           <div className="aspect-square w-24 mb-6 rounded-2xl bg-white/10 p-4 flex items-center justify-center overflow-hidden">
-                            <img src={sol.img} alt={sol.title} className="w-full h-full object-cover rounded-lg group-hover:scale-110 transition-transform duration-500" />
+                            <OptimizedImage src={sol.img} alt={sol.title} className="w-full h-full object-cover rounded-lg group-hover:scale-110 transition-transform duration-500" />
                           </div>
                         </Floating>
                         <h3 className="text-xl font-bold mb-4">{sol.title}</h3>
