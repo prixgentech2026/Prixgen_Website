@@ -14,6 +14,8 @@ import { FileText, ChevronRight, Globe, Zap, BarChart3, ShieldCheck } from 'luci
 import { Magnetic } from '@/components/animations/magnetic';
 import { RevealImage } from '@/components/animations/reveal-image';
 import { RevealText } from '@/components/animations/reveal-text';
+import { Parallax } from '@/components/animations/parallax';
+import { Floating } from '@/components/animations/floating';
 
 export default function IndustryClientPage({ industry }: { industry: any }) {
   // Use summaryImage for the main banner, fallback to featuredImage or externalImageUrl
@@ -28,7 +30,6 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-white selection:bg-prixgen-blue selection:text-white">
-      <AmbientGlow />
       <JsonLd 
         type="Article" 
         data={{ 
@@ -50,12 +51,20 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
 
       {/* Hero Header */}
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-white pt-32 pb-16">
+        <Parallax offset={50} direction="down" className="absolute inset-0 z-0">
+          <AmbientGlow />
+        </Parallax>
+        
         {/* Background Elements */}
-        <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:30px_30px] opacity-40" />
+        <Parallax offset={30} className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:30px_30px] opacity-40" />
         
         {/* Animated Floating Elements */}
-        <div className="absolute top-1/4 -left-20 w-80 h-80 bg-prixgen-blue/5 rounded-full blur-[100px] animate-pulse" />
-        <div className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-prixgen-lightblue/5 rounded-full blur-[120px] animate-pulse delay-1000" />
+        <Floating duration={6} y={20} x={15} className="absolute top-1/4 -left-20 z-0">
+          <div className="w-80 h-80 bg-prixgen-blue/5 rounded-full blur-[100px] animate-pulse" />
+        </Floating>
+        <Floating duration={8} y={30} x={20} delay={1} className="absolute bottom-1/4 -right-20 z-0">
+          <div className="w-[500px] h-[500px] bg-prixgen-lightblue/5 rounded-full blur-[120px] animate-pulse" />
+        </Floating>
         
         <div className="container relative z-10 mx-auto px-4 text-center">
           <FadeUp delay={0.1} className="space-y-8 flex flex-col items-center">
@@ -110,15 +119,17 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
             {/* Visual Narrative Anchor */}
             {bannerImageUrl && (
               <FadeUp delay={0.2} className="relative aspect-[21/10] w-full rounded-[4rem] overflow-hidden shadow-2xl border border-slate-100 group">
-                <RevealImage>
-                  <OptimizedImage
-                    src={bannerImageUrl}
-                    alt={bannerImageAlt}
-                    fill
-                    priority
-                    className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                  />
-                </RevealImage>
+                <Parallax offset={40}>
+                  <RevealImage>
+                    <OptimizedImage
+                      src={bannerImageUrl}
+                      alt={bannerImageAlt}
+                      fill
+                      priority
+                      className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                    />
+                  </RevealImage>
+                </Parallax>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 pointer-events-none" />
                 <div className="absolute bottom-12 left-12">
                    <div className="flex items-center gap-3 px-6 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl text-white font-bold text-xs uppercase tracking-widest">

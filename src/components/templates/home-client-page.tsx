@@ -17,6 +17,8 @@ import { urlFor } from '@/sanity/lib/image';
 import { Magnetic } from '@/components/animations/magnetic';
 import { RevealImage } from '@/components/animations/reveal-image';
 import { RevealText } from '@/components/animations/reveal-text';
+import { Parallax } from '@/components/animations/parallax';
+import { Floating } from '@/components/animations/floating';
 
 // Dynamic import for performance-heavy globe component
 const InteractiveGlobe = dynamic(() => import('@/components/ui/interactive-globe'), {
@@ -107,11 +109,14 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
       
       <main>
         <section className="relative min-h-screen flex items-center pt-28 overflow-hidden bg-white">
-          <AmbientGlow />
+          <Parallax offset={100} direction="down" className="absolute inset-0 z-0">
+            <AmbientGlow />
+          </Parallax>
           
           {/* Animated Background Grid */}
-          <div className="absolute inset-0 z-0 opacity-[0.03]" 
-               style={{ backgroundImage: 'radial-gradient(#0066cc 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+          <Parallax offset={50} direction="up" className="absolute inset-0 z-0 opacity-[0.03]">
+            <div className="w-full h-[150%] bg-[radial-gradient(#0066cc_1px,transparent_1px)] [background-size:40px_40px]" />
+          </Parallax>
 
           <div className="container mx-auto px-4 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -172,26 +177,30 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
               </FadeUp>
 
               <FadeUp delay={0.3} className="relative z-10">
-                <div className="absolute -inset-4 bg-prixgen-blue/5 rounded-[3rem] blur-3xl -z-10 animate-pulse" />
-                <RevealImage className="relative aspect-[4/3] rounded-[3rem] overflow-hidden border border-slate-100 shadow-2xl group">
-                  {homeData.heroImage ? (
-                    <OptimizedImage
-                      src={
-                        homeData.heroImage.url || 
-                        homeData.heroImage.asset ||
-                        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2070"
-                      }
-                      alt="Industrial Architecture"
-                      fill
-                      priority
-                      className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-slate-100 flex items-center justify-center">
-                      <span className="text-slate-300 font-bold uppercase tracking-widest">Architectural Visual</span>
-                    </div>
-                  )}
-                </RevealImage>
+                <Floating duration={5} y={15} x={10}>
+                  <div className="absolute -inset-4 bg-prixgen-blue/5 rounded-[3rem] blur-3xl -z-10 animate-pulse" />
+                </Floating>
+                <Parallax offset={30}>
+                  <RevealImage className="relative aspect-[4/3] rounded-[3rem] overflow-hidden border border-slate-100 shadow-2xl group">
+                    {homeData.heroImage ? (
+                      <OptimizedImage
+                        src={
+                          homeData.heroImage.url || 
+                          homeData.heroImage.asset ||
+                          "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2070"
+                        }
+                        alt="Industrial Architecture"
+                        fill
+                        priority
+                        className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-slate-100 flex items-center justify-center">
+                        <span className="text-slate-300 font-bold uppercase tracking-widest">Architectural Visual</span>
+                      </div>
+                    )}
+                  </RevealImage>
+                </Parallax>
               </FadeUp>
             </div>
           </div>
@@ -226,22 +235,26 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                     <div className="h-full bg-gradient-to-br from-white to-slate-50/50 border border-slate-200/60 rounded-[2.5rem] shadow-sm transition-all duration-700 hover:-translate-y-3 hover:shadow-[0_30px_60px_-15px_rgba(0,102,204,0.15)] hover:border-prixgen-blue/20 relative overflow-hidden group">
                       {/* Image Container with Zoom */}
                       <div className="h-64 overflow-hidden relative bg-slate-100">
-                        <motion.img 
-                          src={service.img} 
-                          alt={service.title}
-                          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                        />
+                        <Parallax offset={20} className="h-full w-full">
+                          <motion.img 
+                            src={service.img} 
+                            alt={service.title}
+                            className="w-full h-[120%] object-cover transition-transform duration-1000 group-hover:scale-110"
+                          />
+                        </Parallax>
                         <div className="absolute top-6 left-6 z-20">
-                          <div className="w-12 h-12 bg-white/90 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg group-hover:bg-prixgen-blue group-hover:text-white transition-all duration-500">
-                            <span className="text-xl">
-                              {service.icon === 'Strategy' && '📊'}
-                              {service.icon === 'Box' && '📦'}
-                              {service.icon === 'Cpu' && '⚙️'}
-                              {service.icon === 'Brain' && '🧠'}
-                              {service.icon === 'TrendingUp' && '📈'}
-                              {service.icon === 'Cloud' && '☁️'}
-                            </span>
-                          </div>
+                          <Floating duration={3 + i} y={5}>
+                            <div className="w-12 h-12 bg-white/90 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg group-hover:bg-prixgen-blue group-hover:text-white transition-all duration-500">
+                              <span className="text-xl">
+                                {service.icon === 'Strategy' && '📊'}
+                                {service.icon === 'Box' && '📦'}
+                                {service.icon === 'Cpu' && '⚙️'}
+                                {service.icon === 'Brain' && '🧠'}
+                                {service.icon === 'TrendingUp' && '📈'}
+                                {service.icon === 'Cloud' && '☁️'}
+                              </span>
+                            </div>
+                          </Floating>
                         </div>
                       </div>
 
@@ -312,9 +325,11 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,rgba(255,255,255,0.15),transparent)] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                       
                       <div className="relative z-10 flex-1">
-                        <div className="aspect-square w-24 mb-6 rounded-2xl bg-white/10 p-4 flex items-center justify-center overflow-hidden">
-                          <img src={sol.img} alt={sol.title} className="w-full h-full object-cover rounded-lg group-hover:scale-110 transition-transform duration-500" />
-                        </div>
+                        <Floating delay={i * 0.2}>
+                          <div className="aspect-square w-24 mb-6 rounded-2xl bg-white/10 p-4 flex items-center justify-center overflow-hidden">
+                            <img src={sol.img} alt={sol.title} className="w-full h-full object-cover rounded-lg group-hover:scale-110 transition-transform duration-500" />
+                          </div>
+                        </Floating>
                         <h3 className="text-xl font-bold mb-4">{sol.title}</h3>
                         <p className="text-white/60 text-sm leading-relaxed">{sol.desc}</p>
                       </div>

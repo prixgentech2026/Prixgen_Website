@@ -13,6 +13,8 @@ import { solutionsData } from '@/lib/data';
 import { Magnetic } from '@/components/animations/magnetic';
 import { RevealImage } from '@/components/animations/reveal-image';
 import { RevealText } from '@/components/animations/reveal-text';
+import { Parallax } from '@/components/animations/parallax';
+import { Floating } from '@/components/animations/floating';
 
 export default function SolutionClientPage({ solution }: { solution: any }) {
   const getImageUrl = (img: any) => {
@@ -26,7 +28,6 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <AmbientGlow />
       <JsonLd 
         type="Service" 
         data={{ 
@@ -48,12 +49,20 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
 
       {/* Hero Header */}
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-white pt-24 pb-12">
+        <Parallax offset={60} direction="down" className="absolute inset-0 z-0">
+          <AmbientGlow />
+        </Parallax>
+        
         {/* Background Elements */}
-        <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-40" />
+        <Parallax offset={30} className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-40" />
         
         {/* Animated Floating Elements */}
-        <div className="absolute top-1/4 -left-20 w-64 h-64 bg-prixgen-blue/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-prixgen-lightblue/5 rounded-full blur-3xl animate-pulse delay-700" />
+        <Floating duration={5} y={15} x={10} className="absolute top-1/4 -left-20 z-0">
+          <div className="w-64 h-64 bg-prixgen-blue/5 rounded-full blur-3xl animate-pulse" />
+        </Floating>
+        <Floating duration={7} y={25} x={15} delay={0.5} className="absolute bottom-1/4 -right-20 z-0">
+          <div className="w-96 h-96 bg-prixgen-lightblue/5 rounded-full blur-3xl animate-pulse" />
+        </Floating>
         
         <div className="container relative z-10 mx-auto px-4 text-center">
           <FadeUp delay={0.1} className="space-y-6 flex flex-col items-center">
@@ -106,15 +115,17 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
           <article className="lg:col-span-2 space-y-16">
             {bannerImageUrl && (
               <FadeUp delay={0.2} className="relative aspect-video w-full rounded-[3rem] overflow-hidden shadow-2xl">
-                <RevealImage>
-                  <OptimizedImage
-                    src={bannerImageUrl}
-                    alt={bannerImageAlt}
-                    fill
-                    priority
-                    className="object-cover transition-transform duration-700 hover:scale-105"
-                  />
-                </RevealImage>
+                <Parallax offset={40}>
+                  <RevealImage>
+                    <OptimizedImage
+                      src={bannerImageUrl}
+                      alt={bannerImageAlt}
+                      fill
+                      priority
+                      className="object-cover transition-transform duration-700 hover:scale-105"
+                    />
+                  </RevealImage>
+                </Parallax>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
               </FadeUp>
             )}
