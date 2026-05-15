@@ -137,7 +137,7 @@ export default function PostClient({ post }: PostClientProps) {
       />
 
       {/* Premium White Hero */}
-      <header className="relative min-h-[60vh] flex items-center pt-32 md:pt-48 pb-20 overflow-hidden bg-white">
+      <header className="relative min-h-[50vh] flex items-center pt-24 md:pt-32 pb-16 overflow-hidden bg-white">
         <AmbientGlow />
         
         {/* Subtle Background Elements */}
@@ -203,7 +203,7 @@ export default function PostClient({ post }: PostClientProps) {
 
       {/* Feature Image */}
       <div className="container mx-auto px-6 relative z-20">
-        <RevealImage className="max-w-7xl mx-auto rounded-[3.5rem] lg:rounded-[5rem] shadow-[0_50px_100px_-20px_rgba(0,102,204,0.15)] border-[12px] border-white ring-1 ring-slate-100">
+        <RevealImage className="max-w-7xl mx-auto rounded-[2.5rem] lg:rounded-[3.5rem] shadow-[0_50px_100px_-20px_rgba(0,102,204,0.15)] border-[8px] md:border-[12px] border-white ring-1 ring-slate-100">
           <div className="relative aspect-[21/9]">
             <OptimizedImage 
               src={post.mainImage || "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2070"} 
@@ -217,7 +217,7 @@ export default function PostClient({ post }: PostClientProps) {
 
 
       {/* Content Section */}
-      <div className="container mx-auto px-6 py-24 relative">
+      <div className="container mx-auto px-6 py-12 lg:py-20 relative">
         <div className="flex flex-col lg:flex-row gap-20">
            {/* Sidebar - Left (Desktop Only) */}
            <aside className="hidden lg:block w-16 shrink-0">
@@ -260,7 +260,7 @@ export default function PostClient({ post }: PostClientProps) {
               </FadeUp>
 
               <footer className="mt-32 pt-20 border-t-2 border-slate-50">
-                <div className="relative group p-12 bg-slate-50 rounded-[4rem] overflow-hidden">
+                <div className="relative group p-8 lg:p-12 bg-slate-50 rounded-[3rem] overflow-hidden">
                    <div className="absolute top-0 right-0 w-64 h-64 bg-prixgen-blue/5 rounded-full blur-[80px] group-hover:scale-150 transition-transform duration-1000" />
                    
                    <div className="relative z-10 flex flex-col md:flex-row gap-12 items-center text-center md:text-left">
@@ -334,11 +334,11 @@ export default function PostClient({ post }: PostClientProps) {
       </div>
 
       {/* Newsletter Section */}
-      <section className="py-24 lg:py-40 bg-slate-50 relative overflow-hidden">
+      <section className="py-16 lg:py-24 bg-slate-50 relative overflow-hidden">
         <div className="container mx-auto px-4">
           <motion.div 
             whileHover={{ y: -5 }}
-            className="relative bg-white rounded-[4rem] lg:rounded-[6rem] p-12 lg:p-32 overflow-hidden shadow-2xl border border-slate-100 group text-left"
+            className="relative bg-white rounded-[3rem] lg:rounded-[4rem] p-8 lg:p-20 overflow-hidden shadow-2xl border border-slate-100 group text-left"
           >
             <div className="absolute bottom-0 right-0 w-full h-full bg-prixgen-blue/5 -z-10 translate-y-1/2 rounded-full blur-[100px]" style={{ willChange: 'transform, opacity' }} />
             

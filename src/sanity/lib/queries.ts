@@ -95,8 +95,16 @@ export const industryBySlugQuery = groq`*[_type == "industry" && slug.current ==
   title,
   headline,
   content,
-  features,
-  process,
+  "features": features[]{
+    _key,
+    title,
+    description
+  },
+  "process": process[]{
+    _key,
+    title,
+    description
+  },
   seo,
   externalImageUrl,
   "featuredImage": {
@@ -127,8 +135,16 @@ export const solutionBySlugQuery = groq`*[_type == "solution" && slug.current ==
   title,
   headline,
   content,
-  features,
-  process,
+  "features": features[]{
+    _key,
+    title,
+    description
+  },
+  "process": process[]{
+    _key,
+    title,
+    description
+  },
   seo,
   externalImageUrl,
   "featuredImage": {
@@ -156,8 +172,16 @@ export const serviceBySlugQuery = groq`*[_type == "service" && slug.current == $
   headline,
   "slug": slug.current,
   content,
-  features,
-  process,
+  "features": features[]{
+    _key,
+    title,
+    description
+  },
+  "process": process[]{
+    _key,
+    title,
+    description
+  },
   seo,
   externalImageUrl,
   "featuredImage": {

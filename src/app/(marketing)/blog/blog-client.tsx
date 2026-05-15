@@ -107,7 +107,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
 
       {/* Section 2: Featured Post (Immersive) */}
       {featuredPost && (
-        <section className="py-24 relative overflow-hidden">
+        <section className="py-12 lg:py-20 relative overflow-hidden">
           <div className="container mx-auto px-4 relative z-10">
             <FadeUp>
               <div className="flex items-center gap-4 mb-12">
@@ -192,7 +192,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
       )}
 
       {/* Section 3: Insights Grid */}
-      <section className="py-24 bg-slate-50 border-y border-slate-200/60 relative">
+      <section className="py-16 lg:py-24 bg-slate-50 border-y border-slate-200/60 relative">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row justify-between items-end gap-8 mb-20 text-left">
             <motion.div 
@@ -294,11 +294,11 @@ export default function BlogClient({ posts }: BlogClientProps) {
       </section>
 
       {/* Section 4: Newsletter / Stay Informed */}
-      <section className="py-24 lg:py-40 bg-white relative overflow-hidden">
+      <section className="py-16 lg:py-24 bg-white relative overflow-hidden">
         <div className="container mx-auto px-4">
           <motion.div 
             whileHover={{ y: -5 }}
-            className="relative bg-gradient-to-br from-prixgen-blue to-indigo-950 rounded-[3.5rem] lg:rounded-[5rem] p-12 lg:p-32 overflow-hidden shadow-2xl group"
+            className="relative bg-gradient-to-br from-prixgen-blue to-indigo-950 rounded-[3rem] lg:rounded-[4rem] p-8 lg:p-20 overflow-hidden shadow-2xl group"
           >
             <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4" />
             

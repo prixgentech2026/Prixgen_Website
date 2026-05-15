@@ -22,7 +22,8 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
   const getImageUrl = (img: any) => {
     if (!img) return null;
     if (typeof img === 'string') return img;
-    return img.sourceUrl || img.asset?.url || null;
+    // Handle Sanity standard image asset structure and our custom projection
+    return img.sourceUrl || img.asset?.url || (typeof img.asset === 'string' ? img.asset : null);
   };
 
   const bannerImageUrl = getImageUrl(industry.summaryImage) || getImageUrl(industry.featuredImage) || industry.externalImageUrl;
@@ -50,7 +51,7 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
       />
 
       {/* Hero Header */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-white pt-32 pb-16">
+      <section className="relative min-h-[40vh] md:min-h-[50vh] flex items-center justify-center overflow-hidden bg-white pt-24 pb-12">
         <Parallax offset={50} direction="down" className="absolute inset-0 z-0">
           <AmbientGlow />
         </Parallax>
@@ -111,10 +112,10 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
         </motion.div>
       </section>
 
-      <div className="container mx-auto px-4 py-12 lg:py-20 relative z-10">
+      <div className="container mx-auto px-4 py-8 lg:py-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-24">
           {/* Main Content */}
-          <article className="lg:col-span-2 space-y-20 lg:space-y-32">
+          <article className="lg:col-span-2 space-y-12 lg:space-y-20">
             
             {/* Visual Narrative Anchor */}
             {bannerImageUrl && (
@@ -141,7 +142,7 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
             )}
 
             {/* Strategic Analysis (Executive Summary) */}
-            <FadeUp delay={0.3} className="relative bg-white rounded-[4rem] p-12 lg:p-20 shadow-[0_40px_100px_-20px_rgba(0,102,204,0.06)] border border-slate-50 overflow-hidden">
+            <FadeUp delay={0.3} className="relative bg-white rounded-[3rem] p-8 lg:p-16 shadow-[0_40px_100px_-20px_rgba(0,102,204,0.06)] border border-slate-50 overflow-hidden">
               <div className="absolute top-0 right-0 w-80 h-80 bg-prixgen-blue/[0.01] rounded-full blur-3xl -mr-40 -mt-40 pointer-events-none" />
               
               <div className="flex items-center gap-5 mb-12">
@@ -175,7 +176,7 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                   {industry.features.map((feature: any, i: number) => (
                     <FadeUp 
-                      key={i} 
+                      key={feature._key || `feature-${i}`} 
                       delay={0.1 * i}
                       className={i === 0 ? "md:col-span-2" : ""}
                     >
@@ -203,7 +204,7 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
             )}
 
             {/* Industrial Resilience Banner */}
-            <FadeUp delay={0.2} className="relative rounded-[4rem] bg-[#020617] overflow-hidden p-12 lg:p-20 shadow-2xl">
+            <FadeUp delay={0.2} className="relative rounded-[3rem] bg-[#020617] overflow-hidden p-8 lg:p-16 shadow-2xl">
                <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
                <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-l from-prixgen-blue/30 to-transparent opacity-40 pointer-events-none" />
                
@@ -245,7 +246,7 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
                   
                   <div className="space-y-20 relative">
                     {industry.process.map((step: any, i: number) => (
-                      <FadeUp key={i} delay={0.1 * i} className="relative flex gap-10 md:gap-16 group">
+                      <FadeUp key={step._key || `step-${i}`} delay={0.1 * i} className="relative flex gap-10 md:gap-16 group">
                         <div className="relative z-10 flex-shrink-0 w-14 h-14 md:w-20 md:h-20 rounded-full bg-white border-[6px] border-prixgen-blue/5 flex items-center justify-center font-black text-prixgen-blue text-2xl shadow-xl group-hover:border-prixgen-blue group-hover:bg-prixgen-blue group-hover:text-white transition-all duration-700">
                           {i + 1}
                         </div>
@@ -265,7 +266,7 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
           <aside className="lg:col-span-1">
             <div className="sticky top-32 space-y-10">
               {/* Lead Capture Card */}
-              <FadeUp delay={0.4} className="bg-white p-12 rounded-[4rem] border border-prixgen-blue/10 shadow-[0_40px_80px_-20px_rgba(0,102,204,0.12)] relative overflow-hidden group">
+              <FadeUp delay={0.4} className="bg-white p-8 lg:p-12 rounded-[3rem] border border-prixgen-blue/10 shadow-[0_40px_80px_-20px_rgba(0,102,204,0.12)] relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-40 h-40 bg-prixgen-blue/[0.03] rounded-full blur-[80px] -mr-20 -mt-20 group-hover:scale-150 transition-transform duration-1000" />
                 <div className="relative z-10 space-y-8">
                   <div className="space-y-4">

@@ -38,7 +38,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
-      <body suppressHydrationWarning>{children}</body>
+      <body className="overflow-x-hidden" suppressHydrationWarning>{children}</body>
     </html>
   );
 }

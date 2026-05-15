@@ -48,8 +48,18 @@ async function uploadImage(url: string, retries = 3) {
 
       if (url.startsWith('file://') || url.startsWith('C:') || url.startsWith('/') || fs.existsSync(url)) {
         const filePath = url.startsWith('file://') ? url.replace('file:///', '').replace('file://', '') : url;
-        buffer = fs.readFileSync(filePath);
-        filename = path.basename(filePath);
+        
+        if (fs.existsSync(filePath)) {
+          buffer = fs.readFileSync(filePath);
+          filename = path.basename(filePath);
+        } else {
+          console.warn(`[WARN] Local file ${filePath} not found. Using fallback image.`);
+          const response = await fetch(FALLBACK_IMAGE);
+          if (!response.ok) throw new Error(`Failed to fetch fallback image`);
+          const arrayBuffer = await response.arrayBuffer();
+          buffer = Buffer.from(arrayBuffer);
+          filename = 'fallback.jpg';
+        }
       } else {
         let response = await fetch(url);
         
@@ -87,15 +97,20 @@ async function uploadImage(url: string, retries = 3) {
   return null;
 }
 
-const PREMIUM_IMAGES: Record<string, string> = {
-  'manufacturing': 'C:/Users/Dell/.gemini/antigravity/brain/f842cbc1-f7da-441f-bf56-d2950f6d5108/manufacturing_industry_premium_1778137573049.png',
-  'retail': 'C:/Users/Dell/.gemini/antigravity/brain/f842cbc1-f7da-441f-bf56-d2950f6d5108/retail_omnichannel_premium_1778137593723.png',
-  'chemicals': 'C:/Users/Dell/.gemini/antigravity/brain/f842cbc1-f7da-441f-bf56-d2950f6d5108/chemicals_processing_premium_1778137616364.png',
-  'fmcg-distribution': 'C:/Users/Dell/.gemini/antigravity/brain/f842cbc1-f7da-441f-bf56-d2950f6d5108/fmcg_distribution_premium_1778137636665.png',
-  'information-services': 'C:/Users/Dell/.gemini/antigravity/brain/f842cbc1-f7da-441f-bf56-d2950f6d5108/information_services_premium_1778137656742.png',
-  'dairy': 'C:/Users/Dell/.gemini/antigravity/brain/f842cbc1-f7da-441f-bf56-d2950f6d5108/dairy_processing_premium_1778137680236.png',
-  'electronics': 'C:/Users/Dell/.gemini/antigravity/brain/f842cbc1-f7da-441f-bf56-d2950f6d5108/electronics_manufacturing_premium_1778137704583.png',
-};
+function addKeysToBlocks(blocks: any) {
+  if (!Array.isArray(blocks)) return blocks;
+  return blocks.map((block: any) => {
+    const newBlock = { ...block, _key: Math.random().toString(36).substr(2, 9) };
+    if (newBlock.children && Array.isArray(newBlock.children)) {
+      newBlock.children = newBlock.children.map((child: any) => ({
+        ...child,
+        _key: Math.random().toString(36).substr(2, 9)
+      }));
+    }
+    return newBlock;
+  });
+}
+
 
 async function migrateHome() {
   console.log('Migrating Home Data...');
@@ -112,7 +127,7 @@ async function migrateHome() {
         _ref: imageId,
       },
     } : undefined,
-    subheadline: homeData.subheadline,
+    subheadline: addKeysToBlocks(homeData.subheadline),
     heroPrimaryCTA: homeData.heroPrimaryCTA,
     heroSecondaryCTA: homeData.heroSecondaryCTA,
     socialProof: homeData.socialProof,
@@ -138,7 +153,7 @@ async function migrateAbout() {
     _id: 'about',
     title: aboutData.title,
     subtitle: aboutData.subtitle,
-    content: aboutData.content,
+    content: addKeysToBlocks(aboutData.content),
     vision: aboutData.vision,
     mission: aboutData.mission,
     stats: aboutData.stats.map(s => ({ _key: Math.random().toString(36).substr(2, 9), ...s })),
@@ -180,8 +195,8 @@ async function migrateIndustries() {
   console.log('Migrating Industries...');
   for (const industry of industriesData) {
     console.log(`Migrating Industry: ${industry.title}`);
-    const imageUrl = PREMIUM_IMAGES[industry.slug] || industry.featuredImage.sourceUrl;
-    const imageId = await uploadImage(imageUrl);
+    const imageUrl = industry.featuredImage?.sourceUrl || industry.externalImageUrl;
+    const imageId = imageUrl ? await uploadImage(imageUrl) : null;
     
     const doc = {
       _type: 'industry',
@@ -197,7 +212,7 @@ async function migrateIndustries() {
         },
         altText: industry.featuredImage.altText,
       } : undefined,
-      content: industry.content,
+      content: addKeysToBlocks(industry.content),
       features: industry.features.map((f: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...f })),
       process: industry.process.map((p: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...p })),
       seo: industry.seo,
@@ -231,7 +246,7 @@ async function migrateSolutions() {
         },
         altText: solution.featuredImage?.altText || solution.title,
       } : undefined,
-      content: solution.content,
+      content: addKeysToBlocks(solution.content),
       features: solution.features ? solution.features.map((f: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...f })) : [],
       process: solution.process ? solution.process.map((p: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...p })) : [],
       seo: solution.seo,
@@ -265,7 +280,7 @@ async function migrateServices() {
         },
         altText: service.featuredImage?.altText || service.title,
       } : undefined,
-      content: service.content,
+      content: addKeysToBlocks(service.content),
       features: service.features ? service.features.map((f: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...f })) : [],
       process: service.process ? service.process.map((p: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...p })) : [],
       seo: service.seo,
@@ -485,7 +500,7 @@ async function migrateBlogPosts() {
         _type: 'image',
         asset: { _type: 'reference', _ref: imageId }
       } : undefined,
-      body: post.body,
+      body: addKeysToBlocks(post.body),
       linkedinUrl: post.linkedinUrl,
       seo: post.seo,
     };

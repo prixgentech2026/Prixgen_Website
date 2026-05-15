@@ -20,7 +20,8 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
   const getImageUrl = (img: any) => {
     if (!img) return null;
     if (typeof img === 'string') return img;
-    return img.sourceUrl || img.asset?.url || null;
+    // Handle Sanity standard image asset structure and our custom projection
+    return img.sourceUrl || img.asset?.url || (typeof img.asset === 'string' ? img.asset : null);
   };
 
   const bannerImageUrl = getImageUrl(solution.summaryImage) || getImageUrl(solution.featuredImage) || solution.externalImageUrl;
@@ -48,7 +49,7 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
       />
 
       {/* Hero Header */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-white pt-24 pb-12">
+      <section className="relative min-h-[40vh] md:min-h-[50vh] flex items-center justify-center overflow-hidden bg-white pt-24 pb-12">
         <Parallax offset={60} direction="down" className="absolute inset-0 z-0">
           <AmbientGlow />
         </Parallax>
@@ -112,7 +113,7 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
       <div className="container mx-auto px-4 py-8 lg:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
           {/* Main Content */}
-          <article className="lg:col-span-2 space-y-16">
+          <article className="lg:col-span-2 space-y-12 lg:space-y-20">
             {bannerImageUrl && (
               <FadeUp delay={0.2} className="relative aspect-video w-full rounded-[3rem] overflow-hidden shadow-2xl">
                 <Parallax offset={40}>
@@ -131,7 +132,7 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
             )}
 
             {/* Executive Summary (Content) */}
-            <FadeUp delay={0.3} className="relative bg-white rounded-[3rem] p-10 lg:p-14 shadow-[0_30px_60px_-15px_rgba(0,102,204,0.05)] border border-slate-100 overflow-hidden">
+            <FadeUp delay={0.3} className="relative bg-white rounded-[3rem] p-8 lg:p-16 shadow-[0_30px_60px_-15px_rgba(0,102,204,0.05)] border border-slate-100 overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-prixgen-blue/[0.02] rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none" />
               
               <div className="flex items-center gap-4 mb-10">
@@ -156,7 +157,7 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {solution.features?.map((feature: any, i: number) => (
                   <FadeUp 
-                    key={i} 
+                    key={feature._key || `feature-${i}`} 
                     delay={0.1 * i}
                     className={i === 0 ? "md:col-span-2" : ""}
                   >
@@ -182,7 +183,7 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
             </div>
 
             {/* Strategic Outcomes Banner */}
-            <FadeUp delay={0.2} className="relative rounded-[3rem] bg-prixgen-dark overflow-hidden p-12 lg:p-16 my-8 shadow-2xl">
+            <FadeUp delay={0.2} className="relative rounded-[3rem] bg-prixgen-dark overflow-hidden p-8 lg:p-16 my-8 shadow-2xl">
                <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
                <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-l from-prixgen-blue/40 to-transparent opacity-30 pointer-events-none" />
                
@@ -218,7 +219,7 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
                   <div className="absolute top-0 bottom-0 left-[27px] md:left-[43px] w-0.5 bg-gradient-to-b from-prixgen-blue/30 via-slate-200 to-transparent" />
                   
                   {solution.process.map((step: any, i: number) => (
-                    <FadeUp key={i} delay={0.1 * i} className="relative flex gap-8 md:gap-12 group pb-16 last:pb-0">
+                    <FadeUp key={step._key || `step-${i}`} delay={0.1 * i} className="relative flex gap-8 md:gap-12 group pb-16 last:pb-0">
                       <div className="relative z-10 flex-shrink-0 w-10 h-10 md:w-14 md:h-14 rounded-full bg-white border-4 border-prixgen-blue/10 flex items-center justify-center font-black text-prixgen-blue text-lg shadow-sm group-hover:border-prixgen-blue group-hover:bg-prixgen-blue group-hover:text-white transition-all duration-500">
                         {i + 1}
                       </div>
@@ -236,7 +237,7 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
           {/* Sticky Sidebar */}
           <aside className="lg:col-span-1">
             <div className="sticky top-24 space-y-8">
-              <FadeUp delay={0.4} className="bg-white p-10 rounded-[3rem] border border-prixgen-blue/10 shadow-2xl shadow-prixgen-blue/5 relative overflow-hidden">
+              <FadeUp delay={0.4} className="bg-white p-8 lg:p-10 rounded-[3rem] border border-prixgen-blue/10 shadow-2xl shadow-prixgen-blue/5 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-prixgen-blue/5 rounded-full blur-3xl -mr-16 -mt-16" />
                 <h3 className="text-2xl font-bold mb-6 text-prixgen-blue relative z-10">Solution Audit</h3>
                 <p className="text-slate-500 mb-8 leading-relaxed font-medium relative z-10">

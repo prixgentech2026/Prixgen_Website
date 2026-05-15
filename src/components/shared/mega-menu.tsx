@@ -140,7 +140,7 @@ export function MegaMenu() {
           Engineering
           <ChevronIcon />
         </button>
-        <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover/menu:opacity-100 group-hover/menu:visible transition-all duration-200 z-50">
+        <div className="absolute top-full right-0 pt-2 opacity-0 invisible group-hover/menu:opacity-100 group-hover/menu:visible transition-all duration-200 z-50">
           <div className="w-[600px] p-6 bg-white rounded-xl shadow-2xl border border-slate-100">
             <ul className="grid gap-3 grid-cols-2 mb-4">
               {MENU_DATA.engineering_services.map((item) => (
