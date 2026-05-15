@@ -19,6 +19,7 @@ import { LinkedInEmbed } from '@/components/shared/linkedin-embed';
 import { LeadCaptureForm } from '@/components/features/lead-capture-form';
 import { RevealImage } from '@/components/animations/reveal-image';
 import { Magnetic } from '@/components/animations/magnetic';
+import { urlFor } from '@/sanity/lib/image';
 
 interface PostClientProps {
   post: BlogPost;
@@ -76,12 +77,11 @@ const components = {
   types: {
     image: ({ value }: any) => (
       <figure className="my-16 group">
-        <div className="relative w-full aspect-[21/9] rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white">
-          <OptimizedImage 
-            src={value.asset?._ref || value.url} 
+        <div className="relative w-full overflow-hidden shadow-2xl border-8 border-white bg-white">
+          <img 
+            src={urlFor(value).url()} 
             alt={value.alt || 'Industrial Insight'} 
-            fill 
-            className="object-cover transition-transform duration-1000 group-hover:scale-105" 
+            className="w-full h-auto object-contain transition-transform duration-1000 group-hover:scale-[1.02]" 
           />
         </div>
         {value.alt && (
@@ -101,6 +101,17 @@ export default function PostClient({ post }: PostClientProps) {
     damping: 30,
     restDelta: 0.001
   });
+  
+  // Specific components for author bio (smaller text, different spacing)
+  const authorComponents = {
+    block: {
+      normal: ({ children }: any) => (
+        <p className="text-lg text-slate-500 font-medium leading-relaxed mb-4">
+          {children}
+        </p>
+      ),
+    },
+  };
 
   // Parallax for Hero and Author
   const heroY = useTransform(scrollYProgress, [0, 0.5], [0, 150]);
@@ -171,7 +182,7 @@ export default function PostClient({ post }: PostClientProps) {
                   )}
                   <div className="text-left">
                     <div className="text-lg font-black text-prixgen-blue tracking-tight leading-none mb-1">{post.author?.name}</div>
-                    <div className="text-prixgen-lightblue text-[10px] font-black uppercase tracking-widest">Principal Architect</div>
+                    <div className="text-prixgen-lightblue text-[10px] font-black uppercase tracking-widest">{post.author?.position || 'Principal Architect'}</div>
                   </div>
                </div>
                <div className="h-8 w-px bg-slate-100" />
@@ -261,11 +272,17 @@ export default function PostClient({ post }: PostClientProps) {
                       <div className="space-y-6">
                         <div className="space-y-1">
                            <h3 className="text-3xl font-black text-prixgen-blue tracking-tighter">About {post.author?.name}</h3>
-                           <p className="text-prixgen-lightblue font-black uppercase tracking-[0.3em] text-[10px]">Principal Enterprise Architect</p>
+                           <p className="text-prixgen-lightblue font-black uppercase tracking-[0.3em] text-[10px]">{post.author?.position || 'Principal Enterprise Architect'}</p>
                         </div>
-                        <p className="text-xl text-slate-500 font-medium leading-relaxed">
-                          Enterprise digital transformation expert specializing in industrial automation and resilient ecosystems. Helping global leaders architect high-performance operations through data intelligence.
-                        </p>
+                        {post.author?.bio ? (
+                          <div className="max-w-none">
+                            <PortableText value={post.author.bio} components={authorComponents} />
+                          </div>
+                        ) : (
+                          <p className="text-xl text-slate-500 font-medium leading-relaxed">
+                            Enterprise digital transformation expert specializing in industrial automation and resilient ecosystems. Helping global leaders architect high-performance operations through data intelligence.
+                          </p>
+                        )}
                         <div className="flex items-center justify-center md:justify-start gap-6 pt-2">
                            <Link href="#" className="text-sm font-black uppercase tracking-widest text-prixgen-blue hover:text-prixgen-lightblue transition-colors">View All Reviews</Link>
                            <Link href="#" className="text-sm font-black uppercase tracking-widest text-prixgen-blue hover:text-prixgen-lightblue transition-colors">LinkedIn Profile</Link>

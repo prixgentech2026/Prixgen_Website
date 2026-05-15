@@ -94,6 +94,7 @@ export interface BlogAuthor {
   name: string;
   slug?: string;
   image?: string;
+  position?: string;
   bio?: any;
 }
 
@@ -1945,6 +1946,7 @@ export const blogAuthors: BlogAuthor[] = [
     name: 'Dr. Arvinth P.',
     slug: 'arvinth-p',
     image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400',
+    position: 'Chief Technology Officer',
     bio: [
       {
         _type: 'block',

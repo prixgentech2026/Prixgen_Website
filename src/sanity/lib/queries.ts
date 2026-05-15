@@ -261,7 +261,8 @@ export const postsQuery = groq`*[_type == "post"] | order(publishedAt desc) {
   "mainImage": mainImage.asset->url,
   "author": author->{
     name,
-    "image": image.asset->url
+    "image": image.asset->url,
+    position
   },
   "categories": categories[]->{
     title
@@ -280,6 +281,7 @@ export const postBySlugQuery = groq`*[_type == "post" && slug.current == $slug][
   "author": author->{
     name,
     "image": image.asset->url,
+    position,
     bio
   },
   "categories": categories[]->{

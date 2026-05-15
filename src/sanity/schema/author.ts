@@ -30,6 +30,12 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'position',
+      title: 'Position',
+      type: 'string',
+      description: 'The professional title of the author (e.g. Principal Enterprise Architect)',
+    }),
+    defineField({
       name: 'bio',
       title: 'Bio',
       type: 'array',

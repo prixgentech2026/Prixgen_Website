@@ -452,6 +452,7 @@ async function migrateBlogAuthors() {
         _type: 'image',
         asset: { _type: 'reference', _ref: imageId }
       } : undefined,
+      position: author.position,
       bio: author.bio,
     };
     await client.createIfNotExists({ _type: 'author', _id: doc._id });
