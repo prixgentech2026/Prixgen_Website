@@ -50,7 +50,7 @@ export function StaggerText({
       variants={container} 
       initial="hidden" 
       whileInView="visible"
-      viewport={{ once: true }}
+      viewport={{ once: false, margin: "-50px" }}
       className={cn(className, colorClass, "font-extrabold")}
     >
 

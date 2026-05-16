@@ -167,23 +167,15 @@ export function MegaMenu() {
           <ChevronIcon />
         </button>
         <div className="absolute top-full right-0 pt-2 opacity-0 invisible group-hover/more:opacity-100 group-hover/more:visible transition-all duration-200 z-50">
-          <div className="w-[180px] p-2 bg-white rounded-xl shadow-2xl border border-slate-100">
+          <div className="w-[300px] p-4 bg-white rounded-xl shadow-2xl border border-slate-100">
             <ul className="flex flex-col gap-1">
-              <li>
-                <Link href="/blog" className="block select-none space-y-1 rounded-md p-2.5 leading-none no-underline outline-none transition-colors hover:bg-prixgen-gray hover:text-prixgen-blue">
-                  <div className="text-sm font-bold leading-none">Blog</div>
-                </Link>
-              </li>
-              <li>
-                <Link href="/careers" className="block select-none space-y-1 rounded-md p-2.5 leading-none no-underline outline-none transition-colors hover:bg-prixgen-gray hover:text-prixgen-blue">
-                  <div className="text-sm font-bold leading-none">Careers</div>
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="block select-none space-y-1 rounded-md p-2.5 leading-none no-underline outline-none transition-colors hover:bg-prixgen-gray hover:text-prixgen-blue">
-                  <div className="text-sm font-bold leading-none">Contact Us</div>
-                </Link>
-              </li>
+              {MENU_DATA.resources.map((item) => (
+                <li key={item.title}>
+                  <ListItem title={item.title} href={item.href}>
+                    {item.description}
+                  </ListItem>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

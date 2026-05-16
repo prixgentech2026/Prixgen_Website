@@ -15,7 +15,6 @@ import { AmbientGlow } from '@/components/animations/ambient-glow';
 import { PortableText } from '@/components/ui/portable-text';
 import { urlFor } from '@/sanity/lib/image';
 import { Magnetic } from '@/components/animations/magnetic';
-import { RevealImage } from '@/components/animations/reveal-image';
 import { RevealText } from '@/components/animations/reveal-text';
 import { Parallax } from '@/components/animations/parallax';
 import { Floating } from '@/components/animations/floating';
@@ -41,13 +40,14 @@ const PatronLogo = ({ patron }: { patron: { filename: string; name: string } }) 
     <motion.div 
       initial={{ opacity: 0, scale: 0.8 }}
       whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
+      viewport={{ once: false }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className="flex flex-col items-center justify-center min-w-[280px] grayscale hover:grayscale-0 transition-all duration-500 hover:scale-110 cursor-default opacity-60 hover:opacity-100 px-10 group"
     >
       <div className="w-28 h-28 mb-4 rounded-full bg-white shadow-xl flex items-center justify-center overflow-hidden p-6 border border-slate-100 group-hover:border-prixgen-blue/30 transition-all duration-300">
         {!error ? (
           <OptimizedImage 
+            fill
             src={`/images/patron/${patron.filename}`} 
             alt={patron.name} 
             className="object-contain p-2"
@@ -108,7 +108,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
       />
       
       <main>
-        <section className="relative min-h-[75vh] lg:min-h-[90vh] flex items-center pt-24 pb-12 overflow-hidden bg-white">
+        <section className="relative min-h-[75vh] lg:min-h-[85vh] flex items-center pt-20 pb-10 overflow-hidden bg-white">
           <Parallax offset={100} direction="down" className="absolute inset-0 z-0">
             <AmbientGlow />
           </Parallax>
@@ -118,12 +118,25 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
             <div className="w-full h-[150%] bg-[radial-gradient(#0066cc_1px,transparent_1px)] [background-size:40px_40px]" />
           </Parallax>
 
+
+
           <div className="container mx-auto px-4 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <FadeUp className="space-y-6 text-left relative z-20">
                 <div className="flex items-center gap-3 mb-8">
-                  <div className="h-[1px] w-8 bg-prixgen-blue/30" />
-                  <span className="px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue font-bold tracking-widest uppercase text-[10px]">
+                  <div className="h-[2px] w-12 bg-prixgen-blue/10 relative overflow-hidden rounded-full">
+                    <motion.div 
+                      className="absolute inset-y-0 left-0 w-1/2 bg-prixgen-lightblue"
+                      initial={{ x: "-100%" }}
+                      animate={{ x: ["-100%", "200%"] }}
+                      transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+                    />
+                  </div>
+                  <span className="px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue font-bold tracking-widest uppercase text-[10px] flex items-center gap-2 shadow-[0_0_15px_rgba(14,165,233,0.15)]">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-prixgen-lightblue opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-prixgen-blue"></span>
+                    </span>
                     Intelligent Architecture
                   </span>
                 </div>
@@ -166,6 +179,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                     <Link href="/solutions/odoo-enterprise" className="group flex items-center gap-3 text-prixgen-blue font-bold text-lg">
                       {homeData.heroSecondaryCTA || "Explore Architecture"}
                       <motion.span
+                        initial={{ x: 0 }}
                         animate={{ x: [0, 5, 0] }}
                         transition={{ duration: 1.5, repeat: Infinity }}
                       >
@@ -180,9 +194,14 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                 <Floating duration={5} y={15} x={10}>
                   <div className="absolute -inset-4 bg-prixgen-blue/5 rounded-[3rem] blur-3xl -z-10 animate-pulse" />
                 </Floating>
-                <Parallax offset={30}>
-                  <RevealImage className="relative aspect-[4/3] rounded-[3rem] overflow-hidden border border-slate-100 shadow-2xl group">
-                    {homeData.heroImage ? (
+                <div className="relative aspect-[4/3] rounded-[3rem] overflow-hidden border border-slate-100 shadow-2xl group">
+                  {homeData.heroImage ? (
+                    <motion.div 
+                      className="absolute inset-0 w-full h-full"
+                      initial={{ scale: 1 }}
+                      animate={{ scale: [1, 1.05, 1] }} 
+                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    >
                       <OptimizedImage
                         src={
                           homeData.heroImage.url || 
@@ -192,15 +211,15 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                         alt="Industrial Architecture"
                         fill
                         priority
-                        className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                        className="object-cover transition-transform duration-1000 group-hover:scale-110"
                       />
-                    ) : (
-                      <div className="w-full h-full bg-slate-100 flex items-center justify-center">
-                        <span className="text-slate-300 font-bold uppercase tracking-widest">Architectural Visual</span>
-                      </div>
-                    )}
-                  </RevealImage>
-                </Parallax>
+                    </motion.div>
+                  ) : (
+                    <div className="w-full h-full bg-slate-100 flex items-center justify-center">
+                      <span className="text-slate-300 font-bold uppercase tracking-widest">Architectural Visual</span>
+                    </div>
+                  )}
+                </div>
               </FadeUp>
             </div>
           </div>
@@ -208,24 +227,50 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
 
 
 
+        {/* Animated Connector 1 */}
+        <div className="relative w-full h-16 flex justify-center -mt-8 z-20">
+          <div className="w-px h-full bg-gradient-to-b from-transparent via-prixgen-blue/30 to-transparent relative overflow-hidden">
+            <motion.div 
+              className="absolute top-0 left-0 w-full h-1/3 bg-prixgen-lightblue shadow-[0_0_8px_#0ea5e9]"
+              initial={{ y: "-100%" }}
+              animate={{ y: ['-100%', '400%'] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
+            />
+          </div>
+        </div>
+
         {/* 2. Services Section (Our Best Services / Prixgen Services) */}
-        <section className="py-10 lg:py-16 bg-prixgen-gray/10 relative">
-          <div className="container mx-auto px-4">
-            <FadeUp className="mb-16 text-center lg:text-left">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="h-[1px] w-12 bg-prixgen-blue" />
-                <span className="text-prixgen-blue font-bold tracking-[0.2em] uppercase text-[10px]">Industrial Services</span>
-              </div>
-              <h2 className="text-4xl lg:text-5xl font-bold text-prixgen-blue mb-6 tracking-tighter">Prixgen Services</h2>
-              <p className="text-lg text-slate-600 font-medium max-w-3xl leading-relaxed">
-                Prixgen’s voyage is unique. We traverse through a stringent yet customer-driven solution method, where success derives from constant research and architectural precision.
-              </p>
-            </FadeUp>
+        <section className="py-6 lg:py-10 bg-prixgen-gray/10 relative">
+          <div className="container mx-auto px-4 pt-4">
+            <div className="mb-16 text-left">
+              <FadeUp>
+                <div className="flex items-center gap-4 mb-4">
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    whileInView={{ width: 48 }}
+                    viewport={{ once: false }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="h-[1px] bg-prixgen-blue" 
+                  />
+                  <span className="text-prixgen-blue font-bold tracking-[0.2em] uppercase text-[10px]">
+                    Industrial Services
+                  </span>
+                </div>
+                
+                <h2 className="text-4xl lg:text-5xl font-bold text-prixgen-blue mb-6 tracking-tighter">
+                  Prixgen Services
+                </h2>
+                
+                <p className="text-lg text-slate-600 font-medium max-w-3xl leading-relaxed">
+                  Prixgen’s voyage is unique. We traverse through a stringent yet customer-driven solution method, where success derives from constant research and architectural precision.
+                </p>
+              </FadeUp>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
-                { title: 'Consulting', desc: 'Prixgen Gold Partner with Oddo and is the best software consulting company in India providing IT consulting services.', link: '/services/it-consulting', icon: 'Strategy', img: '/images/consulting.png' },
-                { title: 'Warehouse', desc: 'Better Warehouse management can be yours. Reduce inventory and warehouse costs while improving customer service.', link: '/solutions/warehouse-management', icon: 'Box', img: '/images/warehouse.png' },
-                { title: 'IIoT', desc: 'Manage Millions of IIOT Device Connections And Support Applications That Open New Revenues For Industries.', link: '/engineering-services/iiot-telemetry', icon: 'Cpu', img: '/images/iiot.png' },
+                { title: 'Consulting', desc: 'Prixgen Gold Partner with Oddo and is the best software consulting company in India providing IT consulting services.', link: '/services/it-consulting', icon: 'Strategy', img: '/images/consulting.png', priority: true },
+                { title: 'Warehouse', desc: 'Better Warehouse management can be yours. Reduce inventory and warehouse costs while improving customer service.', link: '/solutions/warehouse-management', icon: 'Box', img: '/images/warehouse.png', priority: true },
+                { title: 'IIoT', desc: 'Manage Millions of IIOT Device Connections And Support Applications That Open New Revenues For Industries.', link: '/engineering-services/iiot-telemetry', icon: 'Cpu', img: '/images/iiot.png', priority: true },
                 { title: 'AI & ML Advisory', desc: 'Consulting services to define your data-driven roadmap, assess AI readiness, and architect a secure adoption strategy.', link: '/services/ai-machine-learning', icon: 'Brain', img: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop' },
                 { title: 'Transformation Strategy', desc: 'Expert guidance to rethink legacy workflows, optimize business processes, and design your digital transition plan.', link: '/services/business-transformation', icon: 'TrendingUp', img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop' },
                 { title: 'Managed Cloud', desc: 'Secure, high-availability industrial cloud infrastructure with 24/7 monitoring and zero-data-loss disaster recovery.', link: '/engineering-services/cloud-infrastructure', icon: 'Cloud', img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop' }
@@ -235,13 +280,13 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                     <div className="h-full bg-gradient-to-br from-white to-slate-50/50 border border-slate-200/60 rounded-[2.5rem] shadow-sm transition-all duration-700 hover:-translate-y-3 hover:shadow-[0_30px_60px_-15px_rgba(0,102,204,0.15)] hover:border-prixgen-blue/20 relative overflow-hidden group">
                       {/* Image Container with Zoom */}
                       <div className="h-64 overflow-hidden relative bg-slate-100">
-                        <Parallax offset={20} className="h-full w-full">
-                          <OptimizedImage 
-                            src={service.img} 
-                            alt={service.title}
-                            className="transition-transform duration-1000 group-hover:scale-110"
-                          />
-                        </Parallax>
+                        <OptimizedImage 
+                          fill
+                          src={service.img} 
+                          alt={service.title}
+                          priority={service.priority}
+                          className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                        />
                       </div>
                       <div className="absolute top-6 left-6 z-20">
                         <Floating duration={3 + i} y={5}>
@@ -270,6 +315,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                             Architecture Details 
                             <motion.span 
                               className="ml-2"
+                              initial={{ x: 0 }}
                               animate={{ x: [0, 5, 0] }}
                               transition={{ repeat: Infinity, duration: 1.5 }}
                             >
@@ -286,13 +332,31 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
           </div>
         </section>
 
+        {/* Animated Connector 2 */}
+        <div className="relative w-full h-20 flex justify-center -mt-10 z-20">
+          <div className="w-px h-full bg-gradient-to-b from-transparent via-prixgen-blue/30 to-transparent relative overflow-hidden">
+            <motion.div 
+              className="absolute top-0 left-0 w-full h-1/3 bg-prixgen-lightblue shadow-[0_0_8px_#0ea5e9]"
+              initial={{ y: "-100%" }}
+              animate={{ y: ['-100%', '400%'] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "linear", delay: 0.5 }}
+            />
+          </div>
+        </div>
+
         {/* 3. Our Solutions Section */}
-        <section className="py-10 lg:py-16 bg-white">
-          <div className="container mx-auto px-4">
+        <section className="py-6 lg:py-10 bg-white relative">
+          <div className="container mx-auto px-4 pt-6">
             <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-20 gap-8">
               <FadeUp className="max-w-2xl">
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="h-[1px] w-12 bg-prixgen-blue" />
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    whileInView={{ width: 48 }}
+                    viewport={{ once: false }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="h-[1px] bg-prixgen-blue" 
+                  />
                   <span className="text-prixgen-blue font-bold tracking-[0.2em] uppercase text-[10px]">Architecture Suite</span>
                 </div>
                 <h2 className="text-4xl lg:text-5xl font-bold text-prixgen-blue mb-4 tracking-tighter">Our Solutions</h2>
@@ -327,7 +391,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                       <div className="relative z-10 flex-1">
                         <Floating delay={i * 0.2}>
                           <div className="aspect-square w-24 mb-6 rounded-2xl bg-white/10 p-4 flex items-center justify-center overflow-hidden">
-                            <OptimizedImage src={sol.img} alt={sol.title} className="w-full h-full object-cover rounded-lg group-hover:scale-110 transition-transform duration-500" />
+                            <OptimizedImage fill src={sol.img} alt={sol.title} className="w-full h-full object-cover rounded-lg group-hover:scale-110 transition-transform duration-500" />
                           </div>
                         </Floating>
                         <h3 className="text-xl font-bold mb-4">{sol.title}</h3>
@@ -353,12 +417,30 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
           </div>
         </section>
 
+        {/* Animated Connector 3 */}
+        <div className="relative w-full h-16 flex justify-center -mt-8 z-20">
+          <div className="w-px h-full bg-gradient-to-b from-transparent via-prixgen-blue/30 to-transparent relative overflow-hidden">
+            <motion.div 
+              className="absolute top-0 left-0 w-full h-1/3 bg-prixgen-lightblue shadow-[0_0_8px_#0ea5e9]"
+              initial={{ y: "-100%" }}
+              animate={{ y: ['-100%', '400%'] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "linear", delay: 1 }}
+            />
+          </div>
+        </div>
+
         {/* 4. Our Patronage Section - Infinite Marquee */}
-        <section className="py-10 lg:py-16 bg-prixgen-gray/20 overflow-hidden relative border-y border-slate-200/50">
-          <div className="container mx-auto px-4 relative z-10">
+        <section className="py-6 lg:py-10 bg-prixgen-gray/20 overflow-hidden relative border-y border-slate-200/50">
+          <div className="container mx-auto px-4 relative z-10 pt-4">
             <FadeUp className="text-center mb-16">
               <h2 className="text-4xl font-bold text-prixgen-blue mb-4">Our Patronage</h2>
-              <div className="w-20 h-1 bg-prixgen-lightblue mx-auto rounded-full" />
+              <motion.div 
+                initial={{ width: 0 }}
+                whileInView={{ width: 80 }}
+                viewport={{ once: false }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="h-1 bg-prixgen-lightblue mx-auto rounded-full" 
+              />
             </FadeUp>
           </div>
           
@@ -388,7 +470,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
         </section>
 
         {/* 5. Testimonials Section */}
-        <section className="py-10 lg:py-16 bg-white relative overflow-hidden">
+        <section className="py-6 lg:py-10 bg-white relative overflow-hidden">
           <div className="container mx-auto px-4 relative z-10">
             <FadeUp className="text-center mb-16">
               <h2 className="text-4xl font-bold text-prixgen-blue mb-4">Success Voices</h2>
@@ -442,7 +524,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
         </section>
 
         {/* 6. Stories Section (Suppressed)
-        <section className="py-10 lg:py-16 bg-slate-50">
+        <section className="py-8 lg:py-12 bg-slate-50">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
               <FadeUp>
@@ -486,7 +568,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
         */}
 
         {/* 7. Worldwide Presence Section */}
-        <section className="py-10 lg:py-16 bg-white border-t border-slate-100 relative overflow-hidden">
+        <section className="py-8 lg:py-12 bg-white border-t border-slate-100 relative overflow-hidden">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8 items-center">
               {/* Left Column: Headquarters */}

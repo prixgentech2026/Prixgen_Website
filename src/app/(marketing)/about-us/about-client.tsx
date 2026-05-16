@@ -183,6 +183,7 @@ export function AboutClient({ data }: AboutProps) {
 
         {/* Interactive Mouse Glow */}
         <motion.div 
+          initial={{ x: 0, y: 0 }}
           animate={{ 
             x: mousePos.x - 400, 
             y: mousePos.y - 400 
@@ -191,15 +192,90 @@ export function AboutClient({ data }: AboutProps) {
           className="fixed top-0 left-0 w-[800px] h-[800px] bg-prixgen-blue/[0.03] rounded-full blur-[120px] pointer-events-none z-10"
         />
 
+        {/* High-Tech Motion Graphic Background */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden hidden md:block">
+          <svg className="absolute w-full h-full opacity-60" preserveAspectRatio="none" viewBox="0 0 1440 800">
+            {/* Circuit Line 1 */}
+            <motion.path
+              d="M -100,200 L 300,200 L 400,100 L 800,100 L 850,150 L 1500,150"
+              stroke="#0066cc"
+              strokeWidth="2.5"
+              fill="none"
+              strokeDasharray="4 4"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{ pathLength: 1, opacity: 1 }}
+              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            />
+            {/* Circuit Line 2 */}
+            <motion.path
+              d="M 1500,600 L 1000,600 L 950,500 L 600,500 L 550,550 L -100,550"
+              stroke="#43913A"
+              strokeWidth="2"
+              fill="none"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{ pathLength: 1, opacity: 0.8 }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear", delay: 1 }}
+            />
+            {/* Data Packets (Pulsing Dots along the path) */}
+            <motion.circle
+              r="4"
+              fill="#0ea5e9"
+              className="opacity-100"
+              initial={{ cx: -100, cy: 200 }}
+              animate={{
+                cx: [-100, 300, 400, 800, 850, 1500],
+                cy: [200, 200, 100, 100, 150, 150]
+              }}
+              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            />
+            <motion.circle
+              r="4"
+              fill="#43913A"
+              className="opacity-100"
+              initial={{ cx: 1500, cy: 600 }}
+              animate={{
+                cx: [1500, 1000, 950, 600, 550, -100],
+                cy: [600, 600, 500, 500, 550, 550]
+              }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear", delay: 1 }}
+            />
+          </svg>
+          
+          {/* Floating Geometric Orbs */}
+          <motion.div 
+            className="absolute top-[20%] right-[35%] w-40 h-40 rounded-full border border-prixgen-blue/30 bg-prixgen-blue/10"
+            initial={{ y: 0, rotate: 0, scale: 1 }}
+            animate={{ y: [-30, 30, -30], rotate: [0, 180, 360], scale: [1, 1.1, 1] }}
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div 
+            className="absolute bottom-[20%] left-[25%] w-32 h-32 rounded-full border border-prixgen-lightblue/30 bg-prixgen-lightblue/10"
+            initial={{ y: 0, rotate: 0, scale: 1 }}
+            animate={{ y: [20, -20, 20], rotate: [360, 180, 0], scale: [1, 1.05, 1] }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </div>
+
         <AmbientGlow />
         
         <div className="container mx-auto relative z-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <div className="space-y-8">
               <FadeUp>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="h-[1px] w-8 bg-prixgen-blue/30" />
-                  <span className="px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue font-bold tracking-widest uppercase text-[10px]">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="h-[2px] w-12 bg-prixgen-blue/10 relative overflow-hidden rounded-full">
+                    <motion.div 
+                      className="absolute inset-y-0 left-0 w-1/2 bg-prixgen-lightblue"
+                      initial={{ x: "-100%" }}
+                      animate={{ x: ["-100%", "200%"] }}
+                      transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+                    />
+                  </div>
+                  <span className="px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue font-bold tracking-widest uppercase text-[10px] flex items-center gap-2 shadow-[0_0_15px_rgba(14,165,233,0.15)]">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-prixgen-lightblue opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-prixgen-blue"></span>
+                    </span>
                     {data.subtitle || "Architects of Intelligence"}
                   </span>
                 </div>
@@ -229,21 +305,68 @@ export function AboutClient({ data }: AboutProps) {
                     }}
                   />
                 </div>
-                <div className="flex gap-6 mt-6">
+                <motion.div 
+                  className="flex gap-6 mt-6 items-center"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false }}
+                  variants={{
+                    visible: { transition: { staggerChildren: 0.1, delayChildren: 0.6 } },
+                    hidden: {}
+                  }}
+                >
                   {data.stats?.slice(0, 2).map((stat, i) => (
                     <React.Fragment key={i}>
-                      <div className="flex flex-col">
-                        <span className="text-3xl font-bold text-prixgen-blue">{stat.value}</span>
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">{stat.label === "Years of Experience" ? "Years Exp" : stat.label === "Successful Projects" ? "Projects" : stat.label}</span>
-                      </div>
-                      <div className="w-px h-12 bg-slate-100" />
+                      <motion.div 
+                        variants={{
+                          hidden: { opacity: 0, scale: 0.5 },
+                          visible: { opacity: 1, scale: 1, transition: { type: "spring", stiffness: 100 } }
+                        }}
+                        whileHover={{ scale: 1.1, y: -5 }}
+                        className="flex flex-col cursor-default group"
+                      >
+                        <span className="text-3xl font-black text-prixgen-blue group-hover:text-prixgen-lightblue transition-colors duration-300">
+                          {stat.value}
+                        </span>
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 group-hover:text-slate-600 transition-colors duration-300 whitespace-nowrap">
+                          {stat.label}
+                        </span>
+                      </motion.div>
+                      <motion.div 
+                        variants={{
+                          hidden: { height: 0 },
+                          visible: { height: 48, transition: { duration: 0.5 } }
+                        }}
+                        className="w-[1px] bg-slate-200" 
+                      />
                     </React.Fragment>
                   ))}
-                  <div className="flex flex-col">
-                    <span className="text-3xl font-bold text-prixgen-blue">Gold</span>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Partner</span>
-                  </div>
-                </div>
+                  <motion.div 
+                    variants={{
+                      hidden: { opacity: 0, scale: 0.5 },
+                      visible: { opacity: 1, scale: 1, transition: { type: "spring", stiffness: 100 } }
+                    }}
+                    whileHover={{ scale: 1.1, y: -5 }}
+                    className="flex flex-col cursor-default group"
+                  >
+                    <motion.span 
+                      animate={{ 
+                        backgroundPosition: ["0%", "200%"],
+                        textShadow: ["0 0 0px rgba(245,158,11,0)", "0 0 10px rgba(245,158,11,0.3)", "0 0 0px rgba(245,158,11,0)"]
+                      }}
+                      transition={{ 
+                        backgroundPosition: { duration: 3, repeat: Infinity, ease: "linear" },
+                        textShadow: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                      }}
+                      className="text-3xl font-black bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-amber-600 to-amber-400 bg-[length:200%_auto]"
+                    >
+                      Gold
+                    </motion.span>
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 group-hover:text-slate-600 transition-colors duration-300">
+                      Partner
+                    </span>
+                  </motion.div>
+                </motion.div>
               </FadeUp>
             </div>
 
@@ -261,8 +384,12 @@ export function AboutClient({ data }: AboutProps) {
 
                 {/* Floating Badge */}
                 <motion.div 
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  initial={{ y: 0, opacity: 0 }}
+                  animate={{ y: [0, -10, 0], opacity: 1 }}
+                  transition={{ 
+                    opacity: { duration: 0.5 },
+                    y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+                  }}
                   className="absolute -right-8 bottom-20 bg-white p-8 rounded-[2.5rem] shadow-2xl z-20 border border-slate-50 hidden lg:block"
                 >
                   <div className="flex items-center gap-4">
@@ -286,8 +413,20 @@ export function AboutClient({ data }: AboutProps) {
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto text-center mb-20">
             <FadeUp>
-              <h2 className="text-3xl lg:text-4xl font-bold text-prixgen-blue mb-6 tracking-tight">Our Architectural Philosophy</h2>
-              <p className="text-lg lg:text-xl text-slate-500 font-medium leading-relaxed">
+              <StaggerText 
+                text="Our Architectural Philosophy" 
+                variant="default"
+                as="h2"
+                className="text-3xl lg:text-4xl font-bold text-prixgen-blue mb-6 tracking-tight justify-center"
+              />
+              <motion.div 
+                initial={{ width: 0 }}
+                whileInView={{ width: 48 }}
+                viewport={{ once: false }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="h-1 bg-prixgen-blue mx-auto rounded-full mb-8" 
+              />
+              <p className="text-lg lg:text-xl text-slate-500 font-medium leading-relaxed max-w-3xl mx-auto">
                 We don&apos;t just deploy software; we future-proof your digital journey. Our methodology is rooted in architectural integrity and zero-tolerance for operational friction.
               </p>
             </FadeUp>
@@ -316,7 +455,13 @@ export function AboutClient({ data }: AboutProps) {
             <h2 className="text-3xl lg:text-5xl font-bold mb-6 tracking-tight uppercase leading-tight opacity-90">
               The <span className="text-prixgen-lightblue">Foundation</span>
             </h2>
-            <div className="w-24 h-1.5 bg-gradient-to-r from-prixgen-blue to-transparent rounded-full mb-8" />
+            <motion.div 
+              initial={{ width: 0 }}
+              whileInView={{ width: 96 }}
+              viewport={{ once: false }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="h-1.5 bg-gradient-to-r from-prixgen-blue to-transparent rounded-full mb-8" 
+            />
           </FadeUp>
         </div>
 
@@ -380,10 +525,21 @@ export function AboutClient({ data }: AboutProps) {
         <div className="max-w-5xl mb-24">
           <FadeUp>
             <div className="flex items-center gap-4 mb-4">
-              <div className="h-[1px] w-12 bg-prixgen-blue" />
+              <motion.div 
+                initial={{ width: 0 }}
+                whileInView={{ width: 48 }}
+                viewport={{ once: false }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="h-[1px] bg-prixgen-blue" 
+              />
               <span className="text-prixgen-blue font-bold tracking-[0.2em] uppercase text-sm">Our Competitive Edge</span>
             </div>
-            <h2 className="text-3xl lg:text-5xl font-bold text-prixgen-blue mb-8 tracking-tighter">Why Choose Us</h2>
+            <StaggerText 
+              text="Why Choose Us" 
+              variant="default"
+              as="h2"
+              className="text-3xl lg:text-5xl font-bold text-prixgen-blue mb-8 tracking-tighter"
+            />
             <p className="text-lg lg:text-xl text-slate-500 leading-relaxed font-medium max-w-4xl">
               {data.whyChooseUsIntro}
             </p>
@@ -438,9 +594,19 @@ export function AboutClient({ data }: AboutProps) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <FadeUp>
             <div className="relative">
-              <h2 className="text-3xl lg:text-5xl font-bold mb-8 tracking-tight text-slate-900 leading-tight">
-                {data.experienceSection?.title}
-              </h2>
+              <StaggerText 
+                text={data.experienceSection?.title || "Excellence Driven"} 
+                variant="default"
+                as="h2"
+                className="text-3xl lg:text-5xl font-bold mb-8 tracking-tight text-slate-900 leading-tight"
+              />
+              <motion.div 
+                initial={{ width: 0 }}
+                whileInView={{ width: 64 }}
+                viewport={{ once: false }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="h-1 bg-prixgen-blue rounded-full mb-8" 
+              />
               <div className="space-y-8">
                 {data.experienceSection?.points?.map((point, i) => (
                   <motion.div 
@@ -460,7 +626,7 @@ export function AboutClient({ data }: AboutProps) {
           </FadeUp>
           <FadeUp delay={0.2}>
             <div className="relative aspect-video lg:aspect-square rounded-[3rem] overflow-hidden shadow-2xl">
-              <OptimizedImage src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1200" alt="Prixgen Excellence" fill className="object-cover" />
+              <OptimizedImage src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=1200" alt="Prixgen Excellence" fill className="object-cover" />
             </div>
           </FadeUp>
         </div>
@@ -475,14 +641,18 @@ export function AboutClient({ data }: AboutProps) {
             <FadeUp key={stat.label} delay={i * 0.1}>
               <div className="text-center group">
                 <motion.div 
-                  initial={{ scale: 0.5, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  className="text-4xl lg:text-6xl font-bold mb-4 text-white tracking-tighter leading-none"
+                  initial={{ y: 20, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  viewport={{ once: false }}
+                  transition={{ type: "spring", stiffness: 100, delay: i * 0.1 }}
+                  className="text-4xl lg:text-7xl font-black mb-4 text-white tracking-tighter leading-none"
                 >
-                  {stat.value}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40">
+                    {stat.value}
+                  </span>
                 </motion.div>
-                <div className="h-2 w-16 bg-prixgen-blue mx-auto mb-8 group-hover:w-32 transition-all duration-700 rounded-full" />
-                <p className="text-sm lg:text-base text-slate-400 font-bold uppercase tracking-[0.3em] opacity-80">
+                <div className="h-1.5 w-12 bg-prixgen-blue mx-auto mb-8 group-hover:w-24 transition-all duration-700 rounded-full shadow-[0_0_15px_rgba(14,165,233,0.5)]" />
+                <p className="text-[10px] lg:text-xs text-slate-500 font-black uppercase tracking-[0.4em] opacity-80 group-hover:text-prixgen-lightblue transition-colors">
                   {stat.label}
                 </p>
               </div>
@@ -498,13 +668,14 @@ export function AboutClient({ data }: AboutProps) {
         <motion.div 
           initial={{ opacity: 0, y: 40, scale: 0.95 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ margin: "-100px" }}
+          viewport={{ once: false, margin: "-100px" }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="relative bg-[#020617] p-12 lg:p-24 rounded-[4rem] text-white text-center overflow-hidden shadow-2xl group"
         >
           {/* Animated Background for CTA */}
           <div className="absolute inset-0 z-0">
             <motion.div 
+              initial={{ scale: 1, opacity: 0.3 }}
               animate={{ 
                 scale: [1, 1.1, 1],
                 opacity: [0.3, 0.5, 0.3]

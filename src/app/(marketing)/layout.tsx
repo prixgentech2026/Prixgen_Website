@@ -5,6 +5,7 @@ import { Footer } from '@/components/shared/footer';
 import { SmoothScroll } from '@/components/providers/smooth-scroll';
 
 import { PageTransition } from '@/components/providers/page-transition';
+import { PageLoader } from '@/components/shared/page-loader';
 
 export default function MarketingLayout({
   children,
@@ -13,6 +14,7 @@ export default function MarketingLayout({
 }) {
   return (
     <div className="font-sans antialiased bg-white text-prixgen-dark min-h-screen flex flex-col">
+      <PageLoader />
       <SmoothScroll>
         <Header />
         <PageTransition>

@@ -1,6 +1,7 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { cn } from '@/lib/utils';
 import { useRef, ReactNode } from 'react';
 
 interface ParallaxProps {
@@ -33,7 +34,7 @@ export function Parallax({
   );
 
   return (
-    <motion.div ref={ref} style={{ y }} className={className}>
+    <motion.div ref={ref} style={{ y }} className={cn("relative", className)}>
       {children}
     </motion.div>
   );

@@ -10,18 +10,34 @@ import { FadeUp } from '@/components/animations/fade-up';
 import { AmbientGlow } from '@/components/animations/ambient-glow';
 import { PortableText } from '@/components/ui/portable-text';
 import { servicesData } from '@/lib/data';
+import { urlFor } from '@/sanity/lib/image';
 import { Magnetic } from '@/components/animations/magnetic';
-import { RevealImage } from '@/components/animations/reveal-image';
 import { RevealText } from '@/components/animations/reveal-text';
 import { Parallax } from '@/components/animations/parallax';
 import { Floating } from '@/components/animations/floating';
+import { AnimatedConnector } from '@/components/shared/animated-connector';
+import { HeroBadge } from '@/components/shared/hero-badge';
+import { HeroBackground } from '@/components/shared/hero-background';
 
 export default function ServiceClientPage({ service }: { service: any }) {
   const getImageUrl = (img: any) => {
     if (!img) return null;
     if (typeof img === 'string') return img;
-    // Handle Sanity standard image asset structure and our custom projection
-    return img.sourceUrl || img.asset?.url || (typeof img.asset === 'string' ? img.asset : null);
+    
+    // 1. If it's our custom projection with sourceUrl
+    if (img.sourceUrl) return img.sourceUrl;
+    
+    // 2. If it's a raw Sanity image object or reference
+    try {
+      if (img.asset?._ref || img.asset?._id || img.asset?.url) {
+        return urlFor(img).url();
+      }
+    } catch (e) {
+      console.warn("Failed to resolve Sanity image:", e);
+    }
+    
+    // 3. Fallback for absolute URLs or custom asset objects
+    return img.asset?.url || (typeof img.asset === 'string' ? img.asset : null);
   };
 
   const bannerImageUrl = getImageUrl(service.summaryImage) || getImageUrl(service.featuredImage) || service.externalImageUrl;
@@ -49,24 +65,13 @@ export default function ServiceClientPage({ service }: { service: any }) {
       />
 
       {/* Hero Header */}
-      <section className="relative min-h-[40vh] md:min-h-[50vh] flex items-center justify-center overflow-hidden bg-white pt-24 pb-12">
-        <Parallax offset={60} direction="down" className="absolute inset-0 z-0">
-          <AmbientGlow />
-        </Parallax>
-        
-        {/* Background Elements */}
-        <Parallax offset={30} className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-40" />
-        
-        {/* Animated Floating Elements */}
-        <Floating duration={5} y={15} x={10} className="absolute top-1/4 -left-20 z-0">
-          <div className="w-64 h-64 bg-prixgen-blue/5 rounded-full blur-3xl animate-pulse" />
-        </Floating>
-        <Floating duration={7} y={25} x={15} delay={0.5} className="absolute bottom-1/4 -right-20 z-0">
-          <div className="w-96 h-96 bg-prixgen-lightblue/5 rounded-full blur-3xl animate-pulse" />
-        </Floating>
+      <section className="relative min-h-[80vh] flex items-center pt-32 overflow-hidden bg-white">
+        <HeroBackground />
         
         <div className="container relative z-10 mx-auto px-4 text-center">
           <FadeUp delay={0.1} className="space-y-6 flex flex-col items-center">
+            <HeroBadge text={service.title || "Intelligent Architecture"} align="center" />
+            
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -100,39 +105,30 @@ export default function ServiceClientPage({ service }: { service: any }) {
           </FadeUp>
         </div>
         
-        {/* Scroll Indicator */}
-        <motion.div 
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30"
-        >
-          <div className="w-px h-12 bg-gradient-to-b from-prixgen-blue to-transparent" />
-        </motion.div>
+        <div className="absolute bottom-0 left-0 w-full translate-y-1/2 z-20">
+          <AnimatedConnector height="h-32" />
+        </div>
       </section>
 
-      <div className="container mx-auto px-4 py-8 lg:py-12">
+      <div className="container mx-auto px-4 py-8 lg:py-12 relative">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
           {/* Main Content */}
-          <article className="lg:col-span-2 space-y-12 lg:space-y-20">
+          <article className="lg:col-span-2 space-y-8 lg:space-y-12">
             {bannerImageUrl && (
-              <FadeUp delay={0.2} className="relative aspect-video w-full rounded-[3rem] overflow-hidden shadow-2xl">
-                <Parallax offset={40}>
-                  <RevealImage>
-                    <OptimizedImage
-                      src={bannerImageUrl}
-                      alt={bannerImageAlt}
-                      fill
-                      priority
-                      className="object-cover transition-transform duration-700 hover:scale-105"
-                    />
-                  </RevealImage>
-                </Parallax>
+              <div className="relative aspect-video w-full rounded-[3rem] overflow-hidden shadow-2xl">
+                <OptimizedImage
+                  src={bannerImageUrl}
+                  alt={bannerImageAlt}
+                  fill
+                  priority
+                  className="object-cover transition-transform duration-700 hover:scale-105"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
-              </FadeUp>
+              </div>
             )}
 
             {/* Executive Summary (Content) */}
-            <FadeUp delay={0.3} className="relative bg-white rounded-[3rem] p-8 lg:p-16 shadow-[0_30px_60px_-15px_rgba(0,102,204,0.05)] border border-slate-100 overflow-hidden">
+            <FadeUp delay={0.3} className="relative bg-white rounded-[3rem] p-6 lg:p-12 shadow-[0_30px_60px_-15px_rgba(0,102,204,0.05)] border border-slate-100 overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-prixgen-blue/[0.02] rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none" />
               
               <div className="flex items-center gap-4 mb-10">
@@ -186,7 +182,7 @@ export default function ServiceClientPage({ service }: { service: any }) {
             </div>
 
             {/* Business Outcomes Banner */}
-            <FadeUp delay={0.2} className="relative rounded-[3rem] bg-prixgen-dark overflow-hidden p-8 lg:p-16 my-8 shadow-2xl">
+            <FadeUp delay={0.2} className="relative rounded-[3rem] bg-prixgen-dark overflow-hidden p-6 lg:p-12 my-6 shadow-2xl">
                <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
                <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-l from-prixgen-blue/40 to-transparent opacity-30 pointer-events-none" />
                
@@ -211,7 +207,7 @@ export default function ServiceClientPage({ service }: { service: any }) {
 
             {/* Process Section - Vertical Timeline */}
             {service.process && service.process.length > 0 && (
-              <section className="pt-8">
+              <section className="py-8 lg:py-12">
                 <FadeUp>
                   <h2 className="text-3xl md:text-4xl font-bold text-prixgen-dark tracking-tighter mb-12">
                     Implementation <span className="italic text-prixgen-blue text-opacity-80">Roadmap</span>

@@ -14,6 +14,9 @@ import { StaggerText } from '@/components/animations/stagger-text';
 import { AmbientGlow } from '@/components/animations/ambient-glow';
 import { LeadCaptureForm } from '@/components/features/lead-capture-form';
 import { ServicesPageData } from '@/lib/data';
+import { AnimatedConnector } from '@/components/shared/animated-connector';
+import { HeroBadge } from '@/components/shared/hero-badge';
+import { HeroBackground } from '@/components/shared/hero-background';
 
 const IconMap: Record<string, any> = {
   Search, PenTool, Code, 
@@ -33,24 +36,14 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
     <div className="bg-white overflow-hidden selection:bg-prixgen-blue selection:text-white">
       {/* Section 1: The Hero */}
       <section className="relative min-h-[80vh] flex items-center pt-32 overflow-hidden bg-white">
-        <AmbientGlow />
-        
-        {/* Animated Background Grid */}
-        <div className="absolute inset-0 z-0 opacity-[0.03]" 
-             style={{ backgroundImage: 'radial-gradient(#0066cc 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+        <HeroBackground />
 
         <motion.div 
           style={{ opacity, scale }}
           className="container mx-auto px-4 relative z-10 text-center"
         >
           <FadeUp className="space-y-6">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="h-[1px] w-8 bg-prixgen-blue/30" />
-              <span className="px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue font-bold tracking-widest uppercase text-[10px]">
-                {data.subtitle || "Architectural Services"}
-              </span>
-              <div className="h-[1px] w-8 bg-prixgen-blue/30" />
-            </div>
+            <HeroBadge text={data.subtitle || "Architectural Services"} align="center" />
             
             <StaggerText 
               text={data.title} 
@@ -83,6 +76,9 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
           </FadeUp>
         </motion.div>
         
+        <div className="absolute bottom-0 left-0 w-full translate-y-1/2 z-20">
+          <AnimatedConnector height="h-32" />
+        </div>
       </section>
 
       {/* Section 2: Our Methodology (The Voyage) */}

@@ -134,6 +134,8 @@ export default function InteractiveGlobe() {
               <Marker key={name} coordinates={coordinates as [number, number]}>
                 {/* CSS-Animated Halo (More performant than Framer Motion for loops) */}
                 <circle
+                  cx={0}
+                  cy={0}
                   r={12}
                   fill="#00A3E0"
                   className="globe-marker-pulse"
@@ -141,6 +143,8 @@ export default function InteractiveGlobe() {
                 
                 {/* Strategic Node */}
                 <circle 
+                  cx={0}
+                  cy={0}
                   r={5} 
                   fill="#004B87" // prixgen-blue
                   stroke="#fff" 

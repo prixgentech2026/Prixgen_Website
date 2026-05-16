@@ -37,7 +37,7 @@ export function Logo({ className, showTagline = true, variant = 'default' }: Log
           >
             Pri
           </text>
-          
+
           <text
             x="58"
             y="0"
@@ -46,7 +46,7 @@ export function Logo({ className, showTagline = true, variant = 'default' }: Log
           >
             x
           </text>
-          
+
           <text
             x="82"
             y="0"
@@ -74,7 +74,7 @@ export function Logo({ className, showTagline = true, variant = 'default' }: Log
               fill={blueColor}
               style={{ fontSize: '10px', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}
             >
-              Innovation
+              Innovations
             </text>
           </g>
         )}

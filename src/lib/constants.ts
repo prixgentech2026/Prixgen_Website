@@ -51,6 +51,11 @@ export const MENU_DATA = {
     { title: "Dairy", href: "/industries/dairy", description: "Time-critical perishables logistics." },
     { title: "Electronics", href: "/industries/electronics", description: "High-precision engineering and assembly." },
   ],
+  resources: [
+    { title: "Blog", href: "/blog", description: "Insights into enterprise technology and architecture." },
+    { title: "Careers", href: "/careers", description: "Join our team of industrial software architects." },
+    { title: "Contact Us", href: "/contact", description: "Start your transformation journey with our experts." },
+  ],
 };
 
 export const FOOTER_DATA = {

@@ -693,8 +693,8 @@ export const aboutData = {
       children: [{ _type: 'span', text: "We don't just deploy software; we future-proof your digital journey. Our methodology is rooted in architectural integrity and zero-tolerance for operational friction." }]
     }
   ],
-  vision: "To be the global benchmark for operational intelligence and industrial digital transformation.",
-  mission: "Empowering enterprises through unified ecosystems that turn data into decisive competitive advantage.",
+  vision: "Build enterprise solutions, experience the modern technology",
+  mission: "\"PRIXGEN\" being enterprise information solutions provider, understands the client business processes and meticulously planning the business solutions by augmenting and crafting a niche IoT platform for the customers.",
   stats: [
     { label: "Years Experience", value: "20+" },
     { label: "Implementations", value: "100+" },
@@ -720,7 +720,7 @@ export const aboutData = {
     title: "20 Years of Industrial Excellence",
     description: "Our journey has been defined by rescuing failed implementations and architecting unified global ecosystems.",
     points: [
-      "Certified Gold Partners for Odoo and SAP Business One.",
+      "Certified Gold Partners for Odoo.",
       "Proprietary AI and IIoT telemetry extraction models.",
       "Global delivery centers across APAC and EMEA."
     ]

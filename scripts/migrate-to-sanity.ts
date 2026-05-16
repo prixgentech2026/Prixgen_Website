@@ -198,19 +198,31 @@ async function migrateIndustries() {
     const imageUrl = industry.featuredImage?.sourceUrl || industry.externalImageUrl;
     const imageId = imageUrl ? await uploadImage(imageUrl) : null;
     
+    const summaryImageUrl = industry.summaryImage?.sourceUrl;
+    const summaryImageId = summaryImageUrl ? await uploadImage(summaryImageUrl) : null;
+    
     const doc = {
       _type: 'industry',
       _id: `industry-${industry.slug}`,
       title: industry.title,
       slug: { _type: 'slug', current: industry.slug },
       headline: industry.headline,
+      externalImageUrl: industry.externalImageUrl,
       featuredImage: imageId ? {
         _type: 'image',
         asset: {
           _type: 'reference',
           _ref: imageId,
         },
-        altText: industry.featuredImage.altText,
+        altText: industry.featuredImage?.altText || industry.title,
+      } : undefined,
+      summaryImage: summaryImageId ? {
+        _type: 'image',
+        asset: {
+          _type: 'reference',
+          _ref: summaryImageId,
+        },
+        altText: industry.summaryImage?.altText || industry.title,
       } : undefined,
       content: addKeysToBlocks(industry.content),
       features: industry.features.map((f: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...f })),
@@ -230,6 +242,9 @@ async function migrateSolutions() {
     console.log(`Migrating Solution: ${solution.title}`);
     const imageUrl = solution.externalImageUrl || (solution.featuredImage ? solution.featuredImage.sourceUrl : null);
     const imageId = imageUrl ? await uploadImage(imageUrl) : null;
+
+    const summaryImageUrl = solution.summaryImage?.sourceUrl;
+    const summaryImageId = summaryImageUrl ? await uploadImage(summaryImageUrl) : null;
     
     const doc = {
       _type: 'solution',
@@ -245,6 +260,14 @@ async function migrateSolutions() {
           _ref: imageId,
         },
         altText: solution.featuredImage?.altText || solution.title,
+      } : undefined,
+      summaryImage: summaryImageId ? {
+        _type: 'image',
+        asset: {
+          _type: 'reference',
+          _ref: summaryImageId,
+        },
+        altText: solution.summaryImage?.altText || solution.title,
       } : undefined,
       content: addKeysToBlocks(solution.content),
       features: solution.features ? solution.features.map((f: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...f })) : [],
@@ -265,6 +288,9 @@ async function migrateServices() {
     const imageUrl = service.externalImageUrl || (service.featuredImage ? service.featuredImage.sourceUrl : null);
     const imageId = imageUrl ? await uploadImage(imageUrl) : null;
     
+    const summaryImageUrl = service.summaryImage?.sourceUrl;
+    const summaryImageId = summaryImageUrl ? await uploadImage(summaryImageUrl) : null;
+
     const doc = {
       _type: 'service',
       _id: `service-${service.slug}`,
@@ -279,6 +305,14 @@ async function migrateServices() {
           _ref: imageId,
         },
         altText: service.featuredImage?.altText || service.title,
+      } : undefined,
+      summaryImage: summaryImageId ? {
+        _type: 'image',
+        asset: {
+          _type: 'reference',
+          _ref: summaryImageId,
+        },
+        altText: service.summaryImage?.altText || service.title,
       } : undefined,
       content: addKeysToBlocks(service.content),
       features: service.features ? service.features.map((f: any) => ({ _key: Math.random().toString(36).substr(2, 9), ...f })) : [],

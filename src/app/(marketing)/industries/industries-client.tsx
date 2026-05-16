@@ -14,6 +14,9 @@ import { StaggerText } from '@/components/animations/stagger-text';
 import { AmbientGlow } from '@/components/animations/ambient-glow';
 import { LeadCaptureForm } from '@/components/features/lead-capture-form';
 import { IndustriesPageData } from '@/lib/data';
+import { AnimatedConnector } from '@/components/shared/animated-connector';
+import { HeroBadge } from '@/components/shared/hero-badge';
+import { HeroBackground } from '@/components/shared/hero-background';
 
 const IconMap: Record<string, any> = {
   Search, PenTool, Settings, 
@@ -33,24 +36,14 @@ export default function IndustriesClient({ data }: { data: IndustriesPageData })
     <div className="bg-white overflow-hidden selection:bg-prixgen-blue selection:text-white">
       {/* Section 1: The Hero */}
       <section className="relative min-h-[80vh] flex items-center pt-32 overflow-hidden bg-white">
-        <AmbientGlow />
-        
-        {/* Animated Background Grid */}
-        <div className="absolute inset-0 z-0 opacity-[0.03]" 
-             style={{ backgroundImage: 'radial-gradient(#0066cc 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+        <HeroBackground />
 
         <motion.div 
           style={{ opacity, scale }}
           className="container mx-auto px-4 relative z-10 text-center"
         >
           <FadeUp className="space-y-6">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="h-[1px] w-8 bg-prixgen-blue/30" />
-              <span className="px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue font-bold tracking-widest uppercase text-[10px]">
-                {data.subtitle || "Market Verticals"}
-              </span>
-              <div className="h-[1px] w-8 bg-prixgen-blue/30" />
-            </div>
+            <HeroBadge text={data.subtitle || "Market Verticals"} align="center" />
             
             <StaggerText 
               text={data.title} 
@@ -82,10 +75,14 @@ export default function IndustriesClient({ data }: { data: IndustriesPageData })
             </div>
           </FadeUp>
         </motion.div>
+
+        <div className="absolute bottom-0 left-0 w-full translate-y-1/2 z-20">
+          <AnimatedConnector height="h-32" />
+        </div>
       </section>
 
       {/* Section 2: Methodology (Process Intelligence) */}
-      <section id="methodology" className="py-24 lg:py-32 bg-slate-50 border-t border-slate-200/60 relative overflow-hidden">
+      <section id="methodology" className="py-16 lg:py-20 bg-slate-50 border-t border-slate-200/60 relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
              style={{ backgroundImage: 'linear-gradient(#0047ab 1px, transparent 1px), linear-gradient(90deg, #0047ab 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
         
@@ -154,7 +151,7 @@ export default function IndustriesClient({ data }: { data: IndustriesPageData })
       </section>
 
       {/* Section 3: Core Industries Grid */}
-      <section className="py-24 lg:py-32 bg-white relative">
+      <section className="py-16 lg:py-20 bg-white relative">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-20 gap-8 text-left">
             <FadeUp className="max-w-2xl">
@@ -225,7 +222,7 @@ export default function IndustriesClient({ data }: { data: IndustriesPageData })
       </section>
 
       {/* Section 4: Industrial Outcomes */}
-      <section className="py-24 lg:py-32 bg-[#020617] text-white relative overflow-hidden">
+      <section className="py-16 lg:py-20 bg-[#020617] text-white relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full">
           <div className="absolute top-[10%] left-[5%] w-[400px] h-[400px] bg-prixgen-blue/10 rounded-full blur-[120px] animate-pulse" />
           <div className="absolute inset-0 z-0 opacity-20" 
@@ -281,7 +278,7 @@ export default function IndustriesClient({ data }: { data: IndustriesPageData })
       </section>
 
       {/* Section 5: Bottom CTA */}
-      <section className="py-24 lg:py-40 bg-white relative overflow-hidden">
+      <section className="py-16 lg:py-24 bg-white relative overflow-hidden">
         <div className="container mx-auto px-4">
           <motion.div 
             whileHover={{ y: -5 }}

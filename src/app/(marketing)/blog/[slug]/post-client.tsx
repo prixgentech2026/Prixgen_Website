@@ -17,8 +17,10 @@ import { StaggerText } from '@/components/animations/stagger-text';
 import { AmbientGlow } from '@/components/animations/ambient-glow';
 import { LinkedInEmbed } from '@/components/shared/linkedin-embed';
 import { LeadCaptureForm } from '@/components/features/lead-capture-form';
-import { RevealImage } from '@/components/animations/reveal-image';
 import { Magnetic } from '@/components/animations/magnetic';
+import { AnimatedConnector } from '@/components/shared/animated-connector';
+import { HeroBadge } from '@/components/shared/hero-badge';
+import { HeroBackground } from '@/components/shared/hero-background';
 import { urlFor } from '@/sanity/lib/image';
 
 interface PostClientProps {
@@ -60,18 +62,21 @@ const components = {
   list: {
     bullet: ({ children }: any) => (
       <ul className="list-none mb-10 space-y-4 text-slate-600 text-xl font-medium ml-4">
-        {React.Children.map(children, (child) => (
-          <li className="flex items-start gap-4">
-            <span className="mt-2.5 h-2 w-2 rounded-full bg-prixgen-lightblue shrink-0" />
-            {child}
-          </li>
-        ))}
+        {children}
       </ul>
     ),
     number: ({ children }: any) => (
       <ol className="list-decimal list-inside mb-10 space-y-4 text-slate-600 text-xl font-medium ml-4 marker:text-prixgen-blue marker:font-black">
         {children}
       </ol>
+    ),
+  },
+  listItem: {
+    bullet: ({ children }: any) => (
+      <li className="flex items-start gap-4">
+        <span className="mt-2.5 h-2 w-2 rounded-full bg-prixgen-lightblue shrink-0" />
+        <div>{children}</div>
+      </li>
     ),
   },
   types: {
@@ -137,15 +142,13 @@ export default function PostClient({ post }: PostClientProps) {
       />
 
       {/* Premium White Hero */}
-      <header className="relative min-h-[50vh] flex items-center pt-24 md:pt-32 pb-16 overflow-hidden bg-white">
-        <AmbientGlow />
-        
-        {/* Subtle Background Elements */}
-        <div className="absolute inset-0 z-0 opacity-[0.03]" 
-             style={{ backgroundImage: 'radial-gradient(#0066cc 1px, transparent 1px)', backgroundSize: '50px 50px' }} />
+      <header className="relative min-h-[80vh] flex items-center pt-32 overflow-hidden bg-white">
+        <HeroBackground />
 
         <div className="container mx-auto px-6 relative z-10 text-center">
           <FadeUp className="space-y-10 max-w-5xl mx-auto">
+            <HeroBadge text="Intelligence Center" align="center" />
+            
             <Link 
               href="/blog" 
               className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue hover:bg-prixgen-blue hover:text-white transition-all font-black text-[10px] uppercase tracking-widest group mx-auto"
@@ -199,11 +202,15 @@ export default function PostClient({ post }: PostClientProps) {
             </div>
           </FadeUp>
         </div>
+        
+        <div className="absolute bottom-0 left-0 w-full translate-y-1/2 z-20">
+          <AnimatedConnector height="h-32" />
+        </div>
       </header>
 
       {/* Feature Image */}
       <div className="container mx-auto px-6 relative z-20">
-        <RevealImage className="max-w-7xl mx-auto rounded-[2.5rem] lg:rounded-[3.5rem] shadow-[0_50px_100px_-20px_rgba(0,102,204,0.15)] border-[8px] md:border-[12px] border-white ring-1 ring-slate-100">
+        <div className="max-w-7xl mx-auto rounded-[2.5rem] lg:rounded-[3.5rem] shadow-[0_50px_100px_-20px_rgba(0,102,204,0.15)] border-[8px] md:border-[12px] border-white ring-1 ring-slate-100 overflow-hidden">
           <div className="relative aspect-[21/9]">
             <OptimizedImage 
               src={post.mainImage || "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2070"} 
@@ -212,7 +219,7 @@ export default function PostClient({ post }: PostClientProps) {
               className="object-cover transition-transform duration-[2s] hover:scale-105"
             />
           </div>
-        </RevealImage>
+        </div>
       </div>
 
 

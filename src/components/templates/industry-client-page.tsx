@@ -12,18 +12,34 @@ import { AmbientGlow } from '@/components/animations/ambient-glow';
 import { PortableText } from '@/components/ui/portable-text';
 import { FileText, ChevronRight, Globe, Zap, BarChart3, ShieldCheck } from 'lucide-react';
 import { Magnetic } from '@/components/animations/magnetic';
-import { RevealImage } from '@/components/animations/reveal-image';
 import { RevealText } from '@/components/animations/reveal-text';
 import { Parallax } from '@/components/animations/parallax';
 import { Floating } from '@/components/animations/floating';
+import { AnimatedConnector } from '@/components/shared/animated-connector';
+import { HeroBadge } from '@/components/shared/hero-badge';
+import { HeroBackground } from '@/components/shared/hero-background';
+import { urlFor } from '@/sanity/lib/image';
 
 export default function IndustryClientPage({ industry }: { industry: any }) {
   // Use summaryImage for the main banner, fallback to featuredImage or externalImageUrl
   const getImageUrl = (img: any) => {
     if (!img) return null;
     if (typeof img === 'string') return img;
-    // Handle Sanity standard image asset structure and our custom projection
-    return img.sourceUrl || img.asset?.url || (typeof img.asset === 'string' ? img.asset : null);
+    
+    // 1. If it's our custom projection with sourceUrl
+    if (img.sourceUrl) return img.sourceUrl;
+    
+    // 2. If it's a raw Sanity image object or reference
+    try {
+      if (img.asset?._ref || img.asset?._id || img.asset?.url) {
+        return urlFor(img).url();
+      }
+    } catch (e) {
+      console.warn("Failed to resolve Sanity image:", e);
+    }
+    
+    // 3. Fallback for absolute URLs or custom asset objects
+    return img.asset?.url || (typeof img.asset === 'string' ? img.asset : null);
   };
 
   const bannerImageUrl = getImageUrl(industry.summaryImage) || getImageUrl(industry.featuredImage) || industry.externalImageUrl;
@@ -51,29 +67,18 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
       />
 
       {/* Hero Header */}
-      <section className="relative min-h-[40vh] md:min-h-[50vh] flex items-center justify-center overflow-hidden bg-white pt-24 pb-12">
-        <Parallax offset={50} direction="down" className="absolute inset-0 z-0">
-          <AmbientGlow />
-        </Parallax>
-        
-        {/* Background Elements */}
-        <Parallax offset={30} className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:30px_30px] opacity-40" />
-        
-        {/* Animated Floating Elements */}
-        <Floating duration={6} y={20} x={15} className="absolute top-1/4 -left-20 z-0">
-          <div className="w-80 h-80 bg-prixgen-blue/5 rounded-full blur-[100px] animate-pulse" />
-        </Floating>
-        <Floating duration={8} y={30} x={20} delay={1} className="absolute bottom-1/4 -right-20 z-0">
-          <div className="w-[500px] h-[500px] bg-prixgen-lightblue/5 rounded-full blur-[120px] animate-pulse" />
-        </Floating>
+      <section className="relative min-h-[80vh] flex items-center pt-32 overflow-hidden bg-white">
+        <HeroBackground />
         
         <div className="container relative z-10 mx-auto px-4 text-center">
-          <FadeUp delay={0.1} className="space-y-8 flex flex-col items-center">
+          <FadeUp delay={0.1} className="space-y-6 flex flex-col items-center">
+            <HeroBadge text={industry.title || "Intelligent Architecture"} align="center" />
+            
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="px-5 py-2 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 flex items-center justify-center gap-2 text-[10px] font-black text-prixgen-blue uppercase tracking-[0.3em] backdrop-blur-sm"
+              className="px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 flex items-center justify-center gap-2 text-[10px] font-black text-prixgen-blue/60 uppercase tracking-[0.2em] backdrop-blur-sm"
             >
               <Magnetic>
                 <Link href="/" className="hover:text-prixgen-blue transition-colors">Home</Link>
@@ -102,14 +107,9 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
           </FadeUp>
         </div>
         
-        {/* Scroll Indicator */}
-        <motion.div 
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-20"
-        >
-          <div className="w-px h-16 bg-gradient-to-b from-prixgen-blue to-transparent" />
-        </motion.div>
+        <div className="absolute bottom-0 left-0 w-full translate-y-1/2 z-20">
+          <AnimatedConnector height="h-32" />
+        </div>
       </section>
 
       <div className="container mx-auto px-4 py-8 lg:py-12 relative z-10">
@@ -119,18 +119,14 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
             
             {/* Visual Narrative Anchor */}
             {bannerImageUrl && (
-              <FadeUp delay={0.2} className="relative aspect-[21/10] w-full rounded-[4rem] overflow-hidden shadow-2xl border border-slate-100 group">
-                <Parallax offset={40}>
-                  <RevealImage>
-                    <OptimizedImage
-                      src={bannerImageUrl}
-                      alt={bannerImageAlt}
-                      fill
-                      priority
-                      className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                    />
-                  </RevealImage>
-                </Parallax>
+              <div className="relative aspect-[21/10] w-full rounded-[4rem] overflow-hidden shadow-2xl border border-slate-100 group">
+                <OptimizedImage
+                  src={bannerImageUrl}
+                  alt={bannerImageAlt}
+                  fill
+                  priority
+                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 pointer-events-none" />
                 <div className="absolute bottom-12 left-12">
                    <div className="flex items-center gap-3 px-6 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl text-white font-bold text-xs uppercase tracking-widest">
@@ -138,7 +134,7 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
                      Global Sector Intelligence
                    </div>
                 </div>
-              </FadeUp>
+              </div>
             )}
 
             {/* Strategic Analysis (Executive Summary) */}

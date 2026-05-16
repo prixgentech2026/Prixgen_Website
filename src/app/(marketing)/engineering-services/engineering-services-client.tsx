@@ -15,6 +15,9 @@ import { AmbientGlow } from '@/components/animations/ambient-glow';
 import { StaggerText } from '@/components/animations/stagger-text';
 import { LeadCaptureForm } from '@/components/features/lead-capture-form';
 import { ServicesPageData } from '@/lib/data';
+import { AnimatedConnector } from '@/components/shared/animated-connector';
+import { HeroBadge } from '@/components/shared/hero-badge';
+import { HeroBackground } from '@/components/shared/hero-background';
 import { Button } from '@/components/ui/button';
 import { JsonLd } from '@/components/seo/json-ld';
 
@@ -43,12 +46,8 @@ export default function EngineeringServicesClient({ data }: { data: ServicesPage
       />
 
       {/* Hero Section */}
-      <section className="relative min-h-[85vh] flex items-center pt-24 pb-12 overflow-hidden bg-white">
-        <AmbientGlow />
-        
-        {/* Architectural Grid Background */}
-        <div className="absolute inset-0 z-0 opacity-[0.03]" 
-             style={{ backgroundImage: 'linear-gradient(#0066cc 1px, transparent 1px), linear-gradient(90deg, #0066cc 1px, transparent 1px)', backgroundSize: '80px 80px' }} />
+      <section className="relative min-h-[80vh] flex items-center pt-32 overflow-hidden bg-white">
+        <HeroBackground />
 
         <motion.div 
           style={{ opacity, scale }}
@@ -92,6 +91,10 @@ export default function EngineeringServicesClient({ data }: { data: ServicesPage
             </div>
           </FadeUp>
         </motion.div>
+
+        <div className="absolute bottom-0 left-0 w-full translate-y-1/2 z-20">
+          <AnimatedConnector height="h-32" />
+        </div>
       </section>
 
       {/* Methodology Section */}

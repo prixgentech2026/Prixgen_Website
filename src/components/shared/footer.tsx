@@ -113,6 +113,8 @@ export function Footer() {
           <ul className="space-y-3 text-gray-400 text-sm">
             <li><Link href="/who-we-are" className="hover:text-prixgen-lightblue transition-colors">Who We Are</Link></li>
             <li><Link href="/careers" className="hover:text-prixgen-lightblue transition-colors">Careers</Link></li>
+            <li><Link href="/blog" className="hover:text-prixgen-lightblue transition-colors">Blog</Link></li>
+            <li><Link href="/contact" className="hover:text-prixgen-lightblue transition-colors">Contact Us</Link></li>
             <li><Link href="/engineering-services" className="hover:text-prixgen-lightblue transition-colors">Engineering Services</Link></li>
           </ul>
         </div>

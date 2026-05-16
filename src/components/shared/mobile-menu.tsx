@@ -136,11 +136,26 @@ export function MobileMenu() {
                     <Link 
                       href={item.href} 
                       onClick={(e) => { e.preventDefault(); handleNavigate(item.href); }}
-                      className="flex items-center justify-between text-lg font-bold text-prixgen-blue"
+                      className="flex items-center justify-between text-lg font-bold text-prixgen-blue group"
                     >
                       {item.title}
-                      <ChevronRight className="h-5 w-5 text-prixgen-lightblue" />
+                      <ChevronRight className="h-5 w-5 text-prixgen-lightblue group-hover:translate-x-1 transition-transform" />
                     </Link>
+                    {item.subItems && (
+                      <ul className="mt-3 ml-2 pl-4 border-l-2 border-prixgen-lightblue/30 space-y-3">
+                        {item.subItems.map((sub) => (
+                          <li key={sub.title}>
+                            <Link 
+                              href={sub.href} 
+                              onClick={(e) => { e.preventDefault(); handleNavigate(sub.href); }}
+                              className="text-base font-medium text-prixgen-blue/80 hover:text-prixgen-blue block w-full"
+                            >
+                              {sub.title}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -174,28 +189,24 @@ export function MobileMenu() {
             </div>
 
             <div className="pt-8 border-t border-prixgen-gray">
-              <h3 className="text-xs font-bold text-prixgen-dark/40 uppercase tracking-widest mb-4">Resources</h3>
-              <Link 
-                href="/blog" 
-                onClick={(e) => { e.preventDefault(); handleNavigate('/blog'); }}
-                className="block text-2xl font-bold text-prixgen-blue pb-4 border-b border-prixgen-gray/20"
-              >
-                Blog
-              </Link>
-              <Link 
-                href="/careers" 
-                onClick={(e) => { e.preventDefault(); handleNavigate('/careers'); }}
-                className="block text-2xl font-bold text-prixgen-blue pb-4 border-b border-prixgen-gray/20"
-              >
-                Careers
-              </Link>
-              <Link 
-                href="/contact" 
-                onClick={(e) => { e.preventDefault(); handleNavigate('/contact'); }}
-                className="block text-2xl font-bold text-prixgen-blue pb-4 border-b border-prixgen-gray/20"
-              >
-                Contact Us
-              </Link>
+              <h3 className="text-xs font-bold text-prixgen-dark/40 uppercase tracking-widest mb-6">Resources</h3>
+              <ul className="space-y-6">
+                {MENU_DATA.resources.map((item) => (
+                  <li key={item.title}>
+                    <Link 
+                      href={item.href} 
+                      onClick={(e) => { e.preventDefault(); handleNavigate(item.href); }}
+                      className="group block"
+                    >
+                      <div className="flex items-center justify-between text-2xl font-bold text-prixgen-blue group-hover:text-prixgen-lightblue transition-colors">
+                        {item.title}
+                        <ChevronRight className="h-6 w-6 text-prixgen-lightblue" />
+                      </div>
+                      <p className="text-sm text-prixgen-dark/50 mt-1 font-medium">{item.description}</p>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
