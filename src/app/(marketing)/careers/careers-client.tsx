@@ -110,9 +110,9 @@ export default function CareersClient({ data }: { data: CareersPageData }) {
   ];
 
   return (
-    <div className="bg-white selection:bg-prixgen-blue selection:text-white pb-32">
+    <div className="bg-white selection:bg-prixgen-blue selection:text-white pb-16">
       {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex items-center pt-32 overflow-hidden">
+      <section className="relative min-h-[60vh] flex items-center pt-24 overflow-hidden">
         <AmbientGlow />
         
         {/* Decorative elements */}
@@ -145,7 +145,7 @@ export default function CareersClient({ data }: { data: CareersPageData }) {
               <div className="flex flex-wrap gap-6 pt-8">
                 <Button 
                   size="lg" 
-                  className="rounded-2xl h-16 px-12 text-lg font-bold shadow-xl shadow-prixgen-blue/20"
+                  className="rounded-2xl h-16 px-12 text-lg font-bold shadow-xl shadow-prixgen-blue/20 bg-prixgen-blue text-white hover:bg-prixgen-blue/90"
                   onClick={() => document.getElementById('openings')?.scrollIntoView({ behavior: 'smooth' })}
                 >
                   View Openings
@@ -154,7 +154,7 @@ export default function CareersClient({ data }: { data: CareersPageData }) {
                 <Button 
                   variant="outline" 
                   size="lg" 
-                  className="rounded-2xl h-16 px-12 text-lg font-bold border-slate-200 hover:bg-slate-50 hover:text-prixgen-blue"
+                  className="rounded-2xl h-16 px-12 text-lg font-bold border-slate-200 hover:border-prixgen-blue hover:bg-prixgen-blue hover:text-white transition-all duration-300"
                   onClick={() => document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth' })}
                 >
                   Direct Apply
@@ -166,7 +166,7 @@ export default function CareersClient({ data }: { data: CareersPageData }) {
       </section>
 
       {/* Why Join Section */}
-      <section className="container mx-auto px-4 py-16 relative">
+      <section className="container mx-auto px-4 py-12 relative">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-prixgen-blue/20 to-transparent" />
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -182,7 +182,7 @@ export default function CareersClient({ data }: { data: CareersPageData }) {
         </div>
       </section>
 
-      <section className="container mx-auto px-4 py-16 border-t border-slate-100" id="openings">
+      <section className="container mx-auto px-4 py-12 border-t border-slate-100" id="openings">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 items-start">
           
           {/* Left Column: Open Positions */}
@@ -224,7 +224,7 @@ export default function CareersClient({ data }: { data: CareersPageData }) {
                         </div>
                         <Button 
                           variant="outline" 
-                          className="rounded-2xl px-8 h-16 font-bold border-slate-200 hover:border-prixgen-blue hover:text-prixgen-blue hover:bg-prixgen-blue/5 bg-white shadow-sm group-hover:shadow-lg transition-all"
+                          className="rounded-2xl px-8 h-16 font-bold border-slate-200 bg-white shadow-sm hover:bg-prixgen-blue hover:text-white hover:border-prixgen-blue group-hover:shadow-lg transition-all duration-300"
                           onClick={() => {
                             setSelectedJob(job.title);
                             document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth' });
@@ -343,7 +343,7 @@ export default function CareersClient({ data }: { data: CareersPageData }) {
                     <Button 
                       type="submit"
                       disabled={isSubmitting || !selectedFile}
-                      className="w-full h-20 text-lg rounded-3xl bg-prixgen-blue hover:bg-prixgen-blue/90 shadow-2xl shadow-prixgen-blue/40 font-black tracking-[0.2em] uppercase transition-all border-none"
+                      className="w-full h-20 text-lg rounded-3xl bg-prixgen-blue text-white hover:bg-prixgen-blue/90 shadow-2xl shadow-prixgen-blue/40 font-black tracking-[0.2em] uppercase transition-all border-none"
                     >
                       {isSubmitting ? (
                         <div className="flex items-center gap-3">

@@ -35,7 +35,7 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
   return (
     <div className="bg-white overflow-hidden selection:bg-prixgen-blue selection:text-white">
       {/* Section 1: The Hero */}
-      <section className="relative min-h-[80vh] flex items-center pt-32 overflow-hidden bg-white">
+      <section className="relative min-h-[70vh] flex items-center pt-24 pb-12 overflow-hidden bg-white">
         <HeroBackground />
 
         <motion.div 
@@ -82,7 +82,7 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
       </section>
 
       {/* Section 2: Our Methodology (The Voyage) */}
-      <section id="methodology" className="py-12 lg:py-20 bg-slate-100/50 border-t border-slate-200/60 relative overflow-hidden">
+      <section id="methodology" className="py-10 lg:py-16 bg-slate-100/50 border-t border-slate-200/60 relative overflow-hidden">
         {/* Architectural Background Pattern for Section Demarcation */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
              style={{ backgroundImage: 'linear-gradient(#0047ab 1px, transparent 1px), linear-gradient(90deg, #0047ab 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
@@ -128,20 +128,8 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
                     }}
                     className="group relative p-12 rounded-[4rem] border shadow-2xl shadow-indigo-100/50 h-full overflow-hidden flex flex-col"
                   >
-                    {/* Animated Radial Glow - Purple variant */}
-                    <motion.div 
-                      className="absolute inset-0 z-0 opacity-20 group-hover:opacity-40 transition-opacity duration-1000 pointer-events-none"
-                      whileInView={{
-                        background: [
-                          "radial-gradient(600px circle at 0% 0%, rgba(139, 92, 246, 0.15), transparent 40%)",
-                          "radial-gradient(600px circle at 100% 100%, rgba(139, 92, 246, 0.15), transparent 40%)",
-                          "radial-gradient(600px circle at 0% 100%, rgba(139, 92, 246, 0.15), transparent 40%)",
-                          "radial-gradient(600px circle at 0% 0%, rgba(139, 92, 246, 0.15), transparent 40%)",
-                        ]
-                      }}
-                      viewport={{ once: false }}
-                      transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                    />
+                    {/* Static Subdued Background */}
+                    <div className="absolute inset-0 z-0 opacity-10 bg-gradient-to-br from-indigo-500/5 to-transparent pointer-events-none" />
 
                     <div className={`absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-[80px] z-0`} />
                     
@@ -181,7 +169,7 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
       </section>
 
       {/* Section 3: Core Capabilities */}
-      <section className="py-12 lg:py-20 bg-white relative">
+      <section className="py-10 lg:py-14 bg-white relative">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-20 gap-8">
             <FadeUp className="max-w-2xl">
@@ -285,11 +273,9 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
       </section>
 
       {/* Section 4: Enterprise Outcomes */}
-      <section className="py-12 lg:py-20 bg-[#020617] text-white relative overflow-hidden">
+      <section className="py-10 lg:py-14 bg-[#020617] text-white relative overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute top-0 left-0 w-full h-full">
-          <div className="absolute top-[10%] left-[5%] w-[400px] h-[400px] bg-prixgen-blue/10 rounded-full blur-[120px] animate-pulse" />
-          <div className="absolute bottom-[10%] right-[5%] w-[500px] h-[500px] bg-indigo-500/5 rounded-full blur-[150px]" />
           <div className="absolute inset-0 z-0 opacity-20" 
                style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '100px 100px' }} />
         </div>
@@ -343,15 +329,15 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
       </section>
 
       {/* Section 5: Final CTA (The Destination) */}
-      <section className="py-12 lg:py-20 bg-white relative overflow-hidden">
+      <section className="py-10 lg:py-14 bg-white relative overflow-hidden">
         <div className="container mx-auto px-4">
           <motion.div 
             whileHover={{ y: -5 }}
             className="relative bg-gradient-to-br from-prixgen-blue to-indigo-900 rounded-[3.5rem] lg:rounded-[5rem] p-12 lg:p-32 overflow-hidden shadow-[0_40px_100px_-30px_rgba(0,71,171,0.4)] group"
           >
-            {/* Animated Background Elements */}
-            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4 group-hover:scale-110 transition-transform duration-1000" />
-            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-500/10 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/4" />
+            {/* Static Background Elements */}
+            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/[0.02] blur-[100px] -translate-y-1/2 translate-x-1/4" />
+            <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-indigo-500/[0.02] blur-[80px] translate-y-1/2 -translate-x-1/4" />
             
             <div className="relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
               <FadeUp className="text-left space-y-8">

@@ -35,7 +35,7 @@ export default function IndustriesClient({ data }: { data: IndustriesPageData })
   return (
     <div className="bg-white overflow-hidden selection:bg-prixgen-blue selection:text-white">
       {/* Section 1: The Hero */}
-      <section className="relative min-h-[80vh] flex items-center pt-32 overflow-hidden bg-white">
+      <section className="relative min-h-[70vh] flex items-center pt-24 pb-12 overflow-hidden bg-white">
         <HeroBackground />
 
         <motion.div 
@@ -82,7 +82,7 @@ export default function IndustriesClient({ data }: { data: IndustriesPageData })
       </section>
 
       {/* Section 2: Methodology (Process Intelligence) */}
-      <section id="methodology" className="py-16 lg:py-20 bg-slate-50 border-t border-slate-200/60 relative overflow-hidden">
+      <section id="methodology" className="py-10 lg:py-14 bg-slate-50 border-t border-slate-200/60 relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
              style={{ backgroundImage: 'linear-gradient(#0047ab 1px, transparent 1px), linear-gradient(90deg, #0047ab 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
         
@@ -151,7 +151,7 @@ export default function IndustriesClient({ data }: { data: IndustriesPageData })
       </section>
 
       {/* Section 3: Core Industries Grid */}
-      <section className="py-16 lg:py-20 bg-white relative">
+      <section className="py-10 lg:py-14 bg-white relative">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-20 gap-8 text-left">
             <FadeUp className="max-w-2xl">
@@ -222,9 +222,8 @@ export default function IndustriesClient({ data }: { data: IndustriesPageData })
       </section>
 
       {/* Section 4: Industrial Outcomes */}
-      <section className="py-16 lg:py-20 bg-[#020617] text-white relative overflow-hidden">
+      <section className="py-10 lg:py-14 bg-[#020617] text-white relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full">
-          <div className="absolute top-[10%] left-[5%] w-[400px] h-[400px] bg-prixgen-blue/10 rounded-full blur-[120px] animate-pulse" />
           <div className="absolute inset-0 z-0 opacity-20" 
                style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '100px 100px' }} />
         </div>
@@ -278,13 +277,13 @@ export default function IndustriesClient({ data }: { data: IndustriesPageData })
       </section>
 
       {/* Section 5: Bottom CTA */}
-      <section className="py-16 lg:py-24 bg-white relative overflow-hidden">
+      <section className="py-10 lg:py-14 bg-white relative overflow-hidden">
         <div className="container mx-auto px-4">
           <motion.div 
             whileHover={{ y: -5 }}
-            className="relative bg-gradient-to-br from-prixgen-blue to-indigo-900 rounded-[3.5rem] lg:rounded-[5rem] p-12 lg:p-32 overflow-hidden shadow-2xl group"
+            className="relative bg-gradient-to-br from-prixgen-blue to-indigo-900 rounded-[3.5rem] lg:rounded-[5rem] p-12 lg:p-24 overflow-hidden shadow-2xl group"
           >
-            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4" />
+            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/[0.02] blur-[100px] -translate-y-1/2 translate-x-1/4" />
             
             <div className="relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center text-left">
               <FadeUp className="space-y-8">

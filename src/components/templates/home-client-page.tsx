@@ -108,7 +108,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
       />
       
       <main>
-        <section className="relative min-h-[75vh] lg:min-h-[85vh] flex items-center pt-20 pb-10 overflow-hidden bg-white">
+        <section className="relative min-h-[70vh] flex items-center pt-24 pb-12 px-4 overflow-hidden bg-white">
           <Parallax offset={100} direction="down" className="absolute inset-0 z-0">
             <AmbientGlow />
           </Parallax>
@@ -240,7 +240,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
         </div>
 
         {/* 2. Services Section (Our Best Services / Prixgen Services) */}
-        <section className="py-6 lg:py-10 bg-prixgen-gray/10 relative">
+        <section className="py-8 lg:py-12 px-4 bg-prixgen-gray/10 relative">
           <div className="container mx-auto px-4 pt-4">
             <div className="mb-16 text-left">
               <FadeUp>
@@ -345,7 +345,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
         </div>
 
         {/* 3. Our Solutions Section */}
-        <section className="py-6 lg:py-10 bg-white relative">
+        <section className="py-8 lg:py-12 bg-white relative">
           <div className="container mx-auto px-4 pt-6">
             <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-20 gap-8">
               <FadeUp className="max-w-2xl">
@@ -430,7 +430,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
         </div>
 
         {/* 4. Our Patronage Section - Infinite Marquee */}
-        <section className="py-6 lg:py-10 bg-prixgen-gray/20 overflow-hidden relative border-y border-slate-200/50">
+        <section className="py-8 lg:py-12 bg-prixgen-gray/20 overflow-hidden relative border-y border-slate-200/50">
           <div className="container mx-auto px-4 relative z-10 pt-4">
             <FadeUp className="text-center mb-16">
               <h2 className="text-4xl font-bold text-prixgen-blue mb-4">Our Patronage</h2>
@@ -470,7 +470,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
         </section>
 
         {/* 5. Testimonials Section */}
-        <section className="py-6 lg:py-10 bg-white relative overflow-hidden">
+        <section className="py-8 lg:py-12 bg-white relative overflow-hidden">
           <div className="container mx-auto px-4 relative z-10">
             <FadeUp className="text-center mb-16">
               <h2 className="text-4xl font-bold text-prixgen-blue mb-4">Success Voices</h2>

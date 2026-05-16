@@ -65,7 +65,7 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
       />
 
       {/* Hero Header */}
-      <section className="relative min-h-[80vh] flex items-center pt-32 overflow-hidden bg-white">
+      <section className="relative min-h-[80vh] flex items-center pt-24 overflow-hidden bg-white">
         <HeroBackground />
         
         <div className="container relative z-10 mx-auto px-4 text-center">
@@ -110,7 +110,7 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
         </div>
       </section>
 
-      <div className="container mx-auto px-4 py-8 lg:py-12">
+      <div className="container mx-auto px-4 py-6 lg:py-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
           {/* Main Content */}
           <article className="lg:col-span-2 space-y-8 lg:space-y-12">

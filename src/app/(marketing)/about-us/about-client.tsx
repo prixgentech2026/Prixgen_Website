@@ -175,102 +175,23 @@ export function AboutClient({ data }: AboutProps) {
       </AnimatePresence>
       
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[75vh] flex items-center pt-24 pb-12 px-4 overflow-hidden bg-white">
+      <section className="relative min-h-[50vh] flex items-center pt-12 pb-6 px-4 overflow-hidden bg-white">
         {/* Animated Architectural Grid */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#0ea5e908_1px,transparent_1px),linear-gradient(to_bottom,#0ea5e908_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_40%,#000_20%,transparent_100%)]" />
         </div>
 
-        {/* Interactive Mouse Glow */}
-        <motion.div 
-          initial={{ x: 0, y: 0 }}
-          animate={{ 
-            x: mousePos.x - 400, 
-            y: mousePos.y - 400 
-          }}
-          transition={{ type: "spring", damping: 30, stiffness: 50 }}
-          className="fixed top-0 left-0 w-[800px] h-[800px] bg-prixgen-blue/[0.03] rounded-full blur-[120px] pointer-events-none z-10"
-        />
+        {/* Subdued Background Decor */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-prixgen-blue/[0.02] blur-3xl -mr-32 -mt-32" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-prixgen-lightblue/[0.02] blur-3xl -ml-32 -mb-32" />
 
-        {/* High-Tech Motion Graphic Background */}
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden hidden md:block">
-          <svg className="absolute w-full h-full opacity-60" preserveAspectRatio="none" viewBox="0 0 1440 800">
-            {/* Circuit Line 1 */}
-            <motion.path
-              d="M -100,200 L 300,200 L 400,100 L 800,100 L 850,150 L 1500,150"
-              stroke="#0066cc"
-              strokeWidth="2.5"
-              fill="none"
-              strokeDasharray="4 4"
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ pathLength: 1, opacity: 1 }}
-              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-            />
-            {/* Circuit Line 2 */}
-            <motion.path
-              d="M 1500,600 L 1000,600 L 950,500 L 600,500 L 550,550 L -100,550"
-              stroke="#43913A"
-              strokeWidth="2"
-              fill="none"
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ pathLength: 1, opacity: 0.8 }}
-              transition={{ duration: 10, repeat: Infinity, ease: "linear", delay: 1 }}
-            />
-            {/* Data Packets (Pulsing Dots along the path) */}
-            <motion.circle
-              r="4"
-              fill="#0ea5e9"
-              className="opacity-100"
-              initial={{ cx: -100, cy: 200 }}
-              animate={{
-                cx: [-100, 300, 400, 800, 850, 1500],
-                cy: [200, 200, 100, 100, 150, 150]
-              }}
-              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-            />
-            <motion.circle
-              r="4"
-              fill="#43913A"
-              className="opacity-100"
-              initial={{ cx: 1500, cy: 600 }}
-              animate={{
-                cx: [1500, 1000, 950, 600, 550, -100],
-                cy: [600, 600, 500, 500, 550, 550]
-              }}
-              transition={{ duration: 10, repeat: Infinity, ease: "linear", delay: 1 }}
-            />
-          </svg>
-          
-          {/* Floating Geometric Orbs */}
-          <motion.div 
-            className="absolute top-[20%] right-[35%] w-40 h-40 rounded-full border border-prixgen-blue/30 bg-prixgen-blue/10"
-            initial={{ y: 0, rotate: 0, scale: 1 }}
-            animate={{ y: [-30, 30, -30], rotate: [0, 180, 360], scale: [1, 1.1, 1] }}
-            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          />
-          <motion.div 
-            className="absolute bottom-[20%] left-[25%] w-32 h-32 rounded-full border border-prixgen-lightblue/30 bg-prixgen-lightblue/10"
-            initial={{ y: 0, rotate: 0, scale: 1 }}
-            animate={{ y: [20, -20, 20], rotate: [360, 180, 0], scale: [1, 1.05, 1] }}
-            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          />
-        </div>
-
-        <AmbientGlow />
         
         <div className="container mx-auto relative z-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <div className="space-y-8">
               <FadeUp>
                 <div className="flex items-center gap-3 mb-8">
-                  <div className="h-[2px] w-12 bg-prixgen-blue/10 relative overflow-hidden rounded-full">
-                    <motion.div 
-                      className="absolute inset-y-0 left-0 w-1/2 bg-prixgen-lightblue"
-                      initial={{ x: "-100%" }}
-                      animate={{ x: ["-100%", "200%"] }}
-                      transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
-                    />
-                  </div>
+                  <div className="h-[2px] w-12 bg-prixgen-blue/20 rounded-full" />
                   <span className="px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue font-bold tracking-widest uppercase text-[10px] flex items-center gap-2 shadow-[0_0_15px_rgba(14,165,233,0.15)]">
                     <span className="relative flex h-2 w-2">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-prixgen-lightblue opacity-75"></span>
@@ -409,7 +330,7 @@ export function AboutClient({ data }: AboutProps) {
       </section>
 
       {/* 2. CORE PHILOSOPHY SECTION */}
-      <section className="py-16 lg:py-24 px-4 bg-slate-50/50 relative overflow-hidden">
+      <section className="py-10 lg:py-14 px-4 bg-slate-50/50 relative overflow-hidden">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto text-center mb-20">
             <FadeUp>
@@ -435,18 +356,9 @@ export function AboutClient({ data }: AboutProps) {
       </section>
 
     {/* 3. OUR FOUNDATION (Vision & Mission) */}
-    <section className="py-16 lg:py-24 bg-[#020617] text-white relative overflow-hidden">
+    <section className="py-10 lg:py-14 bg-[#020617] text-white relative overflow-hidden">
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 opacity-20 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
-        <motion.div 
-          animate={{ 
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-0 left-0 w-[60%] aspect-square rounded-full bg-prixgen-blue/20 blur-[150px] pointer-events-none opacity-50"
-        />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -516,10 +428,10 @@ export function AboutClient({ data }: AboutProps) {
     </section>
 
     {/* 4. WHY CHOOSE US SECTION */}
-    <section className="py-16 lg:py-24 bg-white relative overflow-hidden">
+    <section className="py-10 lg:py-14 bg-white relative overflow-hidden">
       {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-[50rem] h-[50rem] bg-prixgen-blue/5 rounded-full blur-[120px] -mr-[25rem] -mt-[25rem] animate-pulse" />
-      <div className="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-prixgen-lightblue/5 rounded-full blur-[100px] -ml-[15rem] -mb-[15rem]" />
+      <div className="absolute top-0 right-0 w-[30rem] h-[30rem] bg-prixgen-blue/[0.02] blur-[100px] -mr-[15rem] -mt-[15rem]" />
+      <div className="absolute bottom-0 left-0 w-[20rem] h-[20rem] bg-prixgen-lightblue/[0.02] blur-[80px] -ml-[10rem] -mb-[10rem]" />
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-5xl mb-24">
@@ -588,7 +500,7 @@ export function AboutClient({ data }: AboutProps) {
     </section>
 
     {/* 5. EXPERIENCE SECTION */}
-    <section className="py-16 lg:py-24 bg-gradient-to-b from-white to-slate-50 relative overflow-hidden">
+    <section className="py-10 lg:py-14 bg-gradient-to-b from-white to-slate-50 relative overflow-hidden">
       <div className="absolute -left-10 top-40 text-8xl lg:text-9xl font-bold text-slate-100/40 select-none leading-none pointer-events-none italic">20</div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -634,7 +546,7 @@ export function AboutClient({ data }: AboutProps) {
     </section>
 
     {/* 6. STATS SECTION */}
-    <section className="py-16 lg:py-24 bg-[#020617] relative overflow-hidden border-t border-white/5">
+    <section className="py-10 lg:py-14 bg-[#020617] relative overflow-hidden border-t border-white/5">
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-24">
           {data.stats?.map((stat, i) => (
@@ -663,7 +575,7 @@ export function AboutClient({ data }: AboutProps) {
     </section>
 
     {/* 7. FINAL CTA */}
-    <section className="py-16 lg:py-24 bg-white relative overflow-hidden">
+    <section className="py-10 lg:py-14 bg-white relative overflow-hidden">
       <div className="container mx-auto px-4">
         <motion.div 
           initial={{ opacity: 0, y: 40, scale: 0.95 }}
