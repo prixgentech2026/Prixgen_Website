@@ -23,7 +23,6 @@ import {
   Trophy
 } from 'lucide-react';
 import { HeroBadge } from '@/components/shared/hero-badge';
-import { HeroBadge } from '@/components/shared/hero-badge';
 import { CareersPageData } from '@/lib/data';
 import { submitJobApplication } from '@/actions/careers';
 
