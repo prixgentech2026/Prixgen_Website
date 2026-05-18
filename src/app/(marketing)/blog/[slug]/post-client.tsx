@@ -25,6 +25,7 @@ import { urlFor } from '@/sanity/lib/image';
 
 interface PostClientProps {
   post: BlogPost;
+  relatedPosts?: BlogPost[];
 }
 
 const components = {
@@ -99,7 +100,7 @@ const components = {
   },
 };
 
-export default function PostClient({ post }: PostClientProps) {
+export default function PostClient({ post, relatedPosts = [] }: PostClientProps) {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -125,10 +126,29 @@ export default function PostClient({ post }: PostClientProps) {
   
   const [copied, setCopied] = useState(false);
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(window.location.href);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      // Fallback for browsers/environments where navigator.clipboard is unavailable
+      const textArea = document.createElement("textarea");
+      textArea.value = window.location.href;
+      // Make it invisible
+      textArea.style.position = "absolute";
+      textArea.style.left = "-999999px";
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch (e) {
+        console.error('Copy failed: ', e);
+      }
+      document.body.removeChild(textArea);
+    }
   };
 
   if (!post) return null;
@@ -142,11 +162,11 @@ export default function PostClient({ post }: PostClientProps) {
       />
 
       {/* Premium White Hero */}
-      <header className="relative min-h-[80vh] flex items-center pt-32 overflow-hidden bg-white">
+      <header className="relative pt-24 lg:pt-32 pb-16 flex items-center overflow-hidden bg-white">
         <HeroBackground />
 
         <div className="container mx-auto px-6 relative z-10 text-center">
-          <FadeUp className="space-y-10 max-w-5xl mx-auto">
+          <FadeUp className="space-y-6 max-w-5xl mx-auto">
             <HeroBadge text="Intelligence Center" align="center" />
             
             <Link 
@@ -203,9 +223,7 @@ export default function PostClient({ post }: PostClientProps) {
           </FadeUp>
         </div>
         
-        <div className="absolute bottom-0 left-0 w-full translate-y-1/2 z-20">
-          <AnimatedConnector height="h-32" />
-        </div>
+
       </header>
 
       {/* Feature Image */}
@@ -319,11 +337,26 @@ export default function PostClient({ post }: PostClientProps) {
 
                  <div className="space-y-6 px-4 text-left">
                     <h5 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-6">Trending Analysis</h5>
-                    {[1, 2, 3].map((_, i) => (
+                    {relatedPosts.length > 0 ? relatedPosts.map((relatedPost, i) => (
+                      <Link href={`/blog/${relatedPost.slug}`} key={i}>
+                        <motion.div 
+                          whileHover={{ x: 10 }}
+                          className="group cursor-pointer block mb-8"
+                        >
+                           <div className="text-slate-300 text-[10px] font-black uppercase tracking-widest mb-2 flex items-center gap-2">
+                              <span className="w-1.5 h-1.5 bg-prixgen-lightblue rounded-full" />
+                              {relatedPost.categories?.[0]?.title || 'Insight'}
+                           </div>
+                           <h6 className="text-lg font-bold text-prixgen-blue group-hover:text-prixgen-lightblue transition-colors leading-tight">
+                              {relatedPost.title}
+                           </h6>
+                        </motion.div>
+                      </Link>
+                    )) : [1, 2, 3].map((_, i) => (
                       <motion.div 
                         key={i} 
                         whileHover={{ x: 10 }}
-                        className="group cursor-pointer"
+                        className="group cursor-pointer mb-8"
                       >
                          <div className="text-slate-300 text-[10px] font-black uppercase tracking-widest mb-2 flex items-center gap-2">
                             <span className="w-1.5 h-1.5 bg-prixgen-lightblue rounded-full" />

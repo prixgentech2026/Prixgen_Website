@@ -1,7 +1,7 @@
 export const revalidate = 0;
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getPostBySlug } from '@/lib/data';
+import { getPostBySlug, getPosts } from '@/lib/data';
 import PostClient from './post-client';
 
 interface PostPageProps {
@@ -29,5 +29,8 @@ export default async function PostPage({ params }: PostPageProps) {
     notFound();
   }
 
-  return <PostClient post={post} />;
+  const allPosts = await getPosts();
+  const relatedPosts = allPosts.filter(p => p.slug !== post.slug).slice(0, 3);
+
+  return <PostClient post={post} relatedPosts={relatedPosts} />;
 }
