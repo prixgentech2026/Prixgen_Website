@@ -11,7 +11,7 @@ export const MENU_DATA = {
     { title: "Accounting Advisory", href: "/services/accounting-advisory", description: "Financial precision and compliance." },
     { title: "Management Consulting", href: "/services/management-consulting", description: "Operational excellence and efficiency." },
     { title: "Supply Chain Consulting", href: "/services/supply-chain-consulting", description: "End-to-end logistics optimization." },
-    { title: "WMS", href: "/services/wms", description: "Intelligent warehouse management systems." },
+    { title: "WMS", href: "/services/warehouse-management", description: "Intelligent warehouse management systems." },
     { title: "Hiring Odoo Developers", href: "/services/hiring-odoo-developers", description: "Dedicated talent for Odoo ecosystems." },
   ],
   engineering_services: [
