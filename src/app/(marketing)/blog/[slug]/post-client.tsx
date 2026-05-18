@@ -254,19 +254,18 @@ export default function PostClient({ post, relatedPosts = [] }: PostClientProps)
                  <span className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-300 vertical-text rotate-180 mb-4 whitespace-nowrap">Share Intelligence</span>
                  <div className="w-px h-10 bg-slate-100" />
                  <Magnetic>
-                    <motion.button whileHover={{ scale: 1.1, color: '#0066cc' }} className="text-slate-300 transition-colors p-2">
-                       <Linkedin size={20} />
-                    </motion.button>
+                    <a href="https://www.linkedin.com/company/prixgen-tech-solutions-pvt-ltd/" target="_blank" rel="noopener noreferrer">
+                      <motion.button whileHover={{ scale: 1.1, color: '#0066cc' }} className="text-slate-300 transition-colors p-2">
+                         <Linkedin size={20} />
+                      </motion.button>
+                    </a>
                  </Magnetic>
                  <Magnetic>
-                    <motion.button whileHover={{ scale: 1.1, color: '#1da1f2' }} className="text-slate-300 transition-colors p-2">
-                       <Twitter size={20} />
-                    </motion.button>
-                 </Magnetic>
-                 <Magnetic>
-                    <motion.button whileHover={{ scale: 1.1, color: '#00bfff' }} className="text-slate-300 transition-colors p-2">
-                       <Bookmark size={20} />
-                    </motion.button>
+                    <a href="https://twitter.com/prixgen" target="_blank" rel="noopener noreferrer">
+                      <motion.button whileHover={{ scale: 1.1, color: '#1da1f2' }} className="text-slate-300 transition-colors p-2">
+                         <Twitter size={20} />
+                      </motion.button>
+                    </a>
                  </Magnetic>
               </motion.div>
            </aside>
