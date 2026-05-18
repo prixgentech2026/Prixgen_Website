@@ -22,6 +22,8 @@ import {
   Users,
   Trophy
 } from 'lucide-react';
+import { HeroBadge } from '@/components/shared/hero-badge';
+import { HeroBadge } from '@/components/shared/hero-badge';
 import { CareersPageData } from '@/lib/data';
 import { submitJobApplication } from '@/actions/careers';
 
@@ -123,12 +125,7 @@ export default function CareersClient({ data }: { data: CareersPageData }) {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-6xl mx-auto">
             <FadeUp className="space-y-10">
-              <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 backdrop-blur-sm">
-                <span className="w-2 h-2 rounded-full bg-prixgen-blue animate-ping" />
-                <span className="text-[10px] font-black tracking-[0.3em] uppercase text-prixgen-blue">
-                  {badge || "Career Opportunities"}
-                </span>
-              </div>
+              <HeroBadge text={badge || "Career Opportunities"} align="left" />
               
               <StaggerText 
                 text={title} 

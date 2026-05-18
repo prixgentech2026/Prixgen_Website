@@ -6,7 +6,8 @@ import { FadeUp } from '@/components/animations/fade-up';
 import { StaggerText } from '@/components/animations/stagger-text';
 import { AmbientGlow } from '@/components/animations/ambient-glow';
 import InteractiveGlobe from '@/components/ui/interactive-globe';
-import { Mail, Phone, Globe, Smartphone, MapPin } from 'lucide-react';
+import { Globe, MapPin } from 'lucide-react';
+import { HeroBadge } from '@/components/shared/hero-badge';
 
 export default function ContactClientPage({ contactData }: { contactData: any }) {
   return (
@@ -24,11 +25,7 @@ export default function ContactClientPage({ contactData }: { contactData: any })
         <AmbientGlow />
         <div className="container mx-auto px-4 relative z-10">
           <FadeUp className="max-w-4xl">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="px-3 py-1 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue font-bold tracking-widest uppercase text-[10px]">
-                Connect With Us
-              </span>
-            </div>
+            <HeroBadge text="Connect With Us" align="left" className="mb-6" />
             
             <StaggerText 
               text={contactData.title}

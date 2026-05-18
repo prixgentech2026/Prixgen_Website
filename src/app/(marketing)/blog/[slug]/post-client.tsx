@@ -242,7 +242,7 @@ export default function PostClient({ post, relatedPosts = [] }: PostClientProps)
 
 
       {/* Content Section */}
-      <div className="container mx-auto px-6 py-12 lg:py-20 relative">
+      <div className="container mx-auto px-6 pt-12 pb-8 lg:pt-20 lg:pb-12 relative">
         <div className="flex flex-col lg:flex-row gap-20">
            {/* Sidebar - Left (Desktop Only) */}
            <aside className="hidden lg:block w-16 shrink-0">
@@ -283,7 +283,7 @@ export default function PostClient({ post, relatedPosts = [] }: PostClientProps)
                 </div>
               </FadeUp>
 
-              <footer className="mt-32 pt-20 border-t-2 border-slate-50">
+              <footer className="mt-16 pt-10 border-t-2 border-slate-50">
                 <div className="relative group p-8 lg:p-12 bg-slate-50 rounded-[3rem] overflow-hidden">
                    <div className="absolute top-0 right-0 w-64 h-64 bg-prixgen-blue/5 rounded-full blur-[80px] group-hover:scale-150 transition-transform duration-1000" />
                    
@@ -307,10 +307,12 @@ export default function PostClient({ post, relatedPosts = [] }: PostClientProps)
                             Enterprise digital transformation expert specializing in industrial automation and resilient ecosystems. Helping global leaders architect high-performance operations through data intelligence.
                           </p>
                         )}
+                        {/* Suppressed author links for now
                         <div className="flex items-center justify-center md:justify-start gap-6 pt-2">
                            <Link href="#" className="text-sm font-black uppercase tracking-widest text-prixgen-blue hover:text-prixgen-lightblue transition-colors">View All Reviews</Link>
                            <Link href="#" className="text-sm font-black uppercase tracking-widest text-prixgen-blue hover:text-prixgen-lightblue transition-colors">LinkedIn Profile</Link>
                         </div>
+                        */}
                       </div>
                    </div>
                 </div>
@@ -373,7 +375,7 @@ export default function PostClient({ post, relatedPosts = [] }: PostClientProps)
       </div>
 
       {/* Newsletter Section */}
-      <section className="py-16 lg:py-24 bg-slate-50 relative overflow-hidden">
+      <section className="py-8 lg:py-12 bg-slate-50 relative overflow-hidden">
         <div className="container mx-auto px-4">
           <motion.div 
             whileHover={{ y: -5 }}

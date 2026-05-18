@@ -66,9 +66,7 @@ export default function EngineeringServicesClient({ data }: { data: ServicesPage
             </motion.div>
             
             <header className="space-y-6">
-              <div className="inline-block px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue text-[10px] font-bold tracking-widest uppercase mx-auto">
-                {data.subtitle || "Precision Engineering"}
-              </div>
+              <HeroBadge text={data.subtitle || "Precision Engineering"} align="center" />
               
               <h1 className="text-5xl md:text-8xl lg:text-9xl font-bold text-prixgen-dark leading-[0.85] tracking-tighter">
                 <StaggerText text={data.title} as="span" />

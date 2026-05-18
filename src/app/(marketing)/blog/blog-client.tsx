@@ -9,6 +9,7 @@ import { OptimizedImage } from '@/components/ui/optimized-image';
 import { FadeUp } from '@/components/animations/fade-up';
 import { StaggerText } from '@/components/animations/stagger-text';
 import { AmbientGlow } from '@/components/animations/ambient-glow';
+import { HeroBadge } from '@/components/shared/hero-badge';
 
 interface BlogClientProps {
   posts: BlogPost[];
@@ -84,13 +85,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
           className="container mx-auto px-4 relative z-10 text-center"
         >
           <FadeUp className="space-y-6">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="h-[1px] w-8 bg-prixgen-blue/30" />
-              <span className="px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue font-bold tracking-widest uppercase text-[10px]">
-                Industrial Intelligence
-              </span>
-              <div className="h-[1px] w-8 bg-prixgen-blue/30" />
-            </div>
+            <HeroBadge text="Industrial Intelligence" align="center" className="mb-4" />
             
             <StaggerText 
               text="Strategic Insights & Architecture" 
