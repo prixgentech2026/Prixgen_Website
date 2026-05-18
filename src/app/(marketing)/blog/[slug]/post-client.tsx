@@ -359,7 +359,7 @@ export default function PostClient({ post }: PostClientProps) {
                   Stay ahead of the <br /> <span className="text-prixgen-lightblue italic">industrial curve.</span>
                 </h2>
                 <p className="text-xl text-slate-500 max-w-xl font-medium">
-                  Get our quarterly executive review of Industry 4.0 shifts and architectural breakthroughs.
+                  Get our quarterly executive review of Industry 5.0 shifts and architectural breakthroughs.
                 </p>
               </FadeUp>
 

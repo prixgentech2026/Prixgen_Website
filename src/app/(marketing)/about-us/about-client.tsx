@@ -175,7 +175,7 @@ export function AboutClient({ data }: AboutProps) {
       </AnimatePresence>
       
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[50vh] flex items-center pt-12 pb-6 px-4 overflow-hidden bg-white">
+      <section className="relative min-h-[50vh] flex items-center pt-32 lg:pt-40 pb-12 px-4 overflow-hidden bg-white">
         {/* Animated Architectural Grid */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#0ea5e908_1px,transparent_1px),linear-gradient(to_bottom,#0ea5e908_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_40%,#000_20%,transparent_100%)]" />

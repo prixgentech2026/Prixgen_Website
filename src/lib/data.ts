@@ -766,7 +766,7 @@ export const industriesData: any[] = [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "Manufacturing is no longer just about physical production; it's about digital intelligence. We help discrete and process manufacturers transition to Industry 4.0 by integrating their shop-floor machinery with enterprise-grade ERP systems. Our solutions provide real-time visibility into production cycles, allowing for precise tracking of work-in-progress (WIP) and automated quality control." }]
+        children: [{ _type: 'span', text: "Manufacturing is no longer just about physical production; it's about digital intelligence. We help discrete and process manufacturers transition to Industry 5.0 by integrating their shop-floor machinery with enterprise-grade ERP systems. Our solutions provide real-time visibility into production cycles, allowing for precise tracking of work-in-progress (WIP) and automated quality control." }]
       },
       {
         _type: 'block',
@@ -1786,7 +1786,7 @@ export const industriesPageMockData: IndustriesPageData = {
     { title: "Rapid Modernization", description: "Transform legacy factories into smart facilities with minimal operational downtime.", icon: "Factory" }
   ],
   coreIndustries: [
-    { title: "Manufacturing", headline: "Industry 4.0 Smart Factories.", slug: "manufacturing", image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000" },
+    { title: "Manufacturing", headline: "Industry 5.0 Smart Factories.", slug: "manufacturing", image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000" },
     { title: "Retail", headline: "Omnichannel Commerce Architecture.", slug: "retail", image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1000" },
     { title: "Chemicals", headline: "Precision Batch Intelligence.", slug: "chemicals", image: "https://images.unsplash.com/photo-1532187875605-1ef6c237f146?auto=format&fit=crop&q=80&w=1000" },
     { title: "FMCG & Distribution", headline: "High-Velocity Distribution.", slug: "fmcg-distribution", image: "https://images.unsplash.com/photo-1566633806327-68e152aaf26d?auto=format&fit=crop&q=80&w=1000" },
@@ -1976,7 +1976,7 @@ export const blogPosts: BlogPost[] = [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: 'In the rapidly evolving landscape of Industry 4.0, predictive maintenance has emerged as a cornerstone of operational excellence. By leveraging real-time telemetry from IoT sensors and advanced machine learning algorithms, manufacturers can now anticipate equipment failures before they occur.' }]
+        children: [{ _type: 'span', text: 'In the rapidly evolving landscape of Industry 5.0, predictive maintenance has emerged as a cornerstone of operational excellence. By leveraging real-time telemetry from IoT sensors and advanced machine learning algorithms, manufacturers can now anticipate equipment failures before they occur.' }]
       },
       {
         _type: 'block',
@@ -1992,7 +1992,7 @@ export const blogPosts: BlogPost[] = [
     seo: {
       title: 'Predictive Maintenance in Smart Factories | Prixgen Blog',
       metaDesc: 'Learn how AI and IoT are revolutionizing maintenance strategies in modern smart factories.',
-      keywords: ['Predictive Maintenance', 'Smart Factory', 'Industry 4.0', 'Industrial AI']
+      keywords: ['Predictive Maintenance', 'Smart Factory', 'Industry 5.0', 'Industrial AI']
     }
   },
   {

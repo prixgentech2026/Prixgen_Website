@@ -99,7 +99,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
             />
             
             <p className="text-lg lg:text-xl text-slate-500 font-medium leading-relaxed max-w-4xl mx-auto">
-              Expert perspectives on Industry 4.0, enterprise digital transformation, and the future of resilient industrial ecosystems.
+              Expert perspectives on Industry 5.0, enterprise digital transformation, and the future of resilient industrial ecosystems.
             </p>
           </FadeUp>
         </motion.div>
@@ -312,7 +312,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
                   Stay ahead of the <span className="text-prixgen-lightblue italic">industrial curve.</span>
                 </h2>
                 <p className="text-xl text-white/60 max-w-xl font-medium">
-                  Get our quarterly executive review of Industry 4.0 shifts and architectural breakthroughs.
+                  Get our quarterly executive review of Industry 5.0 shifts and architectural breakthroughs.
                 </p>
               </FadeUp>
 
