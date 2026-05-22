@@ -10,7 +10,18 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.prixgen.com'),
+  metadataBase: new URL(
+    (() => {
+      let baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.prixgen.com';
+      if (!baseUrl || baseUrl.includes('vercel.app') || baseUrl.includes('localhost') || baseUrl.includes('127.0.0.1')) {
+        baseUrl = 'https://www.prixgen.com';
+      }
+      if (baseUrl.endsWith('/')) {
+        baseUrl = baseUrl.slice(0, -1);
+      }
+      return baseUrl;
+    })()
+  ),
   title: {
     template: '%s | Prixgen Enterprise',
     default: 'Prixgen | ERP Implementation Experts',
