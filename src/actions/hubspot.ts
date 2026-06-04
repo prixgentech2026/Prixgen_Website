@@ -27,18 +27,37 @@ export async function submitLead(data: LeadSubmission) {
   try {
     // 1. SAVE TO SANITY (Internal Audit Log)
     if (writeClient) {
-      await writeClient.create({
-        _type: 'leadSubmission',
-        firstname: data.firstname,
-        email: data.email,
-        company: data.company,
-        phone: data.phone || '',
-        source: data.source,
-        message: data.message || 'No message provided.',
-        status: 'new',
-        submittedAt: new Date().toISOString(),
-      });
-      console.log('Lead saved to Sanity:', data.email);
+      try {
+        await writeClient.create({
+          _type: 'leadSubmission',
+          firstname: data.firstname,
+          email: data.email,
+          company: data.company,
+          phone: data.phone || '',
+          source: data.source,
+          message: data.message || 'No message provided.',
+          status: 'new',
+          submittedAt: new Date().toISOString(),
+        });
+        console.log('Lead saved to Sanity (with phone):', data.email);
+      } catch (sanityError: any) {
+        console.warn('Sanity write (with phone) failed, retrying without phone field:', sanityError.message || sanityError);
+        try {
+          await writeClient.create({
+            _type: 'leadSubmission',
+            firstname: data.firstname,
+            email: data.email,
+            company: data.company,
+            source: data.source,
+            message: data.message || 'No message provided.',
+            status: 'new',
+            submittedAt: new Date().toISOString(),
+          });
+          console.log('Lead saved to Sanity (fallback without phone):', data.email);
+        } catch (retryError) {
+          console.error('Sanity write failed completely:', retryError);
+        }
+      }
     } else {
       console.warn('Sanity Write Client not available. Skipping CMS log.');
     }

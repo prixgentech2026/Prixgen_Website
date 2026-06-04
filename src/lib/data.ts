@@ -1,4 +1,13 @@
 import { client } from '@/sanity/lib/client';
+
+// Bypass Next.js fetch caching in development so Sanity updates show instantly
+if (client && process.env.NODE_ENV === 'development') {
+  const originalFetch = client.fetch.bind(client);
+  client.fetch = ((query: string, params?: any, options?: any) => {
+    return originalFetch(query, params, { ...options, cache: 'no-store' });
+  }) as any;
+}
+
 import {
   homeQuery,
   industryBySlugQuery,
