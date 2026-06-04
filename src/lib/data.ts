@@ -674,9 +674,18 @@ export const homeData = {
   ctaDescription: "Join 100+ industrial leaders who have unified their global operations. Start your transformation with a zero-cost architecture audit.",
   ctaButtonText: "Book an Architecture Audit",
   seo: {
-    title: "Odoo Gold Partner & SAP Implementation Experts | Prixgen",
-    metaDesc: "Global enterprise ERP architects specializing in Odoo, SAP, and IIoT integration for manufacturing, FMCG, and industrial sectors.",
-    keywords: ["Odoo Gold Partner", "SAP Implementation", "Enterprise ERP", "Industrial IoT", "Supply Chain Digital Transformation"]
+    title: "Odoo Gold Partner, SAP Experts, Software Consulting, Managed Cloud & AI/ML | Prixgen",
+    metaDesc: "Global enterprise IT consultants specializing in Odoo, SAP, software consulting, managed cloud, AI/ML, and IIoT integration for manufacturing, FMCG, and industrial sectors.",
+    keywords: [
+      "Odoo Gold Partner",
+      "SAP Implementation",
+      "Enterprise ERP",
+      "Industrial IoT",
+      "Supply Chain Digital Transformation",
+      "Software Consulting",
+      "Managed Cloud",
+      "AI & ML"
+    ]
   }
 };
 

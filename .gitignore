@@ -36,3 +36,11 @@ next-env.d.ts
 Thumbs.db
 
 webpagesextraction/
+
+# Export utility scripts
+/scripts/export-leads.ts
+/scripts/export-jobs.ts
+
+# Generated export files
+/*_export.csv
+

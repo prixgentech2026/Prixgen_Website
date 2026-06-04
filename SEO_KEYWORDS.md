@@ -8,7 +8,7 @@ This document contains the **optimized** high-authority SEO metadata designed to
 
 | Page | Optimized SEO Title | Optimized Meta Description | Strategic Keywords |
 | :--- | :--- | :--- | :--- |
-| **Home** | Odoo Gold Partner & SAP Implementation Experts \| Prixgen | Global enterprise ERP architects specializing in Odoo, SAP, and IIoT integration for manufacturing, FMCG, and industrial sectors. | Odoo Gold Partner, SAP Implementation, Enterprise ERP, Industrial IoT, Supply Chain Digital Transformation |
+| **Home** | Odoo Gold Partner, SAP Experts, Software Consulting, Managed Cloud & AI/ML \| Prixgen | Global enterprise IT consultants specializing in Odoo, SAP, software consulting, managed cloud, AI/ML, and IIoT integration for manufacturing, FMCG, and industrial sectors. | Odoo Gold Partner, SAP Implementation, Enterprise ERP, Industrial IoT, Supply Chain Digital Transformation, Software Consulting, Managed Cloud, AI & ML |
 | **About Us** | Global Architects of Enterprise Intelligence \| Prixgen | Elite team of ERP consultants with 30+ years of expertise in IIoT, AI, and large-scale industrial digital transformation. | ERP Consultants, Digital Transformation Agency, Industrial AI Experts, Odoo Partners India |
 | **Contact** | ERP Architecture Audit & Strategy Consulting \| Prixgen | Schedule a zero-cost architecture audit for your enterprise. Discuss Odoo, SAP, or IIoT roadmaps with our senior consultants. | ERP Audit, IT Strategy Consulting, Contact Prixgen, Australia ERP Services |
 | **Careers** | Careers in Industrial Automation & ERP Engineering | Join Prixgen's elite engineering team. Openings for Odoo Developers, ERP Consultants, and Technical Architects in Mysuru. | Odoo Developer Jobs, ERP Careers, Engineering Jobs India, Industrial Automation Careers |
@@ -60,4 +60,4 @@ This document contains the **optimized** high-authority SEO metadata designed to
 ## 📈 Global Meta Standards
 - **Brand Name:** Prixgen Enterprise
 - **Core Industry:** Enterprise IT & Industrial Engineering
-- **Main Competencies:** Odoo Gold Partner, SAP Specialists, IIoT Architects, AI Developers.
+- **Main Competencies:** Odoo Gold Partner, SAP Specialists, Software Consulting, Managed Cloud, AI/ML Solutions, IIoT.

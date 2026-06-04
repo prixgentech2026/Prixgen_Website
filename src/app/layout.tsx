@@ -24,9 +24,19 @@ export const metadata: Metadata = {
   ),
   title: {
     template: '%s | Prixgen Enterprise',
-    default: 'Prixgen | ERP Implementation Experts',
+    default: 'Prixgen | Odoo, SAP, Software Consulting, Managed Cloud & AI/ML',
   },
-  description: 'Enterprise IT consulting and ERP implementation for manufacturing and FMCG.',
+  description: 'Enterprise IT consulting specializing in Odoo, SAP, software consulting, managed cloud, and AI/ML solutions for manufacturing and FMCG.',
+  keywords: [
+    "Odoo Gold Partner",
+    "SAP Implementation",
+    "Enterprise ERP",
+    "Industrial IoT",
+    "Supply Chain Digital Transformation",
+    "Software Consulting",
+    "Managed Cloud",
+    "AI & ML"
+  ],
   openGraph: {
     type: 'website',
     locale: 'en_US',

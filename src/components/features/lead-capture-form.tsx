@@ -15,6 +15,7 @@ const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
   firstname: z.string().min(2, { message: "First name must be at least 2 characters" }),
   company: z.string().min(2, { message: "Company name is required" }),
+  phone: z.string().optional(),
   message: z.string().optional(),
 });
 
@@ -96,6 +97,18 @@ export function LeadCaptureForm({ source }: { source: string }) {
           className={errors.company ? 'border-red-500' : ''}
         />
         {errors.company && <p className="text-xs text-red-500 mt-1">{errors.company.message}</p>}
+      </div>
+
+      <div>
+        <label htmlFor="phone" className="block text-sm font-medium mb-1 text-prixgen-dark/70">Phone Number (Optional)</label>
+        <Input
+          id="phone"
+          type="tel"
+          placeholder="e.g. +1 (555) 000-0000"
+          {...register('phone')}
+          className={errors.phone ? 'border-red-500' : ''}
+        />
+        {errors.phone && <p className="text-xs text-red-500 mt-1">{errors.phone.message}</p>}
       </div>
 
       <div>

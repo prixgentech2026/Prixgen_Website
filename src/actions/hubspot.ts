@@ -7,6 +7,7 @@ const LeadSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
   firstname: z.string().min(2, { message: "First name must be at least 2 characters" }),
   company: z.string().min(2, { message: "Company name is required" }),
+  phone: z.string().optional(),
   source: z.string(),
   message: z.string().optional(),
 });
@@ -31,6 +32,7 @@ export async function submitLead(data: LeadSubmission) {
         firstname: data.firstname,
         email: data.email,
         company: data.company,
+        phone: data.phone || '',
         source: data.source,
         message: data.message || 'No message provided.',
         status: 'new',
@@ -60,6 +62,7 @@ export async function submitLead(data: LeadSubmission) {
           firstname: data.firstname,
           company: data.company,
           lead_source: data.source,
+          ...(data.phone && { phone: data.phone }),
           ...(data.message && { message: data.message })
         },
       }),

@@ -3,7 +3,7 @@
 import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
-export function Magnetic({ children }: { children: React.ReactNode }) {
+export function Magnetic({ children, className }: { children: React.ReactNode; className?: string }) {
     const ref = useRef<HTMLDivElement>(null);
     const [position, setPosition] = useState({ x: 0, y: 0 });
 
@@ -23,6 +23,7 @@ export function Magnetic({ children }: { children: React.ReactNode }) {
 
     return (
         <motion.div
+            className={className}
             style={{ position: "relative" }}
             ref={ref}
             onMouseMove={handleMouse}

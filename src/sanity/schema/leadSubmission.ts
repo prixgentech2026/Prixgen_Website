@@ -22,6 +22,12 @@ const leadSubmission = {
       readOnly: true,
     },
     {
+      name: 'phone',
+      title: 'Phone Number',
+      type: 'string',
+      readOnly: true,
+    },
+    {
       name: 'source',
       title: 'Form Source',
       type: 'string',

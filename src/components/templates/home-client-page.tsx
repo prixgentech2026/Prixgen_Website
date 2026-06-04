@@ -44,17 +44,17 @@ const PatronLogo = ({ patron }: { patron: { filename: string; name: string } }) 
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className="flex flex-col items-center justify-center min-w-[280px] grayscale hover:grayscale-0 transition-all duration-500 hover:scale-110 cursor-default opacity-60 hover:opacity-100 px-10 group"
     >
-      <div className="w-28 h-28 mb-4 rounded-full bg-white shadow-xl flex items-center justify-center overflow-hidden p-6 border border-slate-100 group-hover:border-prixgen-blue/30 transition-all duration-300">
+      <div className="w-44 h-16 mb-4 flex items-center justify-center relative bg-transparent transition-all duration-300">
         {!error ? (
           <OptimizedImage 
             fill
             src={`/images/patron/${patron.filename}`} 
             alt={patron.name} 
-            className="object-contain p-2"
+            className="object-contain"
             wrapperClassName="bg-transparent"
           />
         ) : (
-          <div className="flex items-center justify-center w-full h-full bg-gradient-to-br from-slate-50 to-slate-100 text-prixgen-blue font-black text-2xl">
+          <div className="flex items-center justify-center w-full h-full text-prixgen-blue font-black text-xl">
             {patron.name.split(' ').map(n => n[0]).join('').substring(0, 2)}
           </div>
         )}
@@ -169,16 +169,17 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                   )}
                 </div>
 
-                <div className="flex flex-col sm:flex-row items-center gap-6 pt-6">
-                  <Magnetic>
+                <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-center lg:items-start xl:items-center gap-6 sm:gap-8 lg:gap-6 xl:gap-8 pt-6">
+                  <Magnetic className="w-full sm:w-auto lg:w-auto">
                     <Button size="lg" className="h-16 px-10 text-lg rounded-2xl shadow-xl shadow-prixgen-blue/20 w-full sm:w-auto" asChild>
                       <Link href="/contact">{homeData.heroPrimaryCTA || "Get Started"}</Link>
                     </Button>
                   </Magnetic>
-                  <Magnetic>
-                    <Link href="/solutions/odoo-enterprise" className="group flex items-center gap-3 text-prixgen-blue font-bold text-lg">
-                      {homeData.heroSecondaryCTA || "Explore Architecture"}
+                  <Magnetic className="shrink-0">
+                    <Link href="/solutions/odoo-enterprise" className="group flex items-center gap-3 text-prixgen-blue font-bold text-lg max-w-[260px] leading-snug">
+                      <span>{homeData.heroSecondaryCTA || "Explore Architecture"}</span>
                       <motion.span
+                        className="shrink-0"
                         initial={{ x: 0 }}
                         animate={{ x: [0, 5, 0] }}
                         transition={{ duration: 1.5, repeat: Infinity }}
@@ -268,18 +269,18 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
-                { title: 'Consulting', desc: 'Prixgen Gold Partner with Oddo and is the best software consulting company in India providing IT consulting services.', link: '/services/it-consulting', icon: 'Strategy', img: '/images/consulting.png', priority: true },
-                { title: 'Warehouse', desc: 'Better Warehouse management can be yours. Reduce inventory and warehouse costs while improving customer service.', link: '/solutions/warehouse-management', icon: 'Box', img: '/images/warehouse.png', priority: true },
-                { title: 'IIoT', desc: 'Manage Millions of IIOT Device Connections And Support Applications That Open New Revenues For Industries.', link: '/engineering-services/iiot-telemetry', icon: 'Cpu', img: '/images/iiot.png', priority: true },
-                { title: 'AI & ML Advisory', desc: 'Consulting services to define your data-driven roadmap, assess AI readiness, and architect a secure adoption strategy.', link: '/services/ai-machine-learning', icon: 'Brain', img: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop' },
-                { title: 'Transformation Strategy', desc: 'Expert guidance to rethink legacy workflows, optimize business processes, and design your digital transition plan.', link: '/services/business-transformation', icon: 'TrendingUp', img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop' },
-                { title: 'Managed Cloud', desc: 'Secure, high-availability industrial cloud infrastructure with 24/7 monitoring and zero-data-loss disaster recovery.', link: '/engineering-services/cloud-infrastructure', icon: 'Cloud', img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop' }
+                { title: 'Consulting', desc: 'As an Odoo Gold Partner and premier IT consultancy, we leverage our in-house R&D team to engineer custom software solutions that streamline complex enterprise operations.', link: '/services/it-consulting', icon: 'Strategy', img: '/images/consulting.png', priority: true },
+                { title: 'AI & ML Advisory', desc: 'Empowering enterprises with custom machine learning systems, predictive data analytics, and strategic roadmaps to capture high-value market opportunities.', link: '/services/ai-machine-learning', icon: 'Brain', img: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop', priority: true },
+                { title: 'Managed Cloud', desc: 'High-availability industrial cloud architectures featuring in-house hosting facilities, secure data replication, and 24/7 proactive monitoring.', link: '/engineering-services/cloud-infrastructure', icon: 'Cloud', img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop', priority: true },
+                { title: 'Transformation Strategy', desc: 'Re-engineering legacy workflows into digitally optimized and globally scaled operations designed to drive operational resilience.', link: '/services/business-transformation', icon: 'TrendingUp', img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop' },
+                { title: 'Warehouse', desc: 'Better Warehouse management can be yours. Reduce inventory and warehouse costs while improving customer service.', link: '/solutions/warehouse-management', icon: 'Box', img: '/images/warehouse.png' },
+                { title: 'IIoT', desc: 'Manage Millions of IIOT Device Connections And Support Applications That Open New Revenues For Industries.', link: '/engineering-services/iiot-telemetry', icon: 'Cpu', img: '/images/iiot.png' }
               ].map((service, i) => (
                 <FadeUp key={i} delay={i * 0.1}>
                   <Link href={service.link} className="block h-full group">
-                    <div className="h-full bg-gradient-to-br from-white to-slate-50/50 border border-slate-200/60 rounded-[2.5rem] shadow-sm transition-all duration-700 hover:-translate-y-3 hover:shadow-[0_30px_60px_-15px_rgba(0,102,204,0.15)] hover:border-prixgen-blue/20 relative overflow-hidden group">
+                    <div className="flex flex-col h-full bg-gradient-to-br from-white to-slate-50/50 border border-slate-200/60 rounded-[2.5rem] shadow-sm transition-all duration-700 hover:-translate-y-3 hover:shadow-[0_30px_60px_-15px_rgba(0,102,204,0.15)] hover:border-prixgen-blue/20 relative overflow-hidden group">
                       {/* Image Container with Zoom */}
-                      <div className="h-64 overflow-hidden relative bg-slate-100">
+                      <div className="h-64 overflow-hidden relative bg-slate-100 flex-shrink-0">
                         <OptimizedImage 
                           fill
                           src={service.img} 
@@ -303,26 +304,30 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                         </Floating>
                       </div>
 
-                      <div className="p-10 pt-4 relative z-10">
-                        <h3 className="text-2xl font-bold mb-4 text-prixgen-blue group-hover:text-prixgen-lightblue transition-colors">
-                          {service.title}
-                        </h3>
-                        <p className="text-prixgen-dark/70 leading-relaxed mb-8 min-h-[80px]">
-                          {service.desc}
-                        </p>
-                        <Magnetic>
-                          <div className="flex items-center text-prixgen-lightblue font-bold text-sm uppercase tracking-widest group-hover:gap-3 transition-all duration-300">
-                            Architecture Details 
-                            <motion.span 
-                              className="ml-2"
-                              initial={{ x: 0 }}
-                              animate={{ x: [0, 5, 0] }}
-                              transition={{ repeat: Infinity, duration: 1.5 }}
-                            >
-                              →
-                            </motion.span>
-                          </div>
-                        </Magnetic>
+                      <div className="p-10 pt-6 relative z-10 flex-1 flex flex-col justify-between">
+                        <div className="space-y-4">
+                          <h3 className="text-2xl font-bold text-prixgen-blue group-hover:text-prixgen-lightblue transition-colors">
+                            {service.title}
+                          </h3>
+                          <p className="text-prixgen-dark/70 leading-relaxed">
+                            {service.desc}
+                          </p>
+                        </div>
+                        <div className="pt-8">
+                          <Magnetic>
+                            <div className="flex items-center text-prixgen-lightblue font-bold text-sm uppercase tracking-widest group-hover:gap-3 transition-all duration-300">
+                              Architecture Details 
+                              <motion.span 
+                                className="ml-2"
+                                initial={{ x: 0 }}
+                                animate={{ x: [0, 5, 0] }}
+                                transition={{ repeat: Infinity, duration: 1.5 }}
+                              >
+                                →
+                              </motion.span>
+                            </div>
+                          </Magnetic>
+                        </div>
                       </div>
                     </div>
                   </Link>
