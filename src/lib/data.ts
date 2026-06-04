@@ -1520,40 +1520,35 @@ export const servicesData: any[] = [
   {
     slug: "hiring-odoo-developers",
     title: "Dedicated Odoo Talent Services",
-    headline: "Scaling Your Technical Capacity with Elite Odoo Experts.",
+    headline: "Stop hiring generic module customizers. Augment your technical capacity with pre-vetted Odoo architects capable of building intelligent data pipelines, high-throughput WMS, and industrial IoT hardware loops.",
     featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1000", altText: "Odoo Developers" },
     content: [
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "Finding elite Odoo talent is one of the biggest challenges in digital transformation. We provide access to our pre-vetted pool of senior Odoo developers and architects who have built complex enterprise systems across multiple industries. Our talent services are designed to scale your technical capacity instantly, providing the expertise needed to accelerate your digital roadmap." }]
+        children: [{ _type: 'span', text: "Finding elite Odoo talent is a primary bottleneck in digital transformation. We provide instant access to our pre-vetted hub of senior Odoo developers and ERP architects who have built complex enterprise systems across global industries. Operating from our Mysuru engineering hub, our team integrates seamlessly across APAC, EMEA, and US time zones to scale your technical capability with zero operational friction." }]
       },
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "Our developers are more than just coders; they are business-aware architects who understand how Odoo's core modules interact with your operational goals. Whether you need custom module development, complex API integrations, or database performance tuning, our dedicated talent integrates seamlessly with your internal teams, following your DevOps and communication protocols." }]
-      },
-      {
-        _type: 'block',
-        style: 'normal',
-        children: [{ _type: 'span', text: "We handle the entire vetting and onboarding process, ensuring that the developers we provide have the exact technical and cultural profile your project demands. With Prixgen's dedicated Odoo talent, you eliminate the overhead of traditional hiring and gain immediate access to technical excellence." }]
+        children: [{ _type: 'span', text: "Our engineers are not just coders; they are business-aware ERP architects. We specialize in high-stakes customizations: integrating Odoo databases with machine learning pipelines, connecting edge devices (RFID, IoT, scales) to warehouse modules, and designing low-latency API orchestrations with legacy mainframes." }]
       }
     ],
     features: [
-      { title: "Pre-vetted Experts", description: "Only the top 3% of Odoo developers make it into our pool." },
-      { title: "Full-Stack Capability", description: "Frontend, backend, and PostgreSQL database experts." },
-      { title: "Agile Integration", description: "Talent that adapts to your existing DevOps and PM workflows." },
-      { title: "Technical Oversight", description: "All projects monitored by our senior technical architects." }
+      { title: "Industrial WMS & Logistics", description: "Architect high-velocity inventory routes, custom picking/putaway algorithms, and real-time multi-warehouse sync." },
+      { title: "Physical IoT & RFID Telemetry", description: "Connect Odoo directly to the shop floor. We design low-level interfaces for scales, scanners, and PLCs using MQTT and OPC UA." },
+      { title: "AI/ML Forecasting Pipelines", description: "Integrate custom machine learning models into Odoo's database for predictive ordering and automated demand sensing." },
+      { title: "Zero-Latency API Orchestration", description: "Build hardened middleware bridges connecting Odoo to Salesforce, SAP, Shopify, and legacy mainframes with automated retries." }
     ],
     process: [
-      { title: "Requirements Definition", description: "Understanding the specific skills and seniority you need." },
-      { title: "Talent Matching", description: "Shortlisting candidates who fit your technical and cultural profile." },
-      { title: "Seamless Onboarding", description: "Integrating talent into your communication and dev cycles." }
+      { title: "Technical Assessment & Discovery", description: "We align on your system architecture, scoping document, current code repository, and developer seniority requirements." },
+      { title: "Developer Selection & Pod Assignment", description: "Review resumes and interview pre-vetted engineers. Once selected, we assign your supporting Architect, DevOps, and DBA resources." },
+      { title: "Agile Kickoff & Workspace Sync", description: "Developers join your Slack, configure their local dev environments, sync with your Jira backlog, and begin daily sprint standups." }
     ],
     seo: {
-      title: "Hire Senior Odoo Developers & Technical Architects | Prixgen",
-      metaDesc: "Scale your technical capacity with pre-vetted senior Odoo experts, developers, and architects for enterprise projects.",
-      keywords: ["Hire Odoo Developers", "Odoo Talent", "ERP Staffing", "Dedicated Odoo Team"]
+      title: "Hire Dedicated Odoo Developers & Engineering Pods | Prixgen",
+      metaDesc: "Augment your team with senior Odoo developers and dedicated engineering pods (Architect, DBA, DevOps included) with SLA-backed delivery. Odoo Gold Partner expertise.",
+      keywords: ["Hire Odoo Developers", "Odoo Engineering Pod", "Enterprise Odoo Architects", "Dedicated ERP Developers", "Odoo Staff Augmentation", "PostgreSQL Odoo DBA"]
     }
   },
   {
