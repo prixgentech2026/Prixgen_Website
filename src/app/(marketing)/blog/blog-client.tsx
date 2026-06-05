@@ -145,8 +145,8 @@ export default function BlogClient({ posts }: BlogClientProps) {
                   <div className="flex items-center justify-between mt-auto pt-6 border-t border-white/10">
                     <div className="flex items-center gap-3">
                       {featuredPost.author?.image && (
-                        <div className="w-10 h-10 rounded-xl overflow-hidden border-2 border-prixgen-lightblue rotate-3 group-hover:rotate-0 transition-transform">
-                          <OptimizedImage src={featuredPost.author.image} alt={featuredPost.author.name} fill className="object-cover" />
+                        <div className="w-10 h-10 rounded-xl overflow-hidden border-2 border-prixgen-lightblue rotate-3 group-hover:rotate-0 transition-transform bg-white p-0.5">
+                          <OptimizedImage src={featuredPost.author.image} alt={featuredPost.author.name} fill className="object-contain" />
                         </div>
                       )}
                       <div>

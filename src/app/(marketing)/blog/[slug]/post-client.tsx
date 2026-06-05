@@ -162,7 +162,7 @@ export default function PostClient({ post, relatedPosts = [] }: PostClientProps)
       />
 
       {/* Premium White Hero */}
-      <header className="relative pt-10 lg:pt-12 pb-4 flex items-center overflow-hidden bg-white">
+      <header className="relative pt-24 lg:pt-28 pb-4 flex items-center overflow-hidden bg-white">
         <HeroBackground />
 
         <div className="container mx-auto px-6 relative z-10 text-center">
@@ -206,8 +206,8 @@ export default function PostClient({ post, relatedPosts = [] }: PostClientProps)
             <div className="flex items-center justify-center gap-4 pt-2">
                 <div className="flex items-center gap-3">
                    {post.author?.image && (
-                      <div className="relative w-10 h-10 rounded-xl overflow-hidden border border-slate-100 shadow-md">
-                        <OptimizedImage src={post.author.image} alt={post.author.name} fill className="object-cover" />
+                      <div className="relative w-10 h-10 rounded-xl overflow-hidden border border-slate-100 shadow-md bg-white p-0.5">
+                        <OptimizedImage src={post.author.image} alt={post.author.name} fill className="object-contain" />
                       </div>
                    )}
                    <div className="text-left">
@@ -295,8 +295,8 @@ export default function PostClient({ post, relatedPosts = [] }: PostClientProps)
                    
                    <div className="relative z-10 flex flex-col md:flex-row gap-4 items-center text-center md:text-left">
                       {post.author?.image && (
-                        <motion.div style={{ y: authorY }} className="relative w-16 h-16 rounded-xl overflow-hidden shrink-0 border-2 border-white shadow-md rotate-2 group-hover:rotate-0 transition-transform duration-700">
-                          <OptimizedImage src={post.author.image} alt={post.author.name} fill className="object-cover" />
+                        <motion.div style={{ y: authorY }} className="relative w-16 h-16 rounded-xl overflow-hidden shrink-0 border-2 border-white shadow-md rotate-2 group-hover:rotate-0 transition-transform duration-700 bg-white p-1">
+                          <OptimizedImage src={post.author.image} alt={post.author.name} fill className="object-contain" />
                         </motion.div>
                       )}
                       <div className="space-y-2">
