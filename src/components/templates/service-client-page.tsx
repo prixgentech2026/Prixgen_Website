@@ -354,12 +354,36 @@ function OdooDevelopersLanding({ service }: { service: any }) {
               
               {/* Badges */}
               <div className="flex flex-wrap gap-3">
-                <span className="px-4 py-2 rounded-full bg-[#004B87]/5 border border-[#004B87]/20 text-[#004B87] font-black text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
-                  <Award size={14} className="text-amber-500 fill-amber-500/20" /> Odoo Gold Partner
-                </span>
-                <span className="px-4 py-2 rounded-full bg-slate-100 border border-slate-200 text-slate-600 font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
-                  <Globe size={14} /> Mysuru Engineering Hub
-                </span>
+                <div className="relative p-[1px] overflow-hidden rounded-full group bg-[#004B87]/20 shadow-sm hover:shadow-[0_0_15px_rgba(0,75,135,0.15)] transition-all duration-300">
+                  <motion.div 
+                    className="absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-amber-400 to-transparent"
+                    initial={{ x: "-100%" }}
+                    animate={{ x: ["-100%", "200%"] }}
+                    transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+                  />
+                  <span className="relative px-4 py-2 rounded-full bg-white text-[#004B87] font-black text-xs uppercase tracking-wider flex items-center gap-1.5 backdrop-blur-sm">
+                    <Award size={14} className="text-amber-500 fill-amber-500/20" /> Odoo Gold Partner
+                    <span className="relative flex h-1.5 w-1.5 ml-0.5 shrink-0">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-500"></span>
+                    </span>
+                  </span>
+                </div>
+                <div className="relative p-[1px] overflow-hidden rounded-full group bg-slate-200 shadow-sm hover:shadow-[0_0_15px_rgba(0,163,224,0.15)] transition-all duration-300">
+                  <motion.div 
+                    className="absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-prixgen-lightblue to-transparent"
+                    initial={{ x: "-100%" }}
+                    animate={{ x: ["-100%", "200%"] }}
+                    transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+                  />
+                  <span className="relative px-4 py-2 rounded-full bg-white text-slate-600 font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 backdrop-blur-sm">
+                    <Globe size={14} /> Mysuru Engineering Hub
+                    <span className="relative flex h-1.5 w-1.5 ml-0.5 shrink-0">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-prixgen-lightblue opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-prixgen-blue"></span>
+                    </span>
+                  </span>
+                </div>
               </div>
 
               {/* Breadcrumb */}
@@ -404,7 +428,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
               </FadeUp>
 
               {/* CTAs */}
-              <FadeUp delay={0.4} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4 w-full sm:w-auto">
+              <FadeUp delay={0.4} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-6 pt-4 w-full sm:w-auto">
                 <Magnetic>
                   <button 
                     onClick={handleScrollToForm}
@@ -460,27 +484,52 @@ function OdooDevelopersLanding({ service }: { service: any }) {
       )}
 
       {/* 2. VALUE PROPOSITION GRID (Intelligent ERP Focus) */}
-      <section className="py-20 lg:py-32 bg-slate-50 relative overflow-hidden">
+      <section className="py-10 lg:py-16 bg-slate-50 relative overflow-hidden">
         {/* Grid pattern */}
         <div className="absolute inset-0 opacity-[0.02] pointer-events-none" 
              style={{ backgroundImage: 'linear-gradient(#004B87 1px, transparent 1px), linear-gradient(90deg, #004B87 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl mx-auto text-center mb-20 space-y-4">
-            <span className="text-prixgen-blue font-black tracking-[0.2em] uppercase text-xs">Architectural Leadership</span>
-            <h2 className="text-4xl md:text-6xl font-black text-prixgen-dark tracking-tighter">
-              Intelligent ERP <span className="text-transparent bg-clip-text bg-gradient-to-r from-prixgen-blue to-prixgen-lightblue">Architects</span>
+          {/* Centered Header Block with Motion Animations */}
+          <div className="max-w-3xl mx-auto text-center mb-20 space-y-4 flex flex-col items-center">
+            <RevealText>
+              <span className="text-prixgen-blue font-black tracking-[0.2em] uppercase text-xs block">Architectural Leadership</span>
+            </RevealText>
+            <h2 className="text-4xl md:text-6xl font-black text-prixgen-dark tracking-tighter flex flex-wrap justify-center gap-x-[0.25em]">
+              {["Intelligent", "ERP"].map((word, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, margin: "-50px" }}
+                  transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                  className="inline-block"
+                >
+                  {word}
+                </motion.span>
+              ))}
+              <motion.span
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-prixgen-blue to-prixgen-lightblue"
+              >
+                Architects
+              </motion.span>
             </h2>
-            <p className="text-lg text-slate-500 font-medium leading-relaxed">
-              We shift the focus from basic code tweaks to full-spectrum enterprise integration and industrial-grade reliability.
-            </p>
+            <RevealText delay={0.15}>
+              <p className="text-lg text-slate-500 font-medium leading-relaxed">
+                We shift the focus from basic code tweaks to full-spectrum enterprise integration and industrial-grade reliability.
+              </p>
+            </RevealText>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {/* Card 1 */}
             <FadeUp delay={0.1} className="group">
               <div className="h-full p-10 bg-white border border-slate-100 shadow-[0_15px_40px_-20px_rgba(0,0,0,0.05)] rounded-[2.5rem] hover:border-prixgen-blue/20 hover:shadow-[0_30px_60px_-15px_rgba(0,75,135,0.1)] transition-all duration-500 relative overflow-hidden flex flex-col justify-between">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[#004B87]/[0.02] rounded-bl-[2.5rem] transition-all group-hover:bg-[#004B87]/5" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#004B87]/[0.06] rounded-bl-[2.5rem] transition-all group-hover:bg-[#004B87]/[0.15]" />
                 <div className="space-y-6">
                   <div className="w-14 h-14 rounded-2xl bg-[#004B87]/5 flex items-center justify-center text-[#004B87] group-hover:scale-110 group-hover:bg-[#004B87] group-hover:text-white transition-all duration-500">
                     <Database size={24} />
@@ -496,7 +545,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
             {/* Card 2 */}
             <FadeUp delay={0.2} className="group">
               <div className="h-full p-10 bg-white border border-slate-100 shadow-[0_15px_40px_-20px_rgba(0,0,0,0.05)] rounded-[2.5rem] hover:border-prixgen-blue/20 hover:shadow-[0_30px_60px_-15px_rgba(0,75,135,0.1)] transition-all duration-500 relative overflow-hidden flex flex-col justify-between">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[#004B87]/[0.02] rounded-bl-[2.5rem] transition-all group-hover:bg-[#004B87]/5" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#004B87]/[0.06] rounded-bl-[2.5rem] transition-all group-hover:bg-[#004B87]/[0.15]" />
                 <div className="space-y-6">
                   <div className="w-14 h-14 rounded-2xl bg-[#004B87]/5 flex items-center justify-center text-[#004B87] group-hover:scale-110 group-hover:bg-[#004B87] group-hover:text-white transition-all duration-500">
                     <Activity size={24} />
@@ -512,7 +561,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
             {/* Card 3 */}
             <FadeUp delay={0.3} className="group">
               <div className="h-full p-10 bg-white border border-slate-100 shadow-[0_15px_40px_-20px_rgba(0,0,0,0.05)] rounded-[2.5rem] hover:border-prixgen-blue/20 hover:shadow-[0_30px_60px_-15px_rgba(0,75,135,0.1)] transition-all duration-500 relative overflow-hidden flex flex-col justify-between">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[#004B87]/[0.02] rounded-bl-[2.5rem] transition-all group-hover:bg-[#004B87]/5" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#004B87]/[0.06] rounded-bl-[2.5rem] transition-all group-hover:bg-[#004B87]/[0.15]" />
                 <div className="space-y-6">
                   <div className="w-14 h-14 rounded-2xl bg-[#004B87]/5 flex items-center justify-center text-[#004B87] group-hover:scale-110 group-hover:bg-[#004B87] group-hover:text-white transition-all duration-500">
                     <LineChart size={24} />
@@ -528,7 +577,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
             {/* Card 4 */}
             <FadeUp delay={0.4} className="group">
               <div className="h-full p-10 bg-white border border-slate-100 shadow-[0_15px_40px_-20px_rgba(0,0,0,0.05)] rounded-[2.5rem] hover:border-prixgen-blue/20 hover:shadow-[0_30px_60px_-15px_rgba(0,75,135,0.1)] transition-all duration-500 relative overflow-hidden flex flex-col justify-between">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[#004B87]/[0.02] rounded-bl-[2.5rem] transition-all group-hover:bg-[#004B87]/5" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#004B87]/[0.06] rounded-bl-[2.5rem] transition-all group-hover:bg-[#004B87]/[0.15]" />
                 <div className="space-y-6">
                   <div className="w-14 h-14 rounded-2xl bg-[#004B87]/5 flex items-center justify-center text-[#004B87] group-hover:scale-110 group-hover:bg-[#004B87] group-hover:text-white transition-all duration-500">
                     <Zap size={24} />
@@ -545,60 +594,127 @@ function OdooDevelopersLanding({ service }: { service: any }) {
       </section>
 
       {/* 3. THE "ENGINEERING POD" HIGHLIGHT */}
-      <section id="pricing-pod-section" className="py-20 lg:py-32 bg-white relative">
+      <section id="pricing-pod-section" className="py-10 lg:py-16 bg-white relative">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
               
               {/* Left Column: Pod Pitch & Engagement Models */}
-              <div className="lg:col-span-5 space-y-8">
+              <div className="lg:col-span-7 space-y-8">
                 <div className="space-y-4">
-                  <span className="text-prixgen-lightblue font-black tracking-[0.2em] uppercase text-xs">Maximum Resource ROI</span>
-                  <h2 className="text-4xl md:text-5xl font-black text-prixgen-dark tracking-tighter leading-tight">
-                    The Pod Advantage: <br />
-                    <span className="text-prixgen-blue">Enterprise Power, Zero Overhead</span>
+                  <RevealText>
+                    <span className="text-prixgen-lightblue font-black tracking-[0.2em] uppercase text-xs block">Maximum Resource ROI</span>
+                  </RevealText>
+                  <h2 className="text-4xl md:text-5xl font-black text-prixgen-dark tracking-tighter leading-tight flex flex-wrap gap-x-[0.25em]">
+                    {["The", "Pod", "Advantage:"].map((word, i) => (
+                      <motion.span
+                        key={i}
+                        initial={{ opacity: 0, y: 15 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: false, margin: "-50px" }}
+                        transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                        className="inline-block"
+                      >
+                        {word}
+                      </motion.span>
+                    ))}
+                    {["Enterprise", "Power,", "Zero", "Overhead"].map((word, i) => (
+                      <motion.span
+                        key={i}
+                        initial={{ opacity: 0, y: 15 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: false, margin: "-50px" }}
+                        transition={{ duration: 0.5, delay: (i + 3) * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                        className="inline-block text-prixgen-blue"
+                      >
+                        {word}
+                      </motion.span>
+                    ))}
                   </h2>
-                  <p className="text-lg text-slate-500 font-medium leading-relaxed font-semibold">
-                    A single developer cannot build, secure, and deploy an enterprise ERP alone. When you hire a full-time Prixgen Odoo developer, we allocate a comprehensive engineering pod to support them—at zero additional overhead cost to your business.
-                  </p>
+                  <RevealText delay={0.35}>
+                    <p className="text-lg text-slate-500 font-medium leading-relaxed font-semibold">
+                      A single developer cannot build, secure, and deploy an enterprise ERP alone. When you hire a full-time Prixgen Odoo developer, we allocate a comprehensive engineering pod to support them—at zero additional overhead cost to your business.
+                    </p>
+                  </RevealText>
                 </div>
 
                 {/* Flexible Scaling Card (Replaces Price Callout) */}
-                <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-[#004B87] to-indigo-900 text-white shadow-2xl relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl -mr-10 -mt-10" />
-                  <div className="space-y-6 relative z-10">
-                    <div className="text-sm font-bold opacity-60 uppercase tracking-widest font-black">Capacity Scaling Models</div>
-                    
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-center border-b border-white/10 pb-3">
-                        <span className="font-bold text-sm">Dedicated Developer Pod</span>
-                        <span className="text-[10px] bg-prixgen-lightblue/30 text-prixgen-lightblue px-2.5 py-1 rounded-md font-black uppercase tracking-wider">Full Time</span>
+                <FadeUp delay={0.4} className="group">
+                  <div className="p-10 rounded-[2.5rem] bg-gradient-to-br from-[#004B87] to-indigo-900 text-white shadow-2xl relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl -mr-10 -mt-10" />
+                    <div className="space-y-8 relative z-10">
+                      <div className="text-sm font-bold opacity-60 uppercase tracking-widest font-black">Capacity Scaling Models</div>
+                      
+                      <div className="space-y-6">
+                        <div className="flex justify-between items-center border-b border-white/10 pb-4">
+                          <span className="font-bold text-base">Dedicated Developer Pod</span>
+                          <span className="text-[10px] bg-prixgen-lightblue/30 text-prixgen-lightblue px-2.5 py-1.5 rounded-md font-black uppercase tracking-wider">Full Time</span>
+                        </div>
+                        <div className="flex justify-between items-center border-b border-white/10 pb-4">
+                          <span className="font-bold text-base">Fractional ERP Architect</span>
+                          <span className="text-[10px] bg-indigo-500/30 text-indigo-200 px-2.5 py-1.5 rounded-md font-black uppercase tracking-wider">Part Time</span>
+                        </div>
+                        <div className="flex justify-between items-center pb-2">
+                          <span className="font-bold text-base">Project-Based Sprint Pods</span>
+                          <span className="text-[10px] bg-emerald-500/30 text-emerald-200 px-2.5 py-1.5 rounded-md font-black uppercase tracking-wider">Milestone</span>
+                        </div>
                       </div>
-                      <div className="flex justify-between items-center border-b border-white/10 pb-3">
-                        <span className="font-bold text-sm">Fractional ERP Architect</span>
-                        <span className="text-[10px] bg-indigo-500/30 text-indigo-200 px-2.5 py-1 rounded-md font-black uppercase tracking-wider">Part Time</span>
+
+                      <p className="text-sm opacity-80 leading-relaxed font-medium">
+                        All engagement tiers grant full access to Prixgen's Mysuru Hub supporting resources at zero overhead cost.
+                      </p>
+                      <button 
+                        onClick={handleScrollToForm}
+                        className="w-full py-5 bg-prixgen-lightblue hover:bg-prixgen-lightblue/90 text-white rounded-xl font-black text-sm uppercase tracking-wider transition-colors shadow-lg shadow-prixgen-lightblue/25 cursor-pointer"
+                      >
+                        Request Capacity Briefing
+                      </button>
+                    </div>
+                  </div>
+                </FadeUp>
+
+                {/* SLA & Security Guarantees Card */}
+                <FadeUp delay={0.5} className="group">
+                  <div className="p-10 rounded-[2.5rem] bg-slate-50 border border-slate-100 space-y-8 text-left">
+                    <div className="flex items-center justify-between border-b border-slate-200/60 pb-4">
+                      <div className="space-y-1">
+                        <h4 className="text-base font-black text-prixgen-dark uppercase tracking-wider">SLA & Security Guarantees</h4>
+                        <p className="text-xs text-slate-500 font-semibold leading-relaxed">We protect your workflows with enterprise-grade operational standards.</p>
                       </div>
-                      <div className="flex justify-between items-center pb-1">
-                        <span className="font-bold text-sm">Project-Based Sprint Pods</span>
-                        <span className="text-[10px] bg-emerald-500/30 text-emerald-200 px-2.5 py-1 rounded-md font-black uppercase tracking-wider">Milestone</span>
+                      <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md uppercase tracking-wider shrink-0">100% Risk Free</span>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                      <div className="p-6 bg-white rounded-2xl border border-slate-100/80 space-y-3 shadow-sm hover:border-[#004B87]/20 transition-all duration-300">
+                        <div className="text-[#004B87] font-black text-sm uppercase tracking-wider flex items-center gap-1.5">
+                          <ShieldCheck size={16} className="text-emerald-500" /> IP & Code Security
+                        </div>
+                        <p className="text-sm text-slate-500 font-medium leading-relaxed">Secure development environments, strict NDAs, and full IP protection transfer on code delivery.</p>
+                      </div>
+                      <div className="p-6 bg-white rounded-2xl border border-slate-100/80 space-y-3 shadow-sm hover:border-[#004B87]/20 transition-all duration-300">
+                        <div className="text-[#004B87] font-black text-sm uppercase tracking-wider flex items-center gap-1.5">
+                          <Activity size={16} className="text-prixgen-lightblue" /> 99.9% Availability SLA
+                        </div>
+                        <p className="text-sm text-slate-500 font-medium leading-relaxed">Dedicated backup developers and immediate replacement resources to keep sprints active without delays.</p>
+                      </div>
+                      <div className="p-6 bg-white rounded-2xl border border-slate-100/80 space-y-3 shadow-sm hover:border-[#004B87]/20 transition-all duration-300">
+                        <div className="text-[#004B87] font-black text-sm uppercase tracking-wider flex items-center gap-1.5">
+                          <Zap size={16} className="text-amber-500" /> Workspace Integration
+                        </div>
+                        <p className="text-sm text-slate-500 font-medium leading-relaxed">Seamless sync with Jira, Slack, Teams, and git repositories to operate directly in your workflow.</p>
+                      </div>
+                      <div className="p-6 bg-white rounded-2xl border border-slate-100/80 space-y-3 shadow-sm hover:border-[#004B87]/20 transition-all duration-300">
+                        <div className="text-[#004B87] font-black text-sm uppercase tracking-wider flex items-center gap-1.5">
+                          <Cpu size={16} className="text-purple-500" /> Code Quality Reviews
+                        </div>
+                        <p className="text-sm text-slate-500 font-medium leading-relaxed">Weekly automated test runs and Solutions Architect reviews to maintain strict standards.</p>
                       </div>
                     </div>
-
-                    <p className="text-xs opacity-75 leading-relaxed">
-                      All engagement tiers grant full access to Prixgen's Mysuru Hub supporting resources at zero overhead cost.
-                    </p>
-                    <button 
-                      onClick={handleScrollToForm}
-                      className="w-full py-4 bg-prixgen-lightblue hover:bg-prixgen-lightblue/90 text-white rounded-xl font-black text-sm uppercase tracking-wider transition-colors shadow-lg shadow-prixgen-lightblue/25 cursor-pointer"
-                    >
-                      Request Capacity Briefing
-                    </button>
                   </div>
-                </div>
+                </FadeUp>
               </div>
 
               {/* Right Column: Interactive Pod Roles & Connected Graphic */}
-              <div className="lg:col-span-7 space-y-8">
+              <div className="lg:col-span-5 space-y-8">
                 
                 {/* SVG Telemetry Motion Graphic */}
                 <PrixgenPodGraphic />
@@ -678,102 +794,168 @@ function OdooDevelopersLanding({ service }: { service: any }) {
       </section>
 
       {/* 4. TECH STACK & DEPLOYMENT ARCHITECTURE */}
-      <section className="py-20 lg:py-32 bg-slate-50 relative overflow-hidden">
+      <section className="py-10 lg:py-16 bg-slate-50 relative overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-20 gap-8">
-              <div className="max-w-2xl space-y-4">
-                <span className="text-prixgen-blue font-black tracking-[0.2em] uppercase text-xs">Standardized Stack</span>
-                <h2 className="text-4xl md:text-5xl font-black text-prixgen-dark tracking-tighter">
-                  Enterprise Tech Stack & <span className="text-prixgen-blue">Deployment Standards</span>
+              <div className="max-w-2xl space-y-4 text-left flex flex-col items-start">
+                <RevealText>
+                  <span className="text-prixgen-blue font-black tracking-[0.2em] uppercase text-xs block">Standardized Stack</span>
+                </RevealText>
+                <h2 className="text-4xl md:text-5xl font-black text-prixgen-dark tracking-tighter flex flex-wrap gap-x-[0.25em]">
+                  {["Enterprise", "Tech", "Stack", "&"].map((word, i) => (
+                    <motion.span
+                      key={i}
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: false, margin: "-50px" }}
+                      transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                      className="inline-block"
+                    >
+                      {word}
+                    </motion.span>
+                  ))}
+                  {["Deployment", "Standards"].map((word, i) => (
+                    <motion.span
+                      key={i}
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: false, margin: "-50px" }}
+                      transition={{ duration: 0.5, delay: (i + 4) * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                      className="inline-block text-prixgen-blue"
+                    >
+                      {word}
+                    </motion.span>
+                  ))}
                 </h2>
-                <p className="text-lg text-slate-500 font-semibold leading-relaxed">
-                  We deploy standardized, high-performance tech stacks. No legacy shortcuts. Everything is optimized for cloud availability and automated pipelines.
-                </p>
+                <RevealText delay={0.3}>
+                  <p className="text-lg text-slate-500 font-semibold leading-relaxed">
+                    We deploy standardized, high-performance tech stacks. No legacy shortcuts. Everything is optimized for cloud availability and automated pipelines.
+                  </p>
+                </RevealText>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
               {/* Category 1 */}
-              <div className="p-8 bg-white border border-slate-100 rounded-[2rem] shadow-sm flex flex-col justify-between h-full">
-                <div className="space-y-6">
-                  <div className="w-12 h-12 bg-[#004B87]/5 rounded-xl flex items-center justify-center text-[#004B87]">
-                    <Cpu size={20} />
+              <FadeUp delay={0.1} className="group h-full">
+                <div className="p-8 bg-gradient-to-br from-blue-50/30 via-white to-prixgen-blue/[0.03] border border-prixgen-blue/10 rounded-[2rem] shadow-[0_10px_30px_-15px_rgba(0,75,135,0.05)] flex flex-col justify-between h-full hover:border-prixgen-blue/30 hover:shadow-[0_20px_45px_-15px_rgba(0,75,135,0.1)] transition-all duration-300">
+                  <div className="space-y-6">
+                    <div className="w-12 h-12 bg-[#004B87]/5 rounded-xl flex items-center justify-center text-[#004B87]">
+                      <Cpu size={20} />
+                    </div>
+                    <h4 className="text-xl font-black text-prixgen-dark">Core Technologies</h4>
+                    <p className="text-sm text-slate-400 font-medium">The foundation of every custom enterprise application we design.</p>
                   </div>
-                  <h4 className="text-xl font-black text-prixgen-dark">Core Technologies</h4>
-                  <p className="text-sm text-slate-400 font-medium">The foundation of every custom enterprise application we design.</p>
+                  <div className="flex flex-wrap gap-2 pt-8">
+                    {["Python", "Odoo Framework", "PostgreSQL", "React", "Tailwind CSS", "XML"].map((tech) => (
+                      <span key={tech} className="px-3 py-1.5 bg-white border border-prixgen-blue/10 rounded-xl text-xs font-bold text-slate-600 hover:border-prixgen-blue/30 hover:bg-prixgen-blue/5 transition-colors">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div className="flex flex-wrap gap-2 pt-8">
-                  {["Python", "Odoo Framework", "PostgreSQL", "React", "Tailwind CSS", "XML"].map((tech) => (
-                    <span key={tech} className="px-3 py-1.5 bg-slate-50 border border-slate-200/60 rounded-xl text-xs font-bold text-slate-600 hover:border-[#004B87]/30 transition-colors">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              </FadeUp>
 
               {/* Category 2 */}
-              <div className="p-8 bg-white border border-slate-100 rounded-[2rem] shadow-sm flex flex-col justify-between h-full">
-                <div className="space-y-6">
-                  <div className="w-12 h-12 bg-indigo-500/5 rounded-xl flex items-center justify-center text-indigo-500">
-                    <Activity size={20} />
+              <FadeUp delay={0.2} className="group h-full">
+                <div className="p-8 bg-gradient-to-br from-blue-50/30 via-white to-prixgen-blue/[0.03] border border-prixgen-blue/10 rounded-[2rem] shadow-[0_10px_30px_-15px_rgba(0,75,135,0.05)] flex flex-col justify-between h-full hover:border-prixgen-blue/30 hover:shadow-[0_20px_45px_-15px_rgba(0,75,135,0.1)] transition-all duration-300">
+                  <div className="space-y-6">
+                    <div className="w-12 h-12 bg-indigo-500/5 rounded-xl flex items-center justify-center text-indigo-500">
+                      <Activity size={20} />
+                    </div>
+                    <h4 className="text-xl font-black text-prixgen-dark">Integrations & IoT</h4>
+                    <p className="text-sm text-slate-400 font-medium">Connecting ERP core modules to the physical shop floor and external applications.</p>
                   </div>
-                  <h4 className="text-xl font-black text-prixgen-dark">Integrations & IoT</h4>
-                  <p className="text-sm text-slate-400 font-medium">Connecting ERP core modules to the physical shop floor and external applications.</p>
+                  <div className="flex flex-wrap gap-2 pt-8">
+                    {["MQTT", "OPC UA", "REST APIs", "GraphQL", "Webhooks", "gRPC"].map((tech) => (
+                      <span key={tech} className="px-3 py-1.5 bg-white border border-prixgen-blue/10 rounded-xl text-xs font-bold text-slate-600 hover:border-prixgen-blue/30 hover:bg-prixgen-blue/5 transition-colors">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div className="flex flex-wrap gap-2 pt-8">
-                  {["MQTT", "OPC UA", "REST APIs", "GraphQL", "Webhooks", "gRPC"].map((tech) => (
-                    <span key={tech} className="px-3 py-1.5 bg-slate-50 border border-slate-200/60 rounded-xl text-xs font-bold text-slate-600 hover:border-[#004B87]/30 transition-colors">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              </FadeUp>
 
               {/* Category 3 */}
-              <div className="p-8 bg-white border border-slate-100 rounded-[2rem] shadow-sm flex flex-col justify-between h-full">
-                <div className="space-y-6">
-                  <div className="w-12 h-12 bg-emerald-500/5 rounded-xl flex items-center justify-center text-emerald-500">
-                    <Server size={20} />
+              <FadeUp delay={0.3} className="group h-full">
+                <div className="p-8 bg-gradient-to-br from-blue-50/30 via-white to-prixgen-blue/[0.03] border border-prixgen-blue/10 rounded-[2rem] shadow-[0_10px_30px_-15px_rgba(0,75,135,0.05)] flex flex-col justify-between h-full hover:border-prixgen-blue/30 hover:shadow-[0_20px_45px_-15px_rgba(0,75,135,0.1)] transition-all duration-300">
+                  <div className="space-y-6">
+                    <div className="w-12 h-12 bg-emerald-500/5 rounded-xl flex items-center justify-center text-emerald-500">
+                      <Server size={20} />
+                    </div>
+                    <h4 className="text-xl font-black text-prixgen-dark">DevOps & Cloud</h4>
+                    <p className="text-sm text-slate-400 font-medium">Standardized hosting environments and automated deployment pipelines.</p>
                   </div>
-                  <h4 className="text-xl font-black text-prixgen-dark">DevOps & Cloud</h4>
-                  <p className="text-sm text-slate-400 font-medium">Standardized hosting environments and automated deployment pipelines.</p>
+                  <div className="flex flex-wrap gap-2 pt-8">
+                    {["Docker", "Kubernetes", "AWS", "GCP", "GitHub Actions", "GitLab CI"].map((tech) => (
+                      <span key={tech} className="px-3 py-1.5 bg-white border border-prixgen-blue/10 rounded-xl text-xs font-bold text-slate-600 hover:border-prixgen-blue/30 hover:bg-prixgen-blue/5 transition-colors">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div className="flex flex-wrap gap-2 pt-8">
-                  {["Docker", "Kubernetes", "AWS", "GCP", "GitHub Actions", "GitLab CI"].map((tech) => (
-                    <span key={tech} className="px-3 py-1.5 bg-slate-50 border border-slate-200/60 rounded-xl text-xs font-bold text-slate-600 hover:border-[#004B87]/30 transition-colors">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              </FadeUp>
+
             </div>
           </div>
         </div>
       </section>
 
       {/* 5. ENTERPRISE RELIABILITY FRAMEWORK */}
-      <section className="py-20 lg:py-32 bg-white relative">
+      <section className="py-10 lg:py-16 bg-white relative">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
               
               {/* Left Column: Title & Subtext */}
-              <div className="lg:col-span-5 space-y-6">
-                <span className="text-prixgen-blue font-black tracking-[0.2em] uppercase text-xs">Risk Mitigation</span>
-                <h2 className="text-4xl md:text-5xl font-black text-prixgen-dark tracking-tighter leading-tight">
-                  The Enterprise <br />
-                  <span className="text-[#004B87]">Reliability Framework</span>
+              <div className="lg:col-span-5 space-y-6 text-left flex flex-col items-start">
+                <RevealText>
+                  <span className="text-prixgen-blue font-black tracking-[0.2em] uppercase text-xs block">Risk Mitigation</span>
+                </RevealText>
+                <h2 className="text-4xl md:text-5xl font-black text-prixgen-dark tracking-tighter leading-tight flex flex-wrap gap-x-[0.25em]">
+                  {["The", "Enterprise"].map((word, i) => (
+                    <motion.span
+                      key={i}
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: false, margin: "-50px" }}
+                      transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                      className="inline-block"
+                    >
+                      {word}
+                    </motion.span>
+                  ))}
+                  {["Reliability", "Framework"].map((word, i) => (
+                    <motion.span
+                      key={i}
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: false, margin: "-50px" }}
+                      transition={{ duration: 0.5, delay: (i + 2) * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                      className="inline-block text-[#004B87]"
+                    >
+                      {word}
+                    </motion.span>
+                  ))}
                 </h2>
-                <p className="text-lg text-slate-500 font-medium leading-relaxed">
-                  ERP downtime is a production stoppage. We enforce rigorous QA protocols, dry-run data migrations, and automated regression testing to guarantee zero operational interruption during version upgrades.
-                </p>
-                <div className="p-6 rounded-2xl bg-amber-500/5 border border-amber-500/10 flex items-start gap-4">
-                  <ShieldCheck className="text-amber-500 shrink-0 mt-0.5" size={20} />
-                  <p className="text-sm text-slate-600 font-bold leading-relaxed">
-                    Clients report 100% data integrity and zero downtime on major version updates since we deployed our automated testing runners.
+                <RevealText delay={0.35}>
+                  <p className="text-lg text-slate-500 font-medium leading-relaxed">
+                    ERP downtime is a production stoppage. We enforce rigorous QA protocols, dry-run data migrations, and automated regression testing to guarantee zero operational interruption during version upgrades.
                   </p>
-                </div>
+                </RevealText>
+                <FadeUp delay={0.4} className="w-full">
+                  <div className="p-6 rounded-2xl bg-amber-500/5 border border-amber-500/10 flex items-start gap-4">
+                    <ShieldCheck className="text-amber-500 shrink-0 mt-0.5" size={20} />
+                    <p className="text-sm text-slate-600 font-bold leading-relaxed">
+                      Clients report 100% data integrity and zero downtime on major version updates since we deployed our automated testing runners.
+                    </p>
+                  </div>
+                </FadeUp>
+                {/* Embedded Reliability Motion Graphic */}
+                <FadeUp delay={0.45} className="w-full">
+                  <ReliabilityMotionGraphic />
+                </FadeUp>
               </div>
 
               {/* Right Column: Step Breakdown */}
@@ -802,7 +984,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                     desc: "Deployments are managed via GitLab/GitHub CI/CD pipelines with automated rollback scripts, ensuring 99.9% availability during version upgrades."
                   }
                 ].map((item, index) => (
-                  <div key={index} className="flex gap-6 relative group">
+                  <FadeUp key={index} delay={0.1 * (index + 1)} className="flex gap-6 relative group">
                     <div className="w-14 h-14 rounded-full bg-slate-50 border-4 border-white shadow-sm flex items-center justify-center font-black text-prixgen-blue text-lg shrink-0 group-hover:bg-[#004B87] group-hover:text-white transition-colors relative z-10">
                       {item.step}
                     </div>
@@ -810,7 +992,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                       <h4 className="text-xl font-black text-prixgen-dark group-hover:text-[#004B87] transition-colors">{item.title}</h4>
                       <p className="text-slate-500 font-medium leading-relaxed text-sm">{item.desc}</p>
                     </div>
-                  </div>
+                  </FadeUp>
                 ))}
               </div>
 
@@ -820,20 +1002,48 @@ function OdooDevelopersLanding({ service }: { service: any }) {
       </section>
 
       {/* 6. ENGAGEMENT MODEL */}
-      <section className="py-20 lg:py-32 bg-slate-50 border-t border-b border-slate-200/60 relative overflow-hidden">
+      <section className="py-10 lg:py-16 bg-slate-50 border-t border-b border-slate-200/60 relative overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="max-w-3xl mx-auto text-center mb-20 space-y-4">
-              <span className="text-prixgen-blue font-black tracking-[0.2em] uppercase text-xs">Onboarding Roadmap</span>
-              <h2 className="text-4xl md:text-5xl font-black text-prixgen-dark tracking-tighter">
-                Three Steps to Onboard On-Demand Talent
+            {/* Centered Header Block with Motion Animations */}
+            <div className="max-w-3xl mx-auto text-center mb-20 space-y-4 flex flex-col items-center">
+              <RevealText>
+                <span className="text-prixgen-blue font-black tracking-[0.2em] uppercase text-xs block">Onboarding Roadmap</span>
+              </RevealText>
+              <h2 className="text-4xl md:text-5xl font-black text-prixgen-dark tracking-tighter flex flex-wrap justify-center gap-x-[0.25em]">
+                {["Three", "Steps", "to", "Onboard"].map((word, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false, margin: "-50px" }}
+                    transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                    className="inline-block"
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+                {["On-Demand", "Talent"].map((word, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false, margin: "-50px" }}
+                    transition={{ duration: 0.5, delay: (i + 4) * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                    className="inline-block text-prixgen-blue"
+                  >
+                    {word}
+                  </motion.span>
+                ))}
               </h2>
-              <p className="text-lg text-slate-500 font-medium">
-                Our onboarding process is frictionless and designed to integrate developers into your active sprints within 14 days.
-              </p>
+              <RevealText delay={0.35}>
+                <p className="text-lg text-slate-500 font-medium">
+                  Our onboarding process is frictionless and designed to integrate developers into your active sprints within 14 days.
+                </p>
+              </RevealText>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
               {[
                 {
                   step: "01",
@@ -851,68 +1061,197 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                   desc: "Developers join your communication channels (Slack/Teams), configure local environments, sync with your Jira board, and start daily standups."
                 }
               ].map((item, index) => (
-                <div key={index} className="p-8 bg-white border border-slate-100 rounded-3xl shadow-sm flex flex-col justify-between relative overflow-hidden">
-                  <div className="space-y-6">
-                    <div className="text-6xl font-black text-slate-100">{item.step}</div>
-                    <h3 className="text-xl font-black text-prixgen-dark">{item.title}</h3>
-                    <p className="text-slate-500 font-medium text-sm leading-relaxed">{item.desc}</p>
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  whileHover={{ y: -8 }}
+                  transition={{ 
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20,
+                    opacity: { duration: 0.5, delay: index * 0.1 },
+                    y: { duration: 0.4 }
+                  }}
+                  className="group relative h-full flex flex-col justify-between p-8 md:p-10 rounded-[2.5rem] bg-white border border-prixgen-blue/20 hover:border-prixgen-blue/50 shadow-[0_15px_40px_-20px_rgba(0,75,135,0.06)] hover:shadow-[0_25px_50px_-20px_rgba(0,75,135,0.15)] transition-all duration-300 overflow-hidden"
+                >
+                  {/* Ambient Hover Glow */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-prixgen-blue/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-prixgen-blue/5 to-transparent rounded-bl-[2.5rem] opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none" />
+                  
+                  <div className="space-y-6 relative z-10">
+                    <div className="flex justify-between items-center mb-8">
+                      <span className="text-sm font-black text-prixgen-blue uppercase tracking-widest bg-prixgen-blue/5 px-3.5 py-1.5 rounded-xl border border-prixgen-blue/10 transition-colors group-hover:bg-prixgen-blue group-hover:text-white">
+                        Step {item.step}
+                      </span>
+                      <span className="relative flex h-2 w-2 shrink-0">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-prixgen-blue/50 opacity-75 group-hover:block hidden"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-prixgen-blue/20 group-hover:bg-prixgen-blue transition-colors"></span>
+                      </span>
+                    </div>
+                    
+                    <h3 className="text-2xl font-black text-prixgen-dark tracking-tight group-hover:text-prixgen-blue transition-colors duration-300">
+                      {item.title}
+                    </h3>
+                    <p className="text-slate-500 font-medium text-base leading-relaxed">
+                      {item.desc}
+                    </p>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* 7. BOTTOM LEAD CAPTURE FORM SECTION */}
-      <section id="contact-form-section" className="py-20 lg:py-32 bg-white relative">
+      {/* 7. BOTTOM LEAD CAPTURE & CAREERS SECTION */}
+      <section id="contact-form-section" className="py-10 lg:py-16 bg-white relative">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="relative bg-gradient-to-br from-[#004B87] to-indigo-900 rounded-[3.5rem] p-12 lg:p-24 overflow-hidden shadow-2xl">
-              {/* Background Glow */}
-              <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/[0.02] blur-[100px] -translate-y-1/2 translate-x-1/4 pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-indigo-500/[0.02] blur-[80px] translate-y-1/2 -translate-x-1/4 pointer-events-none" />
-
-              <div className="relative z-10 grid lg:grid-cols-12 gap-16 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+              
+              {/* Card 1: Client Lead Capture */}
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6 }}
+                className="relative bg-gradient-to-br from-[#004B87] to-indigo-900 rounded-[2.5rem] p-8 md:p-12 overflow-hidden shadow-2xl flex flex-col justify-between"
+              >
+                {/* Background Glow */}
+                <div className="absolute top-0 right-0 w-[250px] h-[250px] bg-white/[0.02] blur-[80px] -translate-y-1/2 translate-x-1/4 pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-[200px] h-[200px] bg-indigo-500/[0.02] blur-[60px] translate-y-1/2 -translate-x-1/4 pointer-events-none" />
                 
-                {/* Left Side: Pitch */}
-                <div className="lg:col-span-7 text-left space-y-8">
-                  <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full text-white font-black text-xs uppercase tracking-wider">
-                    <span className="w-2 h-2 bg-prixgen-lightblue rounded-full animate-pulse" />
-                    Connect with Architects
+                <div className="space-y-6 relative z-10">
+                  <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 border border-white/20 rounded-full text-white font-black text-[10px] uppercase tracking-wider">
+                    <span className="w-1.5 h-1.5 bg-prixgen-lightblue rounded-full animate-pulse" />
+                    For Businesses
                   </span>
-                  <h2 className="text-4xl lg:text-6xl font-black text-white leading-tight tracking-tight">
-                    Ready to scale your <br />
-                    <span className="text-prixgen-lightblue italic font-medium">technical capacity?</span>
+                  
+                  <h2 className="text-3xl md:text-4xl font-black text-white leading-tight tracking-tight flex flex-wrap gap-x-[0.2em]">
+                    {["Ready", "to", "scale", "your"].map((word, i) => (
+                      <motion.span
+                        key={i}
+                        initial={{ opacity: 0, y: 12 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: i * 0.05 }}
+                        className="inline-block"
+                      >
+                        {word}
+                      </motion.span>
+                    ))}
+                    {["technical", "capacity?"].map((word, i) => (
+                      <motion.span
+                        key={i}
+                        initial={{ opacity: 0, y: 12 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: (i + 4) * 0.05 }}
+                        className="inline-block text-prixgen-lightblue italic font-medium"
+                      >
+                        {word}
+                      </motion.span>
+                    ))}
                   </h2>
-                  <p className="text-lg text-indigo-100/80 font-medium leading-relaxed max-w-xl">
-                    Submit your details to schedule a dedicated technical brief. Speak directly with our solutions architect to outline your scope and timeline.
+                  
+                  <p className="text-sm text-indigo-100/80 font-medium leading-relaxed">
+                    Submit your requirements and schedule a briefing directly with our Solutions Architect to align on developer seniority, scope, and timeline.
                   </p>
                   
-                  <div className="border-t border-white/10 pt-8 grid grid-cols-2 gap-8 text-white">
-                    <div className="space-y-1">
-                      <div className="text-2xl font-black">14 Days</div>
-                      <div className="text-xs font-bold text-indigo-200 uppercase tracking-wider">Average Onboarding Time</div>
-                    </div>
-                    <div className="space-y-1">
-                      <div className="text-2xl font-black">98.4%</div>
-                      <div className="text-xs font-bold text-indigo-200 uppercase tracking-wider">Developer Retention Rate</div>
+                  <div className="bg-white/95 backdrop-blur-xl p-6 md:p-8 rounded-[2rem] shadow-xl border border-white/15 mt-4">
+                    <div className="scale-95 origin-top">
+                      <LeadCaptureForm source="Service: Hire Odoo Developers (Bottom Client)" />
                     </div>
                   </div>
                 </div>
+              </motion.div>
 
-                {/* Right Side: Form */}
-                <div className="lg:col-span-5 bg-white/95 backdrop-blur-xl p-8 lg:p-10 rounded-[2.5rem] shadow-2xl border border-white/20">
-                  <div className="mb-6 border-b border-slate-100 pb-4">
-                    <h4 className="text-xl font-black text-prixgen-blue">Secure Your Pod</h4>
-                    <p className="text-xs text-slate-500 font-bold mt-1">Submit your requirements and an architect will contact you.</p>
+              {/* Card 2: Careers diversion */}
+              <motion.div 
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6 }}
+                className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 rounded-[2.5rem] p-8 md:p-12 overflow-hidden shadow-2xl flex flex-col justify-between"
+              >
+                {/* Background Glow */}
+                <div className="absolute top-0 right-0 w-[250px] h-[250px] bg-prixgen-lightblue/[0.03] blur-[80px] -translate-y-1/2 translate-x-1/4 pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-[200px] h-[200px] bg-[#004B87]/[0.05] blur-[60px] translate-y-1/2 -translate-x-1/4 pointer-events-none" />
+                
+                <div className="space-y-8 relative z-10 flex flex-col h-full justify-between">
+                  <div className="space-y-6">
+                    <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-prixgen-lightblue font-black text-[10px] uppercase tracking-wider">
+                      <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping" />
+                      We are Hiring
+                    </span>
+                    
+                    <h2 className="text-3xl md:text-4xl font-black text-white leading-tight tracking-tight flex flex-wrap gap-x-[0.2em]">
+                      {["Looking", "for", "your", "next"].map((word, i) => (
+                        <motion.span
+                          key={i}
+                          initial={{ opacity: 0, y: 12 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.4, delay: i * 0.05 }}
+                          className="inline-block"
+                        >
+                          {word}
+                        </motion.span>
+                      ))}
+                      {["career", "leap?"].map((word, i) => (
+                        <motion.span
+                          key={i}
+                          initial={{ opacity: 0, y: 12 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.4, delay: (i + 4) * 0.05 }}
+                          className="inline-block text-emerald-400 italic font-medium"
+                        >
+                          {word}
+                        </motion.span>
+                      ))}
+                    </h2>
+                    
+                    <p className="text-sm text-slate-300 font-medium leading-relaxed">
+                      Are you an elite Python developer, Odoo framework expert, or ERP Solutions Architect? Join our engineering hub to work on complex industrial automation, AI-driven forecasting, and global IoT implementations.
+                    </p>
                   </div>
-                  <div className="scale-95 origin-top">
-                    <LeadCaptureForm source="Service: Hire Odoo Developers" />
+                  
+                  <div className="space-y-4 py-4 border-t border-b border-white/5 my-2">
+                    {[
+                      "Work on global, industrial-scale projects",
+                      "Accelerated path to Solutions Architect roles",
+                      "Collaborative team at Mysuru Hub & hybrid modes",
+                      "IP / Certification sponsorships and bonuses"
+                    ].map((benefit, idx) => (
+                      <div key={idx} className="flex items-center gap-3 text-slate-300 text-sm font-semibold">
+                        <div className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <span>{benefit}</span>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <div className="pt-4 space-y-4">
+                    <Link href="/careers" className="w-full">
+                      <motion.button 
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="w-full py-5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white rounded-2xl font-black text-base uppercase tracking-wider transition-all shadow-lg shadow-emerald-500/20 cursor-pointer flex items-center justify-center gap-2 group"
+                      >
+                        Explore Open Positions
+                        <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                      </motion.button>
+                    </Link>
+                    <p className="text-center text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+                      Or send resume directly to <a href="mailto:careers@prixgen.com" className="text-emerald-400 hover:underline">careers@prixgen.com</a>
+                    </p>
                   </div>
                 </div>
-
-              </div>
+              </motion.div>
 
             </div>
           </div>
@@ -940,17 +1279,7 @@ function ErpHubMotionGraphic() {
           </filter>
         </defs>
 
-        {/* Orbit Rings */}
-        <motion.circle
-          cx="200"
-          cy="200"
-          r="80"
-          fill="none"
-          stroke="#004B87"
-          strokeWidth="1"
-          strokeDasharray="4 6"
-          className="opacity-20"
-        />
+        {/* Orbit Ring */}
         <motion.circle
           cx="200"
           cy="200"
@@ -958,62 +1287,45 @@ function ErpHubMotionGraphic() {
           fill="none"
           stroke="#00A3E0"
           strokeWidth="1.5"
-          strokeDasharray="8 8"
+          strokeDasharray="6 6"
           className="opacity-30"
         />
-        <motion.circle
-          cx="200"
-          cy="200"
-          r="180"
-          fill="none"
-          stroke="#004B87"
-          strokeWidth="0.75"
-          className="opacity-15"
-        />
 
-        {/* Outer Orbit Animation */}
+        {/* Revolving Odoo Modules on the same dotted path */}
         <motion.g
           animate={{ rotate: 360 }}
           transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
           style={{ transformOrigin: "200px 200px" }}
         >
-          {/* Node 1: Python */}
-          <g transform="translate(200, 20)">
+          {/* Node 1: Inventory */}
+          <g transform="translate(200, 60)">
             <circle r="18" fill="white" stroke="#004B87" strokeWidth="2" filter="url(#shadow)" />
-            <text y="4" textAnchor="middle" fill="#004B87" fontSize="10" fontWeight="900">Py</text>
+            <text y="4" textAnchor="middle" fill="#004B87" fontSize="8" fontWeight="900">INV</text>
           </g>
-          {/* Node 2: PostgreSQL */}
-          <g transform="translate(380, 200)">
+          {/* Node 2: CRM */}
+          <g transform="translate(321, 130)">
             <circle r="18" fill="white" stroke="#00A3E0" strokeWidth="2" filter="url(#shadow)" />
-            <text y="4" textAnchor="middle" fill="#00A3E0" fontSize="9" fontWeight="900">SQL</text>
+            <text y="4" textAnchor="middle" fill="#00A3E0" fontSize="8" fontWeight="900">CRM</text>
           </g>
-          {/* Node 3: IoT / Edge */}
-          <g transform="translate(200, 380)">
+          {/* Node 3: Sales */}
+          <g transform="translate(321, 270)">
             <circle r="18" fill="white" stroke="#004B87" strokeWidth="2" filter="url(#shadow)" />
-            <text y="4" textAnchor="middle" fill="#004B87" fontSize="9" fontWeight="900">IoT</text>
+            <text y="4" textAnchor="middle" fill="#004B87" fontSize="8" fontWeight="900">SALE</text>
           </g>
-          {/* Node 4: AI Forecasting */}
-          <g transform="translate(20, 200)">
+          {/* Node 4: Manufacturing */}
+          <g transform="translate(200, 340)">
             <circle r="18" fill="white" stroke="#00A3E0" strokeWidth="2" filter="url(#shadow)" />
-            <text y="4" textAnchor="middle" fill="#00A3E0" fontSize="9" fontWeight="900">AI</text>
+            <text y="4" textAnchor="middle" fill="#00A3E0" fontSize="8" fontWeight="900">MRP</text>
           </g>
-        </motion.g>
-
-        {/* Inner Orbit Animation */}
-        <motion.g
-          animate={{ rotate: -360 }}
-          transition={{ repeat: Infinity, duration: 18, ease: "linear" }}
-          style={{ transformOrigin: "200px 200px" }}
-        >
-          {/* Node 5: WMS Routing */}
-          <g transform="translate(200, 120)">
-            <circle r="14" fill="#004B87" filter="url(#shadow)" />
-            <text y="3" textAnchor="middle" fill="white" fontSize="7" fontWeight="bold">WMS</text>
+          {/* Node 5: Accounting */}
+          <g transform="translate(79, 270)">
+            <circle r="18" fill="white" stroke="#004B87" strokeWidth="2" filter="url(#shadow)" />
+            <text y="4" textAnchor="middle" fill="#004B87" fontSize="8" fontWeight="900">ACC</text>
           </g>
-          {/* Node 6: API Bridges */}
-          <g transform="translate(200, 280)">
-            <circle r="14" fill="#00A3E0" filter="url(#shadow)" />
-            <text y="3" textAnchor="middle" fill="white" fontSize="7" fontWeight="bold">API</text>
+          {/* Node 6: HR */}
+          <g transform="translate(79, 130)">
+            <circle r="18" fill="white" stroke="#00A3E0" strokeWidth="2" filter="url(#shadow)" />
+            <text y="4" textAnchor="middle" fill="#00A3E0" fontSize="8" fontWeight="900">HR</text>
           </g>
         </motion.g>
 
@@ -1104,6 +1416,363 @@ function PrixgenPodGraphic() {
         <circle cx="200" cy="50" r="24" fill="#00A3E0" stroke="white" strokeWidth="2" filter="url(#shadow-pod)" />
         <text y="48" x="200" textAnchor="middle" fill="white" fontSize="8" fontWeight="black">ODOO</text>
         <text y="58" x="200" textAnchor="middle" fill="white" fontSize="7" fontWeight="bold">DEV</text>
+      </svg>
+    </div>
+  );
+}
+
+// 10. VALUE PROP MOTION GRAPHIC
+function ValuePropMotionGraphic() {
+  return (
+    <div className="relative w-full aspect-square max-w-[400px] mx-auto flex items-center justify-center pointer-events-none">
+      <div className="absolute w-[200px] h-[200px] bg-prixgen-blue/5 rounded-full blur-[40px] animate-pulse" />
+      <svg viewBox="0 0 400 400" className="w-full h-full relative z-10">
+        <defs>
+          <filter id="shadow-val" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="0" dy="6" stdDeviation="3" floodColor="#004B87" floodOpacity="0.12" />
+          </filter>
+          <linearGradient id="valGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#004B87" />
+            <stop offset="100%" stopColor="#00A3E0" />
+          </linearGradient>
+        </defs>
+
+        {/* Orbit Rings */}
+        <circle cx="200" cy="200" r="110" fill="none" stroke="#004B87" strokeWidth="1" strokeDasharray="4 6" className="opacity-20" />
+        <circle cx="200" cy="200" r="150" fill="none" stroke="#00A3E0" strokeWidth="1" strokeDasharray="8 8" className="opacity-30" />
+
+        {/* Crosshair guidelines */}
+        <line x1="200" y1="50" x2="200" y2="350" stroke="#004B87" strokeWidth="0.5" strokeDasharray="4 4" className="opacity-10" />
+        <line x1="50" y1="200" x2="350" y2="200" stroke="#004B87" strokeWidth="0.5" strokeDasharray="4 4" className="opacity-10" />
+
+        {/* Connection lines with flow pulse */}
+        <motion.line
+          x1="200" y1="90" x2="200" y2="200"
+          stroke="url(#valGrad)" strokeWidth="2" strokeDasharray="5 5"
+          animate={{ strokeDashoffset: [-20, 0] }}
+          transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+        />
+        <motion.line
+          x1="310" y1="200" x2="200" y2="200"
+          stroke="url(#valGrad)" strokeWidth="2" strokeDasharray="5 5"
+          animate={{ strokeDashoffset: [-20, 0] }}
+          transition={{ repeat: Infinity, duration: 2.2, ease: "linear" }}
+        />
+        <motion.line
+          x1="200" y1="310" x2="200" y2="200"
+          stroke="url(#valGrad)" strokeWidth="2" strokeDasharray="5 5"
+          animate={{ strokeDashoffset: [0, -20] }}
+          transition={{ repeat: Infinity, duration: 1.8, ease: "linear" }}
+        />
+        <motion.line
+          x1="90" y1="200" x2="200" y2="200"
+          stroke="url(#valGrad)" strokeWidth="2" strokeDasharray="5 5"
+          animate={{ strokeDashoffset: [0, -20] }}
+          transition={{ repeat: Infinity, duration: 2.5, ease: "linear" }}
+        />
+
+        {/* Central Core: DB */}
+        <circle cx="200" cy="200" r="30" fill="white" stroke="#004B87" strokeWidth="2.5" filter="url(#shadow-val)" />
+        <path d="M190 190h20v4h-20zm0 6h20v4h-20zm0 6h20v4h-20z" fill="#004B87" />
+        <text y="222" x="200" textAnchor="middle" fill="#004B87" fontSize="6" fontWeight="bold" letterSpacing="0.05em">CORE DB</text>
+
+        {/* Node 1: AI / Brain (Top) */}
+        <motion.g
+          animate={{ y: [0, -4, 0] }}
+          transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+        >
+          <circle cx="200" cy="90" r="22" fill="#004B87" stroke="white" strokeWidth="2" filter="url(#shadow-val)" />
+          {/* Brain Path */}
+          <path d="M195 86a5 5 0 0 1 10 0v2a5 5 0 0 1-10 0zm4 6a3 3 0 0 0-3-3m5 0a3 3 0 0 1 3 3" stroke="white" strokeWidth="1.5" fill="none" />
+          <text y="103" x="200" textAnchor="middle" fill="white" fontSize="6" fontWeight="black">AI CORE</text>
+        </motion.g>
+
+        {/* Node 2: IoT (Right) */}
+        <motion.g
+          animate={{ x: [0, 4, 0] }}
+          transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut" }}
+        >
+          <circle cx="310" cy="200" r="22" fill="white" stroke="#00A3E0" strokeWidth="2" filter="url(#shadow-val)" />
+          {/* Antenna Path */}
+          <circle cx="310" cy="200" r="3" fill="#00A3E0" />
+          <path d="M305 195a8 8 0 0 1 10 0M302 192a12 12 0 0 1 16 0" stroke="#00A3E0" strokeWidth="1" fill="none" />
+          <text y="213" x="310" textAnchor="middle" fill="#00A3E0" fontSize="6" fontWeight="black">IoT GATE</text>
+        </motion.g>
+
+        {/* Node 3: API (Bottom) */}
+        <motion.g
+          animate={{ y: [0, 4, 0] }}
+          transition={{ repeat: Infinity, duration: 3.2, ease: "easeInOut" }}
+        >
+          <circle cx="200" cy="310" r="22" fill="white" stroke="#004B87" strokeWidth="2" filter="url(#shadow-val)" />
+          {/* API plug icon */}
+          <path d="M194 306h12v4h-12zm2 4v4h8v-4z" fill="#004B87" />
+          <text y="323" x="200" textAnchor="middle" fill="#004B87" fontSize="6" fontWeight="black">API LINK</text>
+        </motion.g>
+
+        {/* Node 4: WMS / Box (Left) */}
+        <motion.g
+          animate={{ x: [0, -4, 0] }}
+          transition={{ repeat: Infinity, duration: 2.8, ease: "easeInOut" }}
+        >
+          <circle cx="90" cy="200" r="22" fill="#004B87" stroke="white" strokeWidth="2" filter="url(#shadow-val)" />
+          {/* Box Path */}
+          <path d="M83 194h14v12H83z M83 198h14M90 194v12" stroke="white" strokeWidth="1.2" fill="none" />
+          <text y="213" x="90" textAnchor="middle" fill="white" fontSize="6" fontWeight="black">WMS ENGINE</text>
+        </motion.g>
+      </svg>
+    </div>
+  );
+}
+
+// 11. TECH STACK MOTION GRAPHIC
+function TechStackMotionGraphic() {
+  return (
+    <div className="relative w-full aspect-[4/3] max-w-[450px] mx-auto flex items-center justify-center bg-slate-50/50 rounded-[2.5rem] border border-slate-100 p-6 overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+           style={{ backgroundImage: 'radial-gradient(#004B87 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
+      <svg viewBox="0 0 400 300" className="w-full h-full relative z-10">
+        <defs>
+          <filter id="shadow-tech" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="6" stdDeviation="3" floodColor="#004B87" floodOpacity="0.1" />
+          </filter>
+        </defs>
+
+        {/* Flow Lines */}
+        <motion.line
+          x1="80" y1="150" x2="200" y2="150"
+          stroke="#004B87" strokeWidth="2" strokeDasharray="6 4"
+          animate={{ strokeDashoffset: [-20, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+        />
+        <motion.line
+          x1="200" y1="150" x2="320" y2="150"
+          stroke="#00A3E0" strokeWidth="2" strokeDasharray="6 4"
+          animate={{ strokeDashoffset: [-20, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+        />
+
+        {/* Flowing particle packets */}
+        <motion.circle
+          cx="80" cy="150" r="4" fill="#00A3E0"
+          animate={{ cx: [80, 200] }}
+          transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+        />
+        <motion.circle
+          cx="200" cy="150" r="4" fill="#004B87"
+          animate={{ cx: [200, 320] }}
+          transition={{ repeat: Infinity, duration: 1.5, ease: "linear", delay: 0.75 }}
+        />
+
+        {/* Node 1: Code (Git) */}
+        <g transform="translate(80, 150)">
+          <circle r="24" fill="white" stroke="#004B87" strokeWidth="2" filter="url(#shadow-tech)" />
+          {/* Branch logo path */}
+          <circle cx="-5" cy="5" r="3" fill="none" stroke="#004B87" strokeWidth="1.5" />
+          <circle cx="5" cy="-5" r="3" fill="none" stroke="#004B87" strokeWidth="1.5" />
+          <path d="M-5 2v-4a3 3 0 0 1 3-3h4" stroke="#004B87" strokeWidth="1.5" fill="none" />
+          <text y="20" textAnchor="middle" fill="#004B87" fontSize="6" fontWeight="black" letterSpacing="0.05em">GIT COMMIT</text>
+        </g>
+
+        {/* Node 2: Test / Build (Docker) */}
+        <g transform="translate(200, 150)">
+          <circle r="26" fill="white" stroke="#00A3E0" strokeWidth="2" filter="url(#shadow-tech)" />
+          {/* Animated gear spinner */}
+          <motion.g
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
+          >
+            <circle r="8" fill="none" stroke="#00A3E0" strokeWidth="2" strokeDasharray="3 2" />
+          </motion.g>
+          <text y="21" textAnchor="middle" fill="#00A3E0" fontSize="6" fontWeight="black" letterSpacing="0.05em">CI RUNNER</text>
+        </g>
+
+        {/* Node 3: Deploy (Cloud) */}
+        <g transform="translate(320, 150)">
+          <circle r="24" fill="#004B87" stroke="white" strokeWidth="2" filter="url(#shadow-tech)" />
+          {/* Cloud logo path */}
+          <path d="M-10 2a4 4 0 0 1 3-3 5 5 0 0 1 8 0 4 4 0 0 1 3 3h-14z" fill="white" />
+          <text y="20" textAnchor="middle" fill="white" fontSize="6" fontWeight="black" letterSpacing="0.05em">CLOUD DEPLOY</text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+// 12. RELIABILITY MOTION GRAPHIC
+function ReliabilityMotionGraphic() {
+  return (
+    <div className="relative w-full aspect-square max-w-[320px] mx-auto flex items-center justify-center pointer-events-none mt-6">
+      <div className="absolute w-[160px] h-[160px] bg-emerald-500/5 rounded-full blur-[40px] animate-pulse" />
+      <svg viewBox="0 0 300 300" className="w-full h-full relative z-10">
+        <defs>
+          <filter id="shadow-rel" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="0" dy="5" stdDeviation="3.5" floodColor="#10B981" floodOpacity="0.15" />
+          </filter>
+        </defs>
+
+        {/* Uptime Arc gauge */}
+        <path
+          d="M 60 180 A 90 90 0 1 1 240 180"
+          fill="none"
+          stroke="#E2E8F0"
+          strokeWidth="12"
+          strokeLinecap="round"
+        />
+        <motion.path
+          d="M 60 180 A 90 90 0 1 1 240 180"
+          fill="none"
+          stroke="#10B981"
+          strokeWidth="12"
+          strokeLinecap="round"
+          strokeDasharray="420"
+          initial={{ strokeDashoffset: 420 }}
+          animate={{ strokeDashoffset: 15 }}
+          transition={{ duration: 2, ease: "easeOut" }}
+        />
+
+        {/* Needle Gauge */}
+        <g transform="translate(150, 180)">
+          <motion.path
+            d="M -3 0 L -1 -58 L -6 -58 L 0 -76 L 6 -58 L 1 -58 L 3 0 Z"
+            fill="#1A1A1A"
+            initial={{ rotate: -90 }}
+            animate={{ rotate: [80, 83, 80] }}
+            transition={{ rotate: { repeat: Infinity, duration: 2, ease: "easeInOut", repeatType: "reverse" }, default: { duration: 2, ease: "easeOut" } }}
+            style={{ transformOrigin: "bottom center" }}
+          />
+          <circle cx="0" cy="0" r="10" fill="#1A1A1A" />
+          <circle cx="0" cy="0" r="4" fill="white" />
+        </g>
+
+        {/* Uptime Status Info */}
+        <text y="220" x="150" textAnchor="middle" fill="#10B981" fontSize="22" fontWeight="900" letterSpacing="-0.02em">99.9%</text>
+        <text y="240" x="150" textAnchor="middle" fill="#64748B" fontSize="9" fontWeight="bold" letterSpacing="0.15em">MONITORED SLA</text>
+
+        {/* Shield icon element */}
+        <motion.g
+          animate={{ y: [0, -3, 0] }}
+          transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
+          transform="translate(150, 80)"
+        >
+          <path d="M-10-10 L0-14 L10-10 L10 0 C10 6 6 12 0 14 C-6 12-10 6-10 0 Z" fill="#10B981" filter="url(#shadow-rel)" />
+          <path d="M-5-4 L-1 0 L5-6" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </motion.g>
+      </svg>
+    </div>
+  );
+}
+
+// 13. ONBOARDING MOTION GRAPHIC
+function OnboardingMotionGraphic() {
+  return (
+    <div className="relative w-full aspect-[4/3] max-w-[450px] mx-auto flex items-center justify-center bg-slate-50/50 rounded-[2.5rem] border border-slate-100 p-6 overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+           style={{ backgroundImage: 'radial-gradient(#004B87 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
+      <svg viewBox="0 0 400 300" className="w-full h-full relative z-10">
+        <defs>
+          <filter id="shadow-onb" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="6" stdDeviation="3" floodColor="#004B87" floodOpacity="0.1" />
+          </filter>
+        </defs>
+
+        {/* Connecting timeline path */}
+        <motion.path
+          d="M 70 150 Q 135 100 200 150 T 330 150"
+          fill="none"
+          stroke="#004B87"
+          strokeWidth="2"
+          strokeDasharray="6 4"
+          animate={{ strokeDashoffset: [-20, 0] }}
+          transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+        />
+
+        {/* Onboarding Node 1 */}
+        <g transform="translate(70, 150)">
+          <circle r="22" fill="white" stroke="#004B87" strokeWidth="2" filter="url(#shadow-onb)" />
+          <text y="4" textAnchor="middle" fill="#004B87" fontSize="10" fontWeight="black">01</text>
+          <text y="32" textAnchor="middle" fill="#64748B" fontSize="7" fontWeight="bold">DISCOVERY</text>
+        </g>
+
+        {/* Onboarding Node 2 */}
+        <g transform="translate(200, 150)">
+          <circle r="24" fill="white" stroke="#00A3E0" strokeWidth="2" filter="url(#shadow-onb)" />
+          {/* Supporting pod orbiting circles */}
+          <motion.g
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 6, ease: "linear" }}
+          >
+            <circle cx="0" cy="-32" r="6" fill="#004B87" />
+            <circle cx="-28" cy="16" r="6" fill="#10B981" />
+            <circle cx="28" cy="16" r="6" fill="#F59E0B" />
+          </motion.g>
+          <text y="4" textAnchor="middle" fill="#00A3E0" fontSize="10" fontWeight="black">02</text>
+          <text y="35" textAnchor="middle" fill="#64748B" fontSize="7" fontWeight="bold">POD ASSIGN</text>
+        </g>
+
+        {/* Onboarding Node 3 */}
+        <g transform="translate(330, 150)">
+          <circle r="22" fill="#004B87" stroke="white" strokeWidth="2" filter="url(#shadow-onb)" />
+          {/* Rocket path */}
+          <path d="M-5 5L0-7L5 5L0 2Z" fill="white" />
+          <text y="32" textAnchor="middle" fill="#64748B" fontSize="7" fontWeight="bold">KICKOFF</text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+// 14. LEAD FORM MOTION GRAPHIC
+function LeadFormMotionGraphic() {
+  return (
+    <div className="relative w-full aspect-square max-w-[200px] mx-auto flex items-center justify-center pointer-events-none">
+      <div className="absolute w-[100px] h-[100px] bg-prixgen-blue/15 rounded-full blur-[25px] animate-pulse" />
+      <svg viewBox="0 0 200 200" className="w-full h-full relative z-10">
+        <defs>
+          <filter id="shadow-lf" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="4" stdDeviation="2" floodColor="#00A3E0" floodOpacity="0.2" />
+          </filter>
+        </defs>
+
+        {/* Pulsing connections */}
+        <motion.line x1="100" y1="100" x2="100" y2="40" stroke="white" strokeWidth="1" opacity="0.4" />
+        <motion.line x1="100" y1="100" x2="40" y2="100" stroke="white" strokeWidth="1" opacity="0.4" />
+        <motion.line x1="100" y1="100" x2="160" y2="100" stroke="white" strokeWidth="1" opacity="0.4" />
+        <motion.line x1="100" y1="100" x2="100" y2="160" stroke="white" strokeWidth="1" opacity="0.4" />
+
+        {/* Radar Sweeper */}
+        <motion.circle
+          cx="100" cy="100" r="60" fill="none" stroke="#00A3E0" strokeWidth="1.5"
+          initial={{ scale: 0.1, opacity: 0.8 }}
+          animate={{ scale: 1.1, opacity: 0 }}
+          transition={{ repeat: Infinity, duration: 2.5, ease: "easeOut" }}
+        />
+
+        {/* Central Client Node */}
+        <circle cx="100" cy="100" r="16" fill="white" stroke="#004B87" strokeWidth="2.5" filter="url(#shadow-lf)" />
+        <text y="103" x="100" textAnchor="middle" fill="#004B87" fontSize="8" fontWeight="black">YOU</text>
+
+        {/* Orbital Dev Nodes */}
+        {/* Node SA */}
+        <motion.g animate={{ y: [0, -3, 0] }} transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}>
+          <circle cx="100" cy="40" r="12" fill="#00A3E0" stroke="white" strokeWidth="1.5" />
+          <text y="43" x="100" textAnchor="middle" fill="white" fontSize="6" fontWeight="bold">SA</text>
+        </motion.g>
+        {/* Node DBA */}
+        <motion.g animate={{ x: [0, -3, 0] }} transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}>
+          <circle cx="40" cy="100" r="12" fill="#00A3E0" stroke="white" strokeWidth="1.5" />
+          <text y="103" x="40" textAnchor="middle" fill="white" fontSize="6" fontWeight="bold">DBA</text>
+        </motion.g>
+        {/* Node DEV */}
+        <motion.g animate={{ x: [0, 3, 0] }} transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}>
+          <circle cx="160" cy="100" r="12" fill="#00A3E0" stroke="white" strokeWidth="1.5" />
+          <text y="103" x="160" textAnchor="middle" fill="white" fontSize="6" fontWeight="bold">DEV</text>
+        </motion.g>
+        {/* Node OPS */}
+        <motion.g animate={{ y: [0, 3, 0] }} transition={{ repeat: Infinity, duration: 2.4, ease: "easeInOut" }}>
+          <circle cx="100" cy="160" r="12" fill="#00A3E0" stroke="white" strokeWidth="1.5" />
+          <text y="163" x="100" textAnchor="middle" fill="white" fontSize="5" fontWeight="bold">OPS</text>
+        </motion.g>
       </svg>
     </div>
   );

@@ -12,7 +12,7 @@ export function Magnetic({ children, className }: { children: React.ReactNode; c
         const { height, width, left, top } = ref.current!.getBoundingClientRect();
         const middleX = clientX - (left + width / 2);
         const middleY = clientY - (top + height / 2);
-        setPosition({ x: middleX * 0.3, y: middleY * 0.3 });
+        setPosition({ x: middleX * 0.15, y: middleY * 0.15 });
     };
 
     const reset = () => {
