@@ -16,8 +16,8 @@ import { RevealText } from '@/components/animations/reveal-text';
 import { AnimatedConnector } from '@/components/shared/animated-connector';
 import { HeroBadge } from '@/components/shared/hero-badge';
 import { HeroBackground } from '@/components/shared/hero-background';
-import { 
-  Database, Activity, LineChart, Zap, ArrowRight, 
+import {
+  Database, Activity, LineChart, Zap, ArrowRight,
   Server, ShieldCheck, Cpu, Award, Globe
 } from 'lucide-react';
 
@@ -25,10 +25,10 @@ export default function ServiceClientPage({ service }: { service: any }) {
   const getImageUrl = (img: any) => {
     if (!img) return null;
     if (typeof img === 'string') return img;
-    
+
     // 1. If it's our custom projection with sourceUrl
     if (img.sourceUrl) return img.sourceUrl;
-    
+
     // 2. If it's a raw Sanity image object or reference
     try {
       if (img.asset?._ref || img.asset?._id || img.asset?.url) {
@@ -37,7 +37,7 @@ export default function ServiceClientPage({ service }: { service: any }) {
     } catch (e) {
       console.warn("Failed to resolve Sanity image:", e);
     }
-    
+
     // 3. Fallback for absolute URLs or custom asset objects
     return img.asset?.url || (typeof img.asset === 'string' ? img.asset : null);
   };
@@ -51,33 +51,33 @@ export default function ServiceClientPage({ service }: { service: any }) {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <JsonLd 
-        type="Service" 
-        data={{ 
-          name: service.title, 
+      <JsonLd
+        type="Service"
+        data={{
+          name: service.title,
           description: service.seo?.metaDesc,
           provider: { "@type": "Organization", "name": "Prixgen Enterprise" }
-        }} 
+        }}
       />
-      <JsonLd 
-        type="BreadcrumbList" 
-        data={{ 
+      <JsonLd
+        type="BreadcrumbList"
+        data={{
           itemListElement: [
             { "@type": "ListItem", position: 1, name: "Home", item: "https://www.prixgen.com" },
             { "@type": "ListItem", position: 2, name: "Services", item: "https://www.prixgen.com/services" },
             { "@type": "ListItem", position: 3, name: service.title, item: `https://www.prixgen.com/services/${service.slug}` }
           ]
-        }} 
+        }}
       />
 
       {/* Hero Header */}
       <section className="relative min-h-[80vh] flex items-center pt-32 overflow-hidden bg-white">
         <HeroBackground />
-        
+
         <div className="container relative z-10 mx-auto px-4 text-center">
           <FadeUp delay={0.1} className="space-y-6 flex flex-col items-center">
             <HeroBadge text={service.title || "Intelligent Architecture"} align="center" />
-            
+
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -94,13 +94,13 @@ export default function ServiceClientPage({ service }: { service: any }) {
               <span className="opacity-20">/</span>
               <span className="text-prixgen-blue">{service.title}</span>
             </motion.div>
-            
-            <StaggerText 
-              text={service.title} 
+
+            <StaggerText
+              text={service.title}
               variant="gradient"
               className="text-5xl md:text-7xl font-black leading-[0.9] tracking-tighter"
             />
-            
+
             <div className="max-w-3xl mx-auto pt-6">
               <RevealText delay={0.2}>
                 <p className="text-xl lg:text-2xl text-slate-500 font-medium leading-relaxed">
@@ -110,7 +110,7 @@ export default function ServiceClientPage({ service }: { service: any }) {
             </div>
           </FadeUp>
         </div>
-        
+
         <div className="absolute bottom-0 left-0 w-full translate-y-1/2 z-20">
           <AnimatedConnector height="h-32" />
         </div>
@@ -136,10 +136,10 @@ export default function ServiceClientPage({ service }: { service: any }) {
             {/* Executive Summary (Content) */}
             <FadeUp delay={0.3} className="relative bg-white rounded-[3rem] p-6 lg:p-12 shadow-[0_30px_60px_-15px_rgba(0,102,204,0.05)] border border-slate-100 overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-prixgen-blue/[0.02] rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none" />
-              
+
               <div className="flex items-center gap-4 mb-10">
                 <div className="w-12 h-12 rounded-2xl bg-prixgen-blue/5 flex items-center justify-center">
-                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-prixgen-blue" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-prixgen-blue" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /><polyline points="10 9 9 9 8 9" /></svg>
                 </div>
                 <h3 className="text-2xl font-bold text-prixgen-dark tracking-tight">Executive Summary</h3>
               </div>
@@ -161,19 +161,19 @@ export default function ServiceClientPage({ service }: { service: any }) {
               </FadeUp>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {service.features?.map((feature: any, i: number) => (
-                  <FadeUp 
-                    key={feature._key || `feature-${i}`} 
+                  <FadeUp
+                    key={feature._key || `feature-${i}`}
                     delay={0.1 * i}
                     className={i === 0 ? "md:col-span-2" : ""}
                   >
                     <div className="group h-full p-10 bg-white border border-slate-100 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_30px_60px_-20px_rgba(0,102,204,0.15)] rounded-[2.5rem] hover:border-prixgen-blue/20 transition-all duration-700 relative overflow-hidden">
                       {/* Hover Gradient Background */}
                       <div className="absolute inset-0 bg-gradient-to-br from-prixgen-blue/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                      
+
                       <div className="flex flex-col md:flex-row md:items-center gap-8">
                         <Magnetic>
                           <div className="w-16 h-16 shrink-0 rounded-[1.25rem] bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:scale-110 group-hover:bg-prixgen-blue/5 group-hover:border-prixgen-blue/20 transition-all duration-700">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-prixgen-blue" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-prixgen-blue" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
                           </div>
                         </Magnetic>
                         <div className="space-y-3">
@@ -189,26 +189,26 @@ export default function ServiceClientPage({ service }: { service: any }) {
 
             {/* Business Outcomes Banner */}
             <FadeUp delay={0.2} className="relative rounded-[3rem] bg-prixgen-dark overflow-hidden p-6 lg:p-12 my-6 shadow-2xl">
-               <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
-               <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-l from-prixgen-blue/40 to-transparent opacity-30 pointer-events-none" />
-               
-               <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-10 text-white">
-                  <div className="space-y-3">
-                     <div className="text-4xl font-black text-prixgen-lightblue tracking-tighter">Zero</div>
-                     <h4 className="font-bold text-lg">Operational Friction</h4>
-                     <p className="text-white/60 text-sm leading-relaxed">Streamline workflows and eliminate bottlenecks across your entire enterprise architecture.</p>
-                  </div>
-                  <div className="space-y-3">
-                     <div className="text-4xl font-black text-prixgen-lightblue tracking-tighter">100%</div>
-                     <h4 className="font-bold text-lg">Data Transparency</h4>
-                     <p className="text-white/60 text-sm leading-relaxed">Achieve complete visibility and governance over your mission-critical operations.</p>
-                  </div>
-                  <div className="space-y-3">
-                     <div className="text-4xl font-black text-prixgen-lightblue tracking-tighter">Accelerated</div>
-                     <h4 className="font-bold text-lg">Time to Market</h4>
-                     <p className="text-white/60 text-sm leading-relaxed">Deploy robust industrial solutions faster with our expert engineering methodology.</p>
-                  </div>
-               </div>
+              <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+              <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-l from-prixgen-blue/40 to-transparent opacity-30 pointer-events-none" />
+
+              <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-10 text-white">
+                <div className="space-y-3">
+                  <div className="text-4xl font-black text-prixgen-lightblue tracking-tighter">Zero</div>
+                  <h4 className="font-bold text-lg">Operational Friction</h4>
+                  <p className="text-white/60 text-sm leading-relaxed">Streamline workflows and eliminate bottlenecks across your entire enterprise architecture.</p>
+                </div>
+                <div className="space-y-3">
+                  <div className="text-4xl font-black text-prixgen-lightblue tracking-tighter">100%</div>
+                  <h4 className="font-bold text-lg">Data Transparency</h4>
+                  <p className="text-white/60 text-sm leading-relaxed">Achieve complete visibility and governance over your mission-critical operations.</p>
+                </div>
+                <div className="space-y-3">
+                  <div className="text-4xl font-black text-prixgen-lightblue tracking-tighter">Accelerated</div>
+                  <h4 className="font-bold text-lg">Time to Market</h4>
+                  <p className="text-white/60 text-sm leading-relaxed">Deploy robust industrial solutions faster with our expert engineering methodology.</p>
+                </div>
+              </div>
             </FadeUp>
 
             {/* Process Section - Vertical Timeline */}
@@ -222,7 +222,7 @@ export default function ServiceClientPage({ service }: { service: any }) {
                 <div className="space-y-0 relative pl-4 md:pl-8">
                   {/* Vertical Line */}
                   <div className="absolute top-0 bottom-0 left-[27px] md:left-[43px] w-0.5 bg-gradient-to-b from-prixgen-blue/30 via-slate-200 to-transparent" />
-                  
+
                   {service.process.map((step: any, i: number) => (
                     <FadeUp key={step._key || `step-${i}`} delay={0.1 * i} className="relative flex gap-8 md:gap-12 group pb-16 last:pb-0">
                       <div className="relative z-10 flex-shrink-0 w-10 h-10 md:w-14 md:h-14 rounded-full bg-white border-4 border-prixgen-blue/10 flex items-center justify-center font-black text-prixgen-blue text-lg shadow-sm group-hover:border-prixgen-blue group-hover:bg-prixgen-blue group-hover:text-white transition-all duration-500">
@@ -261,14 +261,14 @@ export default function ServiceClientPage({ service }: { service: any }) {
                     .filter(s => s.slug !== service.slug)
                     .slice(0, 4)
                     .map((related, i) => (
-                      <Link 
-                        key={i} 
+                      <Link
+                        key={i}
                         href={`/services/${related.slug}`}
                         className="flex items-center justify-between p-4 rounded-2xl hover:bg-white hover:shadow-lg transition-all group"
                       >
                         <span className="font-bold text-slate-600 group-hover:text-prixgen-blue">{related.title}</span>
                         <div className="w-8 h-8 rounded-full bg-prixgen-blue/5 flex items-center justify-center text-prixgen-blue group-hover:bg-prixgen-blue group-hover:text-white transition-colors">
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14m-7-7 7 7-7 7" /></svg>
                         </div>
                       </Link>
                     ))}
@@ -319,43 +319,43 @@ function OdooDevelopersLanding({ service }: { service: any }) {
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-white text-prixgen-dark selection:bg-prixgen-blue selection:text-white">
-      <JsonLd 
-        type="Service" 
-        data={{ 
-          name: service.title, 
+      <JsonLd
+        type="Service"
+        data={{
+          name: service.title,
           description: service.seo?.metaDesc,
           provider: { "@type": "Organization", "name": "Prixgen Enterprise" }
-        }} 
+        }}
       />
-      <JsonLd 
-        type="BreadcrumbList" 
-        data={{ 
+      <JsonLd
+        type="BreadcrumbList"
+        data={{
           itemListElement: [
             { "@type": "ListItem", position: 1, name: "Home", item: "https://www.prixgen.com" },
             { "@type": "ListItem", position: 2, name: "Services", item: "https://www.prixgen.com/services" },
             { "@type": "ListItem", position: 3, name: service.title, item: `https://www.prixgen.com/services/${service.slug}` }
           ]
-        }} 
+        }}
       />
 
       {/* 1. HERO COMPONENT */}
       <section className="relative min-h-[90vh] flex items-center pt-32 pb-20 overflow-hidden bg-gradient-to-b from-slate-50 via-white to-white">
         <HeroBackground />
-        
+
         {/* Decorative elements */}
         <div className="absolute top-1/4 right-0 w-96 h-96 bg-prixgen-blue/5 rounded-full blur-[100px] pointer-events-none" />
         <div className="absolute bottom-10 left-10 w-80 h-80 bg-prixgen-lightblue/5 rounded-full blur-[80px] pointer-events-none" />
 
         <div className="container relative z-10 mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
-            
+
             {/* Left Column: Context & Copy */}
             <div className="lg:col-span-7 space-y-8 flex flex-col items-start text-left">
-              
+
               {/* Badges */}
               <div className="flex flex-wrap gap-3">
                 <div className="relative p-[1px] overflow-hidden rounded-full group bg-[#004B87]/20 shadow-sm hover:shadow-[0_0_15px_rgba(0,75,135,0.15)] transition-all duration-300">
-                  <motion.div 
+                  <motion.div
                     className="absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-amber-400 to-transparent"
                     initial={{ x: "-100%" }}
                     animate={{ x: ["-100%", "200%"] }}
@@ -370,7 +370,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                   </span>
                 </div>
                 <div className="relative p-[1px] overflow-hidden rounded-full group bg-slate-200 shadow-sm hover:shadow-[0_0_15px_rgba(0,163,224,0.15)] transition-all duration-300">
-                  <motion.div 
+                  <motion.div
                     className="absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-prixgen-lightblue to-transparent"
                     initial={{ x: "-100%" }}
                     animate={{ x: ["-100%", "200%"] }}
@@ -401,8 +401,8 @@ function OdooDevelopersLanding({ service }: { service: any }) {
               </motion.div>
 
               {/* H1 Heading */}
-              <StaggerText 
-                text="Hire Elite Odoo Developers & ERP Architects" 
+              <StaggerText
+                text="Hire Elite Odoo Developers & ERP Architects"
                 variant="gradient"
                 className="text-4xl md:text-6xl font-black leading-[1.0] tracking-tighter"
               />
@@ -430,7 +430,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
               {/* CTAs */}
               <FadeUp delay={0.4} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-6 pt-4 w-full sm:w-auto">
                 <Magnetic>
-                  <button 
+                  <button
                     onClick={handleScrollToForm}
                     className="px-8 py-5 bg-[#004B87] hover:bg-[#003560] text-white rounded-2xl font-black text-lg shadow-xl shadow-[#004B87]/20 transition-all flex items-center justify-center gap-2 group cursor-pointer w-full sm:w-auto"
                   >
@@ -439,7 +439,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                   </button>
                 </Magnetic>
                 <Magnetic>
-                  <button 
+                  <button
                     onClick={handleScrollToPricing}
                     className="px-8 py-5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-2xl font-black text-lg transition-all cursor-pointer w-full sm:w-auto text-center"
                   >
@@ -486,9 +486,9 @@ function OdooDevelopersLanding({ service }: { service: any }) {
       {/* 2. VALUE PROPOSITION GRID (Intelligent ERP Focus) */}
       <section className="py-10 lg:py-16 bg-slate-50 relative overflow-hidden">
         {/* Grid pattern */}
-        <div className="absolute inset-0 opacity-[0.02] pointer-events-none" 
-             style={{ backgroundImage: 'linear-gradient(#004B87 1px, transparent 1px), linear-gradient(90deg, #004B87 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
-        
+        <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
+          style={{ backgroundImage: 'linear-gradient(#004B87 1px, transparent 1px), linear-gradient(90deg, #004B87 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+
         <div className="container mx-auto px-4 relative z-10">
           {/* Centered Header Block with Motion Animations */}
           <div className="max-w-3xl mx-auto text-center mb-20 space-y-4 flex flex-col items-center">
@@ -598,7 +598,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-              
+
               {/* Left Column: Pod Pitch & Engagement Models */}
               <div className="lg:col-span-7 space-y-8">
                 <div className="space-y-4">
@@ -644,7 +644,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                     <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl -mr-10 -mt-10" />
                     <div className="space-y-8 relative z-10">
                       <div className="text-sm font-bold opacity-60 uppercase tracking-widest font-black">Capacity Scaling Models</div>
-                      
+
                       <div className="space-y-6">
                         <div className="flex justify-between items-center border-b border-white/10 pb-4">
                           <span className="font-bold text-base">Dedicated Developer Pod</span>
@@ -663,7 +663,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                       <p className="text-sm opacity-80 leading-relaxed font-medium">
                         All engagement tiers grant full access to Prixgen's Mysuru Hub supporting resources at zero overhead cost.
                       </p>
-                      <button 
+                      <button
                         onClick={handleScrollToForm}
                         className="w-full py-5 bg-prixgen-lightblue hover:bg-prixgen-lightblue/90 text-white rounded-xl font-black text-sm uppercase tracking-wider transition-colors shadow-lg shadow-prixgen-lightblue/25 cursor-pointer"
                       >
@@ -715,7 +715,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
 
               {/* Right Column: Interactive Pod Roles & Connected Graphic */}
               <div className="lg:col-span-5 space-y-8">
-                
+
                 {/* SVG Telemetry Motion Graphic */}
                 <PrixgenPodGraphic />
 
@@ -907,7 +907,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-              
+
               {/* Left Column: Title & Subtext */}
               <div className="lg:col-span-5 space-y-6 text-left flex flex-col items-start">
                 <RevealText>
@@ -1067,7 +1067,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   whileHover={{ y: -8 }}
-                  transition={{ 
+                  transition={{
                     type: "spring",
                     stiffness: 300,
                     damping: 20,
@@ -1079,7 +1079,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                   {/* Ambient Hover Glow */}
                   <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-prixgen-blue/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                   <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-prixgen-blue/5 to-transparent rounded-bl-[2.5rem] opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none" />
-                  
+
                   <div className="space-y-6 relative z-10">
                     <div className="flex justify-between items-center mb-8">
                       <span className="text-sm font-black text-prixgen-blue uppercase tracking-widest bg-prixgen-blue/5 px-3.5 py-1.5 rounded-xl border border-prixgen-blue/10 transition-colors group-hover:bg-prixgen-blue group-hover:text-white">
@@ -1090,7 +1090,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                         <span className="relative inline-flex rounded-full h-2 w-2 bg-prixgen-blue/20 group-hover:bg-prixgen-blue transition-colors"></span>
                       </span>
                     </div>
-                    
+
                     <h3 className="text-2xl font-black text-prixgen-dark tracking-tight group-hover:text-prixgen-blue transition-colors duration-300">
                       {item.title}
                     </h3>
@@ -1110,9 +1110,9 @@ function OdooDevelopersLanding({ service }: { service: any }) {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-              
+
               {/* Card 1: Client Lead Capture */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
@@ -1122,13 +1122,13 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                 {/* Background Glow */}
                 <div className="absolute top-0 right-0 w-[250px] h-[250px] bg-white/[0.02] blur-[80px] -translate-y-1/2 translate-x-1/4 pointer-events-none" />
                 <div className="absolute bottom-0 left-0 w-[200px] h-[200px] bg-indigo-500/[0.02] blur-[60px] translate-y-1/2 -translate-x-1/4 pointer-events-none" />
-                
+
                 <div className="space-y-6 relative z-10">
                   <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 border border-white/20 rounded-full text-white font-black text-[10px] uppercase tracking-wider">
                     <span className="w-1.5 h-1.5 bg-prixgen-lightblue rounded-full animate-pulse" />
                     For Businesses
                   </span>
-                  
+
                   <h2 className="text-3xl md:text-4xl font-black text-white leading-tight tracking-tight flex flex-wrap gap-x-[0.2em]">
                     {["Ready", "to", "scale", "your"].map((word, i) => (
                       <motion.span
@@ -1155,11 +1155,11 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                       </motion.span>
                     ))}
                   </h2>
-                  
+
                   <p className="text-sm text-indigo-100/80 font-medium leading-relaxed">
                     Submit your requirements and schedule a briefing directly with our Solutions Architect to align on developer seniority, scope, and timeline.
                   </p>
-                  
+
                   <div className="bg-white/95 backdrop-blur-xl p-6 md:p-8 rounded-[2rem] shadow-xl border border-white/15 mt-4">
                     <div className="scale-95 origin-top">
                       <LeadCaptureForm source="Service: Hire Odoo Developers (Bottom Client)" />
@@ -1169,7 +1169,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
               </motion.div>
 
               {/* Card 2: Careers diversion */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
@@ -1179,14 +1179,14 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                 {/* Background Glow */}
                 <div className="absolute top-0 right-0 w-[250px] h-[250px] bg-prixgen-lightblue/[0.03] blur-[80px] -translate-y-1/2 translate-x-1/4 pointer-events-none" />
                 <div className="absolute bottom-0 left-0 w-[200px] h-[200px] bg-[#004B87]/[0.05] blur-[60px] translate-y-1/2 -translate-x-1/4 pointer-events-none" />
-                
+
                 <div className="space-y-8 relative z-10 flex flex-col h-full justify-between">
                   <div className="space-y-6">
                     <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-prixgen-lightblue font-black text-[10px] uppercase tracking-wider">
                       <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping" />
                       We are Hiring
                     </span>
-                    
+
                     <h2 className="text-3xl md:text-4xl font-black text-white leading-tight tracking-tight flex flex-wrap gap-x-[0.2em]">
                       {["Looking", "for", "your", "next"].map((word, i) => (
                         <motion.span
@@ -1213,12 +1213,12 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                         </motion.span>
                       ))}
                     </h2>
-                    
+
                     <p className="text-sm text-slate-300 font-medium leading-relaxed">
                       Are you an elite Python developer, Odoo framework expert, or ERP Solutions Architect? Join our engineering hub to work on complex industrial automation, AI-driven forecasting, and global IoT implementations.
                     </p>
                   </div>
-                  
+
                   <div className="space-y-4 py-4 border-t border-b border-white/5 my-2">
                     {[
                       "Work on global, industrial-scale projects",
@@ -1228,16 +1228,16 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                     ].map((benefit, idx) => (
                       <div key={idx} className="flex items-center gap-3 text-slate-300 text-sm font-semibold">
                         <div className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
                         </div>
                         <span>{benefit}</span>
                       </div>
                     ))}
                   </div>
-                  
+
                   <div className="pt-4 space-y-4">
                     <Link href="/careers" className="w-full">
-                      <motion.button 
+                      <motion.button
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         className="w-full py-5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white rounded-2xl font-black text-base uppercase tracking-wider transition-all shadow-lg shadow-emerald-500/20 cursor-pointer flex items-center justify-center gap-2 group"
@@ -1247,7 +1247,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                       </motion.button>
                     </Link>
                     <p className="text-center text-[10px] text-slate-400 font-bold uppercase tracking-widest">
-                      Or send resume directly to <a href="mailto:careers@prixgen.com" className="text-emerald-400 hover:underline">careers@prixgen.com</a>
+                      Or send resume directly to <a href="mailto:hr@prixgen.com" className="text-emerald-400 hover:underline">careers@prixgen.com</a>
                     </p>
                   </div>
                 </div>
@@ -1267,7 +1267,7 @@ function ErpHubMotionGraphic() {
     <div className="relative w-full aspect-square max-w-[450px] mx-auto flex items-center justify-center pointer-events-none">
       {/* Central glow */}
       <div className="absolute w-[200px] h-[200px] bg-prixgen-blue/10 rounded-full blur-[50px] animate-pulse" />
-      
+
       <svg viewBox="0 0 400 400" className="w-full h-full relative z-10">
         <defs>
           <radialGradient id="odooGlow" cx="50%" cy="50%" r="50%">
@@ -1345,9 +1345,9 @@ function PrixgenPodGraphic() {
   return (
     <div className="relative w-full aspect-[4/3] max-w-[500px] mx-auto flex items-center justify-center bg-slate-50/50 rounded-[2.5rem] border border-slate-100 p-6 overflow-hidden">
       {/* Background glow grids */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-           style={{ backgroundImage: 'radial-gradient(#004B87 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
-      
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{ backgroundImage: 'radial-gradient(#004B87 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
+
       <svg viewBox="0 0 400 300" className="w-full h-full relative z-10">
         <defs>
           <filter id="shadow-pod" x="-20%" y="-20%" width="140%" height="140%">
@@ -1529,8 +1529,8 @@ function ValuePropMotionGraphic() {
 function TechStackMotionGraphic() {
   return (
     <div className="relative w-full aspect-[4/3] max-w-[450px] mx-auto flex items-center justify-center bg-slate-50/50 rounded-[2.5rem] border border-slate-100 p-6 overflow-hidden">
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-           style={{ backgroundImage: 'radial-gradient(#004B87 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{ backgroundImage: 'radial-gradient(#004B87 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
       <svg viewBox="0 0 400 300" className="w-full h-full relative z-10">
         <defs>
           <filter id="shadow-tech" x="-20%" y="-20%" width="140%" height="140%">
@@ -1667,8 +1667,8 @@ function ReliabilityMotionGraphic() {
 function OnboardingMotionGraphic() {
   return (
     <div className="relative w-full aspect-[4/3] max-w-[450px] mx-auto flex items-center justify-center bg-slate-50/50 rounded-[2.5rem] border border-slate-100 p-6 overflow-hidden">
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-           style={{ backgroundImage: 'radial-gradient(#004B87 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{ backgroundImage: 'radial-gradient(#004B87 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
       <svg viewBox="0 0 400 300" className="w-full h-full relative z-10">
         <defs>
           <filter id="shadow-onb" x="-20%" y="-20%" width="140%" height="140%">

@@ -46,6 +46,7 @@ export const MENU_DATA = {
     { title: "Manufacturing", href: "/industries/manufacturing", description: "Shop-floor to top-floor synchronization." },
     { title: "Retail", href: "/industries/retail", description: "Omnichannel commerce and architecture." },
     { title: "Chemicals", href: "/industries/chemicals", description: "Precision process and safety compliance." },
+    { title: "PVC Manufacturing", href: "/industries/pvc-manufacturing", description: "Specialized ERP for PVC manufacturing." },
     { title: "Information Services", href: "/industries/information-services", description: "Digital infrastructure and enterprise software." },
     { title: "Consumer Goods & Distribution", href: "/industries/fmcg-distribution", description: "High-velocity supply chain management." },
     { title: "Dairy", href: "/industries/dairy", description: "Time-critical perishables logistics." },

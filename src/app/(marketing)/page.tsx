@@ -1,5 +1,5 @@
 export const revalidate = 0;
-import { getHomeData } from '@/lib/data';
+import { getHomeData, getPosts, getCareersData } from '@/lib/data';
 import HomeClientPage from '@/components/templates/home-client-page';
 
 export async function generateMetadata() {
@@ -13,5 +13,14 @@ export async function generateMetadata() {
 
 export default async function HomePage() {
   const homeData = await getHomeData();
-  return <HomeClientPage homeData={homeData} />;
+  const posts = await getPosts();
+  const careersData = await getCareersData();
+  
+  return (
+    <HomeClientPage 
+      homeData={homeData} 
+      latestPost={posts && posts.length > 0 ? posts[0] : null}
+      latestCareer={careersData?.openings && careersData.openings.length > 0 ? careersData.openings[0] : null}
+    />
+  );
 }

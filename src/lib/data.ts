@@ -193,24 +193,24 @@ export async function getTermsData() {
 }
 
 export async function getPosts(): Promise<BlogPost[]> {
-  if (!client) return [];
+  if (!client) return blogPosts;
   try {
     const data = await client.fetch(postsQuery, {}, { next: { tags: ['sanity'] } });
-    return data || [];
+    return data || blogPosts;
   } catch (error) {
     console.error('Sanity Fetch Error (Posts):', error);
-    return [];
+    return blogPosts;
   }
 }
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
-  if (!client) return null;
+  if (!client) return blogPosts.find(p => p.slug === slug) || null;
   try {
     const data = await client.fetch(postBySlugQuery, { slug }, { next: { tags: ['sanity'] } });
-    return data || null;
+    return data || blogPosts.find(p => p.slug === slug) || null;
   } catch (error) {
     console.error(`Sanity Fetch Error (Post: ${slug}):`, error);
-    return null;
+    return blogPosts.find(p => p.slug === slug) || null;
   }
 }
 
@@ -1014,6 +1014,42 @@ export const industriesData: any[] = [
       metaDesc: "High-precision ERP for micro-BOM management, assembly line automation, and component-level traceability.",
       keywords: ["Electronics ERP", "SMT Integration", "Micro-BOM", "Component Traceability"]
     }
+  },
+  {
+    slug: "pvc-manufacturing",
+    title: "PVC Manufacturing",
+    headline: "Transforming PVC Manufacturing with Intelligent Enterprise Operations.",
+    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=1000", altText: "PVC Manufacturing" },
+    summaryImage: { sourceUrl: "https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=2000&auto=format&fit=crop", altText: "Modern Industrial Facility" },
+    content: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "PVC manufacturers currently struggle with severe margin erosion, a lack of real-time operational visibility, and significant process inefficiencies that collectively undermine profitability and production stability. The Prixgen PVC Manufacturing Solution systematically addresses these leakages by integrating weighbridges, recipe management, and automated dealer networks." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Through dynamic resin pricing engines, digital recipe variance control, and direct IoT connectivity, our solutions eliminate manual entry errors, reduce powder dust loss, and automate collections. With Prixgen, PVC operations achieve end-to-end traceability and a direct boost to EBITDA." }]
+      }
+    ],
+    features: [
+      { title: "Dynamic Pricing Engine", description: "Enforce automated quotation workflows and credit control automation to secure profitability against volatile resin pricing." },
+      { title: "MRP-based Recipe Management", description: "Optimize recipe consistencies, batch traceability, and scrap accounting to prevent powder loss and regrind ratio misuse." },
+      { title: "IoT Weighbridge Link & Gate Passes", description: "Connect scales to digital systems to automate net weight gate passes and dispatch syncing." },
+      { title: "Dealer Management System (DMS)", description: "Automate secondary sales, rules-based schemes, claims approvals, and reduce dispute delays." }
+    ],
+    process: [
+      { title: "Process Audit", description: "Identify raw material wastage, weighbridge setups, and secondary sales gaps." },
+      { title: "Solution Blueprint", description: "Outline custom integrations for scales, recipe controls, and ERP distribution loops." },
+      { title: "Phased Implementation", description: "Seamlessly deploy automated quote workflows, MRP calculations, and dealer network digitization." },
+      { title: "EBITDA & ROI Tracking", description: "Monitor scrap reductions, quotation speed improvements, and collection cycle compressions." }
+    ],
+    seo: {
+      title: "PVC Manufacturing ERP & Digital Supply Chain | Prixgen",
+      metaDesc: "Scale your PVC manufacturing operations with automated weighbridge integration, dynamic resin pricing, recipe controls, and dealer networks.",
+      keywords: ["PVC Manufacturing", "Weighbridge Integration", "Dealer Management System", "Recipe Management", "PVC ERP"]
+    }
   }
 ];
 
@@ -1802,6 +1838,7 @@ export const industriesPageMockData: IndustriesPageData = {
     { title: "Manufacturing", headline: "Industry 5.0 Smart Factories.", slug: "manufacturing", image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000" },
     { title: "Retail", headline: "Omnichannel Commerce Architecture.", slug: "retail", image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1000" },
     { title: "Chemicals", headline: "Precision Batch Intelligence.", slug: "chemicals", image: "https://images.unsplash.com/photo-1532187875605-1ef6c237f146?auto=format&fit=crop&q=80&w=1000" },
+    { title: "PVC Manufacturing", headline: "Intelligent PVC Operations & Logistics.", slug: "pvc-manufacturing", image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=1000" },
     { title: "FMCG & Distribution", headline: "High-Velocity Distribution.", slug: "fmcg-distribution", image: "https://images.unsplash.com/photo-1566633806327-68e152aaf26d?auto=format&fit=crop&q=80&w=1000" },
     { title: "Information Services", headline: "Digital Infrastructure & Data.", slug: "information-services", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000" },
     { title: "Dairy", headline: "Time-Critical Logistics.", slug: "dairy", image: "https://images.unsplash.com/photo-1550583760-d80392be8c42?auto=format&fit=crop&q=80&w=1000" },
@@ -1809,8 +1846,8 @@ export const industriesPageMockData: IndustriesPageData = {
   ],
   seo: {
     title: "Industries | Enterprise Digital Transformation | Prixgen",
-    metaDesc: "Discover how Prixgen architects operational intelligence for Manufacturing, Retail, Chemicals, FMCG, Dairy, and Electronics.",
-    keywords: ["Industrial Transformation", "Market Verticals", "Smart Factory", "Digital Supply Chain"]
+    metaDesc: "Discover how Prixgen architects operational intelligence for Manufacturing, Retail, Chemicals, PVC Manufacturing, FMCG, Dairy, and Electronics.",
+    keywords: ["Industrial Transformation", "Market Verticals", "Smart Factory", "Digital Supply Chain", "PVC Manufacturing ERP"]
   }
 };
 

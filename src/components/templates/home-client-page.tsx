@@ -7,7 +7,8 @@ import { Button } from '@/components/ui/button';
 import { VideoFacade } from '@/components/features/video-facade';
 import { JsonLd } from '@/components/seo/json-ld';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, ArrowRight } from 'lucide-react';
 import { StaggerText } from '@/components/animations/stagger-text';
 import { FadeUp } from '@/components/animations/fade-up';
 import { LeadCaptureForm } from '@/components/features/lead-capture-form';
@@ -95,7 +96,148 @@ const PATRONS = [
 
 
 
-export default function HomeClientPage({ homeData }: { homeData: any }) {
+interface HomeClientPageProps {
+  homeData: any;
+  latestPost?: any;
+  latestCareer?: any;
+}
+
+export default function HomeClientPage({ homeData, latestPost, latestCareer }: HomeClientPageProps) {
+  const [showToast, setShowToast] = useState(false);
+  const [toastIndex, setToastIndex] = useState(0);
+  const [isMinimized, setIsMinimized] = useState(false);
+
+  const toastNotifications = React.useMemo(() => {
+    const notifications = [];
+
+    // 1. Odoo Services
+    notifications.push({
+      badge: "Odoo Gold Partner",
+      text: "We don't just customize. We engineer high-performance Odoo Enterprise migrations.",
+      cta: "Explore Odoo",
+      link: "/solutions/odoo-enterprise"
+    });
+
+    // 2. Software Development
+    notifications.push({
+      badge: "Software Consulting",
+      text: "Accelerate your digital maturity with low-latency APIs and custom business applications.",
+      cta: "View Services",
+      link: "/services"
+    });
+
+    // 3. ERP Solutions
+    notifications.push({
+      badge: "ERP Ecosystems",
+      text: "Fusing Odoo and SAP S/4HANA with proven industrial intelligence and clean cores.",
+      cta: "ERP Solutions",
+      link: "/solutions"
+    });
+
+    // 4. Cloud Infrastructure
+    notifications.push({
+      badge: "Managed Cloud",
+      text: "Build resilient, secure, and SLA-backed cloud platforms optimized for ERP scale.",
+      cta: "Explore Cloud",
+      link: "/services/cloud-infrastructure"
+    });
+
+    // 5. Hiring Odoo Developers
+    notifications.push({
+      badge: "Odoo Talent",
+      text: "Augment your team with pre-vetted Odoo architects capable of building hardware IoT loops.",
+      cta: "Hire Developers",
+      link: "/services/hiring-odoo-developers"
+    });
+
+    // 6. Industries We Serve
+    notifications.push({
+      badge: "Industries",
+      text: "Specialized systems engineered for Manufacturing, FMCG, Logistics, and Retail.",
+      cta: "See Industries",
+      link: "/industries"
+    });
+
+    // 7. Careers (Dynamic if possible)
+    if (latestCareer && latestCareer.title) {
+      notifications.push({
+        badge: "Careers",
+        text: `We are hiring! Join our elite engineering hub as a ${latestCareer.title} in ${latestCareer.location || 'Mysuru'}.`,
+        cta: "Explore Careers",
+        link: "/careers"
+      });
+    } else {
+      notifications.push({
+        badge: "Careers",
+        text: "Looking for your next career leap? We are hiring Python, Odoo, and SAP specialists.",
+        cta: "Explore Careers",
+        link: "/careers"
+      });
+    }
+
+    // 8. Blogs & Insights (Dynamic if possible)
+    if (latestPost && latestPost.title && latestPost.slug) {
+      notifications.push({
+        badge: "Latest Insight",
+        text: latestPost.title,
+        cta: "Read Blog",
+        link: `/blog/${latestPost.slug}`
+      });
+    } else {
+      notifications.push({
+        badge: "Latest Insight",
+        text: "Beyond Dashboards: How ERP Best Practices Create Real-Time Business Visibility.",
+        cta: "Read Blog",
+        link: "/blog/beyond-dashboards-how-erp-best-practices-create-real-time-business-visibility"
+      });
+    }
+
+    // 9. Contact Us
+    notifications.push({
+      badge: "Consultation",
+      text: "Schedule a zero-cost architecture audit with our senior engineering consultants.",
+      cta: "Contact Us",
+      link: "/contact"
+    });
+
+    return notifications;
+  }, [latestPost, latestCareer]);
+
+  // Initialize and check minimized state
+  useEffect(() => {
+    const minimized = sessionStorage.getItem('home_toast_minimized');
+    if (minimized === 'true') {
+      setIsMinimized(true);
+      setShowToast(true);
+    } else {
+      setIsMinimized(false);
+      // Delay toast display by 2 seconds
+      const timer = setTimeout(() => {
+        setShowToast(true);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  // Cycle notifications every 6 seconds when not minimized
+  useEffect(() => {
+    if (isMinimized || !showToast) return;
+    const interval = setInterval(() => {
+      setToastIndex((prev) => (prev + 1) % toastNotifications.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, [isMinimized, showToast, toastNotifications.length]);
+
+  const handleMinimize = () => {
+    setIsMinimized(true);
+    sessionStorage.setItem('home_toast_minimized', 'true');
+  };
+
+  const handleExpand = () => {
+    setIsMinimized(false);
+    sessionStorage.setItem('home_toast_minimized', 'false');
+  };
+
   return (
     <div className="bg-white">
       <JsonLd 
@@ -274,7 +416,9 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                 { title: 'Managed Cloud', desc: 'High-availability industrial cloud architectures featuring in-house hosting facilities, secure data replication, and 24/7 proactive monitoring.', link: '/engineering-services/cloud-infrastructure', icon: 'Cloud', img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop', priority: true },
                 { title: 'Transformation Strategy', desc: 'Re-engineering legacy workflows into digitally optimized and globally scaled operations designed to drive operational resilience.', link: '/services/business-transformation', icon: 'TrendingUp', img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop' },
                 { title: 'Warehouse', desc: 'Better Warehouse management can be yours. Reduce inventory and warehouse costs while improving customer service.', link: '/solutions/warehouse-management', icon: 'Box', img: '/images/warehouse.png' },
-                { title: 'IIoT', desc: 'Manage Millions of IIOT Device Connections And Support Applications That Open New Revenues For Industries.', link: '/engineering-services/iiot-telemetry', icon: 'Cpu', img: '/images/iiot.png' }
+                { title: 'IIoT', desc: 'Manage Millions of IIOT Device Connections And Support Applications That Open New Revenues For Industries.', link: '/engineering-services/iiot-telemetry', icon: 'Cpu', img: '/images/iiot.png' },
+                { title: 'Hiring Odoo Developers', desc: 'Augment your development capacity with pre-vetted Odoo architects and dedicated engineering pods to scale your enterprise applications.', link: '/services/hiring-odoo-developers', icon: 'Users', img: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000&auto=format&fit=crop' },
+                { title: 'PVC Manufacturing', desc: 'Specialized enterprise architectures, recipe variance controls, and IoT weighbridge integrations engineered specifically for PVC operations.', link: '/industries/pvc-manufacturing', icon: 'Factory', img: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=1000&auto=format&fit=crop' }
               ].map((service, i) => (
                 <FadeUp key={i} delay={i * 0.1}>
                   <Link href={service.link} className="block h-full group">
@@ -282,7 +426,7 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                       {/* Image Container with Zoom */}
                       <div className="h-64 overflow-hidden relative bg-slate-100 flex-shrink-0">
                         <OptimizedImage 
-                          fill
+                           fill
                           src={service.img} 
                           alt={service.title}
                           priority={service.priority}
@@ -299,6 +443,8 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
                               {service.icon === 'Brain' && '🧠'}
                               {service.icon === 'TrendingUp' && '📈'}
                               {service.icon === 'Cloud' && '☁️'}
+                              {service.icon === 'Users' && '👥'}
+                              {service.icon === 'Factory' && '🏭'}
                             </span>
                           </div>
                         </Floating>
@@ -636,6 +782,86 @@ export default function HomeClientPage({ homeData }: { homeData: any }) {
           </div>
         </section>
       </main>
+
+      <AnimatePresence>
+        {showToast && (
+          isMinimized ? (
+            <motion.button
+              key="minimized-btn"
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0, opacity: 0 }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleExpand}
+              className="fixed bottom-6 right-6 z-50 w-12 h-12 bg-transparent border-none flex items-center justify-center cursor-pointer overflow-visible p-0 group"
+              style={{ willChange: 'transform, opacity' }}
+            >
+              <img 
+                src="/images/icon.png" 
+                alt="Prixgen Updates" 
+                className="w-full h-full object-contain rounded-full shadow-[0_10px_25px_-5px_rgba(0,102,204,0.35)] bg-transparent"
+              />
+            </motion.button>
+          ) : (
+            <motion.div
+              key="expanded-toast"
+              initial={{ opacity: 0, y: 50, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 30, scale: 0.95 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="fixed bottom-6 right-6 z-50 max-w-sm w-full bg-white/95 backdrop-blur-md border border-slate-200/50 shadow-[0_25px_60px_-15px_rgba(0,102,204,0.15)] p-5 rounded-2xl text-left flex flex-col gap-3 group ring-1 ring-black/5"
+              style={{ willChange: 'transform, opacity' }}
+            >
+              {/* Glowing Pulse Dot */}
+              <div className="flex items-center justify-between">
+                <span className="px-3 py-1 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue font-bold tracking-widest uppercase text-[9px] flex items-center gap-2">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-prixgen-lightblue opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-prixgen-lightblue"></span>
+                  </span>
+                  {toastNotifications[toastIndex]?.badge}
+                </span>
+                <button 
+                  onClick={handleMinimize}
+                  className="w-6 h-6 rounded-full flex items-center justify-center text-slate-400 hover:text-prixgen-blue hover:bg-slate-100 transition-all cursor-pointer"
+                  aria-label="Minimize notification"
+                >
+                  <X size={14} />
+                </button>
+              </div>
+
+              {/* Content Switcher Animation */}
+              <div className="relative min-h-[50px] overflow-hidden">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={toastIndex}
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="space-y-3 text-left"
+                  >
+                    <p className="text-sm font-bold text-prixgen-blue leading-snug tracking-tight">
+                      {toastNotifications[toastIndex]?.text}
+                    </p>
+                    
+                    {toastNotifications[toastIndex]?.link && (
+                      <Link 
+                        href={toastNotifications[toastIndex].link}
+                        className="inline-flex items-center gap-1.5 text-prixgen-lightblue hover:text-prixgen-blue text-xs font-black uppercase tracking-widest transition-colors group/link"
+                      >
+                        {toastNotifications[toastIndex].cta}
+                        <ArrowRight size={12} className="transition-transform group-hover/link:translate-x-1" />
+                      </Link>
+                    )}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </motion.div>
+          )
+        )}
+      </AnimatePresence>
     </div>
   );
 }
