@@ -8,6 +8,7 @@ interface StaggerTextProps {
   variant?: 'default' | 'gradient';
   mode?: 'dark' | 'light'; // dark for white bg, light for dark/blue bg
   as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div';
+  animateOnMount?: boolean;
 }
 
 /**
@@ -19,7 +20,8 @@ export function StaggerText({
   className, 
   variant = 'default', 
   mode = 'dark',
-  as: Component = 'h1'
+  as: Component = 'h1',
+  animateOnMount = false
 }: StaggerTextProps) {
   const words = text.split(" ");
   
@@ -49,8 +51,9 @@ export function StaggerText({
     <MotionComponent 
       variants={container} 
       initial="hidden" 
-      whileInView="visible"
-      viewport={{ once: false, margin: "-50px" }}
+      animate={animateOnMount ? "visible" : undefined}
+      whileInView={animateOnMount ? undefined : "visible"}
+      viewport={animateOnMount ? undefined : { once: true, margin: "-50px" }}
       className={cn(className, colorClass, "font-extrabold")}
     >
 

@@ -501,7 +501,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                   key={i}
                   initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false, margin: "-50px" }}
+                  viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
                   className="inline-block"
                 >
@@ -511,7 +511,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
               <motion.span
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, margin: "-50px" }}
+                viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-prixgen-blue to-prixgen-lightblue"
               >
@@ -611,7 +611,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                         key={i}
                         initial={{ opacity: 0, y: 15 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: false, margin: "-50px" }}
+                        viewport={{ once: true, margin: "-50px" }}
                         transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
                         className="inline-block"
                       >
@@ -623,7 +623,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                         key={i}
                         initial={{ opacity: 0, y: 15 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: false, margin: "-50px" }}
+                        viewport={{ once: true, margin: "-50px" }}
                         transition={{ duration: 0.5, delay: (i + 3) * 0.05, ease: [0.16, 1, 0.3, 1] }}
                         className="inline-block text-prixgen-blue"
                       >
@@ -808,7 +808,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                       key={i}
                       initial={{ opacity: 0, y: 15 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: false, margin: "-50px" }}
+                      viewport={{ once: true, margin: "-50px" }}
                       transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
                       className="inline-block"
                     >
@@ -820,7 +820,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                       key={i}
                       initial={{ opacity: 0, y: 15 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: false, margin: "-50px" }}
+                      viewport={{ once: true, margin: "-50px" }}
                       transition={{ duration: 0.5, delay: (i + 4) * 0.05, ease: [0.16, 1, 0.3, 1] }}
                       className="inline-block text-prixgen-blue"
                     >
@@ -919,7 +919,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                       key={i}
                       initial={{ opacity: 0, y: 15 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: false, margin: "-50px" }}
+                      viewport={{ once: true, margin: "-50px" }}
                       transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
                       className="inline-block"
                     >
@@ -931,7 +931,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                       key={i}
                       initial={{ opacity: 0, y: 15 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: false, margin: "-50px" }}
+                      viewport={{ once: true, margin: "-50px" }}
                       transition={{ duration: 0.5, delay: (i + 2) * 0.05, ease: [0.16, 1, 0.3, 1] }}
                       className="inline-block text-[#004B87]"
                     >
@@ -1016,7 +1016,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                     key={i}
                     initial={{ opacity: 0, y: 15 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, margin: "-50px" }}
+                    viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
                     className="inline-block"
                   >
@@ -1028,7 +1028,7 @@ function OdooDevelopersLanding({ service }: { service: any }) {
                     key={i}
                     initial={{ opacity: 0, y: 15 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, margin: "-50px" }}
+                    viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.5, delay: (i + 4) * 0.05, ease: [0.16, 1, 0.3, 1] }}
                     className="inline-block text-prixgen-blue"
                   >
