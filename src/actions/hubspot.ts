@@ -2,6 +2,7 @@
 
 import { z } from 'zod';
 import { writeClient } from '@/sanity/lib/write-client';
+import { sendLeadEmailNotification } from '@/lib/email';
 
 const LeadSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -90,8 +91,13 @@ export async function submitLead(data: LeadSubmission) {
     if (!response.ok) {
       const errorData = await response.json();
       console.error('HubSpot API Error:', errorData);
-      // We still return success if Sanity save worked, but maybe with a warning?
-      // For now, let's just log it.
+    }
+
+    // 3. SEND EMAIL NOTIFICATION TO SALES HEAD
+    try {
+      await sendLeadEmailNotification(data);
+    } catch (emailError) {
+      console.error('[WARN] Email dispatch failed inside server action, but lead is logged:', emailError);
     }
 
     return { success: true, message: "Thank you! We'll be in touch shortly." };

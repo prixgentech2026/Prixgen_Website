@@ -2065,5 +2065,20 @@ export const blogPosts: BlogPost[] = [
       metaDesc: 'Explore how modern ERP systems provide the visibility and agility needed for resilient global supply chains.',
       keywords: ['ERP Systems', 'Supply Chain Management', 'Logistics Optimization', 'Business Continuity']
     }
+  },
+  {
+    title: "Why ERP Projects Fail (Myth: It's rarely a software problem)",
+    slug: 'why-erp-projects-fail-myth-it-s-rarely-a-software-problem',
+    excerpt: "Most organisations over-invest in software selection and underestimate what truly drives success: business processes, change management, and long-term planning.",
+    publishedAt: new Date('2025-01-01').toISOString(),
+    mainImage: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200',
+    author: blogAuthors[0],
+    categories: [{ title: 'ERP Insights' }, { title: 'Digital Transformation' }],
+    body: [],
+    seo: {
+      title: "Why ERP Projects Fail (Myth: It's rarely a software problem) | Prixgen",
+      metaDesc: "An ERP implementation failure is almost never a technology issue. Explore the root causes, mistakes to avoid, and how to ensure project success.",
+      keywords: ['ERP Failure', 'ERP Implementation', 'Change Management', 'Odoo ERP', 'SAP ERP']
+    }
   }
 ];

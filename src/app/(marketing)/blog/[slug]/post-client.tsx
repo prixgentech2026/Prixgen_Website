@@ -17,6 +17,7 @@ import { StaggerText } from '@/components/animations/stagger-text';
 import { AmbientGlow } from '@/components/animations/ambient-glow';
 import { LinkedInEmbed } from '@/components/shared/linkedin-embed';
 import { LeadCaptureForm } from '@/components/features/lead-capture-form';
+import { ERPFailureCanvas } from '@/components/features/erp-failure-canvas';
 import { Magnetic } from '@/components/animations/magnetic';
 import { AnimatedConnector } from '@/components/shared/animated-connector';
 import { HeroBadge } from '@/components/shared/hero-badge';
@@ -279,7 +280,9 @@ export default function PostClient({ post, relatedPosts = [] }: PostClientProps)
            <div className="flex-1 max-w-4xl">
               <FadeUp>
                 <div className="max-w-none text-left">
-                  {post.linkedinUrl ? (
+                  {post.slug === 'why-erp-projects-fail-myth-it-s-rarely-a-software-problem' ? (
+                    <ERPFailureCanvas />
+                  ) : post.linkedinUrl ? (
                     <div className="my-12">
                       <LinkedInEmbed url={post.linkedinUrl} />
                     </div>
