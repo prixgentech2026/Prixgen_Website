@@ -18,7 +18,8 @@ import { HeroBadge } from '@/components/shared/hero-badge';
 import { HeroBackground } from '@/components/shared/hero-background';
 import {
   Database, Activity, LineChart, Zap, ArrowRight,
-  Server, ShieldCheck, Cpu, Award, Globe
+  Server, ShieldCheck, Cpu, Award, Globe,
+  CheckCircle2, XCircle, AlertCircle, Sparkles, Clock
 } from 'lucide-react';
 
 export default function ServiceClientPage({ service }: { service: any }) {
@@ -482,6 +483,185 @@ function OdooDevelopersLanding({ service }: { service: any }) {
           </div>
         </section>
       )}
+
+      {/* 1b-2. ON-DEMAND MODEL STRATEGY SECTION */}
+      <section className="py-16 lg:py-24 bg-slate-50 relative overflow-hidden border-b border-slate-100">
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-6xl mx-auto">
+            {/* Header Block */}
+            <div className="max-w-3xl mb-16 space-y-4">
+              <RevealText>
+                <span className="text-prixgen-blue font-black tracking-[0.2em] uppercase text-xs block">On-Demand Engagement Model</span>
+              </RevealText>
+              <h2 className="text-4xl md:text-5xl font-black text-prixgen-dark tracking-tighter leading-[1.1]">
+                On-Demand Odoo Developers: How to Scale ERP Support <span className="text-prixgen-blue">Without Scaling Headcount</span>
+              </h2>
+              <RevealText delay={0.25}>
+                <p className="text-lg text-slate-500 font-medium leading-relaxed">
+                  Odoo work is uneven and project-driven. It spikes during new module deployments, version upgrades, or API integrations, and drops between sprints. Carrying full-time payroll during quiet months is a carrying cost trap. Here is how our on-demand model solves this.
+                </p>
+              </RevealText>
+            </div>
+
+            {/* The Three Paths Comparison Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
+              <FadeUp delay={0.1}>
+                <div className="h-full p-8 rounded-[2.5rem] bg-white border border-slate-100 shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-all duration-300">
+                  <div className="space-y-6">
+                    <div className="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center text-red-500">
+                      <Clock size={22} />
+                    </div>
+                    <h3 className="text-xl font-black text-prixgen-dark tracking-tight">01. Full-Time Hiring</h3>
+                    <p className="text-slate-500 text-sm leading-relaxed">
+                      Expensive relative to the actual workload. You pay fixed salaries, benefits, and carrying costs during quiet periods when no major development is required.
+                    </p>
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-slate-100 text-xs text-red-500 font-bold flex items-center gap-1.5">
+                    <XCircle size={14} /> High Carrying Cost Overhead
+                  </div>
+                </div>
+              </FadeUp>
+
+              <FadeUp delay={0.2}>
+                <div className="h-full p-8 rounded-[2.5rem] bg-white border border-slate-100 shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-all duration-300">
+                  <div className="space-y-6">
+                    <div className="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600">
+                      <AlertCircle size={22} />
+                    </div>
+                    <h3 className="text-xl font-black text-prixgen-dark tracking-tight">02. Marketplace Freelancer</h3>
+                    <p className="text-slate-500 text-sm leading-relaxed">
+                      Cheap upfront, expensive later. Freelancers often lack cross-module functional accountability, have no backend team support, and rarely document customizations, making future upgrades a nightmare.
+                    </p>
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-slate-100 text-xs text-amber-600 font-bold flex items-center gap-1.5">
+                    <AlertCircle size={14} /> Zero Long-Term Accountability
+                  </div>
+                </div>
+              </FadeUp>
+
+              <FadeUp delay={0.3}>
+                <div className="h-full p-8 rounded-[2.5rem] bg-white border-2 border-prixgen-blue/20 shadow-md flex flex-col justify-between relative overflow-hidden group hover:shadow-lg transition-all duration-300">
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-prixgen-blue/5 rounded-bl-[2.5rem]" />
+                  <div className="space-y-6">
+                    <div className="w-12 h-12 rounded-xl bg-prixgen-blue/10 flex items-center justify-center text-prixgen-blue">
+                      <Award size={22} />
+                    </div>
+                    <h3 className="text-xl font-black text-prixgen-dark tracking-tight">03. Prixgen On-Demand</h3>
+                    <p className="text-slate-500 text-sm leading-relaxed">
+                      Elite partner-grade process. Access scoped developers backed by a full delivery team (architects, DBAs, DevOps) when you need them, without any fixed salary liabilities when you don't.
+                    </p>
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-slate-100 text-xs text-prixgen-blue font-black uppercase tracking-wider flex items-center gap-1.5">
+                    <CheckCircle2 size={14} className="text-prixgen-blue fill-prixgen-blue/10" /> 100% Elastic Carrying Cost
+                  </div>
+                </div>
+              </FadeUp>
+            </div>
+
+            {/* What On-Demand Means at Prixgen */}
+            <div className="p-8 md:p-12 rounded-[2.5rem] bg-white border border-slate-100 shadow-sm mb-20 space-y-12">
+              <div className="max-w-xl space-y-2">
+                <span className="text-xs font-black text-prixgen-blue uppercase tracking-widest">Our Blueprint</span>
+                <h3 className="text-3xl font-black text-prixgen-dark tracking-tight">What "On-Demand" Means at Prixgen</h3>
+                <p className="text-slate-500 text-sm font-medium">
+                  We don't assign "whoever is free." We deploy scoped, business-aware developers backed by a structured delivery engine working inside your codebase.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {[
+                  {
+                    step: "01",
+                    title: "Scope First",
+                    desc: "Before a single line of code is written, we detail a precise functional spec defining triggers, outputs, and explicit project exclusions."
+                  },
+                  {
+                    step: "02",
+                    title: "Staging-First Testing",
+                    desc: "All builds are staged and verified against a replica of your live Odoo database. You review and sign off before anything is pushed to production."
+                  },
+                  {
+                    step: "03",
+                    title: "Clean Handovers",
+                    desc: "Every deployment includes full documentation written for whoever maintains the system next, ensuring zero developer lock-in."
+                  },
+                  {
+                    step: "04",
+                    title: "Hardened Support",
+                    desc: "Our work includes a post-delivery support window. Any defects found are resolved immediately as part of the initial engagement."
+                  }
+                ].map((item, i) => (
+                  <div key={i} className="space-y-4 relative">
+                    <div className="text-4xl font-black text-prixgen-blue/20 tracking-tighter">{item.step}</div>
+                    <h4 className="text-lg font-black text-prixgen-dark tracking-tight">{item.title}</h4>
+                    <p className="text-slate-500 text-xs leading-relaxed">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Strategic Use Cases & Savings Block */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
+              {/* Left Column: Use Cases */}
+              <div className="lg:col-span-7 space-y-6">
+                <h3 className="text-xs font-black text-slate-400 tracking-[0.15em] uppercase">Where On-Demand Hiring Makes the Most Sense</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {[
+                    {
+                      title: "Module Customization",
+                      desc: "Build specific operational workflows without disrupting your clean Odoo core."
+                    },
+                    {
+                      title: "Version Upgrades & Migrations",
+                      desc: "Time-boxed technical migrations requiring short-term intensive coding."
+                    },
+                    {
+                      title: "Third-Party Integrations",
+                      desc: "Hardware telemetry (scanners, RFID, scales) or API bridges (e-commerce, CRMs, logistics)."
+                    },
+                    {
+                      title: "Seasonal & Project Surges",
+                      desc: "Temporary spikes when business operations require rapid feature adjustments."
+                    }
+                  ].map((useCase, i) => (
+                    <div key={i} className="p-6 bg-white border border-slate-100 rounded-2xl shadow-sm space-y-2 hover:border-prixgen-blue/20 transition-all duration-300">
+                      <h4 className="font-bold text-prixgen-dark text-base flex items-center gap-2">
+                        <Sparkles size={16} className="text-prixgen-lightblue" />
+                        {useCase.title}
+                      </h4>
+                      <p className="text-xs text-slate-500 leading-relaxed">{useCase.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right Column: The Real Savings */}
+              <div className="lg:col-span-5">
+                <div className="h-full p-8 rounded-[2.5rem] bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white flex flex-col justify-between relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-48 h-48 bg-prixgen-blue/10 rounded-full blur-2xl pointer-events-none" />
+                  <div className="space-y-6 relative z-10">
+                    <span className="text-xs font-black text-prixgen-lightblue uppercase tracking-widest">Avoiding Rework</span>
+                    <h3 className="text-2xl font-black tracking-tight leading-snug">The Real Saving Isn't Just the Hourly Rate</h3>
+                    <p className="text-slate-300 text-sm leading-relaxed font-normal">
+                      On-demand engagement avoids fixed salaries, benefits, and idle overheads. But the ultimate value is avoiding broken builds.
+                    </p>
+                    <p className="text-slate-300 text-sm leading-relaxed font-normal">
+                      A functionally-sound build delivered by certified Odoo Gold Partner developers the first time costs less than a cheap module that breaks operations and requires auditing and rebuilding six months later.
+                    </p>
+                  </div>
+                  <div className="mt-8 relative z-10 p-5 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-4">
+                    <ShieldCheck size={24} className="text-[#00A3E0]" />
+                    <div className="text-xs text-slate-300 leading-normal">
+                      Developers who understand <strong className="text-white">business processes</strong> (MRP, Inventory, Accounts) and not just code lines.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
 
       {/* 1c. FUNCTIONAL-FIRST APPROACH */}
       <section className="py-16 lg:py-24 bg-white relative overflow-hidden border-b border-slate-100">
