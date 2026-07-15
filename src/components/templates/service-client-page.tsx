@@ -483,6 +483,134 @@ function OdooDevelopersLanding({ service }: { service: any }) {
         </section>
       )}
 
+      {/* 1c. FUNCTIONAL-FIRST APPROACH */}
+      <section className="py-16 lg:py-24 bg-white relative overflow-hidden border-b border-slate-100">
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-6xl mx-auto">
+            {/* Header */}
+            <div className="max-w-3xl mb-16 space-y-4">
+              <RevealText>
+                <span className="text-prixgen-blue font-black tracking-[0.2em] uppercase text-xs block">Functional-First Architecture</span>
+              </RevealText>
+              <h2 className="text-4xl md:text-5xl font-black text-prixgen-dark tracking-tighter leading-[1.1]">
+                Why Your Next Odoo Developer Should Understand Your Business, <span className="text-prixgen-blue">Not Just Your Code</span>
+              </h2>
+              <RevealText delay={0.25}>
+                <p className="text-lg text-slate-500 font-medium leading-relaxed">
+                  Functional knowledge is the real differentiator in ERP development. At Prixgen, our developers are business-aware architects who ensure custom code maps to physical operations.
+                </p>
+              </RevealText>
+            </div>
+
+            {/* Split layout: The Gap vs The Solution */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-20">
+              {/* Left Column - The Process Logic Gap */}
+              <div className="lg:col-span-5 space-y-6">
+                <FadeUp delay={0.1}>
+                  <div className="p-8 rounded-[2.5rem] bg-slate-50 border border-slate-100 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 rounded-bl-[2.5rem]" />
+                    <h3 className="text-2xl font-black text-prixgen-dark tracking-tight mb-4 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                      The Gap Nobody Warns You About
+                    </h3>
+                    <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                      Odoo's real complexity isn't syntax—it's process logic. A stock move that ignores your costing method throws off your accounts. A POS configuration without multi-warehouse sync creates mismatches during audits.
+                    </p>
+                    <p className="text-slate-600 text-sm leading-relaxed">
+                      None of these process gaps show up as compile errors. They show up as business problems, usually discovered by Finance or Operations weeks after code-only developers have moved on.
+                    </p>
+                  </div>
+                </FadeUp>
+
+                <FadeUp delay={0.2}>
+                  <div className="p-8 rounded-[2.5rem] bg-prixgen-blue/5 border border-prixgen-blue/10 relative overflow-hidden">
+                    <h3 className="text-2xl font-black text-prixgen-dark tracking-tight mb-4 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-prixgen-blue" />
+                      Why It Matters As You Grow
+                    </h3>
+                    <p className="text-slate-600 text-sm leading-relaxed">
+                      As your ERP scales, every new module touches what came before. A functional gap costing nothing at ten users can disrupt operations at a hundred. Functional context makes customizations maintainable for the long run.
+                    </p>
+                  </div>
+                </FadeUp>
+              </div>
+
+              {/* Right Column - The Functional Domains (6 Cards) */}
+              <div className="lg:col-span-7 space-y-6">
+                <h3 className="text-xs font-black text-slate-400 tracking-[0.15em] uppercase">
+                  Cross-Module Functional Expertise
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {[
+                    {
+                      title: "Accounts & Finance",
+                      desc: "Reconciliation logic, multi-currency, tax rules, and general ledger impact analysis.",
+                      icon: <ShieldCheck size={20} className="text-[#004B87]" />
+                    },
+                    {
+                      title: "Manufacturing (MRP)",
+                      desc: "BOM structures, work orders, subcontracting flows, and real-time shop-floor costing.",
+                      icon: <Cpu size={20} className="text-indigo-500" />
+                    },
+                    {
+                      title: "Inventory & Logistics",
+                      desc: "Multi-warehouse routing rules, costing methods (FIFO/AVCO), and stock valuations.",
+                      icon: <Database size={20} className="text-emerald-500" />
+                    },
+                    {
+                      title: "Sales & CRM",
+                      desc: "Quotation-to-order automation, approval limits, pricelists, and discount logic.",
+                      icon: <LineChart size={20} className="text-amber-500" />
+                    },
+                    {
+                      title: "Point of Sale (POS)",
+                      desc: "Offline synchronization, multi-location deductions, and daily back-office reconciliation.",
+                      icon: <Activity size={20} className="text-purple-500" />
+                    },
+                    {
+                      title: "Procurement & Purchase",
+                      desc: "Vendor bill matching, automated replenishment rules, and cost-center allocations.",
+                      icon: <Zap size={20} className="text-[#004B87]" />
+                    }
+                  ].map((domain, i) => (
+                    <FadeUp key={i} delay={0.05 * (i + 1)}>
+                      <div className="p-6 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md hover:border-prixgen-blue/20 transition-all duration-300 space-y-3">
+                        <div className="flex items-center gap-3">
+                          <div className="p-2 rounded-lg bg-slate-50">
+                            {domain.icon}
+                          </div>
+                          <h4 className="font-bold text-prixgen-dark text-base">{domain.title}</h4>
+                        </div>
+                        <p className="text-xs text-slate-500 leading-relaxed">{domain.desc}</p>
+                      </div>
+                    </FadeUp>
+                  ))}
+                </div>
+              </div>
+            </div>
+            
+            {/* The Prixgen Standard Banner */}
+            <FadeUp delay={0.4}>
+              <div className="p-8 rounded-[2.5rem] bg-gradient-to-r from-slate-900 via-slate-800 to-indigo-950 text-white flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-prixgen-blue/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="space-y-2 relative z-10 max-w-2xl">
+                  <h4 className="text-xl font-black">The Prixgen Standard</h4>
+                  <p className="text-sm text-slate-300 leading-relaxed">
+                    As an Odoo Gold Partner, our developers scope requirements with functional context, test in staging environments against actual workflows, and document the "why" behind every custom process.
+                  </p>
+                </div>
+                <button 
+                  onClick={handleScrollToForm}
+                  className="px-6 py-4 bg-[#004B87] hover:bg-[#003560] text-white text-sm font-black uppercase tracking-wider rounded-xl transition-all shadow-lg shrink-0 relative z-10 self-start md:self-center cursor-pointer"
+                >
+                  Scope Your Project
+                </button>
+              </div>
+            </FadeUp>
+          </div>
+        </div>
+      </section>
+
       {/* 2. VALUE PROPOSITION GRID (Intelligent ERP Focus) */}
       <section className="py-10 lg:py-16 bg-slate-50 relative overflow-hidden">
         {/* Grid pattern */}
