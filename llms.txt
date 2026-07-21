@@ -1,0 +1,77 @@
+# Prixgen SEO Keywords & Metadata (llms.txt)
+
+This document contains the optimized high-authority SEO metadata designed to improve search rankings for enterprise ERP, IIoT, and Industrial AI keywords on the Prixgen platform.
+
+---
+
+## 🏠 Core Pages Metadata
+
+### Homepage
+- **Title:** Odoo Gold Partner, SAP Experts, Software Consulting, Managed Cloud & AI/ML | Prixgen
+- **Description:** Global enterprise IT consultants specializing in Odoo, SAP, software consulting, managed cloud, AI/ML, and IIoT integration for manufacturing, FMCG, and industrial sectors.
+- **Keywords:** Odoo Gold Partner, SAP Implementation, Enterprise ERP, Industrial IoT, Supply Chain Digital Transformation, Software Consulting, Managed Cloud, AI & ML
+
+### About Us
+- **Title:** Global Architects of Enterprise Intelligence | Prixgen
+- **Description:** Elite team of ERP consultants with 30+ years of expertise in IIoT, AI, and large-scale industrial digital transformation.
+- **Keywords:** ERP Consultants, Digital Transformation Agency, Industrial AI Experts, Odoo Partners India
+
+### Contact
+- **Title:** ERP Architecture Audit & Strategy Consulting | Prixgen
+- **Description:** Schedule a zero-cost architecture audit for your enterprise. Discuss Odoo, SAP, or IIoT roadmaps with our senior consultants.
+- **Keywords:** ERP Audit, IT Strategy Consulting, Contact Prixgen, Australia ERP Services
+
+### Careers
+- **Title:** Careers in Industrial Automation & ERP Engineering
+- **Description:** Join Prixgen's elite engineering team. Openings for Odoo Developers, ERP Consultants, and Technical Architects in Mysuru.
+- **Keywords:** Odoo Developer Jobs, ERP Careers, Engineering Jobs India, Industrial Automation Careers
+
+---
+
+## 🏭 Industries & Verticals Metadata
+
+### Manufacturing
+- **Title:** Industry 4.0 ERP for Manufacturing & Process Engineering
+- **Description:** Achieve Zero Operational Friction with integrated shop-floor telemetry and high-precision manufacturing ERP architectures.
+- **Keywords:** Industry 4.0, Manufacturing ERP, Smart Factory, Shop Floor Control, BOM Optimization
+
+### Chemicals
+- **Title:** Chemical ERP Solutions & Batch Manufacturing Compliance
+- **Description:** Precision ERP architectures for complex batch management, regulatory compliance (QMS), and dynamic shelf-life tracking.
+- **Keywords:** Chemical ERP, Batch Management, Regulatory Compliance, Process Manufacturing
+
+### FMCG (Consumer Goods & Distribution)
+- **Title:** High-Velocity FMCG Supply Chain & WMS Solutions
+- **Description:** Hyper-scalable supply chain architectures designed for rapid fulfillment, inventory routing, and margin protection.
+- **Keywords:** FMCG Supply Chain, WMS Solutions, Inventory Routing, Distribution Automation
+
+### Retail
+- **Title:** Omnichannel Retail ERP & POS Integration
+- **Description:** Transform legacy retail into unified omnichannel ecosystems with real-time inventory visibility and POS syncing.
+- **Keywords:** Omnichannel Retail, Retail ERP, POS Integration, Unified Commerce
+
+---
+
+## 🛠️ Solutions & Platforms Metadata
+
+### Odoo
+- **Title:** Odoo Enterprise Implementation & Customization (Gold Partner)
+- **Description:** Engineering complex Odoo engines for multi-national scale. Specialists in migrations, WMS, and custom BI dashboards.
+- **Keywords:** Odoo Gold Partner, Odoo Migration, Custom Odoo Development, Enterprise Odoo
+
+### SAP
+- **Title:** SAP Business One Migration & Strategic Consulting
+- **Description:** Unlocking SAP value through Phase-Zero architectural audits and strategic S/4HANA migration services.
+- **Keywords:** SAP Business One, S/4HANA Migration, SAP Consulting, Enterprise SAP
+
+### Microsoft Dynamics 365
+- **Title:** Microsoft Dynamics 365 & Power BI Integration
+- **Description:** Unified financial management and supply chain operations using Dynamics 365 and the Microsoft Power Platform.
+- **Keywords:** Dynamics 365, Power BI Integration, Business Central, Microsoft ERP
+
+---
+
+## 📈 Global Meta Standards
+- **Brand Name:** Prixgen Enterprise
+- **Core Industry:** Enterprise IT & Industrial Engineering
+- **Main Competencies:** Odoo Gold Partner, SAP Specialists, Software Consulting, Managed Cloud, AI/ML Solutions, IIoT.
