@@ -102,38 +102,19 @@ export default function SuccessStoryClient({ story, relatedStories = [] }: Succe
       {/* Header spacing */}
       <div className="h-20" />
 
-      {/* Top Navigation & Client Badge */}
-      <div className="border-b border-slate-100 bg-white sticky top-20 z-40">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link 
-            href="/success-stories"
-            className="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-prixgen-blue transition-colors group"
-          >
-            <ArrowLeft size={14} className="group-hover:-translate-x-0.5 transition-transform" />
-            Back to Success Stories
-          </Link>
-          
-          {story.clientLogo && (
-            <div className="flex items-center gap-3">
-              <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">Client Profile</span>
-              <div className="relative w-8 h-8 rounded-lg overflow-hidden border border-slate-100 bg-slate-50 flex items-center justify-center p-1">
-                <OptimizedImage 
-                  src={story.clientLogo} 
-                  alt={story.clientName || 'Client'} 
-                  fill 
-                  className="object-contain" 
-                />
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-
       {/* Hero Section */}
       <section className="relative py-12 md:py-20 overflow-hidden bg-white">
         <AmbientGlow />
         <div className="container mx-auto px-4 relative z-10 max-w-5xl">
           <div className="space-y-6">
+            <Link 
+              href="/success-stories" 
+              className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue hover:bg-prixgen-blue hover:text-white transition-all font-black text-[10px] uppercase tracking-widest group mb-4"
+            >
+              <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+              Back to Success Stories
+            </Link>
+
             {story.industry && (
               <span className="inline-block px-3.5 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue text-[10px] font-black uppercase tracking-[0.2em]">
                 {story.industry}
