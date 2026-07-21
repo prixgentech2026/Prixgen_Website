@@ -43,6 +43,18 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://www.prixgen.com',
     siteName: 'Prixgen Enterprise',
+    images: [
+      {
+        url: '/images/hero.png',
+        width: 1200,
+        height: 630,
+        alt: 'Prixgen - Odoo Gold Partner & Enterprise IT Solutions',
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/images/hero.png'],
   },
   alternates: {
     canonical: '/',
