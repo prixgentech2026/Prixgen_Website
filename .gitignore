@@ -37,9 +37,8 @@ Thumbs.db
 
 webpagesextraction/
 
-# Export utility scripts
-/scripts/export-leads.ts
-/scripts/export-jobs.ts
+# Utility and database migration scripts
+/scripts/
 
 # Generated export files
 /*_export.csv
