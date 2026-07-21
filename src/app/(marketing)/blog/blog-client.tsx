@@ -76,7 +76,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
           className="container mx-auto px-4 relative z-10 text-center"
         >
           <FadeUp className="space-y-4">
-            <HeroBadge text="Industrial Intelligence" align="center" className="mb-2" />
+            <HeroBadge text="Blog" align="center" className="mb-2" />
             
             <StaggerText 
               text="Strategic Insights & Architecture" 
@@ -276,57 +276,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
         </div>
       </section>
 
-      {/* Section 4: Newsletter / Stay Informed */}
-      <section className="py-10 lg:py-16 bg-white relative overflow-hidden">
-        <div className="container mx-auto px-4">
-          <motion.div 
-            whileHover={{ y: -4 }}
-            className="relative bg-gradient-to-br from-prixgen-blue to-indigo-950 rounded-3xl p-8 lg:p-12 overflow-hidden shadow-xl group"
-          >
-            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/4" />
-            
-            <div className="relative z-10 grid lg:grid-cols-2 gap-10 items-center text-left">
-              <FadeUp className="space-y-6">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white font-bold text-xs uppercase tracking-widest">
-                  <span className="w-1.5 h-1.5 bg-prixgen-lightblue rounded-full animate-pulse" />
-                  Industrial Briefing
-                </div>
-                <h2 className="text-4xl lg:text-5xl font-black text-white leading-tight tracking-tighter">
-                  Stay ahead of the <span className="text-prixgen-lightblue italic">industrial curve.</span>
-                </h2>
-                <p className="text-base text-white/60 max-w-lg font-medium">
-                  Get our quarterly executive review of Industry 5.0 shifts and architectural breakthroughs.
-                </p>
-              </FadeUp>
 
-              <FadeUp delay={0.2}>
-                <div className="max-w-md ml-auto bg-white/5 backdrop-blur-2xl p-6 lg:p-8 rounded-2xl border border-white/10 shadow-lg">
-                   <div className="space-y-4">
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-white/40 ml-1">Work Email</label>
-                        <input 
-                          type="email" 
-                          placeholder="arvinth@prixgen.com" 
-                          className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3.5 text-white text-sm outline-none focus:border-prixgen-lightblue focus:bg-white/20 transition-all"
-                        />
-                      </div>
-                      <motion.button 
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="w-full py-4 bg-white text-prixgen-blue rounded-xl font-black text-base shadow-lg hover:bg-prixgen-lightblue hover:text-white transition-all cursor-pointer"
-                      >
-                        Subscribe to Insights
-                      </motion.button>
-                      <p className="text-[9px] text-center text-white/30 font-bold uppercase tracking-widest">
-                        Zero spam. Pure industrial intelligence.
-                      </p>
-                   </div>
-                </div>
-              </FadeUp>
-            </div>
-          </motion.div>
-        </div>
-      </section>
     </div>
   );
 }

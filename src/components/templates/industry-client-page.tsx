@@ -10,7 +10,7 @@ import { StaggerText } from '@/components/animations/stagger-text';
 import { FadeUp } from '@/components/animations/fade-up';
 import { AmbientGlow } from '@/components/animations/ambient-glow';
 import { PortableText } from '@/components/ui/portable-text';
-import { FileText, ChevronRight, Globe, Zap, BarChart3, ShieldCheck } from 'lucide-react';
+import { FileText, ChevronRight, Globe, Zap, BarChart3, ShieldCheck, ArrowLeft } from 'lucide-react';
 import { Magnetic } from '@/components/animations/magnetic';
 import { RevealText } from '@/components/animations/reveal-text';
 import { Parallax } from '@/components/animations/parallax';
@@ -67,37 +67,26 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
       />
 
       {/* Hero Header */}
-      <section className="relative min-h-[80vh] flex items-center pt-32 overflow-hidden bg-white">
+      <section className="relative min-h-[50vh] flex items-center pt-24 pb-8 overflow-hidden bg-white">
         <HeroBackground />
         
-        <div className="container relative z-10 mx-auto px-4 text-center">
-          <FadeUp delay={0.1} className="space-y-6 flex flex-col items-center">
-            <HeroBadge text={industry.title || "Intelligent Architecture"} align="center" />
-            
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 flex items-center justify-center gap-2 text-[10px] font-black text-prixgen-blue/60 uppercase tracking-[0.2em] backdrop-blur-sm"
+        <div className="container relative z-10 mx-auto px-4 text-center max-w-5xl">
+          <FadeUp delay={0.1} className="space-y-3 flex flex-col items-center text-center">
+            <Link 
+              href="/industries" 
+              className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue hover:bg-prixgen-blue hover:text-white transition-all font-black text-[10px] uppercase tracking-widest group mb-1"
             >
-              <Magnetic>
-                <Link href="/" className="hover:text-prixgen-blue transition-colors">Home</Link>
-              </Magnetic>
-              <ChevronRight size={10} className="opacity-30" />
-              <Magnetic>
-                <Link href="/industries" className="hover:text-prixgen-blue transition-colors">Industries</Link>
-              </Magnetic>
-              <ChevronRight size={10} className="opacity-30" />
-              <span className="text-prixgen-blue/60">{industry.title}</span>
-            </motion.div>
+              <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+              Back to Industries
+            </Link>
             
             <StaggerText 
               text={industry.title} 
               variant="gradient"
-              className="text-5xl md:text-7xl lg:text-8xl font-black leading-[0.85] tracking-tighter"
+              className="text-5xl md:text-7xl lg:text-8xl font-black leading-[0.85] tracking-tighter text-center"
             />
             
-            <div className="max-w-3xl mx-auto pt-4">
+            <div className="max-w-3xl mx-auto pt-2 text-center">
               <RevealText delay={0.2}>
                 <p className="text-xl lg:text-2xl text-slate-500 font-medium leading-relaxed">
                   {industry.headline}

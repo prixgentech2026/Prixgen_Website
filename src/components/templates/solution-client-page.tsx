@@ -18,6 +18,7 @@ import { AnimatedConnector } from '@/components/shared/animated-connector';
 import { HeroBadge } from '@/components/shared/hero-badge';
 import { HeroBackground } from '@/components/shared/hero-background';
 import { urlFor } from '@/sanity/lib/image';
+import { ArrowLeft } from 'lucide-react';
 
 export default function SolutionClientPage({ solution }: { solution: any }) {
   const getImageUrl = (img: any) => {
@@ -65,37 +66,26 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
       />
 
       {/* Hero Header */}
-      <section className="relative min-h-[80vh] flex items-center pt-24 overflow-hidden bg-white">
+      <section className="relative min-h-[50vh] flex items-center pt-24 pb-8 overflow-hidden bg-white">
         <HeroBackground />
         
-        <div className="container relative z-10 mx-auto px-4 text-center">
-          <FadeUp delay={0.1} className="space-y-6 flex flex-col items-center">
-            <HeroBadge text={solution.title || "Intelligent Architecture"} align="center" />
-            
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="px-4 py-1.5 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 flex items-center justify-center gap-2 text-[10px] font-black text-prixgen-blue/60 uppercase tracking-[0.2em]"
+        <div className="container relative z-10 mx-auto px-4 text-center max-w-5xl">
+          <FadeUp delay={0.1} className="space-y-3 flex flex-col items-center text-center">
+            <Link 
+              href="/solutions" 
+              className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue hover:bg-prixgen-blue hover:text-white transition-all font-black text-[10px] uppercase tracking-widest group mb-1"
             >
-              <Magnetic>
-                <Link href="/" className="hover:text-prixgen-blue transition-colors">Home</Link>
-              </Magnetic>
-              <span className="opacity-20">/</span>
-              <Magnetic>
-                <Link href="/solutions" className="hover:text-prixgen-blue transition-colors">Solutions</Link>
-              </Magnetic>
-              <span className="opacity-20">/</span>
-              <span className="text-prixgen-blue">{solution.title}</span>
-            </motion.div>
+              <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+              Back to Solutions
+            </Link>
             
             <StaggerText 
               text={solution.title} 
               variant="gradient"
-              className="text-5xl md:text-7xl font-black leading-[0.9] tracking-tighter"
+              className="text-5xl md:text-7xl font-black leading-[0.9] tracking-tighter text-center"
             />
             
-            <div className="max-w-3xl mx-auto pt-6">
+            <div className="max-w-3xl mx-auto pt-2 text-center">
               <RevealText delay={0.2}>
                 <p className="text-xl lg:text-2xl text-slate-500 font-medium leading-relaxed">
                   {solution.headline}
