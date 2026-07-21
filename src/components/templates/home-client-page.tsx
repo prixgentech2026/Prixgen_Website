@@ -8,7 +8,7 @@ import { VideoFacade } from '@/components/features/video-facade';
 import { JsonLd } from '@/components/seo/json-ld';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ArrowRight } from 'lucide-react';
+import { X, ArrowRight, ChevronDown } from 'lucide-react';
 import { StaggerText } from '@/components/animations/stagger-text';
 import { FadeUp } from '@/components/animations/fade-up';
 import { LeadCaptureForm } from '@/components/features/lead-capture-form';
@@ -93,6 +93,39 @@ const PATRONS = [
   { filename: 'star-water-tanker.png', name: 'Star Water Tanker' },
 ];
 
+const FAQ_ITEMS = [
+  {
+    question: "What core ERP platforms does Prixgen specialize in?",
+    answer: "We are an official Odoo Gold Partner and SAP solutions provider. We specialize in architecting, customizing, and scaling Odoo Enterprise and SAP S/4HANA ecosystems for complex manufacturing, FMCG, and supply chain operations.",
+    link: { label: "Explore ERP Solutions", href: "/solutions" }
+  },
+  {
+    question: "How does Prixgen integrate AI & Machine Learning into enterprise workflows?",
+    answer: "We build custom AI and Machine Learning models (like Lecca for visual factory inspection) that train on industrial data to automate quality control, forecast inventory demand, and predict machinery maintenance needs.",
+    link: { label: "Explore AI Capabilities", href: "/services/ai-machine-learning" }
+  },
+  {
+    question: "What are Prixgen's Industrial IoT (IIoT) and telemetry capabilities?",
+    answer: "We connect factory-floor sensors, RFID scanners, and production line PLCs directly to your central ERP. This enables real-time tracking of assets, automated logs, and live telemetry dashboards with zero human entry.",
+    link: { label: "Explore IoT Solutions", href: "/engineering-services/iiot-telemetry" }
+  },
+  {
+    question: "What cloud infrastructure and hosting services do you provide?",
+    answer: "We design, migrate, and manage resilient cloud architectures across AWS, Microsoft Azure, and private servers. Our environments are optimized specifically for ERP scalability, highly secure, and backed by strict SLA guarantees.",
+    link: { label: "Explore Cloud Infrastructure", href: "/engineering-services/cloud-infrastructure" }
+  },
+  {
+    question: "How do you handle legacy data migration?",
+    answer: "We utilize a robust extraction, cleansing, and validation methodology. We map your legacy data structures to the target database, run simulated dry-runs in staging, and perform final cutovers with zero data loss and minimal operational downtime.",
+    link: { label: "Explore Services", href: "/services" }
+  },
+  {
+    question: "What post-deployment support and SLA packages do you offer?",
+    answer: "We provide SLA-backed support and maintenance contracts (Prixgen Preferred Care). This includes proactive 24/7 server monitoring, routine security patches, helpdesk ticketing, and functional upgrades.",
+    link: { label: "Get in Touch", href: "/contact" }
+  }
+];
+
 
 
 
@@ -106,6 +139,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
   const [showToast, setShowToast] = useState(false);
   const [toastIndex, setToastIndex] = useState(0);
   const [isMinimized, setIsMinimized] = useState(false);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   const toastNotifications = React.useMemo(() => {
     const notifications = [];
@@ -246,6 +280,19 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
           name: "Prixgen Enterprise", 
           url: "https://www.prixgen.com",
           logo: "https://www.prixgen.com/images/Logo.png" 
+        }} 
+      />
+      <JsonLd 
+        type="FAQPage" 
+        data={{
+          mainEntity: FAQ_ITEMS.map((item) => ({
+            "@type": "Question",
+            "name": item.question,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": item.answer
+            }
+          }))
         }} 
       />
       
@@ -717,6 +764,93 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
           </div>
         </section>
         */}
+
+        {/* 6. FAQ Section */}
+        <section className="py-16 lg:py-24 bg-slate-50 relative overflow-hidden border-t border-slate-100">
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
+              
+              {/* Left Column: Heading and Context */}
+              <FadeUp className="lg:w-1/3 space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-prixgen-blue/5 rounded-full text-prixgen-blue font-bold text-[10px] uppercase tracking-widest">
+                  <span className="w-1.5 h-1.5 bg-prixgen-lightblue rounded-full animate-pulse" />
+                  Q&A
+                </div>
+                <h2 className="text-3xl lg:text-4xl font-bold text-prixgen-blue tracking-tighter leading-tight">
+                  Frequently <br /> Asked Questions
+                </h2>
+                <p className="text-sm text-slate-500 font-medium leading-relaxed max-w-md">
+                  Have questions about custom ERP systems, AI integrations, or support contracts? Explore our answers or get in touch.
+                </p>
+                <div className="pt-4">
+                  <Link 
+                    href="/contact" 
+                    className="inline-flex items-center gap-2 text-prixgen-blue hover:text-prixgen-lightblue font-black text-xs uppercase tracking-widest transition-colors group"
+                  >
+                    Ask a Custom Question
+                    <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </div>
+              </FadeUp>
+
+              {/* Right Column: Accordion */}
+              <div className="lg:w-2/3 space-y-4">
+                {FAQ_ITEMS.map((item, index) => {
+                  const isOpen = openFaqIndex === index;
+                  return (
+                    <FadeUp 
+                      key={index} 
+                      delay={index * 0.05}
+                      className="border border-slate-200/60 rounded-2xl bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                    >
+                      <button
+                        onClick={() => setOpenFaqIndex(isOpen ? null : index)}
+                        className="w-full px-6 py-5 flex items-center justify-between text-left gap-4 font-bold text-prixgen-blue hover:text-prixgen-lightblue transition-colors focus:outline-none"
+                      >
+                        <span className="text-base md:text-lg tracking-tight leading-snug">
+                          {item.question}
+                        </span>
+                        <motion.div
+                          animate={{ rotate: isOpen ? 180 : 0 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          className="shrink-0 w-8 h-8 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-400 group-hover:text-prixgen-blue"
+                        >
+                          <ChevronDown size={16} />
+                        </motion.div>
+                      </button>
+
+                      <AnimatePresence initial={false}>
+                        {isOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                          >
+                            <div className="px-6 pb-6 text-sm md:text-base text-slate-500 font-medium leading-relaxed border-t border-slate-100/50 pt-4 bg-slate-50/40 space-y-3">
+                              <p>{item.answer}</p>
+                              {item.link && (
+                                <div className="pt-2">
+                                  <Link 
+                                    href={item.link.href}
+                                    className="inline-flex items-center gap-1.5 text-prixgen-blue hover:text-prixgen-lightblue font-black text-xs uppercase tracking-widest transition-colors group/faq-link"
+                                  >
+                                    {item.link.label}
+                                    <ArrowRight size={12} className="transition-transform group-hover/faq-link:translate-x-1" />
+                                  </Link>
+                                </div>
+                              )}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </FadeUp>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* 7. Worldwide Presence Section */}
         <section className="py-8 lg:py-12 bg-white border-t border-slate-100 relative overflow-hidden">
