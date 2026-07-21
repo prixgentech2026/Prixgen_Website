@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 
 const inter = Inter({
@@ -64,7 +65,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
-      <body className="overflow-x-hidden" suppressHydrationWarning>{children}</body>
+      <body className="overflow-x-hidden" suppressHydrationWarning>
+        {children}
+        <Script id="apollo-visitor-tracking" strategy="afterInteractive">
+          {`
+            function initApollo(){
+              var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+              o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+              o.onload=function(){window.trackingFunctions.onLoad({appId:"6a473c70ceb7ee0014ef694c"})},
+              document.head.appendChild(o)
+            }
+            initApollo();
+          `}
+        </Script>
+      </body>
     </html>
   );
 }
