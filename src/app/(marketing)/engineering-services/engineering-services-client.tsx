@@ -46,46 +46,45 @@ export default function EngineeringServicesClient({ data }: { data: ServicesPage
       />
 
       {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex items-center pt-32 overflow-hidden bg-white">
+      <section className="relative min-h-[80vh] flex items-center pt-36 overflow-hidden bg-white">
         <HeroBackground />
 
         <motion.div 
           style={{ opacity, scale }}
           className="container mx-auto px-4 relative z-10 text-center"
         >
-          <FadeUp className="space-y-8">
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="flex items-center justify-center gap-2 text-[10px] font-black text-prixgen-blue/40 uppercase tracking-[0.2em]"
-            >
-              <Link href="/" className="hover:text-prixgen-blue transition-colors">Home</Link>
-              <span className="opacity-20">/</span>
-              <span className="text-prixgen-blue">Engineering Services</span>
-            </motion.div>
+          <FadeUp className="space-y-6">
+            <StaggerText 
+              text={data.title} 
+              variant="gradient"
+              className="text-5xl md:text-6xl font-black leading-[0.9] mb-8 tracking-tighter"
+            />
             
-            <header className="space-y-6">
-              <HeroBadge text={data.subtitle || "Precision Engineering"} align="center" />
-              
-              <h1 className="text-5xl md:text-8xl lg:text-9xl font-bold text-prixgen-dark leading-[0.85] tracking-tighter">
-                <StaggerText text={data.title} as="span" />
-              </h1>
-              
-              <div className="max-w-4xl mx-auto pt-4">
-                <p className="text-xl lg:text-2xl text-slate-500 font-medium leading-relaxed">
-                  {data.heroSubheadline}
-                </p>
-              </div>
-            </header>
+            <p className="text-lg lg:text-xl text-slate-500 font-medium leading-relaxed max-w-4xl mx-auto">
+              {data.heroSubheadline}
+            </p>
 
-            <div className="flex flex-wrap items-center justify-center gap-6 pt-8">
-              <Button size="lg" className="rounded-full px-10 h-16 text-lg shadow-2xl shadow-prixgen-blue/20" asChild>
-                <Link href="#capabilities">View Capabilities</Link>
-              </Button>
-              <Button size="lg" variant="outline" className="rounded-full px-10 h-16 text-lg border-prixgen-blue/10 hover:bg-prixgen-blue/5" asChild>
-                <Link href="/contact">Technical Consultation</Link>
-              </Button>
+            <div className="flex flex-col md:flex-row items-center justify-center gap-6 pt-6">
+              <motion.div 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Link 
+                  href="#capabilities" 
+                  className="inline-block px-10 py-5 bg-prixgen-blue text-white rounded-2xl font-bold text-lg shadow-xl shadow-prixgen-blue/20 hover:bg-prixgen-dark transition-colors"
+                >
+                  View Capabilities
+                </Link>
+              </motion.div>
+              <Link href="/contact" className="group flex items-center gap-3 text-prixgen-blue font-bold text-lg">
+                Technical Consultation
+                <motion.div
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <ArrowRight size={20} />
+                </motion.div>
+              </Link>
             </div>
           </FadeUp>
         </motion.div>

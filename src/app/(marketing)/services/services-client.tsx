@@ -35,7 +35,7 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
   return (
     <div className="bg-white overflow-hidden selection:bg-prixgen-blue selection:text-white">
       {/* Section 1: The Hero */}
-      <section className="relative min-h-[70vh] flex items-center pt-24 pb-12 overflow-hidden bg-white">
+      <section className="relative min-h-[70vh] flex items-center pt-32 pb-12 overflow-hidden bg-white">
         <HeroBackground />
 
         <motion.div 
@@ -43,7 +43,6 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
           className="container mx-auto px-4 relative z-10 text-center"
         >
           <FadeUp className="space-y-6">
-            <HeroBadge text={data.subtitle || "Architectural Services"} align="center" />
             
             <StaggerText 
               text={data.title} 
@@ -56,13 +55,17 @@ export default function ServicesClient({ data }: { data: ServicesPageData }) {
             </p>
 
             <div className="flex flex-col md:flex-row items-center justify-center gap-6 pt-6">
-               <motion.button 
-                 whileHover={{ scale: 1.05 }}
-                 whileTap={{ scale: 0.95 }}
-                 className="px-10 py-5 bg-prixgen-blue text-white rounded-2xl font-bold text-lg shadow-xl shadow-prixgen-blue/20 hover:bg-prixgen-dark transition-colors"
-               >
-                 Book a Strategy Session
-               </motion.button>
+                <motion.div 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link 
+                    href="/contact"
+                    className="inline-block px-10 py-5 bg-prixgen-blue text-white rounded-2xl font-bold text-lg shadow-xl shadow-prixgen-blue/20 hover:bg-prixgen-dark transition-colors"
+                  >
+                    Book a Strategy Session
+                  </Link>
+                </motion.div>
                <Link href="#methodology" className="group flex items-center gap-3 text-prixgen-blue font-bold text-lg">
                  Explore Methodology
                  <motion.div

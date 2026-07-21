@@ -83,7 +83,7 @@ export default function IndustryClientPage({ industry }: { industry: any }) {
             <StaggerText 
               text={industry.title} 
               variant="gradient"
-              className="text-5xl md:text-7xl lg:text-8xl font-black leading-[0.85] tracking-tighter text-center"
+              className="text-5xl md:text-6xl font-black leading-[0.9] tracking-tighter text-center"
             />
             
             <div className="max-w-3xl mx-auto pt-2 text-center">
