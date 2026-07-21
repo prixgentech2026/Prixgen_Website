@@ -26,7 +26,9 @@ import {
   termsQuery,
   careersQuery,
   postsQuery,
-  postBySlugQuery
+  postBySlugQuery,
+  successStoriesQuery,
+  successStoryBySlugQuery
 } from '@/sanity/lib/queries';
 
 export interface SEOData {
@@ -117,6 +119,32 @@ export interface BlogPost {
   categories?: { title: string }[];
   body?: any;
   linkedinUrl?: string;
+  seo?: SEOData;
+}
+
+export interface SuccessStoryMetric {
+  value: string;
+  label: string;
+}
+
+export interface SuccessStoryFeature {
+  title: string;
+  description: string;
+}
+
+export interface SuccessStory {
+  title: string;
+  slug: string;
+  subtitle?: string;
+  clientName?: string;
+  clientLogo?: string;
+  industry?: string;
+  mainImage?: string;
+  metrics?: SuccessStoryMetric[];
+  challenge?: any;
+  features?: SuccessStoryFeature[];
+  body?: any;
+  publishedAt: string;
   seo?: SEOData;
 }
 
@@ -211,6 +239,28 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   } catch (error) {
     console.error(`Sanity Fetch Error (Post: ${slug}):`, error);
     return blogPosts.find(p => p.slug === slug) || null;
+  }
+}
+
+export async function getSuccessStories(): Promise<SuccessStory[]> {
+  if (!client) return mockSuccessStories;
+  try {
+    const data = await client.fetch(successStoriesQuery, {}, { next: { tags: ['sanity'] } });
+    return data || mockSuccessStories;
+  } catch (error) {
+    console.error('Sanity Fetch Error (SuccessStories):', error);
+    return mockSuccessStories;
+  }
+}
+
+export async function getSuccessStoryBySlug(slug: string): Promise<SuccessStory | null> {
+  if (!client) return mockSuccessStories.find(s => s.slug === slug) || null;
+  try {
+    const data = await client.fetch(successStoryBySlugQuery, { slug }, { next: { tags: ['sanity'] } });
+    return data || mockSuccessStories.find(s => s.slug === slug) || null;
+  } catch (error) {
+    console.error(`Sanity Fetch Error (SuccessStory: ${slug}):`, error);
+    return mockSuccessStories.find(s => s.slug === slug) || null;
   }
 }
 
@@ -2079,6 +2129,66 @@ export const blogPosts: BlogPost[] = [
       title: "Why ERP Projects Fail (Myth: It's rarely a software problem) | Prixgen",
       metaDesc: "An ERP implementation failure is almost never a technology issue. Explore the root causes, mistakes to avoid, and how to ensure project success.",
       keywords: ['ERP Failure', 'ERP Implementation', 'Change Management', 'Odoo ERP', 'SAP ERP']
+    }
+  }
+];
+
+export const mockSuccessStories: SuccessStory[] = [
+  {
+    title: "One Order, One System: Why Your Restaurant's POS, Kitchen, and Accounts Shouldn't Be Strangers",
+    slug: "restaurant-pos-kitchen-accounting-integration",
+    subtitle: "From the First Order to the Last Bill: A Restaurant's Day with Prixgen & Odoo",
+    clientName: "Global Restaurant Operators",
+    clientLogo: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&q=80&w=200",
+    industry: "Food & Beverage",
+    mainImage: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=1200",
+    publishedAt: new Date('2026-07-21').toISOString(),
+    metrics: [
+      { value: "-9 pts", label: "Food cost gap eliminated" },
+      { value: "2 hrs", label: "Month-end close (was 5 days)" },
+      { value: "4.2 min", label: "Avg. order time reduction" },
+      { value: "100%", label: "Automated tax posting" },
+      { value: "3 apps", label: "Aggregators unified" },
+      { value: "0", label: "Manual reconciliation steps" }
+    ],
+    challenge: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Your POS doesn't know your kitchen exists. Your kitchen doesn't know your accountant exists. And by month-end, nobody knows what actually happened on the floor. Most restaurant operators struggle with three or more disconnected systems stitched together with fragile APIs, leading to inventory leakage, delayed reporting, and manual errors." }]
+      }
+    ],
+    features: [
+      { title: "Multiple KOTs", description: "Each dish and station gets its own live ticket stream, synced to one Order ID. Dine-in, takeaway, and delivery orders are split into appropriate kitchen screens automatically." },
+      { title: "Multiple CDS", description: "Dine-in, takeaway, and delivery runs on separate, perfectly synced customer display screens so orders are never mixed up." },
+      { title: "Recipe & BOM Engine", description: "Actual vs. theoretical food cost calculated for every dish, every shift, every outlet to manage food costs." },
+      { title: "Central Kitchen Production", description: "Central kitchen production orders auto-triggered directly from POS demand data." },
+      { title: "Inventory Integration", description: "Every sale auto-decrements raw material stock, with real-time stock alerts." },
+      { title: "Waste Management", description: "A structured waste log by cause and station, cost-journalled to the P&L live." },
+      { title: "Takeaway & Delivery", description: "A native takeaway flow plus one unified aggregator hub (Grab, foodpanda, DoorDash, Uber Eats, Zomato, Swiggy) instead of a separate tablet per platform." },
+      { title: "Integrated Accounts", description: "Every POS close auto-posts to Odoo Accounting, with tax fully automated." }
+    ],
+    body: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Here's the part that should make every restaurant operator a little uncomfortable: this isn't three vendors stitched together with APIs and prayer. It's one Odoo backbone, engineered end-to-end — not duct-taped from a POS tool, an inventory tool, and an accounting tool that were never built to talk to each other in the first place." }]
+      },
+      {
+        _type: 'block',
+        style: 'h3',
+        children: [{ _type: 'span', text: "Built for Any Market, Any Format" }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Whether you're running a single outlet, a multi-brand cloud kitchen, a QSR chain, or central kitchen production for a large group, the underlying question is the same: Is your restaurant's tech stack actually one system, or multiple systems pretending to talk to each other? With Prixgen and Odoo, we provide a unified core for your entire food business." }]
+      }
+    ],
+    seo: {
+      title: "Restaurant Odoo ERP Integration Success Story | Prixgen",
+      metaDesc: "Read how Prixgen engineered Odoo to integrate POS, Kitchen, and Accounts for major restaurant operators, cutting month-end close to 2 hours.",
+      keywords: ["Restaurant ERP", "Odoo Restaurant POS", "Kitchen Display System", "Food & Beverage ERP", "Odoo Integration"]
     }
   }
 ];

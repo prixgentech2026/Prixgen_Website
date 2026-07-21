@@ -4,7 +4,8 @@ import {
   getSolutions, 
   getServices, 
   getEngineeringServices, 
-  getPosts 
+  getPosts,
+  getSuccessStories
 } from '@/lib/data';
 
 /**
@@ -29,13 +30,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     solutionsData, 
     servicesData, 
     engineeringServicesData, 
-    postsData
+    postsData,
+    successStoriesData
   ] = await Promise.all([
     getIndustries(),
     getSolutions(),
     getServices(),
     getEngineeringServices(),
-    getPosts()
+    getPosts(),
+    getSuccessStories()
   ]);
 
   const solutions = solutionsData.map((node: any) => ({
@@ -71,6 +74,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.7,
+  }));
+
+  const successStories = (successStoriesData || []).filter(Boolean).map((node: any) => ({
+    url: `${baseUrl}/success-stories/${node.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
   }));
 
   const staticPages = [
@@ -129,6 +139,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/success-stories`,
+      lastModified: new Date(),
+      changeFrequency: 'daily' as const,
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/privacy`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
@@ -149,5 +165,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...services,
     ...engineeringServices,
     ...blogPosts,
+    ...successStories,
   ];
 }

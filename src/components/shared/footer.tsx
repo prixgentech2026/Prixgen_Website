@@ -112,6 +112,7 @@ export function Footer() {
           <h4 className="font-bold mb-6 text-sm uppercase tracking-widest text-white/50">Company</h4>
           <ul className="space-y-3 text-gray-400 text-sm">
             <li><Link href="/who-we-are" className="hover:text-prixgen-lightblue transition-colors">Who We Are</Link></li>
+            <li><Link href="/success-stories" className="hover:text-prixgen-lightblue transition-colors">Success Stories</Link></li>
             <li><Link href="/careers" className="hover:text-prixgen-lightblue transition-colors">Careers</Link></li>
             <li><Link href="/blog" className="hover:text-prixgen-lightblue transition-colors">Blog</Link></li>
             <li><Link href="/contact" className="hover:text-prixgen-lightblue transition-colors">Contact Us</Link></li>

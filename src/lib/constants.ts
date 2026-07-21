@@ -54,6 +54,7 @@ export const MENU_DATA = {
   ],
   resources: [
     { title: "Blog", href: "/blog", description: "Insights into enterprise technology and architecture." },
+    { title: "Success Stories", href: "/success-stories", description: "Real-world transformation metrics and outcomes." },
     { title: "Careers", href: "/careers", description: "Join our team of industrial software architects." },
     { title: "Contact Us", href: "/contact", description: "Start your transformation journey with our experts." },
   ],

@@ -315,3 +315,33 @@ export const postBySlugQuery = groq`*[_type == "post" && slug.current == $slug][
   seo
 }`;
 
+// Query for all Success Stories
+export const successStoriesQuery = groq`*[_type == "successStory"] | order(publishedAt desc) {
+  title,
+  "slug": slug.current,
+  subtitle,
+  clientName,
+  "clientLogo": clientLogo.asset->url,
+  industry,
+  "mainImage": mainImage.asset->url,
+  metrics,
+  publishedAt
+}`;
+
+// Query for a single Success Story by slug
+export const successStoryBySlugQuery = groq`*[_type == "successStory" && slug.current == $slug][0]{
+  title,
+  "slug": slug.current,
+  subtitle,
+  clientName,
+  "clientLogo": clientLogo.asset->url,
+  industry,
+  "mainImage": mainImage.asset->url,
+  metrics,
+  challenge,
+  features,
+  body,
+  publishedAt,
+  seo
+}`;
+
