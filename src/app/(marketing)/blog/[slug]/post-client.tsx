@@ -181,7 +181,7 @@ export default function PostClient({ post, relatedPosts = [] }: PostClientProps)
               className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue hover:bg-prixgen-blue hover:text-white transition-all font-black text-[10px] uppercase tracking-widest group mx-auto"
             >
               <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-              Intelligence Center
+              Blogs
             </Link>
 
             <div className="flex flex-wrap items-center justify-center gap-4">

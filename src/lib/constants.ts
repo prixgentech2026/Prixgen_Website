@@ -11,7 +11,7 @@ export const MENU_DATA = {
     { title: "Accounting Advisory", href: "/services/accounting-advisory", description: "Financial precision and compliance." },
     { title: "Management Consulting", href: "/services/management-consulting", description: "Operational excellence and efficiency." },
     { title: "Supply Chain Consulting", href: "/services/supply-chain-consulting", description: "End-to-end logistics optimization." },
-    { title: "WMS", href: "/services/warehouse-management", description: "Intelligent warehouse management systems." },
+    { title: "WMS", href: "/services/prixgen-warehouse-management-solution", description: "Intelligent warehouse management systems." },
     { title: "Hiring Odoo Developers", href: "/services/hiring-odoo-developers", description: "Dedicated talent for Odoo ecosystems." },
   ],
   engineering_services: [
@@ -20,8 +20,8 @@ export const MENU_DATA = {
     { title: "Cloud Infrastructure", href: "/engineering-services/cloud-infrastructure", description: "High-availability industrial cloud." },
   ],
   solutions: [
-    { title: "Odoo", href: "/solutions/odoo-enterprise", description: "Gold Partner precision for scale." },
-    { title: "SAP", href: "/solutions/sap-ecosystems", description: "Intelligent core management." },
+    { title: "Odoo", href: "/solutions/odoo", description: "Gold Partner precision for scale." },
+    { title: "SAP", href: "/solutions/sap", description: "Intelligent core management." },
     { 
       title: "Microsoft Dynamics", 
       href: "/solutions/microsoft-dynamics",
@@ -48,7 +48,7 @@ export const MENU_DATA = {
     { title: "Chemicals", href: "/industries/chemicals", description: "Precision process and safety compliance." },
     { title: "PVC Manufacturing", href: "/industries/pvc-manufacturing", description: "Specialized ERP for PVC manufacturing." },
     { title: "Information Services", href: "/industries/information-services", description: "Digital infrastructure and enterprise software." },
-    { title: "Consumer Goods & Distribution", href: "/industries/fmcg-distribution", description: "High-velocity supply chain management." },
+    { title: "Consumer Goods & Distribution", href: "/industries/consumer-goods-distribution", description: "High-velocity supply chain management." },
     { title: "Dairy", href: "/industries/dairy", description: "Time-critical perishables logistics." },
     { title: "Electronics", href: "/industries/electronics", description: "High-precision engineering and assembly." },
   ],

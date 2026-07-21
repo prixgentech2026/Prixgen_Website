@@ -149,7 +149,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
       badge: "Odoo Gold Partner",
       text: "We don't just customize. We engineer high-performance Odoo Enterprise migrations.",
       cta: "Explore Odoo",
-      link: "/solutions/odoo-enterprise"
+      link: "/solutions/odoo"
     });
 
     // 2. Software Development
@@ -365,7 +365,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
                     </Button>
                   </Magnetic>
                   <Magnetic className="shrink-0">
-                    <Link href="/solutions/odoo-enterprise" className="group flex items-center gap-3 text-prixgen-blue font-bold text-lg max-w-[260px] leading-snug">
+                    <Link href="/solutions/odoo" className="group flex items-center gap-3 text-prixgen-blue font-bold text-lg max-w-[260px] leading-snug">
                       <span>{homeData.heroSecondaryCTA || "Explore Architecture"}</span>
                       <motion.span
                         className="shrink-0"
@@ -462,7 +462,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
                 { title: 'AI & ML Advisory', desc: 'Empowering enterprises with custom machine learning systems, predictive data analytics, and strategic roadmaps to capture high-value market opportunities.', link: '/services/ai-machine-learning', icon: 'Brain', img: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop', priority: true },
                 { title: 'Managed Cloud', desc: 'High-availability industrial cloud architectures featuring in-house hosting facilities, secure data replication, and 24/7 proactive monitoring.', link: '/engineering-services/cloud-infrastructure', icon: 'Cloud', img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop', priority: true },
                 { title: 'Transformation Strategy', desc: 'Re-engineering legacy workflows into digitally optimized and globally scaled operations designed to drive operational resilience.', link: '/services/business-transformation', icon: 'TrendingUp', img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop' },
-                { title: 'Warehouse', desc: 'Better Warehouse management can be yours. Reduce inventory and warehouse costs while improving customer service.', link: '/solutions/warehouse-management', icon: 'Box', img: '/images/warehouse.png' },
+                { title: 'Warehouse', desc: 'Better Warehouse management can be yours. Reduce inventory and warehouse costs while improving customer service.', link: '/services/prixgen-warehouse-management-solution', icon: 'Box', img: '/images/warehouse.png' },
                 { title: 'IIoT', desc: 'Manage Millions of IIOT Device Connections And Support Applications That Open New Revenues For Industries.', link: '/engineering-services/iiot-telemetry', icon: 'Cpu', img: '/images/iiot.png' },
                 { title: 'Hiring Odoo Developers', desc: 'Augment your development capacity with pre-vetted Odoo architects and dedicated engineering pods to scale your enterprise applications.', link: '/services/hiring-odoo-developers', icon: 'Users', img: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000&auto=format&fit=crop' },
                 { title: 'PVC Manufacturing', desc: 'Specialized enterprise architectures, recipe variance controls, and IoT weighbridge integrations engineered specifically for PVC operations.', link: '/industries/pvc-manufacturing', icon: 'Factory', img: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=1000&auto=format&fit=crop' }
@@ -573,8 +573,8 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
-                { title: 'Odoo Enterprise', desc: 'Engineering Odoo into a scalable enterprise engine for global workflows.', img: '/images/odoo.png', color: 'from-purple-500/10', link: '/solutions/odoo-enterprise' },
-                { title: 'SAP Business One', desc: 'Advanced ERP orchestration for high-growth industrial sectors.', img: '/images/sap.png', color: 'from-blue-600/10', link: '/solutions/sap-ecosystems' },
+                { title: 'Odoo Enterprise', desc: 'Engineering Odoo into a scalable enterprise engine for global workflows.', img: '/images/odoo.png', color: 'from-purple-500/10', link: '/solutions/odoo' },
+                { title: 'SAP Business One', desc: 'Advanced ERP orchestration for high-growth industrial sectors.', img: '/images/sap.png', color: 'from-blue-600/10', link: '/solutions/sap' },
                 { title: 'Microsoft Dynamics', desc: 'Intelligent cloud ERP solutions for unified business processes.', img: '/images/microsoft.png', color: 'from-blue-400/10', link: '/solutions/microsoft-dynamics' },
                 { title: 'Power BI Analytics', desc: 'Real-time industrial intelligence and predictive visualization.', img: '/images/powerbi.png', color: 'from-yellow-500/10', link: '/solutions/power-bi' },
                 { title: 'Enterprise AI & ML', desc: 'Empower operations with predictive analytics, generative AI, and intelligent automation.', img: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop', color: 'from-emerald-500/10', link: '/services/ai-machine-learning' },

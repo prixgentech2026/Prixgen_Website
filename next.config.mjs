@@ -32,6 +32,31 @@ const nextConfig = {
         destination: '/about-us',
         permanent: true,
       },
+      {
+        source: '/solutions/odoo-enterprise',
+        destination: '/solutions/odoo',
+        permanent: true,
+      },
+      {
+        source: '/solutions/sap-ecosystems',
+        destination: '/solutions/sap',
+        permanent: true,
+      },
+      {
+        source: '/services/warehouse-management',
+        destination: '/services/prixgen-warehouse-management-solution',
+        permanent: true,
+      },
+      {
+        source: '/solutions/warehouse-management',
+        destination: '/services/prixgen-warehouse-management-solution',
+        permanent: true,
+      },
+      {
+        source: '/industries/fmcg-distribution',
+        destination: '/industries/consumer-goods-distribution',
+        permanent: true,
+      },
       // --- New Redirects to fix Google Search errors ---
       {
         source: '/career',        // Fixing the old WordPress link

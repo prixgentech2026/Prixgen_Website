@@ -895,7 +895,7 @@ export const industriesData: any[] = [
     }
   },
   {
-    slug: "fmcg-distribution",
+    slug: "consumer-goods-distribution",
     title: "FMCG & Distribution",
     headline: "Velocity and Visibility in Consumer Goods.",
     featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1566633806327-68e152aaf26d?auto=format&fit=crop&q=80&w=1000", altText: "FMCG" },
@@ -1105,7 +1105,7 @@ export const industriesData: any[] = [
 
 export const solutionsData: any[] = [
   {
-    slug: "odoo-enterprise",
+    slug: "odoo",
     title: "Odoo Enterprise Integration",
     headline: "Odoo Architecture, Engineered for Scale.",
     featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000", altText: "Odoo ERP" },
@@ -1139,7 +1139,7 @@ export const solutionsData: any[] = [
     }
   },
   {
-    slug: "sap-ecosystems",
+    slug: "sap",
     title: "SAP Ecosystems",
     headline: "Unlocking the Full Value of SAP.",
     featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=1000", altText: "SAP Solutions" },
@@ -1325,7 +1325,7 @@ export const solutionsData: any[] = [
     }
   },
   {
-    slug: "warehouse-management",
+    slug: "prixgen-warehouse-management-solution",
     title: "Warehouse Management",
     headline: "Intelligent Inventory and Fulfillment Automation.",
     featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1000", altText: "Warehouse Management Systems" },
@@ -1566,7 +1566,7 @@ export const servicesData: any[] = [
     }
   },
   {
-    slug: "warehouse-management",
+    slug: "prixgen-warehouse-management-solution",
     title: "Warehouse Management Systems (WMS)",
     headline: "Intelligent Inventory and Fulfillment Automation.",
     featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1000", altText: "Warehouse Management Systems" },
@@ -1852,7 +1852,7 @@ export const servicesPageMockData: ServicesPageData = {
     { title: "Accounting Advisory", headline: "Financial precision and compliance.", slug: "accounting-advisory" },
     { title: "Management Consulting", headline: "Operational excellence and efficiency.", slug: "management-consulting" },
     { title: "Supply Chain Consulting", headline: "End-to-end logistics optimization.", slug: "supply-chain-consulting" },
-    { title: "WMS", headline: "Intelligent warehouse management systems.", slug: "warehouse-management" },
+    { title: "WMS", headline: "Intelligent warehouse management systems.", slug: "prixgen-warehouse-management-solution" },
     { title: "Hiring Odoo Developers", headline: "Dedicated talent for Odoo ecosystems.", slug: "hiring-odoo-developers" },
     { title: "IIoT & Telemetry", headline: "Real-time shop-floor intelligence.", slug: "iiot-telemetry" },
     { title: "Factory Automation", headline: "Robotics and automated control systems.", slug: "automation" },
@@ -1889,7 +1889,7 @@ export const industriesPageMockData: IndustriesPageData = {
     { title: "Retail", headline: "Omnichannel Commerce Architecture.", slug: "retail", image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1000" },
     { title: "Chemicals", headline: "Precision Batch Intelligence.", slug: "chemicals", image: "https://images.unsplash.com/photo-1532187875605-1ef6c237f146?auto=format&fit=crop&q=80&w=1000" },
     { title: "PVC Manufacturing", headline: "Intelligent PVC Operations & Logistics.", slug: "pvc-manufacturing", image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=1000" },
-    { title: "FMCG & Distribution", headline: "High-Velocity Distribution.", slug: "fmcg-distribution", image: "https://images.unsplash.com/photo-1566633806327-68e152aaf26d?auto=format&fit=crop&q=80&w=1000" },
+    { title: "FMCG & Distribution", headline: "High-Velocity Distribution.", slug: "consumer-goods-distribution", image: "https://images.unsplash.com/photo-1566633806327-68e152aaf26d?auto=format&fit=crop&q=80&w=1000" },
     { title: "Information Services", headline: "Digital Infrastructure & Data.", slug: "information-services", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000" },
     { title: "Dairy", headline: "Time-Critical Logistics.", slug: "dairy", image: "https://images.unsplash.com/photo-1550583760-d80392be8c42?auto=format&fit=crop&q=80&w=1000" },
     { title: "Electronics", headline: "High-Precision Engineering.", slug: "electronics", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1000" }
@@ -1948,8 +1948,8 @@ export const solutionsPageMockData: SolutionsPageData = {
     { title: "Scalable Growth", description: "Future-proof architecture that scales seamlessly with your business expansion.", icon: "TrendingUp" }
   ],
   coreSolutions: [
-    { title: "Odoo", headline: "Gold Partner precision for scale.", slug: "odoo-enterprise", externalImageUrl: "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?auto=format&fit=crop&q=80&w=1000" },
-    { title: "SAP", headline: "Intelligent core management.", slug: "sap-ecosystems", externalImageUrl: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1000" },
+    { title: "Odoo", headline: "Gold Partner precision for scale.", slug: "odoo", externalImageUrl: "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?auto=format&fit=crop&q=80&w=1000" },
+    { title: "SAP", headline: "Intelligent core management.", slug: "sap", externalImageUrl: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1000" },
     { title: "Microsoft Dynamics", headline: "Unified business applications.", slug: "microsoft-dynamics", externalImageUrl: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1000" },
     { title: "Power BI", headline: "Real-time industrial intelligence and predictive visualization.", slug: "power-bi", externalImageUrl: "https://images.unsplash.com/photo-1543286386-713bdd548da4?auto=format&fit=crop&q=80&w=1000" },
     { title: "Dynamics NAV", headline: "Modernize your legacy ERP with cloud-ready extensions.", slug: "dynamics-nav", externalImageUrl: "https://images.unsplash.com/photo-1580674285054-bed31e145f59?auto=format&fit=crop&q=80&w=1000" },
