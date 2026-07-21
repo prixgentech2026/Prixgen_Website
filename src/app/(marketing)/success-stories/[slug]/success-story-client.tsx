@@ -106,10 +106,10 @@ export default function SuccessStoryClient({ story, relatedStories = [] }: Succe
       <section className="relative py-12 md:py-20 overflow-hidden bg-white">
         <AmbientGlow />
         <div className="container mx-auto px-4 relative z-10 max-w-5xl">
-          <div className="space-y-6">
+          <div className="flex flex-col items-start gap-4">
             <Link 
               href="/success-stories" 
-              className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue hover:bg-prixgen-blue hover:text-white transition-all font-black text-[10px] uppercase tracking-widest group mb-4"
+              className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-prixgen-blue/5 border border-prixgen-blue/10 text-prixgen-blue hover:bg-prixgen-blue hover:text-white transition-all font-black text-[10px] uppercase tracking-widest group"
             >
               <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
               Back to Success Stories
