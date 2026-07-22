@@ -38,7 +38,7 @@ const PatronLogo = ({ patron }: { patron: { filename: string; name: string } }) 
   const [error, setError] = useState(false);
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: false }}
@@ -47,10 +47,10 @@ const PatronLogo = ({ patron }: { patron: { filename: string; name: string } }) 
     >
       <div className="w-44 h-16 mb-4 flex items-center justify-center relative bg-transparent transition-all duration-300">
         {!error ? (
-          <OptimizedImage 
+          <OptimizedImage
             fill
-            src={`/images/patron/${patron.filename}`} 
-            alt={patron.name} 
+            src={`/images/patron/${patron.filename}`}
+            alt={patron.name}
             className="object-contain"
             wrapperClassName="bg-transparent"
           />
@@ -274,16 +274,16 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
 
   return (
     <div className="bg-white">
-      <JsonLd 
-        type="Organization" 
-        data={{ 
-          name: "Prixgen Enterprise", 
+      <JsonLd
+        type="Organization"
+        data={{
+          name: "Prixgen Enterprise",
           url: "https://www.prixgen.com",
-          logo: "https://www.prixgen.com/images/Logo.png" 
-        }} 
+          logo: "https://www.prixgen.com/images/Logo.png"
+        }}
       />
-      <JsonLd 
-        type="FAQPage" 
+      <JsonLd
+        type="FAQPage"
         data={{
           mainEntity: FAQ_ITEMS.map((item) => ({
             "@type": "Question",
@@ -293,15 +293,15 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
               "text": item.answer
             }
           }))
-        }} 
+        }}
       />
-      
+
       <main>
         <section className="relative min-h-[70vh] flex items-center pt-24 pb-12 px-4 overflow-hidden bg-white">
           <Parallax offset={100} direction="down" className="absolute inset-0 z-0">
             <AmbientGlow />
           </Parallax>
-          
+
           {/* Animated Background Grid */}
           <Parallax offset={50} direction="up" className="absolute inset-0 z-0 opacity-[0.03]">
             <div className="w-full h-[150%] bg-[radial-gradient(#0066cc_1px,transparent_1px)] [background-size:40px_40px]" />
@@ -314,7 +314,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
               <FadeUp className="space-y-6 text-left relative z-20">
                 <div className="flex items-center gap-3 mb-8">
                   <div className="h-[2px] w-12 bg-prixgen-blue/10 relative overflow-hidden rounded-full">
-                    <motion.div 
+                    <motion.div
                       className="absolute inset-y-0 left-0 w-1/2 bg-prixgen-lightblue"
                       initial={{ x: "-100%" }}
                       animate={{ x: ["-100%", "200%"] }}
@@ -329,20 +329,20 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
                     Intelligent Architecture
                   </span>
                 </div>
-                
-                <StaggerText 
-                  text="Innovation" 
+
+                <StaggerText
+                  text="Innovation"
                   variant="gradient"
                   className="text-5xl md:text-6xl lg:text-7xl font-black leading-[0.9] mb-10 tracking-tighter"
                 />
-                
+
                 <div className="max-w-2xl space-y-8">
                   <RevealText delay={0.2}>
                     <h1 className="text-3xl md:text-4xl font-bold text-prixgen-blue tracking-tight leading-[1.1]">
                       {homeData.title || "Intelligent Operations. Unified Enterprise."}
                     </h1>
                   </RevealText>
-                  
+
                   {homeData.subheadline ? (
                     <RevealText delay={0.3}>
                       <div className="text-lg text-slate-500 font-medium leading-relaxed">
@@ -386,15 +386,15 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
                 </Floating>
                 <div className="relative aspect-[4/3] rounded-[3rem] overflow-hidden border border-slate-100 shadow-2xl group">
                   {homeData.heroImage ? (
-                    <motion.div 
+                    <motion.div
                       className="absolute inset-0 w-full h-full"
                       initial={{ scale: 1 }}
-                      animate={{ scale: [1, 1.05, 1] }} 
+                      animate={{ scale: [1, 1.05, 1] }}
                       transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                     >
                       <OptimizedImage
                         src={
-                          homeData.heroImage.url || 
+                          homeData.heroImage.url ||
                           homeData.heroImage.asset ||
                           "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2070"
                         }
@@ -420,7 +420,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
         {/* Animated Connector 1 */}
         <div className="relative w-full h-16 flex justify-center -mt-8 z-20">
           <div className="w-px h-full bg-gradient-to-b from-transparent via-prixgen-blue/30 to-transparent relative overflow-hidden">
-            <motion.div 
+            <motion.div
               className="absolute top-0 left-0 w-full h-1/3 bg-prixgen-lightblue shadow-[0_0_8px_#0ea5e9]"
               initial={{ y: "-100%" }}
               animate={{ y: ['-100%', '400%'] }}
@@ -435,22 +435,22 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
             <div className="mb-16 text-left">
               <FadeUp>
                 <div className="flex items-center gap-4 mb-4">
-                  <motion.div 
+                  <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: 48 }}
                     viewport={{ once: false }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="h-[1px] bg-prixgen-blue" 
+                    className="h-[1px] bg-prixgen-blue"
                   />
                   <span className="text-prixgen-blue font-bold tracking-[0.2em] uppercase text-[10px]">
                     Industrial Services
                   </span>
                 </div>
-                
+
                 <h2 className="text-4xl lg:text-5xl font-bold text-prixgen-blue mb-6 tracking-tighter">
                   Prixgen Services
                 </h2>
-                
+
                 <p className="text-lg text-slate-600 font-medium max-w-3xl leading-relaxed">
                   Prixgen’s voyage is unique. We traverse through a stringent yet customer-driven solution method, where success derives from constant research and architectural precision.
                 </p>
@@ -472,9 +472,9 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
                     <div className="flex flex-col h-full bg-gradient-to-br from-white to-slate-50/50 border border-slate-200/60 rounded-[2.5rem] shadow-sm transition-all duration-700 hover:-translate-y-3 hover:shadow-[0_30px_60px_-15px_rgba(0,102,204,0.15)] hover:border-prixgen-blue/20 relative overflow-hidden group">
                       {/* Image Container with Zoom */}
                       <div className="h-64 overflow-hidden relative bg-slate-100 flex-shrink-0">
-                        <OptimizedImage 
-                           fill
-                          src={service.img} 
+                        <OptimizedImage
+                          fill
+                          src={service.img}
                           alt={service.title}
                           priority={service.priority}
                           className="object-cover transition-transform duration-1000 group-hover:scale-110"
@@ -509,8 +509,8 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
                         <div className="pt-8">
                           <Magnetic>
                             <div className="flex items-center text-prixgen-lightblue font-bold text-sm uppercase tracking-widest group-hover:gap-3 transition-all duration-300">
-                              Architecture Details 
-                              <motion.span 
+                              Architecture Details
+                              <motion.span
                                 className="ml-2"
                                 initial={{ x: 0 }}
                                 animate={{ x: [0, 5, 0] }}
@@ -533,7 +533,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
         {/* Animated Connector 2 */}
         <div className="relative w-full h-20 flex justify-center -mt-10 z-20">
           <div className="w-px h-full bg-gradient-to-b from-transparent via-prixgen-blue/30 to-transparent relative overflow-hidden">
-            <motion.div 
+            <motion.div
               className="absolute top-0 left-0 w-full h-1/3 bg-prixgen-lightblue shadow-[0_0_8px_#0ea5e9]"
               initial={{ y: "-100%" }}
               animate={{ y: ['-100%', '400%'] }}
@@ -548,12 +548,12 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
             <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-20 gap-8">
               <FadeUp className="max-w-2xl">
                 <div className="flex items-center gap-4 mb-4">
-                  <motion.div 
+                  <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: 48 }}
                     viewport={{ once: false }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="h-[1px] bg-prixgen-blue" 
+                    className="h-[1px] bg-prixgen-blue"
                   />
                   <span className="text-prixgen-blue font-bold tracking-[0.2em] uppercase text-[10px]">Architecture Suite</span>
                 </div>
@@ -570,7 +570,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
                 </Magnetic>
               </FadeUp>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 { title: 'Odoo Enterprise', desc: 'Engineering Odoo into a scalable enterprise engine for global workflows.', img: '/images/odoo.png', color: 'from-purple-500/10', link: '/solutions/odoo' },
@@ -585,7 +585,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
                     <div className={`h-full p-8 bg-prixgen-blue rounded-[2.5rem] text-white relative overflow-hidden transition-all duration-500 hover:scale-[1.05] hover:shadow-[0_40px_80px_-20px_rgba(0,102,204,0.4)] flex flex-col`}>
                       {/* Radial Glow Overlay */}
                       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,rgba(255,255,255,0.15),transparent)] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                      
+
                       <div className="relative z-10 flex-1">
                         <Floating delay={i * 0.2}>
                           <div className="aspect-square w-24 mb-6 rounded-2xl bg-white/10 p-4 flex items-center justify-center overflow-hidden">
@@ -595,7 +595,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
                         <h3 className="text-xl font-bold mb-4">{sol.title}</h3>
                         <p className="text-white/60 text-sm leading-relaxed">{sol.desc}</p>
                       </div>
-                      
+
                       <div className="relative z-10 mt-8">
                         <Magnetic>
                           <div className="inline-flex items-center text-xs font-bold uppercase tracking-widest opacity-40 group-hover:opacity-100 transition-opacity">
@@ -618,7 +618,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
         {/* Animated Connector 3 */}
         <div className="relative w-full h-16 flex justify-center -mt-8 z-20">
           <div className="w-px h-full bg-gradient-to-b from-transparent via-prixgen-blue/30 to-transparent relative overflow-hidden">
-            <motion.div 
+            <motion.div
               className="absolute top-0 left-0 w-full h-1/3 bg-prixgen-lightblue shadow-[0_0_8px_#0ea5e9]"
               initial={{ y: "-100%" }}
               animate={{ y: ['-100%', '400%'] }}
@@ -632,26 +632,26 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
           <div className="container mx-auto px-4 relative z-10 pt-4">
             <FadeUp className="text-center mb-16">
               <h2 className="text-4xl font-bold text-prixgen-blue mb-4">Our Patronage</h2>
-              <motion.div 
+              <motion.div
                 initial={{ width: 0 }}
                 whileInView={{ width: 80 }}
                 viewport={{ once: false }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="h-1 bg-prixgen-lightblue mx-auto rounded-full" 
+                className="h-1 bg-prixgen-lightblue mx-auto rounded-full"
               />
             </FadeUp>
           </div>
-          
+
           <div className="relative flex overflow-x-hidden group">
             {/* Left and Right Gradients to hide edges */}
             <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-prixgen-gray/20 to-transparent z-20" />
             <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-prixgen-gray/20 to-transparent z-20" />
 
-            <motion.div 
+            <motion.div
               className="flex whitespace-nowrap gap-0 py-4"
               style={{ willChange: 'transform' }}
               animate={{ x: ["0%", "-50%"] }}
-              transition={{ 
+              transition={{
                 x: {
                   repeat: Infinity,
                   repeatType: "loop",
@@ -678,23 +678,23 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
-                { 
-                  name: "Karan Shetty", 
-                  company: "Murudeshwar Ceramics Limited", 
+                {
+                  name: "Karan Shetty",
+                  company: "Murudeshwar Ceramics Limited",
                   role: "Executive Director",
                   text: "We replace all legacy SAP, Tally, and Daily Tracker applications with Odoo Enterprise Edition. Now, we are working from home due to COVID-19 situation; all our teams are interconnected, and everything is happening paperless. Thanks to Prixgen's professional efforts and expert knowledge.",
                   id: "karan"
                 },
-                { 
-                  name: "Mr. Hemraj Sencha", 
-                  company: "Vahini Irrigations Private Limited", 
+                {
+                  name: "Mr. Hemraj Sencha",
+                  company: "Vahini Irrigations Private Limited",
                   role: "Managing Director",
                   text: "Our experience with Prixgen has been exceptional. The breadth and depth of the offering has met all our requirements, and the team has been incredibly responsive to all our needs.",
                   id: "hemraj"
                 },
-                { 
-                  name: "Kshiraj Prakash", 
-                  company: "BI Worldwide", 
+                {
+                  name: "Kshiraj Prakash",
+                  company: "BI Worldwide",
                   role: "Finance Controller",
                   text: "The COVID-19 forced us to start using Odoo. I must say Odoo ERP reduced a lot of reporting & reconsiliation time of my team. Prixgen team configured an accounting platform without disrupting current practices. We got a strong implementation partner with exceptional product knowledge.",
                   id: "kshiraj"
@@ -769,7 +769,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
         <section className="py-16 lg:py-24 bg-slate-50 relative overflow-hidden border-t border-slate-100">
           <div className="container mx-auto px-4 relative z-10">
             <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
-              
+
               {/* Left Column: Heading and Context */}
               <FadeUp className="lg:w-1/3 space-y-4">
                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-prixgen-blue/5 rounded-full text-prixgen-blue font-bold text-[10px] uppercase tracking-widest">
@@ -783,8 +783,8 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
                   Have questions about custom ERP systems, AI integrations, or support contracts? Explore our answers or get in touch.
                 </p>
                 <div className="pt-4">
-                  <Link 
-                    href="/contact" 
+                  <Link
+                    href="/contact"
                     className="inline-flex items-center gap-2 text-prixgen-blue hover:text-prixgen-lightblue font-black text-xs uppercase tracking-widest transition-colors group"
                   >
                     Ask a Custom Question
@@ -798,8 +798,8 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
                 {FAQ_ITEMS.map((item, index) => {
                   const isOpen = openFaqIndex === index;
                   return (
-                    <FadeUp 
-                      key={index} 
+                    <FadeUp
+                      key={index}
                       delay={index * 0.05}
                       className="border border-slate-200/60 rounded-2xl bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow"
                     >
@@ -831,7 +831,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
                               <p>{item.answer}</p>
                               {item.link && (
                                 <div className="pt-2">
-                                  <Link 
+                                  <Link
                                     href={item.link.href}
                                     className="inline-flex items-center gap-1.5 text-prixgen-blue hover:text-prixgen-lightblue font-black text-xs uppercase tracking-widest transition-colors group/faq-link"
                                   >
@@ -868,11 +868,11 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
                       Prixgen Tech Solutions Pvt. Ltd.
                     </p>
                     <p className="text-base text-prixgen-dark/70 leading-relaxed font-medium">
-                      No 2622, Krishna Kaveri Complex, Panchayat, opposite to Bogadi, Mysuru, Karnataka 570026
+                      No 2622, Krishna Kaveri Complex, Opposite to Panchayat Office, Bhogadi, Mysuru, Karnataka 570026
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="space-y-6">
                   <p className="text-prixgen-lightblue font-bold tracking-widest uppercase text-xs">Global Presence</p>
                   <div className="grid grid-cols-2 gap-4">
@@ -893,13 +893,13 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
                   </Magnetic>
                 </div>
               </FadeUp>
-              
+
               {/* Center Column: Map with enhanced scale and blending */}
               <div className="relative flex justify-center items-center py-12 lg:py-0">
                 <div className="relative w-full max-w-[800px] aspect-square lg:scale-125">
-                   {/* Blending Mask for the map container */}
-                   <div className="absolute inset-0 z-10 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_40%,white_100%)]" />
-                   <InteractiveGlobe />
+                  {/* Blending Mask for the map container */}
+                  <div className="absolute inset-0 z-10 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_40%,white_100%)]" />
+                  <InteractiveGlobe />
                 </div>
               </div>
 
@@ -931,9 +931,9 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
               className="fixed bottom-6 right-6 z-50 w-12 h-12 bg-transparent border-none flex items-center justify-center cursor-pointer overflow-visible p-0 group"
               style={{ willChange: 'transform, opacity' }}
             >
-              <img 
-                src="/images/icon.png" 
-                alt="Prixgen Updates" 
+              <img
+                src="/images/icon.png"
+                alt="Prixgen Updates"
                 className="w-full h-full object-contain rounded-full shadow-[0_10px_25px_-5px_rgba(0,102,204,0.35)] bg-transparent"
               />
             </motion.button>
@@ -956,7 +956,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
                   </span>
                   {toastNotifications[toastIndex]?.badge}
                 </span>
-                <button 
+                <button
                   onClick={handleMinimize}
                   className="w-6 h-6 rounded-full flex items-center justify-center text-slate-400 hover:text-prixgen-blue hover:bg-slate-100 transition-all cursor-pointer"
                   aria-label="Minimize notification"
@@ -979,9 +979,9 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
                     <p className="text-sm font-bold text-prixgen-blue leading-snug tracking-tight">
                       {toastNotifications[toastIndex]?.text}
                     </p>
-                    
+
                     {toastNotifications[toastIndex]?.link && (
-                      <Link 
+                      <Link
                         href={toastNotifications[toastIndex].link}
                         className="inline-flex items-center gap-1.5 text-prixgen-lightblue hover:text-prixgen-blue text-xs font-black uppercase tracking-widest transition-colors group/link"
                       >
