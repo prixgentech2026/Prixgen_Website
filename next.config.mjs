@@ -57,6 +57,11 @@ const nextConfig = {
         destination: '/industries/consumer-goods-distribution',
         permanent: true,
       },
+      {
+        source: '/hiring-odoo-developers',
+        destination: '/services/hiring-odoo-developers',
+        permanent: true,
+      },
       // --- New Redirects to fix Google Search errors ---
       {
         source: '/career',        // Fixing the old WordPress link
@@ -75,7 +80,62 @@ const nextConfig = {
       },
       {
         source: '/consulting',     // Fixing the plural/singular mismatches
-        destination: '/services',  // Or your specific service page
+        destination: '/services/it-consulting',
+        permanent: true,
+      },
+      {
+        source: '/services/consulting',
+        destination: '/services/it-consulting',
+        permanent: true,
+      },
+      {
+        source: '/solutions/ai-ml',
+        destination: '/services/ai-machine-learning',
+        permanent: true,
+      },
+      {
+        source: '/privacy-policy',
+        destination: '/privacy',
+        permanent: true,
+      },
+      {
+        source: '/industries/warehouse-industry',
+        destination: '/services/prixgen-warehouse-management-solution',
+        permanent: true,
+      },
+      {
+        source: '/career/hiring-functional-consultants',
+        destination: '/careers',
+        permanent: true,
+      },
+      {
+        source: '/career/we-are-hiring-web-developers',
+        destination: '/careers',
+        permanent: true,
+      },
+      {
+        source: '/solutions/industrial-internet-of-things',
+        destination: '/engineering-services/iiot-telemetry',
+        permanent: true,
+      },
+      {
+        source: '/industries/consumer-goods-distribution/agile-manufacturing',
+        destination: '/industries/consumer-goods-distribution',
+        permanent: true,
+      },
+      {
+        source: '/industries/fmcg-distribution/agile-manufacturing',
+        destination: '/industries/consumer-goods-distribution',
+        permanent: true,
+      },
+      {
+        source: '/solutions/sap/sap-s-4-hana',
+        destination: '/solutions/sap',
+        permanent: true,
+      },
+      {
+        source: '/solutions/sap-ecosystems/sap-s-4-hana',
+        destination: '/solutions/sap',
         permanent: true,
       }
     ];
