@@ -64,6 +64,9 @@ export const metadata: Metadata = {
     shortcut: '/images/icon.png',
     apple: '/images/icon.png',
   },
+  verification: {
+    google: 'h1i3ADOSlBxDHfbv-6vQy68uPn9k8ZT1RGeRF4XkSc4',
+  },
 };
 
 /**
@@ -78,6 +81,19 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
       <body className="overflow-x-hidden" suppressHydrationWarning>
+        {/* Google Analytics - Placed globally, immediately after the head element */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-JP6M0LYK27"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-JP6M0LYK27');
+          `}
+        </Script>
         {children}
 
         <Script id="apollo-visitor-tracking" strategy="afterInteractive">

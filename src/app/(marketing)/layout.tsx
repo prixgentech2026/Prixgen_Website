@@ -17,19 +17,7 @@ export default function MarketingLayout({
       {/* <PageLoader /> */}
       <SmoothScroll>
         <Header />
-        {/* Google Analytics Tag - Placed after header element */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-JP6M0LYK27"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-JP6M0LYK27');
-          `}
-        </Script>
+
         <PageTransition>
           <main className="flex-1">{children}</main>
         </PageTransition>
