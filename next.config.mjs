@@ -137,6 +137,11 @@ const nextConfig = {
         source: '/solutions/sap-ecosystems/sap-s-4-hana',
         destination: '/solutions/sap',
         permanent: true,
+      },
+      {
+        source: '/pipe-counting',
+        destination: '/solutions/image-processing',
+        permanent: true,
       }
     ];
   },
