@@ -10,10 +10,9 @@ const indiaGeoUrl = "/india-osm.geojson";
 
 const locations = [
   { name: "India (HQ)", coordinates: [76.6394, 12.2958], offset: -15 }, // [longitude, latitude]
-  { name: "Dubai", coordinates: [55.2708, 25.2048], offset: -15 },
+  { name: "UAE", coordinates: [55.2708, 25.2048], offset: -15 },
   { name: "Hong Kong", coordinates: [114.1694, 22.3193], offset: 15 },
-  { name: "Philippines", coordinates: [120.9842, 14.5995], offset: 15 },
-  { name: "Australia", coordinates: [151.2093, -33.8688], offset: 15 }
+  { name: "Philippines", coordinates: [120.9842, 14.5995], offset: 15 }
 ];
 
 // Memoized Map Background to prevent re-renders on scroll/parent updates

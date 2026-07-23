@@ -876,7 +876,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
                 <div className="space-y-6">
                   <p className="text-prixgen-lightblue font-bold tracking-widest uppercase text-xs">Global Presence</p>
                   <div className="grid grid-cols-2 gap-4">
-                    {['Australia', 'Dubai', 'Hong Kong', 'Philippines'].map((loc) => (
+                    {['UAE', 'Hong Kong', 'Philippines'].map((loc) => (
                       <div key={loc} className="flex items-center gap-2 text-prixgen-blue font-bold">
                         <div className="w-2 h-2 bg-prixgen-lightblue rounded-full animate-pulse" />
                         {loc}
