@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
 import { 
   Calendar, ArrowLeft, Clock, 
-  Twitter, Linkedin, 
+  Linkedin, Facebook, Instagram, Youtube, 
   Copy, CheckCircle2, Bookmark
 } from 'lucide-react';
 import { BlogPost } from '@/lib/data';
@@ -23,6 +23,11 @@ import { AnimatedConnector } from '@/components/shared/animated-connector';
 import { HeroBadge } from '@/components/shared/hero-badge';
 import { HeroBackground } from '@/components/shared/hero-background';
 import { urlFor } from '@/sanity/lib/image';
+const XIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" {...props}>
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
 
 interface PostClientProps {
   post: BlogPost;
@@ -126,6 +131,13 @@ export default function PostClient({ post, relatedPosts = [] }: PostClientProps)
   const authorY = useTransform(scrollYProgress, [0.6, 1], [20, -20]);
   
   const [copied, setCopied] = useState(false);
+  const [shareUrl, setShareUrl] = useState('');
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setShareUrl(window.location.href);
+    }
+  }, []);
 
   const handleCopy = async () => {
     try {
@@ -204,29 +216,15 @@ export default function PostClient({ post, relatedPosts = [] }: PostClientProps)
               className="text-2xl md:text-3xl lg:text-4xl font-black leading-[1.1] tracking-tighter"
             />
 
-            <div className="flex items-center justify-center gap-4 pt-2">
-                <div className="flex items-center gap-3">
-                   {post.author?.image && (
-                      <div className="relative w-10 h-10 rounded-xl overflow-hidden border border-slate-100 shadow-md bg-white p-0.5">
-                        <OptimizedImage src={post.author.image} alt={post.author.name} fill className="object-contain" />
-                      </div>
-                   )}
-                   <div className="text-left">
-                     <div className="text-base font-black text-prixgen-blue tracking-tight leading-none mb-1">{post.author?.name}</div>
-                     <div className="text-prixgen-lightblue text-[9px] font-black uppercase tracking-widest">{post.author?.position || 'Principal Architect'}</div>
-                   </div>
-                </div>
-                <div className="h-6 w-px bg-slate-100" />
-                <div className="flex items-center gap-2">
-                  <motion.button 
-                    onClick={handleCopy}
-                    whileHover={{ scale: 1.05 }}
-                    className="w-8 h-8 bg-slate-50 rounded-lg flex items-center justify-center text-slate-400 hover:text-prixgen-blue hover:bg-white hover:shadow-md transition-all"
-                    title="Copy link"
-                  >
-                    {copied ? <CheckCircle2 size={12} /> : <Copy size={12} />}
-                  </motion.button>
-                </div>
+             <div className="flex items-center justify-center gap-2 pt-2">
+               <motion.button 
+                 onClick={handleCopy}
+                 whileHover={{ scale: 1.05 }}
+                 className="w-8 h-8 bg-slate-50 rounded-lg flex items-center justify-center text-slate-400 hover:text-prixgen-blue hover:bg-white hover:shadow-md transition-all"
+                 title="Copy link"
+               >
+                 {copied ? <CheckCircle2 size={12} /> : <Copy size={12} />}
+               </motion.button>
              </div>
           </motion.div>
         </div>
@@ -251,31 +249,60 @@ export default function PostClient({ post, relatedPosts = [] }: PostClientProps)
       {/* Content Section */}
       <div className="container mx-auto px-6 pt-4 pb-4 lg:pt-6 lg:pb-6 relative">
         <div className="flex flex-col lg:flex-row gap-6">
-           {/* Sidebar - Left (Desktop Only) */}
-           <aside className="hidden lg:block w-16 shrink-0">
-              <motion.div 
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                className="sticky top-40 space-y-6 flex flex-col items-center"
-              >
-                 <span className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-300 vertical-text rotate-180 mb-4 whitespace-nowrap">Share Intelligence</span>
-                 <div className="w-px h-10 bg-slate-100" />
-                 <Magnetic>
-                    <a href="https://www.linkedin.com/company/prixgen-tech-solutions-pvt-ltd/" target="_blank" rel="noopener noreferrer">
-                      <motion.button whileHover={{ scale: 1.1, color: '#0066cc' }} className="text-slate-300 transition-colors p-2">
-                         <Linkedin size={20} />
-                      </motion.button>
-                    </a>
-                 </Magnetic>
-                 <Magnetic>
-                    <a href="https://twitter.com/prixgen" target="_blank" rel="noopener noreferrer">
-                      <motion.button whileHover={{ scale: 1.1, color: '#1da1f2' }} className="text-slate-300 transition-colors p-2">
-                         <Twitter size={20} />
-                      </motion.button>
-                    </a>
-                 </Magnetic>
-              </motion.div>
-           </aside>
+            {/* Sidebar - Left (Desktop Only) */}
+            <aside className="hidden lg:block w-16 shrink-0">
+               <motion.div 
+                 initial={{ opacity: 0 }}
+                 whileInView={{ opacity: 1 }}
+                 className="sticky top-40 space-y-4 flex flex-col items-center"
+               >
+                  <span className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-300 vertical-text rotate-180 mb-4 whitespace-nowrap">Share Intelligence</span>
+                  <div className="w-px h-8 bg-slate-100 mb-2" />
+                  {[
+                    { 
+                      icon: Linkedin, 
+                      href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`, 
+                      color: '#0066cc', 
+                      name: "LinkedIn" 
+                    },
+                    { 
+                      isX: true, 
+                      href: `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(post.title)}`, 
+                      color: '#000000', 
+                      name: "X" 
+                    },
+                    { 
+                      icon: Facebook, 
+                      href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`, 
+                      color: '#1877f2', 
+                      name: "Facebook" 
+                    },
+                    { 
+                      icon: Instagram, 
+                      href: "https://www.instagram.com/prixgentechno/", 
+                      color: '#e1306c', 
+                      name: "Instagram" 
+                    },
+                    { 
+                      icon: Youtube, 
+                      href: "https://www.youtube.com/channel/UCdnOG_2Ar83HMPf3PpjDLZQ", 
+                      color: '#ff0000', 
+                      name: "YouTube" 
+                    }
+                  ].map((social) => (
+                    <Magnetic key={social.name}>
+                       <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.name}>
+                         <motion.button 
+                           whileHover={{ scale: 1.15, color: social.color }} 
+                           className="text-slate-300 hover:text-prixgen-blue transition-colors p-1.5 flex items-center justify-center"
+                         >
+                            {social.isX ? <XIcon className="w-5 h-5" /> : social.icon && <social.icon size={20} />}
+                         </motion.button>
+                       </a>
+                    </Magnetic>
+                  ))}
+               </motion.div>
+            </aside>
 
            <div className="flex-1 max-w-4xl">
               <FadeUp>

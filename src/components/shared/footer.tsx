@@ -1,7 +1,13 @@
 import Link from 'next/link';
 import { FOOTER_DATA, MENU_DATA } from '@/lib/constants';
 import Image from 'next/image';
-import { Linkedin, Facebook, Twitter, Instagram, Youtube } from "lucide-react";
+import { Linkedin, Facebook, Instagram, Youtube } from "lucide-react";
+
+const XIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" {...props}>
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
 
 /**
  * Global Footer component.
@@ -39,7 +45,7 @@ export function Footer() {
           <div className="mt-8 pt-8 border-t border-white/5 flex gap-4">
             {[
               { icon: Linkedin, href: "https://www.linkedin.com/company/prixgen-tech-solutions-private-limited/", name: "LinkedIn" },
-              { icon: Twitter, href: "https://twitter.com/prixgentech", name: "Twitter" },
+              { isX: true, href: "https://twitter.com/prixgentech", name: "X" },
               { icon: Facebook, href: "https://www.facebook.com/PrixgentechSolutions/", name: "Facebook" },
               { icon: Instagram, href: "https://www.instagram.com/prixgentechno/", name: "Instagram" },
               { icon: Youtube, href: "https://www.youtube.com/channel/UCdnOG_2Ar83HMPf3PpjDLZQ", name: "YouTube" }
@@ -52,7 +58,11 @@ export function Footer() {
                 className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-prixgen-blue hover:text-white hover:border-prixgen-blue transition-all duration-300 group"
                 aria-label={social.name}
               >
-                <social.icon size={18} strokeWidth={1.5} className="group-hover:scale-110 transition-transform" />
+                {social.isX ? (
+                  <XIcon className="group-hover:scale-110 transition-transform" />
+                ) : social.icon && (
+                  <social.icon size={18} strokeWidth={1.5} className="group-hover:scale-110 transition-transform" />
+                )}
               </a>
             ))}
           </div>
