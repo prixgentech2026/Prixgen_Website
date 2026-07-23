@@ -2190,5 +2190,109 @@ export const mockSuccessStories: SuccessStory[] = [
       metaDesc: "Read how Prixgen engineered Odoo to integrate POS, Kitchen, and Accounts for major restaurant operators, cutting month-end close to 2 hours.",
       keywords: ["Restaurant ERP", "Odoo Restaurant POS", "Kitchen Display System", "Food & Beverage ERP", "Odoo Integration"]
     }
+  },
+  {
+    title: "More Than Implementation: Prixgen's Consulting Expertise Across Every Department at Aaum Paper Products",
+    slug: "aaum-paper-products-consulting-engagement",
+    subtitle: "Odoo is the platform underneath; the value Prixgen brings sits in the consulting layer above it.",
+    clientName: "Aaum Paper Products",
+    industry: "Paper Manufacturing",
+    mainImage: "/images/aaum-team.jpg",
+    publishedAt: new Date('2026-07-23').toISOString(),
+    metrics: [],
+    challenge: [],
+    features: [],
+    body: [
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Most Odoo partners are hired to configure a module and move on. Prixgen's recent engagement with Aaum Paper Products shows a different model – one where Prixgen operates as a consulting partner first, working across Sales, Production, Purchasing, Reporting, IoT, and AI as connected parts of a single business, not a list of separate tickets. Odoo is the platform underneath; the value Prixgen brings sits in the consulting layer above it – the process diagnosis, the governance redesign, and the change recommendations that make the platform actually work the way the business needs it to." }]
+      },
+      {
+        _type: 'block',
+        style: 'h3',
+        children: [{ _type: 'span', text: "Sales & Customer Experience Consulting" }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Prixgen's review of Aaum's sales-to-production handoff identified where orders were moving forward without the right checkpoints in place. The consulting recommendation: a formal approval gate before production begins, automated customer notifications at key order milestones, and a structured feedback and survey mechanism after every completed order – turning customer experience from an assumption into something the business can actually measure." }]
+      },
+      {
+        _type: 'block',
+        style: 'h3',
+        children: [{ _type: 'span', text: "Production & Process Governance Consulting" }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "On the shop floor, Prixgen's process consulting focused on where production planning and control was breaking down in practice, not just in theory. The result is a redesigned, approval-gated production workflow – the kind of process governance work that sits closer to business process re-engineering than software configuration." }]
+      },
+      {
+        _type: 'block',
+        style: 'h3',
+        children: [{ _type: 'span', text: "Management Consulting for Reporting & MIS" }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Every department eventually asks the same question: where's the number? Prixgen's management consulting work standardized how and when MIS reaches decision-makers, and defined a suite of purpose-built dashboards – spanning management oversight, accounts, inventory turnaround, and production planning – so the business runs on live visibility instead of after-the-fact reporting." }]
+      },
+      {
+        _type: 'block',
+        style: 'h3',
+        children: [{ _type: 'span', text: "Purchase, Inventory & Manufacturing Consulting" }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "On the operations side, Prixgen's consulting extended into purchasing and manufacturing planning – recommending tighter integration between purchasing and fleet/transport operations, and rebuilding how BOM calculations and product costing are done, so cost accuracy holds up from the planning stage through shop-floor execution." }]
+      },
+      {
+        _type: 'block',
+        style: 'h3',
+        children: [{ _type: 'span', text: "IoT Consulting & Adoption" }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "IoT is only as valuable as the workflows built around it. Alongside implementation, Prixgen's consulting team is building structured training so new machine-level capability is actually adopted on the floor – the adoption and change-management work that determines whether an IoT investment pays off or sits unused." }]
+      },
+      {
+        _type: 'block',
+        style: 'h3',
+        children: [{ _type: 'span', text: "Enterprise AI Consulting" }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Rather than treating AI as one feature, Prixgen's consulting approach applies it department by department – travel and calendar assistance, voice command functionality, AI-assisted planning and scheduling, sharper product costing, and AI that reads and responds to customer emails. Each is scoped as a specific business outcome for a specific department, the same consulting discipline Prixgen applies to every module it touches." }]
+      },
+      {
+        _type: 'block',
+        style: 'h3',
+        children: [{ _type: 'span', text: "One Partner, Every Department" }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "This is the model Prixgen brings to every engagement: consulting across Sales, Production, Purchasing, MIS, IoT, and AI as one connected transformation – backed by the same expertise Prixgen applies in Internal Auditing, Management Consulting, Financial Auditing, and Business Process Re-engineering. Odoo implementation is where the work lands; the consulting is what makes it worth landing." }]
+      },
+      {
+        _type: 'block',
+        style: 'h3',
+        children: [{ _type: 'span', text: "About Prixgen" }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Prixgen Tech Solutions Pvt. Ltd. is an Odoo Gold Partner delivering end-to-end ERP, consulting, and digital transformation across India, the Middle East, and Southeast Asia." }]
+      }
+    ],
+    seo: {
+      title: "Aaum Paper Products Process Consulting Case Study | Prixgen",
+      metaDesc: "Discover how Prixgen acted as a process and management consultant at Aaum Paper Products, optimizing Sales, Production, MIS, IoT, and AI operations.",
+      keywords: ["ERP Consulting", "Process Governance", "Management Consulting", "Aaum Paper Products", "Odoo Gold Partner"]
+    }
   }
 ];

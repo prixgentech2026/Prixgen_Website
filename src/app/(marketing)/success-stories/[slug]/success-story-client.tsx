@@ -181,32 +181,34 @@ export default function SuccessStoryClient({ story, relatedStories = [] }: Succe
       )}
 
       {/* Narrative Split: Challenge vs. Approach */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <div className="grid md:grid-cols-12 gap-12 items-start">
-            {/* Left: Challenge Badge */}
-            <div className="md:col-span-4 space-y-4 md:sticky md:top-36">
-              <div className="flex items-center gap-3">
-                <span className="h-2 w-2 rounded-full bg-red-500 animate-pulse" />
-                <span className="text-xs font-black uppercase tracking-widest text-slate-400">The Problem Space</span>
+      {story.challenge && story.challenge.length > 0 && (
+        <section className="py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <div className="grid md:grid-cols-12 gap-12 items-start">
+              {/* Left: Challenge Badge */}
+              <div className="md:col-span-4 space-y-4 md:sticky md:top-36">
+                <div className="flex items-center gap-3">
+                  <span className="h-2 w-2 rounded-full bg-red-500 animate-pulse" />
+                  <span className="text-xs font-black uppercase tracking-widest text-slate-400">The Problem Space</span>
+                </div>
+                <h2 className="text-2xl font-black text-prixgen-dark tracking-tight leading-tight">
+                  What Was Holding the Business Back?
+                </h2>
               </div>
-              <h2 className="text-2xl font-black text-prixgen-dark tracking-tight leading-tight">
-                What Was Holding the Business Back?
-              </h2>
-            </div>
 
-            {/* Right: Challenge Copy */}
-            <div className="md:col-span-8 bg-slate-50 border border-slate-100 rounded-3xl p-8 shadow-sm">
-              <div className="prose max-w-none text-slate-600">
-                <PortableText 
-                  value={story.challenge || []} 
-                  components={customPortableTextComponents} 
-                />
+              {/* Right: Challenge Copy */}
+              <div className="md:col-span-8 bg-slate-50 border border-slate-100 rounded-3xl p-8 shadow-sm">
+                <div className="prose max-w-none text-slate-600">
+                  <PortableText 
+                    value={story.challenge} 
+                    components={customPortableTextComponents} 
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Engineered Features Section */}
       {story.features && story.features.length > 0 && (
