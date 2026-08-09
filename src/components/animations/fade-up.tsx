@@ -8,6 +8,7 @@ interface FadeUpProps {
   delay?: number;
   duration?: number;
   y?: number;
+  once?: boolean;
 }
 
 /**
@@ -19,13 +20,14 @@ export function FadeUp({
   className, 
   delay = 0,
   duration = 0.8,
-  y = 30
+  y = 30,
+  once = true
 }: FadeUpProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={{ once, margin: "-50px" }}
       transition={{ 
         duration, 
         delay, 

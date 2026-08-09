@@ -134,6 +134,7 @@ export const solutionsQuery = groq`*[_type == "solution"]{
 export const solutionBySlugQuery = groq`*[_type == "solution" && slug.current == $slug][0]{
   title,
   headline,
+  eyebrow,
   content,
   "features": features[]{
     _key,

@@ -79,6 +79,12 @@ export default function SolutionClientPage({ solution }: { solution: any }) {
               Back to Solutions
             </Link>
             
+            {solution.eyebrow && (
+              <span className="text-[11px] font-black uppercase tracking-[0.2em] text-prixgen-blue/60 mb-1 mt-3 block">
+                {solution.eyebrow}
+              </span>
+            )}
+
             <StaggerText 
               text={solution.title} 
               variant="gradient"

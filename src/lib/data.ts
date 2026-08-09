@@ -1208,36 +1208,163 @@ export const solutionsData: any[] = [
   },
   {
     slug: "lecca-ai",
-    title: "Lecca: Computer Vision & AI",
-    headline: "AI-Powered Industrial Image Processing.",
-    featuredImage: { sourceUrl: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=1000", altText: "Lecca AI" },
+    title: "Lecca — AI-Powered Pipe & Pipe-in-Pipe Counting",
+    eyebrow: "A PRIXGEN TECH SOLUTIONS PRODUCT",
+    headline: "Lecca uses computer vision to count pipe stacks from a single photo — including pipes nested inside larger ones. Built by Prixgen Tech Solutions for manufacturers, traders, ports, and oilfield yards.",
+    featuredImage: { sourceUrl: "/images/lecca/image_1.png", altText: "Lecca AI pipe counting dashboard showing 2,842 pipes detected in a warehouse, with pipe-in-pipe and diameter breakdown." },
+    summaryImage: { sourceUrl: "/images/lecca/image_3.png", altText: "Diagram showing Lecca's process flow: Camera to Lecca AI to Pipe Count to Physical Stock to ERP Inventory, alongside a worker using a tablet to scan a pipe stack." },
     content: [
       {
         _type: 'block',
-        style: 'normal',
-        children: [{ _type: 'span', text: "Lecca is our proprietary AI platform designed specifically for industrial environments. We use advanced computer vision to automate quality control, safety monitoring, and asset tracking. By processing visual data at the edge, Lecca provides real-time alerts that prevent accidents and ensure that every product leaving your facility meets the highest standards." }]
+        style: 'h2',
+        children: [{ _type: 'span', text: "The Problem We Solve" }]
       },
       {
         _type: 'block',
         style: 'normal',
-        children: [{ _type: 'span', text: "Our AI models are trained on hundreds of thousands of industrial data points, making them highly resilient to the challenging lighting and environmental conditions of a factory floor. Lecca integrates directly with your core ERP, turning visual observations into actionable data points for your management team. Experience the next generation of industrial intelligence with Lecca." }]
+        children: [{ _type: 'span', text: "Manufacturers, stockists, ports, and oilfield yards around the world still count pipe stacks the same way they did decades ago: a clipboard, a calculator, and a person doing the math. It's slow, it's tiring, and on a stack of stacked circular cross-sections, it's genuinely easy to get wrong by a few percent — which adds up fast across a full yard." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "Worse, a common industry practice — nesting smaller pipes inside larger ones for transport and storage efficiency — is completely invisible to a surface count. That inventory doesn't show up on the tally sheet at all." }]
+      },
+      {
+        _type: 'block',
+        style: 'h3',
+        children: [{ _type: 'span', text: "What this costs a yard" }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [
+          { _type: 'span', text: "• " },
+          { _type: 'span', text: "Inventory errors", marks: ["strong"] },
+          { _type: 'span', text: " that compound across hundreds of racks\n" },
+          { _type: 'span', text: "• " },
+          { _type: 'span', text: "Full-day stock-takes", marks: ["strong"] },
+          { _type: 'span', text: " that pull a team off other work\n" },
+          { _type: 'span', text: "• " },
+          { _type: 'span', text: "Dispatch and billing disputes", marks: ["strong"] },
+          { _type: 'span', text: " with no independent record to settle them\n" },
+          { _type: 'span', text: "• " },
+          { _type: 'span', text: "Safety risk", marks: ["strong"] },
+          { _type: 'span', text: " from staff climbing on or around tall pipe stacks\n" },
+          { _type: 'span', text: "• " },
+          { _type: 'span', text: "Nested 'pipe-in-pipe' inventory", marks: ["strong"] },
+          { _type: 'span', text: " that never gets counted at all" }
+        ]
+      },
+      {
+        _type: 'block',
+        style: 'h2',
+        children: [{ _type: 'span', text: "Why Lecca" }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [
+          { _type: 'span', text: "• " },
+          { _type: 'span', text: "Built by an Odoo Gold Partner", marks: ["strong"] },
+          { _type: 'span', text: " — Lecca connects directly into your existing ERP inventory, sales, and purchase workflows\n" },
+          { _type: 'span', text: "• " },
+          { _type: 'span', text: "Purpose-built", marks: ["strong"] },
+          { _type: 'span', text: " for the industry's hardest counting problem: pipe-in-pipe nested detection\n" },
+          { _type: 'span', text: "• " },
+          { _type: 'span', text: "Works with the camera you already have", marks: ["strong"] },
+          { _type: 'span', text: " — no proprietary hardware required\n" },
+          { _type: 'span', text: "• " },
+          { _type: 'span', text: "Deployed across industries", marks: ["strong"] },
+          { _type: 'span', text: " — manufacturing floors, ports, and oilfield yards, indoors and out\n" },
+          { _type: 'span', text: "• " },
+          { _type: 'span', text: "Backed by Prixgen Tech Solutions", marks: ["strong"] },
+          { _type: 'span', text: " — an enterprise ERP and digital transformation consultancy operating across India, the Middle East, and Southeast Asia" }
+        ]
+      },
+      {
+        _type: 'block',
+        style: 'h2',
+        children: [{ _type: 'span', text: "Industries We Serve" }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [
+          { _type: 'span', text: "• " },
+          { _type: 'span', text: "Steel Pipe & Tube Manufacturing", marks: ["strong"] },
+          { _type: 'span', text: ": Finished-goods yard counting, dispatch verification, production-line output counting\n" },
+          { _type: 'span', text: "• " },
+          { _type: 'span', text: "Oil & Gas / OCTG", marks: ["strong"] },
+          { _type: 'span', text: ": Yard audits at mills, ports, and rig-site laydown yards; count reconciliation across the supply chain\n" },
+          { _type: 'span', text: "• " },
+          { _type: 'span', text: "Pipe & Steel Trading / Stockists", marks: ["strong"] },
+          { _type: 'span', text: ": Inbound receipt verification and outbound dispatch counting to prevent shrinkage and disputes\n" },
+          { _type: 'span', text: "• " },
+          { _type: 'span', text: "Ports & Logistics", marks: ["strong"] },
+          { _type: 'span', text: ": Independent, neutral load counts for tubular cargo, reducing disputes between shipper and receiver\n" },
+          { _type: 'span', text: "• " },
+          { _type: 'span', text: "EPC & Construction Contractors", marks: ["strong"] },
+          { _type: 'span', text: ": Site-received material verification against purchase orders on large capital projects" }
+        ]
+      },
+      {
+        _type: 'block',
+        style: 'h2',
+        children: [{ _type: 'span', text: "By the Numbers" }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [
+          { _type: 'span', text: "• " },
+          { _type: 'span', text: "Detection accuracy", marks: ["strong"] },
+          { _type: 'span', text: ": Up to 99.7%\n" },
+          { _type: 'span', text: "• " },
+          { _type: 'span', text: "Processing time", marks: ["strong"] },
+          { _type: 'span', text: ": Under 1 second per scan\n" },
+          { _type: 'span', text: "• " },
+          { _type: 'span', text: "Largest single scan", marks: ["strong"] },
+          { _type: 'span', text: ": 2,842 pipes, one pass\n" },
+          { _type: 'span', text: "• " },
+          { _type: 'span', text: "Pipe-in-pipe coverage", marks: ["strong"] },
+          { _type: 'span', text: ": Outer and inner pipes, same frame" }
+        ]
+      },
+      {
+        _type: 'block',
+        style: 'h2',
+        children: [{ _type: 'span', text: "See Lecca count your own yard — free" }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [{ _type: 'span', text: "We're offering a limited number of free pilot counts for manufacturers, traders, ports, and oilfield yards ready to see Lecca on their own inventory." }]
+      },
+      {
+        _type: 'block',
+        style: 'normal',
+        children: [
+          { _type: 'span', text: "Book a Free Pilot Count — " },
+          { _type: 'span', text: "info@prixgen.com", marks: ["strong"] }
+        ]
       }
     ],
     features: [
-      { title: "Automated QC", description: "Visual inspection at production speed with zero-error tolerance." },
-      { title: "Safety Monitoring", description: "Real-time detection of PPE compliance and hazardous conditions." },
-      { title: "Asset Tracking", description: "AI-powered identification and location tracking of industrial assets." },
-      { title: "Edge Processing", description: "Low-latency analysis performed directly on-site for immediate action." }
+      { title: "Pipe-in-Pipe Detection", description: "Smaller pipes nested inside larger ones — standard practice for freight efficiency — are detected and counted separately, closing a blind spot every manual count has." },
+      { title: "Multi-Diameter Classification", description: "Every detected pipe is automatically sorted by diameter, with a full size breakdown generated alongside the total count — no manual sorting required." },
+      { title: "Dispatch Verification", description: "Scans a load against the dispatch order in real time, confirming a match — or flagging a mismatch — before the truck ever leaves the yard." },
+      { title: "Defect & Quality Checks", description: "Logs diameter, wall thickness, and surface condition alongside every count, flagging anomalies so a fast count never comes at the cost of quality." },
+      { title: "Works Anywhere", description: "From indoor manufacturing floors to open-air ports and desert oilfield yards, Lecca works with any camera, tripod, or drone — no fixed installation required." }
     ],
     process: [
-      { title: "Vision Audit", description: "Identifying high-value automation points on your production line." },
-      { title: "Model Training", description: "Developing custom AI models for your specific product or environment." },
-      { title: "Hardware Sync", description: "Deploying cameras and edge computing units for live monitoring." }
+      { title: "Capture", description: "Point any camera, tablet, or drone at the pipe stack. No special rig or lighting setup needed — Lecca is built to work with a normal photo or short video." },
+      { title: "Detect", description: "Lecca's computer-vision engine identifies every pipe end in the frame, tags it, and — critically — looks inside larger pipes for smaller ones nested within, counting both layers in the same pass." },
+      { title: "Verify", description: "The count is displayed instantly with a confidence score, broken down by diameter, and ready to push straight into your ERP or ready for a supervisor to confirm with one tap." }
     ],
     seo: {
-      title: "Industrial Computer Vision & AI Quality Control | Prixgen",
-      metaDesc: "Automate safety monitoring and quality control with Lecca, our proprietary industrial computer vision platform.",
-      keywords: ["Industrial AI", "Computer Vision", "Automated Quality Control", "Lecca AI"]
+      title: "Lecca — AI-Powered Pipe & Pipe-in-Pipe Counting | Prixgen Tech Solutions",
+      metaDesc: "Lecca uses computer vision to count pipe stacks from a single photo — including pipes nested inside larger ones. Built by Prixgen Tech Solutions for manufacturers, traders, ports, and oilfield yards.",
+      keywords: ["Pipe Counting AI", "Computer Vision Pipe Counting", "Industrial AI", "Pipe-in-pipe detection", "Prixgen Tech Solutions"]
     }
   },
   {
@@ -1956,7 +2083,7 @@ export const solutionsPageMockData: SolutionsPageData = {
     { title: "IIoT", headline: "Real-time industrial intelligence.", slug: "iiot-telemetry", externalImageUrl: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=1000" },
     { title: "AI & ML", headline: "Proprietary industrial intelligence.", slug: "ai-machine-learning", externalImageUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=1000" },
     { title: "Image Processing", headline: "Advanced computer vision for quality control and inspection.", slug: "image-processing", externalImageUrl: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=1000" },
-    { title: "Lecca", headline: "Industrial computer vision and AI intelligence.", slug: "lecca-ai", externalImageUrl: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=1000" }
+    { title: "Lecca", headline: "Lecca uses computer vision to count pipe stacks from a single photo — including pipes nested inside larger ones. Built by Prixgen Tech Solutions for manufacturers, traders, ports, and oilfield yards.", slug: "lecca-ai", externalImageUrl: "/images/lecca/image_1.png" }
   ],
   seo: {
     title: "Solutions | Enterprise Resource Planning & AI | Prixgen",

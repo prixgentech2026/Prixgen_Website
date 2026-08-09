@@ -26,6 +26,11 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'eyebrow',
+      title: 'Eyebrow / Kicker',
+      type: 'string',
+    }),
+    defineField({
       name: 'externalImageUrl',
       title: 'External Image URL (Fallback)',
       type: 'url',
