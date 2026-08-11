@@ -107,6 +107,24 @@ export default function RootLayout({
             initApollo();
           `}
         </Script>
+
+        {/* Amplitude Analytics */}
+        <Script id="amplitude-analytics" strategy="afterInteractive">
+          {`
+            (function() {
+              var s = document.createElement('script');
+              s.src = 'https://cdn.amplitude.com/script/3fe5d101a65855246c115a5a77d13be1.js';
+              s.async = true;
+              s.onload = function() {
+                if (window.amplitude && window.sessionReplay) {
+                  window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
+                  window.amplitude.init('3fe5d101a65855246c115a5a77d13be1', {"fetchRemoteConfig":true,"autocapture":true});
+                }
+              };
+              document.head.appendChild(s);
+            })();
+          `}
+        </Script>
       </body>
     </html>
   );
