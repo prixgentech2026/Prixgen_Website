@@ -113,12 +113,12 @@ export default function RootLayout({
           {`
             (function() {
               var s = document.createElement('script');
-              s.src = 'https://cdn.amplitude.com/script/3fe5d101a65855246c115a5a77d13be1.js';
+              s.src = 'https://cdn.amplitude.com/script/861562d0b37fe38490a06de3ef6b29b8.js';
               s.async = true;
               s.onload = function() {
                 if (window.amplitude && window.sessionReplay) {
                   window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
-                  window.amplitude.init('3fe5d101a65855246c115a5a77d13be1', {"fetchRemoteConfig":true,"autocapture":true});
+                  window.amplitude.init('861562d0b37fe38490a06de3ef6b29b8', {"fetchRemoteConfig":true,"autocapture":{"attribution":{"trackingMethod":["userProperty","eventProperty"]},"fileDownloads":true,"formInteractions":true,"pageViews":true,"sessions":true,"elementInteractions":true,"networkTracking":true,"webVitals":true,"frustrationInteractions":{"thrashedCursor":true,"errorClicks":true,"deadClicks":true,"rageClicks":true}}});
                 }
               };
               document.head.appendChild(s);
