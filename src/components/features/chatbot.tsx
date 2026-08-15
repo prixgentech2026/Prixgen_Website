@@ -221,24 +221,128 @@ export function Chatbot() {
     }
   };
 
-  // Convert simple markdown-like syntax to bold/italic tags
+  // Convert simple markdown-like syntax to bold/italic tags and parse tables/lists dynamically
   const renderMessageContent = (content: string) => {
-    // Escape simple HTML first to prevent XSS
-    let escaped = content
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
-
-    // Convert **bold**
-    escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-    // Convert *italic*
-    escaped = escaped.replace(/\*(.*?)\*/g, '<em>$1</em>');
-    // Convert [link text](url)
-    escaped = escaped.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-prixgen-blue hover:underline font-bold">$1</a>');
-    // Convert newlines to breaks
-    escaped = escaped.replace(/\n/g, '<br />');
-
-    return <span dangerouslySetInnerHTML={{ __html: escaped }} />;
+    const lines = content.split('\n');
+    const resultElements: React.ReactNode[] = [];
+    
+    let inList = false;
+    let listItems: string[] = [];
+    
+    let inTable = false;
+    let tableHeaders: string[] = [];
+    let tableRows: string[][] = [];
+    
+    const formatInline = (text: string) => {
+      let formatted = text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+      
+      // Convert **bold**
+      formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      // Convert *italic*
+      formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>');
+      // Convert [link text](url)
+      formatted = formatted.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-prixgen-blue hover:underline font-bold">$1</a>');
+      
+      return formatted;
+    };
+    
+    const flushList = (key: number) => {
+      if (listItems.length > 0) {
+        resultElements.push(
+          <ul key={`ul-${key}`} className="list-disc pl-5 my-1.5 space-y-1 text-slate-700">
+            {listItems.map((item, idx) => (
+              <li key={idx} dangerouslySetInnerHTML={{ __html: formatInline(item) }} />
+            ))}
+          </ul>
+        );
+        listItems = [];
+      }
+      inList = false;
+    };
+    
+    const flushTable = (key: number) => {
+      if (tableHeaders.length > 0 || tableRows.length > 0) {
+        resultElements.push(
+          <div key={`table-wrapper-${key}`} className="overflow-x-auto my-3 border border-slate-200/70 rounded-xl shadow-sm max-w-full">
+            <table className="min-w-full divide-y divide-slate-200/60 text-[12px] md:text-xs">
+              <thead className="bg-slate-50">
+                <tr>
+                  {tableHeaders.map((header, idx) => (
+                    <th key={idx} className="px-3 py-2 text-left font-bold text-slate-700 border-b border-slate-200/60 whitespace-nowrap" dangerouslySetInnerHTML={{ __html: formatInline(header) }} />
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-slate-100">
+                {tableRows.map((row, rowIdx) => (
+                  <tr key={rowIdx} className={rowIdx % 2 === 0 ? 'bg-white' : 'bg-slate-50/30'}>
+                    {row.map((cell, cellIdx) => (
+                      <td key={cellIdx} className="px-3 py-1.5 text-slate-600 font-medium" dangerouslySetInnerHTML={{ __html: formatInline(cell) }} />
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+        tableHeaders = [];
+        tableRows = [];
+      }
+      inTable = false;
+    };
+    
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      
+      // 1. Table Detection
+      if (line.startsWith('|')) {
+        if (inList) flushList(i);
+        
+        const cells = line.split('|').map(c => c.trim()).filter((_, idx, arr) => idx > 0 && idx < arr.length - 1);
+        
+        // Skip separator line (e.g. |---|---|)
+        if (cells.every(c => c.match(/^:?-+:?$/))) {
+          inTable = true;
+          continue;
+        }
+        
+        if (!inTable) {
+          tableHeaders = cells;
+          inTable = true;
+        } else {
+          tableRows.push(cells);
+        }
+        continue;
+      } else if (inTable) {
+        flushTable(i);
+      }
+      
+      // 2. List Detection
+      if (line.startsWith('- ') || line.startsWith('* ')) {
+        if (inTable) flushTable(i);
+        inList = true;
+        listItems.push(line.substring(2));
+        continue;
+      } else if (inList) {
+        flushList(i);
+      }
+      
+      // 3. Normal paragraph text
+      if (line === '') {
+        resultElements.push(<div key={`space-${i}`} className="h-2" />);
+      } else {
+        resultElements.push(
+          <div key={`p-${i}`} className="my-1" dangerouslySetInnerHTML={{ __html: formatInline(line) }} />
+        );
+      }
+    }
+    
+    if (inList) flushList(lines.length);
+    if (inTable) flushTable(lines.length);
+    
+    return <div className="space-y-0.5">{resultElements}</div>;
   };
 
   return (
