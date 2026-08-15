@@ -3,6 +3,7 @@ import Script from 'next/script';
 import { Header } from '@/components/shared/header';
 import { Footer } from '@/components/shared/footer';
 import { SmoothScroll } from '@/components/providers/smooth-scroll';
+import { Chatbot } from '@/components/features/chatbot';
 
 import { PageTransition } from '@/components/providers/page-transition';
 import { PageLoader } from '@/components/shared/page-loader';
@@ -23,6 +24,7 @@ export default function MarketingLayout({
         </PageTransition>
         <Footer />
       </SmoothScroll>
+      <Chatbot />
       {/* HubSpot Tracking Script - Only active when actual ID is provided */}
       {/* 
       <Script

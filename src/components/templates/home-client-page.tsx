@@ -917,6 +917,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
         </section>
       </main>
 
+      {false && (
       <AnimatePresence>
         {showToast && (
           isMinimized ? (
@@ -996,6 +997,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
           )
         )}
       </AnimatePresence>
+      )}
     </div>
   );
 }

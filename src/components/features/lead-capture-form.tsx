@@ -3,7 +3,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useState, useTransition } from 'react';
+import { useState, useTransition, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -34,9 +34,27 @@ export function LeadCaptureForm({ source }: { source: string }) {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm<FormData>({
     resolver: zodResolver(FormSchema),
   });
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedMsg = sessionStorage.getItem('margai_lead_message');
+      if (storedMsg) {
+        // Use a short timeout to ensure the form components are fully registered in react-hook-form
+        const timer = setTimeout(() => {
+          setValue('message', storedMsg, {
+            shouldValidate: true,
+            shouldDirty: true,
+          });
+          sessionStorage.removeItem('margai_lead_message');
+        }, 100);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [setValue]);
 
   const onSubmit = async (data: FormData) => {
     setError(null);
