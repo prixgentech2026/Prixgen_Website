@@ -1,4 +1,4 @@
-export default {
+const termsPageSchema = {
   name: 'termsPage',
   title: 'Terms of Service Page',
   type: 'document',
@@ -81,3 +81,5 @@ export default {
     },
   ],
 };
+
+export default termsPageSchema;

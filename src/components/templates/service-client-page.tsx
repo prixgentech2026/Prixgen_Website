@@ -2015,6 +2015,7 @@ function OnboardingMotionGraphic() {
 }
 
 // 14. LEAD FORM MOTION GRAPHIC
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function LeadFormMotionGraphic() {
   return (
     <div className="relative w-full aspect-square max-w-[200px] mx-auto flex items-center justify-center pointer-events-none">

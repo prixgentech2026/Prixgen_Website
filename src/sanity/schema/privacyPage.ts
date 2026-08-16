@@ -1,4 +1,4 @@
-export default {
+const privacyPageSchema = {
   name: 'privacyPage',
   title: 'Privacy Policy Page',
   type: 'document',
@@ -81,3 +81,5 @@ export default {
     },
   ],
 };
+
+export default privacyPageSchema;
