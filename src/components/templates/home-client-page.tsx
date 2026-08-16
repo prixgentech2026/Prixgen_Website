@@ -38,11 +38,7 @@ const PatronLogo = ({ patron }: { patron: { filename: string; name: string } }) 
   const [error, setError] = useState(false);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: false }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+    <div
       className="flex flex-col items-center justify-center min-w-[280px] grayscale hover:grayscale-0 transition-all duration-500 hover:scale-110 cursor-default opacity-60 hover:opacity-100 px-10 group"
     >
       <div className="w-44 h-16 mb-4 flex items-center justify-center relative bg-transparent transition-all duration-300">
@@ -61,7 +57,7 @@ const PatronLogo = ({ patron }: { patron: { filename: string; name: string } }) 
         )}
       </div>
       <span className="text-[10px] font-black text-prixgen-blue/80 tracking-[0.2em] uppercase text-center max-w-[200px] line-clamp-1">{patron.name}</span>
-    </motion.div>
+    </div>
   );
 };
 
@@ -133,6 +129,150 @@ interface HomeClientPageProps {
   homeData: any;
   latestPost?: any;
   latestCareer?: any;
+}
+
+// ============ ISOLATED INSTRUMENT CLUSTER COMPONENTS (Prevents global page re-renders) ============
+
+// 1. Lecca Vision QC Panel Component
+function LeccaQCPanel() {
+  const [qcCount, setQcCount] = useState(184206);
+  
+  useEffect(() => {
+    const counterTimer = setInterval(() => {
+      setQcCount((prev) => prev + Math.floor(Math.random() * 4) + 1);
+    }, 1400);
+    return () => clearInterval(counterTimer);
+  }, []);
+
+  return (
+    <div className="r4-panel">
+      <div className="r4-panel-head">
+        <span className="r4-panel-title">Lecca · Vision QC</span>
+        <div className="flex items-center gap-1.5">
+          <span className="text-[8px] font-bold text-slate-400 tracking-wider">ACTIVE</span>
+          <span className="r4-panel-led"></span>
+        </div>
+      </div>
+      <div className="r4-panel-body flex-1 flex flex-col justify-center">
+        <div className="flex items-baseline gap-2">
+          <div className="r4-counter">{qcCount.toLocaleString('en-IN')}</div>
+          <span className="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-100 uppercase tracking-wider">+124/min</span>
+        </div>
+        <div className="r4-counter-label">OBJECTS SCANNED TODAY</div>
+      </div>
+      <div className="r4-panel-foot">// COMPUTER_VISION_QC_PIPE</div>
+    </div>
+  );
+}
+
+// 2. IIoT Telemetry Panel Component
+function IIoTTelemetryPanel() {
+  const [telemetryTemp, setTelemetryTemp] = useState(61.4);
+  const [sparkPoints, setSparkPoints] = useState("0,28 22,24 44,26 66,14 88,20 110,10 132,18 154,8 176,16 198,6 220,12");
+
+  useEffect(() => {
+    const telemetryTimer = setInterval(() => {
+      const newTemp = (58 + Math.random() * 8).toFixed(1);
+      setTelemetryTemp(parseFloat(newTemp));
+      
+      let y = 20;
+      const pts = [];
+      for (let x = 0; x <= 220; x += 22) {
+        y += (Math.random() * 14 - 7);
+        y = Math.max(6, Math.min(34, y));
+        pts.push(`${x},${y.toFixed(1)}`);
+      }
+      setSparkPoints(pts.join(' '));
+    }, 2200);
+    return () => clearInterval(telemetryTimer);
+  }, []);
+
+  return (
+    <div className="r4-panel">
+      <div className="r4-panel-head">
+        <span className="r4-panel-title">IIoT Telemetry</span>
+        <div className="flex items-center gap-1.5">
+          <span className="text-[8px] font-bold text-slate-400 tracking-wider">SYNCED</span>
+          <span className="r4-panel-led"></span>
+        </div>
+      </div>
+      <div className="r4-panel-body flex-1 flex flex-col justify-between">
+        <div className="r4-spark-row justify-between mb-1">
+          <span className="r4-spark-val">{telemetryTemp.toFixed(1)}°C</span>
+          <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">TEMP_SENSOR_14</span>
+        </div>
+        <svg className="r4-spark bg-slate-50/50 rounded-lg p-1 border border-slate-100" viewBox="0 0 220 40" preserveAspectRatio="none">
+          <line x1="0" y1="10" x2="220" y2="10" stroke="rgba(0, 75, 135, 0.04)" strokeWidth="0.5" />
+          <line x1="0" y1="20" x2="220" y2="20" stroke="rgba(0, 75, 135, 0.04)" strokeWidth="0.5" />
+          <line x1="0" y1="30" x2="220" y2="30" stroke="rgba(0, 75, 135, 0.04)" strokeWidth="0.5" />
+          <polyline className="r4-spark-line" points={sparkPoints} />
+        </svg>
+      </div>
+      <div className="r4-panel-foot">// PLC_MQTT_CONNECT_OK</div>
+    </div>
+  );
+}
+
+// 3. GenAI Copilot Panel Component
+function GenAICopilotPanel() {
+  const [typedText, setTypedText] = useState("");
+
+  useEffect(() => {
+    const lines = [
+      '> optimize batch schedule — line 3',
+      '> forecast raw-material shortfall: 6 days',
+      '> flag anomaly — sensor 14, packaging cell',
+      '> draft weekly ops summary for plant head'
+    ];
+    let lineIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+    let timeoutId: NodeJS.Timeout;
+
+    const tick = () => {
+      const currentLine = lines[lineIdx];
+      if (!isDeleting) {
+        charIdx++;
+        setTypedText(currentLine.slice(0, charIdx));
+        if (charIdx === currentLine.length) {
+          isDeleting = true;
+          timeoutId = setTimeout(tick, 1400);
+        } else {
+          timeoutId = setTimeout(tick, 38);
+        }
+      } else {
+        charIdx--;
+        setTypedText(currentLine.slice(0, charIdx));
+        if (charIdx === 0) {
+          isDeleting = false;
+          lineIdx = (lineIdx + 1) % lines.length;
+        }
+        timeoutId = setTimeout(tick, 22);
+      }
+    };
+
+    tick();
+    return () => clearTimeout(timeoutId);
+  }, []);
+
+  return (
+    <div className="r4-panel">
+      <div className="r4-panel-head">
+        <span className="r4-panel-title">GenAI Copilot</span>
+        <div className="flex items-center gap-1.5">
+          <span className="text-[8px] font-bold text-slate-400 tracking-wider">RUNNING</span>
+          <span className="r4-panel-led"></span>
+        </div>
+      </div>
+      <div className="r4-panel-body flex-1 flex flex-col justify-center">
+        <div className="r4-term">
+          <span>{typedText}</span>
+          <span className="r4-caret"></span>
+        </div>
+      </div>
+      <div className="r4-panel-foot">// NATURAL_LANGUAGE_OPS</div>
+    </div>
+  );
 }
 
 export default function HomeClientPage({ homeData, latestPost, latestCareer }: HomeClientPageProps) {
@@ -297,6 +437,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
       />
 
       <main>
+        {false && (
         <section className="relative min-h-[70vh] flex items-center pt-24 pb-12 px-4 overflow-hidden bg-white">
           <Parallax offset={100} direction="down" className="absolute inset-0 z-0">
             <AmbientGlow />
@@ -414,20 +555,437 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
             </div>
           </div>
         </section>
+        )}
 
+        {/* ============ REDESIGNED HERO SECTION (Hero Redesign v4 - Light Brand Theme) ============ */}
+        <style dangerouslySetInnerHTML={{ __html: `
+          :root {
+            --r4-navy:        #004B87;   /* brand blue */
+            --r4-lightblue:   #00A3E0;   /* brand lightblue */
+            --r4-dark:        #1A1A1A;   /* brand dark text */
+            --r4-gray:        #F4F4F4;   /* brand gray */
+            --r4-white:       #FFFFFF;
+          }
+          
+          .r4-hero {
+            position: relative;
+            background: #FFFFFF;
+            overflow: hidden;
+            text-align: left;
+          }
+          
+          .r4-hero::before {
+            content: ""; position: absolute; inset: 0; pointer-events: none;
+            background-image:
+              linear-gradient(rgba(0, 75, 135, 0.015) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(0, 75, 135, 0.015) 1px, transparent 1px);
+            background-size: 42px 42px;
+          }
 
+          .r4-eyebrow {
+            display: inline-flex; align-items: center; gap: 9px;
+            font-size: 10px; font-weight: 700; letter-spacing: 0.25em;
+            text-transform: uppercase; color: var(--r4-navy);
+            border: 1px solid rgba(0, 163, 224, 0.25); background: rgba(0, 163, 224, 0.06);
+            padding: 7px 14px 7px 10px; border-radius: 100px; margin-bottom: 26px;
+          }
+          
+          .r4-eyebrow .r4-dot {
+            width: 6px; height: 6px; border-radius: 50%; background: var(--r4-lightblue);
+            box-shadow: 0 0 0 3px rgba(0, 163, 224, 0.25); animation: r4-blink 2.4s infinite;
+          }
+          
+          @keyframes r4-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.35; }
+          }
 
-        {/* Animated Connector 1 */}
-        <div className="relative w-full h-16 flex justify-center -mt-8 z-20">
-          <div className="w-px h-full bg-gradient-to-b from-transparent via-prixgen-blue/30 to-transparent relative overflow-hidden">
-            <motion.div
-              className="absolute top-0 left-0 w-full h-1/3 bg-prixgen-lightblue shadow-[0_0_8px_#0ea5e9]"
-              initial={{ y: "-100%" }}
-              animate={{ y: ['-100%', '400%'] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
-            />
+          .r4-h1 {
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            color: var(--r4-dark);
+          }
+
+          .r4-h1-a {
+            display: block; font-size: 20px; font-weight: 700; color: var(--r4-navy); margin-bottom: 8px;
+          }
+          
+          .r4-h1-b {
+            display: block; font-size: 32px; font-weight: 700;
+          }
+          
+          @media (min-width: 768px) {
+            .r4-h1-a { font-size: 24px; }
+            .r4-h1-b { font-size: 44px; }
+          }
+          @media (min-width: 1024px) {
+            .r4-h1-a { font-size: 28px; }
+            .r4-h1-b { font-size: 48px; }
+          }
+          
+          .r4-h1-b .r4-hi {
+            color: var(--r4-lightblue);
+          }
+
+          .r4-sub {
+            margin-top: 22px; font-size: 18px; font-weight: 500; line-height: 1.7; color: #475569; max-width: 580px;
+          }
+
+          .r4-proof-row {
+            margin-top: 44px; padding-top: 22px; border-top: 1px solid rgba(0, 75, 135, 0.12);
+            display: flex; gap: 28px; flex-wrap: wrap;
+            font-size: 13.5px; color: #475569; letter-spacing: 0.02em;
+          }
+          
+          .r4-proof-row b {
+            color: var(--r4-navy); font-weight: 700;
+          }
+
+          .r4-console-frame {
+            background: #FFFFFF;
+            background-image: 
+              radial-gradient(rgba(0, 163, 224, 0.05) 1.2px, transparent 1.2px),
+              radial-gradient(rgba(0, 75, 135, 0.03) 1.5px, transparent 1.5px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            border: 1px solid rgba(0, 75, 135, 0.12);
+            border-radius: 20px;
+            padding: 16px 18px 18px;
+            box-shadow: 0 25px 60px -15px rgba(0, 75, 135, 0.08), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+          }
+
+          .r4-console-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(0, 75, 135, 0.08);
+            padding-bottom: 12px;
+          }
+
+          .r4-console-address {
+            flex: 1;
+            max-w-[280px];
+            margin: 0 auto;
+            background: #F1F5F9;
+            border-radius: 8px;
+            padding: 4px 10px;
+            font-family: monospace;
+            font-size: 9.5px;
+            color: #64748B;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            border: 1px solid rgba(0, 75, 135, 0.06);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          .r4-console-status {
+            font-family: monospace;
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--r4-lightblue);
+            background: rgba(0, 163, 224, 0.06);
+            padding: 3px 8px;
+            border-radius: 5px;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+          }
+
+          .r4-cluster {
+            display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+            gap: 14px; position: relative; z-index: 2;
+          }
+
+          .r4-panel {
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+            border: 1px solid rgba(0, 75, 135, 0.09);
+            border-radius: 16px; padding: 16px 18px;
+            display: flex; flex-direction: column; 
+            height: 196px; /* Set exact matching height for all cards with bottom margin safety */
+            justify-content: space-between;
+            text-align: left;
+            box-shadow: 0 4px 20px -2px rgba(0, 75, 135, 0.04), inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                        box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                        border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, box-shadow;
+          }
+
+          .r4-panel:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px -12px rgba(0, 75, 135, 0.12), 0 0 0 1px rgba(0, 163, 224, 0.15), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+            border-color: rgba(0, 163, 224, 0.25);
+          }
+          
+          .r4-panel-head {
+            display: flex; align-items: center; justify-content: space-between;
+            border-bottom: 1px solid rgba(0, 75, 135, 0.05);
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+          }
+          
+          .r4-panel-title {
+            font-size: 10px; font-weight: 750; letter-spacing: 0.15em;
+            text-transform: uppercase; color: var(--r4-navy);
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+          }
+          
+          .r4-panel-led {
+            width: 6px; height: 6px; border-radius: 50%; background: var(--r4-lightblue);
+            box-shadow: 0 0 0 3px rgba(0, 163, 224, 0.15);
+            animation: r4-pulse-led 2s infinite;
+          }
+
+          @keyframes r4-pulse-led {
+            0% {
+              box-shadow: 0 0 0 0 rgba(0, 163, 224, 0.4);
+            }
+            70% {
+              box-shadow: 0 0 0 6px rgba(0, 163, 224, 0);
+            }
+            100% {
+              box-shadow: 0 0 0 0 rgba(0, 163, 224, 0);
+            }
+          }
+
+          .r4-counter {
+            font-weight: 750; font-size: 28px; color: var(--r4-navy);
+            letter-spacing: 0.02em;
+          }
+          
+          .r4-counter-label {
+            font-size: 11px; font-weight: 500; color: #64748B; margin-top: 4px;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+          }
+
+          .r4-spark-row {
+            display: flex; align-items: center; gap: 10px;
+          }
+          
+          .r4-spark-val {
+            font-size: 17px; color: var(--r4-navy); font-weight: 700; white-space: nowrap;
+          }
+          
+          svg.r4-spark {
+            width: 100%; height: 38px; overflow: visible;
+          }
+          
+          .r4-spark-line {
+            fill: none; stroke: var(--r4-lightblue); stroke-width: 2.0; stroke-linecap: round; stroke-linejoin: round;
+            stroke-dasharray: 400;
+            stroke-dashoffset: 0;
+            animation: r4-spark-flow 8s linear infinite;
+          }
+
+          @keyframes r4-spark-flow {
+            from { stroke-dashoffset: 400; }
+            to { stroke-dashoffset: 0; }
+          }
+
+          .r4-term {
+            font-family: monospace; font-size: 11px; color: #38BDF8; line-height: 1.55;
+            min-height: 54px;
+            background: #0B0F19;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+          }
+          
+          .r4-term .r4-caret {
+            display: inline-block; width: 6px; height: 12px; background: #38BDF8; margin-left: 2px;
+            vertical-align: middle; animation: r4-blink 1s steps(2) infinite;
+          }
+
+          .r4-panel-foot {
+            font-family: monospace;
+            font-size: 9px; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.06em; color: #64748B;
+            margin-top: auto;
+            padding-top: 10px;
+            border-top: 1px dashed rgba(0, 75, 135, 0.05);
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+          }
+
+          .r4-bars {
+            display: flex; align-items: flex-end; gap: 6px; height: 38px;
+          }
+          
+          .r4-bars i {
+            flex: 1; background: linear-gradient(180deg, var(--r4-lightblue), var(--r4-navy)); border-radius: 2px 2px 0 0;
+            animation: r4-rise 2s ease-in-out infinite alternate; transform-origin: bottom;
+          }
+          
+          .r4-bars i:nth-child(1) { height: 40%; animation-delay: 0s; animation-duration: 1.5s; }
+          .r4-bars i:nth-child(2) { height: 65%; animation-delay: 0.2s; animation-duration: 2.1s; }
+          .r4-bars i:nth-child(3) { height: 50%; animation-delay: 0.4s; animation-duration: 1.8s; }
+          .r4-bars i:nth-child(4) { height: 85%; animation-delay: 0.6s; animation-duration: 2.4s; }
+          .r4-bars i:nth-child(5) { height: 70%; animation-delay: 0.8s; animation-duration: 1.9s; }
+          .r4-bars i:nth-child(6) { height: 95%; animation-delay: 1.0s; animation-duration: 2.2s; }
+          
+          @keyframes r4-rise {
+            0% { transform: scaleY(0.45); }
+            100% { transform: scaleY(1); }
+          }
+
+          .r4-strip {
+            background: var(--r4-white); border-bottom: 1px solid #DCE3E8;
+            text-align: left;
+          }
+          
+          .r4-strip-inner {
+            display: flex; align-items: center; gap: 40px; padding: 26px 0; flex-wrap: wrap;
+          }
+          
+          .r4-strip-quote {
+            font-size: 13.5px; color: #56636E; font-style: italic; max-width: 480px; line-height: 1.5;
+            border-left: 2px solid var(--r4-lightblue); padding-left: 16px;
+          }
+          
+          .r4-strip-quote b {
+            font-style: normal; color: #0C1620;
+          }
+          
+          .r4-strip-clients {
+            display: flex; gap: 34px; flex-wrap: wrap; margin-left: auto;
+          }
+          
+          .r4-strip-clients span {
+            font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 14px; color: #9FB0BD;
+            transition: color 0.2s ease; cursor: default;
+          }
+          
+          .r4-strip-clients span:hover {
+            color: var(--r4-navy);
+          }
+
+          @media (max-width: 980px) {
+            .r4-hero-inner {
+              grid-template-columns: 1fr;
+              padding: 44px 0 40px;
+              gap: 36px;
+            }
+            .r4-h1-b {
+              font-size: 34px;
+            }
+            .r4-h1-a {
+              font-size: 20px;
+            }
+            .r4-cluster {
+              grid-template-columns: 1fr 1fr;
+            }
+            .r4-strip-clients {
+              margin-left: 0;
+              gap: 22px;
+            }
+          }
+        `}} />
+
+        <section className="r4-hero py-16 lg:py-24 px-4">
+          <div className="max-w-[1360px] mx-auto px-4 md:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center r4-hero-inner">
+              <div className="hero-copy">
+                <FadeUp delay={0.15}>
+                  <div className="r4-eyebrow">
+                    <span className="r4-dot"></span> In-House AI · GenAI · IIoT
+                  </div>
+                </FadeUp>
+                
+                <h1 className="r4-h1">
+                  <RevealText delay={0.25}>
+                    <span className="r4-h1-a">Most ERP partners resell someone else's AI.</span>
+                  </RevealText>
+                  <RevealText delay={0.4}>
+                    <span className="r4-h1-b">We build ours <span className="r4-hi">in-house.</span></span>
+                  </RevealText>
+                </h1>
+                
+                <FadeUp delay={0.55}>
+                  <p className="r4-sub">
+                    We architect, deploy, and manage scalable ERP and supply chain ecosystems for global manufacturing and FMCG leaders. Powered by proprietary AI, GenAI, and IIoT — our solutions run on a unified Odoo core with proven industrial intelligence.
+                  </p>
+                </FadeUp>
+                
+                <FadeUp delay={0.7}>
+                  <div className="flex flex-col sm:flex-row items-center gap-6 mt-8">
+                    <Button size="lg" className="h-14 px-8 rounded-xl shadow-md w-full sm:w-auto font-bold text-sm transition-transform hover:-translate-y-0.5 active:scale-95" asChild>
+                      <Link href="/contact">Schedule an Architecture Audit</Link>
+                    </Button>
+                    <Link href="/blog" className="group flex items-center gap-2 text-prixgen-blue font-bold text-sm leading-snug">
+                      <span>Read the 2026 Manufacturing Benchmark</span>
+                      <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
+                    </Link>
+                  </div>
+                </FadeUp>
+                
+                <FadeUp delay={0.85}>
+                  <div className="r4-proof-row">
+                    <span><b>20+</b> years in the field</span>
+                    <span><b>100+</b> implementations shipped</span>
+                    <span><b>Gold</b> Odoo Partner</span>
+                  </div>
+                </FadeUp>
+              </div>
+
+              <FadeUp delay={0.3}>
+                <div className="r4-console-frame">
+                  <div className="r4-console-nav">
+                    <div className="flex gap-1.5">
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] opacity-80"></span>
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] opacity-80"></span>
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] opacity-80"></span>
+                    </div>
+                    <div className="r4-console-address">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      <span>prixgen-engine-v4.local/status</span>
+                    </div>
+                    <div className="r4-console-status">
+                      COGNITIVE ENGINE v4.2
+                    </div>
+                  </div>
+                  
+                  <div className="r4-cluster" role="img" aria-label="Live illustrative dashboard showing Prixgen's AI, IoT and analytics products">
+                    <LeccaQCPanel />
+                    <IIoTTelemetryPanel />
+                    <GenAICopilotPanel />
+                    <div className="r4-panel">
+                      <div className="r4-panel-head">
+                        <span className="r4-panel-title">Predictive Analytics</span>
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-[8px] font-bold text-slate-400 tracking-wider">LIVE</span>
+                          <span className="r4-panel-led"></span>
+                        </div>
+                      </div>
+                      <div className="r4-panel-body flex-1 flex flex-col justify-between">
+                        <div className="flex items-baseline justify-between mb-1 mt-1">
+                          <span className="text-[22px] font-bold text-[#004B87] tracking-tight">98.4%</span>
+                          <span className="text-[8px] font-bold text-emerald-600 bg-emerald-50 px-1 py-0.5 rounded border border-emerald-100 uppercase tracking-wider">YIELD_OK</span>
+                        </div>
+                        <div className="r4-bars mt-2">
+                          <i></i><i></i><i></i><i></i><i></i><i></i>
+                        </div>
+                      </div>
+                      <div className="r4-panel-foot">// DEMAND_YIELD_FORECASTING</div>
+                    </div>
+                  </div>
+                </div>
+              </FadeUp>
+            </div>
           </div>
-        </div>
+        </section>
+
+
+
+
+
+
 
         {/* 2. Services Section (Our Best Services / Prixgen Services) */}
         <section className="py-8 lg:py-12 px-4 bg-prixgen-gray/10 relative">
@@ -438,7 +996,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
                   <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: 48 }}
-                    viewport={{ once: false }}
+                    viewport={{ once: true }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                     className="h-[1px] bg-prixgen-blue"
                   />
@@ -530,17 +1088,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
           </div>
         </section>
 
-        {/* Animated Connector 2 */}
-        <div className="relative w-full h-20 flex justify-center -mt-10 z-20">
-          <div className="w-px h-full bg-gradient-to-b from-transparent via-prixgen-blue/30 to-transparent relative overflow-hidden">
-            <motion.div
-              className="absolute top-0 left-0 w-full h-1/3 bg-prixgen-lightblue shadow-[0_0_8px_#0ea5e9]"
-              initial={{ y: "-100%" }}
-              animate={{ y: ['-100%', '400%'] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "linear", delay: 0.5 }}
-            />
-          </div>
-        </div>
+
 
         {/* 3. Our Solutions Section */}
         <section className="py-8 lg:py-12 bg-white relative">
@@ -551,7 +1099,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
                   <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: 48 }}
-                    viewport={{ once: false }}
+                    viewport={{ once: true }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                     className="h-[1px] bg-prixgen-blue"
                   />
@@ -615,17 +1163,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
           </div>
         </section>
 
-        {/* Animated Connector 3 */}
-        <div className="relative w-full h-16 flex justify-center -mt-8 z-20">
-          <div className="w-px h-full bg-gradient-to-b from-transparent via-prixgen-blue/30 to-transparent relative overflow-hidden">
-            <motion.div
-              className="absolute top-0 left-0 w-full h-1/3 bg-prixgen-lightblue shadow-[0_0_8px_#0ea5e9]"
-              initial={{ y: "-100%" }}
-              animate={{ y: ['-100%', '400%'] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "linear", delay: 1 }}
-            />
-          </div>
-        </div>
+
 
         {/* 4. Our Patronage Section - Infinite Marquee */}
         <section className="py-8 lg:py-12 bg-prixgen-gray/20 overflow-hidden relative border-y border-slate-200/50">
@@ -635,7 +1173,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
               <motion.div
                 initial={{ width: 0 }}
                 whileInView={{ width: 80 }}
-                viewport={{ once: false }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="h-1 bg-prixgen-lightblue mx-auto rounded-full"
               />

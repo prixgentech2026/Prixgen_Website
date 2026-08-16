@@ -20,8 +20,8 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
       root 
       ref={lenisRef}
       options={{ 
-        duration: 1.4,
-        lerp: 0.08, 
+        duration: 1.0,
+        lerp: 0.12, 
         smoothWheel: true,
         wheelMultiplier: 1,
         touchMultiplier: 1.5,

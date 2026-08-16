@@ -163,7 +163,7 @@ export default function CareersClient({ data }: { data: CareersPageData }) {
 
       {/* Why Join Section */}
       <section className="container mx-auto px-4 py-12 relative">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-prixgen-blue/20 to-transparent" />
+
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {benefits.map((benefit, i) => (

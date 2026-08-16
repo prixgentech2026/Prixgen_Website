@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { getSolutionBySlug, getSolutions, PageData } from '@/lib/data';
 import SolutionClientPage from '@/components/templates/solution-client-page';
 import LeccaClientPage from '@/components/templates/lecca-client-page';
+import OdooClientPage from '../../../../components/templates/odoo-client-page';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -35,6 +36,10 @@ export default async function SolutionPage({ params }: PageProps) {
 
   if (slug === 'lecca-ai') {
     return <LeccaClientPage solution={solution} />;
+  }
+
+  if (slug === 'odoo') {
+    return <OdooClientPage solution={solution} />;
   }
 
   return <SolutionClientPage solution={solution} />;
