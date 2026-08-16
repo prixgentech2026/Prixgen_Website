@@ -2,12 +2,10 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
-import { OptimizedImage } from '@/components/ui/optimized-image';
+import { motion } from 'framer-motion';
 import { LeadCaptureForm } from '@/components/features/lead-capture-form';
 import { JsonLd } from '@/components/seo/json-ld';
 import { HeroBackground } from '@/components/shared/hero-background';
-import { Magnetic } from '@/components/animations/magnetic';
 import { RevealText as BaseRevealText } from '@/components/animations/reveal-text';
 import { FadeUp as BaseFadeUp } from '@/components/animations/fade-up';
 import { StaggerText } from '@/components/animations/stagger-text';
@@ -20,8 +18,6 @@ import {
   Cpu,
   LineChart,
   Sliders,
-  CheckCircle2,
-  Layers,
   ArrowRight,
   Sparkles,
   ClipboardList
@@ -63,8 +59,7 @@ export default function OdooClientPage({ solution }: { solution: any }) {
     return img.asset?.url || null;
   };
 
-  const bannerImageUrl = getImageUrl(solution.summaryImage) || getImageUrl(solution.featuredImage) || solution.externalImageUrl;
-  const bannerImageAlt = solution.summaryImage?.altText || solution.featuredImage?.altText || solution.title;
+
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-slate-50 text-slate-800 font-sans">
@@ -444,7 +439,7 @@ export default function OdooClientPage({ solution }: { solution: any }) {
                         </div>
 
                         <div className="p-4 bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-between">
-                          <span className="text-[10px] font-bold text-slate-500">// SELECT AN APP TO PREVIEW PRIXGEN INTERACTION</span>
+                          <span className="text-[10px] font-bold text-slate-500">SELECT AN APP TO PREVIEW PRIXGEN INTERACTION</span>
                           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                         </div>
                       </div>

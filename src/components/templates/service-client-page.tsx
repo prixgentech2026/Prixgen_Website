@@ -14,7 +14,6 @@ import { urlFor } from '@/sanity/lib/image';
 import { Magnetic } from '@/components/animations/magnetic';
 import { RevealText } from '@/components/animations/reveal-text';
 import { AnimatedConnector } from '@/components/shared/animated-connector';
-import { HeroBadge } from '@/components/shared/hero-badge';
 import { HeroBackground } from '@/components/shared/hero-background';
 import {
   Database, Activity, LineChart, Zap, ArrowRight, ArrowLeft,
@@ -1714,6 +1713,7 @@ function PrixgenPodGraphic() {
 }
 
 // 10. VALUE PROP MOTION GRAPHIC
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function ValuePropMotionGraphic() {
   return (
     <div className="relative w-full aspect-square max-w-[400px] mx-auto flex items-center justify-center pointer-events-none">
@@ -1818,6 +1818,7 @@ function ValuePropMotionGraphic() {
 }
 
 // 11. TECH STACK MOTION GRAPHIC
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function TechStackMotionGraphic() {
   return (
     <div className="relative w-full aspect-[4/3] max-w-[450px] mx-auto flex items-center justify-center bg-slate-50/50 rounded-[2.5rem] border border-slate-100 p-6 overflow-hidden">
@@ -1956,6 +1957,7 @@ function ReliabilityMotionGraphic() {
 }
 
 // 13. ONBOARDING MOTION GRAPHIC
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function OnboardingMotionGraphic() {
   return (
     <div className="relative w-full aspect-[4/3] max-w-[450px] mx-auto flex items-center justify-center bg-slate-50/50 rounded-[2.5rem] border border-slate-100 p-6 overflow-hidden">

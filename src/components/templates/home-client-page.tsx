@@ -160,7 +160,7 @@ function LeccaQCPanel() {
         </div>
         <div className="r4-counter-label">OBJECTS SCANNED TODAY</div>
       </div>
-      <div className="r4-panel-foot">// COMPUTER_VISION_QC_PIPE</div>
+      <div className="r4-panel-foot">COMPUTER_VISION_QC_PIPE</div>
     </div>
   );
 }
@@ -208,7 +208,7 @@ function IIoTTelemetryPanel() {
           <polyline className="r4-spark-line" points={sparkPoints} />
         </svg>
       </div>
-      <div className="r4-panel-foot">// PLC_MQTT_CONNECT_OK</div>
+      <div className="r4-panel-foot">PLC_MQTT_CONNECT_OK</div>
     </div>
   );
 }
@@ -270,7 +270,7 @@ function GenAICopilotPanel() {
           <span className="r4-caret"></span>
         </div>
       </div>
-      <div className="r4-panel-foot">// NATURAL_LANGUAGE_OPS</div>
+      <div className="r4-panel-foot">NATURAL_LANGUAGE_OPS</div>
     </div>
   );
 }
@@ -972,7 +972,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
                           <i></i><i></i><i></i><i></i><i></i><i></i>
                         </div>
                       </div>
-                      <div className="r4-panel-foot">// DEMAND_YIELD_FORECASTING</div>
+                      <div className="r4-panel-foot">DEMAND_YIELD_FORECASTING</div>
                     </div>
                   </div>
                 </div>
