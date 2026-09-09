@@ -1293,7 +1293,7 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
 
               <FadeUp delay={0.2}>
                 <p className="text-base sm:text-lg text-slate-300 font-medium leading-relaxed">
-                  The complete 16-page engineering whitepaper for PVC and plastics manufacturers — detailing recipe drift controls, ultrasonic sensor integrations, and closed-loop scrap purge accounting.
+                  The complete engineering executive whitepaper for PVC and plastics manufacturers — detailing recipe drift controls, ultrasonic sensor integrations, and closed-loop scrap purge accounting.
                 </p>
               </FadeUp>
 
@@ -1336,7 +1336,7 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
                       Prixgen Research
                     </span>
                     <span className="text-xs text-slate-400 font-mono">
-                      16 Pages • PDF
+                      Executive Brief • PDF
                     </span>
                   </div>
 
@@ -1349,22 +1349,22 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
                     </p>
                   </div>
 
-                  <div className="bg-slate-900 rounded-lg p-3.5 border border-slate-750 space-y-2 text-xs text-slate-300 font-mono">
+                  <div className="bg-slate-900 rounded-lg p-3.5 border border-slate-700/80 space-y-2 text-xs text-slate-300 font-mono">
                     <div className="flex justify-between items-center text-slate-400">
-                      <span>1. Six Value Chain Disconnects</span>
-                      <span className="text-slate-500">p. 03</span>
+                      <span>01. Six Disconnected Systems</span>
+                      <span className="text-slate-500">p. 02</span>
                     </div>
                     <div className="flex justify-between items-center text-slate-400">
-                      <span>2. Five Industry Shifts</span>
+                      <span>05. Raw Material to Dispatch</span>
                       <span className="text-slate-500">p. 06</span>
                     </div>
                     <div className="flex justify-between items-center text-slate-400">
-                      <span>3. 10-Step Extrusion Control</span>
-                      <span className="text-slate-500">p. 09</span>
+                      <span>06. Two Costs Hiding in Plain Sight</span>
+                      <span className="text-slate-500">p. 07</span>
                     </div>
                     <div className="flex justify-between items-center text-slate-400">
-                      <span>4. 10-Link Batch Traceability</span>
-                      <span className="text-slate-500">p. 13</span>
+                      <span>10. Connected Operating Model</span>
+                      <span className="text-slate-500">p. 11</span>
                     </div>
                   </div>
 

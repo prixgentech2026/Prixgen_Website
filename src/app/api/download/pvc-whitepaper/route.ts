@@ -8,8 +8,9 @@ export async function GET() {
   try {
     // 1. Check local file on disk
     const possiblePaths = [
-      path.join(process.cwd(), 'Reports', 'PVC_whitepaper.pdf'),
+      path.join(process.cwd(), 'public', 'PVC_whitepaper.pdf'),
       path.join(process.cwd(), 'public', 'downloads', 'PVC_whitepaper.pdf'),
+      path.join(process.cwd(), 'Reports', 'PVC_whitepaper.pdf'),
     ];
 
     for (const filePath of possiblePaths) {
