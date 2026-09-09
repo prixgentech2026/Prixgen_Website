@@ -745,7 +745,7 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
                 >
                   <div>
                     <span className="text-xs font-mono font-bold text-[#00A3E0] uppercase tracking-wider">
-                      FAULT LINE 0{FAULT_LINES[activeFault].id} // {FAULT_LINES[activeFault].action}
+                      FAULT LINE 0{FAULT_LINES[activeFault].id} &bull; {FAULT_LINES[activeFault].action}
                     </span>
                     <h3 className="text-2xl sm:text-3xl font-bold text-[#0F172A] mt-1.5">
                       {FAULT_LINES[activeFault].title}
@@ -845,7 +845,7 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
               >
                 <div className="space-y-4 max-w-2xl">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00A3E0]/15 text-[#00A3E0] text-xs font-bold uppercase tracking-wider font-mono">
-                    {PROCESS_STEPS[activeStep].type} // {PROCESS_STEPS[activeStep].kpi}
+                    {PROCESS_STEPS[activeStep].type} &bull; {PROCESS_STEPS[activeStep].kpi}
                   </div>
                   <h3 className="text-3xl sm:text-4xl font-extrabold text-white">
                     Step {PROCESS_STEPS[activeStep].step}: {PROCESS_STEPS[activeStep].title}
@@ -1111,7 +1111,7 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
           <FadeUp>
             <div className="flex items-center gap-3 mb-4">
               <motion.div initial={{ width: 0 }} whileInView={{ width: 40 }} transition={{ duration: 0.6 }} className="h-0.5 bg-[#004B87]" />
-              <span className="text-[11px] font-bold text-[#004B87] uppercase tracking-widest">Section 08 // Asset Reliability</span>
+              <span className="text-[11px] font-bold text-[#004B87] uppercase tracking-widest">Section 08 &bull; Asset Reliability</span>
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] tracking-tight">
               From Reactive to Predictive Maintenance
@@ -1123,7 +1123,7 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
 
           <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-slate-50 rounded-2xl p-8 border border-slate-200 space-y-4">
-              <span className="text-xs font-mono font-bold text-slate-400">STAGE 1 // LEGACY</span>
+              <span className="text-xs font-mono font-bold text-slate-400">STAGE 1 &bull; LEGACY</span>
               <h3 className="text-2xl font-bold text-slate-900">Reactive Maintenance</h3>
               <p className="text-sm text-slate-600 font-medium leading-relaxed">
                 Emergency repairs after equipment stoppage. High rush-part freight spend and extended lost extrusion hours.
@@ -1131,7 +1131,7 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
             </div>
 
             <div className="bg-slate-50 rounded-2xl p-8 border border-slate-200 space-y-4">
-              <span className="text-xs font-mono font-bold text-[#004B87]">STAGE 2 // STANDARD</span>
+              <span className="text-xs font-mono font-bold text-[#004B87]">STAGE 2 &bull; STANDARD</span>
               <h3 className="text-2xl font-bold text-[#004B87]">Preventive Maintenance</h3>
               <p className="text-sm text-slate-600 font-medium leading-relaxed">
                 Calendar-based servicing routines and scheduled downtime for screw cleaning and die maintenance.
@@ -1139,7 +1139,7 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
             </div>
 
             <div className="bg-slate-900 text-white rounded-2xl p-8 border border-slate-800 space-y-4 shadow-xl">
-              <span className="text-xs font-mono font-bold text-[#00A3E0]">STAGE 3 // ODOO CONNECTED</span>
+              <span className="text-xs font-mono font-bold text-[#00A3E0]">STAGE 3 &bull; ODOO CONNECTED</span>
               <h3 className="text-2xl font-bold text-white">Predictive Maintenance</h3>
               <p className="text-sm text-slate-300 font-medium leading-relaxed">
                 IIoT sensor vibration and thermal telemetry flags component fatigue before failure occurs, minimizing downtime.
