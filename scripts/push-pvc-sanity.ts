@@ -26,8 +26,8 @@ const pvcDoc = {
   _id: 'industry-pvc-manufacturing',
   title: 'PVC Manufacturing',
   slug: { _type: 'slug', current: 'pvc-manufacturing' },
-  headline: 'Transforming PVC Manufacturing with Intelligent Enterprise Operations.',
-  externalImageUrl: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=1000',
+  headline: 'From Polymer to Pipe: Building a Connected Operating Model for PVC & Plastics Manufacturers',
+  externalImageUrl: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=1200',
   content: [
     {
       _type: 'block',
@@ -37,7 +37,19 @@ const pvcDoc = {
         {
           _type: 'span',
           _key: generateKey(),
-          text: 'PVC manufacturers currently struggle with severe margin erosion, lack of real-time operational visibility, and significant process inefficiencies that collectively undermine profitability and production stability. The Prixgen PVC Manufacturing Solution systematically addresses these leakages by integrating weighbridges, recipe management, and automated dealer networks.'
+          text: 'The journey from raw polymer to a finished, dispatched pipe involves far more than production. For most PVC and plastics manufacturers, it means six disconnected systems — procurement, formulation, production, quality, inventory, and finance — each owned by a different team, tracked differently, and reconciled on its own schedule. This strategic framework explores what a truly connected manufacturing operating model looks like, and why visibility — not just capacity — is becoming the real competitive edge.'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'h2',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: '1. One Value Chain, Six Disconnected Systems'
         }
       ]
     },
@@ -49,7 +61,127 @@ const pvcDoc = {
         {
           _type: 'span',
           _key: generateKey(),
-          text: 'Through dynamic resin pricing engines, digital recipe variance control, and direct IoT connectivity, our solutions eliminate manual entry errors, reduce powder dust loss, and automate collections. With Prixgen, PVC operations achieve end-to-end traceability and a direct boost to EBITDA.'
+          text: 'Procurement, formulation, production, quality, inventory, and finance are usually owned by six different teams, tracked in six different systems, and reconciled on six different schedules. Yet for a PVC or plastics manufacturer, this isn\'t six businesses — it\'s one continuous value chain running from polymer procurement through formulation, extrusion, inspection, packing and dispatch, to dealers and finance. When these functions operate in isolation, the business loses the ability to see itself as a single connected system. The future of plastics manufacturing is not automated production alone. It is connected decision-making across the entire value chain.'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'h2',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: '2. Five Industry Shifts Manufacturers Can\'t Ignore'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'normal',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: 'Five structural shifts are reshaping the plastics and pipe manufacturing industry: Demand Volatility & Forecasting Pressure, SKU & Variant Explosion, Rising Traceability Expectations, Margin Pressure on Commodity Resin, and the decisive shift from Capacity to Visibility, Response & Control.'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'h2',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: '3. Seven Fault Lines in Modern Pipe Manufacturing'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'normal',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: 'Most operational breakdowns in pipe manufacturing trace back to seven recurring fault lines: demand and forecasting misalignment, material planning gaps between polymer and additive needs, production efficiency lost to changeovers and cold-start scrap, quality and traceability gaps in the audit chain, inventory accuracy issues across yard bins, maintenance and financial control disconnects between downtime and the P&L, and system complexity that quietly resurfaces as cost.'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'h2',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: '4. The 10-Step Journey: From Polymer to Finished Pipe'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'normal',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: 'A finished, dispatch-ready pipe passes through ten distinct stages: goods receipt, compounding, extrusion, sizing and calibration, cooling, cutting, printing and marking, inspection, packing, and dispatch. Upstream control points capture batch identity; downstream control points capture what shipped, to whom, and in what condition.'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'h2',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: '5. Two Hidden Costs: Shooting Waste & the Wall-Thickness Paradox'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'normal',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: 'Shooting Waste (purge material lost during stabilization across color and diameter changes) and the Wall-Thickness Paradox (excess grams of costly resin consumed by pipes exceeding target thickness that still pass QC) compound silently as product ranges expand unless deliberately measured and controlled in the ERP.'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'h2',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: '6. Defensible 10-Link Batch-to-Dispatch Traceability'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'normal',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: 'A defensible traceability chain links a supplier batch all the way through to customer dispatch across ten linked points: supplier batch, raw material lot, material issue, production order, machine/operator/shift, production batch, inspection result, finished goods lot, warehouse location, and customer dispatch. This delivers rapid root-cause isolation, pinpoint recall precision, and unshakable regulatory compliance.'
         }
       ]
     }
@@ -57,59 +189,92 @@ const pvcDoc = {
   features: [
     {
       _key: generateKey(),
-      title: 'Dynamic Pricing Engine',
-      description: 'Enforce automated quotation workflows and credit control automation to secure profitability against volatile resin pricing.'
+      title: 'Dynamic Resin Pricing Engine',
+      description: 'Enforce automated quotation workflows and credit control automation to secure gross margins against volatile commodity resin pricing.'
     },
     {
       _key: generateKey(),
-      title: 'MRP-based Recipe Management',
-      description: 'Optimize recipe consistencies, batch traceability, and scrap accounting to prevent powder loss and regrind ratio misuse.'
+      title: 'MRP-based Recipe Variance & Scrap Reclaim',
+      description: 'Optimize batch consistencies, formulation tolerances, and closed-loop scrap accounting to prevent additive leakage and regrind misuse.'
     },
     {
       _key: generateKey(),
-      title: 'IoT Weighbridge Link & Gate Passes',
-      description: 'Connect scales to digital systems to automate net weight gate passes and dispatch syncing.'
+      title: 'IoT Weighbridge Sync & Digital Gate Passes',
+      description: 'Connect weighbridge scales directly to Odoo to automate net weight gate passes, axle load validations, and dispatch syncing.'
+    },
+    {
+      _key: generateKey(),
+      title: 'End-to-End 10-Link Batch Traceability',
+      description: 'Full digital audit trail from resin supplier COA to customer dispatch note, enabling rapid defect root-cause discovery in under 3 minutes.'
+    },
+    {
+      _key: generateKey(),
+      title: 'Ultrasonic Wall-Thickness Telemetry',
+      description: 'Real-time telemetry and die wear condition monitoring to prevent material over-give and eliminate hidden resin over-consumption.'
     },
     {
       _key: generateKey(),
       title: 'Dealer Management System (DMS)',
-      description: 'Automate secondary sales, rules-based schemes, claims approvals, and reduce dispute delays.'
+      description: 'Digitize secondary sales, automated volume rebate schemes, claims approval workflows, and minimize dealer dispute delays.'
     }
   ],
   process: [
     {
       _key: generateKey(),
-      title: 'Process Audit',
-      description: 'Identify raw material wastage, weighbridge setups, and secondary sales gaps.'
+      title: 'Plant & Silo Diagnostic Audit',
+      description: 'Identify raw material weighbridge gaps, recipe variance leakages, scrap reclaim loops, and secondary sales friction.'
     },
     {
       _key: generateKey(),
-      title: 'Solution Blueprint',
-      description: 'Outline custom integrations for scales, recipe controls, and ERP distribution loops.'
+      title: 'Architecture Blueprint & Matrix BOM Setup',
+      description: 'Model custom integrations for scales, recipe controls, pipe SKU matrices, and ERP distribution logic.'
     },
     {
       _key: generateKey(),
-      title: 'Phased Implementation',
-      description: 'Seamlessly deploy automated quote workflows, MRP calculations, and dealer network digitization.'
+      title: 'Phased Odoo ERP & IIoT Implementation',
+      description: 'Seamlessly deploy dynamic quote workflows, live extruder telemetry, MRP calculations, and dealer network portals.'
     },
     {
       _key: generateKey(),
-      title: 'EBITDA & ROI Tracking',
-      description: 'Monitor scrap reductions, quotation speed improvements, and collection cycle compressions.'
+      title: 'Real-Time Scorecard & EBITDA Realization',
+      description: 'Track ongoing scrap reductions, wall-thickness precision, quotation speed acceleration, and working capital optimization.'
     }
   ],
   seo: {
-    title: 'PVC Manufacturing ERP & Digital Supply Chain | Prixgen',
-    metaDesc: 'Scale your PVC manufacturing operations with automated weighbridge integration, dynamic resin pricing, recipe controls, and dealer networks.',
-    keywords: ['PVC Manufacturing', 'Weighbridge Integration', 'Dealer Management System', 'Recipe Management', 'PVC ERP']
+    title: 'From Polymer to Pipe: Connected ERP for PVC Manufacturers | Prixgen',
+    metaDesc: 'Discover how a connected Odoo ERP operating model eliminates six disconnected systems in PVC & plastics manufacturing — from raw material to dispatch.',
+    keywords: [
+      'Odoo ERP for PVC manufacturers',
+      'plastics manufacturing ERP software',
+      'pipe manufacturing ERP solution',
+      'batch traceability plastics manufacturing',
+      'inventory management for pipe manufacturers',
+      'predictive maintenance plastics industry',
+      'OEE tracking manufacturing',
+      'extrusion production planning software'
+    ]
   }
 };
 
 async function pushPvcData() {
   try {
-    console.log('1. Pushing PVC Industry Document to Sanity...');
+    console.log('1. Checking whitepaper file asset...');
+    const asset = await client.fetch('*[_type == "sanity.fileAsset" && originalFilename match "*PVC*"][0]');
+    
+    const docToPush = {
+      ...pvcDoc,
+      ...(asset && {
+        whitepaperPdf: {
+          _type: 'file',
+          asset: { _type: 'reference', _ref: asset._id }
+        },
+        whitepaperTitle: 'From Polymer to Pipe: Building a Connected Operating Model for PVC & Plastics Manufacturers'
+      })
+    };
+
+    console.log('2. Pushing PVC Industry Document to Sanity...');
     await client.createIfNotExists({ _type: 'industry', _id: 'industry-pvc-manufacturing' });
-    const result = await client.patch('industry-pvc-manufacturing').set(pvcDoc).commit();
+    const result = await client.patch('industry-pvc-manufacturing').set(docToPush).commit();
     console.log(`[SUCCESS] PVC Industry document synced: ${result._id}`);
 
     console.log('2. Verifying and linking PVC in industriesPage...');

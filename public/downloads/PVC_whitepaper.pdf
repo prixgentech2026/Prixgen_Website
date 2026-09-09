@@ -1,0 +1,709 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [ 6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R ] /Count 6 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 595.28 841.89 ] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 2547 >>
+stream
+
+    % Deep Navy Background Banner
+    0 0.153 0.278 rg
+    45 500 505 280 re f
+
+    % Cyan accent stripe
+    0 0.639 0.878 rg
+    45 776 505 4 re f
+
+    BT
+    /F2 10 Tf
+    0 0.639 0.878 rg
+    70 740 Td (PRIXGEN INDUSTRIAL RESEARCH  |  EXECUTIVE WHITE PAPER) Tj
+    ET
+
+    BT
+    /F2 26 Tf
+    1 1 1 rg
+    70 680 Td (FROM POLYMER TO PIPE:) Tj
+    ET
+
+    BT
+    /F2 18 Tf
+    1 1 1 rg
+    70 645 Td (Building a Connected Operating Model) Tj
+    ET
+
+    BT
+    /F1 13 Tf
+    0.85 0.92 0.98 rg
+    70 615 Td (For PVC and Plastics Pipe Manufacturers) Tj
+    ET
+
+    BT
+    /F3 10 Tf
+    0.7 0.8 0.9 rg
+    70 560 Td (A comprehensive framework for eliminating operational disconnects,) Tj
+    70 544 Td (locking recipe variance, capturing wall-thickness giveaways,) Tj
+    70 528 Td (and enforcing defensible 10-link batch-to-dispatch digital traceability.) Tj
+    ET
+
+    % Author Box
+    0.95 0.97 1 rg
+    45 340 505 130 re f
+    0.8 0.88 0.96 rg
+    1 w
+    45 340 505 130 re S
+
+    BT
+    /F2 11 Tf
+    0 0.294 0.529 rg
+    70 440 Td (AUTHOR & INDUSTRY PRACTICE LEAD) Tj
+    ET
+
+    BT
+    /F2 12 Tf
+    0.1 0.15 0.2 rg
+    70 415 Td (Karthik S Hatti) Tj
+    ET
+
+    BT
+    /F1 10 Tf
+    0.3 0.35 0.4 rg
+    70 398 Td (Co-Founder & Chief Business Officer, Prixgen Tech Solutions) Tj
+    70 380 Td (Practice Focus: Enterprise ERP Architecture & Industrial Telemetry) Tj
+    ET
+
+    BT
+    /F1 9 Tf
+    0.4 0.45 0.5 rg
+    70 355 Td (Published by Prixgen Industrial Intelligence  |  prixgen.com) Tj
+    ET
+
+    % Key Takeaways Preview
+    BT
+    /F2 11 Tf
+    0.1 0.15 0.2 rg
+    45 290 Td (EXECUTIVE SUMMARY CORE TAKEAWAYS:) Tj
+    ET
+
+    BT
+    /F1 9.5 Tf
+    0.2 0.25 0.3 rg
+    45 265 Td ([*] 6 Disconnected Systems: Unifying Procurement, Formulation, Production, Quality, Inventory & Finance) Tj
+    45 245 Td ([*] The 10-Step Extrusion Control Journey: Direct telemetry control points from bulk silo to yard bundle) Tj
+    45 225 Td ([*] Two Silent Margin Leaks: Shooting purge waste math and ultrasonic wall-thickness paradox calculation) Tj
+    45 205 Td ([*] 10-Link Digital Traceability: Full supplier COA to customer dispatch note root-cause discovery in < 3 min) Tj
+    45 185 Td ([*] 5-Layer Odoo ERP Operating Model: Connecting plant SCADA/IIoT telemetry directly to financial ledgers) Tj
+    ET
+
+    % Bottom Footer
+    0.85 0.85 0.85 rg
+    0.5 w
+    45 60 m 550 60 l S
+    BT
+    /F3 8 Tf
+    0.5 0.5 0.5 rg
+    45 45 Td (Confidential & Proprietary  |  Copyright (C) Prixgen Tech Solutions. All Rights Reserved.) Tj
+    ET
+  
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 595.28 841.89 ] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 9 0 R >>
+endobj
+9 0 obj
+<< /Length 3293 >>
+stream
+
+    
+      % Header bar
+      0 0.294 0.529 rg
+      0.8 w
+      45 800 m 550 800 l S
+      BT
+      /F2 8 Tf
+      0 0.294 0.529 rg
+      45 806 Td (PRIXGEN INDUSTRIAL RESEARCH // PVC & PLASTICS MANUFACTURING) Tj
+      ET
+      BT
+      /F1 8 Tf
+      0.4 0.4 0.4 rg
+      480 806 Td (STRATEGIC BRIEF) Tj
+      ET
+
+      % Footer bar
+      0.85 0.85 0.85 rg
+      0.5 w
+      45 45 m 550 45 l S
+      BT
+      /F1 8 Tf
+      0.4 0.4 0.4 rg
+      45 32 Td (From Polymer to Pipe: Building a Connected Operating Model) Tj
+      ET
+      BT
+      /F2 8 Tf
+      0 0.294 0.529 rg
+      520 32 Td (Page 2) Tj
+      ET
+    
+
+    BT
+    /F2 16 Tf
+    0 0.294 0.529 rg
+    45 760 Td (1. One Value Chain, Six Disconnected Systems) Tj
+    ET
+
+    BT
+    /F1 10 Tf
+    0.2 0.2 0.2 rg
+    45 735 Td (For most PVC and plastics manufacturers, operations are managed across six isolated systems,) Tj
+    45 720 Td (each owned by a different team, recorded separately, and reconciled on different schedules:) Tj
+    ET
+
+    % 6 Silos Grid Box
+    0.96 0.97 0.99 rg
+    45 470 505 230 re f
+    0.85 0.88 0.92 rg
+    1 w
+    45 470 505 230 re S
+
+    BT
+    /F2 11 Tf
+    0 0.294 0.529 rg
+    65 675 Td (1. Procurement Silo:) Tj
+    65 635 Td (2. Formulation Silo:) Tj
+    65 595 Td (3. Production Silo:) Tj
+    65 555 Td (4. Quality Silo:) Tj
+    65 515 Td (5. Inventory Silo:) Tj
+    65 475 Td (6. Finance Silo:) Tj
+    ET
+
+    BT
+    /F1 9.5 Tf
+    0.2 0.2 0.2 rg
+    180 675 Td (Resin price volatility tracked in isolated supplier spreadsheets.) Tj
+    180 635 Td (Recipe batching variance and unrecorded regrind blending on shop floor.) Tj
+    180 595 Td (Extrusion line stoppages and changeover purges missing from real-time ERP.) Tj
+    180 555 Td (Hydrostatic, tensile, and wall-thickness tests logged on paper clipboards.) Tj
+    180 515 Td (Outdoor yard rack mismatches across diameter, pressure class, and wall SDR.) Tj
+    180 475 Td (Actual scrap costs discovered weeks late at month-end gross margin reviews.) Tj
+    ET
+
+    BT
+    /F2 13 Tf
+    0.1 0.15 0.2 rg
+    45 430 Td (The Cost of Operational Disconnect) Tj
+    ET
+
+    BT
+    /F1 9.5 Tf
+    0.25 0.25 0.25 rg
+    45 410 Td (When these six functions operate in silos, the manufacturer loses the ability to see itself as a single) Tj
+    45 395 Td (continuous value stream. The true cost surfaces in three ways:) Tj
+    45 375 Td (  * Slower Decision Speed: Material planners wait on manual stock counts before confirming orders.) Tj
+    45 355 Td (  * Margin Erosion: Uncaptured resin over-give and cold-start purge inflate COGS without detection.) Tj
+    45 335 Td (  * Recall Vulnerability: Audits require hours of manual paperwork rather than instant serialization.) Tj
+    ET
+
+    % Callout box
+    0.93 0.97 1 rg
+    45 220 505 85 re f
+    0 0.294 0.529 rg
+    1.5 w
+    45 220 m 45 305 l S
+
+    BT
+    /F2 10.5 Tf
+    0 0.294 0.529 rg
+    65 285 Td (THE STRATEGIC PRINCIPLE:) Tj
+    ET
+    BT
+    /F3 9.5 Tf
+    0.1 0.2 0.3 rg
+    65 265 Td ("The future of plastics manufacturing is not automated production alone.) Tj
+    65 250 Td (It is connected decision-making across the entire value chain  linking raw resin) Tj
+    65 235 Td (procurement directly to machine telemetry, quality gates, and dispatch invoicing.") Tj
+    ET
+  
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 595.28 841.89 ] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 11 0 R >>
+endobj
+11 0 obj
+<< /Length 3674 >>
+stream
+
+    
+      % Header bar
+      0 0.294 0.529 rg
+      0.8 w
+      45 800 m 550 800 l S
+      BT
+      /F2 8 Tf
+      0 0.294 0.529 rg
+      45 806 Td (PRIXGEN INDUSTRIAL RESEARCH // PVC & PLASTICS MANUFACTURING) Tj
+      ET
+      BT
+      /F1 8 Tf
+      0.4 0.4 0.4 rg
+      480 806 Td (STRATEGIC BRIEF) Tj
+      ET
+
+      % Footer bar
+      0.85 0.85 0.85 rg
+      0.5 w
+      45 45 m 550 45 l S
+      BT
+      /F1 8 Tf
+      0.4 0.4 0.4 rg
+      45 32 Td (From Polymer to Pipe: Building a Connected Operating Model) Tj
+      ET
+      BT
+      /F2 8 Tf
+      0 0.294 0.529 rg
+      520 32 Td (Page 3) Tj
+      ET
+    
+
+    BT
+    /F2 16 Tf
+    0 0.294 0.529 rg
+    45 760 Td (2. The 10-Step Extrusion Control Journey) Tj
+    ET
+
+    BT
+    /F1 10 Tf
+    0.2 0.2 0.2 rg
+    45 735 Td (Every finished pipe passes through ten distinct stages. A connected ERP captures digital telemetry) Tj
+    45 720 Td (at each control point to eliminate data lag and human logging errors:) Tj
+    ET
+
+    % Table of 10 Steps
+    0.96 0.97 0.98 rg
+    45 340 505 365 re f
+    0.85 0.85 0.85 rg
+    0.5 w
+    45 340 505 365 re S
+
+    BT
+    /F2 9.5 Tf
+    0 0.294 0.529 rg
+    55 685 Td (Stage) Tj
+    110 685 Td (Operation) Tj
+    230 685 Td (Control Point) Tj
+    380 685 Td (Digital ERP Telemetry) Tj
+    ET
+
+    BT
+    /F1 8.5 Tf
+    0.15 0.15 0.15 rg
+    55 660 Td (01) Tj  110 660 Td (Goods Receipt) Tj      230 660 Td (Bulk Silo Inward) Tj       380 660 Td (IoT Weighbridge gross/tare lock) Tj
+    55 635 Td (02) Tj  110 635 Td (Compounding) Tj        230 635 Td (High-Speed Mixer) Tj       380 635 Td (PLC recipe variance < 0.2%) Tj
+    55 610 Td (03) Tj  110 610 Td (Extrusion) Tj          230 610 Td (Melt Temperature) Tj       380 610 Td (Screw RPM & zone thermal sync) Tj
+    55 585 Td (04) Tj  110 585 Td (Calibration) Tj        230 585 Td (Vacuum Sizing Tank) Tj     380 585 Td (OD tolerance +/- 0.05mm) Tj
+    55 560 Td (05) Tj  110 560 Td (Cooling Tanks) Tj      230 560 Td (Spray Water Bath) Tj       380 560 Td (Closed-loop chiller temp 18 deg C) Tj
+    55 535 Td (06) Tj  110 535 Td (Haul-Off & Cut) Tj     230 535 Td (Planetary Cutter) Tj       380 535 Td (Standard length 3m/6m +/- 1mm) Tj
+    55 510 Td (07) Tj  110 510 Td (Marking) Tj            230 510 Td (Online Inkjet Coding) Tj   380 510 Td (BIS/ASTM mark, timestamp & lot) Tj
+    55 485 Td (08) Tj  110 485 Td (Inspection) Tj         230 485 Td (Ultrasonic Wall/Burst) Tj  380 485 Td (Pass/Fail QC gate locking) Tj
+    55 460 Td (09) Tj  110 460 Td (Socketing) Tj          230 460 Td (Belling & Bundling) Tj     380 460 Td (Automated bundle barcode tag) Tj
+    55 435 Td (10) Tj  110 435 Td (Yard & Dispatch) Tj    230 435 Td (Truck Loading Outward) Tj  380 435 Td (Axle load check & digital e-Way bill) Tj
+    ET
+
+    % 10-Link Traceability Section
+    BT
+    /F2 13 Tf
+    0.1 0.15 0.2 rg
+    45 300 Td (Defensible 10-Link Batch Traceability Chain) Tj
+    ET
+
+    BT
+    /F1 9.5 Tf
+    0.2 0.2 0.2 rg
+    45 280 Td (A single defective pipe can trigger catastrophic liability unless the origin is defensibly proven.) Tj
+    45 265 Td (Prixgen's Odoo ERP architecture creates an unbroken audit trail linking ten critical nodes:) Tj
+    ET
+
+    BT
+    /F2 8.5 Tf
+    0 0.294 0.529 rg
+    45 235 Td (1. Supplier COA  -->  2. Silo Lot  -->  3. Compounding Batch  -->  4. Work Order  -->  5. Extruder Line) Tj
+    45 215 Td (6. Shift Operator  -->  7. QC Burst Record  -->  8. Finished Bundle  -->  9. Yard Bin  -->  10. Dispatch Note) Tj
+    ET
+
+    BT
+    /F1 9 Tf
+    0.3 0.3 0.3 rg
+    45 180 Td (Result: Defect root cause isolated in under 3 minutes without recalling unaffected production batches.) Tj
+    ET
+  
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 595.28 841.89 ] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 13 0 R >>
+endobj
+13 0 obj
+<< /Length 3153 >>
+stream
+
+    
+      % Header bar
+      0 0.294 0.529 rg
+      0.8 w
+      45 800 m 550 800 l S
+      BT
+      /F2 8 Tf
+      0 0.294 0.529 rg
+      45 806 Td (PRIXGEN INDUSTRIAL RESEARCH // PVC & PLASTICS MANUFACTURING) Tj
+      ET
+      BT
+      /F1 8 Tf
+      0.4 0.4 0.4 rg
+      480 806 Td (STRATEGIC BRIEF) Tj
+      ET
+
+      % Footer bar
+      0.85 0.85 0.85 rg
+      0.5 w
+      45 45 m 550 45 l S
+      BT
+      /F1 8 Tf
+      0.4 0.4 0.4 rg
+      45 32 Td (From Polymer to Pipe: Building a Connected Operating Model) Tj
+      ET
+      BT
+      /F2 8 Tf
+      0 0.294 0.529 rg
+      520 32 Td (Page 4) Tj
+      ET
+    
+
+    BT
+    /F2 16 Tf
+    0 0.294 0.529 rg
+    45 760 Td (3. Two Silent Margin Leaks in Plastics Manufacturing) Tj
+    ET
+
+    % Leak 1 Box
+    0.98 0.98 0.98 rg
+    45 520 505 220 re f
+    0.85 0.85 0.85 rg
+    1 w
+    45 520 505 220 re S
+
+    BT
+    /F2 12 Tf
+    0.7 0.2 0.1 rg
+    65 715 Td (Leak #1: The Wall-Thickness Paradox (Resin Over-Give)) Tj
+    ET
+
+    BT
+    /F1 9.5 Tf
+    0.2 0.2 0.2 rg
+    65 690 Td (In PVC pipe production, standards define a MINIMUM wall thickness. Operators intentionally) Tj
+    65 675 Td (run lines slightly thicker (+0.1mm to +0.3mm) to ensure 100% compliance during burst testing.) Tj
+    65 655 Td (The Hidden Cost:) Tj
+    65 640 Td (On a plant producing 1,500 tons/month, a mere 2% excess wall thickness burns 30 tons of raw) Tj
+    65 625 Td (polymer per month  costing over $36,000 in unbilled resin giveaway annually.) Tj
+    ET
+
+    BT
+    /F2 9.5 Tf
+    0 0.294 0.529 rg
+    65 595 Td (The Odoo Solution: Real-Time Ultrasonic Telemetry & Weight-Per-Meter Feedback) Tj
+    ET
+    BT
+    /F1 9 Tf
+    0.3 0.3 0.3 rg
+    65 575 Td (Continuous weight-per-meter sensors automatically adjust haul-off traction speed to maintain) Tj
+    65 560 Td (target nominal thickness (+/- 0.02mm) without ever dipping below standard thresholds.) Tj
+    ET
+
+    % Leak 2 Box
+    0.98 0.98 0.98 rg
+    45 270 505 220 re f
+    0.85 0.85 0.85 rg
+    1 w
+    45 270 505 220 re S
+
+    BT
+    /F2 12 Tf
+    0.7 0.2 0.1 rg
+    65 465 Td (Leak #2: Unmodelled Shooting Purge Waste & Regrind Drift) Tj
+    ET
+
+    BT
+    /F1 9.5 Tf
+    0.2 0.2 0.2 rg
+    65 440 Td (Die head changeovers, color switches, and cold starts generate kilograms of degraded polymer purge.) Tj
+    65 425 Td (In disconnected plants, purge is either scrapped without recording or haphazardly fed back into) Tj
+    65 410 Td (extruders without adjusting additive masterbatch ratios.) Tj
+    65 390 Td (The Hidden Cost:) Tj
+    65 375 Td (Uncontrolled regrind ratios alter melt flow index (MFI), causing unexpected pipe brittleness,) Tj
+    65 360 Td (customer hydrostatic failures, and unrecorded COGS inflation.) Tj
+    ET
+
+    BT
+    /F2 9.5 Tf
+    0 0.294 0.529 rg
+    65 330 Td (The Odoo Solution: Closed-Loop Scrap Reclaim & Auto-Balanced MRP BOMs) Tj
+    ET
+    BT
+    /F1 9 Tf
+    0.3 0.3 0.3 rg
+    65 310 Td (Purge weight is logged at extruder bins via barcode. Odoo MRP dynamically adjusts the virgin resin) Tj
+    65 295 Td (and stabilizer dosing ratio in compounding batches based on exact regrind availability.) Tj
+    ET
+  
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 595.28 841.89 ] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 15 0 R >>
+endobj
+15 0 obj
+<< /Length 3599 >>
+stream
+
+    
+      % Header bar
+      0 0.294 0.529 rg
+      0.8 w
+      45 800 m 550 800 l S
+      BT
+      /F2 8 Tf
+      0 0.294 0.529 rg
+      45 806 Td (PRIXGEN INDUSTRIAL RESEARCH // PVC & PLASTICS MANUFACTURING) Tj
+      ET
+      BT
+      /F1 8 Tf
+      0.4 0.4 0.4 rg
+      480 806 Td (STRATEGIC BRIEF) Tj
+      ET
+
+      % Footer bar
+      0.85 0.85 0.85 rg
+      0.5 w
+      45 45 m 550 45 l S
+      BT
+      /F1 8 Tf
+      0.4 0.4 0.4 rg
+      45 32 Td (From Polymer to Pipe: Building a Connected Operating Model) Tj
+      ET
+      BT
+      /F2 8 Tf
+      0 0.294 0.529 rg
+      520 32 Td (Page 5) Tj
+      ET
+    
+
+    BT
+    /F2 16 Tf
+    0 0.294 0.529 rg
+    45 760 Td (4. The 5-Layer Connected Operating Model) Tj
+    ET
+
+    BT
+    /F1 10 Tf
+    0.2 0.2 0.2 rg
+    45 735 Td (Prixgen deploys a unified 5-layer architecture to bridge shop-floor hardware with executive decisions:) Tj
+    ET
+
+    % 5 Layers Graphic
+    0.95 0.97 1 rg  45 660 505 50 re f  0.8 0.88 0.98 rg 1 w 45 660 505 50 re S
+    0.92 0.95 0.99 rg 45 600 505 50 re f  0.75 0.85 0.95 rg 1 w 45 600 505 50 re S
+    0.88 0.93 0.98 rg 45 540 505 50 re f  0.70 0.80 0.92 rg 1 w 45 540 505 50 re S
+    0.84 0.90 0.97 rg 45 480 505 50 re f  0.65 0.75 0.90 rg 1 w 45 480 505 50 re S
+    0.80 0.88 0.96 rg 45 420 505 50 re f  0.60 0.70 0.88 rg 1 w 45 420 505 50 re S
+
+    BT
+    /F2 10 Tf  0 0.294 0.529 rg
+    60 690 Td (LAYER 5: Dealer & Commercial Portal) Tj
+    60 630 Td (LAYER 4: Odoo Business Applications Core) Tj
+    60 570 Td (LAYER 3: Digital Operations & Workflow) Tj
+    60 510 Td (LAYER 2: Data & Telemetry Aggregation) Tj
+    60 450 Td (LAYER 1: Connected Plant Hardware) Tj
+    ET
+
+    BT
+    /F1 8.5 Tf 0.2 0.2 0.2 rg
+    60 675 Td (Live secondary sales, automated volume rebates, claims validation & digital dispatch notes.) Tj
+    60 615 Td (Unified MRP II, Inventory, Live Job Costing, Field Maintenance & Financial General Ledger.) Tj
+    60 555 Td (Recipe locking, automated weighbridge gate passes, closed-loop purge & batch serialization.) Tj
+    60 495 Td (Real-time OEE computation, thermal profile tracking, die wear alerts & predictive maintenance.) Tj
+    60 435 Td (Extruder PLC/SCADA controllers, ultrasonic wall gauges, haul-off sensors & weighbridges.) Tj
+    ET
+
+    % Management Scorecard Table
+    BT
+    /F2 13 Tf
+    0.1 0.15 0.2 rg
+    45 380 Td (Real-Time Manufacturing Scorecard) Tj
+    ET
+
+    BT
+    /F1 9.5 Tf
+    0.2 0.2 0.2 rg
+    45 360 Td (Management steering requires live transaction metrics rather than stale monthly spreadsheets:) Tj
+    ET
+
+    0.97 0.97 0.97 rg 45 180 505 160 re f
+    0.85 0.85 0.85 rg 0.5 w 45 180 505 160 re S
+
+    BT
+    /F2 9 Tf 0 0.294 0.529 rg
+    60 320 Td (Operational Domain) Tj
+    200 320 Td (Primary Metric) Tj
+    340 320 Td (Target Standard) Tj
+    450 320 Td (Impact) Tj
+    ET
+
+    BT
+    /F1 8.5 Tf 0.2 0.2 0.2 rg
+    60 295 Td (Procurement) Tj     200 295 Td (Resin Price Variance) Tj     340 295 Td (< 0.5% vs Index) Tj   450 295 Td (Margin protection) Tj
+    60 270 Td (Compounding) Tj     200 270 Td (Recipe Weight Drift) Tj      340 270 Td (< 0.2% variance) Tj   450 270 Td (Zero batch waste) Tj
+    60 245 Td (Extrusion Line) Tj  200 245 Td (Overall Equipment (OEE)) Tj  340 245 Td (> 86% across shifts) Tj 450 245 Td (Throughput boost) Tj
+    60 220 Td (Quality Assurance) Tj 200 220 Td (Wall Thickness Over-Give) Tj 340 220 Td (< 0.5% over nominal) Tj 450 220 Td ($36k/yr saved) Tj
+    60 195 Td (Distribution) Tj    200 195 Td (Traceability Lookup Time) Tj 340 195 Td (< 3 minutes) Tj      450 195 Td (Defensible audits) Tj
+    ET
+  
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 595.28 841.89 ] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 17 0 R >>
+endobj
+17 0 obj
+<< /Length 2787 >>
+stream
+
+    
+      % Header bar
+      0 0.294 0.529 rg
+      0.8 w
+      45 800 m 550 800 l S
+      BT
+      /F2 8 Tf
+      0 0.294 0.529 rg
+      45 806 Td (PRIXGEN INDUSTRIAL RESEARCH // PVC & PLASTICS MANUFACTURING) Tj
+      ET
+      BT
+      /F1 8 Tf
+      0.4 0.4 0.4 rg
+      480 806 Td (STRATEGIC BRIEF) Tj
+      ET
+
+      % Footer bar
+      0.85 0.85 0.85 rg
+      0.5 w
+      45 45 m 550 45 l S
+      BT
+      /F1 8 Tf
+      0.4 0.4 0.4 rg
+      45 32 Td (From Polymer to Pipe: Building a Connected Operating Model) Tj
+      ET
+      BT
+      /F2 8 Tf
+      0 0.294 0.529 rg
+      520 32 Td (Page 6) Tj
+      ET
+    
+
+    BT
+    /F2 16 Tf
+    0 0.294 0.529 rg
+    45 760 Td (5. Next Steps: Schedule a Plant Diagnostic Audit) Tj
+    ET
+
+    BT
+    /F1 10 Tf
+    0.2 0.2 0.2 rg
+    45 730 Td (Transforming a PVC or plastics plant into a connected manufacturing operation starts with) Tj
+    45 715 Td (a zero-cost operational audit led by Prixgen's industrial engineering and Odoo practice.) Tj
+    ET
+
+    % 4-Step Roadmap Boxes
+    0.96 0.98 1 rg 45 490 505 195 re f
+    0.8 0.88 0.98 rg 1 w 45 490 505 195 re S
+
+    BT
+    /F2 11 Tf 0 0.294 0.529 rg
+    65 660 Td (Phase 1: Plant & Silo Diagnostic (Week 1-2)) Tj
+    65 615 Td (Phase 2: Master Data & Matrix BOM Design (Week 3-4)) Tj
+    65 570 Td (Phase 3: Odoo ERP & IIoT Hardware Integration (Week 5-8)) Tj
+    65 525 Td (Phase 4: Live Scorecard & EBITDA Realization (Week 9+)) Tj
+    ET
+
+    BT
+    /F1 9 Tf 0.2 0.2 0.2 rg
+    65 645 Td (Audit raw material weighbridge gaps, formulation leakages, and yard inventory accuracy.) Tj
+    65 600 Td (Configure multi-variant SDR matrix BOMs and dynamic resin pricing quotation workflows.) Tj
+    65 555 Td (Connect weighbridge scales, PLC telemetry, ultrasonic wall sensors, and barcode guns.) Tj
+    65 510 Td (Real-time OEE tracking, automatic scrap accounting, and digitized dealer rebate loops.) Tj
+    ET
+
+    % Contact Card
+    0 0.153 0.278 rg
+    45 260 505 190 re f
+
+    BT
+    /F2 14 Tf
+    1 1 1 rg
+    70 415 Td (Ready to Connect the Journey From Polymer to Pipe?) Tj
+    ET
+
+    BT
+    /F1 10 Tf
+    0.8 0.9 1 rg
+    70 390 Td (Speak with our manufacturing architects about implementing this framework in your plant.) Tj
+    ET
+
+    BT
+    /F2 10.5 Tf
+    0 0.639 0.878 rg
+    70 355 Td (Direct Consultation Channels:) Tj
+    ET
+
+    BT
+    /F1 10 Tf
+    1 1 1 rg
+    70 335 Td (Email:   sales@prixgen.com  |  info@prixgen.com) Tj
+    70 315 Td (Phone:   +91 99300 57159) Tj
+    70 295 Td (Web:     https://www.prixgen.com/industries/pvc-manufacturing) Tj
+    70 275 Td (Address: Prixgen Tech Solutions Pvt Ltd) Tj
+    ET
+
+    BT
+    /F3 8.5 Tf
+    0.5 0.5 0.5 rg
+    45 180 Td (Document ID: PX-WP-PVC-2026-09  |  Classification: Public Executive Distribution) Tj
+    ET
+  
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000019 00000 n 
+0000000068 00000 n 
+0000000161 00000 n 
+0000000258 00000 n 
+0000000360 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+20766
+%%EOF

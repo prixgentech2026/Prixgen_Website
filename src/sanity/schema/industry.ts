@@ -55,6 +55,21 @@ export default defineType({
       fields: [defineField({ name: 'altText', title: 'Alt Text', type: 'string' })]
     }),
     defineField({
+      name: 'whitepaperPdf',
+      title: 'Whitepaper PDF File',
+      type: 'file',
+      options: {
+        accept: '.pdf',
+      },
+      description: 'Upload or download the strategic whitepaper PDF for this industry.',
+    }),
+    defineField({
+      name: 'whitepaperTitle',
+      title: 'Whitepaper Display Title',
+      type: 'string',
+      description: 'Title shown on the gated download modal.',
+    }),
+    defineField({
       name: 'content',
       title: 'Content',
       type: 'array',

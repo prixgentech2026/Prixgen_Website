@@ -562,14 +562,17 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
           :root {
             --r4-navy:        #004B87;   /* brand blue */
             --r4-lightblue:   #00A3E0;   /* brand lightblue */
-            --r4-dark:        #1A1A1A;   /* brand dark text */
-            --r4-gray:        #F4F4F4;   /* brand gray */
+            --r4-dark:        #0F172A;   /* brand dark text */
+            --r4-gray:        #F8FAFC;   /* brand gray */
             --r4-white:       #FFFFFF;
           }
           
           .r4-hero {
             position: relative;
-            background: #FFFFFF;
+            background: 
+              radial-gradient(1000px circle at 85% 30%, rgba(0, 163, 224, 0.06), transparent 60%),
+              radial-gradient(900px circle at 10% 70%, rgba(0, 75, 135, 0.04), transparent 60%),
+              #FFFFFF;
             overflow: hidden;
             text-align: left;
           }
@@ -577,17 +580,19 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
           .r4-hero::before {
             content: ""; position: absolute; inset: 0; pointer-events: none;
             background-image:
-              linear-gradient(rgba(0, 75, 135, 0.015) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(0, 75, 135, 0.015) 1px, transparent 1px);
-            background-size: 42px 42px;
+              linear-gradient(rgba(0, 75, 135, 0.03) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(0, 75, 135, 0.03) 1px, transparent 1px);
+            background-size: 38px 38px;
+            mask-image: radial-gradient(ellipse at 50% 50%, black 45%, transparent 85%);
+            -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 45%, transparent 85%);
           }
 
           .r4-eyebrow {
-            display: inline-flex; align-items: center; gap: 9px;
-            font-size: 10px; font-weight: 700; letter-spacing: 0.25em;
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 11px; font-weight: 750; letter-spacing: 0.18em;
             text-transform: uppercase; color: var(--r4-navy);
-            border: 1px solid rgba(0, 163, 224, 0.25); background: rgba(0, 163, 224, 0.06);
-            padding: 7px 14px 7px 10px; border-radius: 100px; margin-bottom: 26px;
+            border: 1px solid rgba(0, 163, 224, 0.28); background: rgba(0, 163, 224, 0.06);
+            padding: 6px 14px 6px 11px; border-radius: 100px; margin-bottom: 20px;
           }
           
           .r4-eyebrow .r4-dot {
@@ -601,27 +606,28 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
           }
 
           .r4-h1 {
-            font-weight: 700;
-            line-height: 1.15;
-            letter-spacing: -0.02em;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
             color: var(--r4-dark);
           }
 
           .r4-h1-a {
-            display: block; font-size: 20px; font-weight: 700; color: var(--r4-navy); margin-bottom: 8px;
+            display: block;
+            font-size: clamp(1.35rem, 2.3vw, 1.95rem);
+            font-weight: 700;
+            color: var(--r4-navy);
+            margin-bottom: 6px;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
           }
           
           .r4-h1-b {
-            display: block; font-size: 32px; font-weight: 700;
-          }
-          
-          @media (min-width: 768px) {
-            .r4-h1-a { font-size: 24px; }
-            .r4-h1-b { font-size: 44px; }
-          }
-          @media (min-width: 1024px) {
-            .r4-h1-a { font-size: 28px; }
-            .r4-h1-b { font-size: 48px; }
+            display: block;
+            font-size: clamp(2.25rem, 4.2vw, 3.65rem);
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -0.035em;
           }
           
           .r4-h1-b .r4-hi {
@@ -629,17 +635,28 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
           }
 
           .r4-sub {
-            margin-top: 22px; font-size: 18px; font-weight: 500; line-height: 1.7; color: #475569; max-width: 580px;
+            margin-top: 20px;
+            font-size: clamp(1rem, 1.15vw, 1.15rem);
+            font-weight: 450;
+            line-height: 1.68;
+            color: #475569;
+            max-width: 620px;
           }
 
           .r4-proof-row {
-            margin-top: 44px; padding-top: 22px; border-top: 1px solid rgba(0, 75, 135, 0.12);
-            display: flex; gap: 28px; flex-wrap: wrap;
-            font-size: 13.5px; color: #475569; letter-spacing: 0.02em;
+            margin-top: 36px;
+            padding-top: 22px;
+            border-top: 1px solid rgba(0, 75, 135, 0.12);
+            display: flex;
+            gap: 24px 36px;
+            flex-wrap: wrap;
+            font-size: 13.5px;
+            color: #475569;
+            letter-spacing: 0.01em;
           }
           
           .r4-proof-row b {
-            color: var(--r4-navy); font-weight: 700;
+            color: var(--r4-navy); font-weight: 750;
           }
 
           .r4-console-frame {
@@ -649,13 +666,14 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
               radial-gradient(rgba(0, 75, 135, 0.03) 1.5px, transparent 1.5px);
             background-size: 20px 20px;
             background-position: 0 0, 10px 10px;
-            border: 1px solid rgba(0, 75, 135, 0.12);
-            border-radius: 20px;
+            border: 1px solid rgba(0, 75, 135, 0.14);
+            border-radius: 22px;
             padding: 16px 18px 18px;
-            box-shadow: 0 25px 60px -15px rgba(0, 75, 135, 0.08), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+            box-shadow: 0 25px 60px -15px rgba(0, 75, 135, 0.1), 0 0 0 1px rgba(0, 75, 135, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 0.95);
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 14px;
+            width: 100%;
           }
 
           .r4-console-nav {
@@ -664,34 +682,36 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
             justify-content: space-between;
             border-bottom: 1px solid rgba(0, 75, 135, 0.08);
             padding-bottom: 12px;
+            gap: 10px;
           }
 
           .r4-console-address {
             flex: 1;
-            max-w-[280px];
+            max-width: 260px;
             margin: 0 auto;
             background: #F1F5F9;
-            border-radius: 8px;
+            border-radius: 6px;
             padding: 4px 10px;
-            font-family: monospace;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
             font-size: 9.5px;
+            font-weight: 500;
             color: #64748B;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 6px;
-            border: 1px solid rgba(0, 75, 135, 0.06);
+            border: 1px solid rgba(0, 75, 135, 0.07);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
           }
 
           .r4-console-status {
-            font-family: monospace;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
             font-size: 9px;
-            font-weight: 700;
+            font-weight: 750;
             color: var(--r4-lightblue);
-            background: rgba(0, 163, 224, 0.06);
+            background: rgba(0, 163, 224, 0.08);
             padding: 3px 8px;
             border-radius: 5px;
             letter-spacing: 0.05em;
@@ -699,53 +719,64 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
           }
 
           .r4-cluster {
-            display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
-            gap: 14px; position: relative; z-index: 2;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            position: relative;
+            z-index: 2;
+          }
+
+          @media (max-width: 520px) {
+            .r4-cluster {
+              grid-template-columns: 1fr;
+            }
           }
 
           .r4-panel {
             background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
-            border: 1px solid rgba(0, 75, 135, 0.09);
-            border-radius: 16px; padding: 16px 18px;
-            display: flex; flex-direction: column; 
-            height: 196px; /* Set exact matching height for all cards with bottom margin safety */
+            border: 1px solid rgba(0, 75, 135, 0.1);
+            border-radius: 16px;
+            padding: 15px 16px;
+            display: flex;
+            flex-direction: column; 
+            min-height: 175px;
             justify-content: space-between;
             text-align: left;
-            box-shadow: 0 4px 20px -2px rgba(0, 75, 135, 0.04), inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                        box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                        border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 2px 14px -2px rgba(0, 75, 135, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 0.85);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                        box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                        border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: transform, box-shadow;
           }
 
           .r4-panel:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 40px -12px rgba(0, 75, 135, 0.12), 0 0 0 1px rgba(0, 163, 224, 0.15), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
-            border-color: rgba(0, 163, 224, 0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 32px -10px rgba(0, 75, 135, 0.14), 0 0 0 1px rgba(0, 163, 224, 0.2), inset 0 1px 0 0 rgba(255, 255, 255, 0.95);
+            border-color: rgba(0, 163, 224, 0.3);
           }
           
           .r4-panel-head {
             display: flex; align-items: center; justify-content: space-between;
-            border-bottom: 1px solid rgba(0, 75, 135, 0.05);
+            border-bottom: 1px solid rgba(0, 75, 135, 0.06);
             padding-bottom: 8px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
           }
           
           .r4-panel-title {
-            font-size: 10px; font-weight: 750; letter-spacing: 0.15em;
+            font-size: 10px; font-weight: 750; letter-spacing: 0.14em;
             text-transform: uppercase; color: var(--r4-navy);
             white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
           }
           
           .r4-panel-led {
             width: 6px; height: 6px; border-radius: 50%; background: var(--r4-lightblue);
-            box-shadow: 0 0 0 3px rgba(0, 163, 224, 0.15);
+            box-shadow: 0 0 0 3px rgba(0, 163, 224, 0.18);
             animation: r4-pulse-led 2s infinite;
           }
 
           @keyframes r4-pulse-led {
             0% {
-              box-shadow: 0 0 0 0 rgba(0, 163, 224, 0.4);
+              box-shadow: 0 0 0 0 rgba(0, 163, 224, 0.45);
             }
             70% {
               box-shadow: 0 0 0 6px rgba(0, 163, 224, 0);
@@ -756,29 +787,29 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
           }
 
           .r4-counter {
-            font-weight: 750; font-size: 28px; color: var(--r4-navy);
-            letter-spacing: 0.02em;
+            font-weight: 800; font-size: 26px; color: var(--r4-navy);
+            letter-spacing: 0.01em; line-height: 1.1;
           }
           
           .r4-counter-label {
-            font-size: 11px; font-weight: 500; color: #64748B; margin-top: 4px;
+            font-size: 10.5px; font-weight: 550; color: #64748B; margin-top: 4px;
             white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
           }
 
           .r4-spark-row {
-            display: flex; align-items: center; gap: 10px;
+            display: flex; align-items: center; gap: 8px;
           }
           
           .r4-spark-val {
-            font-size: 17px; color: var(--r4-navy); font-weight: 700; white-space: nowrap;
+            font-size: 16px; color: var(--r4-navy); font-weight: 750; white-space: nowrap;
           }
           
           svg.r4-spark {
-            width: 100%; height: 38px; overflow: visible;
+            width: 100%; height: 36px; overflow: visible;
           }
           
           .r4-spark-line {
-            fill: none; stroke: var(--r4-lightblue); stroke-width: 2.0; stroke-linecap: round; stroke-linejoin: round;
+            fill: none; stroke: var(--r4-lightblue); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
             stroke-dasharray: 400;
             stroke-dashoffset: 0;
             animation: r4-spark-flow 8s linear infinite;
@@ -790,12 +821,13 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
           }
 
           .r4-term {
-            font-family: monospace; font-size: 11px; color: #38BDF8; line-height: 1.55;
-            min-height: 54px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 11px; color: #38BDF8; line-height: 1.5;
+            min-height: 52px;
             background: #0B0F19;
             padding: 8px 12px;
             border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
           }
           
@@ -805,17 +837,17 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
           }
 
           .r4-panel-foot {
-            font-family: monospace;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
             font-size: 9px; font-weight: 600; text-transform: uppercase;
             letter-spacing: 0.06em; color: #64748B;
             margin-top: auto;
             padding-top: 10px;
-            border-top: 1px dashed rgba(0, 75, 135, 0.05);
+            border-top: 1px dashed rgba(0, 75, 135, 0.06);
             white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
           }
 
           .r4-bars {
-            display: flex; align-items: flex-end; gap: 6px; height: 38px;
+            display: flex; align-items: flex-end; gap: 6px; height: 36px;
           }
           
           .r4-bars i {
@@ -834,64 +866,12 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
             0% { transform: scaleY(0.45); }
             100% { transform: scaleY(1); }
           }
-
-          .r4-strip {
-            background: var(--r4-white); border-bottom: 1px solid #DCE3E8;
-            text-align: left;
-          }
-          
-          .r4-strip-inner {
-            display: flex; align-items: center; gap: 40px; padding: 26px 0; flex-wrap: wrap;
-          }
-          
-          .r4-strip-quote {
-            font-size: 13.5px; color: #56636E; font-style: italic; max-width: 480px; line-height: 1.5;
-            border-left: 2px solid var(--r4-lightblue); padding-left: 16px;
-          }
-          
-          .r4-strip-quote b {
-            font-style: normal; color: #0C1620;
-          }
-          
-          .r4-strip-clients {
-            display: flex; gap: 34px; flex-wrap: wrap; margin-left: auto;
-          }
-          
-          .r4-strip-clients span {
-            font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 14px; color: #9FB0BD;
-            transition: color 0.2s ease; cursor: default;
-          }
-          
-          .r4-strip-clients span:hover {
-            color: var(--r4-navy);
-          }
-
-          @media (max-width: 980px) {
-            .r4-hero-inner {
-              grid-template-columns: 1fr;
-              padding: 44px 0 40px;
-              gap: 36px;
-            }
-            .r4-h1-b {
-              font-size: 34px;
-            }
-            .r4-h1-a {
-              font-size: 20px;
-            }
-            .r4-cluster {
-              grid-template-columns: 1fr 1fr;
-            }
-            .r4-strip-clients {
-              margin-left: 0;
-              gap: 22px;
-            }
-          }
         `}} />
 
-        <section className="r4-hero py-16 lg:py-24 px-4">
-          <div className="max-w-[1360px] mx-auto px-4 md:px-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center r4-hero-inner">
-              <div className="hero-copy">
+        <section className="r4-hero pt-28 pb-14 sm:pt-32 sm:pb-16 lg:pt-36 lg:pb-20 px-4 sm:px-6 lg:px-10">
+          <div className="max-w-[1400px] mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-10 xl:gap-14 items-center">
+              <div className="lg:col-span-6 xl:col-span-7 hero-copy">
                 <FadeUp delay={0.15}>
                   <div className="r4-eyebrow">
                     <span className="r4-dot"></span> In-House AI · GenAI · IIoT
@@ -914,11 +894,11 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
                 </FadeUp>
                 
                 <FadeUp delay={0.7}>
-                  <div className="flex flex-col sm:flex-row items-center gap-6 mt-8">
-                    <Button size="lg" className="h-14 px-8 rounded-xl shadow-md w-full sm:w-auto font-bold text-sm transition-transform hover:-translate-y-0.5 active:scale-95" asChild>
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6 mt-8">
+                    <Button size="lg" className="h-13 sm:h-14 px-8 rounded-xl shadow-md font-bold text-sm transition-transform hover:-translate-y-0.5 active:scale-95 bg-prixgen-blue hover:bg-prixgen-dark" asChild>
                       <Link href="/contact">Schedule an Architecture Audit</Link>
                     </Button>
-                    <Link href="/blog" className="group flex items-center gap-2 text-prixgen-blue font-bold text-sm leading-snug">
+                    <Link href="/blog" className="group inline-flex items-center justify-center sm:justify-start gap-2 text-prixgen-blue font-bold text-sm leading-snug py-2">
                       <span>Read the 2026 Manufacturing Benchmark</span>
                       <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
                     </Link>
@@ -934,7 +914,7 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
                 </FadeUp>
               </div>
 
-              <FadeUp delay={0.3}>
+              <FadeUp delay={0.3} className="lg:col-span-6 xl:col-span-5 w-full flex justify-center">
                 <div className="r4-console-frame">
                   <div className="r4-console-nav">
                     <div className="flex gap-1.5">
@@ -965,8 +945,8 @@ export default function HomeClientPage({ homeData, latestPost, latestCareer }: H
                       </div>
                       <div className="r4-panel-body flex-1 flex flex-col justify-between">
                         <div className="flex items-baseline justify-between mb-1 mt-1">
-                          <span className="text-[22px] font-bold text-[#004B87] tracking-tight">98.4%</span>
-                          <span className="text-[8px] font-bold text-emerald-600 bg-emerald-50 px-1 py-0.5 rounded border border-emerald-100 uppercase tracking-wider">YIELD_OK</span>
+                          <span className="text-[24px] font-bold text-[#004B87] tracking-tight">98.4%</span>
+                          <span className="text-[8px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-100 uppercase tracking-wider">YIELD_OK</span>
                         </div>
                         <div className="r4-bars mt-2">
                           <i></i><i></i><i></i><i></i><i></i><i></i>

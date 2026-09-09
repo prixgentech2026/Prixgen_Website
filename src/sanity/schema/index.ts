@@ -18,6 +18,7 @@ import post from './post';
 import author from './author';
 import category from './category';
 import successStory from './successStory';
+import whitepaperDownload from './whitepaperDownload';
 
 export const schema = {
   types: [
@@ -39,6 +40,7 @@ export const schema = {
     post,
     author,
     category,
-    successStory
+    successStory,
+    whitepaperDownload
   ],
 };
