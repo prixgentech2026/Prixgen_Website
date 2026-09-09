@@ -16,17 +16,16 @@ const LeadSchema = z.object({
 export type LeadSubmission = z.infer<typeof LeadSchema>;
 
 /**
- * Server action to submit lead data to HubSpot and Sanity.
+ * Server action to log lead submissions to Sanity CMS and dispatch automated email notifications.
  */
 export async function submitLead(data: LeadSubmission) {
-  // Validate data strictly on the server layer
   const validation = LeadSchema.safeParse(data);
   if (!validation.success) {
     return { success: false, message: "Invalid data provided." };
   }
 
   try {
-    // 1. SAVE TO SANITY (Internal Audit Log)
+    // 1. SAVE TO SANITY
     if (writeClient) {
       try {
         await writeClient.create({
@@ -40,9 +39,9 @@ export async function submitLead(data: LeadSubmission) {
           status: 'new',
           submittedAt: new Date().toISOString(),
         });
-        console.log('Lead saved to Sanity (with phone):', data.email);
+        console.log('[SUCCESS] Lead saved to Sanity:', data.email);
       } catch (sanityError: any) {
-        console.warn('Sanity write (with phone) failed, retrying without phone field:', sanityError.message || sanityError);
+        console.warn('Sanity write failed, retrying without phone field:', sanityError.message || sanityError);
         try {
           await writeClient.create({
             _type: 'leadSubmission',
@@ -54,7 +53,7 @@ export async function submitLead(data: LeadSubmission) {
             status: 'new',
             submittedAt: new Date().toISOString(),
           });
-          console.log('Lead saved to Sanity (fallback without phone):', data.email);
+          console.log('[SUCCESS] Lead saved to Sanity (fallback):', data.email);
         } catch (retryError) {
           console.error('Sanity write failed completely:', retryError);
         }
@@ -63,41 +62,12 @@ export async function submitLead(data: LeadSubmission) {
       console.warn('Sanity Write Client not available. Skipping CMS log.');
     }
 
-    // 2. SUBMIT TO HUBSPOT (CRM Layer)
-    if (!process.env.HUBSPOT_ACCESS_TOKEN || process.env.HUBSPOT_ACCESS_TOKEN.startsWith('your_')) {
-      console.log('SIMULATED HUBSPOT SUBMISSION:', data);
-      await new Promise(resolve => setTimeout(resolve, 800)); // Simulate network latency
-      return { success: true, message: "Thank you! Your inquiry has been logged successfully." };
-    }
-
-    const response = await fetch('https://api.hubapi.com/crm/v3/objects/contacts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.HUBSPOT_ACCESS_TOKEN}`,
-      },
-      body: JSON.stringify({
-        properties: {
-          email: data.email,
-          firstname: data.firstname,
-          company: data.company,
-          lead_source: data.source,
-          ...(data.phone && { phone: data.phone }),
-          ...(data.message && { message: data.message })
-        },
-      }),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error('HubSpot API Error:', errorData);
-    }
-
-    // 3. SEND EMAIL NOTIFICATION TO SALES HEAD
+    // 2. DISPATCH AUTOMATED EMAIL NOTIFICATION
     try {
       await sendLeadEmailNotification(data);
+      console.log('[SUCCESS] Dispatched lead email notification for:', data.email);
     } catch (emailError) {
-      console.error('[WARN] Email dispatch failed inside server action, but lead is logged:', emailError);
+      console.error('[WARN] Email dispatch failed inside server action:', emailError);
     }
 
     return { success: true, message: "Thank you! We'll be in touch shortly." };
@@ -106,3 +76,5 @@ export async function submitLead(data: LeadSubmission) {
     return { success: false, message: "A network error occurred." };
   }
 }
+
+
