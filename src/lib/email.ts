@@ -16,6 +16,12 @@ interface DispatchMailOptions {
   subject: string;
   html: string;
   replyTo?: string | string[];
+  from?: string;
+  attachments?: Array<{
+    filename: string;
+    content: Buffer | string;
+    contentType?: string;
+  }>;
 }
 
 /**
@@ -42,12 +48,12 @@ function getRecipientEmails(customEnvKey?: string): string[] {
  * 2. Falls back to Resend API if RESEND_API_KEY is available
  * 3. Falls back to local console simulation otherwise
  */
-async function dispatchEmail({ to, subject, html, replyTo }: DispatchMailOptions) {
+async function dispatchEmail({ to, subject, html, replyTo, from, attachments }: DispatchMailOptions) {
   const smtpUser = process.env.SMTP_USER || process.env.GMAIL_USER || 'prixgentech@gmail.com';
   const smtpPass = process.env.SMTP_PASS || process.env.GMAIL_APP_PASSWORD;
   const smtpHost = process.env.SMTP_HOST || 'smtp.gmail.com';
   const smtpPort = Number(process.env.SMTP_PORT) || 465;
-  const emailFrom = process.env.EMAIL_FROM || `"Prixgen Tech" <${smtpUser}>`;
+  const emailFrom = from || process.env.EMAIL_FROM || `"Prixgen Tech" <${smtpUser}>`;
 
   // 1. GMAIL SMTP VIA NODEMAILER
   if (smtpPass && !smtpPass.startsWith('your_')) {
@@ -68,6 +74,7 @@ async function dispatchEmail({ to, subject, html, replyTo }: DispatchMailOptions
         replyTo: Array.isArray(replyTo) ? replyTo.join(', ') : replyTo,
         subject,
         html,
+        attachments: attachments && attachments.length > 0 ? attachments : undefined,
       });
 
       console.log(`[SUCCESS] Email sent via Gmail SMTP (${smtpUser}) to ${to.join(', ')} - MessageID: ${info.messageId}`);
@@ -97,6 +104,7 @@ async function dispatchEmail({ to, subject, html, replyTo }: DispatchMailOptions
         }),
       });
 
+
       if (!response.ok) {
         const errorText = await response.text();
         console.error('[ERROR] Resend API Mail Send Failed:', errorText);
@@ -122,11 +130,13 @@ async function dispatchEmail({ to, subject, html, replyTo }: DispatchMailOptions
   return { success: true, message: 'Email simulated.' };
 }
 
+
 /**
  * Sends an email notification to the sales team when a new lead is submitted.
  */
 export async function sendLeadEmailNotification(lead: LeadSubmission) {
   const recipientList = getRecipientEmails();
+  const submissionTimestamp = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
 
   const htmlTemplate = `
     <!DOCTYPE html>
@@ -137,24 +147,38 @@ export async function sendLeadEmailNotification(lead: LeadSubmission) {
         <style>
           body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #f8fafc;
+            background-color: #0f172a;
             color: #1e293b;
             margin: 0;
-            padding: 40px 20px;
+            padding: 40px 16px;
           }
           .container {
-            max-width: 600px;
+            max-width: 620px;
             margin: 0 auto;
             background: #ffffff;
-            border-radius: 24px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 75, 135, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
             border: 1px solid #e2e8f0;
           }
           .header {
             background: linear-gradient(135deg, #004B87 0%, #0ea5e9 100%);
-            padding: 32px;
+            padding: 36px 28px;
             text-align: center;
+            color: #ffffff;
+          }
+          .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 100px;
+            margin-bottom: 12px;
           }
           .header h2 {
             color: #ffffff;
@@ -167,17 +191,14 @@ export async function sendLeadEmailNotification(lead: LeadSubmission) {
             color: rgba(255, 255, 255, 0.85);
             margin: 8px 0 0 0;
             font-size: 13px;
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 0.1em;
           }
           .content {
-            padding: 40px 32px;
+            padding: 36px 28px;
           }
           .detail-row {
-            margin-bottom: 24px;
+            margin-bottom: 18px;
             border-bottom: 1px solid #f1f5f9;
-            padding-bottom: 16px;
+            padding-bottom: 14px;
           }
           .detail-row:last-child {
             margin-bottom: 0;
@@ -189,20 +210,20 @@ export async function sendLeadEmailNotification(lead: LeadSubmission) {
             font-weight: bold;
             color: #0ea5e9;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 6px;
+            letter-spacing: 0.08em;
+            margin-bottom: 4px;
           }
           .value {
-            font-size: 16px;
+            font-size: 15px;
             color: #0f172a;
             font-weight: 600;
           }
           .message-box {
             background-color: #f8fafc;
             border-left: 4px solid #004B87;
-            padding: 20px;
-            border-radius: 12px;
-            font-size: 15px;
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 14px;
             color: #334155;
             line-height: 1.6;
             margin-top: 8px;
@@ -210,24 +231,20 @@ export async function sendLeadEmailNotification(lead: LeadSubmission) {
           }
           .footer {
             background-color: #f8fafc;
-            padding: 24px 32px;
+            padding: 20px 28px;
             text-align: center;
             border-top: 1px solid #f1f5f9;
             font-size: 12px;
             color: #64748b;
-          }
-          .footer a {
-            color: #004B87;
-            text-decoration: none;
-            font-weight: bold;
           }
         </style>
       </head>
       <body>
         <div class="container">
           <div class="header">
-            <p>Prixgen Intelligence Portal</p>
-            <h2>New Business Inquiry</h2>
+            <div class="badge">Website Inquiry</div>
+            <h2>New Business Lead Captured</h2>
+            <p>A prospect submitted an inquiry through the Prixgen web portal.</p>
           </div>
           
           <div class="content">
@@ -243,17 +260,22 @@ export async function sendLeadEmailNotification(lead: LeadSubmission) {
             
             <div class="detail-row">
               <div class="label">Email Address</div>
-              <div class="value"><a href="mailto:${lead.email}" style="color: #004B87; text-decoration: none;">${lead.email}</a></div>
+              <div class="value"><a href="mailto:${lead.email}" style="color: #004B87; text-decoration: none; font-weight: 700;">${lead.email}</a></div>
             </div>
             
             <div class="detail-row">
               <div class="label">Phone Number</div>
-              <div class="value"><a href="tel:${lead.phone || ''}" style="color: #004B87; text-decoration: none;">${lead.phone || 'Not Provided'}</a></div>
+              <div class="value"><a href="tel:${lead.phone || ''}" style="color: #004B87; text-decoration: none; font-weight: 700;">${lead.phone || 'Not Provided'}</a></div>
             </div>
             
             <div class="detail-row">
               <div class="label">Inquiry Source</div>
               <div class="value">${lead.source}</div>
+            </div>
+
+            <div class="detail-row">
+              <div class="label">Submitted At (IST)</div>
+              <div class="value">${submissionTimestamp}</div>
             </div>
             
             <div class="detail-row" style="border-bottom: none; padding-bottom: 0;">
@@ -265,8 +287,8 @@ export async function sendLeadEmailNotification(lead: LeadSubmission) {
           </div>
           
           <div class="footer">
-            Sent automatically by Prixgen Web Engine.<br />
-            Manage your leads in <a href="https://www.prixgen.com/studio" target="_blank">Sanity Studio</a> or HubSpot CRM.
+            Sent automatically by Prixgen Enterprise Web Engine.<br />
+            Notifications dispatched to: <strong>${recipientList.join(', ')}</strong>
           </div>
         </div>
       </body>
@@ -275,9 +297,90 @@ export async function sendLeadEmailNotification(lead: LeadSubmission) {
 
   return dispatchEmail({
     to: recipientList,
-    subject: `[New Inquiry] ${lead.firstname} - ${lead.company}`,
+    subject: `[New Lead] ${lead.firstname} - ${lead.company}`,
     html: htmlTemplate,
     replyTo: lead.email ? [lead.email, 'prixgentech@gmail.com'] : ['prixgentech@gmail.com'],
+  });
+}
+
+export interface JobApplicationEmailData {
+  fullName: string;
+  email: string;
+  appliedFor: string;
+  resumeFileName?: string;
+  resumeBuffer?: Buffer;
+}
+
+/**
+ * Sends an email notification when a job candidate applies on the careers page.
+ * Dispatches from prixgentech@gmail.com directly to HR (hr@prixgen.com) with the Resume PDF attached!
+ */
+export async function sendJobApplicationEmailNotification(app: JobApplicationEmailData) {
+  const hrEmail = (process.env.HR_EMAIL || 'hr@prixgen.com').trim();
+  const recipientList = [hrEmail];
+  const submissionTimestamp = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+
+  const htmlTemplate = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <title>New Job Application</title>
+        <style>
+          body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #0f172a; color: #1e293b; margin: 0; padding: 40px 16px; }
+          .container { max-width: 620px; margin: 0 auto; background: #ffffff; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25); border: 1px solid #e2e8f0; }
+          .header { background: linear-gradient(135deg, #004B87 0%, #0ea5e9 100%); padding: 36px 28px; text-align: center; color: #ffffff; }
+          .badge { display: inline-block; background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.35); color: #ffffff; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; margin-bottom: 12px; }
+          .header h2 { color: #ffffff; margin: 0; font-size: 24px; font-weight: 800; }
+          .content { padding: 36px 28px; }
+          .detail-row { margin-bottom: 18px; border-bottom: 1px solid #f1f5f9; padding-bottom: 14px; }
+          .detail-row:last-child { margin-bottom: 0; border-bottom: none; padding-bottom: 0; }
+          .label { font-size: 11px; font-weight: bold; color: #0ea5e9; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+          .value { font-size: 15px; color: #0f172a; font-weight: 600; }
+          .attachment-badge { background: #f0fdf4; border: 1px solid #bbf7d0; padding: 10px 14px; border-radius: 8px; font-size: 13px; color: #166534; font-weight: 600; margin-top: 6px; }
+          .footer { background-color: #f8fafc; padding: 20px 28px; text-align: center; border-top: 1px solid #f1f5f9; font-size: 12px; color: #64748b; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <div class="badge">Careers Portal</div>
+            <h2>New Job Application Received</h2>
+          </div>
+          <div class="content">
+            <div class="detail-row"><div class="label">Candidate Full Name</div><div class="value">${app.fullName}</div></div>
+            <div class="detail-row"><div class="label">Applied Position</div><div class="value">${app.appliedFor}</div></div>
+            <div class="detail-row"><div class="label">Email Address</div><div class="value"><a href="mailto:${app.email}" style="color: #004B87; text-decoration: none; font-weight: 700;">${app.email}</a></div></div>
+            <div class="detail-row">
+              <div class="label">Candidate Resume</div>
+              <div class="attachment-badge">📎 Attached directly: <strong>${app.resumeFileName || 'Resume.pdf'}</strong></div>
+            </div>
+            <div class="detail-row"><div class="label">Applied At (IST)</div><div class="value">${submissionTimestamp}</div></div>
+          </div>
+          <div class="footer">
+            Candidate resume PDF is attached above.<br />
+            Notification dispatched directly to: <strong>${hrEmail}</strong>
+          </div>
+        </div>
+      </body>
+    </html>
+  `;
+
+  return dispatchEmail({
+    to: recipientList,
+    from: `"Prixgen HR Team" <prixgentech@gmail.com>`,
+    subject: `[Job Application] ${app.fullName} - ${app.appliedFor}`,
+    html: htmlTemplate,
+    replyTo: [app.email, hrEmail],
+    attachments: app.resumeBuffer
+      ? [
+          {
+            filename: app.resumeFileName || 'Resume.pdf',
+            content: app.resumeBuffer,
+            contentType: 'application/pdf',
+          },
+        ]
+      : undefined,
   });
 }
 
@@ -387,18 +490,6 @@ export async function sendWhitepaperEmailNotification(data: WhitepaperDownloadEm
             color: #0f172a; 
             font-weight: 600; 
           }
-          .action-btn {
-            display: inline-block;
-            background: #004B87;
-            color: #ffffff !important;
-            padding: 12px 24px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 13px;
-            margin-top: 16px;
-            text-align: center;
-          }
           .footer { 
             background-color: #f8fafc; 
             padding: 20px 28px; 
@@ -406,11 +497,6 @@ export async function sendWhitepaperEmailNotification(data: WhitepaperDownloadEm
             border-top: 1px solid #f1f5f9; 
             font-size: 12px; 
             color: #64748b; 
-          }
-          .footer a {
-            color: #004B87;
-            text-decoration: none;
-            font-weight: 700;
           }
         </style>
       </head>
@@ -465,16 +551,10 @@ export async function sendWhitepaperEmailNotification(data: WhitepaperDownloadEm
               <div class="label">Downloaded At (IST)</div>
               <div class="value">${downloadTimestamp}</div>
             </div>
-
-            <div style="text-align: center; margin-top: 24px;">
-              <a href="https://www.prixgen.com/studio/structure/whitepaperDownload" target="_blank" class="action-btn">
-                Open in Sanity Studio Leads →
-              </a>
-            </div>
           </div>
 
           <div class="footer">
-            Logged automatically in Sanity CMS under <strong>Whitepaper Downloads</strong>.<br />
+            Sent automatically by Prixgen Industrial Intelligence Engine.<br />
             Notifications dispatched to: <strong>${recipientList.join(', ')}</strong>
           </div>
         </div>

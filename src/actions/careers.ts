@@ -1,6 +1,7 @@
 'use server';
 
 import { writeClient } from '@/sanity/lib/write-client';
+import { sendJobApplicationEmailNotification } from '@/lib/email';
 
 export async function submitJobApplication(formData: FormData) {
   if (!writeClient) {
@@ -43,9 +44,24 @@ export async function submitJobApplication(formData: FormData) {
     });
 
     console.log('Job application submitted:', result._id);
+
+    // 3. Dispatch automated email notification to HR with attached resume PDF
+    try {
+      await sendJobApplicationEmailNotification({
+        fullName,
+        email,
+        appliedFor: appliedFor || 'General Application',
+        resumeFileName: resumeFile.name,
+        resumeBuffer: buffer,
+      });
+    } catch (emailErr) {
+      console.warn('Failed to send career email notification:', emailErr);
+    }
+
     return { success: true, message: 'Application submitted successfully!' };
   } catch (error) {
     console.error('Job application submission error:', error);
     return { success: false, message: 'Failed to submit application. Please try again.' };
   }
 }
+
