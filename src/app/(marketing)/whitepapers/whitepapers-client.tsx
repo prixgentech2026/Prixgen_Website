@@ -54,40 +54,6 @@ const WHITEPAPERS: WhitepaperItem[] = [
       'Scrap & Regrind Accounting',
       'Batch Genealogy & Traceability'
     ]
-  },
-  {
-    id: 'iiot-realtime-telemetry',
-    slug: 'iiot-telemetry',
-    title: 'Bridging the Shop-Floor to Top-Floor: Real-Time IIoT Telemetry & Odoo Integration',
-    subtitle: 'Architectural methodology to eliminate manual operational double-entry and enable sub-second machine health telemetry.',
-    description: 'Learn how to connect high-frequency vibration, temperature, and electrical load sensor networks directly into ERP maintenance workflows and C-suite financial executive dashboards without middleware bloat.',
-    badge: 'Technical Benchmark • Industrial IoT',
-    pages: '9 Pages',
-    publishedDate: 'Q2 2026',
-    downloadPath: '/PVC_whitepaper.pdf',
-    keyTakeaways: [
-      'Zero-latency sensor data ingestion pipelines',
-      'Automated predictive maintenance work-order generation',
-      'Edge gateway resilience protocols during plant power transients'
-    ],
-    topics: ['Edge Computing', 'Predictive Maintenance', 'ERP Ingestion']
-  },
-  {
-    id: 'fmcg-supply-chain-resilience',
-    slug: 'fmcg-supply-chain',
-    title: 'Modernizing Industrial & Chemical Supply Chains with Unified ERP Architectures',
-    subtitle: 'How high-throughput APAC industrial manufacturers scaled batch margins and reduced month-end financial close to under 2 hours.',
-    description: 'Discover how multi-location manufacturing groups replace legacy disconnected spreadsheets and fragmented databases with a single, un-siloed Odoo core.',
-    badge: 'Executive Brief • Supply Chain',
-    pages: '11 Pages',
-    publishedDate: 'Q1 2026',
-    downloadPath: '/PVC_whitepaper.pdf',
-    keyTakeaways: [
-      'Automated batch-level gross margin and recipe cost calculation',
-      'Multi-warehouse automated replenishment and buffer stock optimization',
-      'Fast-track ISO & regulatory audit compliance logging'
-    ],
-    topics: ['Supply Chain Velocity', 'Cost Allocation', 'ISO Compliance']
   }
 ];
 

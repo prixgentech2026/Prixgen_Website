@@ -192,15 +192,15 @@ export function MobileMenu() {
               <h3 className="text-xs font-bold text-prixgen-dark/40 uppercase tracking-widest mb-6">Resources</h3>
               <ul className="space-y-6">
                 {MENU_DATA.resources.map((item) => {
-                  const isExternalOrNewTab = item.href === '/whitepapers' || item.href.endsWith('.pdf');
+                  const isPdf = item.href.endsWith('.pdf');
                   return (
                     <li key={item.title}>
                       <Link 
                         href={item.href} 
-                        target={isExternalOrNewTab ? "_blank" : undefined}
-                        rel={isExternalOrNewTab ? "noopener noreferrer" : undefined}
+                        target={isPdf ? "_blank" : undefined}
+                        rel={isPdf ? "noopener noreferrer" : undefined}
                         onClick={(e) => { 
-                          if (!isExternalOrNewTab) {
+                          if (!isPdf) {
                             e.preventDefault(); 
                             handleNavigate(item.href); 
                           } else {
