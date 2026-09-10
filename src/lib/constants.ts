@@ -55,7 +55,7 @@ export const MENU_DATA = {
   resources: [
     { title: "Blog", href: "/blog", description: "Insights into enterprise technology and architecture." },
     { title: "Success Stories", href: "/success-stories", description: "Real-world transformation metrics and outcomes." },
-    { title: "White Paper", href: "/PVC_whitepaper.pdf", description: "PVC Manufacturing Operating Model & Architecture Benchmark." },
+    { title: "White Papers", href: "/whitepapers", description: "Technical operating models and industrial benchmarks." },
     { title: "Careers", href: "/careers", description: "Join our team of industrial software architects." },
     { title: "Contact Us", href: "/contact", description: "Start your transformation journey with our experts." },
   ],

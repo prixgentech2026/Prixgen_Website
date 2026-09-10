@@ -216,13 +216,13 @@ const ListItem = React.forwardRef<
   HTMLAnchorElement,
   ListItemProps
 >(({ className, title, children, href = "#", ...props }, ref) => {
-  const isPdf = href.endsWith('.pdf');
+  const isExternalOrNewTab = href === '/whitepapers' || href.endsWith('.pdf') || props.target === '_blank';
   return (
     <Link
       ref={ref}
       href={href}
-      target={isPdf ? "_blank" : undefined}
-      rel={isPdf ? "noopener noreferrer" : undefined}
+      target={isExternalOrNewTab ? "_blank" : undefined}
+      rel={isExternalOrNewTab ? "noopener noreferrer" : undefined}
       className={cn(
         "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-prixgen-gray hover:text-prixgen-blue",
         className
@@ -231,9 +231,9 @@ const ListItem = React.forwardRef<
     >
       <div className="text-sm font-bold leading-none flex items-center justify-between">
         <span>{title}</span>
-        {isPdf && (
+        {href === '/whitepapers' && (
           <span className="text-[9px] font-black uppercase tracking-wider bg-prixgen-blue/10 text-prixgen-blue px-1.5 py-0.5 rounded ml-2">
-            PDF
+            Research
           </span>
         )}
       </div>

@@ -192,15 +192,15 @@ export function MobileMenu() {
               <h3 className="text-xs font-bold text-prixgen-dark/40 uppercase tracking-widest mb-6">Resources</h3>
               <ul className="space-y-6">
                 {MENU_DATA.resources.map((item) => {
-                  const isPdf = item.href.endsWith('.pdf');
+                  const isExternalOrNewTab = item.href === '/whitepapers' || item.href.endsWith('.pdf');
                   return (
                     <li key={item.title}>
                       <Link 
                         href={item.href} 
-                        target={isPdf ? "_blank" : undefined}
-                        rel={isPdf ? "noopener noreferrer" : undefined}
+                        target={isExternalOrNewTab ? "_blank" : undefined}
+                        rel={isExternalOrNewTab ? "noopener noreferrer" : undefined}
                         onClick={(e) => { 
-                          if (!isPdf) {
+                          if (!isExternalOrNewTab) {
                             e.preventDefault(); 
                             handleNavigate(item.href); 
                           } else {
@@ -212,9 +212,9 @@ export function MobileMenu() {
                         <div className="flex items-center justify-between text-2xl font-bold text-prixgen-blue group-hover:text-prixgen-lightblue transition-colors">
                           <div className="flex items-center gap-2">
                             <span>{item.title}</span>
-                            {isPdf && (
+                            {item.href === '/whitepapers' && (
                               <span className="text-[10px] font-black uppercase tracking-wider bg-prixgen-blue/10 text-prixgen-blue px-2 py-0.5 rounded">
-                                PDF
+                                Research
                               </span>
                             )}
                           </div>
