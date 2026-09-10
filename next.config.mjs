@@ -142,6 +142,16 @@ const nextConfig = {
         source: '/pipe-counting',
         destination: '/solutions/image-processing',
         permanent: true,
+      },
+      {
+        source: '/whitepaper',
+        destination: '/PVC_whitepaper.pdf',
+        permanent: false,
+      },
+      {
+        source: '/white-paper',
+        destination: '/PVC_whitepaper.pdf',
+        permanent: false,
       }
     ];
   },

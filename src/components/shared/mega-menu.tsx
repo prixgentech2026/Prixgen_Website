@@ -216,16 +216,27 @@ const ListItem = React.forwardRef<
   HTMLAnchorElement,
   ListItemProps
 >(({ className, title, children, href = "#", ...props }, ref) => {
+  const isPdf = href.endsWith('.pdf');
   return (
     <Link
+      ref={ref}
       href={href}
+      target={isPdf ? "_blank" : undefined}
+      rel={isPdf ? "noopener noreferrer" : undefined}
       className={cn(
         "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-prixgen-gray hover:text-prixgen-blue",
         className
       )}
       {...props}
     >
-      <div className="text-sm font-bold leading-none">{title}</div>
+      <div className="text-sm font-bold leading-none flex items-center justify-between">
+        <span>{title}</span>
+        {isPdf && (
+          <span className="text-[9px] font-black uppercase tracking-wider bg-prixgen-blue/10 text-prixgen-blue px-1.5 py-0.5 rounded ml-2">
+            PDF
+          </span>
+        )}
+      </div>
       <div className="line-clamp-2 text-sm leading-snug text-prixgen-dark/60 mt-1">
         {children}
       </div>

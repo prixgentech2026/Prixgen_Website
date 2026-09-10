@@ -112,17 +112,16 @@ export default function SuccessStoriesClient({ stories }: SuccessStoriesClientPr
               className="relative group rounded-3xl bg-white overflow-hidden shadow-2xl border border-slate-100"
             >
               <div className="grid lg:grid-cols-12 min-h-[450px]">
-                {/* Image Section */}
-                <div className="relative overflow-hidden h-[300px] lg:h-auto lg:col-span-6">
-                  <OptimizedImage
-                    src={getStoryImageUrl(featuredStory.mainImage)}
-                    alt={featuredStory.title}
-                    fill
-                    quality={92}
-                    sizes="(max-width: 1024px) 100vw, 600px"
-                    className="object-cover transition-all duration-1000 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent lg:hidden" />
+                {/* Image Section - 100% Uncropped with Premium Showcase Framing */}
+                <div className="relative flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-slate-50 via-slate-100/40 to-slate-50 border-b lg:border-b-0 lg:border-r border-slate-100 lg:col-span-6 overflow-hidden">
+                  <div className="relative w-full h-full flex items-center justify-center min-h-[260px] sm:min-h-[320px] lg:min-h-[380px]">
+                    <img
+                      src={getStoryImageUrl(featuredStory.mainImage)}
+                      alt={featuredStory.title}
+                      className="w-full h-auto max-h-[420px] object-contain rounded-2xl shadow-md transition-transform duration-700 group-hover:scale-[1.01]"
+                      loading="eager"
+                    />
+                  </div>
                 </div>
 
                 {/* Content Section */}
@@ -191,15 +190,13 @@ export default function SuccessStoriesClient({ stories }: SuccessStoriesClientPr
                   className="group relative rounded-2xl bg-white border border-slate-100 hover:border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col justify-between"
                 >
                   <div>
-                    {/* Thumbnail Image */}
-                    <div className="relative h-48 overflow-hidden bg-slate-100">
-                      <OptimizedImage
+                    {/* Thumbnail Image - 100% Uncropped Display */}
+                    <div className="relative h-56 overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100/50 p-3 flex items-center justify-center border-b border-slate-100">
+                      <img
                         src={getStoryImageUrl(story.mainImage)}
                         alt={story.title}
-                        fill
-                        quality={90}
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        className="w-full h-full object-contain rounded-xl transition-transform duration-700 group-hover:scale-[1.02]"
+                        loading="lazy"
                       />
                       <div className="absolute top-4 left-4 z-10">
                         {story.industry && (

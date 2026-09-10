@@ -191,21 +191,40 @@ export function MobileMenu() {
             <div className="pt-8 border-t border-prixgen-gray">
               <h3 className="text-xs font-bold text-prixgen-dark/40 uppercase tracking-widest mb-6">Resources</h3>
               <ul className="space-y-6">
-                {MENU_DATA.resources.map((item) => (
-                  <li key={item.title}>
-                    <Link 
-                      href={item.href} 
-                      onClick={(e) => { e.preventDefault(); handleNavigate(item.href); }}
-                      className="group block"
-                    >
-                      <div className="flex items-center justify-between text-2xl font-bold text-prixgen-blue group-hover:text-prixgen-lightblue transition-colors">
-                        {item.title}
-                        <ChevronRight className="h-6 w-6 text-prixgen-lightblue" />
-                      </div>
-                      <p className="text-sm text-prixgen-dark/50 mt-1 font-medium">{item.description}</p>
-                    </Link>
-                  </li>
-                ))}
+                {MENU_DATA.resources.map((item) => {
+                  const isPdf = item.href.endsWith('.pdf');
+                  return (
+                    <li key={item.title}>
+                      <Link 
+                        href={item.href} 
+                        target={isPdf ? "_blank" : undefined}
+                        rel={isPdf ? "noopener noreferrer" : undefined}
+                        onClick={(e) => { 
+                          if (!isPdf) {
+                            e.preventDefault(); 
+                            handleNavigate(item.href); 
+                          } else {
+                            setOpen(false);
+                          }
+                        }}
+                        className="group block"
+                      >
+                        <div className="flex items-center justify-between text-2xl font-bold text-prixgen-blue group-hover:text-prixgen-lightblue transition-colors">
+                          <div className="flex items-center gap-2">
+                            <span>{item.title}</span>
+                            {isPdf && (
+                              <span className="text-[10px] font-black uppercase tracking-wider bg-prixgen-blue/10 text-prixgen-blue px-2 py-0.5 rounded">
+                                PDF
+                              </span>
+                            )}
+                          </div>
+                          <ChevronRight className="h-6 w-6 text-prixgen-lightblue" />
+                        </div>
+                        <p className="text-sm text-prixgen-dark/50 mt-1 font-medium">{item.description}</p>
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>

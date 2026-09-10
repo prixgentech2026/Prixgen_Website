@@ -123,6 +123,11 @@ export function Footer() {
           <ul className="space-y-3 text-gray-400 text-sm">
             <li><Link href="/who-we-are" className="hover:text-prixgen-lightblue transition-colors">Who We Are</Link></li>
             <li><Link href="/success-stories" className="hover:text-prixgen-lightblue transition-colors">Success Stories</Link></li>
+            <li>
+              <a href="/PVC_whitepaper.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-prixgen-lightblue transition-colors inline-flex items-center gap-1.5">
+                White Paper <span className="text-[9px] font-black px-1.5 py-0.5 bg-white/10 rounded">PDF</span>
+              </a>
+            </li>
             <li><Link href="/careers" className="hover:text-prixgen-lightblue transition-colors">Careers</Link></li>
             <li><Link href="/blog" className="hover:text-prixgen-lightblue transition-colors">Blog</Link></li>
             <li><Link href="/contact" className="hover:text-prixgen-lightblue transition-colors">Contact Us</Link></li>
