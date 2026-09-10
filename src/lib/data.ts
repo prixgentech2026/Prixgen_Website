@@ -132,6 +132,14 @@ export interface SuccessStoryFeature {
   description: string;
 }
 
+export interface SuccessStoryImage {
+  url?: string;
+  alt?: string;
+  fitMode?: 'contain' | 'natural' | 'cover';
+  caption?: string;
+  asset?: any;
+}
+
 export interface SuccessStory {
   title: string;
   slug: string;
@@ -139,7 +147,7 @@ export interface SuccessStory {
   clientName?: string;
   clientLogo?: string;
   industry?: string;
-  mainImage?: string;
+  mainImage?: string | SuccessStoryImage;
   metrics?: SuccessStoryMetric[];
   challenge?: any;
   features?: SuccessStoryFeature[];

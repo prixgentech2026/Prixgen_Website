@@ -55,15 +55,38 @@ export default defineType({
       type: 'image',
       options: {
         hotspot: true,
+        storeOriginalFilename: true,
       },
       fields: [
         {
           name: 'alt',
           type: 'string',
           title: 'Alternative Text',
+          description: 'Important for SEO and screen readers.',
+        },
+        {
+          name: 'fitMode',
+          type: 'string',
+          title: 'Image Framing & Cropping Mode',
+          description: 'Control how this image is rendered on the website. Use "Full Uncropped" to keep 100% of wide group/team photos.',
+          options: {
+            list: [
+              { title: 'Full Uncropped & High Quality (Preserves entire image, zero crop - recommended for team/client photos)', value: 'contain' },
+              { title: 'Natural Dynamic Aspect Ratio (Scales smoothly to full width)', value: 'natural' },
+              { title: 'Cover Banner (Fills frame box, applies hotspot)', value: 'cover' },
+            ],
+            layout: 'radio',
+          },
+          initialValue: 'contain',
+        },
+        {
+          name: 'caption',
+          type: 'string',
+          title: 'Image Caption (Optional)',
+          description: 'Displayed beneath the image on the case study page.',
         }
       ],
-      description: 'Cover image for the success story.',
+      description: 'High-resolution cover image for the success story. Hotspot and framing options preserve full image quality without cropping.',
     }),
     defineField({
       name: 'metrics',

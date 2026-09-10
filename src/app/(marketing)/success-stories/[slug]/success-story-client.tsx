@@ -97,6 +97,15 @@ const customPortableTextComponents = {
 };
 
 export default function SuccessStoryClient({ story, relatedStories = [] }: SuccessStoryClientProps) {
+  // Extract main image URL, alt, caption, and fitMode safely
+  const mainImg = story.mainImage;
+  const imageUrl = typeof mainImg === 'string' 
+    ? mainImg 
+    : (mainImg?.url || (mainImg?.asset?.url ? mainImg.asset.url : undefined));
+  const imageAlt = typeof mainImg === 'object' ? (mainImg?.alt || story.title) : story.title;
+  const fitMode = typeof mainImg === 'object' && mainImg?.fitMode ? mainImg.fitMode : 'contain';
+  const imageCaption = typeof mainImg === 'object' ? mainImg?.caption : undefined;
+
   return (
     <div className="bg-white min-h-screen selection:bg-prixgen-blue selection:text-white pb-16">
       {/* Header spacing */}
@@ -137,15 +146,37 @@ export default function SuccessStoryClient({ story, relatedStories = [] }: Succe
             </div>
           </div>
 
-          {/* Main Visual */}
-          {story.mainImage && (
-            <div className="relative h-[300px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl border border-slate-100 mt-12">
-              <OptimizedImage 
-                src={story.mainImage} 
-                alt={story.title} 
-                fill 
-                className="object-cover" 
-              />
+          {/* Main Visual - Preserved 100% Uncropped & High Quality */}
+          {imageUrl && (
+            <div className="relative w-full rounded-3xl overflow-hidden shadow-2xl border border-slate-100 mt-12 bg-slate-900/5 group">
+              {fitMode === 'cover' ? (
+                <div className="relative h-[320px] sm:h-[420px] md:h-[540px] w-full">
+                  <OptimizedImage 
+                    src={imageUrl} 
+                    alt={imageAlt} 
+                    fill 
+                    quality={95}
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 1200px"
+                    className="object-cover" 
+                  />
+                </div>
+              ) : (
+                /* Full Uncropped / Natural Mode (Default): Preserves 100% width and height without any cropping */
+                <div className="relative w-full flex items-center justify-center p-2 sm:p-4 md:p-6 bg-gradient-to-b from-slate-50 to-slate-100/40">
+                  <img 
+                    src={imageUrl} 
+                    alt={imageAlt} 
+                    className="w-full h-auto max-h-[750px] object-contain rounded-2xl shadow-sm transition-transform duration-700 group-hover:scale-[1.005]" 
+                    loading="eager"
+                  />
+                </div>
+              )}
+              {imageCaption && (
+                <div className="text-center text-xs font-semibold text-slate-500 py-3 px-4 bg-white border-t border-slate-100">
+                  {imageCaption}
+                </div>
+              )}
             </div>
           )}
         </div>

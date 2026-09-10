@@ -15,6 +15,12 @@ interface SuccessStoriesClientProps {
   stories: SuccessStory[];
 }
 
+function getStoryImageUrl(mainImg: any): string {
+  if (!mainImg) return "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=1200";
+  if (typeof mainImg === 'string') return mainImg;
+  return mainImg.url || mainImg.asset?.url || "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=1200";
+}
+
 export default function SuccessStoriesClient({ stories }: SuccessStoriesClientProps) {
   const featuredStory = stories[0];
   const remainingStories = stories.slice(1);
@@ -109,9 +115,11 @@ export default function SuccessStoriesClient({ stories }: SuccessStoriesClientPr
                 {/* Image Section */}
                 <div className="relative overflow-hidden h-[300px] lg:h-auto lg:col-span-6">
                   <OptimizedImage
-                    src={featuredStory.mainImage || "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=1200"}
+                    src={getStoryImageUrl(featuredStory.mainImage)}
                     alt={featuredStory.title}
                     fill
+                    quality={92}
+                    sizes="(max-width: 1024px) 100vw, 600px"
                     className="object-cover transition-all duration-1000 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent lg:hidden" />
@@ -186,9 +194,11 @@ export default function SuccessStoriesClient({ stories }: SuccessStoriesClientPr
                     {/* Thumbnail Image */}
                     <div className="relative h-48 overflow-hidden bg-slate-100">
                       <OptimizedImage
-                        src={story.mainImage || "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800"}
+                        src={getStoryImageUrl(story.mainImage)}
                         alt={story.title}
                         fill
+                        quality={90}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                       <div className="absolute top-4 left-4 z-10">

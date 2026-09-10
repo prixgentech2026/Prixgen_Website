@@ -324,7 +324,13 @@ export const successStoriesQuery = groq`*[_type == "successStory"] | order(publi
   clientName,
   "clientLogo": clientLogo.asset->url,
   industry,
-  "mainImage": mainImage.asset->url,
+  "mainImage": {
+    "url": mainImage.asset->url,
+    "alt": mainImage.alt,
+    "fitMode": mainImage.fitMode,
+    "caption": mainImage.caption,
+    "asset": mainImage.asset->
+  },
   metrics,
   publishedAt
 }`;
@@ -337,7 +343,13 @@ export const successStoryBySlugQuery = groq`*[_type == "successStory" && slug.cu
   clientName,
   "clientLogo": clientLogo.asset->url,
   industry,
-  "mainImage": mainImage.asset->url,
+  "mainImage": {
+    "url": mainImage.asset->url,
+    "alt": mainImage.alt,
+    "fitMode": mainImage.fitMode,
+    "caption": mainImage.caption,
+    "asset": mainImage.asset->
+  },
   metrics,
   challenge,
   features,
