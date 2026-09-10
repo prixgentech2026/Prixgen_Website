@@ -140,157 +140,61 @@ export async function sendLeadEmailNotification(lead: LeadSubmission) {
 
   const htmlTemplate = `
     <!DOCTYPE html>
-    <html>
+    <html lang="en">
       <head>
         <meta charset="utf-8">
         <title>New Lead Inquiry</title>
-        <style>
-          body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #0f172a;
-            color: #1e293b;
-            margin: 0;
-            padding: 40px 16px;
-          }
-          .container {
-            max-width: 620px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-            border: 1px solid #e2e8f0;
-          }
-          .header {
-            background: linear-gradient(135deg, #004B87 0%, #0ea5e9 100%);
-            padding: 36px 28px;
-            text-align: center;
-            color: #ffffff;
-          }
-          .badge {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.35);
-            color: #ffffff;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            padding: 4px 12px;
-            border-radius: 100px;
-            margin-bottom: 12px;
-          }
-          .header h2 {
-            color: #ffffff;
-            margin: 0;
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: -0.025em;
-          }
-          .header p {
-            color: rgba(255, 255, 255, 0.85);
-            margin: 8px 0 0 0;
-            font-size: 13px;
-          }
-          .content {
-            padding: 36px 28px;
-          }
-          .detail-row {
-            margin-bottom: 18px;
-            border-bottom: 1px solid #f1f5f9;
-            padding-bottom: 14px;
-          }
-          .detail-row:last-child {
-            margin-bottom: 0;
-            border-bottom: none;
-            padding-bottom: 0;
-          }
-          .label {
-            font-size: 11px;
-            font-weight: bold;
-            color: #0ea5e9;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 4px;
-          }
-          .value {
-            font-size: 15px;
-            color: #0f172a;
-            font-weight: 600;
-          }
-          .message-box {
-            background-color: #f8fafc;
-            border-left: 4px solid #004B87;
-            padding: 16px;
-            border-radius: 10px;
-            font-size: 14px;
-            color: #334155;
-            line-height: 1.6;
-            margin-top: 8px;
-            font-weight: normal;
-          }
-          .footer {
-            background-color: #f8fafc;
-            padding: 20px 28px;
-            text-align: center;
-            border-top: 1px solid #f1f5f9;
-            font-size: 12px;
-            color: #64748b;
-          }
-        </style>
       </head>
-      <body>
-        <div class="container">
-          <div class="header">
-            <div class="badge">Website Inquiry</div>
-            <h2>New Business Lead Captured</h2>
-            <p>A prospect submitted an inquiry through the Prixgen web portal.</p>
-          </div>
-          
-          <div class="content">
-            <div class="detail-row">
-              <div class="label">Inquirer Name</div>
-              <div class="value">${lead.firstname}</div>
-            </div>
-            
-            <div class="detail-row">
-              <div class="label">Company Name</div>
-              <div class="value">${lead.company}</div>
-            </div>
-            
-            <div class="detail-row">
-              <div class="label">Email Address</div>
-              <div class="value"><a href="mailto:${lead.email}" style="color: #004B87; text-decoration: none; font-weight: 700;">${lead.email}</a></div>
-            </div>
-            
-            <div class="detail-row">
-              <div class="label">Phone Number</div>
-              <div class="value"><a href="tel:${lead.phone || ''}" style="color: #004B87; text-decoration: none; font-weight: 700;">${lead.phone || 'Not Provided'}</a></div>
-            </div>
-            
-            <div class="detail-row">
-              <div class="label">Inquiry Source</div>
-              <div class="value">${lead.source}</div>
-            </div>
-
-            <div class="detail-row">
-              <div class="label">Submitted At (IST)</div>
-              <div class="value">${submissionTimestamp}</div>
-            </div>
-            
-            <div class="detail-row" style="border-bottom: none; padding-bottom: 0;">
-              <div class="label">Message Details</div>
-              <div class="message-box">
-                ${(lead.message || 'No message provided.').replace(/\n/g, '<br />')}
-              </div>
-            </div>
-          </div>
-          
-          <div class="footer">
-            Sent automatically by Prixgen Enterprise Web Engine.<br />
-            Notifications dispatched to: <strong>${recipientList.join(', ')}</strong>
-          </div>
-        </div>
+      <body style="margin: 0; padding: 24px; background-color: #f3f4f6; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #1f2937;">
+        <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width: 580px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; border-top: 4px solid #004B87;">
+          <tr>
+            <td style="padding: 24px 28px 16px; border-bottom: 1px solid #e5e7eb;">
+              <div style="font-size: 11px; font-weight: 700; color: #004B87; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Prixgen Web Inquiries</div>
+              <h2 style="margin: 0; font-size: 20px; color: #111827; font-weight: 700;">New Lead Inquiry Received</h2>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 24px 28px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="font-size: 14px; line-height: 1.6;">
+                <tr>
+                  <td style="padding: 8px 0; color: #6b7280; width: 140px; vertical-align: top; font-weight: 500;">Contact Name</td>
+                  <td style="padding: 8px 0; color: #111827; font-weight: 600; vertical-align: top;">${lead.firstname}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #6b7280; vertical-align: top; font-weight: 500;">Company</td>
+                  <td style="padding: 8px 0; color: #111827; font-weight: 600; vertical-align: top;">${lead.company}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #6b7280; vertical-align: top; font-weight: 500;">Email Address</td>
+                  <td style="padding: 8px 0; vertical-align: top;"><a href="mailto:${lead.email}" style="color: #004B87; text-decoration: none; font-weight: 600;">${lead.email}</a></td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #6b7280; vertical-align: top; font-weight: 500;">Phone Number</td>
+                  <td style="padding: 8px 0; color: #111827; font-weight: 600; vertical-align: top;">${lead.phone ? `<a href="tel:${lead.phone}" style="color: #004B87; text-decoration: none; font-weight: 600;">${lead.phone}</a>` : 'Not provided'}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #6b7280; vertical-align: top; font-weight: 500;">Inquiry Source</td>
+                  <td style="padding: 8px 0; color: #111827; font-weight: 600; vertical-align: top;">${lead.source}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #6b7280; vertical-align: top; font-weight: 500;">Submitted At (IST)</td>
+                  <td style="padding: 8px 0; color: #111827; font-weight: 600; vertical-align: top;">${submissionTimestamp}</td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="padding-top: 16px;">
+                    <div style="font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; margin-bottom: 6px;">Message</div>
+                    <div style="background-color: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; padding: 12px 14px; font-size: 13px; color: #374151; white-space: pre-wrap; line-height: 1.5;">${lead.message || 'No message provided.'}</div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 16px 28px; background-color: #f9fafb; border-top: 1px solid #e5e7eb; font-size: 12px; color: #6b7280;">
+              This is an automated notification from the Prixgen website to <strong>${recipientList.join(', ')}</strong>.
+            </td>
+          </tr>
+        </table>
       </body>
     </html>
   `;
@@ -322,46 +226,54 @@ export async function sendJobApplicationEmailNotification(app: JobApplicationEma
 
   const htmlTemplate = `
     <!DOCTYPE html>
-    <html>
+    <html lang="en">
       <head>
         <meta charset="utf-8">
         <title>New Job Application</title>
-        <style>
-          body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #0f172a; color: #1e293b; margin: 0; padding: 40px 16px; }
-          .container { max-width: 620px; margin: 0 auto; background: #ffffff; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25); border: 1px solid #e2e8f0; }
-          .header { background: linear-gradient(135deg, #004B87 0%, #0ea5e9 100%); padding: 36px 28px; text-align: center; color: #ffffff; }
-          .badge { display: inline-block; background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.35); color: #ffffff; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; margin-bottom: 12px; }
-          .header h2 { color: #ffffff; margin: 0; font-size: 24px; font-weight: 800; }
-          .content { padding: 36px 28px; }
-          .detail-row { margin-bottom: 18px; border-bottom: 1px solid #f1f5f9; padding-bottom: 14px; }
-          .detail-row:last-child { margin-bottom: 0; border-bottom: none; padding-bottom: 0; }
-          .label { font-size: 11px; font-weight: bold; color: #0ea5e9; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
-          .value { font-size: 15px; color: #0f172a; font-weight: 600; }
-          .attachment-badge { background: #f0fdf4; border: 1px solid #bbf7d0; padding: 10px 14px; border-radius: 8px; font-size: 13px; color: #166534; font-weight: 600; margin-top: 6px; }
-          .footer { background-color: #f8fafc; padding: 20px 28px; text-align: center; border-top: 1px solid #f1f5f9; font-size: 12px; color: #64748b; }
-        </style>
       </head>
-      <body>
-        <div class="container">
-          <div class="header">
-            <div class="badge">Careers Portal</div>
-            <h2>New Job Application Received</h2>
-          </div>
-          <div class="content">
-            <div class="detail-row"><div class="label">Candidate Full Name</div><div class="value">${app.fullName}</div></div>
-            <div class="detail-row"><div class="label">Applied Position</div><div class="value">${app.appliedFor}</div></div>
-            <div class="detail-row"><div class="label">Email Address</div><div class="value"><a href="mailto:${app.email}" style="color: #004B87; text-decoration: none; font-weight: 700;">${app.email}</a></div></div>
-            <div class="detail-row">
-              <div class="label">Candidate Resume</div>
-              <div class="attachment-badge">📎 Attached directly: <strong>${app.resumeFileName || 'Resume.pdf'}</strong></div>
-            </div>
-            <div class="detail-row"><div class="label">Applied At (IST)</div><div class="value">${submissionTimestamp}</div></div>
-          </div>
-          <div class="footer">
-            Candidate resume PDF is attached above.<br />
-            Notification dispatched directly to: <strong>${hrEmail}</strong>
-          </div>
-        </div>
+      <body style="margin: 0; padding: 24px; background-color: #f3f4f6; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #1f2937;">
+        <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width: 580px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; border-top: 4px solid #004B87;">
+          <tr>
+            <td style="padding: 24px 28px 16px; border-bottom: 1px solid #e5e7eb;">
+              <div style="font-size: 11px; font-weight: 700; color: #004B87; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Careers Portal</div>
+              <h2 style="margin: 0; font-size: 20px; color: #111827; font-weight: 700;">New Job Application Received</h2>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 24px 28px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="font-size: 14px; line-height: 1.6;">
+                <tr>
+                  <td style="padding: 8px 0; color: #6b7280; width: 150px; vertical-align: top; font-weight: 500;">Candidate Full Name</td>
+                  <td style="padding: 8px 0; color: #111827; font-weight: 600; vertical-align: top;">${app.fullName}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #6b7280; vertical-align: top; font-weight: 500;">Applied Position</td>
+                  <td style="padding: 8px 0; color: #111827; font-weight: 600; vertical-align: top;">${app.appliedFor}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #6b7280; vertical-align: top; font-weight: 500;">Email Address</td>
+                  <td style="padding: 8px 0; vertical-align: top;"><a href="mailto:${app.email}" style="color: #004B87; text-decoration: none; font-weight: 600;">${app.email}</a></td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #6b7280; vertical-align: top; font-weight: 500;">Candidate Resume</td>
+                  <td style="padding: 8px 0; color: #111827; font-weight: 600; vertical-align: top;">
+                    📎 Attached directly: <strong>${app.resumeFileName || 'Resume.pdf'}</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #6b7280; vertical-align: top; font-weight: 500;">Applied At (IST)</td>
+                  <td style="padding: 8px 0; color: #111827; font-weight: 600; vertical-align: top;">${submissionTimestamp}</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 16px 28px; background-color: #f9fafb; border-top: 1px solid #e5e7eb; font-size: 12px; color: #6b7280; line-height: 1.5;">
+              Candidate resume PDF is attached directly to this email.<br />
+              Notification dispatched directly to: <strong>${hrEmail}</strong>
+            </td>
+          </tr>
+        </table>
       </body>
     </html>
   `;
@@ -395,169 +307,58 @@ export async function sendWhitepaperEmailNotification(data: WhitepaperDownloadEm
 
   const htmlTemplate = `
     <!DOCTYPE html>
-    <html>
+    <html lang="en">
       <head>
         <meta charset="utf-8">
         <title>Whitepaper Download Notification</title>
-        <style>
-          body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
-            background-color: #0f172a; 
-            color: #1e293b; 
-            margin: 0;
-            padding: 40px 16px; 
-          }
-          .container { 
-            max-width: 620px; 
-            margin: 0 auto; 
-            background: #ffffff; 
-            border-radius: 20px; 
-            overflow: hidden; 
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25); 
-            border: 1px solid #e2e8f0; 
-          }
-          .header { 
-            background: linear-gradient(135deg, #004B87 0%, #0284c7 100%); 
-            padding: 36px 28px; 
-            text-align: center; 
-            color: #ffffff; 
-          }
-          .badge {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.35);
-            color: #ffffff;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            padding: 4px 12px;
-            border-radius: 100px;
-            margin-bottom: 12px;
-          }
-          .header h2 { 
-            margin: 0; 
-            font-size: 22px; 
-            font-weight: 800; 
-            letter-spacing: -0.02em;
-          }
-          .header p { 
-            color: rgba(255, 255, 255, 0.85); 
-            margin: 8px 0 0 0; 
-            font-size: 13px; 
-          }
-          .content { 
-            padding: 32px 28px; 
-          }
-          .highlight-card {
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 24px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-          }
-          .highlight-card .icon {
-            font-size: 20px;
-          }
-          .highlight-card .text {
-            font-size: 13px;
-            color: #166534;
-            font-weight: 600;
-          }
-          .row { 
-            margin-bottom: 18px; 
-            padding-bottom: 14px; 
-            border-bottom: 1px solid #f1f5f9; 
-          }
-          .row:last-child { 
-            border-bottom: none; 
-            margin-bottom: 0; 
-            padding-bottom: 0; 
-          }
-          .label { 
-            font-size: 11px; 
-            font-weight: 700; 
-            color: #0284c7; 
-            text-transform: uppercase; 
-            letter-spacing: 0.08em; 
-            margin-bottom: 4px; 
-          }
-          .value { 
-            font-size: 15px; 
-            color: #0f172a; 
-            font-weight: 600; 
-          }
-          .footer { 
-            background-color: #f8fafc; 
-            padding: 20px 28px; 
-            text-align: center; 
-            border-top: 1px solid #f1f5f9; 
-            font-size: 12px; 
-            color: #64748b; 
-          }
-        </style>
       </head>
-      <body>
-        <div class="container">
-          <div class="header">
-            <div class="badge">Live Download Lead</div>
-            <h2>Strategic Whitepaper Downloaded</h2>
-            <p>A new prospect has requested and downloaded your publication.</p>
-          </div>
-
-          <div class="content">
-            <div class="highlight-card">
-              <span class="icon">📄</span>
-              <span class="text"><strong>${whitepaperTitle}</strong></span>
-            </div>
-
-            <div class="row">
-              <div class="label">Prospect Full Name</div>
-              <div class="value">${data.name}</div>
-            </div>
-
-            <div class="row">
-              <div class="label">Company / Manufacturing Plant</div>
-              <div class="value">${data.company}</div>
-            </div>
-
-            <div class="row">
-              <div class="label">Work Email Address</div>
-              <div class="value">
-                <a href="mailto:${data.email}" style="color: #004B87; text-decoration: none; font-weight: 700;">
-                  ${data.email}
-                </a>
+      <body style="margin: 0; padding: 24px; background-color: #f3f4f6; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #1f2937;">
+        <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width: 580px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; border-top: 4px solid #004B87;">
+          <tr>
+            <td style="padding: 24px 28px 16px; border-bottom: 1px solid #e5e7eb;">
+              <div style="font-size: 11px; font-weight: 700; color: #004B87; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Whitepaper Download Lead</div>
+              <h2 style="margin: 0; font-size: 20px; color: #111827; font-weight: 700;">Whitepaper Downloaded</h2>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 24px 28px;">
+              <div style="background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 12px 16px; margin-bottom: 20px; color: #166534; font-size: 14px; font-weight: 600;">
+                📄 ${whitepaperTitle}
               </div>
-            </div>
-
-            <div class="row">
-              <div class="label">Direct Contact Number (with Country Code)</div>
-              <div class="value">
-                <a href="tel:${data.phone}" style="color: #004B87; text-decoration: none; font-weight: 700;">
-                  ${data.phone}
-                </a>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="label">Industry / Slug</div>
-              <div class="value">${data.slug || 'General'}</div>
-            </div>
-
-            <div class="row">
-              <div class="label">Downloaded At (IST)</div>
-              <div class="value">${downloadTimestamp}</div>
-            </div>
-          </div>
-
-          <div class="footer">
-            Sent automatically by Prixgen Industrial Intelligence Engine.<br />
-            Notifications dispatched to: <strong>${recipientList.join(', ')}</strong>
-          </div>
-        </div>
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="font-size: 14px; line-height: 1.6;">
+                <tr>
+                  <td style="padding: 8px 0; color: #6b7280; width: 140px; vertical-align: top; font-weight: 500;">Prospect Name</td>
+                  <td style="padding: 8px 0; color: #111827; font-weight: 600; vertical-align: top;">${data.name}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #6b7280; vertical-align: top; font-weight: 500;">Company</td>
+                  <td style="padding: 8px 0; color: #111827; font-weight: 600; vertical-align: top;">${data.company}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #6b7280; vertical-align: top; font-weight: 500;">Work Email</td>
+                  <td style="padding: 8px 0; vertical-align: top;"><a href="mailto:${data.email}" style="color: #004B87; text-decoration: none; font-weight: 600;">${data.email}</a></td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #6b7280; vertical-align: top; font-weight: 500;">Phone Number</td>
+                  <td style="padding: 8px 0; color: #111827; font-weight: 600; vertical-align: top;"><a href="tel:${data.phone}" style="color: #004B87; text-decoration: none; font-weight: 600;">${data.phone}</a></td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #6b7280; vertical-align: top; font-weight: 500;">Category / Slug</td>
+                  <td style="padding: 8px 0; color: #111827; font-weight: 600; vertical-align: top;">${data.slug || 'General'}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: #6b7280; vertical-align: top; font-weight: 500;">Downloaded At (IST)</td>
+                  <td style="padding: 8px 0; color: #111827; font-weight: 600; vertical-align: top;">${downloadTimestamp}</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 16px 28px; background-color: #f9fafb; border-top: 1px solid #e5e7eb; font-size: 12px; color: #6b7280;">
+              This is an automated notification from the Prixgen Whitepapers library to <strong>${recipientList.join(', ')}</strong>.
+            </td>
+          </tr>
+        </table>
       </body>
     </html>
   `;
