@@ -216,9 +216,10 @@ export function WhitepaperFlipbook({ onOpenDownloadModal, className = '' }: Whit
         }
 
         .crisp-book-image {
-          image-rendering: -webkit-optimize-contrast;
-          image-rendering: crisp-edges;
+          image-rendering: auto;
           -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          transform: translateZ(0);
         }
       `}</style>
 
@@ -227,14 +228,14 @@ export function WhitepaperFlipbook({ onOpenDownloadModal, className = '' }: Whit
         ref={stageRef}
         key={playCount}
         onClick={() => handleReplay()}
-        className="wp-book-perspective relative w-full max-w-[880px] aspect-[1000/600] flex items-center justify-center cursor-pointer transition-transform duration-300 hover:scale-[1.01]"
+        className="wp-book-perspective relative w-full max-w-[900px] aspect-[1000/600] flex items-center justify-center cursor-pointer transition-transform duration-300 hover:scale-[1.01]"
         title="Click to replay 4.5s page-flip animation"
       >
         {/* =========================================================================
             STATE 1: SETTLED RAZOR-SHARP COVER (Zero Blur, Zero Overlap, 100% Crisp)
             ========================================================================= */}
         {isSettled ? (
-          <div className="relative w-[330px] h-[450px] flex items-center justify-center">
+          <div className="relative w-[340px] h-[470px] flex items-center justify-center">
             {/* High-Definition Natural Drop Shadow */}
             <div 
               className="absolute inset-0 top-[20px] -bottom-[12px] rounded-r-2xl rounded-l-md pointer-events-none -z-10"
@@ -246,28 +247,28 @@ export function WhitepaperFlipbook({ onOpenDownloadModal, className = '' }: Whit
 
             {/* Pristine Book Hardcover Card */}
             <div
-              className="relative w-full h-full bg-white rounded-r-[14px] rounded-l-[3px] overflow-hidden shadow-[0_22px_50px_rgba(0,0,0,0.28),0_4px_14px_rgba(0,0,0,0.14)] border border-slate-200/90"
+              className="relative w-full h-full bg-white rounded-r-[14px] rounded-l-[3px] overflow-hidden shadow-[0_22px_50px_rgba(0,0,0,0.28),0_4px_14px_rgba(0,0,0,0.14)] border border-slate-200/90 select-none"
               style={{
-                transform: 'rotateX(3deg) rotateY(1deg)',
+                transform: 'rotateX(2deg) rotateY(1deg)',
                 transformStyle: 'flat'
               }}
             >
               {/* Left Spine Book Crease with 3D Depth Highlight */}
               <div
-                className="absolute left-0 top-0 bottom-0 w-3.5 z-20 pointer-events-none"
+                className="absolute left-0 top-0 bottom-0 w-3.5 z-30 pointer-events-none"
                 style={{
                   background: 'linear-gradient(90deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.06) 50%, rgba(255,255,255,0.25) 80%, rgba(0,0,0,0.02) 100%)'
                 }}
               />
 
               {/* Multi-Page Stack Thickness Hint on Right Edge */}
-              <div className="absolute right-0 top-0 bottom-0 w-[3px] bg-gradient-to-r from-slate-200 to-slate-300 border-l border-slate-300/80 z-20 pointer-events-none" />
+              <div className="absolute right-0 top-0 bottom-0 w-[3px] bg-gradient-to-r from-slate-200 to-slate-300 border-l border-slate-300/80 z-30 pointer-events-none" />
 
               {/* 100% Crisp Native Resolution Cover Image */}
               <img
                 src="/images/pvc/whitepaper_cover.png"
                 alt="From Polymer to Pipe: Building a Connected Operating Model for PVC & Plastics Manufacturers"
-                className="crisp-book-image w-full h-full object-fill rounded-r-[13px] select-none"
+                className="crisp-book-image w-full h-full object-fill rounded-r-[13px]"
                 loading="eager"
               />
             </div>

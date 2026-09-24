@@ -2188,16 +2188,47 @@ export const blogAuthors: BlogAuthor[] = [
         children: [{ _type: 'span', text: 'Dr. Arvinth is the Chief Technology Officer at Prixgen, specializing in AI-driven industrial automation and enterprise architecture.' }]
       }
     ]
+  },
+  {
+    name: 'Karthik S Hatti',
+    slug: 'karthik-s-hatti',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400',
+    position: 'Co-Founder & Chief Business Officer',
+    bio: [
+      {
+        _type: 'block',
+        children: [{ _type: 'span', text: 'Karthik S Hatti is the Co-Founder, Director and Chief Business Officer of Prixgen Tech Solutions. With 22+ years of enterprise experience across ERP, Retail, IT, and digital transformation, Karthik has architected 100+ business systems across India, the Middle East, and Southeast Asia.' }]
+      }
+    ]
   }
 ];
 
 export const blogCategories = [
+  { title: 'ERP Strategy', description: 'Executive guidance on aligning ERP investments with enterprise operating models.' },
+  { title: 'Leadership', description: 'Strategic insights for CEOs, CFOs, and business owners managing digital change.' },
+  { title: 'Odoo', description: 'Engineering, customization, and deployment best practices for Odoo Enterprise.' },
+  { title: 'Implementation', description: 'Methodologies for predictable, on-time, and resilient ERP go-lives.' },
   { title: 'Industrial AI', description: 'Exploring the intersection of artificial intelligence and manufacturing operations.' },
   { title: 'ERP Insights', description: 'Deep dives into Enterprise Resource Planning systems and best practices.' },
   { title: 'Digital Transformation', description: 'Strategies for modernizing legacy industrial workflows.' }
 ];
 
 export const blogPosts: BlogPost[] = [
+  {
+    title: "Your ERP Budget Is Missing a Line Item: Your People's Time",
+    slug: 'erp-implementation-team-capacity-risk',
+    excerpt: "Why internal team capacity is the ERP risk most boards never price in, and how to fix it before kickoff. Learn the warning signs and Prixgen's six-step capacity readiness framework.",
+    publishedAt: new Date('2026-09-24').toISOString(),
+    mainImage: '/images/blog/erp-capacity/01_hero.png',
+    author: blogAuthors[1],
+    categories: [{ title: 'ERP Strategy' }, { title: 'Leadership' }, { title: 'Implementation' }, { title: 'Odoo' }],
+    body: [],
+    seo: {
+      title: 'ERP Implementation Risk: Why Team Capacity Matters | Prixgen',
+      metaDesc: "An overstretched internal team is one of the biggest hidden ERP risks. Learn the warning signs and Prixgen's six-step capacity readiness framework.",
+      keywords: ['ERP implementation risk', 'ERP team capacity', 'ERP key users', 'Odoo implementation planning', 'ERP change fatigue', 'ERP project readiness']
+    }
+  },
   {
     title: 'The Future of Predictive Maintenance in Smart Factories',
     slug: 'predictive-maintenance-smart-factories',

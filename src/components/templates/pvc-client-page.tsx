@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -57,7 +58,7 @@ interface PvcClientPageProps {
   industry?: any;
 }
 
-// Diagram Image with Interactive Zoom Lightbox
+// Diagram Image with Interactive Zoom Lightbox (Portaled to document.body for true fullscreen center)
 function DiagramImage({ 
   src, 
   alt, 
@@ -68,60 +69,88 @@ function DiagramImage({
   src: string; 
   alt: string; 
   caption?: string; 
-  className?: string;
+  className?: string; 
   imageClassName?: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Lock body scroll when lightbox is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') setIsOpen(false);
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isOpen]);
 
   return (
-    <figure className={`my-6 overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-sm transition-all hover:shadow-md ${className || ''}`}>
-      <div 
-        className="relative overflow-hidden bg-slate-50 cursor-pointer flex items-center justify-center p-2 sm:p-3"
-        onClick={() => setIsOpen(true)}
-      >
-        <Image
-          src={src}
-          alt={alt}
-          width={1200}
-          height={675}
-          className={`w-full h-auto object-contain transition-transform duration-300 hover:scale-[1.01] ${imageClassName || 'max-h-[360px] sm:max-h-[440px]'}`}
-          priority={false}
-        />
-      </div>
-      {caption && (
-        <figcaption className="px-5 py-3 bg-slate-50/90 border-t border-slate-200/80 text-xs text-slate-600 font-medium flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#004B87] shrink-0" />
-          <span>{caption}</span>
-        </figcaption>
-      )}
+    <>
+      <figure className={`my-6 overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-sm transition-all hover:shadow-md ${className || ''}`}>
+        <div 
+          className="relative overflow-hidden bg-slate-50 cursor-zoom-in flex items-center justify-center p-2 sm:p-3 group"
+          onClick={() => setIsOpen(true)}
+          title="Click to view full screen"
+        >
+          <Image
+            src={src}
+            alt={alt}
+            width={1200}
+            height={675}
+            className={`w-full h-auto object-contain transition-transform duration-300 group-hover:scale-[1.01] ${imageClassName || 'max-h-[360px] sm:max-h-[440px]'}`}
+            priority={false}
+          />
+          <div className="absolute bottom-3 right-3 p-1.5 rounded-lg bg-black/40 text-white opacity-0 group-hover:opacity-100 backdrop-blur transition-opacity">
+            <Maximize2 size={16} />
+          </div>
+        </div>
+        {caption && (
+          <figcaption className="px-5 py-3 bg-slate-50/90 border-t border-slate-200/80 text-xs text-slate-600 font-medium flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#004B87] shrink-0" />
+            <span>{caption}</span>
+          </figcaption>
+        )}
+      </figure>
 
-      {/* Lightbox Modal (Clean Fullscreen with Blurred Backdrop, Only the Image) */}
-      <AnimatePresence>
-        {isOpen && (
+      {/* True Fullscreen Modal Portaled Directly to document.body (Zero Parent Transform Traps) */}
+      {mounted && isOpen && createPortal(
+        <AnimatePresence>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md p-4 sm:p-8 flex items-center justify-center cursor-zoom-out"
+            className="fixed inset-0 z-[99999] bg-black/90 backdrop-blur-lg p-4 sm:p-8 flex items-center justify-center cursor-zoom-out"
             onClick={() => setIsOpen(false)}
           >
             {/* Floating Close Button */}
             <button
               onClick={() => setIsOpen(false)}
-              className="absolute top-5 right-5 sm:top-7 sm:right-7 z-50 p-2.5 rounded-full bg-white/15 hover:bg-white/30 text-white backdrop-blur-md transition-all cursor-pointer shadow-lg hover:scale-110"
+              className="fixed top-5 right-5 sm:top-7 sm:right-7 z-[100000] p-3 rounded-full bg-white/20 hover:bg-white/35 text-white backdrop-blur-md transition-all cursor-pointer shadow-2xl hover:scale-110"
               aria-label="Close popup"
             >
-              <X size={22} />
+              <X size={24} />
             </button>
 
-            {/* Only the Image - Fits viewport cleanly with zero inner scroll */}
+            {/* Centered High-Res Image Container */}
             <motion.div
               initial={{ scale: 0.92, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.92, opacity: 0 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="relative max-w-[94vw] max-h-[92vh] flex items-center justify-center cursor-default"
+              className="relative max-w-[95vw] max-h-[92vh] flex items-center justify-center cursor-default"
               onClick={(e) => e.stopPropagation()}
             >
               <Image
@@ -129,14 +158,15 @@ function DiagramImage({
                 alt={alt}
                 width={1920}
                 height={1080}
-                className="max-h-[88vh] max-w-[92vw] w-auto h-auto object-contain rounded-xl shadow-2xl drop-shadow-[0_25px_50px_rgba(0,0,0,0.6)]"
+                className="max-h-[88vh] max-w-[94vw] w-auto h-auto object-contain rounded-xl shadow-2xl drop-shadow-[0_25px_50px_rgba(0,0,0,0.8)] border border-white/10"
                 priority
               />
             </motion.div>
           </motion.div>
-        )}
-      </AnimatePresence>
-    </figure>
+        </AnimatePresence>,
+        document.body
+      )}
+    </>
   );
 }
 
@@ -501,29 +531,8 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
     }, 450);
   };
 
-  // Whitepaper Modal & Sticky Prompt State
+  // Whitepaper Modal State
   const [isWhitepaperModalOpen, setIsWhitepaperModalOpen] = useState(false);
-  const [showStickyPrompt, setShowStickyPrompt] = useState(false);
-  const [dismissedSticky, setDismissedSticky] = useState(false);
-
-  useEffect(() => {
-    let ticking = false;
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          if (window.scrollY > 600 && !dismissedSticky) {
-            setShowStickyPrompt(true);
-          } else if (window.scrollY <= 600) {
-            setShowStickyPrompt(false);
-          }
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [dismissedSticky]);
 
   return (
     <div className="min-h-screen bg-white text-slate-900 selection:bg-[#004B87] selection:text-white font-sans">
@@ -1610,30 +1619,7 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
         </div>
       </section>
 
-      {/* =========================================================================
-          SECTION 13: ABOUT THE AUTHOR (NEW)
-          ========================================================================= */}
-      <section className="py-16 px-4 sm:px-6 lg:px-10 bg-slate-100 border-b border-slate-200/80">
-        <div className="max-w-[1000px] mx-auto text-left">
-          <div className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm flex flex-col md:flex-row items-start gap-6 sm:gap-8">
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-[#004B87] to-[#00A3E0] text-white flex items-center justify-center font-black text-2xl shrink-0 shadow-md">
-              KH
-            </div>
-            <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 text-xs font-mono font-bold text-[#004B87] uppercase tracking-wider">
-                <UserCheck size={14} /> Author & ERP Strategist
-              </div>
-              <h3 className="text-2xl font-extrabold text-[#0F172A]">Karthik S Hatti</h3>
-              <p className="text-xs font-semibold text-slate-500">
-                Co-Founder, Director & Chief Business Officer &bull; Prixgen Tech Solutions Pvt Ltd
-              </p>
-              <p className="text-sm text-slate-600 font-medium leading-relaxed pt-1">
-                Karthik is Co-Founder, Director and Chief Business Officer of Prixgen Tech Solutions Pvt Ltd, an Odoo Gold Partner and ERP consultancy headquartered in Mysuru, India, serving manufacturing clients across India, the Middle East and Southeast Asia. He works directly with promoters and CXOs on digital transformation, manufacturing operating models, and enterprise architecture.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* =========================================================================
           SECTION 14: DEDICATED STRATEGIC WHITEPAPER DOWNLOAD SHOWCASE
@@ -1791,45 +1777,7 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
         </div>
       </section>
 
-      {/* =========================================================================
-          STICKY / FLOATING WHITEPAPER PROMPT BAR (ON SCROLL)
-          ========================================================================= */}
-      <AnimatePresence>
-        {showStickyPrompt && (
-          <div className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 max-w-sm bg-slate-900 border border-slate-700 rounded-xl p-3.5 shadow-xl text-white flex items-center justify-between gap-3">
-            <div className="min-w-0 text-left">
-              <div className="text-[11px] font-semibold text-[#00A3E0]">
-                PVC Manufacturing Whitepaper
-              </div>
-              <div className="text-xs text-slate-300 font-medium truncate">
-                From Polymer to Pipe (13 Pages)
-              </div>
-            </div>
 
-            <div className="flex items-center gap-2 shrink-0">
-              <button
-                type="button"
-                onClick={() => setIsWhitepaperModalOpen(true)}
-                className="px-3 py-1.5 rounded-lg bg-[#004B87] hover:bg-[#003866] text-white font-semibold text-xs transition-colors cursor-pointer"
-              >
-                Download PDF
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  setDismissedSticky(true);
-                  setShowStickyPrompt(false);
-                }}
-                className="text-slate-400 hover:text-white p-1 rounded transition-colors"
-                aria-label="Dismiss prompt"
-              >
-                <X size={14} />
-              </button>
-            </div>
-          </div>
-        )}
-      </AnimatePresence>
 
       {/* =========================================================================
           GATED WHITEPAPER DOWNLOAD MODAL
