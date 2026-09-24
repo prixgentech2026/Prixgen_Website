@@ -1,11 +1,13 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { LeadCaptureForm } from '@/components/features/lead-capture-form';
 import { WhitepaperDownloadModal } from '@/components/features/whitepaper-download-modal';
+import { WhitepaperFlipbook } from '@/components/features/whitepaper-flipbook';
 import { JsonLd } from '@/components/seo/json-ld';
 import { FadeUp } from '@/components/animations/fade-up';
 import { Magnetic } from '@/components/animations/magnetic';
@@ -42,11 +44,100 @@ import {
   Activity,
   FileText,
   Download,
-  X
+  X,
+  Maximize2,
+  ChevronDown,
+  BookOpen,
+  Award,
+  HelpCircle,
+  UserCheck
 } from 'lucide-react';
 
 interface PvcClientPageProps {
   industry?: any;
+}
+
+// Diagram Image with Interactive Zoom Lightbox
+function DiagramImage({ 
+  src, 
+  alt, 
+  caption, 
+  className,
+  imageClassName,
+}: { 
+  src: string; 
+  alt: string; 
+  caption?: string; 
+  className?: string;
+  imageClassName?: string;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <figure className={`my-6 overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-sm transition-all hover:shadow-md ${className || ''}`}>
+      <div 
+        className="relative overflow-hidden bg-slate-50 cursor-pointer flex items-center justify-center p-2 sm:p-3"
+        onClick={() => setIsOpen(true)}
+      >
+        <Image
+          src={src}
+          alt={alt}
+          width={1200}
+          height={675}
+          className={`w-full h-auto object-contain transition-transform duration-300 hover:scale-[1.01] ${imageClassName || 'max-h-[360px] sm:max-h-[440px]'}`}
+          priority={false}
+        />
+      </div>
+      {caption && (
+        <figcaption className="px-5 py-3 bg-slate-50/90 border-t border-slate-200/80 text-xs text-slate-600 font-medium flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#004B87] shrink-0" />
+          <span>{caption}</span>
+        </figcaption>
+      )}
+
+      {/* Lightbox Modal (Clean Fullscreen with Blurred Backdrop, Only the Image) */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md p-4 sm:p-8 flex items-center justify-center cursor-zoom-out"
+            onClick={() => setIsOpen(false)}
+          >
+            {/* Floating Close Button */}
+            <button
+              onClick={() => setIsOpen(false)}
+              className="absolute top-5 right-5 sm:top-7 sm:right-7 z-50 p-2.5 rounded-full bg-white/15 hover:bg-white/30 text-white backdrop-blur-md transition-all cursor-pointer shadow-lg hover:scale-110"
+              aria-label="Close popup"
+            >
+              <X size={22} />
+            </button>
+
+            {/* Only the Image - Fits viewport cleanly with zero inner scroll */}
+            <motion.div
+              initial={{ scale: 0.92, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.92, opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="relative max-w-[94vw] max-h-[92vh] flex items-center justify-center cursor-default"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={src}
+                alt={alt}
+                width={1920}
+                height={1080}
+                className="max-h-[88vh] max-w-[92vw] w-auto h-auto object-contain rounded-xl shadow-2xl drop-shadow-[0_25px_50px_rgba(0,0,0,0.6)]"
+                priority
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </figure>
+  );
 }
 
 // 1. Six Disconnected Systems Data
@@ -57,6 +148,65 @@ const DISCONNECTED_SYSTEMS = [
   { id: 'quality', title: 'Quality', icon: ShieldCheck, issue: 'Hydrostatic and wall-thickness tests logged on paper clipboards', metric: 'Audit Delays', fix: 'Digital Inspection Gates' },
   { id: 'inventory', title: 'Inventory', icon: Boxes, issue: 'Physical yard stock vs system mismatches across pipe classes', metric: 'Ghost Stock', fix: '5-Dimension Lot Tracking' },
   { id: 'finance', title: 'Finance', icon: BarChart4, issue: 'Actual production scrap costs discovered weeks late at month-end', metric: 'EBITDA Leak', fix: 'Real-Time Job Costing' },
+];
+
+// Implementation Lessons Data (From Prixgen's 10+ Implementations)
+const IMPLEMENTATION_LESSONS = [
+  {
+    num: '01',
+    title: 'Get Product Master Data Right First',
+    desc: 'A clean structure for diameter, pressure class, wall thickness, colour, and length prevents most downstream confusion in planning, pricing, and stock.'
+  },
+  {
+    num: '02',
+    title: 'Model the Process as it Really Runs',
+    desc: 'Continuous extrusion, weight-based consumption, regrind and reclaim loops need to be reflected faithfully, not forced into a generic discrete-manufacturing template.'
+  },
+  {
+    num: '03',
+    title: 'Capture Data at Source',
+    desc: 'Production, scrap, and weight recorded directly at the extrusion line, by shift, are far more reliable than figures reconstructed at the end of the day.'
+  },
+  {
+    num: '04',
+    title: 'Connect Quality to Batches from Day One',
+    desc: 'Retrofitting digital traceability later is significantly harder and more disruptive than designing digital batch-locking in from day one.'
+  },
+  {
+    num: '05',
+    title: 'Involve Finance Early',
+    desc: 'Our in-house Chartered Accountants and manufacturing finance consultants ensure costing, variance, and month-end closing work for plant operations, not just for auditors.'
+  },
+  {
+    num: '06',
+    title: 'Phase Sensibly',
+    desc: 'Finance, inventory, and production core usually come first; advanced planning, predictive maintenance, and direct machine integration follow once the foundation is stable.'
+  },
+  {
+    num: '07',
+    title: 'Never Subcontract Execution',
+    desc: 'Because Prixgen never subcontracts project work, the same in-house team that designs your manufacturing architecture is the one that configures, tests, and supports it.'
+  }
+];
+
+// PVC Industry FAQs Data
+const PVC_FAQS = [
+  {
+    q: 'Is Odoo suitable for PVC pipe manufacturing?',
+    a: 'Yes. With the right configuration, Odoo handles continuous extrusion, weight-based consumption, batch and lot traceability, quality checks, multi-warehouse inventory, and maintenance. Prixgen has implemented it for more than 10 PVC and polymer manufacturers, including multi-unit operations.'
+  },
+  {
+    q: 'How can ERP reduce shooting waste and overweight pipes?',
+    a: 'By recording scrap and weight per metre at each changeover and each shift, ERP makes these costs visible by line, product, and operator. Once visible, they can be managed through better run sequencing, reclaim control, and timely tool maintenance.'
+  },
+  {
+    q: 'What does end-to-end traceability involve?',
+    a: 'It means linking supplier batch, raw material lot, production order, machine and shift, inspection results, finished goods lot, storage location, and customer dispatch, so that any pipe can be traced backwards or forwards in minutes.'
+  },
+  {
+    q: 'Where should a PVC manufacturer start its digital journey?',
+    a: 'Start with a single, reliable foundation for finance, inventory, and production with clean product master data. Then add quality traceability, maintenance, and machine integration in planned phases.'
+  }
 ];
 
 // 2. Five Industry Shifts Data
@@ -153,16 +303,106 @@ const FAULT_LINES = [
 
 // 4. Ten Step Journey Data
 const PROCESS_STEPS = [
-  { step: '01', title: 'Goods Receipt', type: 'Upstream Control', desc: 'Resin lot inspection, bulk density check, weighbridge validation, and automated silo allocation.', kpi: 'Silo Net Weight' },
-  { step: '02', title: 'Compounding', type: 'Upstream Control', desc: 'High-speed mixer batching with automated PLC dosing for polymers, lubricants, stabilizers, and regrind.', kpi: 'Recipe Variance < 0.2%' },
-  { step: '03', title: 'Extrusion', type: 'Production Core', desc: 'Continuous melt temperature, screw RPM, melt pressure, and multi-zone thermal profiling.', kpi: 'Thermal Profile Sync' },
-  { step: '04', title: 'Sizing & Calibration', type: 'Production Core', desc: 'Vacuum calibration tank monitoring ensuring precise outer diameter and circularity standards.', kpi: 'OD Tolerance ±0.05mm' },
-  { step: '05', title: 'Cooling Tanks', type: 'Production Core', desc: 'Multi-stage spray water cooling with closed-loop chiller telemetry to freeze dimensions.', kpi: 'Chiller Temp 18°C' },
-  { step: '06', title: 'Haul-Off & Cutting', type: 'Production Core', desc: 'Synchronized caterpillar traction and planetary cutting to exact standard lengths (3m/6m).', kpi: 'Length Accuracy ±1mm' },
-  { step: '07', title: 'Printing & Marking', type: 'Downstream Control', desc: 'Online inkjet coding with BIS/ASTM standard mark, batch ID, pressure class, and timestamp.', kpi: 'Inkjet Barcode Lock' },
-  { step: '08', title: 'Quality Inspection', type: 'Downstream Control', desc: 'Continuous ultrasonic wall measurement, hydrostatic burst test logging, and impact verification.', kpi: 'Burst Pressure Pass' },
-  { step: '09', title: 'Socketing & Bundling', type: 'Downstream Control', desc: 'Automated bell-mouth forming, rubber ring insertion, strapping, and bundle barcoding.', kpi: 'Bundle Piece Count' },
-  { step: '10', title: 'Dispatch & Logistics', type: 'Downstream Control', desc: 'Net weight weighbridge sync, automated gate pass generation, and dealer route optimization.', kpi: 'Automated Gate Pass' }
+  { 
+    step: '01', 
+    title: 'Goods Receipt', 
+    shortTitle: 'Goods Receipt',
+    type: 'Upstream Control', 
+    desc: 'Resin lot inspection, bulk density check, weighbridge gross/tare validation, and automated silo allocation with supplier COA digital verification.', 
+    kpi: 'Silo Net Weight Sync',
+    odooModule: 'Odoo Purchase & Weighbridge IoT',
+    odooDesc: 'Automated Gross-Tare net weight deduction, Supplier COA attachment, and direct Silo Bin lot creation upon gate entry.'
+  },
+  { 
+    step: '02', 
+    title: 'Compounding', 
+    shortTitle: 'Compounding',
+    type: 'Upstream Control', 
+    desc: 'High-speed mixer batching with automated PLC dosing for PVC polymer resin, thermal stabilizers, calcium carbonate, impact modifiers, and reclaimed regrind.', 
+    kpi: 'Recipe Variance < 0.2%',
+    odooModule: 'Odoo MRP Formulation & Recipe Lock',
+    odooDesc: 'Enforces strict tolerance limits on chemical additives and automatically locks compound batch IDs before extrusion issue.'
+  },
+  { 
+    step: '03', 
+    title: 'Extrusion', 
+    shortTitle: 'Extrusion',
+    type: 'Production Core', 
+    desc: 'Continuous melt temperature, screw RPM, melt pressure, and multi-zone barrel thermal profiling across twin-screw extruders.', 
+    kpi: 'Thermal Profile Sync',
+    odooModule: 'Odoo Shop-Floor & Industrial IoT',
+    odooDesc: 'Captures real-time machine speed, motor load, melt temp, and cold-start scrap logging directly against work orders.'
+  },
+  { 
+    step: '04', 
+    title: 'Sizing & Calibration', 
+    shortTitle: 'Sizing & Calibration',
+    type: 'Production Core', 
+    desc: 'Vacuum calibration tank monitoring ensuring precise outer diameter, roundness, and wall-thickness consistency before initial cooling.', 
+    kpi: 'OD Tolerance ±0.05mm',
+    odooModule: 'Odoo Quality & Dimensional IoT',
+    odooDesc: 'Syncs vacuum tank sensor telemetry with SPC (Statistical Process Control) charts to catch dimensional drift immediately.'
+  },
+  { 
+    step: '05', 
+    title: 'Cooling Tanks', 
+    shortTitle: 'Cooling Tanks',
+    type: 'Production Core', 
+    desc: 'Multi-stage immersion and spray water cooling with closed-loop chiller telemetry to freeze pipe crystalline structure and eliminate residual stresses.', 
+    kpi: 'Chiller Temp 18°C',
+    odooModule: 'Odoo Maintenance & Chiller Telemetry',
+    odooDesc: 'Monitors water flow rate, chiller delta-T, and pump vibration to prevent thermal shock and unrecorded pipe warping.'
+  },
+  { 
+    step: '06', 
+    title: 'Haul-Off & Cutting', 
+    shortTitle: 'Haul-Off & Cutting',
+    type: 'Production Core', 
+    desc: 'Synchronized caterpillar traction and planetary cutting to exact standard lengths (3m / 6m) with zero chamfer deformation.', 
+    kpi: 'Length Accuracy ±1mm',
+    odooModule: 'Odoo Manufacturing Execution (MES)',
+    odooDesc: 'Logs accurate piece counts, cut length validation, and automated routing of cutting swarf directly into regrind inventory.'
+  },
+  { 
+    step: '07', 
+    title: 'Printing & Marking', 
+    shortTitle: 'Printing & Marking',
+    type: 'Downstream Control', 
+    desc: 'Online continuous inkjet coding with BIS / ASTM standard mark, batch ID, pressure class, SDR rating, and exact timestamp.', 
+    kpi: 'Inkjet Barcode Lock',
+    odooModule: 'Odoo Serialization & Traceability',
+    odooDesc: 'Generates unique 2D DataMatrix and GS1 barcode sequences linked directly to the parent compound batch and extrusion shift.'
+  },
+  { 
+    step: '08', 
+    title: 'Quality Inspection', 
+    shortTitle: 'Quality Inspection',
+    type: 'Downstream Control', 
+    desc: 'Continuous ultrasonic wall measurement, laboratory hydrostatic burst pressure testing, tensile elongation, and drop-weight impact verification.', 
+    kpi: 'Burst Pressure Pass',
+    odooModule: 'Odoo Quality Lab & Gate Pass',
+    odooDesc: 'Enforces mandatory QC pass sign-offs before inventory release; failed samples automatically trigger lot quarantine.'
+  },
+  { 
+    step: '09', 
+    title: 'Socketing & Bundling', 
+    shortTitle: 'Socketing & Bundling',
+    type: 'Downstream Control', 
+    desc: 'Automated bell-mouth forming (elastomeric / solvent weld sockets), rubber sealing ring insertion, automated strapping, and bundle barcoding.', 
+    kpi: 'Bundle Piece Count',
+    odooModule: 'Odoo Packaging & Finished Goods Lotting',
+    odooDesc: 'Bundles individual pipes into master warehouse packs, records gasket batch numbers, and prints master bundle barcode labels.'
+  },
+  { 
+    step: '10', 
+    title: 'Dispatch & Logistics', 
+    shortTitle: 'Dispatch & Logistics',
+    type: 'Downstream Control', 
+    desc: 'Net weight weighbridge truck sync, digital gate pass issuance, automated e-Way Bill generation, and secondary dealer dispatch routing.', 
+    kpi: 'Automated Gate Pass',
+    odooModule: 'Odoo Delivery, e-Way Bill & DMS Portal',
+    odooDesc: 'Reconciles outbound truck axle weights against ERP pick orders, generates e-Invoices, and syncs delivery tracking to dealer portal.'
+  }
 ];
 
 // 5. Ten Link Traceability Chain Data
@@ -236,106 +476,11 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
   const [activeFault, setActiveFault] = useState(0);
   const [activeScorecardTab, setActiveScorecardTab] = useState(0);
   const [activeTraceLink, setActiveTraceLink] = useState(0);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
-  // Live Extruder Telemetry Simulation
-  const [selectedLine, setSelectedLine] = useState(4);
-  const [extrusionTemp, setExtrusionTemp] = useState(185.4);
-  const [weighbridgeKg, setWeighbridgeKg] = useState(24850);
-  const [wallVariance, setWallVariance] = useState(0.04);
-  const [sparkPoints, setSparkPoints] = useState("0,18 20,16 40,19 60,14 80,17 100,12 120,15 140,11 160,14 180,13 200,12");
-  
-  // Live Typing Command Prompt
-  const [terminalText, setTerminalText] = useState('');
-  
   // Trace Simulation State
   const [isSimulatingTrace, setIsSimulatingTrace] = useState(false);
   const [traceProgress, setTraceProgress] = useState(0);
-
-  // Whitepaper Modal & Sticky Prompt State
-  const [isWhitepaperModalOpen, setIsWhitepaperModalOpen] = useState(false);
-  const [showStickyPrompt, setShowStickyPrompt] = useState(false);
-  const [dismissedSticky, setDismissedSticky] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 600 && !dismissedSticky) {
-        setShowStickyPrompt(true);
-      } else if (window.scrollY <= 600) {
-        setShowStickyPrompt(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [dismissedSticky]);
-
-  // Live telemetry ticker
-  useEffect(() => {
-    const telemetryInterval = setInterval(() => {
-      setExtrusionTemp((prev) => parseFloat((184.5 + Math.random() * 2.2).toFixed(1)));
-      setWallVariance((prev) => parseFloat((0.02 + Math.random() * 0.03).toFixed(2)));
-      
-      let y = 15;
-      const pts = [];
-      for (let x = 0; x <= 200; x += 20) {
-        y += (Math.random() * 6 - 3);
-        y = Math.max(8, Math.min(22, y));
-        pts.push(`${x},${y.toFixed(1)}`);
-      }
-      setSparkPoints(pts.join(' '));
-    }, 2000);
-
-    const weighbridgeInterval = setInterval(() => {
-      setWeighbridgeKg((prev) => prev + (Math.random() > 0.5 ? 25 : -15));
-    }, 3500);
-
-    return () => {
-      clearInterval(telemetryInterval);
-      clearInterval(weighbridgeInterval);
-    };
-  }, []);
-
-  // Terminal Typing Loop
-  useEffect(() => {
-    const commands = [
-      '> weighbridge.sync(truck="KA-09-EA-4112") → Inward Lot #LOT-881 verified',
-      '> odoo.mrp.lock_recipe(silo="S-02", formula="PVC-U-110mm") → Locked OK',
-      '> ultrasonic.scan_wall(od=110, sdr=21) → Wall over-give eliminated (±0.03mm)',
-      '> scrap_reclaim_loop.route(purge_kg=14.2) → Regrind balance synced to MRP',
-      '> bis_standard.stamp_batch(batch="PV-2026-09-SH-B") → Digital e-Way Bill Ready'
-    ];
-
-    let cmdIdx = 0;
-    let charIdx = 0;
-    let isDeleting = false;
-    let timeout: NodeJS.Timeout;
-
-    const tick = () => {
-      const current = commands[cmdIdx];
-      if (!isDeleting) {
-        charIdx++;
-        setTerminalText(current.slice(0, charIdx));
-        if (charIdx === current.length) {
-          isDeleting = true;
-          timeout = setTimeout(tick, 2200);
-        } else {
-          timeout = setTimeout(tick, 32);
-        }
-      } else {
-        charIdx--;
-        setTerminalText(current.slice(0, charIdx));
-        if (charIdx === 0) {
-          isDeleting = false;
-          cmdIdx = (cmdIdx + 1) % commands.length;
-          timeout = setTimeout(tick, 300);
-        } else {
-          timeout = setTimeout(tick, 18);
-        }
-      }
-    };
-
-    tick();
-    return () => clearTimeout(timeout);
-  }, []);
 
   // Trace Simulation Runner
   const runTraceSimulation = () => {
@@ -355,6 +500,30 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
       }
     }, 450);
   };
+
+  // Whitepaper Modal & Sticky Prompt State
+  const [isWhitepaperModalOpen, setIsWhitepaperModalOpen] = useState(false);
+  const [showStickyPrompt, setShowStickyPrompt] = useState(false);
+  const [dismissedSticky, setDismissedSticky] = useState(false);
+
+  useEffect(() => {
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (window.scrollY > 600 && !dismissedSticky) {
+            setShowStickyPrompt(true);
+          } else if (window.scrollY <= 600) {
+            setShowStickyPrompt(false);
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [dismissedSticky]);
 
   return (
     <div className="min-h-screen bg-white text-slate-900 selection:bg-[#004B87] selection:text-white font-sans">
@@ -409,7 +578,7 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
             {/* Left Copy Column */}
-            <div className="lg:col-span-7 space-y-6 text-left">
+            <div className="lg:col-span-5 xl:col-span-5 space-y-6 text-left">
               <FadeUp delay={0.1}>
                 <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#004B87]/5 border border-[#00A3E0]/30 text-[#004B87] text-[11px] font-bold tracking-widest uppercase shadow-sm">
                   <span className="w-2 h-2 rounded-full bg-[#00A3E0] animate-pulse" />
@@ -418,47 +587,40 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
               </FadeUp>
 
               <FadeUp delay={0.2}>
-                <h1 className="text-4xl sm:text-5xl lg:text-[54px] xl:text-[60px] font-extrabold text-[#0F172A] tracking-tight leading-[1.08]">
+                <h1 className="text-3xl sm:text-4xl lg:text-[44px] xl:text-[48px] font-extrabold text-[#0F172A] tracking-tight leading-[1.1]">
                   From Polymer to Pipe: <br />
                   <span className="text-[#004B87]">Building a Connected Operating Model</span>
                 </h1>
               </FadeUp>
 
+
+
               <FadeUp delay={0.3}>
-                <p className="text-lg sm:text-xl text-slate-600 font-medium leading-relaxed max-w-2xl">
-                  The journey from raw polymer resin to a finished, dispatched pipe involves far more than extrusion. For most manufacturers, it means six disconnected systems — procurement, formulation, production, quality, inventory, and finance — each tracked in silos. We replace this friction with real-time visibility and control.
+                <p className="text-base sm:text-lg text-slate-600 font-medium leading-relaxed">
+                  Walk through any PVC pipe plant and the physical flow is easy to follow from resin to finished pipe. But information flow is fragmented across six operational silos. What we have learned implementing ERP for more than 10 PVC and polymer manufacturers is that the next competitive advantage is visibility, not just capacity.
                 </p>
               </FadeUp>
 
               <FadeUp delay={0.4}>
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-4">
-                  <Magnetic>
-                    <Button size="lg" className="h-14 px-7 rounded-xl font-bold text-sm bg-[#004B87] hover:bg-[#0C1620] text-white shadow-lg shadow-[#004B87]/20 transition-transform hover:-translate-y-0.5 active:scale-95" asChild>
-                      <a href="#audit-form">Schedule a Plant Audit</a>
-                    </Button>
-                  </Magnetic>
-                  
+                <div className="flex flex-wrap items-center gap-3.5 pt-2">
                   <Magnetic>
                     <button
                       type="button"
                       onClick={() => setIsWhitepaperModalOpen(true)}
-                      className="inline-flex items-center justify-center gap-2.5 h-14 px-6 rounded-xl bg-sky-50 border border-sky-200 hover:border-sky-400 text-[#004B87] font-bold text-sm shadow-sm transition-all hover:bg-sky-100/80 active:scale-95 cursor-pointer"
+                      className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-full bg-[#004B87] hover:bg-[#003866] text-white font-bold text-sm shadow-md transition-all transform hover:-translate-y-0.5 active:scale-95 cursor-pointer"
                     >
-                      <div className="w-6 h-6 rounded-lg bg-[#004B87] text-white flex items-center justify-center">
-                        <Download size={13} />
-                      </div>
-                      <span>Download Whitepaper</span>
-                      <span className="text-[10px] bg-sky-200/80 text-[#004B87] px-1.5 py-0.5 rounded font-mono font-bold">PDF</span>
+                      <Download size={16} className="text-white" />
+                      <span className="text-white font-bold">Download White Paper</span>
+                      <span className="text-[10px] bg-sky-400 text-slate-950 font-extrabold px-1.5 py-0.5 rounded font-mono">PDF</span>
                     </button>
                   </Magnetic>
 
                   <Magnetic>
                     <a 
-                      href="#value-chain" 
-                      className="inline-flex items-center justify-center gap-1.5 h-14 px-5 rounded-xl border border-slate-300 hover:border-[#004B87] text-slate-700 hover:text-[#004B87] font-bold text-sm transition-colors"
+                      href="#audit-form"
+                      className="inline-flex items-center justify-center h-12 px-7 rounded-full border-2 border-slate-300 hover:border-[#004B87] bg-white hover:bg-slate-50 text-slate-800 hover:text-[#004B87] font-bold text-sm transition-all shadow-sm transform hover:-translate-y-0.5 active:scale-95 cursor-pointer"
                     >
-                      <span>Explore Framework</span>
-                      <ArrowRight size={14} />
+                      <span>Schedule Plant Audit</span>
                     </a>
                   </Magnetic>
                 </div>
@@ -466,111 +628,47 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
 
               {/* Quick Proof Metrics */}
               <FadeUp delay={0.5}>
-                <div className="grid grid-cols-3 gap-6 pt-6 border-t border-slate-200 text-left">
+                <div className="grid grid-cols-3 gap-4 pt-5 border-t border-slate-200 text-left">
                   <div>
-                    <div className="text-2xl lg:text-3xl font-black text-[#004B87]">6 Silos</div>
-                    <div className="text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">Unified to 1 Core</div>
+                    <div className="text-xl sm:text-2xl font-black text-[#004B87]">10+ Plants</div>
+                    <div className="text-[11px] text-slate-500 font-bold uppercase tracking-wider mt-0.5">Deployments</div>
                   </div>
                   <div>
-                    <div className="text-2xl lg:text-3xl font-black text-[#004B87]">10 Links</div>
-                    <div className="text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">End-to-End Traceability</div>
+                    <div className="text-xl sm:text-2xl font-black text-[#004B87]">10 Links</div>
+                    <div className="text-[11px] text-slate-500 font-bold uppercase tracking-wider mt-0.5">Traceability</div>
                   </div>
                   <div>
-                    <div className="text-2xl lg:text-3xl font-black text-[#004B87]">&lt; 3 Min</div>
-                    <div className="text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">Defect Origin Discovery</div>
+                    <div className="text-xl sm:text-2xl font-black text-[#004B87]">&lt; 3 Min</div>
+                    <div className="text-[11px] text-slate-500 font-bold uppercase tracking-wider mt-0.5">Recall Speed</div>
                   </div>
                 </div>
               </FadeUp>
             </div>
 
-            {/* Right Live Shop-Floor Telemetry Card */}
-            <FadeUp delay={0.3} className="lg:col-span-5 w-full">
-              <div className="bg-slate-950 rounded-3xl p-6 sm:p-8 text-white shadow-2xl border border-slate-800 relative overflow-hidden">
-                {/* Visual Glow */}
-                <div className="absolute top-0 right-0 w-64 h-64 bg-[#00A3E0]/15 rounded-full blur-3xl pointer-events-none" />
-
-                <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-5">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
-                    <span className="font-mono text-xs text-slate-300 font-semibold tracking-wider uppercase">LIVE_TELEMETRY // LINE 0{selectedLine}</span>
-                  </div>
-                  <div className="flex gap-1">
-                    {[1, 2, 3, 4].map((lineNum) => (
-                      <button
-                        key={lineNum}
-                        onClick={() => setSelectedLine(lineNum)}
-                        className={`text-[10px] font-mono px-2 py-0.5 rounded transition-colors ${
-                          selectedLine === lineNum
-                            ? 'bg-[#00A3E0] text-slate-950 font-bold'
-                            : 'bg-slate-800 text-slate-400 hover:text-white'
-                        }`}
-                      >
-                        L{lineNum}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="space-y-4 font-mono text-xs">
-                  {/* Live Status Indicators */}
-                  <div className="bg-slate-900/90 rounded-2xl p-4 border border-slate-800 flex items-center justify-between">
-                    <div>
-                      <div className="text-slate-400 text-[10px] uppercase">Active Formulation SKU</div>
-                      <div className="text-white font-bold text-sm mt-0.5">PVC-U 110mm SDR-21 Class 3</div>
-                    </div>
-                    <span className="bg-emerald-500/15 text-emerald-400 font-bold text-[10px] px-2.5 py-1 rounded border border-emerald-500/30 flex items-center gap-1">
-                      <CheckCircle2 size={12} />
-                      RECIPE_LOCK_OK
-                    </span>
-                  </div>
-
-                  {/* Real-time Tickers */}
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-slate-900/80 rounded-xl p-3.5 border border-slate-800 flex flex-col justify-between">
-                      <div className="text-slate-400 text-[10px] flex items-center justify-between">
-                        <span>WEIGHBRIDGE_INWARD</span>
-                        <Scale size={12} className="text-[#00A3E0]" />
-                      </div>
-                      <div className="text-lg font-bold text-[#00A3E0] mt-1">
-                        {weighbridgeKg.toLocaleString('en-IN')} kg
-                      </div>
-                      <div className="text-[9px] text-slate-500 mt-0.5">SILO_02 // RESIN_LOT_881</div>
-                    </div>
-
-                    <div className="bg-slate-900/80 rounded-xl p-3.5 border border-slate-800 flex flex-col justify-between">
-                      <div className="text-slate-400 text-[10px] flex items-center justify-between">
-                        <span>MELT_TEMP_SENSOR</span>
-                        <Activity size={12} className="text-amber-400" />
-                      </div>
-                      <div className="text-lg font-bold text-amber-400 mt-1">
-                        {extrusionTemp}°C
-                      </div>
-                      <svg className="w-full h-5 mt-1 overflow-visible" viewBox="0 0 200 30" preserveAspectRatio="none">
-                        <polyline fill="none" stroke="#00A3E0" strokeWidth="2" points={sparkPoints} />
-                      </svg>
-                    </div>
-                  </div>
-
-                  {/* Live typing command prompt */}
-                  <div className="bg-black/70 rounded-xl p-3.5 border border-slate-800 min-h-[56px] flex items-center text-[11px] text-[#38BDF8]">
-                    <span>{terminalText}</span>
-                    <span className="inline-block w-1.5 h-3.5 bg-[#38BDF8] ml-1 animate-pulse" />
-                  </div>
-
-                  <div className="pt-2 flex items-center justify-between text-[11px] text-slate-400 border-t border-slate-800/80">
-                    <span>OEE: <b className="text-white">88.4%</b></span>
-                    <span>WALL VAR: <b className="text-emerald-400">±{wallVariance}mm</b></span>
-                    <span>DISPATCH OTIF: <b className="text-[#00A3E0]">99.2%</b></span>
-                  </div>
-                </div>
-              </div>
-            </FadeUp>
+            {/* Right Side: Interactive 3D Whitepaper Flip-Book Preview */}
+            <div className="lg:col-span-7 xl:col-span-7 w-full">
+              <WhitepaperFlipbook onOpenDownloadModal={() => setIsWhitepaperModalOpen(true)} />
+            </div>
           </div>
         </div>
       </section>
 
       {/* =========================================================================
-          SECTION 1: ONE VALUE CHAIN, SIX DISCONNECTED SYSTEMS
+          KEY EXECUTIVE QUOTE & STATS BANNER (IMAGE 02)
+          ========================================================================= */}
+      <section className="py-12 px-4 sm:px-6 lg:px-10 bg-slate-100 border-b border-slate-200">
+        <div className="max-w-[1200px] mx-auto text-center">
+          <DiagramImage
+            src="/images/pvc/02_stats.png"
+            alt="Connected Decision Making Across the Entire PVC Value Chain"
+            caption="The future of plastics manufacturing is not automated production alone. It is connected decision-making across the entire value chain."
+            className="my-0 max-w-4xl mx-auto"
+          />
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 1: ONE VALUE CHAIN, SIX DISCONNECTED SYSTEMS (IMAGES 03, 04, 05)
           ========================================================================= */}
       <section id="value-chain" className="py-20 lg:py-28 px-4 sm:px-6 lg:px-10 bg-slate-50 border-b border-slate-200/80">
         <div className="max-w-[1400px] mx-auto text-left">
@@ -587,8 +685,17 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
             </p>
           </FadeUp>
 
+          {/* Diagram 03: Resin & Additives */}
+          <FadeUp delay={0.2}>
+            <DiagramImage
+              src="/images/pvc/03_resin.jpg"
+              alt="Raw Polymer Resin and Additive Compounding Batch Identity"
+              caption="Every finished pipe starts as resin and additives, and every batch carries an identity worth tracking."
+            />
+          </FadeUp>
+
           {/* Value Chain Visual Map */}
-          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {DISCONNECTED_SYSTEMS.map((silo, idx) => {
               const Icon = silo.icon;
               return (
@@ -621,13 +728,31 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
             })}
           </div>
 
+          {/* Diagram 04 & Diagram 05 Visual Flow */}
+          <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <FadeUp delay={0.2}>
+              <DiagramImage
+                src="/images/pvc/04_value_chain.jpg"
+                alt="One Value Chain Managed in Separate Disconnected Systems"
+                caption="One value chain, from procurement to dealers and finance, often managed in separate systems."
+              />
+            </FadeUp>
+            <FadeUp delay={0.3}>
+              <DiagramImage
+                src="/images/pvc/05_one_business.jpg"
+                alt="Six Operational Domains Connected by a Single Demand Flow"
+                caption="Six operational domains connected by a single flow of demand, production and cash."
+              />
+            </FadeUp>
+          </div>
+
           {/* Strategic Callout */}
-          <FadeUp delay={0.4} className="mt-12">
+          <FadeUp delay={0.4} className="mt-8">
             <div className="bg-gradient-to-r from-[#004B87] to-[#002D54] rounded-2xl p-8 sm:p-10 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
               <div className="space-y-2">
-                <span className="text-[10px] font-bold tracking-widest text-[#00A3E0] uppercase font-mono">CORE EXECUTIVE PRINCIPLE</span>
+                <span className="text-[10px] font-bold tracking-widest text-[#00A3E0] uppercase font-mono">THE KEY SHIFT IN THINKING</span>
                 <p className="text-xl sm:text-2xl font-bold leading-snug">
-                  &ldquo;The future of plastics manufacturing is not automated production alone. It is connected decision-making across the entire value chain.&rdquo;
+                  &ldquo;A pipe manufacturer does not run six businesses. It runs one business, expressed through six operational lenses. Your systems should reflect that.&rdquo;
                 </p>
               </div>
               <Magnetic>
@@ -690,7 +815,7 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
       </section>
 
       {/* =========================================================================
-          SECTION 3: SEVEN FAULT LINES IN MODERN PIPE MANUFACTURING
+          SECTION 3: SEVEN FAULT LINES IN MODERN PIPE MANUFACTURING (IMAGE 06)
           ========================================================================= */}
       <section className="py-20 lg:py-28 px-4 sm:px-6 lg:px-10 bg-slate-50 border-b border-slate-200/80">
         <div className="max-w-[1400px] mx-auto text-left">
@@ -707,8 +832,17 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
             </p>
           </FadeUp>
 
+          {/* Diagram 06: Fault Lines */}
+          <FadeUp delay={0.2}>
+            <DiagramImage
+              src="/images/pvc/06_fault_lines.jpg"
+              alt="Seven Places Where Disconnected Operations Typically Crack"
+              caption="Seven places where disconnected operations typically crack."
+            />
+          </FadeUp>
+
           {/* Interactive Fault Line Selector */}
-          <div className="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <div className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Navigation list */}
             <div className="lg:col-span-5 space-y-2.5">
               {FAULT_LINES.map((fault, idx) => (
@@ -795,7 +929,7 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
       </section>
 
       {/* =========================================================================
-          SECTION 4: THE 10-STEP JOURNEY (FROM POLYMER TO FINISHED PIPE)
+          SECTION 4: THE 10-STEP JOURNEY (FROM POLYMER TO FINISHED PIPE) (IMAGE 07)
           ========================================================================= */}
       <section className="py-20 lg:py-28 px-4 sm:px-6 lg:px-10 bg-white border-b border-slate-200/80">
         <div className="max-w-[1400px] mx-auto text-left">
@@ -812,56 +946,98 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
             </p>
           </FadeUp>
 
+          {/* Diagram 07: Ten Control Points (Compact and visible in one go without multiple scrolls) */}
+          <FadeUp delay={0.2} className="max-w-4xl mx-auto">
+            <DiagramImage
+              src="/images/pvc/07_polymer_to_pipe.jpg"
+              alt="Ten Control Points from Goods Receipt to Customer Dispatch"
+              caption="Ten control points from goods receipt to dispatch."
+              className="my-4 shadow-sm"
+              imageClassName="max-h-[280px] sm:max-h-[340px] w-auto mx-auto object-contain"
+            />
+          </FadeUp>
+
           {/* Interactive Process Pipeline */}
-          <div className="mt-14 space-y-6">
-            <div className="grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 gap-2">
+          <div className="mt-10 space-y-6">
+            {/* 10 Step Selectors (2 rows of 5 for clear readability without cramped ellipses) */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5 sm:gap-3">
               {PROCESS_STEPS.map((step, idx) => (
                 <button
                   key={step.step}
                   onClick={() => setActiveStep(idx)}
-                  className={`p-3 rounded-xl text-left transition-all duration-200 border cursor-pointer ${
+                  className={`p-3.5 sm:p-4 rounded-2xl text-left transition-all duration-200 border cursor-pointer flex flex-col justify-between min-h-[78px] ${
                     activeStep === idx 
-                      ? 'bg-[#004B87] text-white border-[#004B87] shadow-lg scale-105 z-10' 
-                      : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                      ? 'bg-[#004B87] text-white border-[#004B87] shadow-xl ring-2 ring-[#00A3E0]/40 scale-[1.02] z-10' 
+                      : 'bg-white text-slate-800 border-slate-200/90 hover:bg-slate-50 hover:border-slate-300 shadow-sm'
                   }`}
                 >
-                  <div className={`text-[10px] font-mono font-bold ${activeStep === idx ? 'text-[#00A3E0]' : 'text-slate-400'}`}>
-                    STEP {step.step}
+                  <div className="flex items-center justify-between">
+                    <span className={`text-[11px] font-mono font-bold tracking-wider ${activeStep === idx ? 'text-[#38BDF8]' : 'text-[#004B87]'}`}>
+                      STEP {step.step}
+                    </span>
+                    <span className={`w-1.5 h-1.5 rounded-full ${activeStep === idx ? 'bg-[#38BDF8]' : 'bg-slate-300'}`} />
                   </div>
-                  <div className="text-xs font-bold mt-1 line-clamp-1">{step.title}</div>
+                  <div className={`text-xs sm:text-[13px] font-bold mt-1.5 leading-snug ${activeStep === idx ? 'text-white' : 'text-slate-900'}`}>
+                    {step.title}
+                  </div>
                 </button>
               ))}
             </div>
 
-            {/* Active Step Showcase */}
+            {/* Active Step Showcase Card with Large Legible Fonts */}
             <AnimatePresence mode="wait">
               <motion.div 
                 key={activeStep}
-                initial={{ opacity: 0, y: 15 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
+                exit={{ opacity: 0, y: -12 }}
                 transition={{ duration: 0.25 }}
-                className="bg-slate-950 text-white rounded-3xl p-8 sm:p-12 border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl"
+                className="bg-slate-950 text-white rounded-3xl p-6 sm:p-10 lg:p-12 border border-slate-800 flex flex-col lg:flex-row items-stretch justify-between gap-8 shadow-2xl relative overflow-hidden"
               >
-                <div className="space-y-4 max-w-2xl">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00A3E0]/15 text-[#00A3E0] text-xs font-bold uppercase tracking-wider font-mono">
-                    {PROCESS_STEPS[activeStep].type} &bull; {PROCESS_STEPS[activeStep].kpi}
+                {/* Background Ambient Glow */}
+                <div className="absolute top-0 right-0 w-80 h-80 bg-[#00A3E0]/10 rounded-full blur-3xl pointer-events-none" />
+
+                {/* Left Step Details */}
+                <div className="space-y-4 max-w-2xl relative z-10">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#004B87]/50 border border-[#00A3E0]/40 text-[#38BDF8] text-xs font-bold uppercase tracking-wider font-mono">
+                      {PROCESS_STEPS[activeStep].type}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-bold font-mono">
+                      <CheckCircle2 size={12} />
+                      Target: {PROCESS_STEPS[activeStep].kpi}
+                    </span>
                   </div>
-                  <h3 className="text-3xl sm:text-4xl font-extrabold text-white">
+
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight">
                     Step {PROCESS_STEPS[activeStep].step}: {PROCESS_STEPS[activeStep].title}
                   </h3>
-                  <p className="text-base sm:text-lg text-slate-300 font-medium leading-relaxed">
+
+                  <p className="text-base sm:text-lg text-slate-200 font-medium leading-relaxed">
                     {PROCESS_STEPS[activeStep].desc}
                   </p>
                 </div>
 
-                <div className="bg-slate-900/90 rounded-2xl p-6 border border-slate-800 shrink-0 w-full md:w-80 space-y-3 font-mono text-xs">
-                  <div className="text-slate-400 font-bold uppercase text-[10px]">ERP Integration Touchpoint</div>
-                  <div className="text-[#00A3E0] font-bold text-sm">Odoo Connected Module</div>
-                  <div className="text-slate-300 text-xs">
-                    {activeStep < 2 && "MRP Raw Inward & Automated Weighbridge Lot Tagging"}
-                    {activeStep >= 2 && activeStep < 6 && "IoT Extruder Telemetry & Scrap Reclaim Accounting"}
-                    {activeStep >= 6 && "Quality Control Gates, Serialization & DMS Dispatch Sync"}
+                {/* Right Odoo Connected Touchpoint Box */}
+                <div className="bg-slate-900/95 rounded-2xl p-6 sm:p-7 border border-slate-800 shrink-0 w-full lg:w-[420px] flex flex-col justify-between space-y-4 relative z-10 shadow-xl">
+                  <div>
+                    <div className="text-slate-400 font-mono font-bold uppercase text-[10px] tracking-widest flex items-center gap-1.5 mb-2">
+                      <span className="w-2 h-2 rounded-full bg-[#00A3E0]" />
+                      ERP INTEGRATION TOUCHPOINT
+                    </div>
+                    
+                    <div className="text-base sm:text-lg font-extrabold text-[#38BDF8] font-mono leading-snug">
+                      {PROCESS_STEPS[activeStep].odooModule}
+                    </div>
+
+                    <p className="text-xs sm:text-sm text-slate-200 mt-2.5 font-sans leading-relaxed">
+                      {PROCESS_STEPS[activeStep].odooDesc}
+                    </p>
+                  </div>
+
+                  <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-slate-400">
+                    <span>STEP {PROCESS_STEPS[activeStep].step} OF 10</span>
+                    <span className="text-[#38BDF8] font-bold">100% TRACEABLE</span>
                   </div>
                 </div>
               </motion.div>
@@ -871,7 +1047,7 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
       </section>
 
       {/* =========================================================================
-          SECTION 5: TWO HIDDEN COSTS (SHOOTING WASTE & WALL-THICKNESS PARADOX)
+          SECTION 5: TWO HIDDEN COSTS (IMAGE 08)
           ========================================================================= */}
       <section className="py-20 lg:py-28 px-4 sm:px-6 lg:px-10 bg-slate-50 border-b border-slate-200/80">
         <div className="max-w-[1400px] mx-auto text-left">
@@ -888,7 +1064,16 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
             </p>
           </FadeUp>
 
-          <div className="mt-14 grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Diagram 08: Hidden Costs */}
+          <FadeUp delay={0.2}>
+            <DiagramImage
+              src="/images/pvc/08_hidden_costs.jpg"
+              alt="Shooting Waste and the Wall-Thickness Paradox in Pipe Extrusion"
+              caption="Shooting waste and the wall-thickness paradox: two costs that rarely appear as their own line item."
+            />
+          </FadeUp>
+
+          <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Cost 1: Shooting Waste */}
             <FadeUp delay={0.1}>
               <div className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 h-full flex flex-col justify-between space-y-8 group">
@@ -940,14 +1125,14 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
 
           <FadeUp delay={0.3} className="mt-12 text-center bg-[#004B87]/5 rounded-2xl p-6 border border-[#004B87]/15">
             <p className="text-base sm:text-lg font-bold text-[#004B87]">
-              Neither cost is tracked as its own line item by default. Both compound automatically as the product range grows — unless measured on purpose.
+              Neither cost is tracked as its own line item by default. In a commodity-resin business, recovering even a small percentage of overweight and changeover scrap goes straight to the bottom line.
             </p>
           </FadeUp>
         </div>
       </section>
 
       {/* =========================================================================
-          SECTION 6: DEFENSIBLE TRACEABILITY WITH LIVE AUDIT SIMULATOR
+          SECTION 6: DEFENSIBLE TRACEABILITY (IMAGE 09)
           ========================================================================= */}
       <section className="py-20 lg:py-28 px-4 sm:px-6 lg:px-10 bg-white border-b border-slate-200/80">
         <div className="max-w-[1400px] mx-auto text-left">
@@ -980,12 +1165,21 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
               Traceability: One Question, Ten Links in the Chain
             </h2>
             <p className="text-lg text-slate-600 font-medium max-w-3xl mt-4 leading-relaxed">
-              A defensible traceability chain links a supplier batch all the way through to the customer dispatch it was issued against — ten linked points that protect your brand.
+              When a customer reports a failed pipe, answering &ldquo;where did this come from?&rdquo; requires ten linked records: supplier batch, raw material lot, material issue, production order, machine/shift, production batch, inspection result, finished goods lot, warehouse location, and customer dispatch.
             </p>
           </FadeUp>
 
+          {/* Diagram 09: Traceability Chain */}
+          <FadeUp delay={0.2}>
+            <DiagramImage
+              src="/images/pvc/09_traceability.jpg"
+              alt="A Defensible Traceability Chain from Supplier Batch to Customer Dispatch"
+              caption="A defensible traceability chain from supplier batch to customer dispatch."
+            />
+          </FadeUp>
+
           {/* Interactive Trace Chain Flow */}
-          <div className="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-2 gap-3.5">
               {TRACEABILITY_LINKS.map((link, idx) => {
                 const isActive = activeTraceLink === idx;
@@ -1054,7 +1248,7 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
       </section>
 
       {/* =========================================================================
-          SECTION 7: INVENTORY INTELLIGENCE (THE 5 DIMENSIONS)
+          SECTION 7: INVENTORY INTELLIGENCE (IMAGE 10)
           ========================================================================= */}
       <section className="py-20 lg:py-28 px-4 sm:px-6 lg:px-10 bg-slate-50 border-b border-slate-200/80">
         <div className="max-w-[1400px] mx-auto text-left">
@@ -1067,11 +1261,20 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
               From Stock Visibility to Inventory Intelligence
             </h2>
             <p className="text-lg text-slate-600 font-medium max-w-3xl mt-4 leading-relaxed">
-              Knowing a stock quantity isn&apos;t the same as being able to plan against it. Trustworthy inventory data requires accuracy across five dimensions simultaneously.
+              Knowing a stock quantity isn&apos;t the same as being able to plan against it. A trustworthy stock figure must be accurate on five dimensions at once: quantity, batch, location, allocation, and status.
             </p>
           </FadeUp>
 
-          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+          {/* Diagram 10: Inventory */}
+          <FadeUp delay={0.2}>
+            <DiagramImage
+              src="/images/pvc/10_inventory.jpg"
+              alt="Moving From Knowing Stock Quantity to Batch, Location and Allocation Accuracy"
+              caption="Moving from knowing how much stock you have to knowing which batch, where, and for whom."
+            />
+          </FadeUp>
+
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
             {[
               { dim: '01', title: 'Quantity', desc: 'Exact piece count, bundled length & net weight via scale sync.' },
               { dim: '02', title: 'Batch & Lot', desc: 'Resin blend formulation date, color run & extruder line ID.' },
@@ -1097,14 +1300,14 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
 
           <FadeUp delay={0.3} className="mt-12 text-center bg-white rounded-2xl p-6 border border-slate-200">
             <p className="text-base sm:text-lg font-bold text-[#004B87]">
-              An inventory figure that cannot answer which batch and for whom is not really an inventory figure. It is an estimate.
+              If your inventory report cannot tell you which batch a bundle belongs to and which customer it is reserved for, it is not really an inventory figure. It is an estimate.
             </p>
           </FadeUp>
         </div>
       </section>
 
       {/* =========================================================================
-          SECTION 8: FROM REACTIVE TO PREDICTIVE MAINTENANCE
+          SECTION 8: FROM REACTIVE TO PREDICTIVE MAINTENANCE (IMAGE 11)
           ========================================================================= */}
       <section className="py-20 lg:py-28 px-4 sm:px-6 lg:px-10 bg-white border-b border-slate-200/80">
         <div className="max-w-[1400px] mx-auto text-left">
@@ -1117,11 +1320,20 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
               From Reactive to Predictive Maintenance
             </h2>
             <p className="text-lg text-slate-600 font-medium max-w-3xl mt-4 leading-relaxed">
-              Maintenance maturity moves through three distinct stages — trading firefighting for foresight and delivering less unplanned downtime.
+              Extruders, haul-offs, cutters and moulds are the heart of the plant. Maintenance maturity moves through three distinct stages — trading firefighting for foresight and delivering less unplanned downtime.
             </p>
           </FadeUp>
 
-          <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Diagram 11: Maintenance Maturity */}
+          <FadeUp delay={0.2}>
+            <DiagramImage
+              src="/images/pvc/11_maintenance.jpg"
+              alt="Three Stages of Maintenance Maturity in Polymer Manufacturing"
+              caption="Three stages of maintenance maturity: Reactive → Preventive → Predictive."
+            />
+          </FadeUp>
+
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-slate-50 rounded-2xl p-8 border border-slate-200 space-y-4">
               <span className="text-xs font-mono font-bold text-slate-400">STAGE 1 &bull; LEGACY</span>
               <h3 className="text-2xl font-bold text-slate-900">Reactive Maintenance</h3>
@@ -1142,16 +1354,16 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
               <span className="text-xs font-mono font-bold text-[#00A3E0]">STAGE 3 &bull; ODOO CONNECTED</span>
               <h3 className="text-2xl font-bold text-white">Predictive Maintenance</h3>
               <p className="text-sm text-slate-300 font-medium leading-relaxed">
-                IIoT sensor vibration and thermal telemetry flags component fatigue before failure occurs, minimizing downtime.
+                Machine integration captures runtime directly from equipment and triggers maintenance on actual run hours rather than elapsed calendar time.
               </p>
             </div>
           </div>
 
           <div className="mt-10 bg-slate-100 rounded-2xl p-8 border border-slate-200 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
-              <span className="text-xs font-mono font-bold text-[#004B87] uppercase">The Universal Machine Language</span>
+              <span className="text-xs font-mono font-bold text-[#004B87] uppercase">THE ONE METRIC EVERY PLANT SHOULD SHARE</span>
               <h4 className="text-xl font-bold text-slate-900 mt-1">Overall Equipment Effectiveness (OEE)</h4>
-              <p className="text-sm text-slate-600 font-medium mt-1">Availability × Performance × Quality embedded directly into shop-floor dashboards.</p>
+              <p className="text-sm text-slate-600 font-medium mt-1">Availability × Performance × Quality gives management a common language for line performance.</p>
             </div>
             <div className="shrink-0 font-mono text-xl font-black bg-white px-6 py-3 rounded-xl border border-slate-300 text-[#004B87] shadow-sm">
               OEE = A × P × Q
@@ -1161,7 +1373,7 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
       </section>
 
       {/* =========================================================================
-          SECTION 9: THE CONNECTED MANUFACTURING OPERATING MODEL (5 LAYERS)
+          SECTION 9: THE CONNECTED MANUFACTURING OPERATING MODEL (IMAGE 12)
           ========================================================================= */}
       <section id="operating-model" className="py-20 lg:py-28 px-4 sm:px-6 lg:px-10 bg-slate-900 text-white border-b border-slate-800">
         <div className="max-w-[1400px] mx-auto text-left">
@@ -1174,17 +1386,27 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
               The 5-Layer Connected Manufacturing Operating Model
             </h2>
             <p className="text-lg text-slate-300 font-medium max-w-3xl mt-4 leading-relaxed">
-              A digital manufacturing platform is not a bigger ERP system. It is the point where operational data becomes an operating advantage.
+              Bringing this together, a modern PVC operation operates in five distinct layers. Data generated at lower layers becomes the raw material for the layers above.
             </p>
           </FadeUp>
 
-          <div className="mt-14 space-y-4">
+          {/* Diagram 12: Five Layers Operating Model */}
+          <FadeUp delay={0.2}>
+            <DiagramImage
+              src="/images/pvc/12_operating_model.jpg"
+              alt="Five Layers of a Connected Manufacturing Operating Model"
+              caption="Five layers of a connected manufacturing operating model."
+              className="border-slate-800 bg-slate-950 text-slate-300"
+            />
+          </FadeUp>
+
+          <div className="mt-10 space-y-4">
             {[
-              { layer: 'Layer 05', name: 'Experience & Dealer Portal', desc: 'Real-time customer order tracking, dynamic secondary claims approval, mobile dispatch validation.' },
-              { layer: 'Layer 04', name: 'Business Applications (Odoo Core)', desc: 'Unified Procurement, MRP II, Inventory, Accounting, Sales DMS, and Field Maintenance.' },
-              { layer: 'Layer 03', name: 'Digital Operations & Workflow', desc: 'Recipe locking, automated weighbridge gate passes, batch serialization, and reclaim loops.' },
-              { layer: 'Layer 02', name: 'Data & Intelligence Layer', desc: 'Real-time telemetry aggregation, live resin price indexing, OEE computation, and anomaly detection.' },
-              { layer: 'Layer 01', name: 'Connected Plant (Shop Floor)', desc: 'Extrusion lines, digital weighbridges, ultrasonic wall sensors, PLC/SCADA controllers, barcoding.' }
+              { layer: 'Layer 05', name: 'Experience & Dealer Portal', desc: 'Dashboards, mobile apps and portals for management, shop-floor teams, dealers, and customers.' },
+              { layer: 'Layer 04', name: 'Business Applications (Odoo Core)', desc: 'ERP processes for sales, purchase, finance, and HR that consume the same data without re-keying.' },
+              { layer: 'Layer 03', name: 'Digital Operations & Workflow', desc: 'Planning, production, quality, inventory, and maintenance running on shared, real-time data.' },
+              { layer: 'Layer 02', name: 'Data & Intelligence Layer', desc: 'A single, clean data foundation that turns raw plant signals into usable operational intelligence.' },
+              { layer: 'Layer 01', name: 'Connected Plant (Shop Floor)', desc: 'Machines, weighing scales, and sensors that record what actually happens on the line.' }
             ].map((l, idx) => (
               <FadeUp key={l.layer} delay={0.06 * idx}>
                 <div className="bg-slate-800/80 hover:bg-slate-800 rounded-2xl p-6 sm:p-7 border border-slate-700 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 transition-all hover:border-[#00A3E0]/50">
@@ -1201,11 +1423,15 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
               </FadeUp>
             ))}
           </div>
+
+          <FadeUp delay={0.4} className="mt-10 text-center font-mono text-sm text-slate-400">
+            &ldquo;A digital manufacturing platform is not a bigger ERP system. It is the point where operational data becomes an operating advantage.&rdquo;
+          </FadeUp>
         </div>
       </section>
 
       {/* =========================================================================
-          SECTION 10: WHAT SHOULD MANAGEMENT MEASURE? (THE SCORECARD)
+          SECTION 10: WHAT SHOULD MANAGEMENT MEASURE? (IMAGE 13)
           ========================================================================= */}
       <section className="py-20 lg:py-28 px-4 sm:px-6 lg:px-10 bg-white border-b border-slate-200/80">
         <div className="max-w-[1400px] mx-auto text-left">
@@ -1218,12 +1444,21 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
               What Should Management Measure? The Scorecard
             </h2>
             <p className="text-lg text-slate-600 font-medium max-w-3xl mt-4 leading-relaxed">
-              A connected operation runs on one common, real-time scorecard across every domain — not disconnected monthly reports.
+              The value of this scorecard is not just the list of metrics. It is having every metric derived from the same transactions that run the business — refreshed continuously instead of assembled by hand.
             </p>
           </FadeUp>
 
+          {/* Diagram 13: Scorecard */}
+          <FadeUp delay={0.2}>
+            <DiagramImage
+              src="/images/pvc/13_scorecard.jpg"
+              alt="One Real-Time Scorecard Across Every Operational Domain"
+              caption="One real-time scorecard across every operational domain."
+            />
+          </FadeUp>
+
           {/* Tab buttons */}
-          <div className="mt-12 flex flex-wrap gap-2.5 border-b border-slate-200 pb-4">
+          <div className="mt-10 flex flex-wrap gap-2.5 border-b border-slate-200 pb-4">
             {SCORECARD_DOMAINS.map((domain, idx) => (
               <button
                 key={domain.domain}
@@ -1264,15 +1499,144 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
               </div>
             ))}
           </div>
-
-          <FadeUp delay={0.3} className="mt-12 text-center bg-slate-100 rounded-2xl p-6 border border-slate-200 font-mono text-sm text-slate-600">
-            &ldquo;The value of this scorecard is having every metric derived from the same transactions that run the business — refreshed continuously.&rdquo;
-          </FadeUp>
         </div>
       </section>
 
       {/* =========================================================================
-          SECTION 11: DEDICATED STRATEGIC WHITEPAPER DOWNLOAD SHOWCASE
+          SECTION 11: LESSONS FROM 10+ PVC IMPLEMENTATIONS (NEW)
+          ========================================================================= */}
+      <section className="py-20 lg:py-28 px-4 sm:px-6 lg:px-10 bg-slate-50 border-b border-slate-200/80">
+        <div className="max-w-[1400px] mx-auto text-left">
+          <FadeUp>
+            <div className="flex items-center gap-3 mb-4">
+              <motion.div initial={{ width: 0 }} whileInView={{ width: 40 }} transition={{ duration: 0.6 }} className="h-0.5 bg-[#004B87]" />
+              <span className="text-[11px] font-bold text-[#004B87] uppercase tracking-widest">Section 11 // Field Expertise</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] tracking-tight">
+              Lessons From 10+ PVC Implementations
+            </h2>
+            <p className="text-lg text-slate-600 font-medium max-w-3xl mt-4 leading-relaxed">
+              Across our PVC and polymer manufacturing projects — from single-plant pipe makers to multi-unit industrial groups — a few hard-won lessons have proven true every time.
+            </p>
+          </FadeUp>
+
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {IMPLEMENTATION_LESSONS.map((lesson, idx) => (
+              <FadeUp key={lesson.num} delay={0.06 * idx} className={idx === 6 ? "md:col-span-2 lg:col-span-3" : ""}>
+                <div className={`h-full rounded-2xl p-7 border transition-all duration-300 flex flex-col justify-between ${
+                  idx === 6 
+                    ? 'bg-gradient-to-r from-slate-900 to-[#004B87] text-white border-slate-800 shadow-xl' 
+                    : 'bg-white hover:bg-slate-50 border-slate-200/90 shadow-sm hover:shadow-md'
+                }`}>
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <span className={`text-2xl font-black font-mono ${idx === 6 ? 'text-[#00A3E0]' : 'text-[#004B87]'}`}>
+                        {lesson.num}
+                      </span>
+                      <span className={`text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded ${
+                        idx === 6 ? 'bg-white/10 text-white' : 'bg-slate-100 text-slate-600'
+                      }`}>
+                        Core Principle
+                      </span>
+                    </div>
+                    <h3 className={`text-xl font-bold mb-2.5 ${idx === 6 ? 'text-white' : 'text-[#0F172A]'}`}>
+                      {lesson.title}
+                    </h3>
+                    <p className={`text-sm leading-relaxed ${idx === 6 ? 'text-slate-200' : 'text-slate-600 font-medium'}`}>
+                      {lesson.desc}
+                    </p>
+                  </div>
+                </div>
+              </FadeUp>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 12: FREQUENTLY ASKED QUESTIONS (NEW)
+          ========================================================================= */}
+      <section className="py-20 lg:py-28 px-4 sm:px-6 lg:px-10 bg-white border-b border-slate-200/80">
+        <div className="max-w-[1000px] mx-auto text-left">
+          <FadeUp>
+            <div className="flex items-center gap-3 mb-4">
+              <motion.div initial={{ width: 0 }} whileInView={{ width: 40 }} transition={{ duration: 0.6 }} className="h-0.5 bg-[#004B87]" />
+              <span className="text-[11px] font-bold text-[#004B87] uppercase tracking-widest">Section 12 // Direct Answers</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] tracking-tight">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-lg text-slate-600 font-medium mt-3 leading-relaxed">
+              Common questions from plant promoters and operations directors evaluating ERP for plastics and pipe manufacturing.
+            </p>
+          </FadeUp>
+
+          <div className="mt-12 space-y-4">
+            {PVC_FAQS.map((faq, idx) => {
+              const isOpen = openFaq === idx;
+              return (
+                <FadeUp key={faq.q} delay={0.06 * idx}>
+                  <div className="border border-slate-200 rounded-2xl overflow-hidden bg-slate-50/60 transition-colors">
+                    <button
+                      type="button"
+                      onClick={() => setOpenFaq(isOpen ? null : idx)}
+                      className="w-full text-left p-6 sm:p-7 flex items-center justify-between gap-4 font-bold text-base sm:text-lg text-[#0F172A] hover:text-[#004B87] transition-colors cursor-pointer"
+                    >
+                      <span>{faq.q}</span>
+                      <ChevronDown
+                        size={20}
+                        className={`text-slate-400 shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180 text-[#004B87]' : ''}`}
+                      />
+                    </button>
+                    <AnimatePresence>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.25 }}
+                        >
+                          <div className="px-6 pb-6 sm:px-7 sm:pb-7 text-sm sm:text-base text-slate-600 font-medium leading-relaxed border-t border-slate-200/60 pt-4">
+                            {faq.a}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </FadeUp>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 13: ABOUT THE AUTHOR (NEW)
+          ========================================================================= */}
+      <section className="py-16 px-4 sm:px-6 lg:px-10 bg-slate-100 border-b border-slate-200/80">
+        <div className="max-w-[1000px] mx-auto text-left">
+          <div className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm flex flex-col md:flex-row items-start gap-6 sm:gap-8">
+            <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-[#004B87] to-[#00A3E0] text-white flex items-center justify-center font-black text-2xl shrink-0 shadow-md">
+              KH
+            </div>
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-2 text-xs font-mono font-bold text-[#004B87] uppercase tracking-wider">
+                <UserCheck size={14} /> Author & ERP Strategist
+              </div>
+              <h3 className="text-2xl font-extrabold text-[#0F172A]">Karthik S Hatti</h3>
+              <p className="text-xs font-semibold text-slate-500">
+                Co-Founder, Director & Chief Business Officer &bull; Prixgen Tech Solutions Pvt Ltd
+              </p>
+              <p className="text-sm text-slate-600 font-medium leading-relaxed pt-1">
+                Karthik is Co-Founder, Director and Chief Business Officer of Prixgen Tech Solutions Pvt Ltd, an Odoo Gold Partner and ERP consultancy headquartered in Mysuru, India, serving manufacturing clients across India, the Middle East and Southeast Asia. He works directly with promoters and CXOs on digital transformation, manufacturing operating models, and enterprise architecture.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 14: DEDICATED STRATEGIC WHITEPAPER DOWNLOAD SHOWCASE
           ========================================================================= */}
       <section id="whitepaper-download" className="py-20 lg:py-24 px-4 sm:px-6 lg:px-10 bg-slate-900 text-white border-b border-slate-800">
         <div className="max-w-[1400px] mx-auto">
@@ -1398,7 +1762,7 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
                 Can you connect the journey from polymer to pipe?
               </h2>
               <p className="text-lg text-slate-300 font-medium leading-relaxed max-w-xl">
-                Talk to Prixgen about a connected Odoo ERP operating model for your plant. Eliminate disconnected silos, enforce recipe variance control, and digitize your dealer distribution loops.
+                Material, movement, transformation, money and people: a PVC business runs well when all five are visible in one place. If you would like to understand where the biggest visibility gaps are in your own operation, our manufacturing consultants would be happy to walk your plant with you.
               </p>
 
               {/* Direct Contact Info */}
@@ -1438,7 +1802,7 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
                 PVC Manufacturing Whitepaper
               </div>
               <div className="text-xs text-slate-300 font-medium truncate">
-                From Polymer to Pipe (16 Pages)
+                From Polymer to Pipe (13 Pages)
               </div>
             </div>
 

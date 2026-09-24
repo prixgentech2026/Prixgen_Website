@@ -184,6 +184,210 @@ const pvcDoc = {
           text: 'A defensible traceability chain links a supplier batch all the way through to customer dispatch across ten linked points: supplier batch, raw material lot, material issue, production order, machine/operator/shift, production batch, inspection result, finished goods lot, warehouse location, and customer dispatch. This delivers rapid root-cause isolation, pinpoint recall precision, and unshakable regulatory compliance.'
         }
       ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'h2',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: '7. Five-Dimensional Inventory Intelligence'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'normal',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: 'Inventory in a PVC plant is not a single number on a balance sheet. It exists across five distinct, interconnected dimensions: raw materials & compound batches in silos, work-in-progress on extrusion lines, finished goods across warehouse and yard racks, regrind & purge scrap awaiting reclamation, and consignment stock at distributor hubs. Visibility across all five dimensions simultaneously is what separates reactive plants from predictable ones.'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'h2',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: '8. Moving Maintenance from Breakdown to Condition-Based'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'normal',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: 'Most extrusion plants operate in reactive breakdown mode: fixing barrels, screws, and haul-offs only after catastrophic failure. The connected operating model transitions the plant through three stages of maintenance maturity: Reactive Breakdown Maintenance (highest scrap, longest downtime) to Planned Preventive Maintenance (time-based schedules, spare parts buffers) to Connected Condition-Based Maintenance (IoT telemetry on motor current, barrel temperatures, melt pressure, and vibration alerting teams before failure occurs).'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'h2',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: '9. The Five-Layer Connected Operating Model'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'normal',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: 'The architecture rests on five integrated layers: Physical Layer (extruders, corrugators, ultrasonic gauges, weighbridges), Connectivity & Edge Layer (OPC-UA, MQTT, sensor gateways), Core Business & ERP Layer (Odoo ERP unifying MRP, Formulation, Quality, Inventory, Sales, and Finance), Intelligence & Control Layer (real-time dashboards, scrap variance analytics, recipe compliance alerts), and Extended Enterprise Layer (dealer management portal, supplier COA portal, customer order tracking).'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'h2',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: '10. The Real-Time Management Scorecard'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'normal',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: 'A unified operating model generates one real-time management scorecard across four key domains: Production & OEE (line availability, running speed, quality yield), Material & Cost Control (recipe variance, shooting waste %, wall-thickness give-away), Inventory & Working Capital (raw resin stock cover, WIP turnover, finished stock aging), and Order Fulfillment & Customer Service (on-time in-full delivery %, quote turnaround time, dealer claim resolution speed).'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'h2',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: '11. Lessons From 10+ PVC Implementations'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'normal',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: 'Key operational principles learned from frontline deployments: (1) Start with batch formulation and raw material control before tackling shop-floor scheduling. (2) Standardize scrap and regrind accounting early — unmeasured regrind corrupts costing. (3) Integrate weighbridges with ERP on Day 1 to prevent inventory drift. (4) Involve shop-floor operators in UI design to ensure high barcode scanning compliance. (5) Connect maintenance work orders directly to downtime logs to capture true cost of unreliability. (6) Build matrix BOMs for PVC pipe variations to keep SKU maintenance sustainable. (7) Focus on rapid wins in quotation turnaround to gain sales team buy-in immediately.'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'h2',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: '12. Frequently Asked Questions'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'normal',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: 'Q: How long does a full ERP and shop-floor rollout take for a multi-line PVC pipe plant? A: A typical phased deployment takes 12 to 16 weeks, beginning with core procurement, formulation, and inventory control before expanding to live line telemetry and dealer portals.'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'normal',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: 'Q: Can Odoo ERP connect with legacy extruders and PLC systems? A: Yes, using industrial IoT edge gateways supporting OPC-UA, Modbus, and MQTT, legacy extruders can transmit temperature, screw speed, and counter data directly into Odoo.'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'normal',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: 'Q: How does the system handle regrind and purge scrap in the BOM? A: The system uses closed-loop multi-level BOMs that track virgin resin vs. reclaimed regrind ratios with automated cost re-averaging.'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'normal',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: 'Q: How does real-time wall-thickness monitoring impact profitability? A: Controlling wall thickness within ±0.05 mm tolerance prevents 2–4% excess resin give-away, translating directly into six-figure annual material savings on high-volume extrusion lines.'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'h2',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: 'About the Author'
+        }
+      ]
+    },
+    {
+      _type: 'block',
+      _key: generateKey(),
+      style: 'normal',
+      children: [
+        {
+          _type: 'span',
+          _key: generateKey(),
+          text: 'By Karthik S Hatti, Co-Founder & CBO, Prixgen Tech Solutions Pvt Ltd. Specializing in enterprise digital transformations, supply chain architectures, and smart manufacturing systems for process and discrete industries across India and the Middle East.'
+        }
+      ]
     }
   ],
   features: [
