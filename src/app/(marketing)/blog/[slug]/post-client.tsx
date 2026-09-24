@@ -19,6 +19,7 @@ import { LinkedInEmbed } from '@/components/shared/linkedin-embed';
 import { LeadCaptureForm } from '@/components/features/lead-capture-form';
 import { ERPFailureCanvas } from '@/components/features/erp-failure-canvas';
 import { ERPCapacityRiskCanvas } from '@/components/features/erp-capacity-risk-canvas';
+import AiErpStrategyCanvas from '@/components/features/ai-erp-strategy-canvas';
 import { Magnetic } from '@/components/animations/magnetic';
 import { AnimatedConnector } from '@/components/shared/animated-connector';
 import { HeroBadge } from '@/components/shared/hero-badge';
@@ -312,6 +313,8 @@ export default function PostClient({ post, relatedPosts = [] }: PostClientProps)
                     <ERPFailureCanvas />
                   ) : post.slug === 'erp-implementation-team-capacity-risk' ? (
                     <ERPCapacityRiskCanvas />
+                  ) : post.slug === 'ai-for-erp-activate-extend-build' ? (
+                    <AiErpStrategyCanvas />
                   ) : post.linkedinUrl ? (
                     <div className="my-12">
                       <LinkedInEmbed url={post.linkedinUrl} />

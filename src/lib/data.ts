@@ -2215,6 +2215,41 @@ export const blogCategories = [
 
 export const blogPosts: BlogPost[] = [
   {
+    title: "AI for ERP: Activate, Extend or Build?",
+    slug: 'ai-for-erp-activate-extend-build',
+    excerpt: "Should you activate ERP-native AI, extend your ERP with AI, or build custom intelligence? Prixgen helps leaders choose the right path without destabilizing their clean-core ERP.",
+    publishedAt: new Date('2026-09-24').toISOString(),
+    mainImage: '/images/blog/ai-erp/01_hero.png',
+    author: blogAuthors[1],
+    categories: [{ title: 'AI for ERP' }, { title: 'ERP Strategy' }, { title: 'Enterprise AI' }, { title: 'Odoo' }],
+    body: [],
+    seo: {
+      title: 'AI for ERP: Activate, Extend or Build? | Prixgen',
+      metaDesc: 'Should you activate ERP-native AI, extend your ERP with AI, or build custom intelligence? Prixgen helps leaders choose the right path.',
+      keywords: [
+        'AI for ERP',
+        'ERP AI strategy',
+        'AI ERP integration',
+        'enterprise AI',
+        'manufacturing AI',
+        'Odoo AI integration',
+        'ERP automation',
+        'build vs buy AI for ERP',
+        'how to integrate AI with ERP',
+        'AI in manufacturing ERP',
+        'ERP and IIoT integration',
+        'when to build custom AI',
+        'clean core ERP',
+        'predictive maintenance',
+        'computer vision',
+        'AI agents',
+        'master data',
+        'shop-floor telemetry',
+        'human-in-the-loop'
+      ]
+    }
+  },
+  {
     title: "Your ERP Budget Is Missing a Line Item: Your People's Time",
     slug: 'erp-implementation-team-capacity-risk',
     excerpt: "Why internal team capacity is the ERP risk most boards never price in, and how to fix it before kickoff. Learn the warning signs and Prixgen's six-step capacity readiness framework.",
