@@ -521,16 +521,24 @@ export default function AiErpStrategyCanvas() {
 
       {/* 6. CLEAN CORE ERP ARCHITECTURE STACK */}
       <div className="p-6 md:p-10 rounded-3xl bg-slate-50 border border-slate-200 space-y-6">
-        <div className="max-w-2xl">
-          <div className="text-xs font-mono font-bold text-[#004B87] uppercase tracking-wider mb-1">
-            MODULAR ENTERPRISE ARCHITECTURE
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div className="max-w-2xl">
+            <div className="text-xs font-mono font-bold text-[#004B87] uppercase tracking-wider mb-1">
+              MODULAR ENTERPRISE ARCHITECTURE
+            </div>
+            <h3 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
+              Protect the Clean Core ERP
+            </h3>
+            <p className="text-xs md:text-sm text-slate-600 mt-1 leading-relaxed">
+              An ERP system must remain a dependable transactional backbone (finance, inventory, BOMs, audit trails). Do not destabilize the core by hardcoding experimental AI models inside transactional database triggers.
+            </p>
           </div>
-          <h3 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
-            Protect the Clean Core ERP
-          </h3>
-          <p className="text-xs md:text-sm text-slate-600 mt-1 leading-relaxed">
-            An ERP system must remain a dependable transactional backbone (finance, inventory, BOMs, audit trails). Do not destabilize the core by hardcoding experimental AI models inside transactional database triggers.
-          </p>
+          <Link 
+            href="/solutions/odoo"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-slate-200 text-xs font-bold text-[#004B87] hover:text-[#00A3E0] hover:border-[#00A3E0]/40 shadow-xs transition-all shrink-0"
+          >
+            Explore Prixgen Odoo Architecture <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
         </div>
 
         {/* 5-Layer Stack Visualization */}
@@ -597,8 +605,18 @@ export default function AiErpStrategyCanvas() {
             className="w-full h-auto max-h-[500px] object-contain rounded-xl"
           />
         </div>
-        <figcaption className="text-center text-xs text-slate-500 font-medium">
-          <strong>Figure 2.</strong> Enterprise intelligence connects physical shop-floor operations, ERP, data pipelines, and AI while keeping human leadership accountable.
+        <figcaption className="text-center text-xs text-slate-500 font-medium space-y-2">
+          <div>
+            <strong>Figure 2.</strong> Enterprise intelligence connects physical shop-floor operations, ERP, data pipelines, and AI while keeping human leadership accountable.
+          </div>
+          <div>
+            <Link 
+              href="/services/ai-machine-learning"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#004B87] hover:text-[#00A3E0] underline decoration-[#00A3E0]/40 transition-colors"
+            >
+              See Prixgen AI & Machine Learning capabilities <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
         </figcaption>
       </figure>
 
@@ -654,7 +672,7 @@ export default function AiErpStrategyCanvas() {
           <p className="text-sm md:text-base text-slate-100 leading-relaxed font-medium">
             Standardize what is common. Integrate what must connect. Build what creates competitive advantage. Prixgen helps enterprises design scalable clean-core architectures with Odoo, AI/ML, and IIoT integration.
           </p>
-          <div className="pt-2 flex flex-wrap items-center gap-4">
+          <div className="pt-2 flex flex-wrap items-center gap-3">
             <Link 
               href="/contact"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-[#004B87] hover:bg-sky-50 font-bold text-sm shadow-lg transition-all hover:scale-105"
@@ -663,9 +681,21 @@ export default function AiErpStrategyCanvas() {
             </Link>
             <Link 
               href="/solutions/odoo"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-sm backdrop-blur-md transition-all"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-sm backdrop-blur-md transition-all"
             >
               Explore Odoo Clean-Core
+            </Link>
+            <Link 
+              href="/solutions"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-sm backdrop-blur-md transition-all"
+            >
+              Prixgen Solutions
+            </Link>
+            <Link 
+              href="/"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-sm backdrop-blur-md transition-all"
+            >
+              Prixgen Home
             </Link>
           </div>
         </div>
