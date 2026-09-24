@@ -108,15 +108,17 @@ export default function BlogClient({ posts }: BlogClientProps) {
               viewport={{ once: true }}
               className="relative group rounded-3xl bg-prixgen-blue overflow-hidden shadow-xl"
             >
-              <div className="grid lg:grid-cols-2 min-h-[400px]">
-                <div className="relative overflow-hidden h-[300px] lg:h-auto">
-                  <OptimizedImage
-                    src={featuredPost.mainImage || "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200"}
-                    alt={featuredPost.title}
-                    fill
-                    className="object-cover transition-all duration-1000 group-hover:scale-105 group-hover:rotate-1"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-prixgen-blue/80 to-transparent z-10" />
+              <div className="grid lg:grid-cols-2 min-h-[400px] items-center">
+                <div className="relative overflow-hidden h-[260px] sm:h-[320px] lg:h-full min-h-[300px] flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-slate-950/20">
+                  <div className="relative w-full h-full min-h-[220px] lg:min-h-[340px] flex items-center justify-center rounded-2xl overflow-hidden bg-slate-950/40 ring-1 ring-white/10 shadow-2xl">
+                    <OptimizedImage
+                      src={featuredPost.mainImage || "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200"}
+                      alt={featuredPost.title}
+                      fill
+                      className="object-contain p-2 transition-transform duration-700 group-hover:scale-[1.02]"
+                      priority
+                    />
+                  </div>
                 </div>
 
                 <div className="relative p-8 lg:p-12 flex flex-col justify-center text-white z-20">

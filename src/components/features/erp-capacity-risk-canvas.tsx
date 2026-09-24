@@ -276,25 +276,48 @@ export function ERPCapacityRiskCanvas() {
           </div>
         </div>
 
-        {/* Phase Selector Pills */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+        {/* Phase Selector Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
           {phases.map((phase, idx) => {
             const isSelected = activePhaseIndex === idx;
+            const deficit = phase.hoursNeeded - phase.hoursSpare;
             return (
               <button
                 key={idx}
+                type="button"
                 onClick={() => setActivePhaseIndex(idx)}
-                className={`text-left p-3 rounded-xl border transition-all text-xs ${
+                className={`text-left p-4 rounded-2xl border transition-all duration-300 relative overflow-hidden group ${
                   isSelected 
-                    ? 'bg-[#004B87] text-white border-[#004B87] shadow-md ring-2 ring-[#00A3E0]/40' 
-                    : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-100/60'
+                    ? 'bg-[#004B87] text-white border-[#004B87] shadow-lg ring-2 ring-[#00A3E0]/40 -translate-y-0.5' 
+                    : 'bg-white text-slate-700 border-slate-200/80 hover:border-[#00A3E0]/60 hover:bg-slate-50 hover:shadow-md'
                 }`}
               >
-                <div className={`font-bold text-[11px] truncate ${isSelected ? 'text-white' : 'text-slate-900'}`}>
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className={`text-[11px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-md ${
+                    isSelected ? 'bg-white/20 text-white' : 'bg-slate-100 text-[#004B87]'
+                  }`}>
+                    {phase.duration}
+                  </span>
+                  <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
+                    isSelected
+                      ? 'bg-white/20 text-white'
+                      : deficit > 15 
+                        ? 'bg-rose-50 text-rose-700 border border-rose-200' 
+                        : deficit > 0 
+                          ? 'bg-amber-50 text-amber-700 border border-amber-200'
+                          : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                  }`}>
+                    {deficit > 0 ? `-${deficit}h Deficit` : 'Balanced'}
+                  </span>
+                </div>
+
+                <div className={`font-black text-sm md:text-base leading-snug ${isSelected ? 'text-white' : 'text-slate-900 group-hover:text-[#004B87]'}`}>
                   {phase.name}
                 </div>
-                <div className={`text-[10px] font-mono mt-0.5 ${isSelected ? 'text-sky-200' : 'text-slate-400'}`}>
-                  {phase.duration}
+
+                <div className={`text-xs mt-2 flex items-center justify-between font-medium ${isSelected ? 'text-sky-200' : 'text-slate-500'}`}>
+                  <span>Demanded: <strong className={isSelected ? 'text-white' : 'text-slate-900'}>{phase.hoursNeeded}h/wk</strong></span>
+                  <span>Spare: <strong className={isSelected ? 'text-white' : 'text-slate-900'}>{phase.hoursSpare}h/wk</strong></span>
                 </div>
               </button>
             );
