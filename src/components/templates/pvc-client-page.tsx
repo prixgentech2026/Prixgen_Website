@@ -555,6 +555,18 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
         }}
       />
 
+      <JsonLd
+        type="VideoObject"
+        data={{
+          name: "From Polymer to Pipe: How Connected ERP Changes PVC & HDPE Manufacturing",
+          description: "Discover how a connected ERP operating model transforms PVC & HDPE manufacturing by bridging recipe control, machine telemetry, and real-time accounting.",
+          thumbnailUrl: "https://img.youtube.com/vi/tHvJ91R61ro/maxresdefault.jpg",
+          uploadDate: "2026-09-24T08:00:00+05:30",
+          embedUrl: "https://www.youtube.com/embed/tHvJ91R61ro",
+          contentUrl: "https://www.youtube.com/watch?v=tHvJ91R61ro"
+        }}
+      />
+
       {/* =========================================================================
           HERO SECTION: INDUSTRIAL GROUNDED LIGHT THEME WITH LIVE TELEMETRY
           ========================================================================= */}
@@ -626,10 +638,20 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
 
                   <Magnetic>
                     <a 
-                      href="#audit-form"
-                      className="inline-flex items-center justify-center h-12 px-7 rounded-full border-2 border-slate-300 hover:border-[#004B87] bg-white hover:bg-slate-50 text-slate-800 hover:text-[#004B87] font-bold text-sm transition-all shadow-sm transform hover:-translate-y-0.5 active:scale-95 cursor-pointer"
+                      href="#executive-video"
+                      className="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-full border-2 border-[#004B87]/20 hover:border-[#004B87] bg-white hover:bg-slate-50 text-[#004B87] font-bold text-sm transition-all shadow-sm transform hover:-translate-y-0.5 active:scale-95 cursor-pointer"
                     >
-                      <span>Schedule Plant Audit</span>
+                      <Play size={14} className="fill-current text-[#00A3E0]" />
+                      <span>Watch Video</span>
+                    </a>
+                  </Magnetic>
+
+                  <Magnetic>
+                    <a 
+                      href="#audit-form"
+                      className="inline-flex items-center justify-center h-12 px-6 rounded-full border-2 border-slate-300 hover:border-[#004B87] bg-white hover:bg-slate-50 text-slate-800 hover:text-[#004B87] font-bold text-sm transition-all shadow-sm transform hover:-translate-y-0.5 active:scale-95 cursor-pointer"
+                    >
+                      <span>Schedule Audit</span>
                     </a>
                   </Magnetic>
                 </div>
@@ -659,6 +681,73 @@ export default function PvcClientPage({ industry }: PvcClientPageProps) {
               <WhitepaperFlipbook onOpenDownloadModal={() => setIsWhitepaperModalOpen(true)} />
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          EXECUTIVE VIDEO SECTION: "From Polymer to Pipe"
+          ========================================================================= */}
+      <section id="executive-video" className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-10 bg-slate-900 text-white relative overflow-hidden border-b border-slate-800">
+        {/* Subtle Ambient Glow */}
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#00A3E0]/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#004B87]/25 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-[1280px] mx-auto relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+            <FadeUp>
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[#00A3E0] text-[11px] font-bold tracking-widest uppercase mb-4 shadow-sm">
+                <Play size={12} className="fill-current text-[#00A3E0]" />
+                Executive Video Briefing
+              </div>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-[42px] font-extrabold text-white tracking-tight leading-[1.15]">
+                From Polymer to Pipe: <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00A3E0] via-sky-200 to-white">
+                  How Connected ERP Changes PVC & HDPE Manufacturing
+                </span>
+              </h2>
+              <p className="text-base sm:text-lg text-slate-300 font-medium mt-4 leading-relaxed">
+                Watch how a unified digital operating model eliminates disconnected operational silos — bridging recipe compounding, extrusion line telemetry, and financial traceability into a single source of truth.
+              </p>
+            </FadeUp>
+          </div>
+
+          {/* Video Player Card */}
+          <FadeUp delay={0.2}>
+            <div className="relative max-w-4xl mx-auto rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/15 bg-slate-950 p-2 sm:p-3 ring-1 ring-white/10">
+              <div className="relative aspect-video w-full rounded-xl sm:rounded-2xl overflow-hidden bg-black shadow-inner">
+                <iframe
+                  src="https://www.youtube.com/embed/tHvJ91R61ro?rel=0&modestbranding=1"
+                  title="From Polymer to Pipe: How Connected ERP Changes PVC & HDPE Manufacturing"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full border-0"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </FadeUp>
+
+          {/* 4 Core Video Takeaways Grid */}
+          <FadeUp delay={0.3}>
+            <div className="mt-10 max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+              {[
+                { title: "6 Silos Eliminated", desc: "Procurement to dispatch unified in Odoo" },
+                { title: "Real-time Telemetry", desc: "Live line speeds & weighbridge sync" },
+                { title: "10-Link Traceability", desc: "Full audit recall under 3 minutes" },
+                { title: "Exact Cost Accounting", desc: "Material yield & scrap variance tracking" }
+              ].map((item, idx) => (
+                <div key={idx} className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors text-left">
+                  <div className="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">
+                    <CheckCircle2 size={14} className="text-[#00A3E0] shrink-0" />
+                    <span>{item.title}</span>
+                  </div>
+                  <div className="text-[11px] text-slate-400 font-medium mt-1 leading-snug">
+                    {item.desc}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </FadeUp>
         </div>
       </section>
 
