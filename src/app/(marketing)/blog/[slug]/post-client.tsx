@@ -20,6 +20,8 @@ import { LeadCaptureForm } from '@/components/features/lead-capture-form';
 import { ERPFailureCanvas } from '@/components/features/erp-failure-canvas';
 import { ERPCapacityRiskCanvas } from '@/components/features/erp-capacity-risk-canvas';
 import AiErpStrategyCanvas from '@/components/features/ai-erp-strategy-canvas';
+import { FundingDiscoveryCanvas } from '@/components/features/funding-discovery-canvas';
+import { CostOfProductionCanvas } from '@/components/features/cost-of-production-canvas';
 import { Magnetic } from '@/components/animations/magnetic';
 import { AnimatedConnector } from '@/components/shared/animated-connector';
 import { HeroBadge } from '@/components/shared/hero-badge';
@@ -309,7 +311,11 @@ export default function PostClient({ post, relatedPosts = [] }: PostClientProps)
            <div className="flex-1 max-w-4xl">
               <FadeUp>
                 <div className="max-w-none text-left">
-                  {post.slug === 'why-erp-projects-fail-myth-it-s-rarely-a-software-problem' ? (
+                  {post.slug === 'cost-of-production-formula-types-erp' ? (
+                    <CostOfProductionCanvas />
+                  ) : post.slug === 'distance-between-funding-and-discovery' ? (
+                    <FundingDiscoveryCanvas />
+                  ) : post.slug === 'why-erp-projects-fail-myth-it-s-rarely-a-software-problem' ? (
                     <ERPFailureCanvas />
                   ) : post.slug === 'erp-implementation-team-capacity-risk' ? (
                     <ERPCapacityRiskCanvas />

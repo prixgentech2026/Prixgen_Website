@@ -14,9 +14,11 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
   
   if (!post) return { title: "Post Not Found | Prixgen" };
 
+  const exactTitle = post.seo?.title;
+
   return {
-    title: `${post.title} | Prixgen Insights`,
-    description: post.excerpt || `Read our latest insight on ${post.title}`,
+    title: exactTitle ? { absolute: exactTitle } : `${post.title} | Prixgen Insights`,
+    description: post.seo?.metaDesc || post.excerpt || `Read our latest insight on ${post.title}`,
     keywords: [...(post.seo?.keywords || []), ...(post.categories?.map(c => c.title) || [])],
   };
 }

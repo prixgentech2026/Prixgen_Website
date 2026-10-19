@@ -232,7 +232,10 @@ export async function getPosts(): Promise<BlogPost[]> {
   if (!client) return blogPosts;
   try {
     const data = await client.fetch(postsQuery, {}, { next: { tags: ['sanity'] } });
-    return data || blogPosts;
+    if (!data || data.length === 0) return blogPosts;
+    const sanitySlugs = new Set((data || []).map((p: any) => p.slug));
+    const localMissing = blogPosts.filter(p => !sanitySlugs.has(p.slug));
+    return [...localMissing, ...data];
   } catch (error) {
     console.error('Sanity Fetch Error (Posts):', error);
     return blogPosts;
@@ -240,13 +243,15 @@ export async function getPosts(): Promise<BlogPost[]> {
 }
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
-  if (!client) return blogPosts.find(p => p.slug === slug) || null;
+  const localPost = blogPosts.find(p => p.slug === slug);
+  if (localPost) return localPost;
+  if (!client) return null;
   try {
     const data = await client.fetch(postBySlugQuery, { slug }, { next: { tags: ['sanity'] } });
-    return data || blogPosts.find(p => p.slug === slug) || null;
+    return data || null;
   } catch (error) {
     console.error(`Sanity Fetch Error (Post: ${slug}):`, error);
-    return blogPosts.find(p => p.slug === slug) || null;
+    return null;
   }
 }
 
@@ -2204,6 +2209,9 @@ export const blogAuthors: BlogAuthor[] = [
 ];
 
 export const blogCategories = [
+  { title: 'Manufacturing', description: 'Financial frameworks, operational costing, and shop-floor architectures for modern industrial plants.' },
+  { title: 'Cost Accounting', description: 'CAS-4 standards, absorption costing, marginal cost calculations, and variance analysis.' },
+  { title: 'Incubation & Grants', description: 'ERP systems, fund accounting, and compliance architectures for research and incubation institutions.' },
   { title: 'ERP Strategy', description: 'Executive guidance on aligning ERP investments with enterprise operating models.' },
   { title: 'Leadership', description: 'Strategic insights for CEOs, CFOs, and business owners managing digital change.' },
   { title: 'Odoo', description: 'Engineering, customization, and deployment best practices for Odoo Enterprise.' },
@@ -2214,6 +2222,60 @@ export const blogCategories = [
 ];
 
 export const blogPosts: BlogPost[] = [
+  {
+    title: "Cost of Production: The Complete Guide to the Formula, Cost Types and Getting Your True Unit Cost with ERP",
+    slug: 'cost-of-production-formula-types-erp',
+    excerpt: "Learn how to calculate cost of production, the 10 cost types, worked PVC and paint examples, and how ERP gives manufacturers a true unit cost.",
+    publishedAt: new Date('2026-10-18').toISOString(),
+    mainImage: '/images/blog/cost-of-production/fig1_building_blocks.png',
+    author: blogAuthors[1],
+    categories: [{ title: 'Manufacturing' }, { title: 'ERP Strategy' }, { title: 'Odoo' }, { title: 'Cost Accounting' }],
+    body: [],
+    seo: {
+      title: 'Cost of Production: Formula, Types & Examples | Prixgen',
+      metaDesc: 'Learn how to calculate cost of production, the 10 cost types, worked PVC and paint examples, and how ERP gives manufacturers a true unit cost.',
+      keywords: [
+        'cost of production',
+        'cost of production formula',
+        'types of production costs',
+        'fixed and variable costs',
+        'marginal cost',
+        'break-even point',
+        'manufacturing ERP costing',
+        'Odoo product costing',
+        'landed cost',
+        'overhead absorption'
+      ]
+    }
+  },
+  {
+    title: "The Distance Between Funding and Discovery",
+    slug: 'distance-between-funding-and-discovery',
+    excerpt: "Why incubation centers need one connected record, and how Prixgen builds it. Explore how to manage 50+ funders, 120 agreements, and restricted research budgets without stalling science.",
+    publishedAt: new Date('2026-10-15').toISOString(),
+    mainImage: '/images/blog/funding-discovery/01_custodian.jpg',
+    author: blogAuthors[1],
+    categories: [{ title: 'Incubation & Grants' }, { title: 'ERP Strategy' }, { title: 'Odoo' }, { title: 'Implementation' }],
+    body: [],
+    seo: {
+      title: 'ERP for Incubation Centers & Grant-Funded Institutions | Prixgen',
+      metaDesc: 'Incubation centers juggle 50+ funders, 120 agreements and hundreds of startups. See how Prixgen connects funding, projects and approvals into one ERP record.',
+      keywords: [
+        'incubation center ERP',
+        'grant management ERP',
+        'fund accounting',
+        'research funding',
+        'Odoo for incubators',
+        'restricted funds',
+        'Prixgen',
+        'Cornea Technologies',
+        'academic incubation',
+        'research grant accounting',
+        'tranche management',
+        'audit trail'
+      ]
+    }
+  },
   {
     title: "AI for ERP: Activate, Extend or Build?",
     slug: 'ai-for-erp-activate-extend-build',

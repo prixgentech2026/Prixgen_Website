@@ -28,6 +28,16 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/insights/cost-of-production-formula-types-erp',
+        destination: '/blog/cost-of-production-formula-types-erp',
+        permanent: true,
+      },
+      {
+        source: '/insights/distance-between-funding-and-discovery',
+        destination: '/blog/distance-between-funding-and-discovery',
+        permanent: true,
+      },
+      {
         source: '/who-we-are',
         destination: '/about-us',
         permanent: true,
