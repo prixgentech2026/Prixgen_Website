@@ -2327,59 +2327,6 @@ export const blogPosts: BlogPost[] = [
     }
   },
   {
-    title: 'The Future of Predictive Maintenance in Smart Factories',
-    slug: 'predictive-maintenance-smart-factories',
-    excerpt: 'How AI-driven predictive maintenance is reducing downtime and optimizing operational efficiency in modern manufacturing.',
-    publishedAt: new Date().toISOString(),
-    mainImage: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200',
-    author: blogAuthors[0],
-    categories: [{ title: 'Industrial AI' }, { title: 'Digital Transformation' }],
-    linkedinUrl: 'https://www.linkedin.com/posts/prixgen_predictive-maintenance-industry40-activity-7195415705332514816-uvmE',
-    body: [
-      {
-        _type: 'block',
-        style: 'normal',
-        children: [{ _type: 'span', text: 'In the rapidly evolving landscape of Industry 5.0, predictive maintenance has emerged as a cornerstone of operational excellence. By leveraging real-time telemetry from IoT sensors and advanced machine learning algorithms, manufacturers can now anticipate equipment failures before they occur.' }]
-      },
-      {
-        _type: 'block',
-        style: 'h2',
-        children: [{ _type: 'span', text: 'Reducing Unplanned Downtime' }]
-      },
-      {
-        _type: 'block',
-        style: 'normal',
-        children: [{ _type: 'span', text: 'Unplanned downtime remains one of the most significant costs for industrial enterprises. Predictive models analyze vibration patterns, thermal signatures, and acoustic data to identify anomalies that precede mechanical fatigue. This proactive approach allows maintenance teams to schedule repairs during planned windows, minimizing disruption to the production line.' }]
-      }
-    ],
-    seo: {
-      title: 'Predictive Maintenance in Smart Factories | Prixgen Blog',
-      metaDesc: 'Learn how AI and IoT are revolutionizing maintenance strategies in modern smart factories.',
-      keywords: ['Predictive Maintenance', 'Smart Factory', 'Industry 5.0', 'Industrial AI']
-    }
-  },
-  {
-    title: 'Optimizing Supply Chain Resilience with Next-Gen ERP',
-    slug: 'optimizing-supply-chain-resilience-erp',
-    excerpt: 'Why traditional ERP systems are no longer enough to handle modern supply chain complexities and how next-gen solutions are filling the gap.',
-    publishedAt: new Date().toISOString(),
-    mainImage: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1200',
-    author: blogAuthors[0],
-    categories: [{ title: 'ERP Insights' }],
-    body: [
-      {
-        _type: 'block',
-        style: 'normal',
-        children: [{ _type: 'span', text: 'Global supply chains have faced unprecedented challenges in recent years. From geopolitical shifts to logistics bottlenecks, the need for real-time visibility and agile response has never been greater.' }]
-      }
-    ],
-    seo: {
-      title: 'Next-Gen ERP for Supply Chain Resilience | Prixgen Blog',
-      metaDesc: 'Explore how modern ERP systems provide the visibility and agility needed for resilient global supply chains.',
-      keywords: ['ERP Systems', 'Supply Chain Management', 'Logistics Optimization', 'Business Continuity']
-    }
-  },
-  {
     title: "Why ERP Projects Fail (Myth: It's rarely a software problem)",
     slug: 'why-erp-projects-fail-myth-it-s-rarely-a-software-problem',
     excerpt: "Most organisations over-invest in software selection and underestimate what truly drives success: business processes, change management, and long-term planning.",
