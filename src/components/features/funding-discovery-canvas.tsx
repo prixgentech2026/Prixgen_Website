@@ -16,7 +16,6 @@ import {
   Compass, 
   ArrowRight, 
   Sparkles, 
-  Play, 
   Clock, 
   Check, 
   ShieldAlert, 
@@ -51,9 +50,6 @@ export function FundingDiscoveryCanvas() {
 
   // Global Rulebook Active Region
   const [activeRegion, setActiveRegion] = useState<'us' | 'eu' | 'asia' | 'gcc'>('us');
-
-  // Video Modal State
-  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
   // Challenge Matrix Active Filter
   const [challengeFilter, setChallengeFilter] = useState<'all' | 'funds' | 'people' | 'compliance'>('all');
@@ -227,123 +223,36 @@ export function FundingDiscoveryCanvas() {
   return (
     <article className="space-y-16 text-slate-900 leading-relaxed font-sans">
       
-      {/* 1. EDITORIAL PROLOGUE */}
+      {/* 1. OPERATING MODEL PROLOGUE */}
       <section className="space-y-6">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-prixgen-blue/10 border border-prixgen-blue/20 text-prixgen-blue text-xs font-black tracking-wider uppercase">
-          <Building2 className="w-3.5 h-3.5" />
-          Prixgen Insights · Incubation & Grant-Funded Institutions
-        </div>
-
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-prixgen-blue tracking-tight leading-[1.1]">
-          The Distance Between Funding and Discovery
-        </h2>
-        
-        <p className="text-lg md:text-xl text-slate-600 font-medium leading-relaxed border-l-4 border-prixgen-lightblue pl-4">
-          Why incubation centers need one connected record, and how Prixgen builds it.
-        </p>
-
-        <div className="flex flex-wrap items-center gap-4 text-xs font-bold text-slate-500 py-2 border-y border-slate-100">
-          <span className="text-slate-900">Karthik S Hatti</span>
-          <span>·</span>
-          <span>Co-Founder & CBO, Prixgen Tech Solutions Pvt Ltd</span>
-          <span>·</span>
-          <span>October 2026</span>
-          <span>·</span>
-          <span className="flex items-center gap-1 text-prixgen-blue"><Clock className="w-3.5 h-3.5" /> 6 min read</span>
-        </div>
-
-        <div className="prose prose-slate max-w-none text-slate-700 space-y-4 pt-2">
-          <p className="text-lg font-semibold text-slate-900 leading-relaxed">
-            An incubation center is a custodian: funds flow in from many funders, support flows out to many startups.
-          </p>
-          <p>
-            Imagine you are an incubation center. Call it <strong>Cornea Technologies</strong>.
-          </p>
-          <p>
-            You are a custodian. You hold other people&apos;s money in trust, from government programmes, public innovation funds, foundations, corporate sponsors and universities. And you nurture the startups that turn that money into discovery.
-          </p>
-          <p>
-            From the outside, it looks simple: <em>money comes in, research goes out</em>. From the inside, it is one of the most complex operating models in any industry. That gap is the subject of our new short film, and of this article.
-          </p>
-        </div>
-
-        {/* Image 01 Embed */}
-        <figure className="rounded-2xl overflow-hidden border border-slate-200 shadow-md bg-white my-6">
-          <img 
-            src="/images/blog/funding-discovery/01_custodian.jpg" 
-            alt="Diagram of funders flowing into an incubation center that supports many startups" 
-            className="w-full h-auto object-cover"
-          />
-          <figcaption className="px-6 py-3 bg-slate-50 border-t border-slate-100 text-xs text-slate-500 font-medium text-center">
-            An incubation center is a custodian: funds flow in from many funders, support flows out to many startups.
-          </figcaption>
-        </figure>
-      </section>
-
-      {/* 2. WATCH THE SHORT FILM SHOWCASE */}
-      <section className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-slate-950 via-[#0B1E36] to-[#002B49] text-white p-6 md:p-10 shadow-2xl border border-white/10">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#00A3E0]/15 rounded-full blur-[100px] pointer-events-none" />
-        
-        <div className="relative z-10 flex flex-col lg:flex-row items-center gap-8 justify-between">
-          <div className="space-y-4 max-w-xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur border border-white/15 text-[#00D2FF] text-xs font-mono font-bold tracking-widest uppercase">
-              <Play className="w-3 h-3 fill-current" />
-              Watch the Film · 4 Minutes
-            </div>
-            
-            <h3 className="text-2xl md:text-3xl font-black text-white tracking-tight">
-              The Distance Between Funding and Discovery
-            </h3>
-            
-            <p className="text-sm text-slate-300 leading-relaxed">
-              When a scientist needs one $12,000 calibration unit to validate an environmental flood sensor, why does a $500,000 grant stall her lab? Watch how disconnected records halt research, and how one connected system unlocks it.
-            </p>
-
-            <div className="text-xs text-slate-400 font-mono space-y-1 pt-2 border-t border-white/10">
-              <div><strong>Written & Produced by:</strong> Karthik S Hatti (Co-Founder & CBO)</div>
-              <div><strong>Featuring:</strong> Cornea Technologies & RiverSense Telemetry</div>
-            </div>
+        <div className="p-6 md:p-8 rounded-3xl bg-slate-50 border border-slate-200/80 shadow-sm space-y-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-prixgen-blue/10 border border-prixgen-blue/20 text-prixgen-blue text-xs font-bold tracking-wider uppercase font-mono">
+            <Building2 className="w-3.5 h-3.5" />
+            Operating Model Analysis
           </div>
-
-          {/* Film Visual Card / Play Trigger */}
-          <div className="w-full lg:w-80 shrink-0">
-            <div 
-              onClick={() => setIsVideoModalOpen(true)}
-              className="group relative cursor-pointer rounded-2xl overflow-hidden border-2 border-white/20 bg-slate-900 shadow-2xl aspect-video flex items-center justify-center transition-all duration-300 hover:scale-[1.02] hover:border-[#00D2FF]"
-            >
-              <img 
-                src="/images/blog/funding-discovery/01_custodian.jpg" 
-                alt="Diagram of funders flowing into an incubation center that supports many startups" 
-                className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              
-              {/* Play Button */}
-              <div className="relative z-10 w-16 h-16 rounded-full bg-white text-slate-950 flex items-center justify-center shadow-xl group-hover:scale-110 group-hover:bg-[#00D2FF] group-hover:text-white transition-all">
-                <Play className="w-7 h-7 ml-1 fill-current" />
-              </div>
-
-              <div className="absolute bottom-3 left-3 right-3 text-center">
-                <span className="text-[11px] font-bold text-white uppercase tracking-wider bg-black/60 px-2.5 py-1 rounded-md backdrop-blur">
-                  Click to Stream Experience
-                </span>
-              </div>
-            </div>
-          </div>
+          <h3 className="text-xl md:text-2xl font-bold text-slate-900 leading-snug">
+            An incubation center is a custodian: funds flow in from many funders, support flows out to many startups.
+          </h3>
+          <p className="text-slate-600 leading-relaxed text-sm md:text-base">
+            Consider a typical incubation center — represented in this study by reference model <strong>Cornea Technologies</strong>. You are a custodian holding other people&apos;s money in trust from government programmes, public innovation funds, foundations, corporate sponsors, and universities, all while nurturing the startups that turn that money into discovery.
+          </p>
+          <p className="text-slate-600 leading-relaxed text-sm md:text-base">
+            From the outside, it looks simple: <em>money comes in, research goes out</em>. From the inside, it is one of the most complex multi-jurisdictional operating models in any industry. This case study details why disconnected records halt research, and how a unified ERP architecture unlocks it.
+          </p>
         </div>
       </section>
 
-      {/* 3. THE SCALE NOBODY SEES */}
+      {/* 2. THE SCALE NOBODY SEES */}
       <section className="space-y-6">
         <div className="space-y-2">
           <div className="text-xs font-mono font-bold uppercase tracking-widest text-prixgen-lightblue">
             The Scale Nobody Sees
           </div>
           <h3 className="text-2xl md:text-3xl font-black text-prixgen-blue tracking-tight">
-            Cornea Technologies is Fictional. Its Shape Is Real.
+            Operating Complexity of Modern Incubation Centers
           </h3>
           <p className="text-slate-600">
-            A mid-sized incubation center manages thousands of moving parts across separate academic and commercial jurisdictions:
+            A mid-sized incubation center manages thousands of moving parts across separate academic and commercial jurisdictions (illustrated through representative benchmark Cornea Technologies):
           </p>
         </div>
 
@@ -409,7 +318,7 @@ export function FundingDiscoveryCanvas() {
             One Instrument. $12,000.
           </h3>
           <p className="text-sm text-slate-300 max-w-2xl">
-            In the film, a scientist needs one calibration instrument to finish a field validation. It costs $12,000. Her project grant is worth $500,000 over five years, so the purchase sounds trivial.
+            In our reference case scenario, a scientist needs one calibration instrument to finish a field validation. It costs $12,000. Her project grant is worth $500,000 over five years, so the purchase sounds trivial.
           </p>
         </div>
 
@@ -1040,7 +949,7 @@ export function FundingDiscoveryCanvas() {
 
         <div className="prose prose-slate max-w-none text-slate-700 space-y-4">
           <p className="text-base md:text-lg leading-relaxed">
-            In the film, the third tranche arrives. It is matched to the right agreement in minutes. $35,000 becomes available, the purchase order is released, and nine business days later the calibration instrument is on the scientist&apos;s bench. The reading holds, and the field validation passes.
+            When the third tranche arrives, it is matched to the right agreement in minutes. $35,000 becomes available, the purchase order is released, and nine business days later the calibration instrument is on the scientist&apos;s bench. The reading holds, and the field validation passes.
           </p>
 
           <blockquote className="p-6 rounded-2xl bg-slate-900 text-white font-bold text-lg md:text-xl leading-snug border-l-4 border-emerald-400 not-italic">
@@ -1083,65 +992,12 @@ export function FundingDiscoveryCanvas() {
           </div>
         </div>
 
-        {/* Footnote Credits */}
+        {/* Reference Attribution */}
         <div className="pt-6 border-t border-white/15 text-xs text-slate-300 font-mono space-y-1">
-          <div><strong>Film, script, direction, story, dialogues, background score and production:</strong> Karthik S Hatti</div>
-          <div>Cornea Technologies is an illustrative incubation center. Its people, programs, funders and figures are fictional.</div>
+          <div><strong>Architecture & Analysis:</strong> Karthik S Hatti (Co-Founder & CBO, Prixgen Tech Solutions)</div>
+          <div>Cornea Technologies is an illustrative reference benchmark. Its governance models, fund structures, and workflows reflect operational realities of leading research incubators.</div>
         </div>
       </section>
-
-      {/* VIDEO STREAM MODAL */}
-      <AnimatePresence>
-        {isVideoModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-4xl bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-white/15 text-white"
-            >
-              <div className="p-4 border-b border-white/10 flex items-center justify-between">
-                <div className="flex items-center gap-2 text-xs font-mono font-bold text-sky-400">
-                  <Play className="w-3.5 h-3.5 fill-current" />
-                  Short Film Experience · The Distance Between Funding and Discovery
-                </div>
-                <button 
-                  onClick={() => setIsVideoModalOpen(false)}
-                  className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Video Player Display */}
-              <div className="aspect-video bg-black relative flex items-center justify-center">
-                <video 
-                  controls 
-                  autoPlay
-                  poster="/images/blog/funding-discovery/01_custodian.jpg"
-                  className="w-full h-full object-contain"
-                >
-                  <source src="/videos/funding-discovery-film.mkv" type="video/webm" />
-                  Your browser does not support embedded video playback.
-                </video>
-              </div>
-
-              <div className="p-6 bg-slate-950 flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs text-slate-300">
-                <div>
-                  <div className="font-bold text-white text-sm">Official Release by Prixgen Tech Solutions</div>
-                  <div>Directed by Karthik S Hatti · Runtime 4:00 min</div>
-                </div>
-                <a 
-                  href="mailto:karthik@prixgen.com?subject=Private%20Screening%20%26%20Incubation%20ERP%20Briefing"
-                  className="px-4 py-2 rounded-lg bg-prixgen-blue hover:bg-blue-600 text-white font-bold transition-all text-center"
-                >
-                  Request Executive Screening
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
 
       {/* LEAD CAPTURE BRIEFING MODAL */}
       <AnimatePresence>
