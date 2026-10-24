@@ -231,11 +231,35 @@ export async function getTermsData() {
 export async function getPosts(): Promise<BlogPost[]> {
   if (!client) return blogPosts;
   try {
-    const data = await client.fetch(postsQuery, {}, { next: { tags: ['sanity'] } });
+    const data = await client.fetch(
+      postsQuery, 
+      {}, 
+      { next: { tags: ['sanity'], revalidate: 0 }, cache: 'no-store' }
+    );
     if (!data || data.length === 0) return blogPosts;
     const sanitySlugs = new Set((data || []).map((p: any) => p.slug));
+    
+    // Merge Sanity posts with any local configuration
+    const mergedSanityPosts = data.map((sp: any) => {
+      const local = blogPosts.find(p => p.slug === sp.slug);
+      if (!local) return sp;
+      return {
+        ...local,
+        ...sp,
+        title: sp.title || local.title,
+        excerpt: sp.excerpt || local.excerpt,
+        mainImage: sp.mainImage || local.mainImage,
+        author: sp.author?.name ? {
+          name: sp.author.name,
+          image: sp.author.image || local.author?.image,
+          position: sp.author.position || local.author?.position,
+        } : local.author,
+        categories: (sp.categories && sp.categories.length > 0) ? sp.categories : local.categories,
+      };
+    });
+
     const localMissing = blogPosts.filter(p => !sanitySlugs.has(p.slug));
-    return [...localMissing, ...data];
+    return [...mergedSanityPosts, ...localMissing];
   } catch (error) {
     console.error('Sanity Fetch Error (Posts):', error);
     return blogPosts;
@@ -243,16 +267,45 @@ export async function getPosts(): Promise<BlogPost[]> {
 }
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
-  const localPost = blogPosts.find(p => p.slug === slug);
-  if (localPost) return localPost;
-  if (!client) return null;
-  try {
-    const data = await client.fetch(postBySlugQuery, { slug }, { next: { tags: ['sanity'] } });
-    return data || null;
-  } catch (error) {
-    console.error(`Sanity Fetch Error (Post: ${slug}):`, error);
-    return null;
+  let sanityPost: BlogPost | null = null;
+
+  if (client) {
+    try {
+      sanityPost = await client.fetch(
+        postBySlugQuery, 
+        { slug }, 
+        { next: { tags: ['sanity'], revalidate: 0 }, cache: 'no-store' }
+      );
+    } catch (error) {
+      console.error(`Sanity Fetch Error (Post: ${slug}):`, error);
+    }
   }
+
+  const localPost = blogPosts.find(p => p.slug === slug);
+
+  if (sanityPost) {
+    if (localPost) {
+      return {
+        ...localPost,
+        ...sanityPost,
+        title: sanityPost.title || localPost.title,
+        excerpt: sanityPost.excerpt || localPost.excerpt,
+        mainImage: sanityPost.mainImage || localPost.mainImage,
+        author: sanityPost.author?.name ? {
+          name: sanityPost.author.name,
+          image: sanityPost.author.image || localPost.author?.image,
+          position: sanityPost.author.position || localPost.author?.position,
+          bio: sanityPost.author.bio || localPost.author?.bio,
+          slug: sanityPost.author.slug || localPost.author?.slug,
+        } : localPost.author,
+        categories: (sanityPost.categories && sanityPost.categories.length > 0) ? sanityPost.categories : localPost.categories,
+        seo: sanityPost.seo || localPost.seo,
+      };
+    }
+    return sanityPost;
+  }
+
+  return localPost || null;
 }
 
 export async function getSuccessStories(): Promise<SuccessStory[]> {
@@ -2197,7 +2250,7 @@ export const blogAuthors: BlogAuthor[] = [
   {
     name: 'Karthik S Hatti',
     slug: 'karthik-s-hatti',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400',
+    image: 'https://cdn.sanity.io/images/yyxkchao/production/99825aab731fe691eebfb21527ae8f80644172bc-800x800.jpg',
     position: 'Co-Founder & Chief Business Officer',
     bio: [
       {

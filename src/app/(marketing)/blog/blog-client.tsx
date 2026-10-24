@@ -253,9 +253,15 @@ export default function BlogClient({ posts }: BlogClientProps) {
 
                       <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <div className="w-6 h-6 rounded-lg bg-slate-100 flex items-center justify-center text-prixgen-blue">
-                            <User size={12} />
-                          </div>
+                          {post.author?.image ? (
+                            <div className="w-6 h-6 rounded-lg overflow-hidden border border-slate-200 relative shrink-0">
+                              <OptimizedImage src={post.author.image} alt={post.author.name} fill className="object-cover" />
+                            </div>
+                          ) : (
+                            <div className="w-6 h-6 rounded-lg bg-slate-100 flex items-center justify-center text-prixgen-blue shrink-0">
+                              <User size={12} />
+                            </div>
+                          )}
                           <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">{post.author?.name}</span>
                         </div>
                         <div className="w-8 h-8 rounded-lg bg-prixgen-blue/5 flex items-center justify-center text-prixgen-blue group-hover:bg-prixgen-blue group-hover:text-white transition-all overflow-hidden relative">

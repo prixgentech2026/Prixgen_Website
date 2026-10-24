@@ -337,8 +337,8 @@ export default function PostClient({ post, relatedPosts = [] }: PostClientProps)
                    
                    <div className="relative z-10 flex flex-col md:flex-row gap-4 items-center text-center md:text-left">
                       {post.author?.image && (
-                        <motion.div style={{ y: authorY }} className="relative w-16 h-16 rounded-xl overflow-hidden shrink-0 border-2 border-white shadow-md rotate-2 group-hover:rotate-0 transition-transform duration-700 bg-white p-1">
-                          <OptimizedImage src={post.author.image} alt={post.author.name} fill className="object-contain" />
+                        <motion.div style={{ y: authorY }} className="relative w-16 h-16 rounded-xl overflow-hidden shrink-0 border-2 border-white shadow-md rotate-2 group-hover:rotate-0 transition-transform duration-700 bg-white p-0.5">
+                          <OptimizedImage src={post.author.image} alt={post.author.name} fill className="object-cover rounded-lg" />
                         </motion.div>
                       )}
                       <div className="space-y-2">
@@ -348,7 +348,13 @@ export default function PostClient({ post, relatedPosts = [] }: PostClientProps)
                         </div>
                         {post.author?.bio ? (
                           <div className="max-w-none">
-                            <PortableText value={post.author.bio} components={authorComponents} />
+                            {typeof post.author.bio === 'string' ? (
+                              <p className="text-xs md:text-sm text-slate-500 font-medium leading-relaxed">
+                                {post.author.bio}
+                              </p>
+                            ) : Array.isArray(post.author.bio) ? (
+                              <PortableText value={post.author.bio} components={authorComponents} />
+                            ) : null}
                           </div>
                         ) : (
                           <p className="text-xs md:text-sm text-slate-500 font-medium leading-relaxed">
